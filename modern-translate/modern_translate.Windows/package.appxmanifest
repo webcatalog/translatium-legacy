@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
+  <Identity Name="55974nhutquang97.5translate" Version="2015.912.1122.0" Publisher="CN=C635F506-DEEB-41A4-8CAA-16689F486ED2" />
+  <Properties>
+    <DisplayName>Modern Translate</DisplayName>
+    <PublisherDisplayName>Modern Translate Team</PublisherDisplayName>
+    <Logo>images\storelogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.3.0</OSMinVersion>
+    <OSMaxVersionTested>6.3.0</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" StartPage="default.html">
+      <m2:VisualElements DisplayName="Modern Translate" Description="modern_translate.Windows" ForegroundText="light" BackgroundColor="#689f38" Square150x150Logo="images\Square150x150Logo.png" Square30x30Logo="images\SmallLogo.png">
+        <m2:DefaultTile Square310x310Logo="images\Square310x310Logo.png" Square70x70Logo="images\Square70x70Logo.png" Wide310x150Logo="images\Wide310x150Logo.png" DefaultSize="square150x150Logo">
+          <m2:ShowNameOnTiles>
+            <m2:ShowOn Tile="wide310x150Logo" />
+            <m2:ShowOn Tile="square310x310Logo" />
+          </m2:ShowNameOnTiles>
+        </m2:DefaultTile>
+        <m2:SplashScreen Image="images\splashscreen.png" BackgroundColor="#689f38" />
+      </m2:VisualElements>
+      <Extensions>
+        <Extension Category="windows.shareTarget">
+          <ShareTarget>
+            <DataFormat>Text</DataFormat>
+          </ShareTarget>
+        </Extension>
+        <Extension Category="windows.protocol">
+          <Protocol Name="modern-translate">
+            <DisplayName>Modern Translate</DisplayName>
+          </Protocol>
+        </Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <Capability Name="picturesLibrary" />
+    <DeviceCapability Name="webcam" />
+    <DeviceCapability Name="microphone" />
+  </Capabilities>
+</Package>

@@ -1,0 +1,208 @@
+﻿/* Material Font */
+/* Roboto */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Roboto Thin'), local('Roboto-Thin'), url(../fonts/Roboto-Thin.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Light'), local('Roboto-Light'), url(../fonts/Roboto-Light.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Regular'), local('Roboto-Regular'), url(../fonts/Roboto-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Noto Sans Myanmar'), local('Noto Sans Myanmar'), url(../fonts/NotoSansMyanmar-Regular.ttf) format('truetype');
+  unicode-range: U+1000-109F;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Roboto Medium'), local('Roboto-Medium'), url(../fonts/Roboto-Medium.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'), local('Roboto-Bold'), url(../fonts/Roboto-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Noto Sans Myanmar'), local('Noto Sans Myanmar'), url(../fonts/NotoSansMyanmar-Bold.ttf) format('truetype');
+  unicode-range: U+1000-109F;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Roboto Black'), local('Roboto-Black'), url(../fonts/Roboto-Black.ttf) format('truetype');
+}
+
+
+* {
+    font-family: "Roboto", "Segoe UI", "Segoe", "Ebrima", "Nirmala UI", "Gadugi", "Segoe UI Emoji", "Segoe UI Symbol", "Symbols", "Meiryo UI", "Leelawadee UI", "Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic", "Estrangelo Edessa", "Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le", "Microsoft Yi Baiti", "Mongolian Baiti", "MV Boli", "Myanmar Text", "Javanese Text", "Cambria Math" !important;
+    font-weight: 500;
+}
+
+
+/* Material Toolbar */
+.material-toolbar {
+    display: -ms-grid;
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    -ms-grid-rows: 1fr;
+    -ms-grid-columns: 56px 1fr 56px;
+    height: 56px;
+}
+
+.phone .material-toolbar {
+    -ms-grid-columns: 10px 1fr 56px;
+}
+
+.phone .material-toolbar .md.md-arrow-back {
+    display: none;
+}
+
+    .material-toolbar .md {
+        margin: 4px;
+        color: #fff;
+    }
+
+    .material-toolbar .material-text {
+        line-height: 56px;
+        font-size: 18px;
+        color: #fff;
+        font-weight: 500;
+        padding: 0 20px;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-transform: capitalize;
+    }
+
+/* Material Content */
+.material-content {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    position: relative;
+}
+
+/* Material Icon */
+.md {
+    height: 48px;
+    width: 48px;
+    font-size: 28px !important;
+    line-height: 48px !important;
+    border-radius: 24px;
+    text-align: center;
+}
+
+    .md:hover {
+        background-color: rgba(0,0,0,0.25);
+    }
+
+    .md[disabled] {
+        pointer-events: none;
+    }
+
+    .md[disabled], .md.disabled {
+        opacity: 0.3;
+    }
+
+        .md[disabled]:hover, .md.disabled:hover {
+            background-color: transparent !important;
+        }
+
+/* Material Grid Column */
+.material-grid-col-1 {
+    -ms-grid-column: 1;
+}
+
+.material-grid-col-2 {
+    -ms-grid-column: 2;
+}
+
+.material-grid-col-3 {
+    -ms-grid-column: 3;
+}
+
+.material-grid-col-4 {
+    -ms-grid-column: 4;
+}
+
+/* Material Grid Row */
+.material-grid-row-1 {
+    -ms-grid-row: 1;
+}
+
+.material-grid-row-2 {
+    -ms-grid-row: 2;
+}
+
+.material-grid-row-3 {
+    -ms-grid-row: 3;
+}
+
+/* Material Text Align */
+.material-text-align-left {
+    text-align: left;
+}
+
+.material-text-align-center {
+    text-align: center;
+}
+
+.material-text-align-right {
+    text-align: right;
+}
+
+/* Material Float */
+.left {
+    float: left;
+}
+
+[dir=rtl] .left {
+    float: right;
+}
+
+.right {
+    float: right;
+}
+
+[dir=rtl] .right {
+    float: left;
+}
+
+
+/* Material Button */
+.material-button {
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Poly */
+[hidden] {
+    display: none !important;
+}

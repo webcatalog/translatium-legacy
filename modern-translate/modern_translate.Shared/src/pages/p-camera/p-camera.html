@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>p-camera</title>
+
+    <link href="p-camera.css" rel="stylesheet" />
+    <script src="p-camera.js"></script>
+</head>
+<body>
+    <div class="p-camera fragment">
+        <div class="material-toolbar themed">
+            <div class="material-grid-col-1 material-grid-row-1">
+                <i class="md md-close"
+                   data-win-bind="onclick: onclickBack"></i>
+            </div>
+            <div class="material-grid-col-2 material-grid-row-1">
+                <span class="material-text material-grid-row-1 material-grid-col-1" data-win-bind="innerText: inputLang Custom.Converter.languageString"></span>
+                <i class="md md-trending-neutral material-grid-row-1 material-grid-col-2"></i>
+                <span class="material-text material-grid-row-1 material-grid-col-3" data-win-bind="innerText: outputLang Custom.Converter.languageString"></span>
+            </div>
+        </div>
+        <div class="material-content">
+            <div class="zoom-container material-grid-col-1 material-grid-row-1">
+                <div class="text-overlay"></div>
+                <div class="bg-overlay"></div>
+                <img class="preview"
+                     data-win-bind="src: imgSrc" />
+            </div>
+            <div class="action-container material-grid-col-1 material-grid-row-2">
+                <div class="action material-grid-col-1 material-grid-row-1"
+                     data-win-bind="onclick: onclickSelect">
+                    <i class="md md-collections"></i>
+                    <p data-win-res="{innerText: 'select_picture'}"></p>
+                </div>
+                <div id="cameraMenu" data-win-control="WinJS.UI.Menu">
+                    <button data-win-control="WinJS.UI.MenuCommand"
+                            data-win-bind="winControl.onclick: onclickOpenCamera"
+                            data-win-res="{ winControl: { label: 'camera' } }"
+                            data-win-options="{type:'button'}"></button>
+                    <button data-win-control="WinJS.UI.MenuCommand"
+                            data-win-bind="winControl.onclick: onclickOpenGallery"
+                            data-win-res="{ winControl: { label: 'gallery' } }"
+                            data-win-options="{type:'button'}"></button>
+                </div>
+                <div class="action material-grid-col-2 material-grid-row-1"
+                     data-win-bind="disabled: extractedText Custom.Converter.forwardDisabled; onclick: onclickOnImg">
+                    <i class="md md-translate"></i>
+                    <p data-win-res="{innerText: 'translate'}"></p>
+                </div>
+                <div class="action material-grid-col-3 material-grid-row-1"
+                     data-win-bind="disabled: extractedText Custom.Converter.forwardDisabled; onclick: onclickTextOnly">
+                    <i class="md md-text-format"></i>
+                    <p data-win-res="{innerText: 'text_only'}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
