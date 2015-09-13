@@ -1,1 +1,594 @@
-!function(){"use strict";var t,i=WinJS.Utilities,e=WinJS.Binding,n=WinJS.UI,a=WinJS.Application,s=WinJS.Navigation,o=Windows.Storage.ApplicationData.current,r=o.localSettings,l=o.roamingSettings;n.Pages.define("/pages/home/home.html",{ready:function(t,n){var o=this;this.liveCardTemplate=t.querySelector(".live-card-template").winControl,this.normalCardTemplate=t.querySelector(".normal-card-template").winControl,this.progressHistory=t.querySelector(".history-footer .progress"),this.progressFavorites=t.querySelector(".favorites-footer .progress"),this.dtInputLang=t.querySelector("#dt-input-lang"),this.imeContainer=t.querySelector(".ime-container"),this.backDrop=t.querySelector(".backdrop"),this.selectLanguage=t.querySelector(".select-language"),this.inputBox=t.querySelector("#input-box"),this.pivotView=t.querySelector("#pivot").winControl,this.toolBar=t.querySelector(".toolbar").winControl,1==l.values["prevent-lock"]&&null==window.dispRequest&&(window.dispRequest=new Windows.System.Display.DisplayRequest,window.dispRequest.requestActive());var u=!1,g=!1;this.bindingData=e.as({labelClearHistory:WinJS.Resources.getString("clear_history").value,selectMode:"hidden",imeMode:"",inputLang:"undefined"==typeof r.values.inputLang?"en":r.values.inputLang,tmpinputLang:r.values.inputLang,outputLang:"undefined"==typeof r.values.outputLang?"es":r.values.outputLang,inputText:a.sessionState.inputText?a.sessionState.inputText:"",expandinputBox:!1,isPremium:Custom.Utils.isPremium(),languageTemplate:e.initializer(function(t){return t.then(function(t){var i=document.createElement("div");return i.className="language-item material-text",i.innerText=t.data.language_name?t.data.language_name:WinJS.Resources.getString(t.data.language_id).value,i})}),languageGroupTemplate:e.initializer(function(t){return t.then(function(t){var i=document.createElement("div");return i.className="language-group material-text themed-text",1==t.data.main?i.innerText=WinJS.Resources.getString("all").value:(i.innerText=WinJS.Resources.getString("recent").value,i.style.marginTop="10px"),i})}),languageInvoked:e.initializer(function(t){o.hideDropdown();var i=t.detail.itemIndex,e=Custom.Data.groupedlanguageList.getAt(i).language_id;"inputLang"==o.bindingData.selectMode&&("auto"!=o.bindingData.inputLang&&e==o.bindingData.outputLang?o.swapLanguage():o.bindingData.inputLang=e),"outputLang"==o.bindingData.selectMode&&(e==o.bindingData.inputLang?o.swapLanguage():o.bindingData.outputLang=e)}),cardTemplate:e.initializer(function(t){return t.then(function(i){return"live"===i.data.type?o.liveCardTemplate.renderItem(t):o.normalCardTemplate.renderItem(t)})}),cardLayout:{type:WinJS.Class.define(function(t){this._site=null,this._surface=null},{initialize:function(t){return this._site=t,this._surface=this._site.surface,WinJS.Utilities.addClass(this._surface,"card-layout"),WinJS.UI.Orientation.vertical},uninitialize:function(){WinJS.Utilities.removeClass(this._surface,"card-layout"),this._site=null,this._surface=null}})},historyList:new WinJS.Binding.List([]),loadmoreHistory:e.initializer(function(t){var e=t?t.detail.visible:!0;return e?WinJS.Promise.as().then(function(){if(!u){u=!0,i.removeClass(o.progressHistory,"hide");var t="SELECT * FROM history ORDER BY id DESC LIMIT 0,5";if(o.bindingData.historyList.length>0){var e=o.bindingData.historyList.getAt(o.bindingData.historyList.length-1);"live"!=e.type&&(t="SELECT * FROM history WHERE id < "+e.id+" ORDER BY id DESC LIMIT 0,5")}return Custom.SQLite.localDatabase.executeAsync(t).then(function(t){t.forEach(function(t){var i=Custom.SQLite.entriestoObj(t.entries);o.bindingData.historyList.push(i)}),u=!1})}}).then(function(){i.addClass(o.progressHistory,"hide")}):void i.addClass(o.progressHistory,"hide")}),favoriteList:new WinJS.Binding.List([]),loadmoreFavorite:e.initializer(function(t){var e=t?t.detail.visible:!0;return e?WinJS.Promise.as().then(function(){if(!g){g=!0,i.removeClass(o.progressFavorites,"hide");var t="9223372036854775807";o.bindingData.favoriteList.length>0&&(t=o.bindingData.favoriteList.getAt(o.bindingData.favoriteList.length-1).id);var e="SELECT * FROM favorites WHERE id < "+t+" ORDER BY id DESC LIMIT 0,5";return Custom.SQLite.localDatabase.executeAsync(e).then(function(t){t.forEach(function(t){var i=Custom.SQLite.entriestoObj(t.entries);o.bindingData.favoriteList.push(i)}),g=!1})}}).then(function(){i.addClass(o.progressFavorites,"hide")}):void i.addClass(o.progressFavorites,"hide")}),onclickinputLang:e.initializer(function(t){o.bindingData.imeMode="","inputLang"==o.bindingData.selectMode?o.bindingData.selectMode="hidden":o.bindingData.selectMode="inputLang"}),onclickoutputLang:e.initializer(function(t){o.bindingData.imeMode="","outputLang"==o.bindingData.selectMode?o.bindingData.selectMode="hidden":o.bindingData.selectMode="outputLang"}),onclickbackDrop:e.initializer(function(){o.bindingData.selectMode="hidden"}),onclickSwap:e.initializer(function(t){o.swapLanguage()}),oninputText:e.initializer(function(t){o.bindingData.inputText=o.inputBox.value}),onkeydownText:0==l.values["enter-to-translate"]?null:e.initializer(function(t){13==(t.keyCode||t.which)&&(o.inputBox.blur(),t.preventDefault(),o.addTranslation())}),onclickClearHistory:e.initializer(function(t){if(o.bindingData.historyList.length>0){Custom.Utils.showNotif(WinJS.Resources.getString("clearing_history").value);var i=0;"live"==o.bindingData.historyList.getAt(0).type&&(i=1),o.bindingData.historyList.splice(i,o.bindingData.historyList.length);var e="DELETE FROM history";Custom.SQLite.localDatabase.executeAsync(e).then(function(){Custom.Utils.hideNotif()})}}),onclickAbout:e.initializer(function(t){s.navigate("/pages/about/about.html")}),onclickSettings:e.initializer(function(t){s.navigate("/pages/settings/settings.html")}),onclickPin:e.initializer(function(t){s.navigate("/pages/p-pin/p-pin.html")}),onclickBuyNow:e.initializer(function(t){s.navigate("/pages/premium/premium.html")}),onclickClear:e.initializer(function(t){o.bindingData.inputText=""}),onclickWrite:e.initializer(function(t){o.bindingData.imeMode="write"!=o.bindingData.imeMode?"write":"",""!=o.bindingData.imeMode&&(o.bindingData.expandinputBox=!1)}),onclickSpeak:e.initializer(function(t){return i.hasClass(this,"disabled")?void Custom.Utils.popupMsg(WinJS.Resources.getString("sorry").value,WinJS.Resources.getString("speech_not_available").value.replace("{1}",WinJS.Resources.getString(o.bindingData.inputLang).value)):(o.bindingData.imeMode="speak"!=o.bindingData.imeMode?"speak":"",void(""!=o.bindingData.imeMode&&(o.bindingData.expandinputBox=!1)))}),onclickCamera:e.initializer(function(e){if(i.hasClass(this,"disabled"))return void Custom.Utils.popupMsg(WinJS.Resources.getString("sorry").value,WinJS.Resources.getString("camera_not_available").value.replace("{1}",WinJS.Resources.getString(o.bindingData.inputLang).value));var n=new Windows.Storage.Pickers.FileOpenPicker;if(n.suggestedStartLocation=Windows.Storage.Pickers.PickerLocationId.picturesLibrary,n.fileTypeFilter.append(".jpg"),n.fileTypeFilter.append(".jpeg"),n.fileTypeFilter.append(".png"),1==Custom.Device.isPhone)n.pickSingleFileAndContinue();else{var a=t.querySelector("#cameraMenu").winControl;a.show(this,"bottom")}}),onclickForward:e.initializer(function(t){o.addTranslation()}),onselectionchangedpivotView:e.initializer(function(t){var i=t.detail.item;1==o.pivotView.selectedIndex?(o.bindingData.historyList.splice(0,o.bindingData.historyList.length),o.bindingData.loadmoreFavorite().then(function(){0==o.bindingData.favoriteList.length?(i.element.querySelector(".empty").style.display="",i.element.querySelector("#favorite-list").style.display="none"):(i.element.querySelector(".empty").style.display="none",i.element.querySelector("#favorite-list").style.display="")})):0==o.pivotView.selectedIndex&&(o.bindingData.favoriteList.splice(0,o.bindingData.favoriteList.length),o.bindingData.loadmoreHistory())}),onclickExpand:e.initializer(function(t){o.bindingData.expandinputBox=!o.bindingData.expandinputBox,o.bindingData.imeMode=""}),onclickOutside:e.initializer(function(t){o.bindingData.imeMode=""}),onclickOpenCamera:e.initializer(function(){var t=new Windows.Media.Capture.CameraCaptureUI;return t.captureFileAsync(Windows.Media.Capture.CameraCaptureUIMode.photo).then(function(t){t&&s.navigate("/pages/p-camera/p-camera.html",{file:t})})}),onclickOpenGallery:e.initializer(function(){var t=new Windows.Storage.Pickers.FileOpenPicker;t.suggestedStartLocation=Windows.Storage.Pickers.PickerLocationId.picturesLibrary,t.fileTypeFilter.append(".jpg"),t.fileTypeFilter.append(".jpeg"),t.fileTypeFilter.append(".png"),t.pickSingleFileAsync().done(function(t){t&&s.navigate("/pages/p-camera/p-camera.html",{file:t})})})}),e.processAll(t,this.bindingData),e.bind(this.bindingData,{inputLang:function(t){r.values.inputLang=t,o.bindingData.tmpinputLang=t,"auto"!=t&&o.updateRecent(),o.liveTranslation()},outputLang:function(t){r.values.outputLang=t,o.updateRecent(),o.liveTranslation()},selectMode:function(t){"hidden"==t?o.hideDropdown():o.showDropdown(o.bindingData.selectMode)},imeMode:function(t){o.imeControl&&(o.imeControl.dispose(),o.imeControl=null),o.imeContainer.className="ime-container",o.imeContainer.innerHTML="",o.applyText(),""!=t&&("write"==t&&(o.imeControl=new Custom.Control.Write(o.imeContainer)),"speak"==t&&(o.imeControl=new Custom.Control.Speak(o.imeContainer)),o.imeControl.onedit=function(t){0==t.eType?o.addText(t.eText):1==t.eType?o.deleteText():2==t.eType&&o.applyText()})},inputText:function(t){o.inputBox.value!=t&&(o.inputBox.value=t),a.sessionState.inputText=t,o.liveTranslation()},expandinputBox:function(t,i){1==i&&(o.pivotView.selectedItem.element.style.transform="translate(-"+o.pivotView.selectedItem.element.style.left+", 0px)")}}),this.toolBar.forceLayout()},unload:function(t,i){window.soundPromise&&window.soundPromise.cancel(),null!=window.dispRequest&&(window.dispRequest.requestRelease(),window.dispRequest=null)},updateLayout:function(t,i){this.bindingData.imeMode=""},deleteText:function(){var t=this.inputBox.querySelector(".new-text");if(t)t.innerText="",t.className="";else{var i=this.inputBox.value;i.length>0&&(this.bindingData.inputText=i.substr(0,i.length-1))}},addText:function(t){var i=this.inputBox.querySelector(".new-text");i?i.innerText=t:(i=document.createElement("span"),i.innerText=t,i.className="new-text",this.inputBox.appendChild(i))},applyText:function(){var t=this.inputBox.querySelector(".new-text");t&&(t.className="",this.bindingData.inputText=this.inputBox.value)},hideDropdown:function(){this.element,i.removeClass(this.backDrop,"show"),i.removeClass(this.selectLanguage,"show")},showDropdown:function(t){var e=this.element,n=(e.querySelector("#language-list").winControl,!1);"auto"==Custom.Data.languageList.getAt(0).language_id&&(n=!0),"inputLang"==t&&(0==n&&Custom.Data.languageList.unshift({language_id:"auto",main:1}),i.removeClass(this.selectLanguage,"show-right"),i.addClass(this.selectLanguage,"show-left"),i.addClass(this.selectLanguage,"show")),"outputLang"==t&&(1==n&&Custom.Data.languageList.shift(),i.removeClass(this.selectLanguage,"show-left"),i.addClass(this.selectLanguage,"show-right"),i.addClass(this.selectLanguage,"show")),i.addClass(this.backDrop,"show")},swapLanguage:function(){if("auto"!=this.bindingData.inputLang){var t=this.element;WinJS.Utilities.toggleClass(t.querySelector("#swap"),"rotate");var i=this.bindingData.outputLang;this.bindingData.outputLang=this.bindingData.inputLang,this.bindingData.inputLang=i}},addTranslation:function(){var i=this;return t&&t.cancel(),WinJS.Promise.as().then(function(){var t=i.bindingData.inputLang,e=i.bindingData.outputLang,n=i.bindingData.inputText;return n.length<1?void 0:WinJS.Promise.as().then(function(){if(Custom.Utils.showNotif(WinJS.Resources.getString("translating").value),i.bindingData.historyList.length>0){var a=i.bindingData.historyList.getAt(0);if("live"==a.type&&(i.bindingData.historyList.splice(0,1),a.inputText==n&&a.inputLang==t&&a.outputLang==e))return a}return Custom.Translate.translate(t,e,n)}).then(function(t){return Custom.Utils.hideNotif(),t?(delete t.type,delete t.suggestedinputLang,delete t.suggestedinputText,Custom.SQLite.insertObject(Custom.SQLite.localDatabase,"history",t).then(function(t){i.bindingData.inputText="",t.type="normal",i.bindingData.historyList.unshift(t),i.bindingData.expandinputBox=!1})):Custom.Utils.popupNoInternet()})})},liveTranslation:function(){if(0!=l.values["realtime-translation"]&&1!=this.bindingData.expandinputBox){var i=this;t&&t.cancel(),t=WinJS.Promise.as().then(function(){var t=i.bindingData.inputLang,e=i.bindingData.outputLang,n=i.bindingData.inputText;return n.trim().length<1?(i.bindingData.historyList.length>0&&"live"==i.bindingData.historyList.getAt(0).type&&i.bindingData.historyList.splice(0,1),void("auto"==t&&(i.bindingData.tmpinputLang="auto"))):Custom.Translate.translate(t,e,n).then(function(e){return e?void(i.bindingData.inputText==n&&("auto"==t&&(i.bindingData.tmpinputLang=e.inputLang),e.type="live",e.id=null,i.bindingData.historyList.length>0&&"live"==i.bindingData.historyList.getAt(0).type?i.bindingData.historyList.splice(0,1,e):i.bindingData.historyList.unshift(e))):void(i.bindingData.historyList.length>0&&"live"==i.bindingData.historyList.getAt(0).type&&i.bindingData.historyList.splice(0,1))})})}},updateRecent:function(){var t=this.bindingData.inputLang,i=this.bindingData.outputLang,e=r.values.recent,n=[];e&&(n=JSON.parse(e));for(var a=Custom.Data.languageList.length-1;0==Custom.Data.languageList.getAt(a).main;)Custom.Data.languageList.pop(),a--;n.indexOf(t)<0&&"auto"!=t&&n.push(t),n.indexOf(i)<0&&n.push(i),n.splice(0,n.length-3),n.forEach(function(t){Custom.Data.languageList.push({language_id:t,language_name:WinJS.Resources.getString(t).value,main:0})}),r.values.recent=JSON.stringify(n)}})}();
+﻿(function () {
+    "use strict";
+
+    var utils = WinJS.Utilities;
+    var binding = WinJS.Binding;
+    var ui = WinJS.UI;
+    var app = WinJS.Application;
+    var nav = WinJS.Navigation;
+
+    var applicationData = Windows.Storage.ApplicationData.current;
+    var localSettings = applicationData.localSettings;
+    var roamingSettings = applicationData.roamingSettings;
+    
+    var livePromise;
+
+    ui.Pages.define("/pages/home/home.html", {
+        ready: function (element, options) {
+    
+            var that = this;
+
+            this.liveCardTemplate = element.querySelector(".live-card-template").winControl;
+            this.normalCardTemplate = element.querySelector(".normal-card-template").winControl;
+            this.progressHistory = element.querySelector(".history-footer .progress");
+            this.progressFavorites = element.querySelector(".favorites-footer .progress");
+            this.dtInputLang = element.querySelector("#dt-input-lang");
+            this.imeContainer = element.querySelector(".ime-container");
+            this.backDrop = element.querySelector(".backdrop");
+            this.selectLanguage = element.querySelector(".select-language");
+            this.inputBox = element.querySelector("#input-box");
+            this.pivotView = element.querySelector("#pivot").winControl;
+            this.toolBar = element.querySelector(".toolbar").winControl;
+
+            if (roamingSettings.values["prevent-lock"] == true) {
+                if (window.dispRequest == null) {
+                    window.dispRequest = new Windows.System.Display.DisplayRequest;
+                    window.dispRequest.requestActive();
+                }
+            }
+
+            var runningHistory = false;
+            var runningFavorites = false;
+
+            this.bindingData = binding.as({
+                labelClearHistory: WinJS.Resources.getString("clear_history").value,
+                selectMode: "hidden",
+                imeMode: "",
+                inputLang: (typeof localSettings.values["inputLang"] == "undefined") ? "en": localSettings.values["inputLang"],
+                tmpinputLang: localSettings.values["inputLang"],
+                outputLang: (typeof localSettings.values["outputLang"] == "undefined") ? "es" : localSettings.values["outputLang"],
+                inputText: app.sessionState.inputText ? app.sessionState.inputText : "",
+                expandinputBox: false,
+                isPremium: Custom.Utils.isPremium(),
+                languageTemplate: binding.initializer(function (itemPromise) {
+                    return itemPromise.then(function (item) {
+                        var div = document.createElement("div");
+                        div.className = "language-item material-text";
+                        div.innerText = (item.data.language_name) ? item.data.language_name
+                                            : WinJS.Resources.getString(item.data.language_id).value;
+                        return div;
+                    });
+                }),
+                languageGroupTemplate: binding.initializer(function (itemPromise) {
+                    return itemPromise.then(function (item) {
+                        var div = document.createElement("div");
+                        div.className = "language-group material-text themed-text";
+                        if (item.data.main == 1)
+                            div.innerText = WinJS.Resources.getString("all").value;
+                        else {
+                            div.innerText = WinJS.Resources.getString("recent").value;
+                            div.style.marginTop = "10px";
+                        }
+                        return div;
+                    });
+                }),
+                languageInvoked: binding.initializer(function (e) {
+                    that.hideDropdown();
+                    var index = e.detail.itemIndex;
+                    var newLang = Custom.Data.groupedlanguageList.getAt(index).language_id;
+                    if (that.bindingData.selectMode == "inputLang") {
+                        if ((that.bindingData.inputLang != "auto") && (newLang == that.bindingData.outputLang))
+                            that.swapLanguage();
+                        else
+                            that.bindingData.inputLang = newLang;
+                    }
+                    if (that.bindingData.selectMode == "outputLang") {
+                        if (newLang == that.bindingData.inputLang) 
+                            that.swapLanguage();
+                        else
+                            that.bindingData.outputLang = newLang;
+                    }
+                }),
+                cardTemplate: binding.initializer(function (itemPromise) {
+                    return itemPromise.then(function (item) {
+                        if (item.data.type === "live")
+                            return that.liveCardTemplate.renderItem(itemPromise);
+                        return that.normalCardTemplate.renderItem(itemPromise);
+                    });
+                }),
+                cardLayout: {
+                    type: WinJS.Class.define(function (options) {
+                            this._site = null;
+                            this._surface = null;
+                          },
+                          {
+                            initialize: function (site) {
+                                this._site = site;
+                                this._surface = this._site.surface;
+
+                                WinJS.Utilities.addClass(this._surface, "card-layout");
+
+                                return WinJS.UI.Orientation.vertical;
+                            },
+
+                            uninitialize: function () {
+                                WinJS.Utilities.removeClass(this._surface, "card-layout");
+                                this._site = null;
+                                this._surface = null;
+                            },
+                          })
+                },
+                historyList: new WinJS.Binding.List([]),
+                loadmoreHistory: binding.initializer(function (e) {
+                    var visible = (e) ? e.detail.visible : true;
+                    if (visible) {
+                        return WinJS.Promise.as().then(function () {
+                            if (runningHistory) return;
+                            runningHistory = true;
+                            utils.removeClass(that.progressHistory, "hide");
+
+                            var statement = "SELECT * FROM history ORDER BY id DESC LIMIT 0,5";
+                            if (that.bindingData.historyList.length > 0) {
+                                var lastData = that.bindingData.historyList.getAt(that.bindingData.historyList.length - 1);
+                                if (lastData.type != "live")
+                                    statement = "SELECT * FROM history WHERE id < " + lastData.id + " ORDER BY id DESC LIMIT 0,5";
+                            }
+                            
+                            return Custom.SQLite.localDatabase.executeAsync(statement)
+                                .then(function (result) {
+                                    result.forEach(function (x) {
+                                        var item = Custom.SQLite.entriestoObj(x.entries);
+                                        that.bindingData.historyList.push(item);
+                                    });
+                                    runningHistory = false;
+                                });
+                        }).then(function () {
+                            utils.addClass(that.progressHistory, "hide");
+                        });
+                    }
+                    else {
+                        utils.addClass(that.progressHistory, "hide");
+                    }
+                }),
+                favoriteList: new WinJS.Binding.List([]),
+                loadmoreFavorite: binding.initializer(function (e) {
+                    var visible = (e) ? e.detail.visible: true;
+                    if (visible) {
+                        return WinJS.Promise.as().then(function () {
+                            if (runningFavorites) return;
+                            runningFavorites = true;
+                            utils.removeClass(that.progressFavorites, "hide");
+                            var maxId = "9223372036854775807";
+                            if (that.bindingData.favoriteList.length > 0) {
+                                maxId = that.bindingData.favoriteList.getAt(that.bindingData.favoriteList.length - 1).id;
+                            }
+                            var statement = "SELECT * FROM favorites WHERE id < " + maxId + " ORDER BY id DESC LIMIT 0,5";
+                            return Custom.SQLite.localDatabase.executeAsync(statement)
+                                .then(function (result) {
+                                    result.forEach(function (x) {
+                                        var item = Custom.SQLite.entriestoObj(x.entries);
+                                        that.bindingData.favoriteList.push(item);
+                                    });
+                                    runningFavorites = false;
+                                });
+                        }).then(function () {
+                            utils.addClass(that.progressFavorites, "hide");
+                        });
+                    }
+                    else {
+                        utils.addClass(that.progressFavorites, "hide");
+                    }
+                }),
+                onclickinputLang: binding.initializer(function (e) {
+                    that.bindingData.imeMode = "";
+                    if (that.bindingData.selectMode == "inputLang")
+                        that.bindingData.selectMode = "hidden";
+                    else
+                        that.bindingData.selectMode = "inputLang";
+                }),
+                onclickoutputLang: binding.initializer(function (e) {
+                    that.bindingData.imeMode = "";
+                    if (that.bindingData.selectMode == "outputLang")
+                        that.bindingData.selectMode = "hidden";
+                    else
+                        that.bindingData.selectMode = "outputLang";
+                }),
+                onclickbackDrop: binding.initializer(function () {
+                    that.bindingData.selectMode = "hidden";
+                }),
+                onclickSwap: binding.initializer(function (e) {
+                    that.swapLanguage();
+                }),
+                oninputText: binding.initializer(function (e) {
+                    that.bindingData.inputText = that.inputBox.value;
+                }),
+                onkeydownText: (roamingSettings.values["enter-to-translate"] == false) ? null :
+                    binding.initializer(function (e) {
+                    if ((e.keyCode || e.which) == 13) {
+                        that.inputBox.blur();
+                        e.preventDefault();
+                        that.addTranslation();
+                    }
+                }),
+                onclickClearHistory: binding.initializer(function (e) {
+                    if (that.bindingData.historyList.length > 0) {
+                        Custom.Utils.showNotif(WinJS.Resources.getString("clearing_history").value);
+                        var start = 0;
+                        if (that.bindingData.historyList.getAt(0).type == "live") start = 1;
+                        that.bindingData.historyList.splice(start, that.bindingData.historyList.length);
+                        var statement = "DELETE FROM history";
+                        Custom.SQLite.localDatabase.executeAsync(statement).then(function () {
+                            Custom.Utils.hideNotif();
+                        });
+                    }
+                }),
+                onclickAbout: binding.initializer(function (e) {
+                    nav.navigate("/pages/about/about.html");
+                }),
+                onclickSettings: binding.initializer(function (e) {
+                    nav.navigate("/pages/settings/settings.html");
+                }),
+                onclickPin: binding.initializer(function (e) {
+                    nav.navigate("/pages/p-pin/p-pin.html");
+                }),
+                onclickBuyNow: binding.initializer(function (e) {
+                    nav.navigate("/pages/premium/premium.html");
+                }),
+                onclickClear: binding.initializer(function (e) {
+                    that.bindingData.inputText = "";
+                }),
+                onclickWrite: binding.initializer(function (e) {
+                    that.bindingData.imeMode = (that.bindingData.imeMode != "write") ? "write" : "";
+                    if (that.bindingData.imeMode != "")
+                        that.bindingData.expandinputBox = false;
+                }),
+                onclickSpeak: binding.initializer(function (e) {
+                    if (utils.hasClass(this, "disabled")) {
+                        Custom.Utils.popupMsg(WinJS.Resources.getString("sorry").value,
+                                              WinJS.Resources.getString("speech_not_available").value
+                                                .replace("{1}", WinJS.Resources.getString(that.bindingData.inputLang).value));
+                        return;
+                    }
+                    that.bindingData.imeMode = (that.bindingData.imeMode != "speak") ? "speak" : "";
+                    if (that.bindingData.imeMode != "")
+                        that.bindingData.expandinputBox = false;
+                }),
+                onclickCamera: binding.initializer(function (e) {
+                    if (utils.hasClass(this, "disabled")) {
+                        Custom.Utils.popupMsg(WinJS.Resources.getString("sorry").value,
+                                              WinJS.Resources.getString("camera_not_available").value
+                                                .replace("{1}", WinJS.Resources.getString(that.bindingData.inputLang).value));
+                        return;
+                    }
+                    var picker = new Windows.Storage.Pickers.FileOpenPicker();
+                    picker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.picturesLibrary;
+                    picker.fileTypeFilter.append(".jpg");
+                    picker.fileTypeFilter.append(".jpeg");
+                    picker.fileTypeFilter.append(".png");
+
+                    if (Custom.Device.isPhone == true)
+                        picker.pickSingleFileAndContinue();
+                    else {
+                        var menu = element.querySelector("#cameraMenu").winControl;
+                        menu.show(this, "bottom");
+                    }
+                }),
+                onclickForward: binding.initializer(function (e) {
+                    that.addTranslation();
+                }),
+                onselectionchangedpivotView: binding.initializer(function (e) {
+                    var item = e.detail.item;
+                    if (that.pivotView.selectedIndex == 1) {
+                        that.bindingData.historyList.splice(0, that.bindingData.historyList.length);
+                        that.bindingData.loadmoreFavorite().then(function () {
+                            if (that.bindingData.favoriteList.length == 0) {
+                                item.element.querySelector(".empty").style.display = "";
+                                item.element.querySelector("#favorite-list").style.display = "none";
+                            }
+                            else {
+                                item.element.querySelector(".empty").style.display = "none";
+                                item.element.querySelector("#favorite-list").style.display = "";
+                            }
+                        });
+                    }
+                    else if (that.pivotView.selectedIndex == 0) {
+                        that.bindingData.favoriteList.splice(0, that.bindingData.favoriteList.length);
+                        that.bindingData.loadmoreHistory();
+                    }
+                }),
+                onclickExpand: binding.initializer(function (e) {
+                    that.bindingData.expandinputBox = !that.bindingData.expandinputBox;
+                    that.bindingData.imeMode = "";
+                }),
+                onclickOutside: binding.initializer(function (e) {
+                    that.bindingData.imeMode = "";
+                }),
+                onclickOpenCamera: binding.initializer(function () {
+                    var dialog = new Windows.Media.Capture.CameraCaptureUI();
+                    return dialog.captureFileAsync(Windows.Media.Capture.CameraCaptureUIMode.photo).then(function (file) {
+                        if (file)
+                            nav.navigate("/pages/p-camera/p-camera.html", { file: file });
+                    });
+                }),
+                onclickOpenGallery: binding.initializer(function () {
+                    var picker = new Windows.Storage.Pickers.FileOpenPicker();
+                    picker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.picturesLibrary;
+                    picker.fileTypeFilter.append(".jpg");
+                    picker.fileTypeFilter.append(".jpeg");
+                    picker.fileTypeFilter.append(".png");
+                    picker.pickSingleFileAsync().done(function (file) {
+                        if (file)
+                            nav.navigate("/pages/p-camera/p-camera.html", { file: file });
+                    });
+                })
+            });
+           
+            binding.processAll(element, this.bindingData);
+            binding.bind(this.bindingData, {
+                inputLang: function(value) {
+                    localSettings.values["inputLang"] = value;
+                    that.bindingData.tmpinputLang = value;
+                    if (value != "auto") that.updateRecent();
+                    that.liveTranslation();
+                },
+                outputLang: function (value) {
+                    localSettings.values["outputLang"] = value;
+                    that.updateRecent();
+                    that.liveTranslation();
+                },
+                selectMode: function (value) {
+                    if (value == "hidden")
+                        that.hideDropdown();
+                    else
+                        that.showDropdown(that.bindingData.selectMode);
+                },
+                imeMode: function (value) {
+                    if (that.imeControl) {
+                        that.imeControl.dispose();
+                        that.imeControl = null;
+                    }
+                    that.imeContainer.className = "ime-container";
+                    that.imeContainer.innerHTML = "";
+                    that.applyText();
+
+                    if (value != "") {
+                        if (value == "write")
+                            that.imeControl = new Custom.Control.Write(that.imeContainer);
+                        if (value == "speak")
+                            that.imeControl = new Custom.Control.Speak(that.imeContainer);
+
+                        that.imeControl.onedit = function (e) {
+                            if (e.eType == 0)
+                                that.addText(e.eText);
+                            else if (e.eType == 1)
+                                that.deleteText();
+                            else if (e.eType == 2) 
+                                that.applyText(); 
+                        }
+                    }
+                },
+                inputText: function (value) {
+                    if (that.inputBox.value != value)
+                        that.inputBox.value = value;
+                    app.sessionState.inputText = value;
+                    that.liveTranslation();
+                },
+                expandinputBox: function (value, old_value) {
+                    if (old_value == true)
+                        that.pivotView.selectedItem.element.style.transform = "translate(-" + that.pivotView.selectedItem.element.style.left + ", 0px)";
+                }
+            });
+
+            // Preview Bug fixes
+            this.toolBar.forceLayout();
+            
+        },
+
+        unload: function (element, options) {
+            if (window.soundPromise)
+                window.soundPromise.cancel();
+            if (window.dispRequest != null) {
+                window.dispRequest.requestRelease();
+                window.dispRequest = null;
+            }
+        },
+
+        updateLayout: function (element, options) {
+            this.bindingData.imeMode = "";
+        },
+
+        deleteText: function() {
+            var new_text = this.inputBox.querySelector(".new-text");
+            if (new_text) {
+                new_text.innerText = "";
+                new_text.className = "";
+            }
+            else {
+                var oldText = this.inputBox.value;
+                if (oldText.length > 0)
+                    this.bindingData.inputText = oldText.substr(0, oldText.length - 1);
+            }
+        },
+
+        addText: function(text) {
+            var new_text = this.inputBox.querySelector(".new-text");
+            if (new_text) {
+                new_text.innerText = text;
+            }
+            else {
+                new_text = document.createElement("span");
+                new_text.innerText = text;
+                new_text.className = "new-text";
+                this.inputBox.appendChild(new_text);
+            }
+        },
+
+        applyText: function() {
+            var new_text = this.inputBox.querySelector(".new-text");
+            if (new_text) {
+                new_text.className = "";
+                this.bindingData.inputText = this.inputBox.value;
+            }
+        },
+
+        hideDropdown: function () {
+            var element = this.element;
+            utils.removeClass(this.backDrop, "show");
+            utils.removeClass(this.selectLanguage, "show");
+        },
+
+        showDropdown: function (type) {
+            var element = this.element;
+            var langlist = element.querySelector("#language-list").winControl;
+            var auto_in_list = false;
+            if (Custom.Data.languageList.getAt(0).language_id == "auto") auto_in_list = true;
+            if (type == "inputLang") {
+                if (auto_in_list == false) Custom.Data.languageList.unshift({
+                    language_id: "auto",
+                    main: 1
+                });
+
+                utils.removeClass(this.selectLanguage, "show-right");
+                utils.addClass(this.selectLanguage, "show-left");
+                utils.addClass(this.selectLanguage, "show");
+            }
+            if (type == "outputLang") {
+                if (auto_in_list == true) Custom.Data.languageList.shift();
+                utils.removeClass(this.selectLanguage, "show-left");
+                utils.addClass(this.selectLanguage, "show-right");
+                utils.addClass(this.selectLanguage, "show");
+            }
+            utils.addClass(this.backDrop, "show");
+        },
+
+        swapLanguage: function () {
+            if (this.bindingData.inputLang == "auto") return;
+
+            var element = this.element;
+            WinJS.Utilities.toggleClass(element.querySelector("#swap"), "rotate");
+            var tmp = this.bindingData.outputLang;
+            this.bindingData.outputLang = this.bindingData.inputLang;
+            this.bindingData.inputLang = tmp;
+        },
+
+        addTranslation: function() {
+            var that = this;
+            if (livePromise)
+                livePromise.cancel();
+            return WinJS.Promise.as().then(function () {
+                var inputLang = that.bindingData.inputLang;
+                var outputLang = that.bindingData.outputLang;
+                var inputText = that.bindingData.inputText;
+
+                if (inputText.length < 1) return;
+
+                return WinJS.Promise.as().then(function () {
+                    Custom.Utils.showNotif(WinJS.Resources.getString("translating").value);
+                    if (that.bindingData.historyList.length > 0) {
+                        var tmp = that.bindingData.historyList.getAt(0);
+                        if (tmp.type == "live") {
+                            that.bindingData.historyList.splice(0, 1);
+                            if ((tmp.inputText == inputText)
+                            && (tmp.inputLang == inputLang)
+                            && (tmp.outputLang == outputLang))
+                                return tmp;
+                        }
+                    }
+                    return Custom.Translate.translate(inputLang, outputLang, inputText);
+                }).then(function (data) {
+                    Custom.Utils.hideNotif();
+                    if (data) {
+                        delete data.type;
+                        delete data.suggestedinputLang;
+                        delete data.suggestedinputText;
+                        return Custom.SQLite.insertObject(Custom.SQLite.localDatabase, "history", data).then(function (res) {
+                            that.bindingData.inputText = "";
+                            res.type = "normal";
+                            that.bindingData.historyList.unshift(res);
+                            that.bindingData.expandinputBox = false;
+                        });      
+                    }
+                    else {
+                        return Custom.Utils.popupNoInternet();
+                    }               
+                });
+            });
+        },
+
+        liveTranslation: function () {
+            if (roamingSettings.values["realtime-translation"] == false) return;
+            if (this.bindingData.expandinputBox == true) return;
+            var that = this;
+            if (livePromise)
+                livePromise.cancel();
+            livePromise = WinJS.Promise.as().then(function () {
+
+                var inputLang = that.bindingData.inputLang;
+                var outputLang = that.bindingData.outputLang;
+                var inputText = that.bindingData.inputText;
+
+                if (inputText.trim().length < 1) {
+                    if ((that.bindingData.historyList.length > 0) && (that.bindingData.historyList.getAt(0).type == "live"))
+                        that.bindingData.historyList.splice(0, 1);
+                    if (inputLang == "auto")
+                        that.bindingData.tmpinputLang = "auto";
+                }
+                else {
+                    return Custom.Translate.translate(inputLang, outputLang, inputText)
+                        .then(function (result) {
+                            if (!result) {
+                                if ((that.bindingData.historyList.length > 0) && (that.bindingData.historyList.getAt(0).type == "live"))
+                                    that.bindingData.historyList.splice(0, 1);
+                                return;
+                            }
+                            if (that.bindingData.inputText == inputText) {
+                                if (inputLang == "auto")
+                                    that.bindingData.tmpinputLang = result.inputLang;
+                                var tmp = result;
+                                result.type = "live";
+                                result.id = null;
+                                if ((that.bindingData.historyList.length > 0) && (that.bindingData.historyList.getAt(0).type == "live"))
+                                    that.bindingData.historyList.splice(0, 1, result);
+                                else 
+                                    that.bindingData.historyList.unshift(result);
+                            }
+                        });
+                }
+            })
+        },
+
+        updateRecent: function () {
+            var inputLang = this.bindingData.inputLang;
+            var outputLang = this.bindingData.outputLang;
+            var recent = localSettings.values["recent"];
+            var recentArr = [];
+            if (recent) recentArr = JSON.parse(recent);
+
+            var l = Custom.Data.languageList.length - 1;
+            while (Custom.Data.languageList.getAt(l).main == 0) {
+                Custom.Data.languageList.pop();
+                l--;
+            }
+
+            if ((recentArr.indexOf(inputLang) < 0) && (inputLang != "auto")) {
+                recentArr.push(inputLang);
+            }
+            if (recentArr.indexOf(outputLang) < 0) {
+                recentArr.push(outputLang);
+            }
+
+            recentArr.splice(0, recentArr.length - 3);
+
+            recentArr.forEach(function (x) {
+                Custom.Data.languageList.push({
+                    language_id: x,
+                    language_name: WinJS.Resources.getString(x).value,
+                    main: 0
+                })
+            });
+
+            localSettings.values["recent"] = JSON.stringify(recentArr);
+        },
+    });
+
+})();

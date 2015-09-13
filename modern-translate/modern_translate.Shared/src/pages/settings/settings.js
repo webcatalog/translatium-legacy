@@ -1,1 +1,103 @@
-!function(){"use strict";var e=WinJS.Navigation,n=(WinJS.Utilities,WinJS.Binding),a=(WinJS.UI,WinJS.Application,Windows.Storage.ApplicationData.current),t=(a.localSettings,a.roamingSettings);WinJS.UI.Pages.define("/pages/settings/settings.html",{ready:function(i,s){var l=[{name:WinJS.Resources.getString("default").value,tag:""}];Windows.Globalization.ApplicationLanguages.manifestLanguages.forEach(function(e,n){var a=new Windows.Globalization.Language(e);l.push({name:a.displayName+" - "+a.nativeName,tag:e})}),this.bindingData={currentDisplayLanguage:Windows.Globalization.ApplicationLanguages.primaryLanguageOverride,hideControlStatusbar:!Custom.Device.isPhone,showStatusbar:"undefined"!=typeof t.values.statusbar?t.values.statusbar:!0,useRealtimeTranslation:"undefined"!=typeof t.values["realtime-translation"]?t.values["realtime-translation"]:!0,useBing:"undefined"!=typeof t.values.bing?t.values.bing:!1,useEnterToTranslate:"undefined"!=typeof t.values["enter-to-translate"]?t.values["enter-to-translate"]:!0,usePreventLock:"undefined"!=typeof t.values["prevent-lock"]?t.values["prevent-lock"]:!1,useChineseServer:"undefined"!=typeof t.values["chinese-server"]?t.values["chinese-server"]:!1,useHTTPS:"undefined"!=typeof t.values.https?t.values.https:!1,displayLangList:new WinJS.Binding.List(l).sort(function(e,n){return e.name-e.name}),onclickBack:n.initializer(function(){e.back()}),onclickClearAll:n.initializer(function(){var n=new Windows.UI.Popups.MessageDialog(WinJS.Resources.getString("erase_all_tip").value,WinJS.Resources.getString("erase_all").value);return n.commands.append(new Windows.UI.Popups.UICommand(WinJS.Resources.getString("erase_all_short").value,function(){var n=t.values.purchased;Custom.SQLite.localDatabase.close(),a.clearAsync().then(function(){return Custom.SQLite.setupDatabase()}).then(function(){t.values.purchased=n,Custom.UI.applyTheme(),Custom.UI.applyStatusbar(),e.history.current.initialPlaceholder=!0,e.navigate("/pages/settings/settings.html")})})),n.commands.append(new Windows.UI.Popups.UICommand(WinJS.Resources.getString("cancel").value)),n.defaultCommandIndex=0,n.cancelCommandIndex=1,n.showAsync()}),onclickSignIn:n.initializer(function(){Custom.Sync.signIn()}),toggleStatusbar:n.initializer(function(e){t.values.statusbar=e.srcElement.winControl.checked,Custom.UI.applyStatusbar()}),toggleRealtimeTranslation:n.initializer(function(e){t.values["realtime-translation"]=e.srcElement.winControl.checked}),toggleBing:n.initializer(function(e){t.values.bing=e.srcElement.winControl.checked}),toggleEnterToTranslate:n.initializer(function(e){t.values["enter-to-translate"]=e.srcElement.winControl.checked}),togglePreventLock:n.initializer(function(e){t.values["prevent-lock"]=e.srcElement.winControl.checked}),toggleChineseServer:n.initializer(function(e){t.values["chinese-server"]=e.srcElement.winControl.checked}),toggleHTTPS:n.initializer(function(e){t.values.https=e.srcElement.winControl.checked}),changeDisplayLanguage:n.initializer(function(e){Windows.Globalization.ApplicationLanguages.primaryLanguageOverride=e.srcElement.value,Custom.Data.loadlanguageList()})},n.processAll(i,this.bindingData)},unload:function(){}})}();
+﻿(function () {
+    "use strict";
+    
+    var nav = WinJS.Navigation;
+    var utils = WinJS.Utilities;
+    var binding = WinJS.Binding;
+    var ui = WinJS.UI;
+    var app = WinJS.Application;
+
+    var applicationData = Windows.Storage.ApplicationData.current;
+    var localSettings = applicationData.localSettings;
+    var roamingSettings = applicationData.roamingSettings;
+
+    WinJS.UI.Pages.define("/pages/settings/settings.html", {
+
+        ready: function (element, options) {
+
+            var langArr = [{ name: WinJS.Resources.getString('default').value, tag: "" }];
+            Windows.Globalization.ApplicationLanguages.manifestLanguages.forEach(function (tag, i) {
+                var lang = new Windows.Globalization.Language(tag);
+                langArr.push({
+                    name: lang.displayName + " - " + lang.nativeName,
+                    tag: tag
+                });
+            });
+
+            this.bindingData = {
+                currentDisplayLanguage: Windows.Globalization.ApplicationLanguages.primaryLanguageOverride,
+                hideControlStatusbar: !Custom.Device.isPhone,
+                showStatusbar: (typeof roamingSettings.values["statusbar"] != 'undefined') ? roamingSettings.values["statusbar"] : true,
+                useRealtimeTranslation: (typeof roamingSettings.values["realtime-translation"] != 'undefined') ? roamingSettings.values["realtime-translation"] : true,
+                useBing: (typeof roamingSettings.values["bing"] != 'undefined') ? roamingSettings.values["bing"] : false,
+                useEnterToTranslate: (typeof roamingSettings.values["enter-to-translate"] != 'undefined') ? roamingSettings.values["enter-to-translate"] : true,
+                usePreventLock: (typeof roamingSettings.values["prevent-lock"] != 'undefined') ? roamingSettings.values["prevent-lock"] : false,
+                useChineseServer: (typeof roamingSettings.values["chinese-server"] != 'undefined') ? roamingSettings.values["chinese-server"] : false,
+                useHTTPS: (typeof roamingSettings.values["https"] != 'undefined') ? roamingSettings.values["https"] : false,
+                displayLangList: new WinJS.Binding.List(langArr).sort(function (a, b) {
+                    return a.name - a.name;
+                }),
+                onclickBack: binding.initializer(function () {
+                    nav.back();
+                }),
+                onclickClearAll: binding.initializer(function () {
+                    var msg = new Windows.UI.Popups.MessageDialog(WinJS.Resources.getString("erase_all_tip").value, WinJS.Resources.getString("erase_all").value);
+                    msg.commands.append(new Windows.UI.Popups.UICommand(
+                        WinJS.Resources.getString("erase_all_short").value,
+                        function () {
+                            var tmpPurchase = roamingSettings.values["purchased"];
+                            Custom.SQLite.localDatabase.close();
+                            applicationData.clearAsync().then(function () {
+                                return Custom.SQLite.setupDatabase();
+                            }).then(function () {
+                                roamingSettings.values["purchased"] = tmpPurchase;
+                                Custom.UI.applyTheme();
+                                Custom.UI.applyStatusbar();
+                                nav.history.current.initialPlaceholder = true;
+                                nav.navigate("/pages/settings/settings.html");
+                            });
+                        })
+                    );
+                    msg.commands.append(new Windows.UI.Popups.UICommand(WinJS.Resources.getString("cancel").value));
+                    msg.defaultCommandIndex = 0;
+                    msg.cancelCommandIndex = 1;
+                    return msg.showAsync();
+                }),
+                onclickSignIn: binding.initializer(function() {
+                    Custom.Sync.signIn();
+                }),
+                toggleStatusbar: binding.initializer(function (e) {
+                    roamingSettings.values["statusbar"] = e.srcElement.winControl.checked;
+                    Custom.UI.applyStatusbar();
+                }),
+                toggleRealtimeTranslation: binding.initializer(function (e) {
+                    roamingSettings.values["realtime-translation"] = e.srcElement.winControl.checked;
+                }),
+                toggleBing: binding.initializer(function (e) {
+                    roamingSettings.values["bing"] = e.srcElement.winControl.checked;
+                }),
+                toggleEnterToTranslate: binding.initializer(function (e) {
+                    roamingSettings.values["enter-to-translate"] = e.srcElement.winControl.checked;
+                }),
+                togglePreventLock: binding.initializer(function (e) {
+                    roamingSettings.values["prevent-lock"] = e.srcElement.winControl.checked;
+                }),
+                toggleChineseServer: binding.initializer(function (e) {
+                    roamingSettings.values["chinese-server"] = e.srcElement.winControl.checked;
+                }),
+                toggleHTTPS: binding.initializer(function (e) {
+                    roamingSettings.values["https"] = e.srcElement.winControl.checked;
+                }),
+                changeDisplayLanguage: binding.initializer(function (e) {
+                    Windows.Globalization.ApplicationLanguages.primaryLanguageOverride = e.srcElement.value;
+                    Custom.Data.loadlanguageList();
+                })
+            };
+            binding.processAll(element, this.bindingData);
+        },
+
+        unload: function () {
+        },
+
+    });
+})();

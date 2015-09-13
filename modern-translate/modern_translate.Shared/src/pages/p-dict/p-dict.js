@@ -1,1 +1,305 @@
-!function(){"use strict";var e=WinJS.Binding,n=WinJS.Navigation,t=WinJS.Utilities,a=WinJS.Application,i=Windows.Storage.ApplicationData.current,c=i.localSettings;i.roamingSettings,WinJS.UI.Pages.define("/pages/p-dict/p-dict.html",{ready:function(t,a){var i=this;this.bindingData=e.as({pageTitle:a.title,onclickBack:e.initializer(function(){n.back()})}),e.processAll(t,i.bindingData);var c;c="google"==a.source?"inputDict"==a.type?this.generateinputDictbyGoogle(JSON.parse(a.dict)):this.generateoutputDictbyGoogle(JSON.parse(a.dict)):this.generateDictbyBing(a.dict),t.querySelector(".material-content").appendChild(c)},unload:function(){},generateDictbyBing:function(e){e=decodeURIComponent(e);var n=document.createElement("div");n.className="dict";var t=document.createElement("div");return t.className="bing-dict",t.innerHTML=e,n.appendChild(t),n},generateoutputDictbyGoogle:function(e){var n=this,t=document.createElement("div");t.className="dict";var a=document.createElement("div");return a.className="title themed",a.innerText=WinJS.Resources.getString("translations").value,t.appendChild(a),e.forEach(function(e){var a=document.createElement("div");a.className="part-container";var i=document.createElement("div");i.className="type",i.innerText="/ "+WinJS.Resources.getString(e[0]).value+" /",a.appendChild(i),e[2].forEach(function(e,t){var i=document.createElement("div");i.className="word-item";var r=document.createElement("div");r.className="word",r.innerText=t+1+". ",e[4]&&(r.innerText+=e[4]+" ");var l=document.createElement("a");l.className="blue",l.innerText=e[0],l.onclick=function(){n.translate(c.values.outputLang,c.values.inputLang,e[0])},r.appendChild(l);var d=document.createElement("div");d.className="meaning",e[1].forEach(function(e,t){if(t>0){var a=document.createElement("span");a.innerText=", ",d.appendChild(a)}var i=document.createElement("a");i.innerText=e,i.onclick=function(){n.translate(c.values.inputLang,c.values.outputLang,e)},d.appendChild(i)}),i.appendChild(r),i.appendChild(d),a.appendChild(i)}),t.appendChild(a)}),t},generateinputDictbyGoogle:function(e){var n=this,a=document.createElement("div");if(a.className="dict",e[1]){var i=document.createElement("div");i.className="title themed",i.innerText=WinJS.Resources.getString("definitions").value,a.appendChild(i),e[1].forEach(function(e){var t=document.createElement("div");t.className="part-container";var i=document.createElement("div");i.className="type",i.innerText="/ "+WinJS.Resources.getString(e[0]).value+" /",t.appendChild(i),e[1].forEach(function(e,a){var i=document.createElement("div");i.className="word-item";var r=document.createElement("div");r.className="word",r.innerText=a+1+". ";var l=document.createElement("a");if(l.className="blue",l.innerText=e[0],l.onclick=function(){n.translate(c.values.inputLang,c.values.outputLang,e[0])},r.appendChild(l),i.appendChild(r),e[2]){var d=document.createElement("div");d.className="meaning";var o=document.createElement("a");o.innerText='"'+e[2]+'"',o.onclick=function(){n.translate(c.values.inputLang,c.values.outputLang,e[2])},d.appendChild(o),i.appendChild(d)}t.appendChild(i)}),a.appendChild(t)})}if(e[0]){var i=document.createElement("div");i.className="title themed",i.innerText=WinJS.Resources.getString("synonyms").value,a.appendChild(i);var r=document.createElement("div");r.className="part-container",e[0].forEach(function(e){var t=document.createElement("div");t.className="type",t.innerText="/ "+e[0]+" /";var a=document.createElement("ul");e[1].forEach(function(e){var t=document.createElement("li");e[0].forEach(function(e,a){if(a>0){var i=document.createElement("span");i.innerText=", ",t.appendChild(i)}var r=document.createElement("a");r.innerText=e,r.onclick=function(){n.translate(c.values.inputLang,c.values.outputLang,e)},t.appendChild(r)}),a.appendChild(t)}),r.appendChild(t),r.appendChild(a)}),a.appendChild(r)}if(e[2]){var i=document.createElement("div");i.className="title themed",i.innerText=WinJS.Resources.getString("examples").value,a.appendChild(i);var r=document.createElement("div");r.className="part-container",e[2][0].forEach(function(e,a){var i=document.createElement("div");i.className="word-item";var l=document.createElement("div");l.className="word";var d=document.createElement("span");d.innerText=a+1+". ",l.appendChild(d);var o=document.createElement("a");t.setInnerHTML(o,toStaticHTML(e[0])),o.onclick=function(){n.translate(c.values.inputLang,c.values.outputLang,o.innerText)},l.appendChild(o),i.appendChild(l),r.appendChild(i)}),a.appendChild(r)}if(e[3]){var i=document.createElement("div");i.className="title themed",i.innerText=WinJS.Resources.getString("see_also").value,a.appendChild(i);var r=document.createElement("div");r.className="part-container",e[3].forEach(function(e){var a=document.createElement("div");a.className="word-item";var i=document.createElement("div");i.className="word",e.forEach(function(e,a){if(a>0){var r=document.createElement("span");r.innerText=", ",i.appendChild(r)}var l=document.createElement("a");t.setInnerHTML(l,toStaticHTML(e)),l.onclick=function(){n.translate(c.values.inputLang,c.values.outputLang,l.innerText)},i.appendChild(l)}),a.appendChild(i),r.appendChild(a)}),a.appendChild(r)}return a},translate:function(e,t,i){c.values.inputLang=e,c.values.outputLang=t,a.sessionState.inputText=i,n.back()}})}();
+﻿(function () {
+    "use strict";
+
+    var binding = WinJS.Binding;
+    var nav = WinJS.Navigation;
+    var utils = WinJS.Utilities;
+    var app = WinJS.Application;
+
+    var applicationData = Windows.Storage.ApplicationData.current;
+    var localSettings = applicationData.localSettings;
+    var roamingSettings = applicationData.roamingSettings;
+
+    WinJS.UI.Pages.define("/pages/p-dict/p-dict.html", {
+
+        ready: function (element, options) {
+            var that = this;
+            this.bindingData = binding.as({
+                pageTitle: options.title,
+                onclickBack: binding.initializer(function () {
+                    nav.back();
+                }),
+            });
+
+            binding.processAll(element, that.bindingData);
+            
+            var dict;
+            if (options.source == "google") {
+                if (options.type == "inputDict")
+                    dict = this.generateinputDictbyGoogle(JSON.parse(options.dict));
+                else
+                    dict = this.generateoutputDictbyGoogle(JSON.parse(options.dict));
+            }
+            else {
+                dict = this.generateDictbyBing(options.dict);
+            }
+            element.querySelector(".material-content").appendChild(dict);            
+        },
+
+        unload: function () {
+        },
+
+        generateDictbyBing: function(dictData) {
+            dictData = decodeURIComponent(dictData);
+            var dict = document.createElement("div");
+            dict.className = "dict";
+
+            var content = document.createElement("div");
+            content.className = "bing-dict";
+            content.innerHTML = dictData;
+            dict.appendChild(content);
+
+            return dict;
+        },
+
+        generateoutputDictbyGoogle: function (dictData) {
+            var that = this;
+            var dict_output = document.createElement("div");
+            dict_output.className = "dict";
+            var dict_title = document.createElement("div");
+            dict_title.className = "title themed";
+            dict_title.innerText = WinJS.Resources.getString("translations").value;
+            dict_output.appendChild(dict_title);
+
+            dictData.forEach(function (x) {
+                var part = document.createElement("div");
+                part.className = "part-container";
+
+                var type = document.createElement("div");
+                type.className = "type";
+                type.innerText = "/ " + WinJS.Resources.getString(x[0]).value + " /";
+                part.appendChild(type);
+
+                x[2].forEach(function (y, i) {
+                    var word_item = document.createElement("div");
+                    word_item.className = "word-item";
+                    var word = document.createElement("div");
+                    word.className =  "word";
+
+                    word.innerText = i + 1 + ". ";
+
+                    // Prefix
+                    if (y[4]) word.innerText += y[4] + " ";
+                                        
+                    // Word
+                    var main_word = document.createElement("a");
+                    main_word.className = "blue";
+                    main_word.innerText = y[0];
+                    main_word.onclick = function () {
+                        that.translate(localSettings.values["outputLang"], localSettings.values["inputLang"], y[0]);
+                    }
+                    word.appendChild(main_word);
+
+                    // Meanings
+                    var meaning = document.createElement("div");
+                    meaning.className = "meaning";
+                    y[1].forEach(function (text, i) {
+
+                        if (i > 0) {
+                            var sepa = document.createElement("span");
+                            sepa.innerText = ", ";
+                            meaning.appendChild(sepa);
+                        }
+
+                        var am = document.createElement("a");
+                        am.innerText = text;
+                        am.onclick = function () {
+                            that.translate(localSettings.values["inputLang"], localSettings.values["outputLang"], text);
+                        }
+                        meaning.appendChild(am);
+                    });
+                                      
+                    word_item.appendChild(word);
+                    word_item.appendChild(meaning);
+
+                    part.appendChild(word_item);
+                });
+
+                dict_output.appendChild(part);
+            });
+            return dict_output;
+        },
+
+        generateinputDictbyGoogle: function (dictData) {
+            var that = this;
+            var dict_input = document.createElement("div");
+            dict_input.className = "dict";
+            // Definitions
+            if (dictData[1]) {
+                var title = document.createElement("div");
+                title.className = "title themed";
+                title.innerText = WinJS.Resources.getString("definitions").value;
+                dict_input.appendChild(title);
+
+                dictData[1].forEach(function (x) {
+                    var part = document.createElement("div");
+                    part.className = "part-container";
+
+                    var type = document.createElement("div");
+                    type.className = "type";
+                    type.innerText = "/ " + WinJS.Resources.getString(x[0]).value + " /";
+                    part.appendChild(type);
+
+                    x[1].forEach(function (y, i) {
+                        var word_item = document.createElement("div");
+                        word_item.className = "word-item";
+                        var word = document.createElement("div");
+                        word.className = "word";
+
+                        word.innerText = i + 1 + ". ";
+
+                        // Word
+                        var main_word = document.createElement("a");
+                        main_word.className = "blue";
+                        main_word.innerText = y[0];
+                        main_word.onclick = function () {
+                            that.translate(localSettings.values["inputLang"], localSettings.values["outputLang"], y[0]);
+                        }
+                        word.appendChild(main_word);
+                        word_item.appendChild(word);
+
+                        // Example
+                        if (y[2]) {
+                            var example = document.createElement("div");
+                            example.className = "meaning";
+                            var am = document.createElement("a");
+                            am.innerText = '"' + y[2] + '"';
+                            am.onclick = function () {
+                                that.translate(localSettings.values["inputLang"], localSettings.values["outputLang"], y[2]);
+                            }
+                            example.appendChild(am);
+                            word_item.appendChild(example);
+                        }
+
+                        part.appendChild(word_item);
+                    });
+
+                    dict_input.appendChild(part);
+                });
+            }
+
+            // Synonyms
+            if (dictData[0]) {
+                var title = document.createElement("div");
+                title.className = "title themed";
+                title.innerText = WinJS.Resources.getString("synonyms").value;
+                dict_input.appendChild(title);
+
+                var part = document.createElement("div");
+                part.className = "part-container";
+
+                dictData[0].forEach(function (x) {
+                    var type = document.createElement("div");
+                    type.className = "type";
+                    type.innerText = "/ " + x[0] + " /";
+
+                    var ul = document.createElement("ul");
+                    x[1].forEach(function (word_list) {
+                        var li = document.createElement("li");
+                        word_list[0].forEach(function (text, i) {
+                            if (i > 0) {
+                                var sepa = document.createElement("span");
+                                sepa.innerText = ", ";
+                                li.appendChild(sepa);
+                            }
+
+                            var am = document.createElement("a");
+                            am.innerText = text;
+                            am.onclick = function () {
+                                that.translate(localSettings.values["inputLang"], localSettings.values["outputLang"], text);
+                            }
+                            li.appendChild(am);
+                        })
+
+                        ul.appendChild(li);
+                    });
+                    part.appendChild(type);
+                    part.appendChild(ul);
+                });
+
+                dict_input.appendChild(part);
+            }
+
+            // Examples
+            if (dictData[2]) {
+                var title = document.createElement("div");
+                title.className = "title themed";
+                title.innerText = WinJS.Resources.getString("examples").value;
+                dict_input.appendChild(title);
+
+                var part = document.createElement("div");
+                part.className = "part-container";
+
+                dictData[2][0].forEach(function (x, i) {
+                    var word_item = document.createElement("div");
+                    word_item.className = "word-item";
+                    var word = document.createElement("div");
+                    word.className = "word";
+
+                    var span = document.createElement("span");
+                    span.innerText = i + 1 + ". ";
+                    word.appendChild(span);
+
+                    var ax = document.createElement("a");
+                    utils.setInnerHTML(ax, toStaticHTML(x[0]));
+                    ax.onclick = function () {
+                        that.translate(localSettings.values["inputLang"], localSettings.values["outputLang"], ax.innerText);
+                    };
+                    word.appendChild(ax);
+
+                    word_item.appendChild(word);
+                    part.appendChild(word_item);
+                });
+
+                dict_input.appendChild(part);
+            }
+
+            // See also
+            if (dictData[3]) {
+                var title = document.createElement("div");
+                title.className = "title themed";
+                title.innerText = WinJS.Resources.getString("see_also").value;
+                dict_input.appendChild(title);
+
+                var part = document.createElement("div");
+                part.className = "part-container";
+
+                dictData[3].forEach(function (x) {
+                    var word_item = document.createElement("div");
+                    word_item.className = "word-item";
+                    var word = document.createElement("div");
+                    word.className = "word";
+
+                    x.forEach(function (y, i) {
+                        if (i > 0) {
+                            var sepa = document.createElement("span");
+                            sepa.innerText = ", ";
+                            word.appendChild(sepa);
+                        }
+                        var ax = document.createElement("a");
+                        utils.setInnerHTML(ax, toStaticHTML(y));
+                        ax.onclick = function () {
+                            that.translate(localSettings.values["inputLang"], localSettings.values["outputLang"], ax.innerText);
+                        };
+                        word.appendChild(ax);
+                    });
+
+                    word_item.appendChild(word);
+                    part.appendChild(word_item);
+                });
+
+
+                dict_input.appendChild(part);
+            }
+            return dict_input;
+        },
+
+        translate: function (inputLang, outputLang, inputText) {
+            localSettings.values["inputLang"] = inputLang;
+            localSettings.values["outputLang"] = outputLang;
+            app.sessionState.inputText = inputText;
+            nav.back();
+        }
+    });
+
+})();

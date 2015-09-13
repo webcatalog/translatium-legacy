@@ -1,1 +1,41 @@
-!function(){"use strict";var i=WinJS.Binding,n=WinJS.Navigation,o=Windows.Storage.ApplicationData.current,t=o.localSettings;o.roamingSettings,WinJS.UI.Pages.define("/pages/p-zoom/p-zoom.html",{ready:function(o,e){var a=this;this.bindingData=i.as({zoomFontsize:"undefined"==typeof t.values["zoom-fontsize"]?50:t.values["zoom-fontsize"],zoomFontsizePX:"undefined"==typeof t.values["zoom-fontsize"]?"50px":t.values["zoom-fontsize"]+"px",zoomText:e&&e.text?e.text:"",onclickBack:i.initializer(function(){n.back()}),onchangeSize:i.initializer(function(i){t.values["zoom-fontsize"]=i.srcElement.value,a.bindingData.zoomFontsize=t.values["zoom-fontsize"]})}),i.processAll(o,a.bindingData),i.bind(this.bindingData,{zoomFontsize:function(){a.bindingData.zoomFontsizePX=a.bindingData.zoomFontsize+"px"}})},unload:function(){}})}();
+﻿(function () {
+    "use strict";
+
+    var binding = WinJS.Binding;
+    var nav = WinJS.Navigation;
+
+    var applicationData = Windows.Storage.ApplicationData.current;
+    var localSettings = applicationData.localSettings;
+    var roamingSettings = applicationData.roamingSettings;
+
+    WinJS.UI.Pages.define("/pages/p-zoom/p-zoom.html", {
+
+        ready: function (element, options) {
+            var that = this;
+            this.bindingData = binding.as({
+                zoomFontsize: (typeof localSettings.values["zoom-fontsize"] == "undefined") ? 50 : localSettings.values["zoom-fontsize"] ,
+                zoomFontsizePX: (typeof localSettings.values["zoom-fontsize"] == "undefined") ? "50px" : localSettings.values["zoom-fontsize"] + "px",
+                zoomText: (options && options.text) ? options.text : "",
+                onclickBack: binding.initializer(function () {
+                    nav.back();
+                }),
+                onchangeSize: binding.initializer(function (evt) {
+                    localSettings.values["zoom-fontsize"] = evt.srcElement.value;
+                    that.bindingData.zoomFontsize = localSettings.values["zoom-fontsize"];
+                }),
+            });
+
+            binding.processAll(element, that.bindingData);
+            binding.bind(this.bindingData, {
+                zoomFontsize: function () {
+                    that.bindingData.zoomFontsizePX = that.bindingData.zoomFontsize + "px";
+                },
+            })
+            
+        },
+
+        unload: function () {
+        },
+
+    });
+})();

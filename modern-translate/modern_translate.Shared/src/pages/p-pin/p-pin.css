@@ -1,1 +1,17 @@
-.p-pin .bottom-toolbar{position:absolute;bottom:0;color:#fff}.p-pin .bottom-toolbar *{color:#fff!important}.p-pin .material-content{text-align:center;padding-top:calc(50% - 200px)}
+﻿.p-pin {
+}
+
+    .p-pin .bottom-toolbar {
+	    position: absolute;
+	    bottom: 0px;
+        color: #fff;
+    }
+
+        .p-pin .bottom-toolbar * {
+            color: #fff !important;
+        }
+
+    .p-pin .material-content {
+        text-align: center;
+        padding-top: calc(50% - 200px);
+    }

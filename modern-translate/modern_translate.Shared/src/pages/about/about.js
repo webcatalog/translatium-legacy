@@ -1,1 +1,58 @@
-!function(){"use strict";var n=WinJS.Navigation,i=(WinJS.Utilities,WinJS.Binding);WinJS.UI,WinJS.UI.Pages.define("/pages/about/about.html",{ready:function(e,a){var t=Windows.ApplicationModel.Package.current.id.version;this.bindingData=WinJS.Binding.as({appVersion:t.major+"."+t.minor+"."+t.build+"."+t.revision,developedBy:WinJS.Resources.getString("developed_by").value.replace("{1}",'<a href="http://moderntech.io">ModernTech.io</a>'),poweredBy:WinJS.Resources.getString("powered_by").value.replace("{1}",'<a href="http://translate.google.com">Google</a> & <a href="http://bing.com/translator">Bing</a>'),onclickBack:i.initializer(function(){n.back()}),onclickRate:i.initializer(function(){if(Custom.Device.isPhone)var n=new Windows.Foundation.Uri("zune:reviewapp?appid="+Windows.ApplicationModel.Store.CurrentApp.appId);else var n=new Windows.Foundation.Uri("ms-windows-store:REVIEW?PFN="+Windows.ApplicationModel.Store.CurrentApp.appId);return Windows.System.Launcher.launchUriAsync(n)}),onclickContact:i.initializer(function(){var n=new Windows.Foundation.Uri("mailto:support@moderntech.io?body=//Please write your email in English.");return Windows.System.Launcher.launchUriAsync(n)}),onclickWebsite:i.initializer(function(){var n=new Windows.Foundation.Uri("http://moderntranslate.com");return Windows.System.Launcher.launchUriAsync(n)})});var o="",r=Custom.Data.languageList.length,s=0;Custom.Data.languageList.forEach(function(n){return"auto"==n.language_id||0==n.main?void r--:(s++,void(o+=n.language_name+", "))}),o=o.substring(0,o.length-2)+".",this.bindingData.languageList=o,this.bindingData.feature_new_1=WinJS.Resources.getString("feature_new_1").value.replace("{1}",r),i.processAll(e,this.bindingData)},unload:function(){}})}();
+﻿(function () {
+    "use strict";
+
+    var nav = WinJS.Navigation;
+    var utils = WinJS.Utilities;
+    var binding = WinJS.Binding;
+    var ui = WinJS.UI;
+
+    WinJS.UI.Pages.define("/pages/about/about.html", {
+        ready: function (element, options) {
+            var p = Windows.ApplicationModel.Package.current.id.version;
+            this.bindingData = WinJS.Binding.as({
+                appVersion: p.major + "." + p.minor + "." + p.build + "." + p.revision, 
+                developedBy: WinJS.Resources.getString("developed_by").value.replace("{1}", "<a href=\"http://moderntech.io\">ModernTech.io</a>"),
+                poweredBy: WinJS.Resources.getString("powered_by").value.replace("{1}", "<a href=\"http://translate.google.com\">Google</a> & <a href=\"http://bing.com/translator\">Bing</a>"),
+                onclickBack: binding.initializer(function () {
+                    nav.back();
+                }),
+                onclickRate: binding.initializer(function () {
+                    if (Custom.Device.isPhone)
+                        var uri = new Windows.Foundation.Uri("zune:reviewapp?appid=" + Windows.ApplicationModel.Store.CurrentApp.appId);
+                    else
+                        var uri = new Windows.Foundation.Uri("ms-windows-store:REVIEW?PFN=" + Windows.ApplicationModel.Store.CurrentApp.appId);
+                    return Windows.System.Launcher.launchUriAsync(uri);
+                }),
+                onclickContact: binding.initializer(function () {
+                    var uri = new Windows.Foundation.Uri("mailto:support@moderntranslate.com?body=//Please write your email in English.");
+                    return Windows.System.Launcher.launchUriAsync(uri);
+                }),
+                onclickWebsite: binding.initializer(function () {
+                    var uri = new Windows.Foundation.Uri("http://moderntranslate.com");
+                    return Windows.System.Launcher.launchUriAsync(uri);
+                })
+            });
+
+            var list = "";
+            var number = Custom.Data.languageList.length;
+            var count = 0;
+            Custom.Data.languageList.forEach(function (item) {
+                if ((item.language_id == "auto") || (item.main == 0)) {
+                    number--;
+                    return;
+                }
+                count++;
+                list += item.language_name + ", ";
+            });
+            list = list.substring(0, list.length - 2) + ".";
+            this.bindingData.languageList = list;
+            this.bindingData.feature_new_1 = WinJS.Resources.getString("feature_new_1").value.replace("{1}", number);
+
+            binding.processAll(element, this.bindingData);
+
+        },
+
+        unload: function () {
+        }
+    });
+})();

@@ -1,1 +1,38 @@
-!function(){"use strict";var i=WinJS.Navigation,n=(WinJS.Utilities,WinJS.Binding);WinJS.UI,WinJS.UI.Pages.define("/pages/premium/premium.html",{ready:function(t,e){var r=this,o=Windows.ApplicationModel.Store.CurrentApp;o.licenseInformation,Windows.ApplicationModel.Package.current.id.version,this.bindingData=WinJS.Binding.as({onclickBack:n.initializer(function(){i.back()}),isPremium:Custom.Utils.isPremium(),onclickBuy:n.initializer(function(){o.requestProductPurchaseAsync("premium").then(function(){r.bindingData.isPremium=Custom.Utils.isPremium()},function(i){})})}),n.processAll(t,this.bindingData),o.loadListingInformationAsync("premium").then(function(i){var n=i.productListings.premium.formattedPrice;t.querySelector(".price").innerText=n}).then(null,function(i){})}})}();
+﻿(function () {
+    "use strict";
+
+    var nav = WinJS.Navigation;
+    var utils = WinJS.Utilities;
+    var binding = WinJS.Binding;
+    var ui = WinJS.UI;
+
+    WinJS.UI.Pages.define("/pages/premium/premium.html", {
+        ready: function (element, options) {
+            var that = this;
+
+            var currentApp = Windows.ApplicationModel.Store.CurrentApp;
+            var licenseInformation = currentApp.licenseInformation;
+
+            var p = Windows.ApplicationModel.Package.current.id.version;
+            this.bindingData = WinJS.Binding.as({
+                onclickBack: binding.initializer(function () {
+                    nav.back();
+                }),
+                isPremium: Custom.Utils.isPremium(),
+                onclickBuy: binding.initializer(function () {
+                    currentApp.requestProductPurchaseAsync("premium")
+                        .then(function () {
+                            that.bindingData.isPremium = Custom.Utils.isPremium();
+                        }, function (err) { });
+                })
+            });
+
+            binding.processAll(element, this.bindingData);
+
+            currentApp.loadListingInformationAsync("premium").then(function (info) {
+                var price = info.productListings.premium.formattedPrice;
+                element.querySelector(".price").innerText = price;
+            }).then(null, function(err) {});
+        }
+    });
+})();
