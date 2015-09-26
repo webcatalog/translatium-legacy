@@ -50,8 +50,8 @@
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <PackageCertificateKeyFile>modern_translate.Windows_StoreKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>8CB9D4609C6A3C73923E979C508C694D6F432017</PackageCertificateThumbprint>
-    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <PackageCertificateThumbprint>64819815B478F449E0721F6B7D637628D50FDB3B</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
   </PropertyGroup>
@@ -85,9 +85,10 @@
     <Content Include="images\Wide310x150Logo.secondary.png" />
     <Content Include="js\device.js" />
     <None Include="Package.StoreAssociation.xml" />
+    <None Include="modern_translate.Windows_TemporaryKey.pfx" />
     <None Include="modern_translate.Windows_StoreKey.pfx" />
+    <Content Include="OcrResources\MsOcrRes.orp" />
     <Content Include="packages.config" />
-    <None Include="modern_translate_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="WindowsPreview.Media.Ocr">

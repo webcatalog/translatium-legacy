@@ -14,7 +14,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Microsoft.WinJS.4.0\fonts\Symbols.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Microsoft.WinJS.4.0\js\en-US\ui.strings.js" />
     <Content Include="$(MSBuildThisFileDirectory)Microsoft.WinJS.4.0\js\WinJS.js" />
-    <Content Include="$(MSBuildThisFileDirectory)OcrResources\MsOcrRes.orp" />
     <Content Include="$(MSBuildThisFileDirectory)pages\about\about.css" />
     <Content Include="$(MSBuildThisFileDirectory)pages\about\about.html" />
     <Content Include="$(MSBuildThisFileDirectory)pages\about\about.js" />

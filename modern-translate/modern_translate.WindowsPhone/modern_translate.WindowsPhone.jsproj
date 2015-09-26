@@ -63,6 +63,7 @@
     <Content Include="images\SplashScreen.scale-240.png" />
     <Content Include="images\StoreLogo.scale-240.png" />
     <Content Include="js\device.js" />
+    <Content Include="OcrResources\MsOcrRes.orp" />
     <Content Include="StoreManifest.xml" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="packages.config" />

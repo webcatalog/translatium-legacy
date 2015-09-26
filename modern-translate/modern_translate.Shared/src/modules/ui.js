@@ -74,9 +74,8 @@
                 }
             }
             else {
-                // PC
-                if (Windows.UI && Windows.UI.ViewManagement && Windows.UI.ViewManagement.ApplicationView) {
-                    var v = Windows.UI.ViewManagement.ApplicationView.getForCurrentView();
+                var v = Windows.UI.ViewManagement.ApplicationView.getForCurrentView();
+                if (v.titleBar) {
                     v.titleBar.backgroundColor = backgroundColor;
                     v.titleBar.foregroundColor = foregroundColor;
                     v.titleBar.buttonBackgroundColor = backgroundColor;
