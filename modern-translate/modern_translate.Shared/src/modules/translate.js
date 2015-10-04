@@ -55,7 +55,7 @@
                 });
             }
             else {
-                var url = encodeURI(Custom.Utils.getDomain() + "/translate_a/single?client=t&sl=" + inputLang + "&tl=" + outputLang + "&hl=en&dt=bd&dt=ex&dt=ld&dt=md&dt=qc&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&prev=btn&ssel=4&tsel=4&q=" + inputText)
+                var url = encodeURI(Custom.Utils.getDomain() + "/translate_a/single?client=t&sl=" + inputLang + "&tl=" + outputLang + "&hl=en&dt=bd&dt=ex&dt=ld&dt=md&dt=qc&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&prev=btn&ssel=4&tsel=4&tk=0&q=" + inputText)
                 return WinJS.xhr({
                     type: "get",
                     url: url,
@@ -121,7 +121,7 @@
     }
 
     function translateinBatchByGoogle(inputLang, outputLang, inputArr) {
-        var url = Custom.Utils.getDomain() + "/translate_a/t?client=mt&sl=" + inputLang + "&tl=" + outputLang + "&hl=en&v=1.0";
+        var url = Custom.Utils.getDomain() + "/translate_a/t?client=mt&sl=" + inputLang + "&tl=" + outputLang + "&hl=en&v=1.0&tk=0";
         
         var nextArr = [];
 
