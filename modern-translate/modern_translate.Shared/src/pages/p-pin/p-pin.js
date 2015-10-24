@@ -44,21 +44,21 @@
                                            + WinJS.Resources.getString(outputLang).value;
 
                     if (Custom.Device.isPhone) {
-                        var square150x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Square150x150Logo.scale-240.png");
-                        var wide310x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Wide310x150Logo.scale-240.png");
+                        var square150x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Square150x150Logo.png");
+                        var wide310x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Wide310x150Logo.png");
                         var square310x310Logo = null;
                     }
                     else {
-                        var square150x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Square150x150Logo.scale-180.png");
-                        var wide310x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Wide310x150Logo.scale-180.png");
-                        var square310x310Logo = new Windows.Foundation.Uri("ms-appx:///images/Square310x310Logo.scale-100.png");
+                        var square150x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Square150x150Logo.png");
+                        var wide310x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Wide310x150Logo.png");
+                        var square310x310Logo = new Windows.Foundation.Uri("ms-appx:///images/Square310x310Logo.png");
                     }
 
                     var newTileDesiredLogo = (Custom.Device.isPhone) ? square150x150Logo : square310x310Logo;
                     var newTileDesiredSize = Windows.UI.StartScreen.TileSize.square150x150;
                     var tile = new Windows.UI.StartScreen.SecondaryTile(appbarTileId,
                                                                         newTileDisplayName,
-                                                                        TileActivationArguments,
+                                                                        TileActivationArguments + appbarTileId,
                                                                         newTileDesiredLogo,
                                                                         newTileDesiredSize);
                     tile.visualElements.showNameOnSquare150x150Logo = true;
@@ -69,7 +69,7 @@
                         tile.visualElements.showNameOnSquare310x310Logo = true;
                         tile.visualElements.square310x310Logo = square310x310Logo;
                     }
-                    
+
                     return tile.requestCreateAsync().then(function () { that.updateHidden(); }, function (err) { that.updateHidden(); });
                 }),
                 onclickUnpin: binding.initializer(function (e) {

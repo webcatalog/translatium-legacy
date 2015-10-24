@@ -37,7 +37,7 @@
                 this.element.appendChild(sp);
 
                 this.element.onclick = this._changeThemeX.bind(this);
-                
+
             }, {
                 _changeThemeX: function () {
                     if (!Custom.Utils.isPremium()) {
@@ -100,7 +100,7 @@
                 }
 
                 this.element.onclick = this._changeThemeY.bind(this);
-                
+
             }, {
                 _changeThemeY: function () {
                     if (!Custom.Utils.isPremium()) {
@@ -171,7 +171,7 @@
                     var that = this;
                     return WinJS.Promise.as().then(function () {
                         Custom.Utils.showNotif(WinJS.Resources.getString("loading_sound").value);
-                        var url = encodeURI("https://translate.google.com/translate_tts?ie=UTF-8&tl=" + lang + "&q=" + text + "&textlen=" + text.length + "&idx=" + idx + " &total=" + total +"&client=t&prev=input");
+                        var url = encodeURI("https://translate.google.com/translate_tts?ie=UTF-8&tl=" + lang + "&q=" + text + "&textlen=" + text.length + "&idx=" + idx + " &total=" + total +"&client=t&prev=input&tk=0");
                         return WinJS.xhr({ url: url, responseType: "blob" }).then(function (response) {
                             return response.response;
                         }, function () {
@@ -290,7 +290,7 @@
 
                 utils.addClass(this.element, "win-disposable");
                 this._disposed = false;
-             
+
                 this.element.onclick = this._useSuggestion.bind(this);
             },
             {
@@ -347,7 +347,7 @@
 
                 utils.addClass(this.element, "win-disposable");
                 this._disposed = false;
-                
+
                 this.element.onclick = this._deleteHistory.bind(this);
             },
             {
@@ -415,7 +415,7 @@
                                 var statement = "SELECT * FROM history WHERE id = " + id + " LIMIT 0,1";
                                 return Custom.SQLite.localDatabase.executeAsync(statement);
                             }).then(function (result) {
-                                var data = Custom.SQLite.entriestoObj(result[0].entries);                              
+                                var data = Custom.SQLite.entriestoObj(result[0].entries);
                                 data.history_id = data.id;
                                 delete data.id;
                                 return Custom.SQLite.insertObject(Custom.SQLite.localDatabase, "favorites", data);
@@ -678,7 +678,7 @@
                 this.canvas.onmouseleave = function (e) {
                     that.paint = false;
                 };
-                
+
 
             }, {
                 dlist: [",", ".", "?", "!", ":", "'", "\"", ";", "@"],

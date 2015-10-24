@@ -1,2 +1,2 @@
-MainPackage=C:\Users\quanglam2807\Projects\modern-translate\winjs\modern-translate\modern_translate.Windows\bin\x86\Release\modern_translate.Windows_2015.1004.913.0_x86.appx
-SymbolPackage=C:\Users\quanglam2807\Projects\modern-translate\winjs\modern-translate\modern_translate.Windows\AppPackages\modern_translate.Windows_2015.1004.913.0_Test\modern_translate.Windows_2015.1004.913.0_x86.appxsym
+MainPackage=C:\Users\quanglam2807\Projects\winjs\modern-translate\modern_translate.Windows\bin\x86\Release\modern_translate.Windows_2015.1024.1045.0_x86.appx
+SymbolPackage=C:\Users\quanglam2807\Projects\winjs\modern-translate\modern_translate.Windows\AppPackages\modern_translate.Windows_2015.1024.1045.0_Test\modern_translate.Windows_2015.1024.1045.0_x86.appxsym

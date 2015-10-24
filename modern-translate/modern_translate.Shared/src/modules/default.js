@@ -40,6 +40,17 @@
                 return Custom.SQLite.setupDatabase();
             });
         }).then(function () {
+
+          if (localSettings.values["tile_fixed"] != true) {
+            Windows.UI.StartScreen.SecondaryTile.findAllAsync().then(function(tiles) {
+              tiles.forEach(function(tile) {
+                tile.requestDeleteAsync()
+              })
+            }).then(function() {
+              localSettings.values["tile_fixed"] = true;
+            });
+          }
+
             if (args.detail.kind == activation.ActivationKind.protocol) {
                 var uriObj = args.detail.uri;
                 nav.history = app.sessionState.history || {};
@@ -89,7 +100,7 @@
                 var type = speechRecognitionResult.rulePath[0];
                 var inputText = speechRecognitionResult.semanticInterpretation.properties.inputText[0];
                 var outputLangName = speechRecognitionResult.semanticInterpretation.properties.outputLang[0];
-                
+
                 var outputLang = "en";
                 for (var i = 0; i < Custom.Data.langArr.length; i++) {
                     var lang_id = Custom.Data.langArr[i];
@@ -127,11 +138,11 @@
                 return ui.processAll().then(function () {
                     Custom.Data.loadlanguageList();
                     if (args.detail.arguments.substr(0,13) == "tile_shortcut") {
-                        var lang = args.detail.arguments.substr(13, args.detail.arguments.length - 13).split("_");
-                        localSettings.values["inputLang"] = lang[0];
-                        localSettings.values["outputLang"] = lang[1];
-                        app.sessionState.inputText = "";
-                        return nav.navigate(Custom.Navigation.navigator.home);
+                      var lang = args.detail.arguments.substr(13, args.detail.arguments.length - 13).split("_");
+                      localSettings.values["inputLang"] = lang[0];
+                      localSettings.values["outputLang"] = lang[1];
+                      app.sessionState.inputText = "";
+                      return nav.navigate(Custom.Navigation.navigator.home);
                     }
                     return nav.navigate(nav.location || Custom.Navigation.navigator.home, nav.state);
                 });
