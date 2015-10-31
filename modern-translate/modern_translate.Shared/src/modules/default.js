@@ -152,22 +152,6 @@
         }).then(function () {
             ui.enableAnimations();
         });
-        p.then(function () {
-            if ((Custom.Utils.isPremium() == false) && (app.sessionState.remind != true)) {
-                var msg = new Windows.UI.Popups.MessageDialog(WinJS.Resources.getString("premium_introduce").value, "Premium");
-                msg.commands.append(new Windows.UI.Popups.UICommand(
-                    WinJS.Resources.getString("buy_now").value,
-                    function () {
-                        nav.navigate("/pages/premium/premium.html");
-                    })
-                );
-                msg.commands.append(new Windows.UI.Popups.UICommand(WinJS.Resources.getString("later").value));
-                msg.defaultCommandIndex = 0;
-                msg.cancelCommandIndex = 1;
-                app.sessionState.remind = true;
-                msg.showAsync();
-            }
-        });
         p.done();
         args.setPromise(p);
     }

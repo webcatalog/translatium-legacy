@@ -14,9 +14,11 @@
             var cn = "md md md-keyboard-voice";
             if (language_id == "auto") return cn + " disabled";
 
-            var speechArr = ["ar", "is", "en", "pl", "eu", "pt", "bg", "ca", "hr", "iw", "de", "gl", "nl", "ko", "hi", "hu", "id",
-                             "la", "ms", "no", "af", "ru", "ja", "fr", "fi", "tl", "ro", "cs", "sk", "es", "th", "tr", "sv", "zh",
-                             "uk", "vi", "sr", "it", "zu"]; // YES
+            var speechArr = [
+              "af", "ar", "eu", "bg", "ca", "zh", "hr", "cs", "nl", "tl", "fi", "fr", "gl", "de", "iw", "hi", "hu", "is",
+              "id",  "it", "ja", "ko", "ms", "no", "pl", "pt", "ro", "ru", "sr", "sk", "es", "sv", "th", "tr",
+              "uk", "vi", "zu", "en"
+            ]; // YES
             if (speechArr.indexOf(language_id) > -1) return cn;
             return cn + " disabled";
         }),
