@@ -5,7 +5,6 @@
 
     var applicationData = Windows.Storage.ApplicationData.current;
     var localSettings = applicationData.localSettings;
-    var roamingSettings = applicationData.roamingSettings;
 
     function translateByGoogle (inputLang, outputLang, inputText) {
         return WinJS.Promise.as().then(function () {
@@ -122,7 +121,7 @@
 
     function translateinBatchByGoogle(inputLang, outputLang, inputArr) {
         var url = Custom.Utils.getDomain() + "/translate_a/t?client=mt&sl=" + inputLang + "&tl=" + outputLang + "&hl=en&v=1.0&tk=0";
-        
+
         var nextArr = [];
 
         for (var i = 0; i < inputArr.length; i++) {
@@ -187,7 +186,7 @@
                     app.sessionState.bingAppId = null;
                     throw "appid_expired";
                 }
-                
+
                 if (inputLang == "auto") {
                     inputLang = result[0].From;
                     if (inputLang == "zh-CHS")
@@ -275,7 +274,7 @@
             });
         });
     }
-    
+
     var supportedbyBing = ["auto", "he", "pl", "ar", "hi", "pt", "bg", "ca", "hu", "ro", "zh", "id",
                             "ru", "zh-TW", "it", "sk", "cs", "ja", "sl", "da", "es", "nl", "sv", "en",
                             "ko", "th", "et", "lv", "tr", "fi", "lt", "uk", "fr", "ms", "ur", "de", "mt",
@@ -303,7 +302,7 @@
                 });
             }
 
-            if ((roamingSettings.values["bing"] == true) && (supportedbyBing.indexOf(inputLang) > -1) && (supportedbyBing.indexOf(outputLang) > -1))
+            if ((localSettings.values["bing"] == true) && (supportedbyBing.indexOf(inputLang) > -1) && (supportedbyBing.indexOf(outputLang) > -1))
                 return Custom.Translate.translateByBing(inputLang, outputLang, inputText);
 
             return Custom.Translate.translateByGoogle(inputLang, outputLang, inputText);
@@ -331,7 +330,7 @@
                 });
             }
 
-            if ((roamingSettings.values["bing"] == true) && (supportedbyBing.indexOf(inputLang) > -1) && (supportedbyBing.indexOf(outputLang) > -1))
+            if ((localSettings.values["bing"] == true) && (supportedbyBing.indexOf(inputLang) > -1) && (supportedbyBing.indexOf(outputLang) > -1))
                 return Custom.Translate.translateinBatchByBing(inputLang, outputLang, inputArr);
 
             return Custom.Translate.translateinBatchByGoogle(inputLang, outputLang, inputArr);

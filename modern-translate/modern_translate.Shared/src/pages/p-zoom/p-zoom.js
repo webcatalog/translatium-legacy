@@ -6,7 +6,6 @@
 
     var applicationData = Windows.Storage.ApplicationData.current;
     var localSettings = applicationData.localSettings;
-    var roamingSettings = applicationData.roamingSettings;
 
     WinJS.UI.Pages.define("/pages/p-zoom/p-zoom.html", {
 
@@ -31,7 +30,7 @@
                     that.bindingData.zoomFontsizePX = that.bindingData.zoomFontsize + "px";
                 },
             })
-            
+
         },
 
         unload: function () {

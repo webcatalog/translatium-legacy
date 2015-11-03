@@ -32,6 +32,13 @@
                         data-win-bind="disabled: disabledBuy; onclick: onclickBuy"></button>
                 <p class="thankyou" data-win-res="{innerText: 'thank_you_for_your_support'}"></p>
             </div>
+
+            <div class="button-container">
+              <p class="thankyou" data-win-bind="innerText: freeUpgradeMsg"></p>
+                <button class="material-button themed"
+                        data-win-res="{ innerText: 'free_upgrade' }"
+                        data-win-bind="disabled: disabledBuy; onclick: onclickFreeUpgrade"></button>
+            </div>
         </div>
     </div>
 </body>

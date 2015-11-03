@@ -54,7 +54,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <AppxPackageDir>C:\Users\quanglam2807\Desktop\APPX\</AppxPackageDir>
+    <AppxPackageDir>C:\Users\quanglam2807\Desktop\x\8.x_pc\</AppxPackageDir>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -95,6 +95,14 @@
     <ProjectReference Include="..\SQLite.PC\SQLite.Windows.vcxproj" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="WindowsPreview.Media.Ocr">
+      <HintPath>..\..\packages\Microsoft.Windows.Ocr.1.0.0\lib\win81\x86\WindowsPreview.Media.Ocr.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+      <CopyLocal>True</CopyLocal>
+      <SpecificVersion>True</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <PRIResource Include="strings\ar\resources.resjson" />
     <PRIResource Include="strings\az\resources.resjson" />
     <PRIResource Include="strings\be-BY\resources.resjson" />
@@ -111,14 +119,6 @@
     <PRIResource Include="strings\tr\resources.resjson" />
     <PRIResource Include="strings\vi\resources.resjson" />
     <PRIResource Include="strings\zh-CN\resources.resjson" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="WindowsPreview.Media.Ocr">
-      <HintPath>..\..\packages\Microsoft.Windows.Ocr.1.0.0\lib\win81\x86\WindowsPreview.Media.Ocr.winmd</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-      <CopyLocal>True</CopyLocal>
-      <SpecificVersion>True</SpecificVersion>
-    </Reference>
   </ItemGroup>
   <Import Project="..\modern_translate.Shared\modern_translate.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />

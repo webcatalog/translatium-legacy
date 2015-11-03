@@ -27,7 +27,7 @@
                      data-win-bind="this['aria-name']: name WinJS.Binding.setAttribute; this['aria-hex']: hex WinJS.Binding.setAttribute;  this['aria-thex']: thex WinJS.Binding.setAttribute"></div>
             </div>
             <div class="theme-y-list"
-                data-win-control="WinJS.UI.Repeater" 
+                data-win-control="WinJS.UI.Repeater"
                 data-win-options="{data: Custom.Data.themeYList}" >
                 <div data-win-control="Custom.Control.Theme_Y"
                     data-win-bind="this['aria-name']: name WinJS.Binding.setAttribute; this['aria-hex']: hex WinJS.Binding.setAttribute"></div>
@@ -35,15 +35,9 @@
             <h5 data-win-res="{ innerText: 'show_statusbar' }" data-win-bind="hidden: hideControlStatusbar"></h5>
             <div data-win-control="WinJS.UI.ToggleSwitch" data-win-bind="hidden: hideControlStatusbar; winControl.checked: showStatusbar; winControl.onchange: toggleStatusbar">
             </div>
-            <h5 data-win-res="{innerText: 'display_language'}" style="margin-top: 10px"></h5>
-            <select data-win-control="WinJS.UI.Repeater"
-                    data-win-bind="winControl.data: displayLangList WinJS.Binding.oneTime; onchange: changeDisplayLanguage; value: currentDisplayLanguage">
-                <option data-win-bind="innerText: name; value: tag"></option>
-            </select>
-            <p data-win-res="{innerText: 'recommend_to_restart'}" style="margin: 0"></p>
             <h4 data-win-res="{innerText: 'others'}" style="margin-top: 40px"></h4>
             <h5 data-win-res="{ innerText: 'realtime_translation' }" style="margin-top: 10px"></h5>
-            <div data-win-control="WinJS.UI.ToggleSwitch" 
+            <div data-win-control="WinJS.UI.ToggleSwitch"
                  data-win-bind="winControl.checked: useRealtimeTranslation; winControl.onchange: toggleRealtimeTranslation"></div>
             <h5 data-win-res="{ innerText: 'use_bing' }" style="margin-top: 10px"></h5>
             <div data-win-control="WinJS.UI.ToggleSwitch"

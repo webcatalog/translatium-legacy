@@ -5,7 +5,6 @@
     var utils = WinJS.Utilities;
     var applicationData = Windows.Storage.ApplicationData.current;
     var localSettings = applicationData.localSettings;
-    var roamingSettings = applicationData.roamingSettings;
 
     function importCSS(url) {
         var ss = document.styleSheets;
@@ -23,14 +22,14 @@
     function applyTheme() {
         return WinJS.Promise.as().then(function () {
 
-            if (typeof roamingSettings.values["x-theme"] == "undefined")
-                roamingSettings.values["x-theme"] = "light";
+            if (typeof localSettings.values["x-theme"] == "undefined")
+                localSettings.values["x-theme"] = "light";
 
-            if (typeof roamingSettings.values["y-theme"] == "undefined")
-                roamingSettings.values["y-theme"] = "light-green";
+            if (typeof localSettings.values["y-theme"] == "undefined")
+                localSettings.values["y-theme"] = "light-green";
 
-            var x_theme = roamingSettings.values["x-theme"];
-            var y_theme = roamingSettings.values["y-theme"];
+            var x_theme = localSettings.values["x-theme"];
+            var y_theme = localSettings.values["y-theme"];
 
             importCSS("/Microsoft.WinJS.4.0/css/ui-" + x_theme + ".css");
             importCSS("/WinJS.Material/css/material-" + x_theme + ".css");
@@ -38,7 +37,7 @@
 
             document.body.setAttribute('x-theme', x_theme);
             document.body.setAttribute('y-theme', y_theme);
-            if (Custom.Device.isPhone) 
+            if (Custom.Device.isPhone)
                 utils.addClass(document.body, "phone");
         });
     }
@@ -49,7 +48,7 @@
             var backgroundColor = null;
             var foregroundColor = { r: 255, g: 255, b: 255, a: 1 };
 
-            var y_theme = roamingSettings.values["y-theme"];
+            var y_theme = localSettings.values["y-theme"];
             Custom.Data.themeYList.every(function (data) {
                 if (data.name == y_theme) {
                     backgroundColor = data.statusbar;
@@ -61,7 +60,7 @@
 
             if (Custom.Device.isPhone) {
                 var statusBar = Windows.UI.ViewManagement.StatusBar.getForCurrentView();
-                if (roamingSettings.values["statusbar"] != false) {
+                if (localSettings.values["statusbar"] != false) {
                     if (backgroundColor) {
                         statusBar.backgroundColor = backgroundColor;
                         statusBar.foregroundColor = { r: 255, g: 255, b: 255, a: 1 };

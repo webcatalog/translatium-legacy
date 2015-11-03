@@ -6,7 +6,6 @@
 
     var applicationData = Windows.Storage.ApplicationData.current;
     var localSettings = applicationData.localSettings;
-    var roamingSettings = applicationData.roamingSettings;
 
     function runPromisesInSerial (promiseFunctions) {
         return promiseFunctions.reduce(function (promiseChain, nextPromiseFunction) {
@@ -52,7 +51,7 @@
         });
     }
 
-    function insertObject (database, table_name, obj) {  
+    function insertObject (database, table_name, obj) {
         return WinJS.Promise.as().then(function () {
             var parameters = [];
 
@@ -89,7 +88,7 @@
             obj.id = x[0].getFirstValueByName("last_insert_rowid()");
             return obj;
         });
-    
+
     }
 
     function entriestoObj (entries) {

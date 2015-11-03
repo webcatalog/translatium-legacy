@@ -5,7 +5,6 @@
 
     var applicationData = Windows.Storage.ApplicationData.current;
     var localSettings = applicationData.localSettings;
-    var roamingSettings = applicationData.roamingSettings;
 
     function standardlizeJSON(str) {
         var i = 0;
@@ -45,17 +44,17 @@
 
     function getPurchaseDateAsync() {
         return WinJS.Promise.as().then(function () {
-            if (typeof roamingSettings.values["purchased"] != 'undefined') return;
+            if (typeof localSettings.values["purchased"] != 'undefined') return;
             var currentApp = Windows.ApplicationModel.Store.CurrentApp;
             var licenseInformation = currentApp.licenseInformation;
 
             if (licenseInformation.productLicenses.lookup("premium").isActive) {
-                roamingSettings.values["purchased"] = true;
+                localSettings.values["purchased"] = true;
                 return;
             }
             else {
                 if (licenseInformation.isTrial == true) {
-                    roamingSettings.values["purchased"] = false;
+                    localSettings.values["purchased"] = false;
                     return;
                 }
                 return currentApp.getAppReceiptAsync().then(function (txt) {
@@ -64,7 +63,7 @@
                     var purchaseDate = new Date(xmlDoc.getElementsByTagName("AppReceipt")[0].attributes.getNamedItem("PurchaseDate").value);
                     var pivotDate = new Date("2015-03-29T03:00:00Z");
                     if (purchaseDate <= pivotDate)
-                        roamingSettings.values["purchased"] = true;
+                        localSettings.values["purchased"] = true;
                 });
             }
         }).then(null, function (err) { });
@@ -73,10 +72,8 @@
     function isPremiun() {
         var currentApp = Windows.ApplicationModel.Store.CurrentApp;
         var licenseInformation = currentApp.licenseInformation;
-        if ((licenseInformation.productLicenses.lookup("premium").isActive == true) ||
-            (roamingSettings.values["purchased"] == true))
-            return true;
-        return false;
+        return ((licenseInformation.productLicenses.lookup("premium").isActive == true)
+          || (licenseInformation.productLicenses.lookup("free.upgrade").isActive == true))
     }
 
     function popupNoInternet() {
@@ -92,7 +89,7 @@
     };
 
     function showNotif(str) {
-        if ((Custom.Device.isPhone) && (roamingSettings.values["statusbar"] != false)) {
+        if ((Custom.Device.isPhone) && (localSettings.values["statusbar"] != false)) {
             var statusBar = Windows.UI.ViewManagement.StatusBar.getForCurrentView();
             statusBar.progressIndicator.progressValue = null;
             statusBar.progressIndicator.text = str;
@@ -104,7 +101,7 @@
     }
 
     function hideNotif() {
-        if ((Custom.Device.isPhone) && (roamingSettings.values["statusbar"] != false)) {
+        if ((Custom.Device.isPhone) && (localSettings.values["statusbar"] != false)) {
             var statusBar = Windows.UI.ViewManagement.StatusBar.getForCurrentView();
             statusBar.progressIndicator.progressValue = 0;
             return statusBar.progressIndicator.hideAsync();
@@ -115,8 +112,8 @@
     }
 
     function getDomain() {
-        var useChineseServer = (typeof roamingSettings.values["chinese-server"] != 'undefined') ? roamingSettings.values["chinese-server"] : false;
-        var useHTTPS = (typeof roamingSettings.values["https"] != 'undefined') ? roamingSettings.values["https"] : false;
+        var useChineseServer = (typeof localSettings.values["chinese-server"] != 'undefined') ? localSettings.values["chinese-server"] : false;
+        var useHTTPS = (typeof localSettings.values["https"] != 'undefined') ? localSettings.values["https"] : false;
         if (useChineseServer == true) return "http://translate.google.cn";
         if (useHTTPS) return "https://translate.google.com";
         return "http://translate.google.com";

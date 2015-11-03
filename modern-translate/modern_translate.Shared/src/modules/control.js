@@ -6,7 +6,6 @@
     var app = WinJS.Application;
     var applicationData = Windows.Storage.ApplicationData.current;
     var localSettings = applicationData.localSettings;
-    var roamingSettings = applicationData.roamingSettings;
 
     WinJS.Namespace.define("Custom.Control", {
         Theme_X: WinJS.Class.define(
@@ -24,7 +23,7 @@
                 utils.addClass(this.element, "win-disposable");
                 this._disposed = false;
 
-                if (this.name == roamingSettings.values["x-theme"]) {
+                if (this.name == localSettings.values["x-theme"]) {
                     var active = document.createElement("i");
                     active.className = "md md-done";
                     active.style.color = this.thex;
@@ -44,12 +43,12 @@
                         nav.navigate("/pages/premium/premium.html");
                         return;
                     }
-                    if (this.name != roamingSettings.values["x-theme"]) {
+                    if (this.name != localSettings.values["x-theme"]) {
 
                         var newname = this.name;
-                        var oldname = roamingSettings.values["x-theme"];
+                        var oldname = localSettings.values["x-theme"];
 
-                        roamingSettings.values["x-theme"] = newname;
+                        localSettings.values["x-theme"] = newname;
                         Custom.UI.applyTheme();
 
                         Custom.Data.themeXList.every(function (x, i) {
@@ -93,7 +92,7 @@
                 utils.addClass(this.element, "win-disposable");
                 this._disposed = false;
 
-                if (this.name == roamingSettings.values["y-theme"]) {
+                if (this.name == localSettings.values["y-theme"]) {
                     var active = document.createElement("i");
                     active.className = "md md-done";
                     this.element.appendChild(active);
@@ -107,12 +106,12 @@
                         nav.navigate("/pages/premium/premium.html");
                         return;
                     }
-                    if (this.name != roamingSettings.values["y-theme"]) {
+                    if (this.name != localSettings.values["y-theme"]) {
 
                         var newname = this.name;
-                        var oldname = roamingSettings.values["y-theme"];
+                        var oldname = localSettings.values["y-theme"];
 
-                        roamingSettings.values["y-theme"] = newname;
+                        localSettings.values["y-theme"] = newname;
                         Custom.UI.applyTheme();
                         Custom.UI.applyStatusbar();
 
@@ -694,7 +693,7 @@
                     var that = this;
                     if (this._promise) this._promise.cancel();
                     this._promise = WinJS.Promise.as().then(function () {
-                        var useHTTPS = (typeof roamingSettings.values["https"] != 'undefined') ? roamingSettings.values["https"] : false;
+                        var useHTTPS = (typeof localSettings.values["https"] != 'undefined') ? localSettings.values["https"] : false;
                         var http_prefix = (useHTTPS == true) ? "https" : "http";
                         var url = http_prefix + "://www.google.com/inputtools/request?ime=handwriting&app=mobilesearch&cs=1&oe=UTF-8";
                         var data = {
@@ -912,7 +911,7 @@
                             that.systemMediaControls.onpropertychanged = null;
                             var blob = MSApp.createBlobFromRandomAccessStream("audio/l16", that.soundStream);
                             that.soundStream = null;
-                            var useHTTPS = (typeof roamingSettings.values["https"] != 'undefined') ? roamingSettings.values["https"] : false;
+                            var useHTTPS = (typeof localSettings.values["https"] != 'undefined') ? localSettings.values["https"] : false;
                             var http_prefix = (useHTTPS == true) ? "https" : "http";
                             var url  = http_prefix + "://www.google.com/speech-api/v2/recognize?output=json&lang=" + localSettings.values["inputLang"] + "&key=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw"
                             if (that._promise) that._promise.cancel();

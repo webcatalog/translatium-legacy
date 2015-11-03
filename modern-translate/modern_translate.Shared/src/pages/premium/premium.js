@@ -13,8 +13,12 @@
             var currentApp = Windows.ApplicationModel.Store.CurrentApp;
             var licenseInformation = currentApp.licenseInformation;
 
+            var pivotDate = new Date("2015-03-29T03:00:00Z");
+            var datefmt = new Windows.Globalization.DateTimeFormatting.DateTimeFormatter("longdate");
+
             var p = Windows.ApplicationModel.Package.current.id.version;
             this.bindingData = WinJS.Binding.as({
+                freeUpgradeMsg: WinJS.Resources.getString("free_upgrade_msg").value.replace("{1}", datefmt.format(pivotDate)),
                 onclickBack: binding.initializer(function () {
                     nav.back();
                 }),
@@ -24,6 +28,28 @@
                         .then(function () {
                             that.bindingData.isPremium = Custom.Utils.isPremium();
                         }, function (err) { });
+                }),
+                onclickFreeUpgrade: binding.initializer(function () {
+                  return currentApp.getAppReceiptAsync().then(
+                    function (txt) {
+                      var xmlDoc = new Windows.Data.Xml.Dom.XmlDocument();
+                      xmlDoc.loadXml(txt);
+                      var purchaseDate = new Date(xmlDoc.getElementsByTagName("AppReceipt")[0].attributes.getNamedItem("PurchaseDate").value);
+                      var pivotDate = new Date("2015-03-29T03:00:00Z");
+                      if (purchaseDate <= pivotDate) {
+                        return currentApp.requestProductPurchaseAsync("free.upgrade")
+                            .then(function () {
+                                that.bindingData.isPremium = Custom.Utils.isPremium();
+                            }, function (err) { });
+                      }
+                      else {
+                        return Custom.Utils.popupMsg("Oops", WinJS.Resources.getString("not_qualified_for_free_upgrade").value)
+                      }
+                    },
+                    function(err) {
+                      return Custom.Utils.popupNoInternet()
+                    }
+                  );
                 })
             });
 

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="55974nhutquang97.5translate" Version="2015.1031.1130.0" Publisher="CN=C635F506-DEEB-41A4-8CAA-16689F486ED2" />
+  <Identity Name="55974nhutquang97.5translate" Version="2015.1103.1351.0" Publisher="CN=C635F506-DEEB-41A4-8CAA-16689F486ED2" />
   <Properties>
     <DisplayName>Modern Translate</DisplayName>
     <PublisherDisplayName>Modern Translate Team</PublisherDisplayName>

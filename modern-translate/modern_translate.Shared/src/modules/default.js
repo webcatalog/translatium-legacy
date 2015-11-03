@@ -13,26 +13,26 @@
 
     var applicationData = Windows.Storage.ApplicationData.current;
     var localSettings = applicationData.localSettings;
-    var roamingSettings = applicationData.roamingSettings;
 
     app.onactivated = function (args) {
         var p = WinJS.Promise.as().then(function () {
             var currentAppLang = Windows.Globalization.ApplicationLanguages.languages[0];
-            if ((currentAppLang == "zh-CN") && (typeof roamingSettings.values["chinese-server"] != 'undefined'))
-                roamingSettings.values["chinese-server"] = true;
-            if ((args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated)
-             && (Custom.Device.isPhone)
-             && (currentAppLang == "en-US")) {
-                var uri = new Windows.Foundation.Uri("ms-appx:///cortana.xml");
-                Windows.Storage.StorageFile.getFileFromApplicationUriAsync(uri).then(function (vcd) {
-                    return Windows.Media.SpeechRecognition.VoiceCommandManager.installCommandSetsFromStorageFileAsync(vcd);
-                }).then(function () {
-                    var phraseList = [];
-                    Custom.Data.langArr.forEach(function (lang_id) {
-                        phraseList.push(WinJS.Resources.getString(lang_id).value);
-                    });
-                    return Windows.Media.SpeechRecognition.VoiceCommandManager.installedCommandSets.lookup("modern_translate").setPhraseListAsync("outputLang", phraseList);
-                }).then(null, function (err) {});
+            if ((currentAppLang == "zh-CN") && (typeof localSettings.values["chinese-server"] != 'undefined'))
+                localSettings.values["chinese-server"] = true;
+            if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
+               if ((Custom.Device.isPhone)
+               && (currentAppLang == "en-US")) {
+                  var uri = new Windows.Foundation.Uri("ms-appx:///cortana.xml");
+                  Windows.Storage.StorageFile.getFileFromApplicationUriAsync(uri).then(function (vcd) {
+                      return Windows.Media.SpeechRecognition.VoiceCommandManager.installCommandSetsFromStorageFileAsync(vcd);
+                  }).then(function () {
+                      var phraseList = [];
+                      Custom.Data.langArr.forEach(function (lang_id) {
+                          phraseList.push(WinJS.Resources.getString(lang_id).value);
+                      });
+                      return Windows.Media.SpeechRecognition.VoiceCommandManager.installedCommandSets.lookup("modern_translate").setPhraseListAsync("outputLang", phraseList);
+                  }).then(null, function (err) {});
+              }
             }
             return Custom.UI.applyTheme().then(function () {
                 return Custom.UI.applyStatusbar();

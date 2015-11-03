@@ -6,7 +6,6 @@
 
     var applicationData = Windows.Storage.ApplicationData.current;
     var localSettings = applicationData.localSettings;
-    var roamingSettings = applicationData.roamingSettings;
 
     WinJS.UI.Pages.define("/pages/p-pin/p-pin.html", {
 

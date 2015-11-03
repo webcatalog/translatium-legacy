@@ -9,7 +9,6 @@
 
     var applicationData = Windows.Storage.ApplicationData.current;
     var localSettings = applicationData.localSettings;
-    var roamingSettings = applicationData.roamingSettings;
 
     WinJS.UI.Pages.define("/pages/p-camera/p-camera.html", {
 
@@ -149,7 +148,7 @@
                 var bitmapTransform = new Windows.Graphics.Imaging.BitmapTransform();
                 bitmapTransform.scaledHeight = imgHeight;
                 bitmapTransform.scaledWidth = imgWidth;
-     
+
                 return decoder.getPixelDataAsync(
                     Windows.Graphics.Imaging.BitmapPixelFormat.unknown,
                     Windows.Graphics.Imaging.BitmapAlphaMode.premultiplied,
@@ -207,7 +206,7 @@
                 return extractedText;
 
             }).then(function (text) {
-                if (text.length < 1) 
+                if (text.length < 1)
                     throw WinJS.Resources.getString("cannot_recognize").value;
                 that.bindingData.extractedText = text;
                 Custom.Utils.hideNotif();

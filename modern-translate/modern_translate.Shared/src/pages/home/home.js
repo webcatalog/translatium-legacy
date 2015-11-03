@@ -9,13 +9,12 @@
 
     var applicationData = Windows.Storage.ApplicationData.current;
     var localSettings = applicationData.localSettings;
-    var roamingSettings = applicationData.roamingSettings;
-    
+
     var livePromise;
 
     ui.Pages.define("/pages/home/home.html", {
         ready: function (element, options) {
-    
+
             var that = this;
 
             this.liveCardTemplate = element.querySelector(".live-card-template").winControl;
@@ -30,7 +29,7 @@
             this.pivotView = element.querySelector("#pivot").winControl;
             this.toolBar = element.querySelector(".toolbar").winControl;
 
-            if (roamingSettings.values["prevent-lock"] == true) {
+            if (localSettings.values["prevent-lock"] == true) {
                 if (window.dispRequest == null) {
                     window.dispRequest = new Windows.System.Display.DisplayRequest;
                     window.dispRequest.requestActive();
@@ -83,7 +82,7 @@
                             that.bindingData.inputLang = newLang;
                     }
                     if (that.bindingData.selectMode == "outputLang") {
-                        if (newLang == that.bindingData.inputLang) 
+                        if (newLang == that.bindingData.inputLang)
                             that.swapLanguage();
                         else
                             that.bindingData.outputLang = newLang;
@@ -133,7 +132,7 @@
                                 if (lastData.type != "live")
                                     statement = "SELECT * FROM history WHERE id < " + lastData.id + " ORDER BY id DESC LIMIT 0,5";
                             }
-                            
+
                             return Custom.SQLite.localDatabase.executeAsync(statement)
                                 .then(function (result) {
                                     result.forEach(function (x) {
@@ -202,7 +201,7 @@
                 oninputText: binding.initializer(function (e) {
                     that.bindingData.inputText = that.inputBox.value;
                 }),
-                onkeydownText: (roamingSettings.values["enter-to-translate"] == false) ? null :
+                onkeydownText: (localSettings.values["enter-to-translate"] == false) ? null :
                     binding.initializer(function (e) {
                     if ((e.keyCode || e.which) == 13) {
                         that.inputBox.blur();
@@ -322,7 +321,7 @@
                     });
                 })
             });
-           
+
             binding.processAll(element, this.bindingData);
             binding.bind(this.bindingData, {
                 inputLang: function(value) {
@@ -362,8 +361,8 @@
                                 that.addText(e.eText);
                             else if (e.eType == 1)
                                 that.deleteText();
-                            else if (e.eType == 2) 
-                                that.applyText(); 
+                            else if (e.eType == 2)
+                                that.applyText();
                         }
                     }
                 },
@@ -381,7 +380,7 @@
 
             // Preview Bug fixes
             this.toolBar.forceLayout();
-            
+
         },
 
         unload: function (element, options) {
@@ -506,17 +505,17 @@
                             res.type = "normal";
                             that.bindingData.historyList.unshift(res);
                             that.bindingData.expandinputBox = false;
-                        });      
+                        });
                     }
                     else {
                         return Custom.Utils.popupNoInternet();
-                    }               
+                    }
                 });
             });
         },
 
         liveTranslation: function () {
-            if (roamingSettings.values["realtime-translation"] == false) return;
+            if (localSettings.values["realtime-translation"] == false) return;
             if (this.bindingData.expandinputBox == true) return;
             var that = this;
             if (livePromise)
@@ -549,7 +548,7 @@
                                 result.id = null;
                                 if ((that.bindingData.historyList.length > 0) && (that.bindingData.historyList.getAt(0).type == "live"))
                                     that.bindingData.historyList.splice(0, 1, result);
-                                else 
+                                else
                                     that.bindingData.historyList.unshift(result);
                             }
                         });

@@ -8,7 +8,6 @@
 
     var applicationData = Windows.Storage.ApplicationData.current;
     var localSettings = applicationData.localSettings;
-    var roamingSettings = applicationData.roamingSettings;
 
     WinJS.UI.Pages.define("/pages/p-dict/p-dict.html", {
 
@@ -22,7 +21,7 @@
             });
 
             binding.processAll(element, that.bindingData);
-            
+
             var dict;
             if (options.source == "google") {
                 if (options.type == "inputDict")
@@ -33,7 +32,7 @@
             else {
                 dict = this.generateDictbyBing(options.dict);
             }
-            element.querySelector(".material-content").appendChild(dict);            
+            element.querySelector(".material-content").appendChild(dict);
         },
 
         unload: function () {
@@ -80,7 +79,7 @@
 
                     // Prefix
                     if (y[4]) word.innerText += y[4] + " ";
-                                        
+
                     // Word
                     var main_word = document.createElement("a");
                     main_word.className = "blue";
@@ -108,7 +107,7 @@
                         }
                         meaning.appendChild(am);
                     });
-                                      
+
                     word_item.appendChild(word);
                     word_item.appendChild(meaning);
 
