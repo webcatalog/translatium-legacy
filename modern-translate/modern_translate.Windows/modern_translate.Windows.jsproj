@@ -54,7 +54,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <AppxPackageDir>C:\Users\quanglam2807\Desktop\x\8.x_pc\</AppxPackageDir>
+    <AppxPackageDir>C:\Users\quanglam2807\Desktop\New folder\</AppxPackageDir>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
