@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="55974nhutquang97.5translate" Version="2015.1103.1559.0" Publisher="CN=C635F506-DEEB-41A4-8CAA-16689F486ED2" />
+  <Identity Name="55974nhutquang97.5translate" Version="2015.1122.1738.0" Publisher="CN=C635F506-DEEB-41A4-8CAA-16689F486ED2" />
   <mp:PhoneIdentity PhoneProductId="c9133e34-4582-4dc3-9eba-c8798dcf63ee" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Modern Translate</DisplayName>
-    <PublisherDisplayName>Modern Translate Team</PublisherDisplayName>
+    <PublisherDisplayName>Modern Lab</PublisherDisplayName>
     <Logo>images\Store.png</Logo>
   </Properties>
   <Prerequisites>
@@ -16,7 +16,7 @@
   </Resources>
   <Applications>
     <Application Id="App" StartPage="default.html">
-      <m3:VisualElements DisplayName="Modern Translate" Square150x150Logo="images\Square150x150.png" Square44x44Logo="images\Square44x44.png" Description="modern_translate.WindowsPhone" ForegroundText="light" BackgroundColor="transparent">
+      <m3:VisualElements DisplayName="Modern Translator" Square150x150Logo="images\Square150x150.png" Square44x44Logo="images\Square44x44.png" Description="modern_translate.WindowsPhone" ForegroundText="light" BackgroundColor="transparent">
         <m3:DefaultTile Wide310x150Logo="images\Wide310x150.png" Square71x71Logo="images\Square71x71.png">
           <m3:ShowNameOnTiles>
             <m3:ShowOn Tile="square150x150Logo" />

@@ -50,11 +50,11 @@
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <PackageCertificateKeyFile>modern_translate.Windows_StoreKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>4AF8035A19306A1B3A9D2CD2175D3C50101AAD56</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>33257DDA7462D79F80998CCCA034D1B7E4D4878F</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <AppxPackageDir>C:\Users\quanglam2807\Desktop\New folder\</AppxPackageDir>
+    <AppxPackageDir>C:\Users\quanglam2807\Desktop\APPXPHONE\</AppxPackageDir>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">

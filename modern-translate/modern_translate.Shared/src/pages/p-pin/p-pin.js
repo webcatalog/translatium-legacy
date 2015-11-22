@@ -43,14 +43,14 @@
                                            + WinJS.Resources.getString(outputLang).value;
 
                     if (Custom.Device.isPhone) {
-                        var square150x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Square150x150Logo.png");
-                        var wide310x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Wide310x150Logo.png");
+                        var square150x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Square150x150.png");
+                        var wide310x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Wide310x150.png");
                         var square310x310Logo = null;
                     }
                     else {
-                        var square150x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Square150x150Logo.png");
-                        var wide310x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Wide310x150Logo.png");
-                        var square310x310Logo = new Windows.Foundation.Uri("ms-appx:///images/Square310x310Logo.png");
+                        var square150x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Square150x150.png");
+                        var wide310x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Wide310x150.png");
+                        var square310x310Logo = new Windows.Foundation.Uri("ms-appx:///images/Square310x310.png");
                     }
 
                     var newTileDesiredLogo = (Custom.Device.isPhone) ? square150x150Logo : square310x310Logo;

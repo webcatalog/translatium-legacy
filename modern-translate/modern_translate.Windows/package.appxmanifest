@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="55974nhutquang97.5translate" Version="2015.1103.1352.0" Publisher="CN=C635F506-DEEB-41A4-8CAA-16689F486ED2" />
+  <Identity Name="55974nhutquang97.5translate" Version="2015.1122.1740.0" Publisher="CN=C635F506-DEEB-41A4-8CAA-16689F486ED2" />
   <Properties>
     <DisplayName>Modern Translate</DisplayName>
-    <PublisherDisplayName>Modern Translate Team</PublisherDisplayName>
+    <PublisherDisplayName>Modern Lab</PublisherDisplayName>
     <Logo>images\Store.png</Logo>
   </Properties>
   <Prerequisites>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" StartPage="default.html">
-      <m2:VisualElements DisplayName="Modern Translate" Description="modern_translate.Windows" ForegroundText="light" BackgroundColor="#689f38" Square150x150Logo="images\Square150x150.png" Square30x30Logo="images\Square30x30.png">
+      <m2:VisualElements DisplayName="Modern Translator" Description="modern_translate.Windows" ForegroundText="light" BackgroundColor="#689f38" Square150x150Logo="images\Square150x150.png" Square30x30Logo="images\Square30x30.png">
         <m2:DefaultTile Square310x310Logo="images\Square310x310.png" Square70x70Logo="images\Square70x70.png" Wide310x150Logo="images\Wide310x150.png" DefaultSize="square150x150Logo">
           <m2:ShowNameOnTiles>
             <m2:ShowOn Tile="square150x150Logo" />

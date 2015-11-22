@@ -76,17 +76,9 @@
     <Content Include="images\Wide310x150.scale-240.png" />
     <Content Include="js\device.js" />
     <Content Include="OcrResources\MsOcrRes.orp" />
+    <Content Include="packages.config" />
     <Content Include="StoreManifest.xml" />
     <None Include="Package.StoreAssociation.xml" />
-    <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="WindowsPreview.Media.Ocr">
-      <HintPath>..\..\packages\Microsoft.Windows.Ocr.1.0.0\lib\wpa81\x86\WindowsPreview.Media.Ocr.winmd</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-      <CopyLocal>True</CopyLocal>
-      <SpecificVersion>True</SpecificVersion>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SQLite.Phone\SQLite.WindowsPhone.vcxproj" />
@@ -108,6 +100,14 @@
     <PRIResource Include="strings\tr\resources.resjson" />
     <PRIResource Include="strings\vi\resources.resjson" />
     <PRIResource Include="strings\zh-CN\resources.resjson" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="WindowsPreview.Media.Ocr">
+      <HintPath>..\..\packages\Microsoft.Windows.Ocr.1.0.0\lib\wpa81\x86\WindowsPreview.Media.Ocr.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+      <CopyLocal>True</CopyLocal>
+      <SpecificVersion>True</SpecificVersion>
+    </Reference>
   </ItemGroup>
   <Import Project="..\modern_translate.Shared\modern_translate.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />

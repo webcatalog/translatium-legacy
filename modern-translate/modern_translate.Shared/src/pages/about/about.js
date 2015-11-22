@@ -10,8 +10,7 @@
         ready: function (element, options) {
             var p = Windows.ApplicationModel.Package.current.id.version;
             this.bindingData = WinJS.Binding.as({
-                appVersion: "3.9.2.0", 
-                developedBy: WinJS.Resources.getString("developed_by").value.replace("{1}", "<a href=\"http://moderntech.io\">ModernTech.io</a>"),
+                appVersion: "3.9.3.0",
                 poweredBy: WinJS.Resources.getString("powered_by").value.replace("{1}", "<a href=\"http://translate.google.com\">Google</a> & <a href=\"http://bing.com/translator\">Bing</a>"),
                 onclickBack: binding.initializer(function () {
                     nav.back();
@@ -24,11 +23,11 @@
                     return Windows.System.Launcher.launchUriAsync(uri);
                 }),
                 onclickContact: binding.initializer(function () {
-                    var uri = new Windows.Foundation.Uri("mailto:support@moderntranslate.com?body=//Please write your email in English.");
+                    var uri = new Windows.Foundation.Uri("mailto:support@modernlab.xyz");
                     return Windows.System.Launcher.launchUriAsync(uri);
                 }),
                 onclickWebsite: binding.initializer(function () {
-                    var uri = new Windows.Foundation.Uri("http://moderntranslate.com");
+                    var uri = new Windows.Foundation.Uri("http://moderntranslator.com");
                     return Windows.System.Launcher.launchUriAsync(uri);
                 })
             });
