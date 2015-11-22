@@ -104,19 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="strings\ar\resources.resjson" />
-    <PRIResource Include="strings\az\resources.resjson" />
-    <PRIResource Include="strings\be-BY\resources.resjson" />
-    <PRIResource Include="strings\cs\resources.resjson" />
     <PRIResource Include="strings\de\resources.resjson" />
     <PRIResource Include="strings\en-US\resources.resjson" />
-    <PRIResource Include="strings\es-ES\resources.resjson" />
     <PRIResource Include="strings\fr\resources.resjson" />
-    <PRIResource Include="strings\gl-ES\resources.resjson" />
     <PRIResource Include="strings\it\resources.resjson" />
-    <PRIResource Include="strings\pt-PT\resources.resjson" />
     <PRIResource Include="strings\ru\resources.resjson" />
     <PRIResource Include="strings\th\resources.resjson" />
-    <PRIResource Include="strings\tr\resources.resjson" />
     <PRIResource Include="strings\vi\resources.resjson" />
     <PRIResource Include="strings\zh-CN\resources.resjson" />
   </ItemGroup>
