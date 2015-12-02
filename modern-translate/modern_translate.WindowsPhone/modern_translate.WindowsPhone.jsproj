@@ -84,30 +84,25 @@
     <ProjectReference Include="..\SQLite.Phone\SQLite.WindowsPhone.vcxproj" />
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="strings\ar\resources.resjson" />
-    <PRIResource Include="strings\az\resources.resjson" />
-    <PRIResource Include="strings\be-BY\resources.resjson" />
-    <PRIResource Include="strings\cs\resources.resjson" />
-    <PRIResource Include="strings\de\resources.resjson" />
-    <PRIResource Include="strings\en-US\resources.resjson" />
-    <PRIResource Include="strings\es-ES\resources.resjson" />
-    <PRIResource Include="strings\fr\resources.resjson" />
-    <PRIResource Include="strings\gl-ES\resources.resjson" />
-    <PRIResource Include="strings\it\resources.resjson" />
-    <PRIResource Include="strings\pt-PT\resources.resjson" />
-    <PRIResource Include="strings\ru\resources.resjson" />
-    <PRIResource Include="strings\th\resources.resjson" />
-    <PRIResource Include="strings\tr\resources.resjson" />
-    <PRIResource Include="strings\vi\resources.resjson" />
-    <PRIResource Include="strings\zh-CN\resources.resjson" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="WindowsPreview.Media.Ocr">
       <HintPath>..\..\packages\Microsoft.Windows.Ocr.1.0.0\lib\wpa81\x86\WindowsPreview.Media.Ocr.winmd</HintPath>
       <IsWinMDFile>true</IsWinMDFile>
       <CopyLocal>True</CopyLocal>
       <SpecificVersion>True</SpecificVersion>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="strings\ar\resources.resjson" />
+    <PRIResource Include="strings\de\resources.resjson" />
+    <PRIResource Include="strings\en-US\resources.resjson" />
+    <PRIResource Include="strings\fr\resources.resjson" />
+    <PRIResource Include="strings\it\resources.resjson" />
+    <PRIResource Include="strings\pt-BR\resources.resjson" />
+    <PRIResource Include="strings\pt-PT\resources.resjson" />
+    <PRIResource Include="strings\ru\resources.resjson" />
+    <PRIResource Include="strings\th\resources.resjson" />
+    <PRIResource Include="strings\vi\resources.resjson" />
+    <PRIResource Include="strings\zh-CN\resources.resjson" />
   </ItemGroup>
   <Import Project="..\modern_translate.Shared\modern_translate.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
