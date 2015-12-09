@@ -54,7 +54,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <AppxPackageDir>C:\Users\quanglam2807\Desktop\F2\</AppxPackageDir>
+    <AppxPackageDir>C:\Users\quanglam2807\Desktop\F4\</AppxPackageDir>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -88,7 +88,9 @@
     <None Include="modern_translate.Windows_TemporaryKey.pfx" />
     <None Include="modern_translate.Windows_StoreKey.pfx" />
     <Content Include="packages.config" />
-    <None Include="Package.StoreAssociation.xml" />
+    <None Include="Package.StoreAssociation.xml">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="OcrResources\MsOcrRes.orp" />
   </ItemGroup>
   <ItemGroup>
@@ -104,13 +106,13 @@
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="strings\ar\resources.resjson" />
-    <PRIResource Include="strings\de\resources.resjson" />
+    <PRIResource Include="strings\de-DE\resources.resjson" />
     <PRIResource Include="strings\en-US\resources.resjson" />
-    <PRIResource Include="strings\fr\resources.resjson" />
-    <PRIResource Include="strings\it\resources.resjson" />
+    <PRIResource Include="strings\fr-FR\resources.resjson" />
+    <PRIResource Include="strings\it-IT\resources.resjson" />
     <PRIResource Include="strings\pt-BR\resources.resjson" />
     <PRIResource Include="strings\pt-PT\resources.resjson" />
-    <PRIResource Include="strings\ru\resources.resjson" />
+    <PRIResource Include="strings\ru-RU\resources.resjson" />
     <PRIResource Include="strings\th\resources.resjson" />
     <PRIResource Include="strings\vi\resources.resjson" />
     <PRIResource Include="strings\zh-CN\resources.resjson" />
