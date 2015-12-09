@@ -148,9 +148,46 @@
                 });
             }
         }).then(function () {
-            return sched.requestDrain(sched.Priority.aboveNormal + 1);
+          if (Custom.Utils.isPremium() == true) return;
+          var adControlEl = document.querySelector("#adControl");
+
+          var style = {};
+          if (Custom.Device.isPhone == true) {
+            if (window.innerWidth >= 480) {
+              style.width = 480;
+              style.height = 80;
+            }
+            else {
+              style.width = 320;
+              style.height = 50;
+            }
+          }
+          else {
+            style.width = 728;
+            style.height = 90;
+          }
+
+          var options = {
+            keywords: ["translation", "translator", "translate", "dictionary", "education"]
+          };
+          if (Custom.Device.isPhone == true) {
+            options.applicationId = "e388bbd2-5e9e-4562-9ef4-79751efbd4fb";
+            options.adUnitId = "11561360";
+          }
+          else {
+            options.applicationId = "6863e6e4-65fb-48f5-8c05-56ea1b22237a";
+            options.adUnitId = "11561359";
+          }
+
+          adControlEl.style.height = style.height+"px";
+          adControlEl.style.width = style.width+"px";
+          var adControl = new MicrosoftNSJS.Advertising.AdControl(
+            adControlEl, options
+          );
+        }).then(function() {
+          return sched.requestDrain(sched.Priority.aboveNormal + 1);
         }).then(function () {
-            ui.enableAnimations();
+          ui.enableAnimations();
         });
         p.done();
         args.setPromise(p);

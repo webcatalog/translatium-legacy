@@ -1,1 +1,80 @@
-﻿!function(){"use strict";var e=WinJS.Navigation,i=(WinJS.Utilities,WinJS.Binding);WinJS.UI;WinJS.UI.Pages.define("/pages/premium/premium.html",{ready:function(n,t){var r=this,a=Windows.ApplicationModel.Store.CurrentApp,o=(a.licenseInformation,new Date("2015-03-29T03:00:00Z")),u=new Windows.Globalization.DateTimeFormatting.DateTimeFormatter("longdate");Windows.ApplicationModel.Package.current.id.version;this.bindingData=WinJS.Binding.as({freeUpgradeMsg:WinJS.Resources.getString("free_upgrade_msg").value.replace("{1}",u.format(o)),onclickBack:i.initializer(function(){e.back()}),isPremium:Custom.Utils.isPremium(),onclickBuy:i.initializer(function(){a.requestProductPurchaseAsync("premium").then(function(){r.bindingData.isPremium=Custom.Utils.isPremium()},function(e){})}),onclickFreeUpgrade:i.initializer(function(){return a.getAppReceiptAsync().then(function(e){var i=new Windows.Data.Xml.Dom.XmlDocument;i.loadXml(e);var n=new Date(i.getElementsByTagName("AppReceipt")[0].attributes.getNamedItem("PurchaseDate").value),t=new Date("2015-03-29T03:00:00Z");return t>=n?a.requestProductPurchaseAsync("free.upgrade").then(function(){r.bindingData.isPremium=Custom.Utils.isPremium()},function(e){}):Custom.Utils.popupMsg("Oops",WinJS.Resources.getString("not_qualified_for_free_upgrade").value)},function(e){return Custom.Utils.popupNoInternet()})})}),i.processAll(n,this.bindingData),a.loadListingInformationAsync("premium").then(function(e){var i=e.productListings.premium.formattedPrice;n.querySelector(".price").innerText=i}).then(null,function(e){})}})}();
+﻿(function () {
+    "use strict";
+
+    var nav = WinJS.Navigation;
+    var utils = WinJS.Utilities;
+    var binding = WinJS.Binding;
+    var ui = WinJS.UI;
+
+    WinJS.UI.Pages.define("/pages/premium/premium.html", {
+        ready: function (element, options) {
+            var that = this;
+
+            var currentApp = Windows.ApplicationModel.Store.CurrentApp;
+            var licenseInformation = currentApp.licenseInformation;
+
+            var pivotDate = new Date("2015-03-29T03:00:00Z");
+            var datefmt = new Windows.Globalization.DateTimeFormatting.DateTimeFormatter("longdate");
+
+            var p = Windows.ApplicationModel.Package.current.id.version;
+            this.bindingData = WinJS.Binding.as({
+                freeUpgradeMsg: WinJS.Resources.getString("free_upgrade_msg").value.replace("{1}", datefmt.format(pivotDate)),
+                onclickBack: binding.initializer(function () {
+                    nav.back();
+                }),
+                isPremium: Custom.Utils.isPremium(),
+                onclickBuy: binding.initializer(function () {
+                    currentApp.requestProductPurchaseAsync("premium")
+                        .then(function () {
+                          var isPremium = Custom.Utils.isPremium();
+                          that.bindingData.isPremium = isPremium;
+                          if (isPremium == true) {
+                            var adControlEl = document.querySelector("#adControl");
+                            if (adControlEl && adControlEl.winControl) {
+                              adControlEl.winControl.dispose();
+                              adControlEl.style.display = "none";
+                            }
+                          }
+                        }, function (err) { });
+                }),
+                onclickFreeUpgrade: binding.initializer(function () {
+                  return currentApp.getAppReceiptAsync().then(
+                    function (txt) {
+                      var xmlDoc = new Windows.Data.Xml.Dom.XmlDocument();
+                      xmlDoc.loadXml(txt);
+                      var purchaseDate = new Date(xmlDoc.getElementsByTagName("AppReceipt")[0].attributes.getNamedItem("PurchaseDate").value);
+                      var pivotDate = new Date("2015-03-29T03:00:00Z");
+                      if (purchaseDate <= pivotDate) {
+                        return currentApp.requestProductPurchaseAsync("free.upgrade")
+                            .then(function () {
+                              var isPremium = Custom.Utils.isPremium();
+                              that.bindingData.isPremium = isPremium;
+                              if (isPremium == true) {
+                                var adControlEl = document.querySelector("#adControl");
+                                if (adControlEl && adControlEl.winControl) {
+                                  adControlEl.winControl.dispose();
+                                  adControlEl.style.display = "none";
+                                }
+                              }
+                            }, function (err) { });
+                      }
+                      else {
+                        return Custom.Utils.popupMsg("Oops", WinJS.Resources.getString("not_qualified_for_free_upgrade").value)
+                      }
+                    },
+                    function(err) {
+                      return Custom.Utils.popupNoInternet()
+                    }
+                  );
+                })
+            });
+
+            binding.processAll(element, this.bindingData);
+
+            currentApp.loadListingInformationAsync("premium").then(function (info) {
+                var price = info.productListings.premium.formattedPrice;
+                element.querySelector(".price").innerText = price;
+            }).then(null, function(err) {});
+        }
+    });
+})();

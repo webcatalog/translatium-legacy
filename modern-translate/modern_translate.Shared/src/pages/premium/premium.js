@@ -26,7 +26,15 @@
                 onclickBuy: binding.initializer(function () {
                     currentApp.requestProductPurchaseAsync("premium")
                         .then(function () {
-                            that.bindingData.isPremium = Custom.Utils.isPremium();
+                          var isPremium = Custom.Utils.isPremium();
+                          that.bindingData.isPremium = isPremium;
+                          if (isPremium == true) {
+                            var adControlEl = document.querySelector("#adControl");
+                            if (adControlEl && adControlEl.winControl) {
+                              adControlEl.winControl.dispose();
+                              adControlEl.style.display = "none";
+                            }
+                          }
                         }, function (err) { });
                 }),
                 onclickFreeUpgrade: binding.initializer(function () {
@@ -39,7 +47,15 @@
                       if (purchaseDate <= pivotDate) {
                         return currentApp.requestProductPurchaseAsync("free.upgrade")
                             .then(function () {
-                                that.bindingData.isPremium = Custom.Utils.isPremium();
+                              var isPremium = Custom.Utils.isPremium();
+                              that.bindingData.isPremium = isPremium;
+                              if (isPremium == true) {
+                                var adControlEl = document.querySelector("#adControl");
+                                if (adControlEl && adControlEl.winControl) {
+                                  adControlEl.winControl.dispose();
+                                  adControlEl.style.display = "none";
+                                }
+                              }
                             }, function (err) { });
                       }
                       else {

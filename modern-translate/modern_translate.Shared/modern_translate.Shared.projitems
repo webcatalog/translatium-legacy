@@ -8,6 +8,7 @@
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)bundle.min.js" />
     <Content Include="$(MSBuildThisFileDirectory)default.html" />
+    <Content Include="$(MSBuildThisFileDirectory)images\for-advertising.png" />
     <Content Include="$(MSBuildThisFileDirectory)main.css" />
     <Content Include="$(MSBuildThisFileDirectory)Microsoft.WinJS.4.0\css\ui-dark.css" />
     <Content Include="$(MSBuildThisFileDirectory)Microsoft.WinJS.4.0\css\ui-light.css" />

@@ -1,4 +1,4 @@
-{
+{ "no_ads": "Pas de pub",
     "free_upgrade_msg": "Ont déjà acheté ou reçu l'application par le biais myAppFree avant {1}?",
   "free_upgrade": "Mise à niveau PRO gratuitement",
   "not_qualified_for_free_upgrade": "Vous n'êtes pas qualifié pour la mise à jour gratuite.",

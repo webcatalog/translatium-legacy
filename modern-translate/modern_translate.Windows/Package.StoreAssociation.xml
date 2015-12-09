@@ -377,67 +377,72 @@
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>X86</PackageArchitecture>
-        <PackageMaxArchitectureVersion>2015.1122.1740.0</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>2015.1202.237.0</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>X64</PackageArchitecture>
-        <PackageMaxArchitectureVersion>2015.1122.1740.0</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>2015.1202.237.0</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Arm</PackageArchitecture>
-        <PackageMaxArchitectureVersion>2015.1122.1740.0</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>2015.1202.237.0</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>2015.1122.1740.0</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>2015.1202.237.0</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>2015.1122.1740.0</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>2015.1202.237.0</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>2015.1122.1740.0</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>2015.1202.237.0</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>2015.1122.1740.0</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>2015.1202.237.0</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>2015.1122.1740.0</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>2015.1202.237.0</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>2015.1122.1740.0</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>2015.1202.237.0</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>2015.1122.1740.0</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>2015.1202.237.0</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>2015.1122.1740.0</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>2015.1202.237.0</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>2015.1122.1740.0</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>2015.1202.237.0</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>2015.1122.1740.0</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>2015.1202.237.0</PackageMaxArchitectureVersion>
+      </PackageInfo>
+      <PackageInfo>
+        <OsMinVersion>6.3.0.0</OsMinVersion>
+        <PackageArchitecture>Neutral</PackageArchitecture>
+        <PackageMaxArchitectureVersion>2015.1202.237.0</PackageMaxArchitectureVersion>
       </PackageInfo>
     </BundleInfo>
   </PackageInfoList>

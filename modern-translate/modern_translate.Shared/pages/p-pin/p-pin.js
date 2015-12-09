@@ -1,1 +1,101 @@
-﻿!function(){"use strict";var n=WinJS.Binding,i=WinJS.Navigation,a=Windows.Storage.ApplicationData.current,t=a.localSettings;WinJS.UI.Pages.define("/pages/p-pin/p-pin.html",{ready:function(a,e){var u=this;"auto"==Custom.Data.languageList.getAt(0).language_id&&Custom.Data.languageList.shift(),this.bindingData=n.as({inputLang:"auto"==t.values.inputLang?"en":t.values.inputLang,outputLang:t.values.outputLang,hidePin:!1,hideUnpin:!0,onclickBack:n.initializer(function(){i.back()}),onclickSwap:n.initializer(function(){var n=u.bindingData.inputLang;u.bindingData.inputLang=u.bindingData.outputLang,u.bindingData.outputLang=n}),onchangeinputLang:n.initializer(function(n){u.bindingData.inputLang=n.srcElement.value}),onchangeoutputLang:n.initializer(function(n){u.bindingData.outputLang=n.srcElement.value}),onclickPin:n.initializer(function(n){var i=u.bindingData.inputLang,a=u.bindingData.outputLang,t=i+"_"+a,e="tile_shortcut",o=WinJS.Resources.getString(i).value+" <> "+WinJS.Resources.getString(a).value;if(Custom.Device.isPhone)var s=new Windows.Foundation.Uri("ms-appx:///images/Square150x150.png"),g=new Windows.Foundation.Uri("ms-appx:///images/Wide310x150.png"),d=null;else var s=new Windows.Foundation.Uri("ms-appx:///images/Square150x150.png"),g=new Windows.Foundation.Uri("ms-appx:///images/Wide310x150.png"),d=new Windows.Foundation.Uri("ms-appx:///images/Square310x310.png");var r=Custom.Device.isPhone?s:d,p=Windows.UI.StartScreen.TileSize.square150x150,c=new Windows.UI.StartScreen.SecondaryTile(t,o,e+t,r,p);return c.visualElements.showNameOnSquare150x150Logo=!0,c.visualElements.foregroundText=Windows.UI.StartScreen.ForegroundText.light,c.visualElements.showNameOnWide310x150Logo=!0,c.visualElements.wide310x150Logo=g,Custom.Device.isPhone||(c.visualElements.showNameOnSquare310x310Logo=!0,c.visualElements.square310x310Logo=d),c.requestCreateAsync().then(function(){u.updateHidden()},function(n){u.updateHidden()})}),onclickUnpin:n.initializer(function(n){var i=u.bindingData.inputLang+"_"+u.bindingData.outputLang,a=new Windows.UI.StartScreen.SecondaryTile(i);a.requestDeleteAsync().then(function(){u.updateHidden()},function(){u.updateHidden()})})}),n.processAll(a,this.bindingData),n.bind(this.bindingData,{inputLang:function(){u.updateHidden()},outputLang:function(){u.updateHidden()}})},updateHidden:function(){var n=this.bindingData.inputLang+"_"+this.bindingData.outputLang;Windows.UI.StartScreen.SecondaryTile.exists(n)?this.bindingData.hidePin=!0:this.bindingData.hidePin=!1,this.bindingData.hideUnpin=!this.bindingData.hidePin}})}();
+﻿(function () {
+    "use strict";
+
+    var binding = WinJS.Binding;
+    var nav = WinJS.Navigation;
+
+    var applicationData = Windows.Storage.ApplicationData.current;
+    var localSettings = applicationData.localSettings;
+
+    WinJS.UI.Pages.define("/pages/p-pin/p-pin.html", {
+
+        ready: function (element, options) {
+            var that = this;
+
+            if (Custom.Data.languageList.getAt(0).language_id == "auto")
+                Custom.Data.languageList.shift();
+
+            this.bindingData = binding.as({
+                inputLang: (localSettings.values["inputLang"] == "auto") ? "en" : localSettings.values["inputLang"],
+                outputLang: localSettings.values["outputLang"],
+                hidePin: false,
+                hideUnpin: true,
+                onclickBack: binding.initializer(function () {
+                    nav.back();
+                }),
+                onclickSwap: binding.initializer(function () {
+                    var tmp = that.bindingData.inputLang;
+                    that.bindingData.inputLang = that.bindingData.outputLang;
+                    that.bindingData.outputLang = tmp;
+                }),
+                onchangeinputLang: binding.initializer(function (e) {
+                    that.bindingData.inputLang = e.srcElement.value;
+                }),
+                onchangeoutputLang: binding.initializer(function (e) {
+                    that.bindingData.outputLang = e.srcElement.value;
+                }),
+                onclickPin: binding.initializer(function (e) {
+                    var inputLang = that.bindingData.inputLang;
+                    var outputLang = that.bindingData.outputLang;
+                    var appbarTileId = inputLang + "_" + outputLang;
+                    var TileActivationArguments = "tile_shortcut";
+                    var newTileDisplayName = WinJS.Resources.getString(inputLang).value + " <> "
+                                           + WinJS.Resources.getString(outputLang).value;
+
+                    if (Custom.Device.isPhone) {
+                        var square150x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Square150x150.png");
+                        var wide310x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Wide310x150.png");
+                        var square310x310Logo = null;
+                    }
+                    else {
+                        var square150x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Square150x150.png");
+                        var wide310x150Logo = new Windows.Foundation.Uri("ms-appx:///images/Wide310x150.png");
+                        var square310x310Logo = new Windows.Foundation.Uri("ms-appx:///images/Square310x310.png");
+                    }
+
+                    var newTileDesiredLogo = (Custom.Device.isPhone) ? square150x150Logo : square310x310Logo;
+                    var newTileDesiredSize = Windows.UI.StartScreen.TileSize.square150x150;
+                    var tile = new Windows.UI.StartScreen.SecondaryTile(appbarTileId,
+                                                                        newTileDisplayName,
+                                                                        TileActivationArguments + appbarTileId,
+                                                                        newTileDesiredLogo,
+                                                                        newTileDesiredSize);
+                    tile.visualElements.showNameOnSquare150x150Logo = true;
+                    tile.visualElements.foregroundText = Windows.UI.StartScreen.ForegroundText.light;
+                    tile.visualElements.showNameOnWide310x150Logo = true;
+                    tile.visualElements.wide310x150Logo = wide310x150Logo;
+                    if (!Custom.Device.isPhone) {
+                        tile.visualElements.showNameOnSquare310x310Logo = true;
+                        tile.visualElements.square310x310Logo = square310x310Logo;
+                    }
+
+                    return tile.requestCreateAsync().then(function () { that.updateHidden(); }, function (err) { that.updateHidden(); });
+                }),
+                onclickUnpin: binding.initializer(function (e) {
+                    var tileId = that.bindingData.inputLang + "_" + that.bindingData.outputLang;
+                    var tileToDelete = new Windows.UI.StartScreen.SecondaryTile(tileId);
+                    tileToDelete.requestDeleteAsync().then(function () { that.updateHidden(); }, function () { that.updateHidden(); });
+                })
+            });
+            binding.processAll(element, this.bindingData);
+            binding.bind(this.bindingData, {
+                inputLang: function () {
+                    that.updateHidden();
+                },
+                outputLang: function () {
+                    that.updateHidden();
+                }
+            })
+        },
+
+        updateHidden: function () {
+            var tileId = this.bindingData.inputLang + "_" + this.bindingData.outputLang;
+            if (Windows.UI.StartScreen.SecondaryTile.exists(tileId))
+                this.bindingData.hidePin = true;
+            else
+                this.bindingData.hidePin = false;
+            this.bindingData.hideUnpin = !this.bindingData.hidePin;
+        }
+    });
+
+})();

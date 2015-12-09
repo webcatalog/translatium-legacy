@@ -1,4 +1,5 @@
 {
+  "no_ads": "无广告",
     "free_upgrade_msg": "已经购买或通过myAppFree之前{1}接收到的应用程序？",
   "free_upgrade": "升级到PRO免费",
   "not_qualified_for_free_upgrade": "你没有资格免费升级。",

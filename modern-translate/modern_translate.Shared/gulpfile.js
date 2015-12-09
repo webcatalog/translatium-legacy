@@ -9,7 +9,7 @@ var bom = require('gulp-bom');
 gulp.task('compress-modules-js', function () {
     return gulp.src('src/modules/*.js')
       .pipe(concat('concat.js'))
-      .pipe(uglify())
+      //.pipe(uglify())
       .pipe(rename('bundle.min.js'))
       .pipe(bom())
       .pipe(gulp.dest('./'));
@@ -17,7 +17,7 @@ gulp.task('compress-modules-js', function () {
 
 gulp.task('compress-pages-js', function () {
     return gulp.src('src/pages/**/*.js')
-      .pipe(uglify())
+      //.pipe(uglify())
       .pipe(bom())
       .pipe(gulp.dest('./pages/'));
 });

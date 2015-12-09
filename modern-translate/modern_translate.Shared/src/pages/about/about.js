@@ -10,17 +10,10 @@
         ready: function (element, options) {
             var p = Windows.ApplicationModel.Package.current.id.version;
             this.bindingData = WinJS.Binding.as({
-                appVersion: "3.9.5.0",
+                appVersion: "3.9.6.0",
                 poweredBy: WinJS.Resources.getString("powered_by").value.replace("{1}", "<a href=\"http://translate.google.com\">Google</a> & <a href=\"http://bing.com/translator\">Bing</a>"),
                 onclickBack: binding.initializer(function () {
                     nav.back();
-                }),
-                onclickRate: binding.initializer(function () {
-                    if (Custom.Device.isPhone)
-                        var uri = new Windows.Foundation.Uri("zune:reviewapp?appid=" + Windows.ApplicationModel.Store.CurrentApp.appId);
-                    else
-                        var uri = new Windows.Foundation.Uri("ms-windows-store:REVIEW?PFN=" + Windows.ApplicationModel.Store.CurrentApp.appId);
-                    return Windows.System.Launcher.launchUriAsync(uri);
                 }),
                 onclickContact: binding.initializer(function () {
                     var uri = new Windows.Foundation.Uri("mailto:support@modernlab.xyz");

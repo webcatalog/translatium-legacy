@@ -7,10 +7,17 @@
     position: relative;
 }
 
+body {
+  display: -ms-grid;
+  -ms-grid-columns: 1fr;
+  -ms-grid-rows: 1fr auto;
+}
+
 #contenthost {
-    height: calc(100%);
+  height: 100%;
     width: 100%;
     position: relative;
+  -ms-grid-row: 1;
 }
 
 
@@ -191,7 +198,7 @@
         width: 64px;
         visibility: hidden;
     }
-	
+
 @keyframes changesize2 {
     0%   {height: 64px; width: 64px; }
     50%  {height: 128px; width: 128px; }
@@ -227,3 +234,17 @@
     .speak-control.loading progress {
         visibility: visible;
     }
+
+.ad-control-container {
+  width: 100%;
+  background-color: #000;
+  background-image: url("/images/for-advertising.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  -ms-grid-row: 2;
+}
+
+.ad-control-container .ad-control {
+  margin: 0 auto;
+}
