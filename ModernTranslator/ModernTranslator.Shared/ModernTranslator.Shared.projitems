@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>b40e93d1-23c2-490d-acf6-c7c0bf7cc6ce</SharedGUID>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)bundle.min.js" />
+    <Content Include="$(MSBuildThisFileDirectory)default.html" />
+    <Content Include="$(MSBuildThisFileDirectory)images\for-advertising.png" />
+    <Content Include="$(MSBuildThisFileDirectory)main.css" />
+    <Content Include="$(MSBuildThisFileDirectory)Microsoft.WinJS.4.0\css\ui-dark.css" />
+    <Content Include="$(MSBuildThisFileDirectory)Microsoft.WinJS.4.0\css\ui-light.css" />
+    <Content Include="$(MSBuildThisFileDirectory)Microsoft.WinJS.4.0\fonts\Symbols.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)Microsoft.WinJS.4.0\js\en-US\ui.strings.js" />
+    <Content Include="$(MSBuildThisFileDirectory)Microsoft.WinJS.4.0\js\WinJS.js" />
+    <Content Include="$(MSBuildThisFileDirectory)OcrResources\MsOcrRes.orp" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\about\about.css" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\about\about.html" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\about\about.js" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\home\home.css" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\home\home.html" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\home\home.js" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\p-camera\p-camera.css" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\p-camera\p-camera.html" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\p-camera\p-camera.js" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\p-dict\p-dict.css" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\p-dict\p-dict.html" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\p-dict\p-dict.js" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\p-pin\p-pin.css" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\p-pin\p-pin.html" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\p-pin\p-pin.js" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\p-zoom\p-zoom.css" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\p-zoom\p-zoom.html" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\p-zoom\p-zoom.js" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\premium\premium.css" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\premium\premium.html" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\premium\premium.js" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\settings\settings.css" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\settings\settings.html" />
+    <Content Include="$(MSBuildThisFileDirectory)pages\settings\settings.js" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\material-dark.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\material-light.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\themes\blue-grey.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\themes\blue.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\themes\brown.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\themes\cyan.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\themes\deep-orange.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\themes\deep-purple.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\themes\green.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\themes\grey.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\themes\indigo.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\themes\light-blue.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\themes\light-green.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\themes\pink.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\themes\purple.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\themes\red.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\css\themes\teal.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\fonts\NotoSansMyanmar-Bold.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\fonts\NotoSansMyanmar-Regular.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\fonts\Roboto-Black.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\fonts\Roboto-Bold.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\fonts\Roboto-Light.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\fonts\Roboto-Medium.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\fonts\Roboto-Regular.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\fonts\Roboto-Thin.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\material-design-iconic-font\css\material-design-iconic-font.css" />
+    <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\material-design-iconic-font\fonts\Material-Design-Iconic-Font.ttf" />
+  </ItemGroup>
+</Project>

@@ -3,28 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modern_translate", "modern_translate", "{B8617AA7-6DBB-4B3E-9186-4DD6AB35EDE8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModernTranslator", "ModernTranslator", "{B8617AA7-6DBB-4B3E-9186-4DD6AB35EDE8}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "modern_translate.Shared", "modern-translate\modern_translate.Shared\modern_translate.Shared.shproj", "{B40E93D1-23C2-490D-ACF6-C7C0BF7CC6CE}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ModernTranslator.Shared", "ModernTranslator\ModernTranslator.Shared\ModernTranslator.Shared.shproj", "{B40E93D1-23C2-490D-ACF6-C7C0BF7CC6CE}"
 EndProject
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "modern_translate.Windows", "modern-translate\modern_translate.Windows\modern_translate.Windows.jsproj", "{73256886-AB19-48B3-88F8-80EB2C04B3F4}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "ModernTranslator.Windows", "ModernTranslator\ModernTranslator.Windows\ModernTranslator.Windows.jsproj", "{73256886-AB19-48B3-88F8-80EB2C04B3F4}"
 EndProject
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "modern_translate.WindowsPhone", "modern-translate\modern_translate.WindowsPhone\modern_translate.WindowsPhone.jsproj", "{9CEB3B64-E099-413A-A234-591156D31069}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "ModernTranslator.WindowsPhone", "ModernTranslator\ModernTranslator.WindowsPhone\ModernTranslator.WindowsPhone.jsproj", "{9CEB3B64-E099-413A-A234-591156D31069}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite.Shared", "modern-translate\SQLite.Shared\SQLite.Shared.vcxitems", "{CBF60A61-5B6C-4666-AEF5-17EA586736CB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite.Shared", "ModernTranslator\SQLite.Shared\SQLite.Shared.vcxitems", "{CBF60A61-5B6C-4666-AEF5-17EA586736CB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite.WindowsPhone", "modern-translate\SQLite.Phone\SQLite.WindowsPhone.vcxproj", "{5796F605-213E-45C1-BD46-62AB9BEC3CC0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite.WindowsPhone", "ModernTranslator\SQLite.Phone\SQLite.WindowsPhone.vcxproj", "{5796F605-213E-45C1-BD46-62AB9BEC3CC0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite.Windows", "modern-translate\SQLite.PC\SQLite.Windows.vcxproj", "{BF8CE2EC-1E71-42F9-B832-87FADDAFBB6B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite.Windows", "ModernTranslator\SQLite.PC\SQLite.Windows.vcxproj", "{BF8CE2EC-1E71-42F9-B832-87FADDAFBB6B}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		modern-translate\SQLite.Shared\SQLite.Shared.vcxitems*{cbf60a61-5b6c-4666-aef5-17ea586736cb}*SharedItemsImports = 9
-		modern-translate\SQLite.Shared\SQLite.Shared.vcxitems*{5796f605-213e-45c1-bd46-62ab9bec3cc0}*SharedItemsImports = 4
-		modern-translate\modern_translate.Shared\modern_translate.Shared.projitems*{9ceb3b64-e099-413a-a234-591156d31069}*SharedItemsImports = 5
-		modern-translate\SQLite.Shared\SQLite.Shared.vcxitems*{bf8ce2ec-1e71-42f9-b832-87faddafbb6b}*SharedItemsImports = 4
-		modern-translate\modern_translate.Shared\modern_translate.Shared.projitems*{b40e93d1-23c2-490d-acf6-c7c0bf7cc6ce}*SharedItemsImports = 13
-		modern-translate\modern_translate.Shared\modern_translate.Shared.projitems*{73256886-ab19-48b3-88f8-80eb2c04b3f4}*SharedItemsImports = 5
+		ModernTranslator\SQLite.Shared\SQLite.Shared.vcxitems*{cbf60a61-5b6c-4666-aef5-17ea586736cb}*SharedItemsImports = 9
+		ModernTranslator\SQLite.Shared\SQLite.Shared.vcxitems*{5796f605-213e-45c1-bd46-62ab9bec3cc0}*SharedItemsImports = 4
+		ModernTranslator\ModernTranslator.Shared\ModernTranslator.Shared.projitems*{9ceb3b64-e099-413a-a234-591156d31069}*SharedItemsImports = 5
+		ModernTranslator\SQLite.Shared\SQLite.Shared.vcxitems*{bf8ce2ec-1e71-42f9-b832-87faddafbb6b}*SharedItemsImports = 4
+		ModernTranslator\ModernTranslator.Shared\ModernTranslator.Shared.projitems*{b40e93d1-23c2-490d-acf6-c7c0bf7cc6ce}*SharedItemsImports = 13
+		ModernTranslator\ModernTranslator.Shared\ModernTranslator.Shared.projitems*{73256886-ab19-48b3-88f8-80eb2c04b3f4}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
