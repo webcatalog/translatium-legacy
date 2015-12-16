@@ -48,7 +48,6 @@
                 outputLang: (typeof localSettings.values["outputLang"] == "undefined") ? "es" : localSettings.values["outputLang"],
                 inputText: app.sessionState.inputText ? app.sessionState.inputText : "",
                 expandinputBox: false,
-                isPremium: Custom.Utils.isPremium(),
                 languageTemplate: binding.initializer(function (itemPromise) {
                     return itemPromise.then(function (item) {
                         var div = document.createElement("div");

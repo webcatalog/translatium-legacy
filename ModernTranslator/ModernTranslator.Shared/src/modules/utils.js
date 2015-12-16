@@ -69,14 +69,6 @@
     }).then(null, function (err) { });
   }
 
-  function isPremiun() {
-    var currentApp = Windows.ApplicationModel.Store.CurrentApp;
-    var licenseInformation = currentApp.licenseInformation;
-    return ((licenseInformation.productLicenses.lookup("premium").isActive == true)
-    || (licenseInformation.productLicenses.lookup("free.upgrade").isActive == true)
-    || (licenseInformation.productLicenses.lookup("remove.ads").isActive == true))
-  }
-
   function popupNoInternet() {
     return Custom.Utils.popupMsg(WinJS.Resources.getString('no_internet').value, WinJS.Resources.getString("please_check_internet").value);
   };
@@ -122,7 +114,6 @@
 
   WinJS.Namespace.define("Custom.Utils", {
     getPurchaseDateSync: getPurchaseDateAsync,
-    isPremium: isPremiun,
     standardlizeJSON: standardlizeJSON,
     popupMsg: popupMsg,
     popupNoInternet: popupNoInternet,

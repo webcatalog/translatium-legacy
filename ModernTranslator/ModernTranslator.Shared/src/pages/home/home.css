@@ -1,340 +1,340 @@
-﻿.home {
-    -ms-grid-rows: 56px 1fr 48px;
+.home {
+  -ms-grid-rows: 56px 1fr 48px;
 }
 
 [x-theme=light] .home {
-    background-color: #e0e0e0;
+  background-color: #e0e0e0;
 }
 
 [x-theme=dark] .home {
-    background-color: #000;
+  background-color: #000;
 }
 
-    .home .material-toolbar {
-        z-index: 3;
-        position: relative;
-        -ms-grid-columns: 1fr 56px 1fr !important;
-    }
+.home .material-toolbar {
+  z-index: 3;
+  position: relative;
+  -ms-grid-columns: 1fr 56px 1fr !important;
+}
 
-            .home .material-toolbar #swap {
-                transition: transform 0.3s;
-            }
+.home .material-toolbar #swap {
+  transition: transform 0.3s;
+}
 
-                .home .material-toolbar #swap.rotate {
-                    transform: rotate(360deg);
-                }
+.home .material-toolbar #swap.rotate {
+  transform: rotate(360deg);
+}
 
-    .home .material-content {
-        display: -ms-grid;
-        -ms-grid-rows: 160px 1fr;
-        -ms-grid-columns: 1fr;
-    }
+.home .material-content {
+  display: -ms-grid;
+  -ms-grid-rows: 160px 1fr;
+  -ms-grid-columns: 1fr;
+}
 
-        .home .material-content[expanded=true] {
-            -ms-grid-rows: 1fr;
-            z-index: 1;
-        }
+.home .material-content[expanded=true] {
+  -ms-grid-rows: 1fr;
+  z-index: 1;
+}
 
-        .home .material-content .input-container {
-            height: 100%;
-        }
+.home .material-content .input-container {
+  height: 100%;
+}
 
-        [x-theme=light] .home .material-content .input-container {
-            background-color: #fff;
-        }
+[x-theme=light] .home .material-content .input-container {
+  background-color: #fff;
+}
 
-        [x-theme=dark] .home .material-content .input-container {
-            background-color: #1d1d1d;
-        }
+[x-theme=dark] .home .material-content .input-container {
+  background-color: #1d1d1d;
+}
 
-            .home .material-content .input-container .md {
-                border-radius: 0;
-            }
+.home .material-content .input-container .md {
+  border-radius: 0;
+}
 
-            .home .material-content .input-container .lang-text {
-                line-height: 48px;
-                font-size: 1em;
-                font-weight: 500;
-            }
+.home .material-content .input-container .lang-text {
+  line-height: 48px;
+  font-size: 1em;
+  font-weight: 500;
+}
 
-                .home .material-content .input-container [hidden].md + .lang-text {
-                    margin-left: 12px;
-                }
+.home .material-content .input-container [hidden].md + .lang-text {
+  margin-left: 12px;
+}
 
-            .home .material-content .input-container .input-box {
-                height: calc(100% - 96px);
-                width: 100%;
-                box-sizing: border-box;
-                padding: 2px 12px;
-                word-wrap: break-word;
-                overflow: hidden;
-                font-size: 18px;
-                font-weight: 700;
-                border: none;
-                margin: 0;
-                overflow-y: auto;
-            }
-                .home .material-content .input-container .input-box * {
-                    font-size: 18px;
-                    font-weight: 700;
-                }
+.home .material-content .input-container .input-box {
+  height: calc(100% - 96px);
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2px 12px;
+  word-wrap: break-word;
+  overflow: hidden;
+  font-size: 18px;
+  font-weight: 700;
+  border: none;
+  margin: 0;
+  overflow-y: auto;
+}
+.home .material-content .input-container .input-box * {
+  font-size: 18px;
+  font-weight: 700;
+}
 
-                .home .material-content .input-container .input-box .new-text {
-                    text-decoration: underline !important;
-                }
+.home .material-content .input-container .input-box .new-text {
+  text-decoration: underline !important;
+}
 
-            [x-theme=light] .home .material-content .input-container .input-box {
-                background-color: #fff;
-                color: #000;
-            }
+[x-theme=light] .home .material-content .input-container .input-box {
+  background-color: #fff;
+  color: #000;
+}
 
-            [x-theme=dark] .home .material-content .input-container .input-box {
-                background-color: #1d1d1d;
-                color: #fff;
-            }
+[x-theme=dark] .home .material-content .input-container .input-box {
+  background-color: #1d1d1d;
+  color: #fff;
+}
 
-            .home .material-content .input-container .action-top {
-                padding-left: 10px;
-                padding-right: 10px;
-            }
+.home .material-content .input-container .action-top {
+  padding-left: 10px;
+  padding-right: 10px;
+}
 
-            .home .material-content .input-container .action-bottom {
-                display: -ms-grid;
-                -ms-grid-rows: 1fr;
-                -ms-grid-columns: 1fr 1fr 1fr 1fr;
-                height: 48px;
-            }
+.home .material-content .input-container .action-bottom {
+  display: -ms-grid;
+  -ms-grid-rows: 1fr;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr;
+  height: 48px;
+}
 
-                .home .material-content .input-container .action-bottom .md {
-                    width: 100%;
-                }
+.home .material-content .input-container .action-bottom .md {
+  width: 100%;
+}
 
 
-        .home .material-content[expanded=true] .pivot-view {
-            display: none;
-        }
+.home .material-content[expanded=true] .pivot-view {
+  display: none;
+}
 
-            .home .material-content .pivot-view .win-pivot-item .win-pivot-item-content {
-                padding: 0 12px;
-                width: calc(100% - 12px);
-            }
+.home .material-content .pivot-view .win-pivot-item .win-pivot-item-content {
+  padding: 0 12px;
+  width: calc(100% - 12px);
+}
 
 .home .suggestion {
-    padding: 15px;
-    font-size: 1.1em;
+  padding: 15px;
+  font-size: 1.1em;
 }
 
 .home .card {
-    min-height: 100px;
-    padding: 10px;
-    box-sizing: border-box;
+  min-height: 100px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 [x-theme=light] .home .card:not(.themed) {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 [x-theme=dark] .home .card:not(.themed) {
-    background-color: #1d1d1d;
+  background-color: #1d1d1d;
 }
 
-    .home .card.themed {
-        color: #fff;
-    }
-    
-    .home .card .lang-text {
-        line-height: 48px;
-        font-size: 1em;
-        font-weight: 500;
-    }
+.home .card.themed {
+  color: #fff;
+}
 
-        .home .card .md[hidden] + .lang-text {
-            margin-left: 12px;
-        }
+.home .card .lang-text {
+  line-height: 48px;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.home .card .md[hidden] + .lang-text {
+  margin-left: 12px;
+}
 
 
-    .home .card .main-text {
-        padding: 0 0 0 12px;
-        margin: 0;
-        font-size: 1.25em;
-        font-weight: 700;
-        word-wrap: break-word;
-		-ms-user-select: text;
-        white-space: pre-wrap;
-    }
+.home .card .main-text {
+  padding: 0 0 0 12px;
+  margin: 0;
+  font-size: 1.25em;
+  font-weight: 700;
+  word-wrap: break-word;
+  -ms-user-select: text;
+  white-space: pre-wrap;
+}
 
-    .home .card .roman-text {
-        padding: 0 0 0 12px;
-        margin: 0;
-        font-size: 1em;
-        font-weight: 700;
-        word-break: break-all;
-		-ms-user-select: text;
-    }
+.home .card .roman-text {
+  padding: 0 0 0 12px;
+  margin: 0;
+  font-size: 1em;
+  font-weight: 700;
+  word-break: break-all;
+  -ms-user-select: text;
+}
 
-    .home .card .line-divider {
-        border-bottom: 1px solid #fff;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
+.home .card .line-divider {
+  border-bottom: 1px solid #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
-    .home .card .action {
-        height: 48px;
-    }
+.home .card .action {
+  height: 48px;
+}
 
-    .home .select-language {
-        position: absolute;
-        z-index: 2;
-        border-width: 0 1px 1px 1px;
-        border-style: solid;
-        width: calc(50%);
-        min-width: 220px;
-        height: calc(100% - 150px);
-        top: 56px;
-        transform: translateY(-120%);
-        transition: all 0.3s ease-out; 
-    }
+.home .select-language {
+  position: absolute;
+  z-index: 2;
+  border-width: 0 1px 1px 1px;
+  border-style: solid;
+  width: calc(50%);
+  min-width: 220px;
+  height: calc(100% - 150px);
+  top: 56px;
+  transform: translateY(-120%);
+  transition: all 0.3s ease-out;
+}
 
 [x-theme=light] .home .select-language {
-    background-color: #fff;
-    border-color: #000;
+  background-color: #fff;
+  border-color: #000;
 }
 
 [x-theme=dark] .home .select-language {
-    background-color: #1d1d1d;
-    border-color: #fff;
+  background-color: #1d1d1d;
+  border-color: #fff;
 }
 
-        .home .select-language.show {
-            transform: translateY(0);
-        }
+.home .select-language.show {
+  transform: translateY(0);
+}
 
-        .home .select-language.show-left, [dir="rtl"] .home .select-language.show-right {
-            left: 5px;
-            right: auto;
-        }
+.home .select-language.show-left, [dir="rtl"] .home .select-language.show-right {
+  left: 5px;
+  right: auto;
+}
 
-        .home .select-language.show-right, [dir="rtl"] .home .select-language.show-left {
-            left: auto;
-            right: 5px;
-        }
+.home .select-language.show-right, [dir="rtl"] .home .select-language.show-left {
+  left: auto;
+  right: 5px;
+}
 
-        .home .select-language #language-list {
-            height: 100%;
-        }
+.home .select-language #language-list {
+  height: 100%;
+}
 
-            .home .select-language #language-list .win-itembox {
-                background-color: transparent;
-            }
+.home .select-language #language-list .win-itembox {
+  background-color: transparent;
+}
 
 
-            .home .select-language #language-list .win-groupleader {
-                margin-top: 70px;
-            }
+.home .select-language #language-list .win-groupleader {
+  margin-top: 70px;
+}
 
-            .home .select-language #language-list .language-group {
-                padding: 0 0 0 15px;
-                text-transform: uppercase;
-                font-weight: 700;
-                font-size: 1.25em;
-            }
+.home .select-language #language-list .language-group {
+  padding: 0 0 0 15px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.25em;
+}
 
-            .home .select-language #language-list .language-item {
-                background-color: transparent;
-                font-size: 18px;
-                font-weight: 500;
-                line-height: 50px;
-                height: 50px;
-                padding-left: 10px;
-            }
+.home .select-language #language-list .language-item {
+  background-color: transparent;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 50px;
+  height: 50px;
+  padding-left: 10px;
+}
 
-    .home .backdrop {
-        position: absolute;
-        z-index: 1;
-        height: calc(100% - 56px);
-        width: 100%;
-        background-color: rgba(0,0,0,0.3);
-        visibility: hidden;
-        top: 56px;
-    }
+.home .backdrop {
+  position: absolute;
+  z-index: 1;
+  height: calc(100% - 56px);
+  width: 100%;
+  background-color: rgba(0,0,0,0.3);
+  visibility: hidden;
+  top: 56px;
+}
 
-        .home .backdrop.show {
-            visibility: visible;
-        }
+.home .backdrop.show {
+  visibility: visible;
+}
 
-    .home .footer {
-        padding: 10px 0;
-        text-align: center;
-    }
+.home .footer {
+  padding: 10px 0;
+  text-align: center;
+}
 
-        .home .footer .progress.hide {
-            display: none;
-        }
+.home .footer .progress.hide {
+  display: none;
+}
 
-    .home .card-layout .win-container {
-        width: calc(100% - 12px);
-        margin: 0 0 20px 0 !important;
-    }
+.home .card-layout .win-container {
+  width: calc(100% - 12px);
+  margin: 0 0 20px 0 !important;
+}
 
-    .home .appbar-toggle {
-        position: absolute;
-        height: 24px;
-        width: 50px;
-        bottom: 0px;
-        right: 20px;
-    }
+.home .appbar-toggle {
+  position: absolute;
+  height: 24px;
+  width: 50px;
+  bottom: 0px;
+  right: 20px;
+}
 
-        .home .appbar-toggle .win-commandicon {
-            margin: 0 13px;
-        }
+.home .appbar-toggle .win-commandicon {
+  margin: 0 13px;
+}
 
-            .home .appbar-toggle .win-commandicon .win-commandimage {
-                color: #fff;
-            }
+.home .appbar-toggle .win-commandicon .win-commandimage {
+  color: #fff;
+}
 
-    .home .ime-container {
-        width: 100%;
-        position: absolute;
-        z-index: 1;
-        bottom: 0px;
-        left: 0px;
-        display: none;
-    }
+.home .ime-container {
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  bottom: 0px;
+  left: 0px;
+  display: none;
+}
 
-        .home .ime-container.show {
-            display: block;
-        }
+.home .ime-container.show {
+  display: block;
+}
 
 
 .home .empty {
-    text-align: center; 
-    padding-top: 20px;
+  text-align: center;
+  padding-top: 20px;
 }
 
-    .home .empty .md {
-        background: none;
-        width: 128px;
-        height: 128px;
-        line-height: 128px !important; 
-        font-size: 128px !important;
-    }
+.home .empty .md {
+  background: none;
+  width: 128px;
+  height: 128px;
+  line-height: 128px !important;
+  font-size: 128px !important;
+}
 
 .home .toolbar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
 }
 
-    .home .toolbar .win-commandingsurface-actionarea.win-toolbar-actionarea {
-        min-width: 100vw;
-    }
+.home .toolbar .win-commandingsurface-actionarea.win-toolbar-actionarea {
+  min-width: 100vw;
+}
 
- 
-    .home .toolbar .win-commandimage, .home .toolbar .win-toolbar-actionarea .win-label, .home .toolbar .win-appbar-ellipsis, .home .toolbar .win-toolbar-ellipsis {
-        color: #fff !important;
-    }
 
-    .home .toolbar .sync-command .win-commandimage {
-        font-size: 16px;
-    }
+.home .toolbar .win-commandimage, .home .toolbar .win-toolbar-actionarea .win-label, .home .toolbar .win-appbar-ellipsis, .home .toolbar .win-toolbar-ellipsis {
+  color: #fff !important;
+}
+
+.home .toolbar .sync-command .win-commandimage {
+  font-size: 16px;
+}

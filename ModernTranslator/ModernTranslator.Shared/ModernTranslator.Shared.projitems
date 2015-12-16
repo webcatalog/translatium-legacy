@@ -34,9 +34,6 @@
     <Content Include="$(MSBuildThisFileDirectory)pages\p-zoom\p-zoom.css" />
     <Content Include="$(MSBuildThisFileDirectory)pages\p-zoom\p-zoom.html" />
     <Content Include="$(MSBuildThisFileDirectory)pages\p-zoom\p-zoom.js" />
-    <Content Include="$(MSBuildThisFileDirectory)pages\premium\premium.css" />
-    <Content Include="$(MSBuildThisFileDirectory)pages\premium\premium.html" />
-    <Content Include="$(MSBuildThisFileDirectory)pages\premium\premium.js" />
     <Content Include="$(MSBuildThisFileDirectory)pages\settings\settings.css" />
     <Content Include="$(MSBuildThisFileDirectory)pages\settings\settings.html" />
     <Content Include="$(MSBuildThisFileDirectory)pages\settings\settings.js" />
