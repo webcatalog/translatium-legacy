@@ -44,7 +44,7 @@
   <PropertyGroup>
     <DefaultLanguage>en-US</DefaultLanguage>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <AppxPackageDir>C:\Users\quanglam2807\Desktop\FF10\</AppxPackageDir>
+    <AppxPackageDir>C:\Users\quanglam2807\Desktop\FF100\</AppxPackageDir>
     <AppxBundlePlatforms>arm</AppxBundlePlatforms>
     <AppxBundle>Always</AppxBundle>
   </PropertyGroup>

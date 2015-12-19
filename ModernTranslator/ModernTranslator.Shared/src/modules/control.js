@@ -7,6 +7,53 @@
   var applicationData = Windows.Storage.ApplicationData.current;
   var localSettings = applicationData.localSettings;
 
+  function RL(a, b) {
+    for (var c = 0; c < b.length - 2; c += 3) {
+      var d = b.charAt(c + 2);
+      d = d >= "a" ? d.charCodeAt(0) - 87 : Number(d);
+      d = b.charAt(c + 1) == "+" ? a >>> d : a << d;
+      a = b.charAt(c) == "+" ? a + d & 4294967295 : a ^ d;
+    }
+    return a;
+  }
+
+
+  function TL(a) {
+    var b = 402890;
+    var d = [];
+    for (var e = 0, f = 0; f < a.length; f++) {
+      var g = a.charCodeAt(f);
+
+      if (128 > g) {
+        d[e++] = g
+      } else {
+        if (2048 > g) {
+          d[e++] = g >> 6 | 192;
+        } else {
+          if ( 55296 == (g & 64512) && f + 1 < a.length && 56320 == (a.charCodeAt(f + 1) & 64512) ) {
+            g = 65536 + ((g & 1023) << 10) + (a.charCodeAt(++f) & 1023);
+            d[e++] = g >> 18 | 240;
+            d[e++] = g >> 12 & 63 | 128;
+          } else {
+            d[e++] = g >> 12 | 224;
+            d[e++] = g >> 6 & 63 | 128;
+          }
+        }
+        d[e++] = g & 63 | 128;
+      }
+    }
+
+    a = b;
+    for (var e = 0; e < d.length; e++) {
+      a += d[e];
+      a = RL(a, '+-a^+6');
+    }
+    a = RL(a, "+-3^+b+-f");
+    if (0 > a) a = (a & 2147483647) + 2147483648;
+    a %= Math.pow(10, 6);
+    return a + "." + (a ^ b);
+  }
+
   WinJS.Namespace.define("Custom.Control", {
     Theme_X: WinJS.Class.define(
       function (element, options) {
@@ -162,7 +209,7 @@
           var that = this;
           return WinJS.Promise.as().then(function () {
             Custom.Utils.showNotif(WinJS.Resources.getString("loading_sound").value);
-            var url = encodeURI("https://translate.google.com/translate_tts?ie=UTF-8&tl=" + lang + "&q=" + text + "&textlen=" + text.length + "&idx=" + idx + " &total=" + total +"&client=t&prev=input&tk=0");
+            var url = encodeURI("https://translate.google.com/translate_tts?ie=UTF-8&tl=" + lang + "&q=" + text + "&textlen=" + text.length + "&idx=" + idx + " &total=" + total +"&client=t&prev=input&tk=" + TL(text));
             return WinJS.xhr({ url: url, responseType: "blob" }).then(function (response) {
               return response.response;
             }, function () {
