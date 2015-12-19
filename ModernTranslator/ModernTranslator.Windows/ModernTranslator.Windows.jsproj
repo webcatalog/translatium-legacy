@@ -54,7 +54,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <AppxPackageDir>C:\Users\quanglam2807\Desktop\FF1\</AppxPackageDir>
+    <AppxPackageDir>C:\Users\quanglam2807\Desktop\FF10\</AppxPackageDir>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
