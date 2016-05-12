@@ -6,51 +6,34 @@
   var applicationData = Windows.Storage.ApplicationData.current;
   var localSettings = applicationData.localSettings;
 
-  function RL(a, b) {
-    for (var c = 0; c < b.length - 2; c += 3) {
-      var d = b.charAt(c + 2);
-      d = d >= "a" ? d.charCodeAt(0) - 87 : Number(d);
-      d = b.charAt(c + 1) == "+" ? a >>> d : a << d;
-      a = b.charAt(c) == "+" ? a + d & 4294967295 : a ^ d;
+  var TKK = ((function() {
+    var a = 561666268;
+    var b = 1526272306;
+    return 406398 + '.' + (a + b);
+  })());
+
+  function b(a, b) {
+    for (var d = 0; d < b.length - 2; d += 3) {
+        var c = b.charAt(d + 2),
+            c = "a" <= c ? c.charCodeAt(0) - 87 : Number(c),
+            c = "+" == b.charAt(d + 1) ? a >>> c : a << c;
+        a = "+" == b.charAt(d) ? a + c & 4294967295 : a ^ c
     }
-    return a;
+    return a
   }
 
-
   function TL(a) {
-    var b = 402890;
-    var d = [];
-    for (var e = 0, f = 0; f < a.length; f++) {
-      var g = a.charCodeAt(f);
-
-      if (128 > g) {
-        d[e++] = g
-      } else {
-        if (2048 > g) {
-          d[e++] = g >> 6 | 192;
-        } else {
-          if ( 55296 == (g & 64512) && f + 1 < a.length && 56320 == (a.charCodeAt(f + 1) & 64512) ) {
-            g = 65536 + ((g & 1023) << 10) + (a.charCodeAt(++f) & 1023);
-            d[e++] = g >> 18 | 240;
-            d[e++] = g >> 12 & 63 | 128;
-          } else {
-            d[e++] = g >> 12 | 224;
-            d[e++] = g >> 6 & 63 | 128;
-          }
-        }
-        d[e++] = g & 63 | 128;
+      for (var e = TKK.split("."), h = Number(e[0]) || 0, g = [], d = 0, f = 0; f < a.length; f++) {
+          var c = a.charCodeAt(f);
+          128 > c ? g[d++] = c : (2048 > c ? g[d++] = c >> 6 | 192 : (55296 == (c & 64512) && f + 1 < a.length && 56320 == (a.charCodeAt(f + 1) & 64512) ? (c = 65536 + ((c & 1023) << 10) + (a.charCodeAt(++f) & 1023), g[d++] = c >> 18 | 240, g[d++] = c >> 12 & 63 | 128) : g[d++] = c >> 12 | 224, g[d++] = c >> 6 & 63 | 128), g[d++] = c & 63 | 128)
       }
-    }
-
-    a = b;
-    for (var e = 0; e < d.length; e++) {
-      a += d[e];
-      a = RL(a, '+-a^+6');
-    }
-    a = RL(a, "+-3^+b+-f");
-    if (0 > a) a = (a & 2147483647) + 2147483648;
-    a %= Math.pow(10, 6);
-    return a + "." + (a ^ b);
+      a = h;
+      for (d = 0; d < g.length; d++) a += g[d], a = b(a, "+-a^+6");
+      a = b(a, "+-3^+b+-f");
+      a ^= Number(e[1]) || 0;
+      0 > a && (a = (a & 2147483647) + 2147483648);
+      a %= 1E6;
+      return a.toString() + "." + (a ^ h)
   }
 
   function translateByGoogle (inputLang, outputLang, inputText) {
@@ -167,33 +150,7 @@
   }
 
   function translateinBatchByGoogle(inputLang, outputLang, inputArr) {
-    var rArr = [];
-    var failed = false;
-
-    var promises = inputArr.map(function (text, i) {
-      return Custom.Translate.translateByGoogle(inputLang, outputLang, text)
-        .then(function(result) {
-          if (!result) failed = true;
-          rArr.push({ i: i, text: result.outputText });
-        });
-    })
-
-    return WinJS.Promise.join(promises)
-      .then(function () {
-        if (failed == false) {
-          var outputArr = rArr
-            .sort(function (a,b) {
-              return a.i - b.i;
-            })
-            .map(function(obj) {
-              return obj.text;
-            });
-
-          return outputArr;
-        }
-      })
-    /*
-    var url = Custom.Utils.getDomain() + "/translate_a/t?client=mt&sl=" + inputLang + "&tl=" + outputLang + "&hl=en&v=1.0&tk=0";
+    var url = Custom.Utils.getDomain() + "/translate_a/t?client=mt&sl=" + inputLang + "&tl=" + outputLang + "&hl=en&v=1.0&tk=" + TL(inputArr.join(""));
 
     var nextArr = [];
 
@@ -216,7 +173,7 @@
       responseType: "json"
     }).then(function (response) {
       return JSON.parse(response.response);
-    });*/
+    });
   }
 
   function translateByBing(inputLang, outputLang, inputText) {
