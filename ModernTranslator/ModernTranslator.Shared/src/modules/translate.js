@@ -6,11 +6,32 @@
   var applicationData = Windows.Storage.ApplicationData.current;
   var localSettings = applicationData.localSettings;
 
-  var TKK = ((function() {
-    var a = 561666268;
-    var b = 1526272306;
-    return 406398 + '.' + (a + b);
-  })());
+  function getGoogleTkk() {
+    if (sessionStorage.getItem("googleTkk") === null) {
+      var url = "https://translate.google.com";
+      return WinJS.xhr({
+        url: url,
+        responseType: "text"
+      }).then(function (response) {
+          return response.response;
+        })
+        .then(function(body) {
+          //const matches = body.match('/TKK.*return\s?-?\d+/');
+          var startStr = 'TKK=eval(';
+          var endStr = ');WEB_TRANSLATION_PATH=';
+          var startI = body.indexOf(startStr) + startStr.length;
+          var endI = body.indexOf(endStr);
+          var tkkEval = body.substring(startI, endI);
+
+          var x = eval(eval(tkkEval));
+          sessionStorage.setItem("googleTkk", x);
+          return sessionStorage.getItem("googleTkk");
+        });
+    }
+    else {
+      return WinJS.Promise.as(sessionStorage.getItem("googleTkk"));
+    }
+   }
 
   function b(a, b) {
     for (var d = 0; d < b.length - 2; d += 3) {
@@ -22,8 +43,8 @@
     return a
   }
 
-  function TL(a) {
-      for (var e = TKK.split("."), h = Number(e[0]) || 0, g = [], d = 0, f = 0; f < a.length; f++) {
+  function TL(tkk, a) {
+      for (var e = tkk.split("."), h = Number(e[0]) || 0, g = [], d = 0, f = 0; f < a.length; f++) {
           var c = a.charCodeAt(f);
           128 > c ? g[d++] = c : (2048 > c ? g[d++] = c >> 6 | 192 : (55296 == (c & 64512) && f + 1 < a.length && 56320 == (a.charCodeAt(f + 1) & 64512) ? (c = 65536 + ((c & 1023) << 10) + (a.charCodeAt(++f) & 1023), g[d++] = c >> 18 | 240, g[d++] = c >> 12 & 63 | 128) : g[d++] = c >> 12 | 224, g[d++] = c >> 6 & 63 | 128), g[d++] = c & 63 | 128)
       }
@@ -84,13 +105,16 @@
         });
       }
       else {
-        var url = encodeURI(Custom.Utils.getDomain() + "/translate_a/single?client=t&sl=" + inputLang + "&tl=" + outputLang + "&hl=en&dt=bd&dt=ex&dt=ld&dt=md&dt=qc&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&prev=btn&ssel=4&tsel=4&tk="+ TL(inputText) + "&q=" + inputText)
-        return WinJS.xhr({
-          type: "get",
-          url: url,
-          responseType: "json"
-        }).then(function (response) {
-
+        return getGoogleTkk()
+          .then(function(tkk) {
+            var url = encodeURI(Custom.Utils.getDomain() + "/translate_a/single?client=t&sl=" + inputLang + "&tl=" + outputLang + "&hl=en&dt=bd&dt=ex&dt=ld&dt=md&dt=qc&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8&prev=btn&ssel=4&tsel=4&tk="+ TL(tkk, inputText) + "&q=" + inputText)
+            return WinJS.xhr({
+              type: "get",
+              url: url,
+              responseType: "json"
+            })
+          })
+          .then(function (response) {
           var raw = response.response;
           raw = Custom.Utils.standardlizeJSON(raw);
           var result = JSON.parse(raw);
@@ -150,30 +174,34 @@
   }
 
   function translateinBatchByGoogle(inputLang, outputLang, inputArr) {
-    var url = Custom.Utils.getDomain() + "/translate_a/t?client=mt&sl=" + inputLang + "&tl=" + outputLang + "&hl=en&v=1.0&tk=" + TL(inputArr.join(""));
+    return getGoogleTkk()
+      .then(function(tkk) {
+        var url = Custom.Utils.getDomain() + "/translate_a/t?client=mt&sl=" + inputLang + "&tl=" + outputLang + "&hl=en&v=1.0&tk=" + TL(tkk, inputArr.join(""));
 
-    var nextArr = [];
+        var nextArr = [];
 
-    for (var i = 0; i < inputArr.length; i++) {
-      if (encodeURI(url + "&q" + inputArr[i]).length > 2000) {
-        nextArr = inputArr.slice(i, inputArr.length);
-        break;
-      }
-      else {
-        url += "&q=";
-        url += inputArr[i];
-      }
-    }
-    url = encodeURI(url);
+        for (var i = 0; i < inputArr.length; i++) {
+          if (encodeURI(url + "&q" + inputArr[i]).length > 2000) {
+            nextArr = inputArr.slice(i, inputArr.length);
+            break;
+          }
+          else {
+            url += "&q=";
+            url += inputArr[i];
+          }
+        }
+        url = encodeURI(url);
 
 
-    return WinJS.xhr({
-      type: "get",
-      url: url,
-      responseType: "json"
-    }).then(function (response) {
-      return JSON.parse(response.response);
-    });
+        return WinJS.xhr({
+          type: "get",
+          url: url,
+          responseType: "json"
+        });
+      })
+      .then(function (response) {
+        return JSON.parse(response.response);
+      });
   }
 
   function translateByBing(inputLang, outputLang, inputText) {

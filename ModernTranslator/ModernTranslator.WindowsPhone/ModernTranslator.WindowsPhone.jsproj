@@ -44,7 +44,7 @@
   <PropertyGroup>
     <DefaultLanguage>en-US</DefaultLanguage>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <AppxPackageDir>C:\Users\quanglam2807\Desktop\FF100\</AppxPackageDir>
+    <AppxPackageDir>\\Mac\Home\Downloads\x\</AppxPackageDir>
     <AppxBundlePlatforms>arm</AppxBundlePlatforms>
     <AppxBundle>Always</AppxBundle>
   </PropertyGroup>
@@ -102,9 +102,6 @@
     <PRIResource Include="strings\th\resources.resjson" />
     <PRIResource Include="strings\vi\resources.resjson" />
     <PRIResource Include="strings\zh-CN\resources.resjson" />
-  </ItemGroup>
-  <ItemGroup>
-    <SDKReference Include="MSAdvertisingJS, Version=8.5" />
   </ItemGroup>
   <Import Project="..\ModernTranslator.Shared\ModernTranslator.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />

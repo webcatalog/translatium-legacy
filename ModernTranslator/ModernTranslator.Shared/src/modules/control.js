@@ -7,51 +7,28 @@
   var applicationData = Windows.Storage.ApplicationData.current;
   var localSettings = applicationData.localSettings;
 
-  function RL(a, b) {
-    for (var c = 0; c < b.length - 2; c += 3) {
-      var d = b.charAt(c + 2);
-      d = d >= "a" ? d.charCodeAt(0) - 87 : Number(d);
-      d = b.charAt(c + 1) == "+" ? a >>> d : a << d;
-      a = b.charAt(c) == "+" ? a + d & 4294967295 : a ^ d;
+  function b(a, b) {
+    for (var d = 0; d < b.length - 2; d += 3) {
+        var c = b.charAt(d + 2),
+            c = "a" <= c ? c.charCodeAt(0) - 87 : Number(c),
+            c = "+" == b.charAt(d + 1) ? a >>> c : a << c;
+        a = "+" == b.charAt(d) ? a + c & 4294967295 : a ^ c
     }
-    return a;
+    return a
   }
 
-
-  function TL(a) {
-    var b = 402890;
-    var d = [];
-    for (var e = 0, f = 0; f < a.length; f++) {
-      var g = a.charCodeAt(f);
-
-      if (128 > g) {
-        d[e++] = g
-      } else {
-        if (2048 > g) {
-          d[e++] = g >> 6 | 192;
-        } else {
-          if ( 55296 == (g & 64512) && f + 1 < a.length && 56320 == (a.charCodeAt(f + 1) & 64512) ) {
-            g = 65536 + ((g & 1023) << 10) + (a.charCodeAt(++f) & 1023);
-            d[e++] = g >> 18 | 240;
-            d[e++] = g >> 12 & 63 | 128;
-          } else {
-            d[e++] = g >> 12 | 224;
-            d[e++] = g >> 6 & 63 | 128;
-          }
-        }
-        d[e++] = g & 63 | 128;
+  function TL(tkk, a) {
+      for (var e = tkk.split("."), h = Number(e[0]) || 0, g = [], d = 0, f = 0; f < a.length; f++) {
+          var c = a.charCodeAt(f);
+          128 > c ? g[d++] = c : (2048 > c ? g[d++] = c >> 6 | 192 : (55296 == (c & 64512) && f + 1 < a.length && 56320 == (a.charCodeAt(f + 1) & 64512) ? (c = 65536 + ((c & 1023) << 10) + (a.charCodeAt(++f) & 1023), g[d++] = c >> 18 | 240, g[d++] = c >> 12 & 63 | 128) : g[d++] = c >> 12 | 224, g[d++] = c >> 6 & 63 | 128), g[d++] = c & 63 | 128)
       }
-    }
-
-    a = b;
-    for (var e = 0; e < d.length; e++) {
-      a += d[e];
-      a = RL(a, '+-a^+6');
-    }
-    a = RL(a, "+-3^+b+-f");
-    if (0 > a) a = (a & 2147483647) + 2147483648;
-    a %= Math.pow(10, 6);
-    return a + "." + (a ^ b);
+      a = h;
+      for (d = 0; d < g.length; d++) a += g[d], a = b(a, "+-a^+6");
+      a = b(a, "+-3^+b+-f");
+      a ^= Number(e[1]) || 0;
+      0 > a && (a = (a & 2147483647) + 2147483648);
+      a %= 1E6;
+      return a.toString() + "." + (a ^ h)
   }
 
   WinJS.Namespace.define("Custom.Control", {
@@ -205,30 +182,46 @@
           });
         },
 
+        getGoogleTkk: function() {
+          if (sessionStorage.getItem("googleTkk") === null) {
+            var url = "https://translate.google.com";
+            return WinJS.xhr({
+              url: url,
+              responseType: "text"
+            }).then(function (response) {
+                return response.response;
+              })
+              .then(function(body) {
+                //const matches = body.match('/TKK.*return\s?-?\d+/');
+                var startStr = 'TKK=eval(';
+                var endStr = ');WEB_TRANSLATION_PATH=';
+                var startI = body.indexOf(startStr) + startStr.length;
+                var endI = body.indexOf(endStr);
+                var tkkEval = body.substring(startI, endI);
+
+                var x = eval(eval(tkkEval));
+                sessionStorage.setItem("googleTkk", x);
+                return sessionStorage.getItem("googleTkk");
+              });
+          }
+          else {
+            return WinJS.Promise.as(sessionStorage.getItem("googleTkk"));
+          }
+        },
+
         _loadPart: function (lang, text, idx, total) {
           var that = this;
           return WinJS.Promise.as().then(function () {
             Custom.Utils.showNotif(WinJS.Resources.getString("loading_sound").value);
-            var url = encodeURI("https://translate.google.com/translate_tts?ie=UTF-8&tl=" + lang + "&q=" + text + "&textlen=" + text.length + "&idx=" + idx + " &total=" + total +"&client=t&prev=input&tk=" + TL(text));
-            return WinJS.xhr({ url: url, responseType: "blob" }).then(function (response) {
+
+            return that.getGoogleTkk()
+              .then(function(tkk) {
+                console.log(tkk);
+                var url = encodeURI("https://translate.google.com/translate_tts?ie=UTF-8&tl=" + lang + "&q=" + text + "&textlen=" + text.length + "&idx=" + idx + " &total=" + total +"&client=t&prev=input&tk=" + TL(tkk, text));
+                return WinJS.xhr({ url: url, responseType: "blob" })
+              })
+            .then(function (response) {
               return response.response;
-            }, function () {
-              var allVoices = Windows.Media.SpeechSynthesis.SpeechSynthesizer.allVoices;
-              var i = -1;
-              for (var j = 0; j < allVoices.length; j++) {
-                if (allVoices[j].language.substr(0, 2) == lang) {
-                  i = j;
-                  break;
-                }
-              }
-              if (i > -1) {
-                var synth = new Windows.Media.SpeechSynthesis.SpeechSynthesizer();
-                synth.voice = allVoices[i];
-                return synth.synthesizeTextToStreamAsync(text).then(function (markersStream) {
-                  var blob = MSApp.createBlobFromRandomAccessStream(markersStream.ContentType, markersStream);
-                  return blob;
-                });
-              }
             }).then(function (blob) {
               if (blob) {
                 var url = URL.createObjectURL(blob, { oneTimeOnly: true });
@@ -238,7 +231,7 @@
                 });
               }
               throw "fail to get blob";
-            }).then(function () {
+            }).then(function (err) {
               return true;
             });
           });

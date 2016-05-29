@@ -50,11 +50,11 @@
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <PackageCertificateKeyFile>ModernTranslator.Windows_StoreKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>00A5362C25E2541C7660547C10B56CB234B3E270</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>A5A9194BEBFB4776598E81EBFD1039448AD9122B</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <AppxPackageDir>C:\Users\quanglam2807\Desktop\FF100\</AppxPackageDir>
+    <AppxPackageDir>\\Mac\Home\Downloads\x\</AppxPackageDir>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -115,9 +115,6 @@
     <PRIResource Include="strings\th\resources.resjson" />
     <PRIResource Include="strings\vi\resources.resjson" />
     <PRIResource Include="strings\zh-CN\resources.resjson" />
-  </ItemGroup>
-  <ItemGroup>
-    <SDKReference Include="MSAdvertisingJS, Version=8.5" />
   </ItemGroup>
   <Import Project="..\ModernTranslator.Shared\ModernTranslator.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />

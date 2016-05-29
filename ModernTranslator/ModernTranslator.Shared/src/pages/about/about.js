@@ -10,7 +10,7 @@
     ready: function (element, options) {
       var p = Windows.ApplicationModel.Package.current.id.version;
       this.bindingData = WinJS.Binding.as({
-        appVersion: "3.9.12",
+        appVersion: "3.9.13",
         poweredBy: WinJS.Resources.getString("powered_by").value.replace("{1}", "<a href=\"http://translate.google.com\">Google</a> & <a href=\"http://bing.com/translator\">Bing</a>"),
         onclickBack: binding.initializer(function () {
           nav.back();
