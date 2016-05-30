@@ -184,7 +184,7 @@
 
         getGoogleTkk: function() {
           if (sessionStorage.getItem("googleTkk") === null) {
-            var url = "https://translate.google.com";
+            var url = "https://translate.google.com/m/translate";
             return WinJS.xhr({
               url: url,
               responseType: "text"
@@ -192,9 +192,8 @@
                 return response.response;
               })
               .then(function(body) {
-                //const matches = body.match('/TKK.*return\s?-?\d+/');
-                var startStr = 'TKK=eval(';
-                var endStr = ');WEB_TRANSLATION_PATH=';
+                var startStr = 'campaign_tracker_id:\'1h\',tkk:';
+                var endStr = ',enable_formality:false';
                 var startI = body.indexOf(startStr) + startStr.length;
                 var endI = body.indexOf(endStr);
                 var tkkEval = body.substring(startI, endI);
