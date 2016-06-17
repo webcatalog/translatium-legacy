@@ -1,0 +1,208 @@
+@keyframes change-size-2 {
+  0% {
+    height 64px
+    width 64px
+  }
+  50% {
+    height 128px
+    width 128px
+  }
+  100% {
+    height 64px
+    width 64px
+  }
+}
+
+@keyframes change-size {
+  0% {
+    height 64px
+    width 64px
+    opacity 1
+  }
+  100% {
+    height 192px
+    width 192px
+    opacity 0
+  }
+}
+
+
+.app-home-page
+  display flex
+  flex-direction column
+  height 100%
+  &.app-expanded
+    .app-input-container
+      flex-basis auto
+      flex 1
+    .app-translation-card-container
+      display none
+  .app-toolbar-container
+    flex-basis 48px
+    background-color $color-2
+    padding 0 12px
+    box-sizing border-box
+  .app-input-container
+    flex-basis 144px
+    background-color $color-2
+    padding 0 12px 12px 12px
+    box-sizing border-box
+    .app-textarea
+      margin 0
+      width 100%
+      height calc(100% - 32px)
+      direction ltr
+      +RTL()
+        direction rtl
+    .app-translate-button
+      width 100%
+  .app-translation-card-container
+    flex 1
+    padding 12px
+    box-sizing border-box
+    overflow-y auto
+    .app-suggestion
+      height 36px
+      line-height 36px
+      width 100%
+      background-color $color-2
+      margin-bottom 6px
+      padding 0 12px
+      box-sizing border-box
+      > .app-hl
+        &:hover, &:focus
+          text-decoration underline
+    .app-ads
+      width 100%
+      box-sizing border-box
+      text-align right
+    .app-card
+      width 100%
+      background-color $color-2
+      padding-bottom 12px
+      &.app-rating-box
+        width 100%
+        box-sizing border-box
+        text-align center
+        padding 12px
+      .app-output-text, .app-output-roman
+        padding 0 12px 0 12px
+        white-space pre-wrap
+        word-wrap break-word
+        direction ltr
+        +RTL()
+          direction rtl
+    .app-note
+      margin-top 6px
+      margin-bottom 12px
+      text-transform uppercase
+      border-top $color-reverse-1 1px solid
+      padding-top 4px
+      > .win-h6
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
+  .app-write-control
+    position absolute
+    bottom 0
+    left 0
+    height 300px
+    width 100%
+    background-color $color-2
+    border-top rgba($color-reverse-1, 0.7) 1px solid
+    padding 0 12px 12px 12px
+    box-sizing border-box
+    display flex
+    flex-direction column
+    z-index 2
+    .app-list
+      flex-basis 48px
+      .win-itemscontainer
+        width 100% !important
+      .win-container
+        width auto !important
+        margin-top 0 !important
+        > .win-itembox
+          background transparent
+      .app-item
+        padding 0 12px
+        height 48px
+        line-height 48px
+    .app-canvas
+      flex 1
+      width 100%
+      height 100%
+      background-color $color-1
+    .app-control-container
+      flex-basis 48px
+      padding 8px 0
+      box-sizing border-box
+  .app-speak-control
+    position absolute
+    bottom 0
+    left 0
+    height 300px
+    width 100%
+    background-color $color-2
+    border-top rgba($color-reverse-1, 0.7) 1px solid
+    z-index 2
+    &.active
+      .app-control-button
+        background-color #F44336
+        color #fff
+      .app-wave, .app-wave-2
+        visibility visible
+    .app-control-button
+      top 0px
+      left 0px
+      bottom 0px
+      right 0px
+      background-color #fff
+      margin auto
+      position absolute
+      height 64px
+      width 64px
+      line-height 64px
+      border-radius 32px
+      font-size 28px
+      color #F44336
+      font-family "Segoe UI Command",Symbols
+      text-align center
+      z-index 1
+    .app-wave
+      position absolute
+      top 0px
+      left 0px
+      bottom 0px
+      right 0px
+      border solid 1px $color-reverse-1
+      animation change-size 1.5s infinite
+      border-radius 50%
+      margin auto
+      visibility hidden
+    .app-wave-2
+      position absolute
+      top 0px
+      left 0px
+      bottom 0px
+      right 0px
+      background-color rgba($color-reverse-1, 0.2)
+      border-radius 50%
+      animation change-size-2 1.5s infinite
+      margin auto
+      height 64px
+      width 64px
+      visibility hidden
+    .app-tips
+      position absolute
+      bottom 24px
+      left 0
+      width 100%
+      text-align center
+    .app-progress
+      position absolute
+      top 0
+      bottom 0
+      left 0
+      right 0
+      margin auto

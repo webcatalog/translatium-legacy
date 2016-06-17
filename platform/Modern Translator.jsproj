@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x86">
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+      <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+      <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+      <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>940899d8-49f3-41b5-bcae-9a3d67037d79</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).Default.props" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
+  <PropertyGroup>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <PackageCertificateKeyFile>Modern Translator_StoreKey.pfx</PackageCertificateKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppxManifest Include="package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <Content Include="images\Splash620x300.scale-100.png" />
+    <Content Include="images\Splash620x300.scale-125.png" />
+    <Content Include="images\Splash620x300.scale-150.png" />
+    <Content Include="images\Splash620x300.scale-200.png" />
+    <Content Include="images\Splash620x300.scale-400.png" />
+    <Content Include="images\Square150x150.scale-100.png" />
+    <Content Include="images\Square150x150.scale-125.png" />
+    <Content Include="images\Square150x150.scale-150.png" />
+    <Content Include="images\Square150x150.scale-200.png" />
+    <Content Include="images\Square150x150.scale-400.png" />
+    <Content Include="images\Square310x310.scale-100.png" />
+    <Content Include="images\Square310x310.scale-125.png" />
+    <Content Include="images\Square310x310.scale-150.png" />
+    <Content Include="images\Square310x310.scale-200.png" />
+    <Content Include="images\Square310x310.scale-400.png" />
+    <Content Include="images\Square44x44.scale-100.png" />
+    <Content Include="images\Square44x44.scale-125.png" />
+    <Content Include="images\Square44x44.scale-150.png" />
+    <Content Include="images\Square44x44.scale-200.png" />
+    <Content Include="images\Square44x44.scale-400.png" />
+    <Content Include="images\Square44x44.targetsize-16_altform-unplated.png" />
+    <Content Include="images\Square44x44.targetsize-24_altform-unplated.png" />
+    <Content Include="images\Square44x44.targetsize-256_altform-unplated.png" />
+    <Content Include="images\Square44x44.targetsize-48_altform-unplated.png" />
+    <Content Include="images\Square71x71.scale-100.png" />
+    <Content Include="images\Square71x71.scale-125.png" />
+    <Content Include="images\Square71x71.scale-150.png" />
+    <Content Include="images\Square71x71.scale-200.png" />
+    <Content Include="images\Square71x71.scale-400.png" />
+    <Content Include="images\Store.scale-100.png" />
+    <Content Include="images\Store.scale-125.png" />
+    <Content Include="images\Store.scale-150.png" />
+    <Content Include="images\Store.scale-200.png" />
+    <Content Include="images\Store.scale-400.png" />
+    <Content Include="images\Wide310x150.scale-100.png" />
+    <Content Include="images\Wide310x150.scale-125.png" />
+    <Content Include="images\Wide310x150.scale-150.png" />
+    <Content Include="images\Wide310x150.scale-200.png" />
+    <Content Include="images\Wide310x150.scale-400.png" />
+    <None Include="Package.StoreAssociation.xml" />
+    <Content Include="www\app-dark.min.css" />
+    <Content Include="www\app-light.min.css" />
+    <Content Include="www\bundle.min.js" />
+    <Content Include="www\index.html" />
+    <Content Include="www\winjs\css\ui-dark.min.css" />
+    <Content Include="www\winjs\css\ui-light.min.css" />
+    <Content Include="www\winjs\fonts\Symbols.ttf" />
+    <Content Include="www\winjs\js\base.min.js" />
+    <Content Include="www\winjs\js\en-US\ui.strings.js" />
+    <Content Include="www\winjs\js\ui.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="strings\en-us\cortana.resjson" />
+    <PRIResource Include="strings\en-us\languages.resjson" />
+    <PRIResource Include="strings\en-us\resources.resjson" />
+    <PRIResource Include="strings\vi-vn\cortana.resjson" />
+    <PRIResource Include="strings\vi-vn\languages.resjson" />
+    <PRIResource Include="strings\vi-vn\resources.resjson" />
+    <PRIResource Include="www\winjs-localization\en-us\Microsoft.WinJS.resjson" />
+    <PRIResource Include="www\winjs-localization\vi-vn\Microsoft.WinJS.resjson" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
+  <Target Name="BeforeBuild">
+    <Exec Command="gulp --gulpfile ../gulpfile.babel.js" />
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <PropertyGroup>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+    <PackageCertificateThumbprint>3A491D175D3DCA783C7A734AAF33D3626CB4FC84</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
+    <AppxPackageDir>Z:\Downloads\y\</AppxPackageDir>
+  </PropertyGroup>
+</Project>

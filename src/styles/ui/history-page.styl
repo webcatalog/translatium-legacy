@@ -1,0 +1,46 @@
+.app-history-page
+  height 100%
+  overflow-y auto
+  .app-ring
+    position absolute
+    top 24px
+    left 0
+    right 0
+    margin auto
+  .app-empty-box
+    display flex
+    align-items center
+    justify-content center
+    height 100%
+    flex-direction column
+    .app-big-icon
+      font-family "Segoe MDL2 Assets",Symbols
+      font-size 96px
+      margin-bottom 12px
+  .app-list
+    .app-footer
+      position relative
+      height 48px
+      text-align center
+    .app-item
+      width 100%
+      background-color $color-2
+      padding-bottom 12px
+      .app-control-container
+        display flex
+        flex-direction row
+        height 48px
+        > .app-language-title
+          flex 1
+          line-height 48px
+          padding 0 12px
+          overflow hidden
+          text-overflow ellipsis
+          white-space nowrap
+        > .app-toolbar-container
+          flex-basis 72px
+      .app-output-text, .app-input-text
+        padding 0 12px 0 12px
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
