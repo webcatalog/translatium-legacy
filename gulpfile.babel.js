@@ -1,17 +1,16 @@
-import gulp from 'gulp'
+import gulp from 'gulp';
 import jade from 'gulp-jade';
-import stylus from 'gulp-stylus'
-import rename from 'gulp-rename'
-import bom from 'gulp-bom'
-import webpackStream from 'webpack-stream'
-import webpack from 'webpack'
-import path from 'path'
+import stylus from 'gulp-stylus';
+import rename from 'gulp-rename';
+import bom from 'gulp-bom';
+import webpackStream from 'webpack-stream';
+import webpack from 'webpack';
+import path from 'path';
 
 const targetDir = 'platform/www/';
 
-gulp.task('jade', () => {
-  return gulp.src('src/index.jade')
-    .pipe(jade())
+gulp.task('html', () => {
+  return gulp.src('src/index.html')
     .pipe(bom())
     .pipe(gulp.dest(targetDir))
 })
@@ -75,4 +74,4 @@ gulp.task('winjs-localization', () => {
 })
 
 gulp.task('prepare', ['winjs', 'winjs-localization'])
-gulp.task('default', ['jade', 'stylus', 'webpack'])
+gulp.task('default', ['html', 'stylus', 'webpack'])
