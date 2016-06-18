@@ -10,7 +10,7 @@ import TranslationActions from "actions/translation.js"
 import OcrActions from "actions/ocr.js"
 import OcrStore from "stores/ocr.js"
 
-import PassContext from "./pass-context.js"
+import PassContext from './PassContext';
 
 class Layout extends React.Component {
   static getStores() {
