@@ -1,19 +1,13 @@
 import React from "react"
 import ReactWinJS from "react-winjs"
 import ReactMixin from "react-mixin"
-import ReactOnClickOutside from "react-onclickoutside"
+import onClickOutside from "react-onclickoutside"
 import TranslationStore from "stores/translation.js"
 import TranslationActions from "actions/translation.js"
 
 const defaultList = [",", ".", "?", "!", ":", "'", "\"", ";", "@"]
 
 class WriteControl extends React.Component {
-  static contextTypes = {
-    getString: React.PropTypes.func,
-    settings: React.PropTypes.object,
-    mode: React.PropTypes.string
-  }
-
   constructor(props) {
     super(props)
 
@@ -283,5 +277,11 @@ class WriteControl extends React.Component {
     )
   }
 }
-ReactMixin(WriteControl.prototype, ReactOnClickOutside)
-export default WriteControl
+
+WriteControl.contextTypes = {
+  getString: React.PropTypes.func,
+  settings: React.PropTypes.object,
+  mode: React.PropTypes.string,
+};
+
+export default onClickOutside(WriteControl);

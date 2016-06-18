@@ -1,16 +1,11 @@
 import React from "react"
 import ReactWinJS from "react-winjs"
 import ReactMixin from "react-mixin"
-import ReactOnClickOutside from "react-onclickoutside"
+import onClickOutside from "react-onclickoutside"
 import TranslationStore from "stores/translation.js"
 import TranslationActions from "actions/translation.js"
 
 class SpeakControl extends React.Component {
-  static contextTypes = {
-    getString: React.PropTypes.func,
-    settings: React.PropTypes.object
-  }
-
   constructor(props) {
     super(props)
 
@@ -171,5 +166,10 @@ class SpeakControl extends React.Component {
     )
   }
 }
-ReactMixin(SpeakControl.prototype, ReactOnClickOutside)
-export default SpeakControl
+
+SpeakControl.contextTypes = {
+  getString: React.PropTypes.func,
+  settings: React.PropTypes.object,
+};
+
+export default onClickOutside(SpeakControl);

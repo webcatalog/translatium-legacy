@@ -1,13 +1,8 @@
-import React from "react"
-import ReactWinJS from "react-winjs"
+import React from 'react';
+import ReactWinJS from 'react-winjs';
 import Animation from "views/animation.js"
 
 class AboutPage extends React.Component {
-  static contextTypes = {
-    getString: React.PropTypes.func,
-    settings: React.PropTypes.object
-  }
-
   openURI(uriStr) {
     let uri = new Windows.Foundation.Uri(uriStr)
     return Windows.System.Launcher.launchUriAsync(uri)
@@ -89,5 +84,10 @@ class AboutPage extends React.Component {
     )
   }
 }
+
+AboutPage.contextTypes = {
+  getString: React.PropTypes.func,
+  settings: React.PropTypes.object,
+};
 
 export default AboutPage

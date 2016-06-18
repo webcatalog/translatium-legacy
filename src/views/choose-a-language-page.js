@@ -7,13 +7,6 @@ import OcrActions from "actions/ocr.js"
 import OcrStore from "stores/ocr.js"
 
 class ChooseALanguagePage extends React.Component {
-  static contextTypes = {
-    settings: React.PropTypes.object,
-    history: React.PropTypes.object,
-    location: React.PropTypes.object,
-    getString: React.PropTypes.func
-  }
-
   constructor(props, context) {
     super(props)
 
@@ -148,4 +141,13 @@ class ChooseALanguagePage extends React.Component {
     )
   }
 }
+
+ChooseALanguagePage.contextTypes = {
+  settings: React.PropTypes.object,
+  history: React.PropTypes.object,
+  location: React.PropTypes.object,
+  getString: React.PropTypes.func,
+};
+
+
 export default ChooseALanguagePage

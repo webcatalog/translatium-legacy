@@ -4,12 +4,6 @@ import Animation from "views/animation.js"
 import SettingActions from "actions/setting.js"
 
 export default class SettingsPage extends React.Component {
-  static contextTypes = {
-    getString: React.PropTypes.func,
-    settings: React.PropTypes.object,
-    history: React.PropTypes.object
-  }
-
   constructor() {
     super()
 
@@ -295,3 +289,9 @@ export default class SettingsPage extends React.Component {
     )
   }
 }
+
+SettingsPage.contextTypes = {
+  getString: React.PropTypes.func,
+  settings: React.PropTypes.object,
+  history: React.PropTypes.object,
+};

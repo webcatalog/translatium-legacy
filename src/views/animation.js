@@ -2,10 +2,6 @@ import React from "react"
 import ReactDOM from "react-dom"
 
 export default class Animation extends React.Component {
-  static propTypes = {
-    name: React.PropTypes.string
-  }
-
   componentDidMount() {
     WinJS.UI.Animation[this.props.name](ReactDOM.findDOMNode(this)).done()
   }
@@ -18,3 +14,7 @@ export default class Animation extends React.Component {
     )
   }
 }
+
+Animation.propTypes = {
+  name: React.PropTypes.string
+};

@@ -6,12 +6,6 @@ import TranslationActions from "actions/translation.js"
 import SettingActions from "actions/setting.js"
 
 class Dictionary extends React.Component {
-  static contextTypes = {
-    getString: React.PropTypes.func,
-    settings: React.PropTypes.object,
-    history: React.PropTypes.object
-  }
-
   static getStores() {
     return [TranslationStore]
   }
@@ -81,4 +75,11 @@ class Dictionary extends React.Component {
     )
   }
 }
+
+Dictionary.contextTypes = {
+  getString: React.PropTypes.func,
+  settings: React.PropTypes.object,
+  history: React.PropTypes.object
+}
+
 export default connectToStores(Dictionary)

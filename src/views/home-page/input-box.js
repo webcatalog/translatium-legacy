@@ -5,12 +5,6 @@ import TranslationStore from "stores/translation.js"
 import TranslationActions from "actions/translation.js"
 
 class InputBox extends React.Component {
-  static contextTypes = {
-    settings: React.PropTypes.object,
-    getString: React.PropTypes.func,
-    expanded: React.PropTypes.bool
-  }
-
   static getStores() {
     return [TranslationStore]
   }
@@ -65,4 +59,10 @@ class InputBox extends React.Component {
   }
 }
 
-export default connectToStores(InputBox)
+InputBox.contextTypes = {
+  settings: React.PropTypes.object,
+  getString: React.PropTypes.func,
+  expanded: React.PropTypes.bool,
+};
+
+export default connectToStores(InputBox);

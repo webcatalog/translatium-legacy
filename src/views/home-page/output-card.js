@@ -9,12 +9,6 @@ import LanguageUtils from "utils/language.js"
 import Dictionary from "./dictionary.js"
 
 class OutputCard extends React.Component {
-  static contextTypes = {
-    getString: React.PropTypes.func,
-    settings: React.PropTypes.object,
-    history: React.PropTypes.object
-  }
-
   static getStores() {
     return [TranslationStore]
   }
@@ -124,10 +118,6 @@ class OutputCard extends React.Component {
           return msg.showAsync().done()
         }
       })
-  }
-
-  handleDictionaryButtonClick() {
-    this.context.history.push("/dictionary")
   }
 
   handleBigTextButtonClick() {
@@ -282,12 +272,6 @@ class OutputCard extends React.Component {
               label={this.context.getString("listen")}
               onClick={this.handleListenButtonClick.bind(this)}/>
             <ReactWinJS.ToolBar.Button
-              key="dictionary"
-              icon=""
-              hidden={!this.props.outputObj.inputDict && !this.props.outputObj.outputDict}
-              label={this.context.getString("dictionary")}
-              onClick={this.handleDictionaryButtonClick.bind(this)}/>
-            <ReactWinJS.ToolBar.Button
               key="big-text"
               icon=""
               label={this.context.getString("big-text")}
@@ -362,4 +346,11 @@ class OutputCard extends React.Component {
     )
   }
 }
-export default connectToStores(OutputCard)
+
+OutputCard.contextTypes = {
+  getString: React.PropTypes.func,
+  settings: React.PropTypes.object,
+  history: React.PropTypes.object,
+};
+
+export default connectToStores(OutputCard);

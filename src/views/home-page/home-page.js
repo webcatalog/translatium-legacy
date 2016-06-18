@@ -8,16 +8,6 @@ import SpeakControl from "./speak-control.js"
 import WriteControl from "./write-control.js"
 
 class HomePage extends React.Component {
-  static contextTypes = {
-    settings: React.PropTypes.object,
-    overwriteHandleBackClick: React.PropTypes.func
-  }
-
-  static childContextTypes = {
-    expanded: React.PropTypes.bool,
-    toggleExpanded: React.PropTypes.func,
-  }
-
   getChildContext() {
     return {
       expanded: this.state.expanded,
@@ -80,4 +70,15 @@ class HomePage extends React.Component {
     )
   }
 }
-export default HomePage
+
+HomePage.contextTypes = {
+  settings: React.PropTypes.object,
+  overwriteHandleBackClick: React.PropTypes.func,
+};
+
+HomePage.childContextTypes = {
+  expanded: React.PropTypes.bool,
+  toggleExpanded: React.PropTypes.func,
+};
+
+export default HomePage;

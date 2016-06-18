@@ -7,13 +7,6 @@ import OcrStore from "stores/ocr.js"
 import TranslationActions from "actions/translation.js"
 
 class OcrPage extends React.Component {
-  static contextTypes = {
-    settings: React.PropTypes.object,
-    history: React.PropTypes.object,
-    location: React.PropTypes.object,
-    getString: React.PropTypes.func
-  }
-
   static getStores() {
     return [OcrStore]
   }
@@ -245,5 +238,12 @@ class OcrPage extends React.Component {
     )
   }
 }
+
+OcrPage.contextTypes = {
+  settings: React.PropTypes.object,
+  history: React.PropTypes.object,
+  location: React.PropTypes.object,
+  getString: React.PropTypes.func,
+};
 
 export default connectToStores(OcrPage)

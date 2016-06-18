@@ -6,11 +6,6 @@ import SettingActions from "actions/setting.js"
 import Animation from "views/animation.js"
 
 class BigTextPage extends React.Component {
-  static contextTypes = {
-    getString: React.PropTypes.func,
-    settings: React.PropTypes.object
-  }
-
   static getStores() {
     return [TranslationStore]
   }
@@ -43,4 +38,11 @@ class BigTextPage extends React.Component {
     )
   }
 }
+
+BigTextPage.contextTypes = {
+  getString: React.PropTypes.func,
+  settings: React.PropTypes.object
+}
+
+
 export default connectToStores(BigTextPage)

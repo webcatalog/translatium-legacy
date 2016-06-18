@@ -7,14 +7,6 @@ import OcrActions from "actions/ocr.js"
 import TTSUtils from "utils/tts.js"
 
 class InputToolbar extends React.Component {
-  static contextTypes = {
-    settings: React.PropTypes.object,
-    getString: React.PropTypes.func,
-    history: React.PropTypes.object,
-    expanded: React.PropTypes.bool,
-    toggleExpanded: React.PropTypes.func
-  }
-
   constructor(props) {
     super(props)
     this.state = {
@@ -192,4 +184,14 @@ class InputToolbar extends React.Component {
     )
   }
 }
-export default InputToolbar
+
+InputToolbar.contextTypes = {
+  settings: React.PropTypes.object,
+  getString: React.PropTypes.func,
+  history: React.PropTypes.object,
+  expanded: React.PropTypes.bool,
+  toggleExpanded: React.PropTypes.func,
+};
+
+
+export default InputToolbar;

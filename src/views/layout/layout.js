@@ -13,15 +13,6 @@ import OcrStore from "stores/ocr.js"
 import PassContext from "./pass-context.js"
 
 class Layout extends React.Component {
-  static childContextTypes = {
-    history: React.PropTypes.object,
-    location: React.PropTypes.object,
-    settings: React.PropTypes.object,
-    getString: React.PropTypes.func,
-    overwriteHandleBackClick: React.PropTypes.func,
-    mode: React.PropTypes.string
-  }
-
   static getStores() {
     return [SettingStore]
   }
@@ -374,5 +365,15 @@ class Layout extends React.Component {
      )
   }
 }
+
+Layout.childContextTypes = {
+  history: React.PropTypes.object,
+  location: React.PropTypes.object,
+  settings: React.PropTypes.object,
+  getString: React.PropTypes.func,
+  overwriteHandleBackClick: React.PropTypes.func,
+  mode: React.PropTypes.string,
+};
+
 
 export default connectToStores(Layout)

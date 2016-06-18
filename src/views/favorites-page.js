@@ -7,12 +7,6 @@ import TranslationActions from "actions/translation.js"
 import SettingActions from "actions/setting.js"
 
 class FavoritesPage extends React.Component {
-  static contextTypes = {
-    getString: React.PropTypes.func,
-    settings: React.PropTypes.object,
-    history: React.PropTypes.object
-  }
-
   constructor(props) {
     super(props)
     this.state = {
@@ -166,4 +160,12 @@ class FavoritesPage extends React.Component {
     )
   }
 }
+
+FavoritesPage.contextTypes = {
+  getString: React.PropTypes.func,
+  settings: React.PropTypes.object,
+  history: React.PropTypes.object,
+};
+
+
 export default FavoritesPage
