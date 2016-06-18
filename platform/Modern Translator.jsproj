@@ -104,7 +104,6 @@
     <Content Include="www\index.html" />
     <Content Include="www\winjs\css\ui-dark.min.css" />
     <Content Include="www\winjs\css\ui-light.min.css" />
-    <Content Include="www\winjs\fonts\Symbols.ttf" />
     <Content Include="www\winjs\js\base.min.js" />
     <Content Include="www\winjs\js\en-US\ui.strings.js" />
     <Content Include="www\winjs\js\ui.min.js" />

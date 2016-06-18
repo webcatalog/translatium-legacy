@@ -37,7 +37,6 @@
     "gulp-bom": "^1.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-stylus": "^2.1.0",
-    "mkdirp": "^0.5.0",
     "webpack": "^1.10.1",
     "webpack-stream": "^3.1.0"
   }

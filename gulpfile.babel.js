@@ -50,9 +50,21 @@ gulp.task('webpack', () =>
         root: path.resolve('src'),
       },
       plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
-          sourceMap: false,
-          mangle: false,
+          compress: {
+            warnings: false,
+          },
+          output: {
+            comments: false,
+          },
+        }),
+        new webpack.optimize.AggressiveMergingPlugin(),
+        new webpack.DefinePlugin({
+          'process.env': {
+            NODE_ENV: JSON.stringify('production'),
+          },
         }),
       ],
     }))

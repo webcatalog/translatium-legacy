@@ -1,5 +1,7 @@
 /* global WinJS Windows */
 
+import 'whatwg-fetch';
+
 import ReactDOM from 'react-dom';
 import AppRoutes from './routes';
 

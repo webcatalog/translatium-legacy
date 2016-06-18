@@ -32,7 +32,7 @@
 	"expand"		:		"Mở rộng",
 	"collapse"		:		"Thu nhỏ",
 	"clear-all"		:		"Xoá tất cả",
-	"translate-and-save"		:		"Dịch & Lưu vào Lịch sử",
+	"translate"		:		"Dịch",
 	"add-to-favorites"		:		"Thêm vào Yêu thích",
 	"remove-from-favorites"		:		"Xoá khỏi Yêu thích",
 	"type-something-here"		:		"Gõ ở đây...",

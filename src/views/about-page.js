@@ -16,7 +16,7 @@ class AboutPage extends React.Component {
         </div>
         <div className="app-info">
           <h4 className="win-h4" style={{ marginTop: 18 }}>{this.context.getString("app-name")}</h4>
-          <h5 className="win-h5">4.6.1</h5>
+          <h5 className="win-h5">4.7.0</h5>
           <button
             className="win-button"
             onClick={this.openURI.bind(this, "https://moderntranslator.com")}>
@@ -29,7 +29,7 @@ class AboutPage extends React.Component {
           </button>
           <button
             className="win-button"
-            onClick={this.openURI.bind(this, "https://moderntranslator.com/changelog/windows")}>
+            onClick={this.openURI.bind(this, "https://moderntranslator.com/changelog")}>
             {this.context.getString("changelog")}
           </button>
           <h5 className="win-h5">

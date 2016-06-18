@@ -102,7 +102,9 @@ class OutputCard extends React.Component {
 
   handleListenButtonClick() {
     if (this.state.playing == true) {
-      return TTSUtils.stop()
+      TTSUtils.stop();
+      this.setState({ playing: false });
+      return;
     }
 
     this.setState({ playing: true })
@@ -317,9 +319,7 @@ class OutputCard extends React.Component {
         <div className="app-note">
           <h6 className="win-h6">
             {(() => {
-              if (this.props.loadedFrom == "history") return this.context.getString("loaded-from-history")
               if (this.props.loadedFrom == "favorites") return this.context.getString("loaded-from-favorites")
-              if (this.props.saved) return this.context.getString("saved-to-history")
               return this.context.getString("real-time")
             })()}
           </h6>

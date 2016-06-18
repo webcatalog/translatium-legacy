@@ -32,7 +32,7 @@
 	"expand"		:		"Expand",
 	"collapse"		:		"Collapse",
 	"clear-all"		:		"Clear all",
-	"translate-and-save"		:		"Translate & Save to history",
+	"translate"		:		"Translate",
 	"add-to-favorites"		:		"Add to favorites",
 	"remove-from-favorites"		:		"Remove from favorites",
 	"type-something-here"		:		"Type something here...",

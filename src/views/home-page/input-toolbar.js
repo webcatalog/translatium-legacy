@@ -56,7 +56,9 @@ class InputToolbar extends React.Component {
 
   handleListenButtonClick() {
     if (this.state.playing == true) {
-      return TTSUtils.stop()
+      TTSUtils.stop();
+      this.setState({ playing: false });
+      return;
     }
 
     let { inputObj } = TranslationStore.getState()
@@ -65,15 +67,14 @@ class InputToolbar extends React.Component {
     TTSUtils.ttsText(this.context.settings.inputLang, inputObj.inputText)
       .then(() => {
         this.setState({ playing: false })
-      }, err => {
-        if (err.name != "Canceled") {
-          let title = this.context.getString("connect-problem")
-          let content = this.context.getString("check-connect")
-          let msg = new Windows.UI.Popups.MessageDialog(content, title)
-          msg.showAsync().done()
-        }
-        this.setState({ playing: false })
       })
+      .catch(err => {
+        let title = this.context.getString("connect-problem");
+        let content = this.context.getString("check-connect");
+        let msg = new Windows.UI.Popups.MessageDialog(content, title);
+        msg.showAsync().done();
+        this.setState({ playing: false })
+      });
   }
 
   handleSpeakButtonClick() {
