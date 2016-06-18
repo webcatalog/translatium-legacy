@@ -52,7 +52,7 @@
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile>Modern Translator_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Modern Translator_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -98,6 +98,7 @@
     <Content Include="images\Wide310x150.scale-200.png" />
     <Content Include="images\Wide310x150.scale-400.png" />
     <None Include="Package.StoreAssociation.xml" />
+    <None Include="Modern Translator_TemporaryKey.pfx" />
     <Content Include="www\app-dark.min.css" />
     <Content Include="www\app-light.min.css" />
     <Content Include="www\bundle.min.js" />
@@ -126,10 +127,10 @@
   </Target>
   <PropertyGroup>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-    <PackageCertificateThumbprint>3A491D175D3DCA783C7A734AAF33D3626CB4FC84</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>E1616A8CAEBBD5958B3E114AFE75D8F77C055A89</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <AppxPackageDir>Z:\Downloads\y\</AppxPackageDir>
+    <AppxPackageDir>C:\x\</AppxPackageDir>
   </PropertyGroup>
 </Project>
