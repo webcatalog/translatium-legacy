@@ -1,8 +1,0 @@
-{
-  "name": "web",
-  "version": "1.0.0",
-  "license": "UNLICENSED",
-  "dependencies": {
-    "bulma": "0.0.28"
-  }
-}
