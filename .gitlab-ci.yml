@@ -1,0 +1,17 @@
+image: node:4.2.2
+
+pages:
+  cache:
+    paths:
+    - vendor
+
+  script:
+  - cd web
+  - npm install -g harp
+  - npm install
+  - harp compile
+  artifacts:
+    paths:
+    - web/www
+  only:
+  - master
