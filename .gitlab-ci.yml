@@ -8,9 +8,9 @@ pages:
   script:
   - npm install
   - npm install -g harp
-  - harp compile
+  - harp compile ./ public
   artifacts:
     paths:
-    - www
+    - public
   only:
   - pages
