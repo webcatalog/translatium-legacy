@@ -162,13 +162,13 @@ class Layout extends React.Component {
 }
 
 Layout.propTypes = {
-  location: React.PropTypes.object,  // current router location
-  children: React.PropTypes.node, // matched child route component
-  screenWidth: React.PropTypes.number,
-  theme: React.PropTypes.string,
-  primaryColorId: React.PropTypes.string,
-  onResize: React.PropTypes.func,
-  onTabbarItemClick: React.PropTypes.func,
+  location: React.PropTypes.object.isRequired,  // current router location
+  children: React.PropTypes.node.isRequired, // matched child route component
+  screenWidth: React.PropTypes.number.isRequired,
+  theme: React.PropTypes.string.isRequired,
+  primaryColorId: React.PropTypes.string.isRequired,
+  onResize: React.PropTypes.func.isRequired,
+  onTabbarItemClick: React.PropTypes.func.isRequired,
 };
 
 

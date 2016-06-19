@@ -4,9 +4,10 @@ import { routerReducer } from 'react-router-redux';
 
 import screen from './screen';
 import settings from './settings';
+import home from './home';
 
 const rootReducer = combineReducers({
-  screen, settings,
+  screen, settings, home,
   routing: routerReducer,
 });
 

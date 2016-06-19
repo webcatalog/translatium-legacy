@@ -100,12 +100,12 @@ const Settings = ({
 );
 
 Settings.propTypes = {
-  theme: React.PropTypes.string,
-  primaryColorId: React.PropTypes.string,
-  chinaMode: React.PropTypes.bool,
-  realtime: React.PropTypes.bool,
-  preventingScreenLock: React.PropTypes.bool,
-  onSettingChange: React.PropTypes.func,
+  theme: React.PropTypes.string.isRequired,
+  primaryColorId: React.PropTypes.string.isRequired,
+  chinaMode: React.PropTypes.bool.isRequired,
+  realtime: React.PropTypes.bool.isRequired,
+  preventingScreenLock: React.PropTypes.bool.isRequired,
+  onSettingChange: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

@@ -16,8 +16,8 @@ class Animation extends React.Component {
 }
 
 Animation.propTypes = {
-  name: React.PropTypes.string,
-  children: React.PropTypes.node,
+  name: React.PropTypes.string.isRequired,
+  children: React.PropTypes.node.isRequired,
 };
 
 export default Animation;
