@@ -4,11 +4,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 
-import { screenResize } from '../actions/screen';
+import { screenResize } from '../../actions/screen';
 
-import i18n from '../i18n';
+import { materialDesignColors } from '../../constants/colors';
 
-import { materialDesignColors } from '../constants/colors';
+import Title from './Title';
 
 const setAppTheme = (theme) => {
   // Theme
@@ -80,41 +80,12 @@ class Layout extends React.Component {
     window.removeEventListener('resize', this.props.onResize);
   }
 
-  renderTitle() {
-    const { location } = this.props;
-    const inputLang = 'en';
-    const outputLang = 'vi';
-
-    if (location.pathname === '/') {
-      return (
-        <div>
-          <h4 className="win-h4 app-language-title">
-            {i18n(`/languages/${inputLang}`)}
-          </h4>
-          <button
-            className="win-backbutton app-button app-icon"
-            data-icon=""
-            disabled
-          />
-          <h4 className="win-h4 app-language-title">
-            {i18n(`/languages/${outputLang}`)}
-          </h4>
-        </div>
-      );
-    }
-
-    return (
-      <h4 className="win-h4 app-title">
-        {i18n(location.pathname.slice(1))}
-      </h4>
-    );
-  }
-
   render() {
     const {
       children,
       primaryColorId,
       onTabbarItemClick,
+      location,
     } = this.props;
 
     return (
@@ -125,7 +96,7 @@ class Layout extends React.Component {
           }}
           className="win-ui-dark app-topbar"
         >
-          {this.renderTitle()}
+          <Title location={location} />
         </div>
         <div className="app-content">
           {children}

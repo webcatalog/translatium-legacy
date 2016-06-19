@@ -7,11 +7,12 @@ import { connect } from 'react-redux';
 import i18n from '../../i18n';
 
 import { clearHome } from '../../actions/home';
+import { playInputText } from '../../actions/textToSpeech';
 
 const InputToolbar = ({
   inputLang, outputLang,
-  inputExpanded,
-  onClearButtonClick,
+  inputExpanded, ttsPlaying,
+  onClearButtonClick, onListenButtonClick,
 }) => {
   const tileExisted = Windows.UI.StartScreen.SecondaryTile.exists(
     `${inputLang}_${outputLang}`
@@ -28,8 +29,9 @@ const InputToolbar = ({
         />
         <ReactWinJS.ToolBar.Button
           key="listen"
-          icon=""
+          icon={ttsPlaying ? '' : ''}
           label={i18n('listen')}
+          onClick={onListenButtonClick}
         />
         <ReactWinJS.ToolBar.Button
           key="speak"
@@ -73,18 +75,24 @@ InputToolbar.propTypes = {
   inputLang: React.PropTypes.string.isRequired,
   outputLang: React.PropTypes.string.isRequired,
   inputExpanded: React.PropTypes.bool.isRequired,
+  ttsPlaying: React.PropTypes.bool.isRequired,
   onClearButtonClick: React.PropTypes.func.isRequired,
+  onListenButtonClick: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   inputLang: state.settings.inputLang,
   outputLang: state.settings.outputLang,
   inputExpanded: state.home.inputExpanded,
+  ttsPlaying: state.textToSpeech.ttsPlaying,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onClearButtonClick: () => {
     dispatch(clearHome());
+  },
+  onListenButtonClick: () => {
+    dispatch(playInputText());
   },
 });
 

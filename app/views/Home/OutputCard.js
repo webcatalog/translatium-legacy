@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 
 import i18n from '../../i18n';
 
+import { playOutputText } from '../../actions/textToSpeech';
+
 const OutputCard = ({
   outputLang,
   status, outputText, outputRoman,
+  ttsPlaying, onListenButtonClick,
 }) => {
   if (status === 'failed') {
     return (
@@ -41,9 +44,9 @@ const OutputCard = ({
         <ReactWinJS.ToolBar>
           <ReactWinJS.ToolBar.Button
             key="listen"
-            icon=""
-            hidden={false}
+            icon={ttsPlaying ? '' : ''}
             label={i18n('listen')}
+            onClick={onListenButtonClick}
           />
           <ReactWinJS.ToolBar.Button
             key="big-text"
@@ -96,15 +99,22 @@ OutputCard.propTypes = {
   status: React.PropTypes.string.isRequired,
   outputText: React.PropTypes.string.isRequired,
   outputRoman: React.PropTypes.string.isRequired,
+  ttsPlaying: React.PropTypes.bool.isRequired,
+  onListenButtonClick: React.PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = (dispatch) => ({
+  onListenButtonClick: () => {
+    dispatch(playOutputText());
+  },
+});
 
 const mapStateToProps = (state) => ({
   outputLang: state.settings.outputLang,
   status: state.home.status,
   outputText: state.home.outputText,
   outputRoman: state.home.outputRoman,
+  ttsPlaying: state.textToSpeech.ttsPlaying,
 });
 
 export default connect(
