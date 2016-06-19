@@ -9,13 +9,13 @@ import path from 'path';
 const targetDir = 'platform/www/';
 
 gulp.task('html', () =>
-  gulp.src('src/index.html')
+  gulp.src('app/index.html')
     .pipe(bom())
     .pipe(gulp.dest(targetDir))
 );
 
 gulp.task('stylus', () =>
-  gulp.src(['src/styles/app-dark.styl', 'src/styles/app-light.styl'])
+  gulp.src(['app/styles/app-dark.styl', 'app/styles/app-light.styl'])
     .pipe(stylus({
       compress: true,
     }))
@@ -28,7 +28,7 @@ gulp.task('stylus', () =>
 
 
 gulp.task('webpack', () =>
-  gulp.src('src/app.js')
+  gulp.src('app/index.js')
     .pipe(webpackStream({
       cache: true,
       output: {
@@ -47,10 +47,10 @@ gulp.task('webpack', () =>
         ],
       },
       resolve: {
-        root: path.resolve('src'),
+        root: path.resolve('app'),
       },
       plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
+        /*new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
           compress: {
@@ -65,7 +65,7 @@ gulp.task('webpack', () =>
           'process.env': {
             NODE_ENV: JSON.stringify('production'),
           },
-        }),
+        }),*/
       ],
     }))
     .pipe(bom())
