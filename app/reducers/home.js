@@ -1,5 +1,5 @@
 import {
-  EXPAND_INPUT, COLLAPSE_INPUT,
+  TOGGLE_EXPANDED,
   UPDATE_INPUT_TEXT, UPDATE_HOME_MULTIPLE,
 } from '../constants/actions';
 
@@ -20,13 +20,9 @@ const initialState = {
 
 const home = (state = initialState, action) => {
   switch (action.type) {
-    case EXPAND_INPUT:
+    case TOGGLE_EXPANDED:
       return Object.assign({}, state, {
-        inputExpanded: true,
-      });
-    case COLLAPSE_INPUT:
-      return Object.assign({}, state, {
-        inputExpanded: false,
+        inputExpanded: !state.inputExpanded,
       });
     case UPDATE_INPUT_TEXT:
       return Object.assign({}, state, {

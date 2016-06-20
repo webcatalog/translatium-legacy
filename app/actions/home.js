@@ -1,13 +1,11 @@
 import {
-  EXPAND_INPUT, COLLAPSE_INPUT,
+  TOGGLE_EXPANDED,
   UPDATE_INPUT_TEXT, UPDATE_HOME_MULTIPLE,
 } from '../constants/actions';
 
 import translateText from '../lib/translateText';
 
-export const expandInput = () => ({ type: EXPAND_INPUT });
-
-export const collapseInput = () => ({ type: COLLAPSE_INPUT });
+export const toggleExpanded = () => ({ type: TOGGLE_EXPANDED });
 
 export const clearHome = () => ({
   type: UPDATE_HOME_MULTIPLE,

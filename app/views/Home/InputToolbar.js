@@ -6,13 +6,14 @@ import { connect } from 'react-redux';
 
 import i18n from '../../i18n';
 
-import { clearHome } from '../../actions/home';
+import { clearHome, toggleExpanded } from '../../actions/home';
 import { playInputText } from '../../actions/textToSpeech';
 
 const InputToolbar = ({
   inputLang, outputLang,
   inputExpanded, ttsPlaying,
   onClearButtonClick, onListenButtonClick,
+  onExpandButtonClick,
 }) => {
   const tileExisted = Windows.UI.StartScreen.SecondaryTile.exists(
     `${inputLang}_${outputLang}`
@@ -57,6 +58,7 @@ const InputToolbar = ({
           key="expand"
           icon={inputExpanded ? '' : ''}
           label={inputExpanded ? i18n('collapse') : i18n('expand')}
+          onClick={onExpandButtonClick}
         />
         <ReactWinJS.ToolBar.Button
           key="pinLanguagePair"
@@ -78,6 +80,7 @@ InputToolbar.propTypes = {
   ttsPlaying: React.PropTypes.bool.isRequired,
   onClearButtonClick: React.PropTypes.func.isRequired,
   onListenButtonClick: React.PropTypes.func.isRequired,
+  onExpandButtonClick: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -93,6 +96,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onListenButtonClick: () => {
     dispatch(playInputText());
+  },
+  onExpandButtonClick: () => {
+    dispatch(toggleExpanded());
   },
 });
 
