@@ -1,7 +1,0 @@
-{
-"good-bye"		:		"Tạm biệt",
-	"hello"		:		"Xin chào",
-	"how-to-say"		:		"Làm thế nào để nói {inputText} [bằng] {outputLang}?",
-	"translating"		:		"Đang dịch {inputText} sang {outputLang}",
-	"translate-to"		:		"Dịch {inputText} [sang] {outputLang}"
-}

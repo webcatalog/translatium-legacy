@@ -9,6 +9,7 @@ import Layout from './views/Layout';
 import Home from './views/Home';
 import Settings from './views/Settings';
 import About from './views/About';
+import ChooseLanguage from './views/ChooseLanguage';
 
 const history = syncHistoryWithStore(hashHistory, store);
 
@@ -18,6 +19,7 @@ const renderRoutes = () => (
       <IndexRoute component={Home} />
       <Route path="settings" component={Settings} />
       <Route path="about" component={About} />
+      <Route path="choose-language" component={ChooseLanguage} />
     </Route>
   </Router>
 );

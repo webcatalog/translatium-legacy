@@ -6,6 +6,8 @@ import i18n from '../../i18n';
 
 import { playOutputText } from '../../actions/textToSpeech';
 
+import Dictionary from './Dictionary';
+
 const OutputCard = ({
   outputLang,
   status, outputText, outputRoman,
@@ -40,54 +42,57 @@ const OutputCard = ({
     );
   } else if (status === 'successful') {
     return (
-      <div className="app-card">
-        <ReactWinJS.ToolBar>
-          <ReactWinJS.ToolBar.Button
-            key="listen"
-            icon={ttsPlaying ? '' : ''}
-            label={i18n('listen')}
-            onClick={onListenButtonClick}
-          />
-          <ReactWinJS.ToolBar.Button
-            key="big-text"
-            icon=""
-            label={i18n('big-text')}
-          />
-          <ReactWinJS.ToolBar.Button
-            key="swap"
-            icon=""
-            label={i18n('swap')}
-          />
-          <ReactWinJS.ToolBar.Button
-            key="copyToClipboard"
-            icon=""
-            label={i18n('copy-to-clipboard')}
-          />
-          <ReactWinJS.ToolBar.Button
-            key="share"
-            icon=""
-            label={i18n('share')}
-          />
-          <ReactWinJS.ToolBar.Button
-            key="addToFavorites"
-            icon=""
-            label={i18n('add-to-favorites')}
-          />
-        </ReactWinJS.ToolBar>
-        <h4
-          className="win-h4 app-output-text app-allow-select-text"
-          lang={outputLang}
-        >
-          {outputText}
-        </h4>
-        {outputRoman ? (
-          <h6
-            className="win-h6 app-output-roman app-allow-select-text"
+      <div>
+        <div className="app-card">
+          <ReactWinJS.ToolBar>
+            <ReactWinJS.ToolBar.Button
+              key="listen"
+              icon={ttsPlaying ? '' : ''}
+              label={i18n('listen')}
+              onClick={onListenButtonClick}
+            />
+            <ReactWinJS.ToolBar.Button
+              key="big-text"
+              icon=""
+              label={i18n('big-text')}
+            />
+            <ReactWinJS.ToolBar.Button
+              key="swap"
+              icon=""
+              label={i18n('swap')}
+            />
+            <ReactWinJS.ToolBar.Button
+              key="copyToClipboard"
+              icon=""
+              label={i18n('copy-to-clipboard')}
+            />
+            <ReactWinJS.ToolBar.Button
+              key="share"
+              icon=""
+              label={i18n('share')}
+            />
+            <ReactWinJS.ToolBar.Button
+              key="addToFavorites"
+              icon=""
+              label={i18n('add-to-favorites')}
+            />
+          </ReactWinJS.ToolBar>
+          <h4
+            className="win-h4 app-output-text app-allow-select-text"
             lang={outputLang}
           >
-            {outputRoman}
-          </h6>
-        ) : null}
+            {outputText}
+          </h4>
+          {outputRoman ? (
+            <h6
+              className="win-h6 app-output-roman app-allow-select-text"
+              lang={outputLang}
+            >
+              {outputRoman}
+            </h6>
+          ) : null}
+        </div>
+        <Dictionary />
       </div>
     );
   }
@@ -97,8 +102,8 @@ const OutputCard = ({
 OutputCard.propTypes = {
   outputLang: React.PropTypes.string.isRequired,
   status: React.PropTypes.string.isRequired,
-  outputText: React.PropTypes.string.isRequired,
-  outputRoman: React.PropTypes.string.isRequired,
+  outputText: React.PropTypes.string,
+  outputRoman: React.PropTypes.string,
   ttsPlaying: React.PropTypes.bool.isRequired,
   onListenButtonClick: React.PropTypes.func.isRequired,
 };

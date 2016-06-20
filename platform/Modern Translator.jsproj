@@ -113,11 +113,7 @@
     <PRIResource Include="strings\en-us\cortana.resjson" />
     <PRIResource Include="strings\en-us\languages.resjson" />
     <PRIResource Include="strings\en-us\resources.resjson" />
-    <PRIResource Include="strings\vi-vn\cortana.resjson" />
-    <PRIResource Include="strings\vi-vn\languages.resjson" />
-    <PRIResource Include="strings\vi-vn\resources.resjson" />
     <PRIResource Include="www\winjs-localization\en-us\Microsoft.WinJS.resjson" />
-    <PRIResource Include="www\winjs-localization\vi-vn\Microsoft.WinJS.resjson" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <Target Name="BeforeBuild">

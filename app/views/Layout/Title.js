@@ -1,13 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import i18n from '../../i18n';
 
-const Title = ({ location, inputLang, outputLang }) => {
+const Title = ({
+  location, inputLang, outputLang,
+  onLanguageClick,
+}) => {
   if (location.pathname === '/') {
     return (
       <div>
-        <h4 className="win-h4 app-language-title">
+        <h4
+          className="win-h4 app-language-title"
+          onClick={() => onLanguageClick('inputLang')}
+        >
           {i18n(`/languages/${inputLang}`)}
         </h4>
         <button
@@ -15,7 +22,10 @@ const Title = ({ location, inputLang, outputLang }) => {
           data-icon=""
           disabled
         />
-        <h4 className="win-h4 app-language-title">
+        <h4
+          className="win-h4 app-language-title"
+          onClick={() => onLanguageClick('outputLang')}
+        >
           {i18n(`/languages/${outputLang}`)}
         </h4>
       </div>
@@ -33,6 +43,7 @@ Title.propTypes = {
   location: React.PropTypes.object.isRequired,
   inputLang: React.PropTypes.string.isRequired,
   outputLang: React.PropTypes.string.isRequired,
+  onLanguageClick: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -40,6 +51,16 @@ const mapStateToProps = (state) => ({
   outputLang: state.settings.outputLang,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onLanguageClick: (type) => {
+    dispatch(push({
+      pathname: '/choose-language',
+      query: { type },
+    })
+  );
+  },
+});
+
 export default connect(
-  mapStateToProps
+  mapStateToProps, mapDispatchToProps
 )(Title);

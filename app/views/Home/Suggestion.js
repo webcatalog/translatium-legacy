@@ -77,9 +77,9 @@ Suggestion.propTypes = {
   inputLang: React.PropTypes.string.isRequired,
   primaryColorId: React.PropTypes.string.isRequired,
   status: React.PropTypes.string.isRequired,
-  detectedInputLang: React.PropTypes.string.isRequired,
-  suggestedInputText: React.PropTypes.string.isRequired,
-  suggestedInputLang: React.PropTypes.string.isRequired,
+  detectedInputLang: React.PropTypes.string,
+  suggestedInputText: React.PropTypes.string,
+  suggestedInputLang: React.PropTypes.string,
 };
 
 const mapDispatchToProps = () => ({});

@@ -6,12 +6,24 @@
     overflow hidden
     text-overflow ellipsis
     white-space nowrap
+    box-sizing border-box
+    width 100%
+    float left
+    +RTL()
+      float right
+    @media screen and (min-width: 600px)
+      width 50%
+    @media screen and (min-width: 1200px)
+      width 33.3%
+  .app-group-item-container
+    padding 12px
+    box-sizing border-box
+    width 100%
   .app-group-item
     height 40px
-    margin 12px
     text-align center
     line-height 40px
     color #ffffff
-    padding 0 12px
     display inline-block
     text-transform uppercase
+    padding 0 12px

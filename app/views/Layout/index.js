@@ -58,6 +58,10 @@ class Layout extends React.Component {
     const { theme, primaryColorId } = this.props;
     setAppTheme(theme);
     setAppColor(primaryColorId);
+
+    const systemNavigationManager = Windows.UI.Core.SystemNavigationManager.getForCurrentView();
+    systemNavigationManager.appViewBackButtonVisibility
+      = Windows.UI.Core.AppViewBackButtonVisibility.visible;
   }
 
   componentDidMount() {

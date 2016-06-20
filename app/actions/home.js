@@ -84,3 +84,13 @@ export const updateInputText = (inputText) => ((dispatch, getState) => {
 
   if (realtime === true) dispatch(translate());
 });
+
+export const translateWithInfo = (inputLang, outputLang, inputText) =>
+  ((dispatch) => {
+    dispatch({
+      type: UPDATE_HOME_MULTIPLE,
+      newValue: { inputLang, outputLang, inputText },
+    });
+
+    dispatch(translate());
+  });
