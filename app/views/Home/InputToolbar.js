@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import i18n from '../../i18n';
 
-import { clearHome, toggleExpanded } from '../../actions/home';
+import { updateInputText, toggleExpanded } from '../../actions/home';
 import { playInputText } from '../../actions/textToSpeech';
 
 const InputToolbar = ({
@@ -92,7 +92,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onClearButtonClick: () => {
-    dispatch(clearHome());
+    dispatch(updateInputText(''));
   },
   onListenButtonClick: () => {
     dispatch(playInputText());

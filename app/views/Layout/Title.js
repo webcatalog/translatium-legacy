@@ -4,9 +4,12 @@ import { push } from 'react-router-redux';
 
 import i18n from '../../i18n';
 
+import { swapLanguages } from '../../actions/settings';
+import { isOutput } from '../../lib/languageUtils';
+
 const Title = ({
   location, inputLang, outputLang,
-  onLanguageClick,
+  onLanguageClick, onSwapButtonClick,
 }) => {
   if (location.pathname === '/') {
     return (
@@ -20,7 +23,8 @@ const Title = ({
         <button
           className="win-backbutton app-button app-icon"
           data-icon=""
-          disabled
+          disabled={(isOutput(inputLang) === false)}
+          onClick={onSwapButtonClick}
         />
         <h4
           className="win-h4 app-language-title"
@@ -44,6 +48,7 @@ Title.propTypes = {
   inputLang: React.PropTypes.string.isRequired,
   outputLang: React.PropTypes.string.isRequired,
   onLanguageClick: React.PropTypes.func.isRequired,
+  onSwapButtonClick: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -56,8 +61,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(push({
       pathname: '/choose-language',
       query: { type },
-    })
-  );
+    }));
+  },
+  onSwapButtonClick: () => {
+    dispatch(swapLanguages());
   },
 });
 

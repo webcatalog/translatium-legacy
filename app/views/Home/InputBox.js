@@ -12,7 +12,7 @@ const InputBox = ({
   inputText, onInputText,
   onTranslateButtonClick,
 }) => {
-  const translateButtonDisabled = false;
+  const translateButtonDisabled = inputText.trim().length < 1;
   return (
     <div className="app-input-container">
       <textarea

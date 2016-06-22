@@ -231,8 +231,8 @@ Dictionary.propTypes = {
   primaryColorId: React.PropTypes.string.isRequired,
   inputLang: React.PropTypes.string.isRequired,
   outputLang: React.PropTypes.string.isRequired,
-  inputDict: React.PropTypes.object,
-  outputDict: React.PropTypes.object,
+  inputDict: React.PropTypes.array,
+  outputDict: React.PropTypes.array,
   onLinkClick: React.PropTypes.func.isRequired,
 };
 

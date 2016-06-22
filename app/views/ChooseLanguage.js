@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 
-
 import { materialDesignColors } from '../constants/colors';
 
 import i18n from '../i18n';
@@ -10,6 +9,8 @@ import i18n from '../i18n';
 import { getInputLanguages, getOutputLanguages } from '../lib/languageUtils';
 
 import { updateSetting } from '../actions/settings';
+
+import Animation from './Animation';
 
 const ChooseLanguage = ({
   location, primaryColorId,
@@ -22,27 +23,29 @@ const ChooseLanguage = ({
   else languages = getOutputLanguages();
 
   return (
-    <div className="app-choose-a-language-page">
-      <div className="app-group-item-container">
-        <div
-          className="app-group-item win-h4"
-          style={{ backgroundColor: materialDesignColors[primaryColorId].light }}
-        >
-          {i18n('all')}
+    <Animation name="enterPage">
+      <div className="app-choose-a-language-page">
+        <div className="app-group-item-container">
+          <div
+            className="app-group-item win-h4"
+            style={{ backgroundColor: materialDesignColors[primaryColorId].light }}
+          >
+            {i18n('all')}
+          </div>
         </div>
+        {languages.map(lang => (
+          <div
+            className="app-item"
+            key={lang}
+            onClick={() => onLanguageClick(type, lang)}
+          >
+            <h4 className="win-h4">
+              {i18n(`/languages/${lang}`)}
+            </h4>
+          </div>
+          ))}
       </div>
-      {languages.map(lang => (
-        <div
-          className="app-item"
-          key={lang}
-          onClick={() => onLanguageClick(type, lang)}
-        >
-          <h4 className="win-h4">
-            {i18n(`/languages/${lang}`)}
-          </h4>
-        </div>
-        ))}
-    </div>
+    </Animation>
   );
 };
 

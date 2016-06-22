@@ -1,8 +1,8 @@
-/* global Windows */
+/* global Windows WinJS */
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { replace } from 'react-router-redux';
+import { replace, goBack } from 'react-router-redux';
 
 import { screenResize } from '../../actions/screen';
 
@@ -52,16 +52,24 @@ const setAppColor = (primaryColorId) => {
   }
 };
 
+const canGoBack = (location) =>
+  (['/', '/phrasebook', '/settings', '/about']
+    .indexOf(location.pathname) < 0);
 
 class Layout extends React.Component {
   componentWillMount() {
-    const { theme, primaryColorId } = this.props;
+    const { theme, primaryColorId, onBackClick } = this.props;
     setAppTheme(theme);
     setAppColor(primaryColorId);
 
-    const systemNavigationManager = Windows.UI.Core.SystemNavigationManager.getForCurrentView();
-    systemNavigationManager.appViewBackButtonVisibility
-      = Windows.UI.Core.AppViewBackButtonVisibility.visible;
+    WinJS.Application.onbackclick = () => {
+      const { location } = this.props;
+      if (canGoBack(location) === true) {
+        onBackClick();
+        return true;
+      }
+      return false;
+    };
   }
 
   componentDidMount() {
@@ -69,7 +77,7 @@ class Layout extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
-    const { theme, primaryColorId } = this.props;
+    const { theme, primaryColorId, location } = this.props;
     if (theme !== nextProps.theme) {
       setAppTheme(nextProps.theme);
     }
@@ -77,11 +85,19 @@ class Layout extends React.Component {
     if (primaryColorId !== nextProps.primaryColorId) {
       setAppColor(nextProps.primaryColorId);
     }
+
+    if (location.pathname !== nextProps.location.pathname) {
+      const systemNavigationManager = Windows.UI.Core.SystemNavigationManager.getForCurrentView();
+      systemNavigationManager.appViewBackButtonVisibility
+        = canGoBack(nextProps.location) ? Windows.UI.Core.AppViewBackButtonVisibility.visible
+                               : Windows.UI.Core.AppViewBackButtonVisibility.collapsed;
+    }
   }
 
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.props.onResize);
+    WinJS.Application.onbackclick = null;
   }
 
   render() {
@@ -144,8 +160,8 @@ Layout.propTypes = {
   primaryColorId: React.PropTypes.string.isRequired,
   onResize: React.PropTypes.func.isRequired,
   onTabbarItemClick: React.PropTypes.func.isRequired,
+  onBackClick: React.PropTypes.func.isRequired,
 };
-
 
 const mapDispatchToProps = (dispatch) => ({
   onResize: () => {
@@ -153,6 +169,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onTabbarItemClick: (pathname) => {
     dispatch(replace(pathname));
+  },
+  onBackClick: () => {
+    dispatch(goBack());
   },
 });
 

@@ -11,7 +11,6 @@ export const clearHome = () => ({
   type: UPDATE_HOME_MULTIPLE,
   newValue: {
     status: 'none',
-    inputText: '',
     outputText: null,
     inputRoman: null,
     outputRoman: null,
@@ -27,9 +26,11 @@ export const clearHome = () => ({
 export const translate = () => ((dispatch, getState) => {
   const { settings, home } = getState();
   const { inputLang, outputLang, chinaMode } = settings;
-  const { inputText } = home;
+  const { inputText, inputExpanded } = home;
 
   if (inputText.length < 1) return;
+
+  if (inputExpanded === true) dispatch(toggleExpanded());
 
   dispatch({
     type: UPDATE_HOME_MULTIPLE,
@@ -75,14 +76,15 @@ export const translate = () => ((dispatch, getState) => {
 });
 
 export const updateInputText = (inputText) => ((dispatch, getState) => {
-  const { settings } = getState();
+  const { settings, home } = getState();
   const { realtime } = settings;
+  const { inputExpanded } = home;
 
   dispatch({ type: UPDATE_INPUT_TEXT, inputText });
 
   if (inputText.length === 0) dispatch(clearHome());
 
-  if (realtime === true) dispatch(translate());
+  if (realtime === true && inputExpanded === false) dispatch(translate());
 });
 
 export const translateWithInfo = (inputLang, outputLang, inputText) =>
