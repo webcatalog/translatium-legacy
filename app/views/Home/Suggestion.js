@@ -24,6 +24,7 @@ const Suggestion = ({
               className="app-hl"
               style={{ color: materialDesignColors[primaryColorId].light }}
               onClick={null}
+              key="detectedInputLang"
             >
                 {i18n(`/languages/${detectedInputLang}`)}
             </span>)
@@ -41,6 +42,7 @@ const Suggestion = ({
               className="app-hl"
               style={{ color: materialDesignColors[primaryColorId].light }}
               onClick={null}
+              key="suggestedInputText"
             >
               {suggestedInputText}
             </span>)
@@ -62,6 +64,7 @@ const Suggestion = ({
               className="app-hl"
               style={{ color: materialDesignColors[primaryColorId].light }}
               onClick={null}
+              key="suggestedInputLang"
             >
               {i18n(`/languages/${suggestedInputLang}`)}
             </span>)

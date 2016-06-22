@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 import i18n from '../../i18n';
 
 import { playOutputText } from '../../actions/textToSpeech';
+import { togglePhrasebook } from '../../actions/home';
 
 import Dictionary from './Dictionary';
 
 const OutputCard = ({
   outputLang,
-  status, outputText, outputRoman,
-  ttsPlaying, onListenButtonClick,
+  status, outputText, outputRoman, phrasebookId,
+  ttsPlaying, onListenButtonClick, onPhrasebookButtonClick,
 }) => {
   if (status === 'failed') {
     return (
@@ -73,8 +74,9 @@ const OutputCard = ({
             />
             <ReactWinJS.ToolBar.Button
               key="addToFavorites"
-              icon=""
-              label={i18n('add-to-favorites')}
+              icon={(phrasebookId) ? '' : ''}
+              label={(phrasebookId) ? i18n('remove-from-phrasebook') : i18n('add-to-phrasebook')}
+              onClick={onPhrasebookButtonClick}
             />
           </ReactWinJS.ToolBar>
           <h4
@@ -104,13 +106,18 @@ OutputCard.propTypes = {
   status: React.PropTypes.string.isRequired,
   outputText: React.PropTypes.string,
   outputRoman: React.PropTypes.string,
+  phrasebookId: React.PropTypes.string,
   ttsPlaying: React.PropTypes.bool.isRequired,
   onListenButtonClick: React.PropTypes.func.isRequired,
+  onPhrasebookButtonClick: React.PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onListenButtonClick: () => {
     dispatch(playOutputText());
+  },
+  onPhrasebookButtonClick: () => {
+    dispatch(togglePhrasebook());
   },
 });
 
@@ -119,6 +126,7 @@ const mapStateToProps = (state) => ({
   status: state.home.status,
   outputText: state.home.outputText,
   outputRoman: state.home.outputRoman,
+  phrasebookId: state.home.phrasebookId,
   ttsPlaying: state.textToSpeech.ttsPlaying,
 });
 

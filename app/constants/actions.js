@@ -10,3 +10,5 @@ export const UPDATE_HOME_MULTIPLE = 'UPDATE_HOME_MULTIPLE';
 
 export const PLAY_TTS = 'PLAY_TTS';
 export const STOP_TTS = 'STOP_TTS';
+
+export const UPDATE_PHRASEBOOK = 'UPDATE_PHRASEBOOK';

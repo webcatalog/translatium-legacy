@@ -1,9 +1,13 @@
+import PouchDB from 'pouchdb';
+
 import {
   TOGGLE_EXPANDED,
   UPDATE_INPUT_TEXT, UPDATE_HOME_MULTIPLE,
 } from '../constants/actions';
 
 import translateText from '../lib/translateText';
+
+const phrasebookDb = new PouchDB('favorites');
 
 export const toggleExpanded = () => ({ type: TOGGLE_EXPANDED });
 
@@ -20,6 +24,7 @@ export const clearHome = () => ({
     outputDict: null,
     suggestedInputLang: null,
     suggestedInputText: null,
+    phrasebookId: null,
   },
 });
 
@@ -45,6 +50,7 @@ export const translate = () => ((dispatch, getState) => {
       outputDict: null,
       suggestedInputLang: null,
       suggestedInputText: null,
+      phrasebookId: null,
     },
   });
 
@@ -96,3 +102,34 @@ export const translateWithInfo = (inputLang, outputLang, inputText) =>
 
     dispatch(translate());
   });
+
+export const togglePhrasebook = () => ((dispatch, getState) => {
+  const { settings, home } = getState();
+  const { inputLang, outputLang } = settings;
+  const { inputText, outputText, inputDict, outputDict, phrasebookId } = home;
+
+  if (phrasebookId) {
+    phrasebookDb.get(phrasebookId)
+      .then(doc => phrasebookDb.remove(doc))
+      .then(() => {
+        dispatch({
+          type: UPDATE_HOME_MULTIPLE,
+          newValue: { phrasebookId: null },
+        });
+      });
+  } else {
+    const newPhrasebookId = new Date().toJSON();
+    phrasebookDb.put({
+      _id: newPhrasebookId,
+      inputLang, outputLang,
+      inputText, outputText,
+      inputDict, outputDict,
+    })
+    .then(() => {
+      dispatch({
+        type: UPDATE_HOME_MULTIPLE,
+        newValue: { phrasebookId: newPhrasebookId },
+      });
+    });
+  }
+});

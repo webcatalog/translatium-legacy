@@ -10,6 +10,7 @@ import Home from './views/Home';
 import Settings from './views/Settings';
 import About from './views/About';
 import ChooseLanguage from './views/ChooseLanguage';
+import Phrasebook from './views/Phrasebook';
 
 const history = syncHistoryWithStore(hashHistory, store);
 
@@ -20,6 +21,7 @@ const renderRoutes = () => (
       <Route path="settings" component={Settings} />
       <Route path="about" component={About} />
       <Route path="choose-language" component={ChooseLanguage} />
+      <Route path="phrasebook" component={Phrasebook} />
     </Route>
   </Router>
 );

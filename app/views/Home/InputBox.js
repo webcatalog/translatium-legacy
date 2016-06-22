@@ -21,6 +21,7 @@ const InputBox = ({
         className="win-textarea app-textarea"
         lang={inputLang}
         onInput={onInputText}
+        onChange={onInputText}
         value={inputText}
       />
       <button
