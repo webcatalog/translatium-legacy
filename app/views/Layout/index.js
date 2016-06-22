@@ -121,32 +121,34 @@ class Layout extends React.Component {
         <div className="app-content">
           {children}
         </div>
-        <div className="app-tabbar">
-          <div
-            className="app-tabbar-item"
-            onClick={() => onTabbarItemClick('/')}
-          >
-            
+        {canGoBack(location) === false ? (
+          <div className="app-tabbar">
+            <div
+              className="app-tabbar-item"
+              onClick={() => onTabbarItemClick('/')}
+            >
+              
+            </div>
+            <div
+              className="app-tabbar-item"
+              onClick={() => onTabbarItemClick('/phrasebook')}
+            >
+              
+            </div>
+            <div
+              className="app-tabbar-item"
+              onClick={() => onTabbarItemClick('/settings')}
+            >
+              
+            </div>
+            <div
+              className="app-tabbar-item"
+              onClick={() => onTabbarItemClick('/about')}
+            >
+              
+            </div>
           </div>
-          <div
-            className="app-tabbar-item"
-            onClick={() => onTabbarItemClick('/phrasebook')}
-          >
-            
-          </div>
-          <div
-            className="app-tabbar-item"
-            onClick={() => onTabbarItemClick('/settings')}
-          >
-            
-          </div>
-          <div
-            className="app-tabbar-item"
-            onClick={() => onTabbarItemClick('/about')}
-          >
-            
-          </div>
-        </div>
+        ) : null}
       </div>
     );
   }
