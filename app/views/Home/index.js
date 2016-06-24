@@ -5,8 +5,9 @@ import InputToolbar from './InputToolbar';
 import InputBox from './InputBox';
 import Suggestion from './Suggestion';
 import OutputCard from './OutputCard';
+import Handwriting from './Handwriting';
 
-const Home = ({ inputExpanded }) => (
+const Home = ({ inputExpanded, imeMode }) => (
   <div className={`app-home-page ${(inputExpanded) ? 'app-expanded' : ''}`}>
     <InputToolbar />
     <InputBox />
@@ -14,19 +15,20 @@ const Home = ({ inputExpanded }) => (
       <Suggestion />
       <OutputCard />
     </div>
+    {imeMode === 'handwriting' ? <Handwriting /> : null}
   </div>
 );
 
 Home.propTypes = {
-  inputExpanded: React.PropTypes.bool,
+  inputExpanded: React.PropTypes.bool.isRequired,
+  imeMode: React.PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   inputExpanded: state.home.inputExpanded,
+  imeMode: state.home.imeMode,
 });
 
-const mapDispatchToProps = () => ({});
-
 export default connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps
 )(Home);

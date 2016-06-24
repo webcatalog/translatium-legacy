@@ -6,14 +6,14 @@ import { connect } from 'react-redux';
 
 import i18n from '../../i18n';
 
-import { updateInputText, toggleExpanded } from '../../actions/home';
+import { updateInputText, toggleExpanded, switchIme } from '../../actions/home';
 import { playInputText } from '../../actions/textToSpeech';
 
 const InputToolbar = ({
   inputLang, outputLang,
   inputExpanded, ttsPlaying,
   onClearButtonClick, onListenButtonClick,
-  onExpandButtonClick,
+  onExpandButtonClick, onWriteButtonClick,
 }) => {
   const tileExisted = Windows.UI.StartScreen.SecondaryTile.exists(
     `${inputLang}_${outputLang}`
@@ -43,6 +43,7 @@ const InputToolbar = ({
           key="write"
           icon=""
           label={i18n('write')}
+          onClick={onWriteButtonClick}
         />
         <ReactWinJS.ToolBar.Button
           key="capture"
@@ -81,6 +82,7 @@ InputToolbar.propTypes = {
   onClearButtonClick: React.PropTypes.func.isRequired,
   onListenButtonClick: React.PropTypes.func.isRequired,
   onExpandButtonClick: React.PropTypes.func.isRequired,
+  onWriteButtonClick: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -99,6 +101,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onExpandButtonClick: () => {
     dispatch(toggleExpanded());
+  },
+  onWriteButtonClick: () => {
+    dispatch(switchIme('handwriting'));
   },
 });
 

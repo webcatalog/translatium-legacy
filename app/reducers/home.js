@@ -16,6 +16,7 @@ const initialState = {
   outputDict: null,
   suggestedInputLang: null,
   suggestedInputText: null,
+  imeMode: null,
 };
 
 const home = (state = initialState, action) => {

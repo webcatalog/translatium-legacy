@@ -133,3 +133,8 @@ export const togglePhrasebook = () => ((dispatch, getState) => {
     });
   }
 });
+
+export const switchIme = (imeMode) => ({
+  type: UPDATE_HOME_MULTIPLE,
+  newValue: { imeMode },
+});
