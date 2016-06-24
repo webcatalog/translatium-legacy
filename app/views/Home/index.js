@@ -6,6 +6,7 @@ import InputBox from './InputBox';
 import Suggestion from './Suggestion';
 import OutputCard from './OutputCard';
 import Handwriting from './Handwriting';
+import SpeechRecognition from './SpeechRecognition';
 
 const Home = ({ inputExpanded, imeMode }) => (
   <div className={`app-home-page ${(inputExpanded) ? 'app-expanded' : ''}`}>
@@ -16,6 +17,7 @@ const Home = ({ inputExpanded, imeMode }) => (
       <OutputCard />
     </div>
     {imeMode === 'handwriting' ? <Handwriting /> : null}
+    {imeMode === 'speech' ? <SpeechRecognition /> : null}
   </div>
 );
 

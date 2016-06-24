@@ -14,6 +14,7 @@ const InputToolbar = ({
   inputExpanded, ttsPlaying,
   onClearButtonClick, onListenButtonClick,
   onExpandButtonClick, onWriteButtonClick,
+  onSpeakButtonClick,
 }) => {
   const tileExisted = Windows.UI.StartScreen.SecondaryTile.exists(
     `${inputLang}_${outputLang}`
@@ -38,6 +39,7 @@ const InputToolbar = ({
           key="speak"
           icon="microphone"
           label={i18n('speak')}
+          onClick={onSpeakButtonClick}
         />
         <ReactWinJS.ToolBar.Button
           key="write"
@@ -83,6 +85,7 @@ InputToolbar.propTypes = {
   onListenButtonClick: React.PropTypes.func.isRequired,
   onExpandButtonClick: React.PropTypes.func.isRequired,
   onWriteButtonClick: React.PropTypes.func.isRequired,
+  onSpeakButtonClick: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -104,6 +107,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onWriteButtonClick: () => {
     dispatch(switchIme('handwriting'));
+  },
+  onSpeakButtonClick: () => {
+    dispatch(switchIme('speech'));
   },
 });
 
