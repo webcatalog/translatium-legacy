@@ -1,8 +1,12 @@
+/* global Windows */
+
 import { UPDATE_HANDWRITING_SUGGESTION_LIST } from '../constants/actions';
 
 import recognizeHandwriting from '../lib/recognizeHandwriting';
 
 import { updateInputText } from './home';
+
+import i18n from '../i18n';
 
 export const resetSuggestionList = () => ({
   type: UPDATE_HANDWRITING_SUGGESTION_LIST,
@@ -36,5 +40,11 @@ export const loadSuggestionList = (
           suggestionList: outputArr,
         });
       }
+    })
+    .catch(() => {
+      const title = i18n('connect-problem');
+      const content = i18n('check-connect');
+      const msg = new Windows.UI.Popups.MessageDialog(content, title);
+      msg.showAsync().done();
     });
 });
