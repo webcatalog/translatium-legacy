@@ -155,7 +155,7 @@ const translateTextWithGoogle = (inputLang, outputLang, inputText, options) =>
         }));
 
       return Promise.all(promises).then(() => {
-        if ((!leftRes) || (!rightRes)) return Promise.reject('Failed');
+        if ((!leftRes) || (!rightRes)) return Promise.reject(new Error('Failed'));
         return {
           outputText: `${leftRes.outputText} ${rightRes.outputText}`,
           inputRoman: (leftRes.inputRoman && rightRes.inputRoman) ?
@@ -189,7 +189,7 @@ const translateTextWithMicrosoft = (inputLang, outputLang, inputText) =>
     .then(body => JSON.parse(body.trim()))
     .then(result => {
       if (typeof result !== 'object') {
-        return Promise.reject('AppId is not correct');
+        return Promise.reject(new Error('AppId is not correct'));
       }
 
       let detectedInputLang = result[0].From;

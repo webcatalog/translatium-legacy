@@ -3,18 +3,20 @@
 import React from 'react';
 import ReactWinJS from 'react-winjs';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import i18n from '../../i18n';
 
 import { updateInputText, toggleExpanded, switchIme } from '../../actions/home';
 import { playInputText } from '../../actions/textToSpeech';
+import { initOcr } from '../../actions/ocr';
 
 const InputToolbar = ({
   inputLang, outputLang,
   inputExpanded, ttsPlaying,
   onClearButtonClick, onListenButtonClick,
   onExpandButtonClick, onWriteButtonClick,
-  onSpeakButtonClick,
+  onSpeakButtonClick, onCaptureButtonClick, onOpenFromGalleryButtonClick,
 }) => {
   const tileExisted = Windows.UI.StartScreen.SecondaryTile.exists(
     `${inputLang}_${outputLang}`
@@ -51,11 +53,13 @@ const InputToolbar = ({
           key="capture"
           icon="camera"
           label={i18n('capture')}
+          onClick={onCaptureButtonClick}
         />
         <ReactWinJS.ToolBar.Button
           key="openFromGallery"
           icon=""
           label={i18n('open-from-gallery')}
+          onClick={onOpenFromGalleryButtonClick}
         />
         <ReactWinJS.ToolBar.Button
           key="expand"
@@ -86,6 +90,8 @@ InputToolbar.propTypes = {
   onExpandButtonClick: React.PropTypes.func.isRequired,
   onWriteButtonClick: React.PropTypes.func.isRequired,
   onSpeakButtonClick: React.PropTypes.func.isRequired,
+  onCaptureButtonClick: React.PropTypes.func.isRequired,
+  onOpenFromGalleryButtonClick: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -110,6 +116,29 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onSpeakButtonClick: () => {
     dispatch(switchIme('speech'));
+  },
+  onCaptureButtonClick: () => {
+    const dialog = new Windows.Media.Capture.CameraCaptureUI();
+    dialog.captureFileAsync(Windows.Media.Capture.CameraCaptureUIMode.photo)
+      .then(file => {
+        if (!file) return;
+        dispatch(initOcr(file));
+        dispatch(push('/ocr'));
+      });
+  },
+  onOpenFromGalleryButtonClick: () => {
+    const picker = new Windows.Storage.Pickers.FileOpenPicker();
+    picker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.picturesLibrary;
+    picker.fileTypeFilter.append('.jpg');
+    picker.fileTypeFilter.append('.jpeg');
+    picker.fileTypeFilter.append('.png');
+    picker.pickSingleFileAsync()
+      .then(file => {
+        if (!file) return;
+        dispatch(initOcr(file));
+        dispatch(push('/ocr'));
+      })
+      .then(null, () => {});
   },
 });
 

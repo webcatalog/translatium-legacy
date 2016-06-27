@@ -9,11 +9,12 @@ import textToSpeech from './textToSpeech';
 import phrasebook from './phrasebook';
 import handwriting from './handwriting';
 import speechRecognition from './speechRecognition';
+import ocr from './ocr';
 
 const rootReducer = combineReducers({
   screen, settings, home,
   textToSpeech, phrasebook, handwriting,
-  speechRecognition,
+  speechRecognition, ocr,
   routing: routerReducer,
 });
 

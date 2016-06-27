@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactWinJS from 'react-winjs';
 import { connect } from 'react-redux';
+import { replace } from 'react-router-redux';
 
 import Animation from './Animation';
 
 import i18n from '../i18n';
 
 import { initPhrasebook, deletePhrasebookItem, loadPhrasebook } from '../actions/phrasebook';
+import { loadInfo } from '../actions/home';
 
 class Phrasebook extends React.Component {
   componentDidMount() {
@@ -18,6 +20,7 @@ class Phrasebook extends React.Component {
   render() {
     const {
       phrasebookItems, phrasebookLoading, canLoadMore,
+      onItemClick,
       onDeleteButtonClick, onLoadMoreButtonClick,
     } = this.props;
 
@@ -40,8 +43,17 @@ class Phrasebook extends React.Component {
                   id, rev,
                   inputLang, outputLang,
                   inputText, outputText,
+                  inputDict, outputDict,
                 }, i) => (
-                  <div className="app-item" key={i}>
+                  <div
+                    className="app-item"
+                    key={i}
+                    onClick={() => onItemClick({
+                      inputLang, outputLang,
+                      inputText, outputText,
+                      inputDict, outputDict,
+                    })}
+                  >
                     <div className="app-control-container">
                       <div className="win-h5 app-language-title">
                         {i18n(`/languages/${inputLang}`)}
@@ -106,8 +118,17 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onItemClick: () => {
-    // dispatch(deletePhrasebookItem());
+  onItemClick: ({
+    inputLang, outputLang,
+    inputText, outputText,
+    inputDict, outputDict,
+  }) => {
+    dispatch(loadInfo({
+      inputLang, outputLang,
+      inputText, outputText,
+      inputDict, outputDict,
+    }));
+    dispatch(replace('/'));
   },
   onDeleteButtonClick: (id, rev) => {
     dispatch(deletePhrasebookItem(id, rev));

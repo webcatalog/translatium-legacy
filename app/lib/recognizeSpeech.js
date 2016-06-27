@@ -11,7 +11,7 @@ const recognizeSpeech = (inputLang, inputAudio) => {
         const outputText = JSON.parse(xmlStr).result[0].alternative[0].transcript;
         return { outputText };
       }
-      return Promise.reject('Voice recognition failed');
+      return Promise.reject(new Error('Voice recognition failed'));
     });
 };
 

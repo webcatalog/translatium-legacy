@@ -7,6 +7,8 @@ import {
 
 import translateText from '../lib/translateText';
 
+import { updateSetting } from './settings';
+
 const phrasebookDb = new PouchDB('favorites');
 
 export const toggleExpanded = () => ({ type: TOGGLE_EXPANDED });
@@ -37,21 +39,11 @@ export const translate = () => ((dispatch, getState) => {
 
   if (inputExpanded === true) dispatch(toggleExpanded());
 
+  dispatch(clearHome());
+
   dispatch({
     type: UPDATE_HOME_MULTIPLE,
-    newValue: {
-      status: 'loading',
-      outputText: null,
-      inputRoman: null,
-      outputRoman: null,
-      outputSegments: null,
-      detectedInputLang: null,
-      inputDict: null,
-      outputDict: null,
-      suggestedInputLang: null,
-      suggestedInputText: null,
-      phrasebookId: null,
-    },
+    newValue: { status: 'loading' },
   });
 
   translateText(inputLang, outputLang, inputText, { chinaMode })
@@ -95,13 +87,35 @@ export const updateInputText = (inputText) => ((dispatch, getState) => {
 
 export const translateWithInfo = (inputLang, outputLang, inputText) =>
   ((dispatch) => {
+    dispatch(updateSetting('inputLang', inputLang));
+    dispatch(updateSetting('outputLang', outputLang));
+
     dispatch({
       type: UPDATE_HOME_MULTIPLE,
-      newValue: { inputLang, outputLang, inputText },
+      newValue: { inputText },
     });
 
     dispatch(translate());
   });
+
+export const loadInfo = ({
+  inputLang, outputLang,
+  inputText, outputText,
+  inputDict, outputDict,
+}) => ((dispatch) => {
+  if (inputLang) dispatch(updateSetting('inputLang', inputLang));
+  if (outputLang) dispatch(updateSetting('outputLang', outputLang));
+
+  dispatch(clearHome());
+
+  dispatch({
+    type: UPDATE_HOME_MULTIPLE,
+    newValue: {
+      status: 'successful',
+      inputText, outputText, inputDict, outputDict,
+    },
+  });
+});
 
 export const togglePhrasebook = () => ((dispatch, getState) => {
   const { settings, home } = getState();

@@ -31,7 +31,7 @@ const ttsShortText = (lang, text, idx, total) =>
           }
         );
       }
-      return Promise.reject('Fail to get blob');
+      return Promise.reject(new Error('Fail to get blob'));
     });
 
 export const playTTS = (ttsLang, ttsText) => ((dispatch) => {

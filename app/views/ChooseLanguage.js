@@ -6,9 +6,13 @@ import { materialDesignColors } from '../constants/colors';
 
 import i18n from '../i18n';
 
-import { getInputLanguages, getOutputLanguages } from '../lib/languageUtils';
+import {
+  getInputLanguages,
+  getOutputLanguages,
+  getOcrSupportedLanguages,
+} from '../lib/languageUtils';
 
-import { updateSetting } from '../actions/settings';
+import { updateLanguage } from '../actions/settings';
 
 import Animation from './Animation';
 
@@ -20,6 +24,7 @@ const ChooseLanguage = ({
 
   let languages;
   if (type === 'inputLang') languages = getInputLanguages();
+  else if (type === 'ocrInputLang') languages = getOcrSupportedLanguages();
   else languages = getOutputLanguages();
 
   return (
@@ -56,9 +61,17 @@ ChooseLanguage.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onLanguageClick: (name, value) => {
-    dispatch(updateSetting(name, value));
+  onLanguageClick: (type, value) => {
+    let name = type;
+    if (type === 'ocrInputLang') name = 'inputLang';
+    if (type === 'ocrOutputLang') name = 'outputLang';
+
+    dispatch(updateLanguage(name, value));
     dispatch(goBack());
+
+    if (type === 'ocrInputLang' || type === 'ocrOutputLang') {
+      dispatch(goBack());
+    }
   },
 });
 

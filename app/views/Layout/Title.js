@@ -11,12 +11,15 @@ const Title = ({
   location, inputLang, outputLang,
   onLanguageClick, onSwapButtonClick,
 }) => {
-  if (location.pathname === '/') {
+  if (location.pathname === '/' || location.pathname === '/ocr') {
+    const inputLangType = location.pathname === '/ocr' ? 'ocrInputLang' : 'inputLang';
+    const outputLangType = location.pathname === '/ocr' ? 'ocrOutputLang' : 'outputLang';
+
     return (
       <div>
         <h4
           className="win-h4 app-language-title"
-          onClick={() => onLanguageClick('inputLang')}
+          onClick={() => onLanguageClick(inputLangType)}
         >
           {i18n(`/languages/${inputLang}`)}
         </h4>
@@ -28,7 +31,7 @@ const Title = ({
         />
         <h4
           className="win-h4 app-language-title"
-          onClick={() => onLanguageClick('outputLang')}
+          onClick={() => onLanguageClick(outputLangType)}
         >
           {i18n(`/languages/${outputLang}`)}
         </h4>

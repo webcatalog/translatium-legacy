@@ -11,6 +11,15 @@ export const updateSetting = (name, value) => ({
   name, value,
 });
 
+export const updateLanguage = (name, value) => ((dispatch, getState) => {
+  const { realtime } = getState().settings;
+
+  dispatch(updateSetting(name, value));
+
+  if (realtime === true) dispatch(translate());
+  else dispatch(clearHome());
+});
+
 export const swapLanguages = () => ((dispatch, getState) => {
   const { inputLang, outputLang, realtime } = getState().settings;
 
