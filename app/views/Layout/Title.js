@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 import i18n from '../../i18n';
 
 import { swapLanguages } from '../../actions/settings';
-import { isOutput } from '../../lib/languageUtils';
+import { isOutput, isOcrSupported } from '../../lib/languageUtils';
 
 const Title = ({
   location, inputLang, outputLang,
@@ -14,6 +14,13 @@ const Title = ({
   if (location.pathname === '/' || location.pathname === '/ocr') {
     const inputLangType = location.pathname === '/ocr' ? 'ocrInputLang' : 'inputLang';
     const outputLangType = location.pathname === '/ocr' ? 'ocrOutputLang' : 'outputLang';
+
+    const isOcr = location.pathname === '/ocr';
+
+    let isSwapDisabled = isOutput(inputLang) === false;
+    if (location.pathname === '/ocr' && isOcrSupported(outputLang) !== true) {
+      isSwapDisabled = true;
+    }
 
     return (
       <div>
@@ -26,8 +33,8 @@ const Title = ({
         <button
           className="win-backbutton app-button app-icon"
           data-icon=""
-          disabled={(isOutput(inputLang) === false)}
-          onClick={onSwapButtonClick}
+          disabled={isSwapDisabled}
+          onClick={() => onSwapButtonClick(isOcr)}
         />
         <h4
           className="win-h4 app-language-title"
@@ -66,8 +73,8 @@ const mapDispatchToProps = (dispatch) => ({
       query: { type },
     }));
   },
-  onSwapButtonClick: () => {
-    dispatch(swapLanguages());
+  onSwapButtonClick: (isOcr) => {
+    dispatch(swapLanguages(isOcr));
   },
 });
 

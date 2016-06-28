@@ -9,7 +9,7 @@ import Animation from './Animation';
 
 import i18n from '../i18n';
 
-import { initOcr, toggleShowOriginal, resetOcr } from '../actions/ocr';
+import { initOcr, toggleShowOriginal } from '../actions/ocr';
 import { loadInfo } from '../actions/home';
 
 class Ocr extends React.Component {
@@ -28,12 +28,6 @@ class Ocr extends React.Component {
       const h = (window.innerHeight / imgHeight * 0.9).toFixed(2);
       this.refs.zoomContainer.msContentZoomFactor = Math.min(w, h);
     }
-  }
-
-  componentWillUnmount() {
-    const { onLeaveOcr } = this.props;
-
-    onLeaveOcr();
   }
 
   onZoomInButtonClick() {
@@ -230,7 +224,6 @@ Ocr.propTypes = {
   onTryAgainButtonClick: React.PropTypes.func.isRequired,
   onToggleModeButtonClick: React.PropTypes.func.isRequired,
   onTextOnlyButtonClick: React.PropTypes.func.isRequired,
-  onLeaveOcr: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -279,9 +272,6 @@ const mapDispatchToProps = (dispatch) => ({
       outputText: translatedText,
     }));
     dispatch(goBack());
-  },
-  onLeaveOcr: () => {
-    dispatch(resetOcr());
   },
 });
 

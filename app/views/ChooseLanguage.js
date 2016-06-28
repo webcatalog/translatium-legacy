@@ -66,7 +66,9 @@ const mapDispatchToProps = (dispatch) => ({
     if (type === 'ocrInputLang') name = 'inputLang';
     if (type === 'ocrOutputLang') name = 'outputLang';
 
-    dispatch(updateLanguage(name, value));
+    const isOcr = type === 'ocrInputLang' || type === 'ocrOutputLang';
+
+    dispatch(updateLanguage(name, value, isOcr));
     dispatch(goBack());
   },
 });

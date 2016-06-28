@@ -5,26 +5,32 @@ import {
 import { isOutput } from '../lib/languageUtils';
 
 import { translate, clearHome } from './home';
+import { initOcr } from './ocr';
 
 export const updateSetting = (name, value) => ({
   type: UPDATE_SETTING,
   name, value,
 });
 
-const runAfterLanguageChange = () => ((dispatch, getState) => {
-  const { settings } = getState();
+const runAfterLanguageChange = (isOcr) => ((dispatch, getState) => {
+  const { settings, ocr } = getState();
   const { realtime } = settings;
+  const { inputFile } = ocr;
 
-  if (realtime === true) dispatch(translate());
-  else dispatch(clearHome());
+  if (isOcr === true) {
+    dispatch(initOcr(inputFile));
+  } else {
+    if (realtime === true) dispatch(translate());
+    else dispatch(clearHome());
+  }
 });
 
-export const updateLanguage = (name, value) => ((dispatch) => {
+export const updateLanguage = (name, value, isOcr) => ((dispatch) => {
   dispatch(updateSetting(name, value));
-  dispatch(runAfterLanguageChange());
+  dispatch(runAfterLanguageChange(isOcr));
 });
 
-export const swapLanguages = () => ((dispatch, getState) => {
+export const swapLanguages = (isOcr) => ((dispatch, getState) => {
   const { inputLang, outputLang } = getState().settings;
 
   if (isOutput(inputLang) === false) return;
@@ -32,5 +38,5 @@ export const swapLanguages = () => ((dispatch, getState) => {
   dispatch(updateSetting('inputLang', outputLang));
   dispatch(updateSetting('outputLang', inputLang));
 
-  dispatch(runAfterLanguageChange());
+  dispatch(runAfterLanguageChange(isOcr));
 });
