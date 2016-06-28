@@ -100,6 +100,9 @@ export const ocrSpaceStandardlizedLanguage = lang =>
 // Check if language supports OCR
 export const isOcrSupported = lang => (ocrStandardlizedLanguage(lang) in data.ocrSpaceCodes);
 
+// Check if language is supported as input
+export const isInput = lang => !(data.all.indexOf(lang) > -1);
+
 // Check if language is supported as output
 export const isOutput = lang => !(data.outputNotSupported.indexOf(lang) > -1);
 

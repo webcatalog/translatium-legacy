@@ -26,9 +26,15 @@
         <uap:SplashScreen Image="images\Splash620x300.png" BackgroundColor="#43A047" />
       </uap:VisualElements>
       <Extensions>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="modern-translator">
+            <uap:DisplayName>ms-resource:app-name</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
         <uap:Extension Category="windows.shareTarget">
-          <uap:ShareTarget Description="Translate text">
+          <uap:ShareTarget>
             <uap:DataFormat>Text</uap:DataFormat>
+            <uap:DataFormat>URI</uap:DataFormat>
           </uap:ShareTarget>
         </uap:Extension>
       </Extensions>
