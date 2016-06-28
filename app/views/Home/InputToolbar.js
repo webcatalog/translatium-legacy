@@ -11,6 +11,13 @@ import { updateInputText, toggleExpanded, switchIme } from '../../actions/home';
 import { playInputText } from '../../actions/textToSpeech';
 import { initOcr } from '../../actions/ocr';
 
+import {
+  isTtsSupported,
+  isVoiceRecognitionSupported,
+  isHandwritingSupported,
+  isOcrSupported,
+} from '../../lib/languageUtils';
+
 class InputToolbar extends React.Component {
   constructor(props) {
     super(props);
@@ -90,30 +97,35 @@ class InputToolbar extends React.Component {
             key="listen"
             icon={ttsPlaying ? '' : ''}
             label={i18n('listen')}
+            hidden={!isTtsSupported(inputLang)}
             onClick={onListenButtonClick}
           />
           <ReactWinJS.ToolBar.Button
             key="speak"
             icon="microphone"
             label={i18n('speak')}
+            hidden={!isVoiceRecognitionSupported(inputLang)}
             onClick={onSpeakButtonClick}
           />
           <ReactWinJS.ToolBar.Button
             key="write"
             icon=""
             label={i18n('write')}
+            hidden={!isHandwritingSupported(inputLang)}
             onClick={onWriteButtonClick}
           />
           <ReactWinJS.ToolBar.Button
             key="capture"
             icon="camera"
             label={i18n('capture')}
+            hidden={!isOcrSupported(inputLang)}
             onClick={onCaptureButtonClick}
           />
           <ReactWinJS.ToolBar.Button
             key="openFromGallery"
             icon=""
             label={i18n('open-from-gallery')}
+            hidden={!isOcrSupported(inputLang)}
             onClick={onOpenFromGalleryButtonClick}
           />
           <ReactWinJS.ToolBar.Button

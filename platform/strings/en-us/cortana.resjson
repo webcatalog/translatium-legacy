@@ -1,7 +1,0 @@
-{
-"good-bye"		:		"Good bye",
-	"hello"		:		"Hello",
-	"how-to-say"		:		"How to say {inputText} [in] {outputLang}",
-	"translating"		:		"Translating {inputText} to {outputLang}",
-	"translate-to"		:		"Translate {inputText} [to] {outputLang}"
-}

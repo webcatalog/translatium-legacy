@@ -5,24 +5,26 @@ import translateImage from '../lib/translateImage';
 
 const apiKey = '0088228ab088957';
 
+export const resetOcr = () => ({
+  type: UPDATE_OCR_MULTIPLE,
+  newValue: {
+    ocrStatus: 'loading',
+    originalText: null,
+    originalSegments: null,
+    translatedText: null,
+    translatedSegments: null,
+    imgHeight: null,
+    imgWidth: null,
+    ratio: null,
+    inputFile: null,
+    showOriginal: false,
+  },
+});
+
 export const initOcr = (inputFile) => ((dispatch, getState) => {
   const { inputLang, outputLang } = getState().settings;
 
-  dispatch({
-    type: UPDATE_OCR_MULTIPLE,
-    newValue: {
-      ocrStatus: 'loading',
-      originalText: null,
-      originalSegments: null,
-      translatedText: null,
-      translatedSegments: null,
-      imgHeight: null,
-      imgWidth: null,
-      ratio: null,
-      inputFile: null,
-      showOriginal: false,
-    },
-  });
+  dispatch(resetOcr());
 
   let imgWidth;
   let imgHeight;

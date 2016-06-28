@@ -13,7 +13,7 @@ const About = () => (
       </div>
       <div className="app-info">
         <h4 className="win-h4" style={{ marginTop: 18 }}>
-          {i18n('app-name')}
+          Modern Translator
         </h4>
         <h5 className="win-h5">5.0.0</h5>
         <button
@@ -75,7 +75,7 @@ const About = () => (
         </h5>
         <button
           className="win-button"
-          style={{ color: '#fff', marginTop: 6 }}
+          style={{ marginTop: 6 }}
           onClick={() => openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}
         >
           {i18n('give-us-5-star')}

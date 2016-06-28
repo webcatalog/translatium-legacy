@@ -176,6 +176,7 @@ const translateTextWithGoogle = (inputLang, outputLang, inputText, options) =>
 const translateTextWithMicrosoft = (inputLang, outputLang, inputText) =>
   getMicrosoftTranslatorAppId()
     .then(appId => {
+      console.log(appId);
       const texts = inputText.split('\n'); // For multi-paragraph
       const uri = encodeURI(`https://api.microsofttranslator.com/v2/ajax.svc/TranslateArray2?appId=${appId}`
                 + `&texts=${JSON.stringify(texts)}`

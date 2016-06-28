@@ -127,7 +127,6 @@
     <Content Include="www\winjs\README.md" />
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="strings\en-us\cortana.resjson" />
     <PRIResource Include="strings\en-us\languages.resjson" />
     <PRIResource Include="strings\en-us\resources.resjson" />
     <PRIResource Include="www\winjs-localization\af-za\Microsoft.WinJS.resjson" />

@@ -1,19 +1,29 @@
+/* global Windows */
+
 import React from 'react';
 import ReactWinJS from 'react-winjs';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import i18n from '../../i18n';
 
 import { playOutputText } from '../../actions/textToSpeech';
-import { togglePhrasebook, translate } from '../../actions/home';
+import { togglePhrasebook, translate, translateWithInfo } from '../../actions/home';
+import shareText from '../../lib/shareText';
+import copyToClipboard from '../../lib/copyToClipboard';
 
 import Dictionary from './Dictionary';
 
+import {
+  isTtsSupported,
+} from '../../lib/languageUtils';
+
 const OutputCard = ({
-  outputLang,
+  inputLang, outputLang, inputText,
   status, outputText, outputRoman, phrasebookId,
   ttsPlaying, onListenButtonClick, onPhrasebookButtonClick,
-  onTryAgainButtonClick,
+  onTryAgainButtonClick, onShareButtonClick, onCopyToClipboardClick,
+  onSwapButtonClick, onBigTextClick,
 }) => {
   if (status === 'failed') {
     return (
@@ -51,27 +61,32 @@ const OutputCard = ({
               key="listen"
               icon={ttsPlaying ? '' : ''}
               label={i18n('listen')}
+              hidden={!isTtsSupported(outputLang)}
               onClick={onListenButtonClick}
             />
             <ReactWinJS.ToolBar.Button
               key="big-text"
               icon=""
               label={i18n('big-text')}
+              onClick={onBigTextClick}
             />
             <ReactWinJS.ToolBar.Button
               key="swap"
               icon=""
               label={i18n('swap')}
+              onClick={() => onSwapButtonClick(inputLang, outputLang, outputText)}
             />
             <ReactWinJS.ToolBar.Button
               key="copyToClipboard"
               icon=""
               label={i18n('copy-to-clipboard')}
+              onClick={e => onCopyToClipboardClick(e, inputText, outputText)}
             />
             <ReactWinJS.ToolBar.Button
               key="share"
               icon=""
               label={i18n('share')}
+              onClick={e => onShareButtonClick(e, inputText, outputText)}
             />
             <ReactWinJS.ToolBar.Button
               key="addToFavorites"
@@ -103,8 +118,10 @@ const OutputCard = ({
 };
 
 OutputCard.propTypes = {
+  inputLang: React.PropTypes.string.isRequired,
   outputLang: React.PropTypes.string.isRequired,
   status: React.PropTypes.string.isRequired,
+  inputText: React.PropTypes.string,
   outputText: React.PropTypes.string,
   outputRoman: React.PropTypes.string,
   phrasebookId: React.PropTypes.string,
@@ -112,6 +129,10 @@ OutputCard.propTypes = {
   onListenButtonClick: React.PropTypes.func.isRequired,
   onPhrasebookButtonClick: React.PropTypes.func.isRequired,
   onTryAgainButtonClick: React.PropTypes.func.isRequired,
+  onShareButtonClick: React.PropTypes.func.isRequired,
+  onCopyToClipboardClick: React.PropTypes.func.isRequired,
+  onSwapButtonClick: React.PropTypes.func.isRequired,
+  onBigTextClick: React.PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -124,11 +145,71 @@ const mapDispatchToProps = (dispatch) => ({
   onTryAgainButtonClick: () => {
     dispatch(translate());
   },
+  onShareButtonClick: (e, inputText, outputText) => {
+    const menu = new Windows.UI.Popups.PopupMenu();
+    menu.commands.append(
+      new Windows.UI.Popups.UICommand(
+        i18n('original-text'),
+        () => shareText(inputText)
+      )
+    );
+    menu.commands.append(
+      new Windows.UI.Popups.UICommand(
+        i18n('translated-text'),
+        () => shareText(outputText)
+      )
+    );
+    menu.commands.append(
+      new Windows.UI.Popups.UICommand(
+        i18n('both'),
+        () => shareText(`${inputText}\r\n${outputText}`)
+      )
+    );
+    const zoomFactor = document.documentElement.msContentZoomFactor;
+    menu.showAsync({
+      x: (e.pageX - window.pageXOffset) * zoomFactor,
+      y: (e.pageY - window.pageYOffset) * zoomFactor,
+    }).done();
+  },
+  onCopyToClipboardClick: (e, inputText, outputText) => {
+    const menu = new Windows.UI.Popups.PopupMenu();
+    menu.commands.append(
+      new Windows.UI.Popups.UICommand(
+        i18n('original-text'),
+        () => copyToClipboard(inputText)
+      )
+    );
+    menu.commands.append(
+      new Windows.UI.Popups.UICommand(
+        i18n('translated-text'),
+        () => copyToClipboard(outputText)
+      )
+    );
+    menu.commands.append(
+      new Windows.UI.Popups.UICommand(
+        i18n('both'),
+        () => copyToClipboard(`${inputText}\r\n${outputText}`)
+      )
+    );
+    const zoomFactor = document.documentElement.msContentZoomFactor;
+    menu.showAsync({
+      x: (e.pageX - window.pageXOffset) * zoomFactor,
+      y: (e.pageY - window.pageYOffset) * zoomFactor,
+    }).done();
+  },
+  onSwapButtonClick: (inputLang, outputLang, outputText) => {
+    dispatch(translateWithInfo(outputLang, inputLang, outputText));
+  },
+  onBigTextClick: () => {
+    dispatch(push('/big-text'));
+  },
 });
 
 const mapStateToProps = (state) => ({
+  inputLang: state.settings.inputLang,
   outputLang: state.settings.outputLang,
   status: state.home.status,
+  inputText: state.home.inputText,
   outputText: state.home.outputText,
   outputRoman: state.home.outputRoman,
   phrasebookId: state.home.phrasebookId,

@@ -12,6 +12,7 @@ import About from './views/About';
 import ChooseLanguage from './views/ChooseLanguage';
 import Phrasebook from './views/Phrasebook';
 import Ocr from './views/Ocr';
+import BigText from './views/BigText';
 
 const history = syncHistoryWithStore(hashHistory, store);
 
@@ -24,6 +25,7 @@ const renderRoutes = () => (
       <Route path="choose-language" component={ChooseLanguage} />
       <Route path="phrasebook" component={Phrasebook} />
       <Route path="ocr" component={Ocr} />
+      <Route path="big-text" component={BigText} />
     </Route>
   </Router>
 );

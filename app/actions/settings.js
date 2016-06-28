@@ -11,23 +11,26 @@ export const updateSetting = (name, value) => ({
   name, value,
 });
 
-export const updateLanguage = (name, value) => ((dispatch, getState) => {
-  const { realtime } = getState().settings;
-
-  dispatch(updateSetting(name, value));
+const runAfterLanguageChange = () => ((dispatch, getState) => {
+  const { settings } = getState();
+  const { realtime } = settings;
 
   if (realtime === true) dispatch(translate());
   else dispatch(clearHome());
 });
 
+export const updateLanguage = (name, value) => ((dispatch) => {
+  dispatch(updateSetting(name, value));
+  dispatch(runAfterLanguageChange());
+});
+
 export const swapLanguages = () => ((dispatch, getState) => {
-  const { inputLang, outputLang, realtime } = getState().settings;
+  const { inputLang, outputLang } = getState().settings;
 
   if (isOutput(inputLang) === false) return;
 
   dispatch(updateSetting('inputLang', outputLang));
   dispatch(updateSetting('outputLang', inputLang));
 
-  if (realtime === true) dispatch(translate());
-  else dispatch(clearHome());
+  dispatch(runAfterLanguageChange());
 });

@@ -68,10 +68,6 @@ const mapDispatchToProps = (dispatch) => ({
 
     dispatch(updateLanguage(name, value));
     dispatch(goBack());
-
-    if (type === 'ocrInputLang' || type === 'ocrOutputLang') {
-      dispatch(goBack());
-    }
   },
 });
 
