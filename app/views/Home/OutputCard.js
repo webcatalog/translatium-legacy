@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import i18n from '../../i18n';
 
 import { playOutputText } from '../../actions/textToSpeech';
-import { togglePhrasebook } from '../../actions/home';
+import { togglePhrasebook, translate } from '../../actions/home';
 
 import Dictionary from './Dictionary';
 
@@ -13,6 +13,7 @@ const OutputCard = ({
   outputLang,
   status, outputText, outputRoman, phrasebookId,
   ttsPlaying, onListenButtonClick, onPhrasebookButtonClick,
+  onTryAgainButtonClick,
 }) => {
   if (status === 'failed') {
     return (
@@ -28,7 +29,7 @@ const OutputCard = ({
         <button
           className="win-button"
           style={{ marginTop: 12 }}
-          onClick={null}
+          onClick={onTryAgainButtonClick}
         >
           {i18n('try-again')}
         </button>
@@ -110,6 +111,7 @@ OutputCard.propTypes = {
   ttsPlaying: React.PropTypes.bool.isRequired,
   onListenButtonClick: React.PropTypes.func.isRequired,
   onPhrasebookButtonClick: React.PropTypes.func.isRequired,
+  onTryAgainButtonClick: React.PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -118,6 +120,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onPhrasebookButtonClick: () => {
     dispatch(togglePhrasebook());
+  },
+  onTryAgainButtonClick: () => {
+    dispatch(translate());
   },
 });
 

@@ -9,9 +9,13 @@ import { materialDesignColors } from '../../constants/colors';
 
 import { countryRemovedLanguage } from '../../lib/languageUtils';
 
+import { updateSetting } from '../../actions/settings';
+import { updateInputText, translate } from '../../actions/home';
+
 const Suggestion = ({
   inputLang, primaryColorId,
   status, detectedInputLang, suggestedInputText, suggestedInputLang,
+  onLanguageClick, onTextClick,
 }) => {
   if (status === 'successful') {
     if (inputLang === 'auto') {
@@ -23,7 +27,7 @@ const Suggestion = ({
             (<span
               className="app-hl"
               style={{ color: materialDesignColors[primaryColorId].light }}
-              onClick={null}
+              onClick={() => onLanguageClick(detectedInputLang)}
               key="detectedInputLang"
             >
                 {i18n(`/languages/${detectedInputLang}`)}
@@ -41,7 +45,7 @@ const Suggestion = ({
             (<span
               className="app-hl"
               style={{ color: materialDesignColors[primaryColorId].light }}
-              onClick={null}
+              onClick={() => onTextClick(suggestedInputText)}
               key="suggestedInputText"
             >
               {suggestedInputText}
@@ -63,7 +67,7 @@ const Suggestion = ({
             (<span
               className="app-hl"
               style={{ color: materialDesignColors[primaryColorId].light }}
-              onClick={null}
+              onClick={() => onLanguageClick(suggestedInputLang)}
               key="suggestedInputLang"
             >
               {i18n(`/languages/${suggestedInputLang}`)}
@@ -83,9 +87,20 @@ Suggestion.propTypes = {
   detectedInputLang: React.PropTypes.string,
   suggestedInputText: React.PropTypes.string,
   suggestedInputLang: React.PropTypes.string,
+  onLanguageClick: React.PropTypes.func.isRequired,
+  onTextClick: React.PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = (dispatch) => ({
+  onLanguageClick: (inputLang) => {
+    dispatch(updateSetting('inputLang', inputLang));
+    dispatch(translate());
+  },
+  onTextClick: (inputText) => {
+    dispatch(updateInputText(inputText));
+    dispatch(translate());
+  },
+});
 
 const mapStateToProps = (state) => ({
   inputLang: state.settings.inputLang,

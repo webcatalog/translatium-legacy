@@ -86,6 +86,7 @@ export const playTTS = (ttsLang, ttsText) => ((dispatch) => {
       dispatch({ type: STOP_TTS });
     })
     .catch(() => {
+      dispatch({ type: STOP_TTS });
       const title = i18n('connect-problem');
       const content = i18n('check-connect');
       const msg = new Windows.UI.Popups.MessageDialog(content, title);
