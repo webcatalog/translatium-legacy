@@ -25,9 +25,17 @@ const runAfterLanguageChange = (isOcr) => ((dispatch, getState) => {
   }
 });
 
-export const updateLanguage = (name, value, isOcr) => ((dispatch) => {
+export const updateLanguage = (name, value, isOcr) => ((dispatch, getState) => {
+  const { recentLanguages } = getState().settings;
+
   dispatch(updateSetting(name, value));
   dispatch(runAfterLanguageChange(isOcr));
+
+  if (recentLanguages.indexOf(value) < 0 && value !== 'auto') {
+    recentLanguages.unshift(value);
+  }
+
+  dispatch(updateSetting('recentLanguages', recentLanguages.slice(0, 6)));
 });
 
 export const swapLanguages = (isOcr) => ((dispatch, getState) => {

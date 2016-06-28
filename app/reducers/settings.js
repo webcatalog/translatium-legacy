@@ -10,7 +10,7 @@ const defaultState = {
   preferredProvider: 'google',
   realtime: true,
   bigTextFontSize: 50,
-  recentLangList: [],
+  recentLanguages: ['en', 'zh'],
   preventingScreenLock: false,
 };
 

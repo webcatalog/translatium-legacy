@@ -17,7 +17,7 @@ import { updateLanguage } from '../actions/settings';
 import Animation from './Animation';
 
 const ChooseLanguage = ({
-  location, primaryColorId,
+  location, primaryColorId, recentLanguages,
   onLanguageClick,
 }) => {
   const { type } = location.query;
@@ -31,6 +31,25 @@ const ChooseLanguage = ({
     <Animation name="enterPage">
       <div className="app-choose-a-language-page">
         <div className="app-group-item-container">
+          <div
+            className="app-group-item win-h4"
+            style={{ backgroundColor: materialDesignColors[primaryColorId].light }}
+          >
+            {i18n('recent')}
+          </div>
+        </div>
+        {recentLanguages.map(lang => (
+          <div
+            className="app-item"
+            key={lang}
+            onClick={() => onLanguageClick(type, lang)}
+          >
+            <h4 className="win-h4">
+              {i18n(`/languages/${lang}`)}
+            </h4>
+          </div>
+          ))}
+        <div className="app-group-item-container" style={{ marginTop: 12 }}>
           <div
             className="app-group-item win-h4"
             style={{ backgroundColor: materialDesignColors[primaryColorId].light }}
@@ -57,6 +76,7 @@ const ChooseLanguage = ({
 ChooseLanguage.propTypes = {
   location: React.PropTypes.object.isRequired,
   primaryColorId: React.PropTypes.string.isRequired,
+  recentLanguages: React.PropTypes.array.isRequired,
   onLanguageClick: React.PropTypes.func.isRequired,
 };
 
@@ -75,6 +95,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   primaryColorId: state.settings.primaryColorId,
+  recentLanguages: state.settings.recentLanguages,
 });
 
 export default connect(
