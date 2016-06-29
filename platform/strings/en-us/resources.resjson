@@ -57,7 +57,8 @@
 	"china-mode-desc"		:		"If China Mode is turned on, Google Translate China, which is not blocked in China, will be used.",
 	"real-time-translation"		:		"Real-time Translation",
 	"advanced"		:		"Advanced",
-	"choose-language"		:		"Choose a language",
+	"choose-an-input-language"		:		"Choose an input language",
+	"choose-an-output-language"		:		"Choose an output language",
 	"preventing-screen-lock"		:		"Preventing screen lock",
 	"tap-to-start-recording"		:		"Tap to start recording",
 	"tap-to-stop-recording"		:		"Tap to stop recording",
@@ -81,8 +82,6 @@
 	"all"		:		"All",
 	"pin-language-pair"		:		"Pin language pair",
 	"unpin-language-pair"		:		"Unpin language pair",
-	"real-time"		:		"Real time",
-	"translated-by"		:		"Translated by",
 	"load-more"		:		"Load more",
 	"phrasebook-is-empty"		:		"Phrasebook is empty.",
 	"personalization"		:		"Personalization"

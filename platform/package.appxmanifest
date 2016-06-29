@@ -3,7 +3,7 @@
   <Identity Name="55974nhutquang97.5translate" Version="2016.530.1400.0" Publisher="CN=quanglam2807" />
   <mp:PhoneIdentity PhoneProductId="c0b63b78-00d7-4e11-bec5-ffecef0bdd2e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>ms-resource:app-name</DisplayName>
+    <DisplayName>Modern Translator</DisplayName>
     <PublisherDisplayName>Modern Lab</PublisherDisplayName>
     <Logo>images\Store.png</Logo>
   </Properties>

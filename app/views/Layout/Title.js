@@ -46,9 +46,18 @@ const Title = ({
     );
   }
 
+  let pageTitle = i18n(location.pathname.slice(1));
+  if (location.pathname === '/choose-language') {
+    if (location.query.type === 'inputLang' || location.query.type === 'ocrInputLang') {
+      pageTitle = i18n('choose-an-input-language');
+    } else {
+      pageTitle = i18n('choose-an-output-language');
+    }
+  }
+
   return (
     <h4 className="win-h4 app-title">
-      {i18n(location.pathname.slice(1))}
+      {pageTitle}
     </h4>
   );
 };
