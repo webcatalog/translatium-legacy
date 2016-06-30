@@ -85,4 +85,5 @@ gulp.task('winjs-localization', () =>
 );
 
 gulp.task('prepare', ['winjs', 'winjs-localization']);
-gulp.task('default', ['html', 'stylus', 'webpack']);
+gulp.task('build', ['html', 'stylus', 'webpack']);
+gulp.task('default', ['prepare', 'build']);
