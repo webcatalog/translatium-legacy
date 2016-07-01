@@ -5,10 +5,15 @@ import { connect } from 'react-redux';
 import { replace, goBack } from 'react-router-redux';
 
 import { screenResize } from '../../actions/screen';
+import { updateSetting } from '../../actions/settings';
 
 import { materialDesignColors } from '../../constants/colors';
 
 import Title from './Title';
+
+import i18n from '../../i18n';
+import openUri from '../../openUri';
+
 
 const setAppTheme = (theme) => {
   // Theme
@@ -73,7 +78,75 @@ class Layout extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.props.onResize);
+    const { launchTime, onResize, onUpdateLaunchTime } = this.props;
+
+    window.addEventListener('resize', onResize);
+
+    onUpdateLaunchTime(launchTime + 1);
+
+    if (launchTime === 10) {
+      const askForFeedback = () => {
+        const content = i18n('would-you-mind-giving-us-some-feedback');
+        const msg = new Windows.UI.Popups.MessageDialog(content);
+        msg.commands.append(
+          new Windows.UI.Popups.UICommand(
+            i18n('ok-sure'),
+            () => {
+              openUri('mailto:support@moderntranslator.com');
+            }
+          )
+        );
+        msg.commands.append(
+          new Windows.UI.Popups.UICommand(
+            i18n('no-thanks'),
+            () => {}
+          )
+        );
+        msg.showAsync().done();
+
+        onUpdateLaunchTime(-100);
+      };
+
+      const askForRating = () => {
+        const content = i18n('how-are-about-a-rating');
+        const msg = new Windows.UI.Popups.MessageDialog(content);
+        msg.commands.append(
+          new Windows.UI.Popups.UICommand(
+            i18n('ok-sure'),
+            () => {
+              openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k');
+            }
+          )
+        );
+        msg.commands.append(
+          new Windows.UI.Popups.UICommand(
+            i18n('no-thanks'),
+            () => {}
+          )
+        );
+        msg.showAsync().done();
+      };
+
+      const askForFeeling = () => {
+        const content = i18n('enjoying-the-app');
+        const msg = new Windows.UI.Popups.MessageDialog(content);
+        msg.commands.append(
+          new Windows.UI.Popups.UICommand(
+            i18n('yes'),
+            askForRating
+          )
+        );
+        msg.commands.append(
+          new Windows.UI.Popups.UICommand(
+            i18n('not-really'),
+            askForFeedback
+          )
+        );
+        msg.showAsync().done();
+      };
+
+      askForFeeling();
+    }
   }
 
   componentWillUpdate(nextProps) {
@@ -160,9 +233,11 @@ Layout.propTypes = {
   screenWidth: React.PropTypes.number.isRequired,
   theme: React.PropTypes.string.isRequired,
   primaryColorId: React.PropTypes.string.isRequired,
+  launchTime: React.PropTypes.number.isRequired,
   onResize: React.PropTypes.func.isRequired,
   onTabbarItemClick: React.PropTypes.func.isRequired,
   onBackClick: React.PropTypes.func.isRequired,
+  onUpdateLaunchTime: React.PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -175,12 +250,16 @@ const mapDispatchToProps = (dispatch) => ({
   onBackClick: () => {
     dispatch(goBack());
   },
+  onUpdateLaunchTime: (launchTime) => {
+    dispatch(updateSetting('launchTime', launchTime));
+  },
 });
 
 const mapStateToProps = (state) => ({
   screenWidth: state.screen.screenWidth,
   theme: state.settings.theme,
   primaryColorId: state.settings.primaryColorId,
+  launchTime: state.settings.launchTime,
 });
 
 export default connect(

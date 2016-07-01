@@ -11,6 +11,8 @@ import i18n from '../i18n';
 import { materialDesignColors } from '../constants/colors';
 
 import { updateSetting } from '../actions/settings';
+import isFull from '../lib/isFull';
+import showUpgradeDialog from '../lib/showUpgradeDialog';
 
 const Settings = ({
   theme,
@@ -118,7 +120,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onSettingChange: (name, value) => {
-    dispatch(updateSetting(name, value));
+    if ((name === 'theme' || name === 'primary-color') && isFull() !== true) {
+      showUpgradeDialog();
+    } else {
+      dispatch(updateSetting(name, value));
+    }
   },
 });
 

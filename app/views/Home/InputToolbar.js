@@ -10,6 +10,8 @@ import i18n from '../../i18n';
 import { updateInputText, toggleExpanded, switchIme } from '../../actions/home';
 import { playInputText } from '../../actions/textToSpeech';
 import { initOcr } from '../../actions/ocr';
+import isFull from '../../lib/isFull';
+import showUpgradeDialog from '../../lib/showUpgradeDialog';
 
 import {
   isTtsSupported,
@@ -181,33 +183,49 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(toggleExpanded());
   },
   onWriteButtonClick: () => {
-    dispatch(switchIme('handwriting'));
+    if (isFull() !== true) {
+      showUpgradeDialog();
+    } else {
+      dispatch(switchIme('handwriting'));
+    }
   },
   onSpeakButtonClick: () => {
-    dispatch(switchIme('speech'));
+    if (isFull() !== true) {
+      showUpgradeDialog();
+    } else {
+      dispatch(switchIme('speech'));
+    }
   },
   onCaptureButtonClick: () => {
-    const dialog = new Windows.Media.Capture.CameraCaptureUI();
-    dialog.captureFileAsync(Windows.Media.Capture.CameraCaptureUIMode.photo)
-      .then(file => {
-        if (!file) return;
-        dispatch(initOcr(file));
-        dispatch(push('/ocr'));
-      });
+    if (isFull() !== true) {
+      showUpgradeDialog();
+    } else {
+      const dialog = new Windows.Media.Capture.CameraCaptureUI();
+      dialog.captureFileAsync(Windows.Media.Capture.CameraCaptureUIMode.photo)
+        .then(file => {
+          if (!file) return;
+          dispatch(initOcr(file));
+          dispatch(push('/ocr'));
+        });
+    }
   },
   onOpenFromGalleryButtonClick: () => {
-    const picker = new Windows.Storage.Pickers.FileOpenPicker();
-    picker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.picturesLibrary;
-    picker.fileTypeFilter.append('.jpg');
-    picker.fileTypeFilter.append('.jpeg');
-    picker.fileTypeFilter.append('.png');
-    picker.pickSingleFileAsync()
-      .then(file => {
-        if (!file) return;
-        dispatch(initOcr(file));
-        dispatch(push('/ocr'));
-      })
-      .then(null, () => {});
+    if (isFull() !== true) {
+      showUpgradeDialog();
+    } else {
+      const picker = new Windows.Storage.Pickers.FileOpenPicker();
+      picker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.picturesLibrary;
+      picker.fileTypeFilter.append('.jpg');
+      picker.fileTypeFilter.append('.jpeg');
+      picker.fileTypeFilter.append('.png');
+      picker.pickSingleFileAsync()
+        .then(file => {
+          if (!file) return;
+          dispatch(initOcr(file));
+          dispatch(push('/ocr'));
+        })
+        .then(null, () => {});
+    }
   },
 });
 

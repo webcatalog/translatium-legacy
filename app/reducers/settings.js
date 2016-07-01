@@ -12,6 +12,7 @@ const defaultState = {
   bigTextFontSize: 50,
   recentLanguages: ['en', 'zh'],
   preventingScreenLock: false,
+  launchTime: 0,
 };
 
 const getInitialValue = (name) => {

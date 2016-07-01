@@ -84,5 +84,16 @@
 	"unpin-language-pair"		:		"Unpin language pair",
 	"load-more"		:		"Load more",
 	"phrasebook-is-empty"		:		"Phrasebook is empty.",
-	"personalization"		:		"Personalization"
+	"personalization"		:		"Personalization",
+	"sorry"		:		"Sorry!",
+	"only-available-in-full-version"		:		"This feature is only available in the full version of Modern Translator.",
+	"upgrade-to-full-version"		:		"Upgrade to full version",
+	"later"		:		"Later",
+	"enjoying-the-app"		:		"Enjoying Modern Translator?",
+	"not-really"		:		"Not really",
+	"yes"		:		"Yes!",
+	"how-are-about-a-rating"		:		"How about a rating on Windows Store, then?",
+	"ok-sure"		:		"Ok, sure!",
+	"no-thanks"		:		"No, thanks",
+	"would-you-mind-giving-us-some-feedback": "Would you mind giving us some feedback?"
 }
