@@ -1,9 +1,8 @@
 import generateGoogleTranslateToken from './generateGoogleTranslateToken';
 import * as languageUtils from './languageUtils';
-import getMicrosoftTranslatorAppId from './getMicrosoftTranslatorAppId';
 
 // Maximum encoded inputText length: 2000
-const translateShortTextWithGoogle = (inputLang, outputLang, inputText, options) =>
+const translateShortText = (inputLang, outputLang, inputText, options) =>
   generateGoogleTranslateToken(inputText)
     .then(token => {
       let uri = 'translate_a/single?client=t'
@@ -122,11 +121,11 @@ const translateShortTextWithGoogle = (inputLang, outputLang, inputText, options)
     });
 
 // Split text to chucks of short-length strings, translate with Google and then merge them together
-const translateTextWithGoogle = (inputLang, outputLang, inputText, options) =>
+const translateText = (inputLang, outputLang, inputText, options) =>
   Promise.resolve()
     .then(() => {
       if (encodeURIComponent(inputText).length < 1000) {
-        return translateShortTextWithGoogle(inputLang, outputLang, inputText, options);
+        return translateShortText(inputLang, outputLang, inputText, options);
       }
 
       let tmp = inputText.substr(0, 100);
@@ -144,12 +143,12 @@ const translateTextWithGoogle = (inputLang, outputLang, inputText, options) =>
       let leftRes;
       let rightRes;
       const promises = [];
-      promises.push(translateShortTextWithGoogle(inputLang, outputLang, leftInputText, options)
+      promises.push(translateShortText(inputLang, outputLang, leftInputText, options)
         .then(result => {
           leftRes = result;
         }));
 
-      promises.push(translateTextWithGoogle(inputLang, outputLang, rightInputText, options)
+      promises.push(translateText(inputLang, outputLang, rightInputText, options)
         .then(result => {
           rightRes = result;
         }));
@@ -172,101 +171,5 @@ const translateTextWithGoogle = (inputLang, outputLang, inputText, options) =>
       r.provider = 'Google';
       return r;
     });
-
-const translateTextWithMicrosoft = (inputLang, outputLang, inputText) =>
-  getMicrosoftTranslatorAppId()
-    .then(appId => {
-      console.log(appId);
-      const texts = inputText.split('\n'); // For multi-paragraph
-      const uri = encodeURI(`https://api.microsofttranslator.com/v2/ajax.svc/TranslateArray2?appId=${appId}`
-                + `&texts=${JSON.stringify(texts)}`
-                + `&from=${languageUtils.microsoftStandardlizedLanguage(inputLang)}`
-                + `&to=${languageUtils.microsoftStandardlizedLanguage(outputLang)}`
-                + '&options={}');
-
-      return fetch(uri);
-    })
-    .then(res => res.text())
-    .then(body => JSON.parse(body.trim()))
-    .then(result => {
-      if (typeof result !== 'object') {
-        return Promise.reject(new Error('AppId is not correct'));
-      }
-
-      let detectedInputLang = result[0].From;
-      if (detectedInputLang === 'zh-CHS') {
-        detectedInputLang = 'zh-CN';
-      } else if (detectedInputLang === 'zh-CHT') {
-        detectedInputLang = 'zh-TW';
-      }
-
-      let outputText = '';
-      result.forEach(x => {
-        outputText += `${x.TranslatedText}\n`;
-      });
-
-      return {
-        outputText,
-        detectedInputLang,
-      };
-    })
-    .then(result => {
-      const r = result;
-      r.provider = 'Microsoft';
-      return r;
-    });
-
-const translateText = (inputLang, outputLang, inputText, options) => {
-  if (inputText.length < 1) {
-    return Promise.resolve({
-      status: 0,
-    });
-  }
-
-  return Promise.resolve()
-    .then(() => {
-      // Cross-translation between Google & Microsoft, using English as a bridge
-      if (languageUtils.isOnlyMicrosoftSupported(inputLang)) {
-        if (languageUtils.isMicrosoftSupported(outputLang)) {
-          return translateTextWithMicrosoft(inputLang, outputLang, inputText);
-        }
-
-        return translateTextWithMicrosoft(inputLang, 'en', inputText)
-          .then(result => translateTextWithGoogle('en', outputLang, result.outputText, options))
-          .then(result => {
-            const x = result;
-            // Delete the unwanted results produced during the translation
-            delete x.inputDict;
-            delete x.outputDict;
-            delete x.suggestedInputLang;
-            delete x.suggestedInputText;
-            x.provider = 'Google + Microsoft';
-            return result;
-          });
-      }
-
-
-      if (languageUtils.isOnlyMicrosoftSupported(outputLang)) {
-        if (languageUtils.isMicrosoftSupported(inputLang)) {
-          return translateTextWithMicrosoft(inputLang, outputLang, inputText);
-        }
-        return translateTextWithGoogle(inputLang, 'en', inputText, options)
-          .then(result => translateTextWithMicrosoft('en', outputLang, result.outputText))
-          .then(result => {
-            const r = result;
-            r.provider = 'Google + Microsoft';
-            return r;
-          });
-      }
-
-      if (options && options.preferredProvider === 'microsoft'
-        && languageUtils.isMicrosoftSupported(inputLang)
-        && languageUtils.isMicrosoftSupported(outputLang)) {
-        return translateTextWithMicrosoft(inputLang, outputLang, inputText);
-      }
-
-      return translateTextWithGoogle(inputLang, outputLang, inputText, options);
-    });
-};
 
 export default translateText;

@@ -20,19 +20,9 @@ const data = {
     'es-PY', 'es-PE', 'es-PR', 'es-ES', 'es-US', 'es-UY', 'es-VE',
     'su', 'sw', 'sv', 'tg', 'ta', 'te', 'th', 'tr', 'uk', 'ur', 'uz', 'vi', 'cy', 'yi', 'yo', 'zu',
     'am', 'co', 'fy', 'ky', 'haw', 'ku', 'lb', 'sm', 'gd', 'sn', 'sd', 'ps', 'xh',
-    'tlh', 'otq', 'yua',
   ],
   outputNotSupported: [
     'auto',
-  ],
-  microsoftSupported: [
-    'he', 'pl', 'ar', 'hi', 'pt', 'bg', 'ca', 'hu', 'ro', 'zh-CN', 'zh-HK', 'zh-TW', 'zh-YUE', 'id',
-    'ru', 'it', 'sk', 'cs', 'ja', 'sl', 'da', 'es', 'nl', 'sv', 'en',
-    'ko', 'th', 'et', 'lv', 'tr', 'fi', 'lt', 'uk', 'fr', 'ms', 'ur', 'de', 'mt',
-    'vi', 'el', 'no', 'cy', 'ht', 'fa', 'tlh', 'otq', 'yua',
-  ],
-  onlyMicrosoftSupported: [
-    'tlh', 'otq', 'yua',
   ],
   voiceRecognitionSupported: [
     'af', 'ar', 'eu', 'bg', 'ca', 'zh', 'hr', 'cs', 'nl', 'tl', 'fi',
@@ -116,21 +106,6 @@ export const isTtsSupported = lang =>
 
 // Check if language supports Handwriting recognition
 export const isHandwritingSupported = lang => !(data.handwritingNotSupported.indexOf(lang) > -1);
-
-// Check if language ONLY supports translating using Microsoft Translator
-export const isOnlyMicrosoftSupported = lang => (data.onlyMicrosoftSupported.indexOf(lang) > -1);
-
-// Check if language supports translating using Microsoft Translator
-export const isMicrosoftSupported = lang => (data.microsoftSupported.indexOf(lang) > -1);
-
-export const microsoftStandardlizedLanguage = lang => {
-  if (['zh-CN', 'zh-HK'].indexOf(lang) > -1) return 'zh-CHS';
-  if (['zh-TW', 'zh-YUE'].indexOf(lang) > -1) return 'zh-CHT';
-  if (lang === 'auto') return '';
-  if (isOnlyMicrosoftSupported(lang)) return lang;
-  if (lang.length > 2) return lang.substring(0, 2);
-  return lang;
-};
 
 // Get list of all languages
 export const getLanguages = () => data.all;
