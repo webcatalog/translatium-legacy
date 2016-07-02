@@ -1,17 +1,11 @@
 image: node:4.2.2
 
-pages:
-  cache:
-    paths:
-    - vendor
+script:
+- npm install -g harp
+- npm install -g surge
+- npm install bulma
+- harp compile ./ public
+- surge --project ./public --domain moderntranslator.com
 
-  script:
-  - npm install -g harp
-  - npm install bulma
-  - mv ./node_modules ./_node_modules
-  - harp compile ./ public
-  artifacts:
-    paths:
-    - public
-  only:
-  - pages
+only:
+- pages

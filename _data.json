@@ -22,7 +22,7 @@
       "sw", "sv", "ta", "th", "tr", "vi", "cy"
     ],
     "writeNotSupported": [
-      "hy", "ka", "ig", "ha", "yo", "yi", "st", "kk", "tg", "uz", "tlh", "otq", "yua",
+      "hy", "ka", "ig", "ha", "yo", "yi", "st", "kk", "tg", "uz",
       "sd", "ps", "am"
     ],
     "ocrSupported": [
@@ -182,10 +182,7 @@
     	"cy"		:		"Welsh",
     	"yi"		:		"Yiddish",
     	"yo"		:		"Yoruba",
-    	"zu"		:		"Zulu",
-    	"tlh"		:		"Klingon",
-    	"yua"		:		"Yucatec Maya",
-    	"otq"		:		"Querétaro Otomi"
+    	"zu"		:		"Zulu"
     }
   }
 }

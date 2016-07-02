@@ -1,5 +1,12 @@
 # What's New
 
+#### 5.0.0 (2nd July 2016)
+1. No more hamburger button! Tab bar is the future!
+2. Many UI & UX changes.
+3. Improved: stability & performance.
+
+---
+
 #### 4.7.0 (18th June 2016)
 1. Fixed: Text-to-speech's not working on mobile.
 2. Fixed: Cannot close handwriting & speech panel.
