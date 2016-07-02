@@ -5,5 +5,6 @@ all_tests:
   - npm install -g harp
   - npm install -g surge
   - npm install bulma
-  - harp compile ./ public
-  - surge --project ./public --domain moderntranslator.com
+  - mv ./node_modules ./_node_modules
+  - harp compile
+  - surge --project ./www --domain moderntranslator.com
