@@ -1,11 +1,9 @@
 image: node:4.2.2
 
-script:
-- npm install -g harp
-- npm install -g surge
-- npm install bulma
-- harp compile ./ public
-- surge --project ./public --domain moderntranslator.com
-
-only:
-- pages
+all_tests:
+  script:
+  - npm install -g harp
+  - npm install -g surge
+  - npm install bulma
+  - harp compile ./ public
+  - surge --project ./public --domain moderntranslator.com
