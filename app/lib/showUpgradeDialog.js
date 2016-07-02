@@ -8,7 +8,7 @@ const showUpgradeDialog = () => {
   const msg = new Windows.UI.Popups.MessageDialog(content, title);
   msg.commands.append(
     new Windows.UI.Popups.UICommand(
-      i18n('upgrade-to-full-version'),
+      i18n('upgrade-now'),
       () => {
         Windows.ApplicationModel.Store.CurrentApp
           .requestAppPurchaseAsync(false)

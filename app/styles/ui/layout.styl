@@ -4,69 +4,69 @@
   cursor default
   display flex
   flex-flow column
-  .app-content
+.app-content
+  flex 1
+  height 100%
+  overflow hidden
+.app-tabbar
+  flex-basis 48px
+  height 48px
+  position relative
+  background-color $color-2
+  display flex
+  justify-content center
+  .app-tabbar-item
+    height 48px
+    width 48px
+    font-family "Segoe MDL2 Assets",Symbols
+    font-size 16px
+    line-height 48px
+    text-align center
+    color $color-reverse-1
     flex 1
-    height 100%
+.app-topbar
+  flex-basis 48px
+  height 48px
+  position relative
+  .app-menu-button
+    display inline-block
+    float left
+    +RTL()
+      float right
+  .app-button
+    display inline-block
+    height 48px
+    width 48px
+    line-height 48px
+    float left
+    +RTL()
+      float right
+  .app-title
+    display inline-block
+    padding 0 12px
+    line-height 48px
+    width 100%
+    white-space nowrap
     overflow hidden
-  .app-tabbar
-    flex-basis 48px
-    height 48px
-    position relative
-    background-color $color-2
-    display flex
-    justify-content center
-    .app-tabbar-item
-      height 48px
-      width 48px
-      font-family "Segoe MDL2 Assets",Symbols
-      font-size 16px
-      line-height 48px
-      text-align center
-      color $color-reverse-1
-      flex 1
-  .app-topbar
-    flex-basis 48px
-    height 48px
-    position relative
-    .app-menu-button
-      display inline-block
-      float left
-      +RTL()
-        float right
-    .app-button
-      display inline-block
-      height 48px
-      width 48px
-      line-height 48px
-      float left
-      +RTL()
-        float right
-    .app-title
-      display inline-block
-      padding 0 12px
-      line-height 48px
-      width 100%
-      white-space nowrap
-      overflow hidden
-      text-overflow ellipsis
-      box-sizing border-box
-      +RTL()
-        float right
+    text-overflow ellipsis
+    box-sizing border-box
+    +RTL()
+      float right
+  .app-language-title
+    display inline-block
+    line-height 48px
+    padding 0 12px
+    text-align center
+    width calc(50% - 24px)
+    box-sizing border-box
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
+    float left
+    +RTL()
+      float right
+    &:hover, &:focus
+      background-color rgba(255, 255, 255, 0.1)
+  .app-ocr-top
     .app-language-title
-      display inline-block
-      line-height 48px
-      padding 0 12px
-      text-align center
-      width calc(50% - 24px)
-      box-sizing border-box
-      white-space nowrap
-      overflow hidden
-      text-overflow ellipsis
-      float left
-      +RTL()
-        float right
-      &:hover, &:focus
-        background-color rgba(255, 255, 255, 0.1)
-    .app-ocr-top
-      .app-language-title
-        width calc(50% - 72px)
+      width calc(50% - 72px)

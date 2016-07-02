@@ -52,7 +52,7 @@
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile>Modern Translator_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Modern Translator_StoreKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -101,9 +101,9 @@
     <Content Include="images\Wide310x150.scale-200.png" />
     <Content Include="images\Wide310x150.scale-400.png" />
     <None Include="Modern Translator_TemporaryKey.pfx" />
+    <None Include="Modern Translator_StoreKey.pfx" />
     <Content Include="www\winjs\css\ui-dark.min.css" />
     <Content Include="www\winjs\css\ui-light.min.css" />
-    <Content Include="www\winjs\fonts\Symbols.ttf" />
     <Content Include="www\winjs\js\base.min.js" />
     <Content Include="www\winjs\js\ui.min.js" />
     <Content Include="www\app-dark.min.css" />
@@ -114,7 +114,10 @@
   <ItemGroup>
     <PRIResource Include="strings\en-us\languages.resjson" />
     <PRIResource Include="strings\en-us\resources.resjson" />
+    <PRIResource Include="strings\vi-vn\languages.resjson" />
+    <PRIResource Include="strings\vi-vn\resources.resjson" />
     <PRIResource Include="www\winjs-localization\en-us\Microsoft.WinJS.resjson" />
+    <PRIResource Include="www\winjs-localization\vi-vn\Microsoft.WinJS.resjson" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <Target Name="BeforeBuild">
@@ -124,10 +127,10 @@
   </Target>
   <PropertyGroup>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-    <PackageCertificateThumbprint>9378C5241542C9A43163A599F3F5EF319D14C8B3</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>72EFF1DF3BBD942519D7AECE08AFA3F74EA2CC00</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <AppxPackageDir>C:\x\</AppxPackageDir>
+    <AppxPackageDir>C:\y\</AppxPackageDir>
   </PropertyGroup>
 </Project>

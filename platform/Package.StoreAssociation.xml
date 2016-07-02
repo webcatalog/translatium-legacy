@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <StoreAssociation xmlns="http://schemas.microsoft.com/appx/2010/storeassociation">
   <Publisher>CN=C635F506-DEEB-41A4-8CAA-16689F486ED2</Publisher>
-  <PublisherDisplayName>Modern Lab</PublisherDisplayName>
+  <PublisherDisplayName>Quang Lam</PublisherDisplayName>
   <GeneratePackageHash>http://www.w3.org/2001/04/xmlenc#sha256</GeneratePackageHash>
   <SupportedLocales>
     <Language Code="af" InMinimumRequirementSet="true" />

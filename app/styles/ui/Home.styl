@@ -117,18 +117,13 @@
     z-index 2
     .app-list
       flex-basis 48px
-      .win-itemscontainer
-        width 100% !important
-      .win-container
-        width auto !important
-        margin-top 0 !important
-        > .win-itembox
-          background transparent
+      overflow auto
+      white-space nowrap
       .app-item
         padding 0 12px
         height 48px
         line-height 48px
-        float left
+        display inline-block
     .app-canvas
       flex 1
       width 100%

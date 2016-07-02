@@ -54,6 +54,7 @@ const setAppColor = (primaryColorId) => {
     statusBar.backgroundColor = backgroundColor;
     statusBar.foregroundColor = foregroundColor;
     statusBar.backgroundOpacity = 1;
+    statusBar.showAsync();
   }
 };
 
