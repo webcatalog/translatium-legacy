@@ -11,7 +11,7 @@ I am sorry but at the moment, Modern Translation is not open for localization.
 ---
 
 <section class="section has-text-centered">
-  <h3 class="title is-3">Can't find an answer for your question?</h3>
+  <h3 class="title is-3">Can't find an answer to your question?</h3>
   <a class="button is-large is-primary" href="mailto:support@moderntranslator.com">
     <span class="icon"><i class="fa fa-life-ring"></i></span>
     <span>Contact Support</span>
