@@ -15,7 +15,7 @@ const About = () => (
         <h4 className="win-h4" style={{ marginTop: 18 }}>
           Modern Translator
         </h4>
-        <h5 className="win-h5">5.0.0</h5>
+        <h5 className="win-h5">5.1.0</h5>
         <button
           className="win-button"
           onClick={() => openUri('https://moderntranslator.com')}
@@ -35,7 +35,13 @@ const About = () => (
           {i18n('changelog')}
         </button>
         <h5 className="win-h5">
-          A product of <a href="https://quanglam.me">Quang Lam</a>.
+          <span>A product of </span>
+          <span
+            onClick={() => openUri('https://quanglam.me')}
+            style={{ textDecoration: 'underline' }}
+          >
+            Quang Lam
+          </span>.
         </h5>
         <h5 className="win-h5">
           Made with <span style={{ color: '#F44336' }}>&hearts;</span>

@@ -46,13 +46,15 @@ const Title = ({
     );
   }
 
-  let pageTitle = i18n(location.pathname.slice(1));
+  let pageTitle;
   if (location.pathname === '/choose-language') {
     if (location.query.type === 'inputLang' || location.query.type === 'ocrInputLang') {
       pageTitle = i18n('choose-an-input-language');
     } else {
       pageTitle = i18n('choose-an-output-language');
     }
+  } else {
+    pageTitle = i18n(location.pathname.slice(1));
   }
 
   return (

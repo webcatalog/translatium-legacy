@@ -199,7 +199,7 @@ const Dictionary = ({
                     <span>{j + 1}. </span>
                     <span
                       className="app-link"
-                      onClick={() => onLinkClick(outputLang, inputLang, y[0])}
+                      onClick={() => onLinkClick(inputLang, outputLang, y[0])}
                     >
                       {y[0]}
                     </span>

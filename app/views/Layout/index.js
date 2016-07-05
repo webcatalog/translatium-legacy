@@ -68,13 +68,16 @@ class Layout extends React.Component {
     setAppTheme(theme);
     setAppColor(primaryColorId);
 
-    WinJS.Application.onbackclick = () => {
+    const systemNavigationManager = Windows.UI.Core.SystemNavigationManager.getForCurrentView();
+    systemNavigationManager.onbackrequested = (e) => {
       const { location } = this.props;
       if (canGoBack(location) === true) {
         onBackClick();
-        return true;
+      } else {
+        /* eslint-disable */
+        e.handled = true;
+        /* eslint-enable */
       }
-      return false;
     };
   }
 

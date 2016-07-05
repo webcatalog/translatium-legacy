@@ -13,12 +13,12 @@ import { isInput, isOutput } from './lib/languageUtils';
 import { clearHome, updateInputText } from './actions/home';
 import { updateSetting } from './actions/settings';
 
-WinJS.Application.onactivated = (args) => {
-  switch (args.detail.kind) {
+Windows.UI.WebUI.WebUIApplication.onactivated = (args) => {
+  switch (args.kind) {
     case Windows.ApplicationModel.Activation.ActivationKind.protocol: {
-      if (args.detail.uri.path === 'translate') {
+      if (args.uri.path === 'translate') {
         const params = (() => {
-          const query = args.detail.uri.query.substring(1);
+          const query = args.uri.query.substring(1);
           const result = {};
           query.split('&').forEach(part => {
             const item = part.split('=');
@@ -40,7 +40,7 @@ WinJS.Application.onactivated = (args) => {
     }
 
     case Windows.ApplicationModel.Activation.ActivationKind.shareTarget: {
-      const shareOperation = args.detail.shareOperation;
+      const shareOperation = args.shareOperation;
       if (shareOperation.data.contains(
         Windows.ApplicationModel.DataTransfer.StandardDataFormats.text
       )) {
@@ -53,9 +53,9 @@ WinJS.Application.onactivated = (args) => {
     }
 
     case Windows.ApplicationModel.Activation.ActivationKind.launch: {
-      if (args.detail.arguments.substr(0, 13) === 'tile_shortcut') {
-        const lang = args.detail.arguments
-            .substr(13, args.detail.arguments.length - 13)
+      if (args.arguments.substr(0, 13) === 'tile_shortcut') {
+        const lang = args.arguments
+            .substr(13, args.arguments.length - 13)
             .split('_');
         store.dispatch(updateSetting('inputLang', lang[0]));
         store.dispatch(updateSetting('outputLang', lang[1]));
@@ -74,5 +74,3 @@ WinJS.Application.onactivated = (args) => {
     document.getElementById('app')
   );
 };
-
-WinJS.Application.start();

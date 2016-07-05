@@ -22,49 +22,9 @@ const translateShortText = (inputLang, outputLang, inputText, options) =>
       return fetch(uri);
     })
     .then(res => res.text())
-    .then(body => {
-      // Convert Google JSON to standard JSON
-      let i = 0;
-      let jsonStr = '';
-      while (i < body.length) {
-        if ((body[i] === ',') || (body[i] === '[')) {
-          switch (body[i + 1]) {
-            case ',':
-            case ']': {
-              jsonStr += `${body[i]}null`;
-              i++;
-              break;
-            }
-            case '"': {
-              const tmp = body.substring(i + 2);
-              let j = tmp.indexOf('"');
-              while ((tmp[j - 1] === '\\') && (tmp[j - 2] !== '\\')) {
-                j = j + 1 + tmp.substring(j + 1).indexOf('"');
-              }
-              j = i + 2 + j;
-              jsonStr += body.substring(i, j + 1);
-              i = j + 1;
-              break;
-            }
-            default: {
-              jsonStr += body[i];
-              i++;
-            }
-          }
-        } else {
-          jsonStr += body[i];
-          i++;
-        }
-      }
-
-      let r;
-      try {
-        r = JSON.parse(jsonStr);
-      } catch (err) {
-        return Promise.reject(err);
-      }
-      return r;
-    })
+    /* eslint-disable */
+    .then(body => eval(body))
+    /* eslint-enable */
     .then(result => {
       let outputText = '';
       let inputRoman = undefined;

@@ -99,7 +99,6 @@ export const startRecording = () => ((dispatch) => {
   captureInitSettings.videoDeviceId = '';
   captureInitSettings.streamingCaptureMode = Windows.Media.Capture.StreamingCaptureMode.audio;
 
-  /* WinJS Promise */
   mediaCaptureMgr.initializeAsync(captureInitSettings)
     .then(() => {
       checkTime = setInterval(() => {
