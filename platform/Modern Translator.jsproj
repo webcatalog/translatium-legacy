@@ -52,7 +52,7 @@
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile>Modern Translator_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Modern Translator_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -121,13 +121,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <Target Name="BeforeBuild">
-    <Exec Command="gulp build --gulpfile ../gulpfile.babel.js" />
+    <Exec Command="gulp build --gulpfile ../gulpfile.js" />
   </Target>
   <Target Name="AfterBuild">
   </Target>
   <PropertyGroup>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-    <PackageCertificateThumbprint>72EFF1DF3BBD942519D7AECE08AFA3F74EA2CC00</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>2C39E01CB8FB6D36625FB9D27DB7D9101CD6AB22</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>

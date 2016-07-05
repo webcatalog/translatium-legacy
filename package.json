@@ -23,7 +23,6 @@
     "react-winjs": "^2.5.0",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
-    "whatwg-fetch": "^1.0.0",
     "winjs": "^4.4.0",
     "winjs-localization": "^4.4.0"
   },
@@ -38,7 +37,7 @@
     "eslint-plugin-import": "^1.8.1",
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-react": "^5.2.1",
-    "gulp": "^3.9.0",
+    "gulp": "^3.9.1",
     "gulp-bom": "^1.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-stylus": "^2.1.0",

@@ -49,10 +49,8 @@ export const stopRecording = () => ((dispatch, getState) => {
         mediaCaptureMgr = null;
         const systemMediaControls = Windows.Media.SystemMediaTransportControls.getForCurrentView();
         systemMediaControls.onpropertychanged = null;
-        const blob = MSApp.createBlobFromRandomAccessStream('audio/l16', soundStream);
-        soundStream = null;
 
-        recognizeSpeech(inputLang, blob)
+        recognizeSpeech(inputLang, soundStream)
           .then(({ outputText }) => {
             dispatch(updateInputText(`${inputText} ${outputText}`));
             dispatch({

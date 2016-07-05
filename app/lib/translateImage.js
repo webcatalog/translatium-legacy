@@ -1,19 +1,48 @@
+/* global Windows */
+
 import { ocrSpaceStandardlizedLanguage } from './languageUtils';
 import translateArray from './translateArray';
+import httpClient from './httpClient';
 
-const translateImage = (inputLang, outputLang, inputBlob, apiKey) => {
-  const formData = new FormData();
+const fetchOcr = (multipartContent) => {
+  const uriString = 'https://api.ocr.space/Parse/Image';
+  const uri = new Windows.Foundation.Uri(uriString);
+  const promise = new Promise((resolve, reject) => {
+    httpClient.postAsync(uri, multipartContent)
+      .then(response => {
+        response.ensureSuccessStatusCode();
+        return response.content.readAsStringAsync();
+      })
+      .done(
+        body => { resolve(JSON.parse(body)); },
+        err => { reject(err); }
+      );
+  });
 
-  formData.append('file', inputBlob, 'image.jpg');
-  formData.append('language', ocrSpaceStandardlizedLanguage(inputLang));
-  formData.append('apikey', apiKey);
-  formData.append('isOverlayRequired', true);
+  return promise;
+};
 
-  return fetch('https://api.ocr.space/Parse/Image', {
-    method: 'POST',
-    body: formData,
-  })
-  .then(res => res.json())
+const translateImage = (inputLang, outputLang, inputStream, apiKey) => {
+  const httpMultipartFormDataContent = new Windows.Web.Http.HttpMultipartFormDataContent();
+
+  httpMultipartFormDataContent.add(
+    new Windows.Web.Http.HttpStreamContent(inputStream),
+    'file', 'image.jpg'
+  );
+  httpMultipartFormDataContent.add(
+    new Windows.Web.Http.HttpStringContent(ocrSpaceStandardlizedLanguage(inputLang)),
+    'language'
+  );
+  httpMultipartFormDataContent.add(
+    new Windows.Web.Http.HttpStringContent(apiKey),
+    'apikey'
+  );
+  httpMultipartFormDataContent.add(
+    new Windows.Web.Http.HttpStringContent('true'),
+    'isOverlayRequired'
+  );
+
+  return fetchOcr(httpMultipartFormDataContent)
   .then(result => {
     // Successful
     if (result.OCRExitCode === 1) {

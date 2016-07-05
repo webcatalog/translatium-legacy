@@ -1,8 +1,29 @@
+/* global Windows */
+
+import httpClient from './httpClient';
+
+const fetchGoogleTkk = () => {
+  const uriString = 'https://translate.google.com/m/translate';
+  const uri = new Windows.Foundation.Uri(uriString);
+  const promise = new Promise((resolve, reject) => {
+    httpClient.getAsync(uri)
+      .then(response => {
+        response.ensureSuccessStatusCode();
+        return response.content.readAsStringAsync();
+      })
+      .done(
+        body => { resolve(body); },
+        err => { reject(err); }
+      );
+  });
+
+  return promise;
+};
+
+
 const getGoogleTkk = () => {
   if (sessionStorage.getItem('googleTkk') === null) {
-    const url = 'https://translate.google.com/m/translate';
-    return fetch(url)
-      .then(res => res.text())
+    return fetchGoogleTkk()
       .then(body => {
         const startStr = 'campaign_tracker_id:\'1h\',tkk:';
         const endStr = ',enable_formality:false';

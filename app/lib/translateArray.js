@@ -1,5 +1,26 @@
+/* global Windows */
+
 import generateGoogleTranslateToken from './generateGoogleTranslateToken';
 import * as languageUtils from './languageUtils';
+
+import httpClient from './httpClient';
+
+const fetchJson = (uriString) => {
+  const uri = new Windows.Foundation.Uri(uriString);
+  const promise = new Promise((resolve, reject) => {
+    httpClient.getAsync(uri)
+      .then(response => {
+        response.ensureSuccessStatusCode();
+        return response.content.readAsStringAsync();
+      })
+      .done(
+        body => { resolve(JSON.parse(body)); },
+        err => { reject(err); }
+      );
+  });
+
+  return promise;
+};
 
 const translateArray = (initInputLang, initOutputLang, inputArr, options) =>
   generateGoogleTranslateToken(inputArr.join(''))
@@ -57,8 +78,7 @@ const translateArray = (initInputLang, initOutputLang, inputArr, options) =>
       }
 
       // Else just translate & return
-      return fetch(uri)
-        .then(res => res.json())
+      return fetchJson(uri)
         .then(outputArr => {
           const result = {
             outputArr,

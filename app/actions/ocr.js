@@ -65,11 +65,7 @@ export const initOcr = (inputFile) => ((dispatch, getState) => {
     })
     .then(() => inMemoryRandomAccessStream.flushAsync())
     .then(() => {
-      const blob = window.MSApp.createBlobFromRandomAccessStream(
-        'image/jpeg', inMemoryRandomAccessStream
-      );
-
-      translateImage(inputLang, outputLang, blob, apiKey)
+      translateImage(inputLang, outputLang, inMemoryRandomAccessStream, apiKey)
         .then(({
           originalText,
           originalSegments,

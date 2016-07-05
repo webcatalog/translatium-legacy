@@ -1,5 +1,26 @@
+/* global Windows */
+
 import generateGoogleTranslateToken from './generateGoogleTranslateToken';
 import * as languageUtils from './languageUtils';
+import httpClient from './httpClient';
+
+const fetchEvalScript = (uriString) => {
+  const uri = new Windows.Foundation.Uri(uriString);
+  const promise = new Promise((resolve, reject) => {
+    httpClient.getAsync(uri)
+      .then(response => {
+        response.ensureSuccessStatusCode();
+        return response.content.readAsStringAsync();
+      })
+      .done(
+        body => { resolve(body); },
+        err => { reject(err); }
+      );
+  });
+
+  return promise;
+};
+
 
 // Maximum encoded inputText length: 2000
 const translateShortText = (inputLang, outputLang, inputText, options) =>
@@ -19,9 +40,8 @@ const translateShortText = (inputLang, outputLang, inputText, options) =>
 
       uri = encodeURI(uri);
 
-      return fetch(uri);
+      return fetchEvalScript(uri);
     })
-    .then(res => res.text())
     /* eslint-disable */
     .then(body => eval(body))
     /* eslint-enable */

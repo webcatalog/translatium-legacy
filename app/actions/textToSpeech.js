@@ -4,9 +4,33 @@ import { PLAY_TTS, STOP_TTS } from '../constants/actions';
 
 import generateGoogleTranslateToken from '../lib/generateGoogleTranslateToken';
 import i18n from '../i18n';
+import httpClient from '../lib/httpClient';
 
 let player = null;
 let currentTimestamp;
+
+const fetchBlob = (uriString) => {
+  const uri = new Windows.Foundation.Uri(uriString);
+  const promise = new Promise((resolve, reject) => {
+    httpClient.getAsync(uri)
+      .then(response => {
+        response.ensureSuccessStatusCode();
+        return response.content.readAsBufferAsync();
+      })
+      .done(
+        buffer => {
+          const reader = Windows.Storage.Streams.DataReader.fromBuffer(buffer);
+          const bytes = new Uint8Array(buffer.length);
+          reader.readBytes(bytes);
+          const blob = new Blob([bytes], { type: 'audio/mpeg' });
+          resolve(blob);
+        },
+        err => { reject(err); }
+      );
+  });
+
+  return promise;
+};
 
 const ttsShortText = (lang, text, idx, total) =>
   generateGoogleTranslateToken(text)
@@ -16,9 +40,8 @@ const ttsShortText = (lang, text, idx, total) =>
         + `&q=${text}&textlen=${text.length}&idx=${idx}&total=${total}`
         + `&client=t&prev=input&tk=${token}`
       );
-      return fetch(uri);
+      return fetchBlob(uri);
     })
-    .then(res => res.blob())
     .then(blob => {
       if (blob) {
         const uri = URL.createObjectURL(blob, { oneTimeOnly: true });

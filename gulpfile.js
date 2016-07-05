@@ -1,10 +1,10 @@
-import gulp from 'gulp';
-import stylus from 'gulp-stylus';
-import rename from 'gulp-rename';
-import bom from 'gulp-bom';
-import webpackStream from 'webpack-stream';
-import webpack from 'webpack';
-import path from 'path';
+const gulp = require('gulp');
+const stylus = require('gulp-stylus');
+const rename = require('gulp-rename');
+const bom = require('gulp-bom');
+const webpackStream = require('webpack-stream');
+const webpack = require('webpack');
+const path = require('path');
 
 const targetDir = 'platform/www/';
 
