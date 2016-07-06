@@ -1,5 +1,13 @@
 # What's New
 
+#### 5.1.0 (6th July 2016)
+1. Fixed: Cannot connect to server on Windows Insider builds.
+2. Fixed: Preventing screen lock's not working.
+3. Translate when pressing Enter.
+4. Small bug fixes & improvements.
+
+---
+
 #### 5.0.0 (2nd July 2016)
 1. No more hamburger button! Tab bar is the future!
 2. Many UI & UX changes.
