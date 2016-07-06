@@ -2,31 +2,13 @@
 
 import { ocrSpaceStandardlizedLanguage } from './languageUtils';
 import translateArray from './translateArray';
-import httpClient from './httpClient';
-
-const fetchOcr = (multipartContent) => {
-  const uriString = 'https://api.ocr.space/Parse/Image';
-  const uri = new Windows.Foundation.Uri(uriString);
-  const promise = new Promise((resolve, reject) => {
-    httpClient.postAsync(uri, multipartContent)
-      .then(response => {
-        response.ensureSuccessStatusCode();
-        return response.content.readAsStringAsync();
-      })
-      .done(
-        body => { resolve(JSON.parse(body)); },
-        err => { reject(err); }
-      );
-  });
-
-  return promise;
-};
+import winXhr from './winXhr';
 
 const translateImage = (inputLang, outputLang, inputStream, apiKey) => {
   const httpMultipartFormDataContent = new Windows.Web.Http.HttpMultipartFormDataContent();
 
   httpMultipartFormDataContent.add(
-    new Windows.Web.Http.HttpStreamContent(inputStream),
+    new Windows.Web.Http.HttpStreamContent(inputStream.getInputStreamAt(0)),
     'file', 'image.jpg'
   );
   httpMultipartFormDataContent.add(
@@ -42,7 +24,12 @@ const translateImage = (inputLang, outputLang, inputStream, apiKey) => {
     'isOverlayRequired'
   );
 
-  return fetchOcr(httpMultipartFormDataContent)
+  return winXhr({
+    type: 'post',
+    uri: 'https://api.ocr.space/Parse/Image',
+    responseType: 'json',
+    data: httpMultipartFormDataContent,
+  })
   .then(result => {
     // Successful
     if (result.OCRExitCode === 1) {

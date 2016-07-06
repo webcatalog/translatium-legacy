@@ -49,9 +49,12 @@ export const stopRecording = () => ((dispatch, getState) => {
         mediaCaptureMgr = null;
         const systemMediaControls = Windows.Media.SystemMediaTransportControls.getForCurrentView();
         systemMediaControls.onpropertychanged = null;
-
+        return soundStream.flushAsync();
+      })
+      .then(() => {
         recognizeSpeech(inputLang, soundStream)
           .then(({ outputText }) => {
+            soundStream = null;
             dispatch(updateInputText(`${inputText} ${outputText}`));
             dispatch({
               type: UPDATE_SPEECH_RECOGNITION_STATUS,

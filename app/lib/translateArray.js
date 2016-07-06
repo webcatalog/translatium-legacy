@@ -3,24 +3,7 @@
 import generateGoogleTranslateToken from './generateGoogleTranslateToken';
 import * as languageUtils from './languageUtils';
 
-import httpClient from './httpClient';
-
-const fetchJson = (uriString) => {
-  const uri = new Windows.Foundation.Uri(uriString);
-  const promise = new Promise((resolve, reject) => {
-    httpClient.getAsync(uri)
-      .then(response => {
-        response.ensureSuccessStatusCode();
-        return response.content.readAsStringAsync();
-      })
-      .done(
-        body => { resolve(JSON.parse(body)); },
-        err => { reject(err); }
-      );
-  });
-
-  return promise;
-};
+import winXhr from './winXhr';
 
 const translateArray = (initInputLang, initOutputLang, inputArr, options) =>
   generateGoogleTranslateToken(inputArr.join(''))
@@ -56,11 +39,15 @@ const translateArray = (initInputLang, initOutputLang, inputArr, options) =>
         let leftArr;
         let rightArr;
         promises.push(
-          fetch(uri)
-            .then(res => res.json())
-            .then(outputArr => {
-              leftArr = outputArr;
-            })
+          winXhr({
+            type: 'get',
+            uri,
+            responseType: 'json',
+          })
+          .then(res => res.json())
+          .then(outputArr => {
+            leftArr = outputArr;
+          })
         );
         promises.push(
           translateArray(inputLang, outputLang, nextArr)
@@ -78,14 +65,18 @@ const translateArray = (initInputLang, initOutputLang, inputArr, options) =>
       }
 
       // Else just translate & return
-      return fetchJson(uri)
-        .then(outputArr => {
-          const result = {
-            outputArr,
-            provider: 'Google',
-          };
-          return result;
-        });
+      return winXhr({
+        type: 'get',
+        uri,
+        responseType: 'json',
+      })
+      .then(outputArr => {
+        const result = {
+          outputArr,
+          provider: 'Google',
+        };
+        return result;
+      });
     });
 
 export default translateArray;

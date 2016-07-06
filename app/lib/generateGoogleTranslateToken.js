@@ -1,42 +1,27 @@
 /* global Windows */
 
-import httpClient from './httpClient';
-
-const fetchGoogleTkk = () => {
-  const uriString = 'https://translate.google.com/m/translate';
-  const uri = new Windows.Foundation.Uri(uriString);
-  const promise = new Promise((resolve, reject) => {
-    httpClient.getAsync(uri)
-      .then(response => {
-        response.ensureSuccessStatusCode();
-        return response.content.readAsStringAsync();
-      })
-      .done(
-        body => { resolve(body); },
-        err => { reject(err); }
-      );
-  });
-
-  return promise;
-};
-
+import winXhr from './winXhr';
 
 const getGoogleTkk = () => {
   if (sessionStorage.getItem('googleTkk') === null) {
-    return fetchGoogleTkk()
-      .then(body => {
-        const startStr = 'campaign_tracker_id:\'1h\',tkk:';
-        const endStr = ',enable_formality:false';
-        const startI = body.indexOf(startStr) + startStr.length;
-        const endI = body.indexOf(endStr);
-        const tkkEval = body.substring(startI, endI);
+    return winXhr({
+      type: 'get',
+      uri: 'https://translate.google.com/m/translate',
+      responseType: 'text',
+    })
+    .then(body => {
+      const startStr = 'campaign_tracker_id:\'1h\',tkk:';
+      const endStr = ',enable_formality:false';
+      const startI = body.indexOf(startStr) + startStr.length;
+      const endI = body.indexOf(endStr);
+      const tkkEval = body.substring(startI, endI);
 
-        /* eslint-disable */
-        const x = eval(eval(tkkEval));
-        /* eslint-enable */
-        sessionStorage.setItem('googleTkk', x);
-        return sessionStorage.getItem('googleTkk');
-      });
+      /* eslint-disable */
+      const x = eval(eval(tkkEval));
+      /* eslint-enable */
+      sessionStorage.setItem('googleTkk', x);
+      return sessionStorage.getItem('googleTkk');
+    });
   }
   return Promise.resolve(sessionStorage.getItem('googleTkk'));
 };
