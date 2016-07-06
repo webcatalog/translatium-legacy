@@ -1,4 +1,4 @@
-/* global Windows WinJS */
+/* global Windows */
 
 import React from 'react';
 import ReactWinJS from 'react-winjs';

@@ -27,6 +27,13 @@ const ChooseLanguage = ({
   else if (type === 'ocrInputLang') languages = getOcrSupportedLanguages();
   else languages = getOutputLanguages();
 
+  languages.sort((x, y) => {
+    if (x === 'auto') return -1;
+    if (y === 'auto') return 1;
+    return i18n(`/languages/${x}`).localeCompare(i18n(`/languages/${y}`));
+  });
+
+
   return (
     <Animation name="enterPage">
       <div className="app-choose-a-language-page">
