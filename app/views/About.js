@@ -15,7 +15,7 @@ const About = () => (
         <h4 className="win-h4" style={{ marginTop: 18 }}>
           Modern Translator
         </h4>
-        <h5 className="win-h5">5.1.0</h5>
+        <h5 className="win-h5">5.1.1</h5>
         <button
           className="win-button"
           onClick={() => openUri('https://moderntranslator.com')}

@@ -73,7 +73,6 @@ class Layout extends React.Component {
       const { location } = this.props;
       if (canGoBack(location) === true) {
         onBackClick();
-      } else {
         /* eslint-disable */
         e.handled = true;
         /* eslint-enable */
@@ -174,7 +173,8 @@ class Layout extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.props.onResize);
-    WinJS.Application.onbackclick = null;
+    const systemNavigationManager = Windows.UI.Core.SystemNavigationManager.getForCurrentView();
+    systemNavigationManager.onbackrequested = null;
   }
 
   render() {

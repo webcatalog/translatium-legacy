@@ -1,4 +1,4 @@
-/* global WinJS */
+/* global Windows */
 
 import React from 'react';
 import { connect } from 'react-redux';
@@ -13,14 +13,14 @@ class SpeechRecognition extends React.Component {
   componentWillMount() {
     const { onReleaseDevice } = this.props;
 
-    WinJS.Application.addEventListener('checkpoint', onReleaseDevice);
+    Windows.UI.WebUI.WebUIApplication.addEventListener('suspending', onReleaseDevice);
   }
 
   componentWillUnmount() {
     const { onReleaseDevice } = this.props;
 
     onReleaseDevice();
-    WinJS.Application.removeEventListener('checkpoint', onReleaseDevice);
+    Windows.UI.WebUI.WebUIApplication.removeEventListener('suspending', onReleaseDevice);
   }
 
   handleClickOutside() {

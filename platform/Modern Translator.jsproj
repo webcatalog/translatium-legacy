@@ -131,6 +131,6 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <AppxPackageDir>C:\z\</AppxPackageDir>
+    <AppxPackageDir>C:\a\</AppxPackageDir>
   </PropertyGroup>
 </Project>
