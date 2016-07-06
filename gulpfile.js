@@ -50,7 +50,7 @@ gulp.task('webpack', () =>
         root: path.resolve('app'),
       },
       plugins: [
-        /*new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
           compress: {
@@ -65,7 +65,7 @@ gulp.task('webpack', () =>
           'process.env': {
             NODE_ENV: JSON.stringify('production'),
           },
-        }),*/
+        }),
       ],
     }))
     .pipe(bom())

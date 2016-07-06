@@ -80,9 +80,10 @@ export const updateInputText = (inputText) => ((dispatch, getState) => {
 
   dispatch({ type: UPDATE_INPUT_TEXT, inputText });
 
-  if (inputText.length === 0) dispatch(clearHome());
-
-  if (realtime === true && inputExpanded === false) dispatch(translate());
+  if (inputText.trim().length === 0) dispatch(clearHome());
+  else {
+    if (realtime === true && inputExpanded === false) dispatch(translate());
+  }
 });
 
 export const translateWithInfo = (inputLang, outputLang, inputText) =>

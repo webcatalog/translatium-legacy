@@ -20,6 +20,7 @@ const Settings = ({
   chinaMode,
   realtime,
   preventingScreenLock,
+  translateWhenPressingEnter,
   onSettingChange,
 }) => (
   <Animation name="enterPage">
@@ -86,15 +87,20 @@ const Settings = ({
         checked={realtime}
         onChange={e => onSettingChange('realtime', e.currentTarget.winControl.checked)}
       />
-      <h4 className="win-h4" style={{ marginTop: 24 }}>
-        {i18n('advanced')}
-      </h4>
       <h5 className="win-h5" style={{ marginTop: 12 }}>
         {i18n('preventing-screen-lock')}
       </h5>
       <ReactWinJS.ToggleSwitch
         checked={preventingScreenLock}
         onChange={e => onSettingChange('preventingScreenLock', e.currentTarget.winControl.checked)}
+      />
+      <h5 className="win-h5" style={{ marginTop: 12 }}>
+        {i18n('translate-when-pressing-enter')}
+      </h5>
+      <ReactWinJS.ToggleSwitch
+        checked={translateWhenPressingEnter}
+        onChange={e =>
+          onSettingChange('translateWhenPressingEnter', e.currentTarget.winControl.checked)}
       />
       <div style={{ height: 2 }} />
     </div>
@@ -107,6 +113,7 @@ Settings.propTypes = {
   chinaMode: React.PropTypes.bool.isRequired,
   realtime: React.PropTypes.bool.isRequired,
   preventingScreenLock: React.PropTypes.bool.isRequired,
+  translateWhenPressingEnter: React.PropTypes.bool.isRequired,
   onSettingChange: React.PropTypes.func.isRequired,
 };
 
@@ -116,6 +123,7 @@ const mapStateToProps = (state) => ({
   chinaMode: state.settings.chinaMode,
   realtime: state.settings.realtime,
   preventingScreenLock: state.settings.preventingScreenLock,
+  translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
 });
 
 const mapDispatchToProps = (dispatch) => ({

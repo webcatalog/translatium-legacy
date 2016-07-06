@@ -56,7 +56,7 @@
 	"china-mode"		:		"Chế độ Trung Quốc",
 	"china-mode-desc"		:		"Nếu chế độ Trung Quốc được bật, Google Translate Trung Quốc (không bị chặn ở Trung Quốc) sẽ được sử dụng.",
 	"real-time-translation"		:		"Dịch thời gian thực",
-	"advanced"		:		"Nâng cao",
+	"translate-when-pressing-enter"		:		"Dịch khi nhấn Enter",
 	"choose-an-input-language"		:		"Chọn một ngôn ngữ đầu vào",
 	"choose-an-output-language"		:		"Chọn một ngôn ngữ đầu ra",
 	"preventing-screen-lock"		:		"Ngăn khoá màn hình",

@@ -56,7 +56,7 @@
 	"china-mode"		:		"China Mode",
 	"china-mode-desc"		:		"If China Mode is turned on, Google Translate China, which is not blocked in China, will be used.",
 	"real-time-translation"		:		"Real-time Translation",
-	"advanced"		:		"Advanced",
+	"translate-when-pressing-enter"		:		"Translate when pressing Enter",
 	"choose-an-input-language"		:		"Choose an input language",
 	"choose-an-output-language"		:		"Choose an output language",
 	"preventing-screen-lock"		:		"Preventing screen lock",

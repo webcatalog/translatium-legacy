@@ -13,6 +13,7 @@ const defaultState = {
   recentLanguages: ['en', 'zh'],
   preventingScreenLock: false,
   launchTime: 0,
+  translateWhenPressingEnter: true,
 };
 
 const getInitialValue = (name) => {

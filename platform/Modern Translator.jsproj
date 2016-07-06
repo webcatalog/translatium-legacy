@@ -52,7 +52,7 @@
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile>Modern Translator_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Modern Translator_StoreKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -127,10 +127,10 @@
   </Target>
   <PropertyGroup>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-    <PackageCertificateThumbprint>2C39E01CB8FB6D36625FB9D27DB7D9101CD6AB22</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>7F30D8A153642CE7CCFED8B0DC187B8AB6D6DF67</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <AppxPackageDir>C:\y\</AppxPackageDir>
+    <AppxPackageDir>C:\z\</AppxPackageDir>
   </PropertyGroup>
 </Project>
