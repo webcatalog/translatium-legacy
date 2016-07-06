@@ -1,5 +1,10 @@
 # What's New
 
+#### 5.1.1 (6th July 2016)
+1. Fixed: Back button does not work correctly.
+
+---
+
 #### 5.1.0 (6th July 2016)
 1. Fixed: Cannot connect to server on Windows Insider builds.
 2. Fixed: Preventing screen lock's not working.
