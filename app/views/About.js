@@ -1,3 +1,5 @@
+/* global Windows */
+
 import React from 'react';
 
 import openUri from '../openUri';
@@ -13,9 +15,9 @@ const About = () => (
       </div>
       <div className="app-info">
         <h4 className="win-h4" style={{ marginTop: 18 }}>
-          Modern Translator
+          {process.env.APP_PROFILE === 'lite' ? 'Modern Translator Lite' : 'Modern Translator'}
         </h4>
-        <h5 className="win-h5">5.1.1</h5>
+        <h5 className="win-h5">5.1.2</h5>
         <button
           className="win-button"
           onClick={() => openUri('https://moderntranslator.com')}
@@ -24,7 +26,7 @@ const About = () => (
         </button>
         <button
           className="win-button"
-          onClick={() => openUri('ms-windows-store://pdp/?ProductId=9wzdncrcsg9k')}
+          onClick={() => openUri(`ms-windows-store://pdp/?PFN=${Windows.ApplicationModel.Package.current.id.familyName}`)}
         >
           {i18n('view-on-store')}
         </button>
@@ -82,7 +84,7 @@ const About = () => (
         <button
           className="win-button"
           style={{ marginTop: 6 }}
-          onClick={() => openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}
+          onClick={() => openUri(`ms-windows-store://review/?PFN=${Windows.ApplicationModel.Package.current.id.familyName}`)}
         >
           {i18n('give-us-5-star')}
         </button>

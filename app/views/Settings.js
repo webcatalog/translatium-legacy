@@ -128,7 +128,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onSettingChange: (name, value) => {
-    if ((name === 'theme' || name === 'primary-color') && isFull() !== true) {
+    if ((name === 'theme' || name === 'primaryColor') && isFull() !== true) {
       showUpgradeDialog();
     } else {
       dispatch(updateSetting(name, value));

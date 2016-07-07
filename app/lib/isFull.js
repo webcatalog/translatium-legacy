@@ -1,9 +1,9 @@
 /* global Windows */
 
-const currentApp = Windows.ApplicationModel.Store.CurrentApp;
+const isFull = () => {
+  if (process.env.APP_PROFILE === 'lite') return false;
 
-const isFull = () => !currentApp.licenseInformation.isTrial;
-
-// const isFull = () => true;
+  return Windows.ApplicationModel.Store.CurrentApp.licenseInformation.isTrial === false;
+};
 
 export default isFull;

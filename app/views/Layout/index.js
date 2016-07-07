@@ -117,7 +117,7 @@ class Layout extends React.Component {
           new Windows.UI.Popups.UICommand(
             i18n('ok-sure'),
             () => {
-              openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k');
+              openUri(`ms-windows-store://review/?PFN=${Windows.ApplicationModel.Package.current.id.familyName}`);
             }
           )
         );

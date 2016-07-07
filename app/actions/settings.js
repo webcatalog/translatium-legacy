@@ -12,7 +12,7 @@ export const updateSetting = (name, value) => ({
   name, value,
 });
 
-const runAfterLanguageChange = (language, isOcr) => ((dispatch, getState) => {
+const runAfterLanguageChange = (isOcr, language) => ((dispatch, getState) => {
   const { settings, ocr } = getState();
   const { realtime, recentLanguages } = settings;
   const { inputFile } = ocr;
@@ -24,6 +24,8 @@ const runAfterLanguageChange = (language, isOcr) => ((dispatch, getState) => {
     else dispatch(clearHome());
   }
 
+  if (!language) return;
+
   if (recentLanguages.indexOf(language) < 0 && language !== 'auto') {
     recentLanguages.unshift(language);
   }
@@ -33,12 +35,12 @@ const runAfterLanguageChange = (language, isOcr) => ((dispatch, getState) => {
 
 export const updateInputLang = (value, isOcr) => ((dispatch) => {
   dispatch(updateSetting('inputLang', value));
-  dispatch(runAfterLanguageChange(value, isOcr));
+  dispatch(runAfterLanguageChange(isOcr, value));
 });
 
 export const updateOutputLang = (value, isOcr) => ((dispatch) => {
   dispatch(updateSetting('outputLang', value));
-  dispatch(runAfterLanguageChange(value, isOcr));
+  dispatch(runAfterLanguageChange(isOcr, value));
 });
 
 export const swapLanguages = (isOcr) => ((dispatch, getState) => {

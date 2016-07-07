@@ -102,6 +102,7 @@
     <Content Include="images\Wide310x150.scale-400.png" />
     <None Include="Modern Translator_TemporaryKey.pfx" />
     <None Include="Modern Translator_StoreKey.pfx" />
+    <Content Include="www\index.html" />
     <Content Include="www\winjs\css\ui-dark.min.css" />
     <Content Include="www\winjs\css\ui-light.min.css" />
     <Content Include="www\winjs\js\base.min.js" />
@@ -109,7 +110,6 @@
     <Content Include="www\app-dark.min.css" />
     <Content Include="www\app-light.min.css" />
     <Content Include="www\bundle.min.js" />
-    <Content Include="www\index.html" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="strings\en-us\languages.resjson" />
@@ -130,6 +130,6 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <AppxPackageDir>C:\b\</AppxPackageDir>
+    <AppxPackageDir>C:\b-lite\</AppxPackageDir>
   </PropertyGroup>
 </Project>

@@ -1,6 +1,7 @@
 /* global Windows */
 
 import i18n from '../i18n';
+import openUri from '../openUri';
 
 const showUpgradeDialog = () => {
   const title = i18n('sorry');
@@ -10,9 +11,13 @@ const showUpgradeDialog = () => {
     new Windows.UI.Popups.UICommand(
       i18n('upgrade-now'),
       () => {
-        Windows.ApplicationModel.Store.CurrentApp
-          .requestAppPurchaseAsync(false)
-          .done();
+        if (process.env.APP_PROFILE === 'lite') {
+          openUri('ms-windows-store://pdp/?ProductId=9wzdncrcsg9k');
+        } else {
+          Windows.ApplicationModel.Store.CurrentApp
+            .requestAppPurchaseAsync(false)
+            .done();
+        }
       }
     )
   );
