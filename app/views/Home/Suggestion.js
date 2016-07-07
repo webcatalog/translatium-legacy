@@ -9,7 +9,7 @@ import { materialDesignColors } from '../../constants/colors';
 
 import { countryRemovedLanguage } from '../../lib/languageUtils';
 
-import { updateSetting } from '../../actions/settings';
+import { updateInputLang } from '../../actions/settings';
 import { updateInputText, translate } from '../../actions/home';
 
 const Suggestion = ({
@@ -93,7 +93,7 @@ Suggestion.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onLanguageClick: (inputLang) => {
-    dispatch(updateSetting('inputLang', inputLang));
+    dispatch(updateInputLang(inputLang));
     dispatch(translate());
   },
   onTextClick: (inputText) => {

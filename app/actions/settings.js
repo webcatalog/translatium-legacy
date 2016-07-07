@@ -12,9 +12,9 @@ export const updateSetting = (name, value) => ({
   name, value,
 });
 
-const runAfterLanguageChange = (isOcr) => ((dispatch, getState) => {
+const runAfterLanguageChange = (language, isOcr) => ((dispatch, getState) => {
   const { settings, ocr } = getState();
-  const { realtime } = settings;
+  const { realtime, recentLanguages } = settings;
   const { inputFile } = ocr;
 
   if (isOcr === true) {
@@ -23,19 +23,22 @@ const runAfterLanguageChange = (isOcr) => ((dispatch, getState) => {
     if (realtime === true) dispatch(translate());
     else dispatch(clearHome());
   }
-});
 
-export const updateLanguage = (name, value, isOcr) => ((dispatch, getState) => {
-  const { recentLanguages } = getState().settings;
-
-  dispatch(updateSetting(name, value));
-  dispatch(runAfterLanguageChange(isOcr));
-
-  if (recentLanguages.indexOf(value) < 0 && value !== 'auto') {
-    recentLanguages.unshift(value);
+  if (recentLanguages.indexOf(language) < 0 && language !== 'auto') {
+    recentLanguages.unshift(language);
   }
 
   dispatch(updateSetting('recentLanguages', recentLanguages.slice(0, 6)));
+});
+
+export const updateInputLang = (value, isOcr) => ((dispatch) => {
+  dispatch(updateSetting('inputLang', value));
+  dispatch(runAfterLanguageChange(value, isOcr));
+});
+
+export const updateOutputLang = (value, isOcr) => ((dispatch) => {
+  dispatch(updateSetting('outputLang', value));
+  dispatch(runAfterLanguageChange(value, isOcr));
 });
 
 export const swapLanguages = (isOcr) => ((dispatch, getState) => {

@@ -8,7 +8,7 @@ import renderRoutes from './renderRoutes';
 
 import { isInput, isOutput } from './lib/languageUtils';
 import { clearHome, updateInputText } from './actions/home';
-import { updateSetting } from './actions/settings';
+import { updateInputLang, updateOutputLang } from './actions/settings';
 
 Windows.UI.WebUI.WebUIApplication.onactivated = (args) => {
   switch (args.kind) {
@@ -27,10 +27,10 @@ Windows.UI.WebUI.WebUIApplication.onactivated = (args) => {
         store.dispatch(clearHome());
 
         if (params.outputLang && isOutput(params.outputLang)) {
-          store.dispatch(updateSetting('outputLang', params.outputLang));
+          store.dispatch(updateOutputLang(params.outputLang));
         }
         if (params.inputLang && isInput(params.inputLang)) {
-          store.dispatch(updateSetting('inputLang', params.inputLang));
+          store.dispatch(updateInputLang(params.inputLang));
         }
       }
       break;
@@ -54,8 +54,8 @@ Windows.UI.WebUI.WebUIApplication.onactivated = (args) => {
         const lang = args.arguments
             .substr(13, args.arguments.length - 13)
             .split('_');
-        store.dispatch(updateSetting('inputLang', lang[0]));
-        store.dispatch(updateSetting('outputLang', lang[1]));
+        store.dispatch(updateInputLang(lang[0]));
+        store.dispatch(updateOutputLang(lang[1]));
       }
       break;
     }

@@ -121,7 +121,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <Target Name="BeforeBuild">
-    <Exec Command="gulp build --gulpfile ../gulpfile.js" />
   </Target>
   <Target Name="AfterBuild">
   </Target>

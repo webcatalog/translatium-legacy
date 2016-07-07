@@ -12,7 +12,7 @@ import {
   getOcrSupportedLanguages,
 } from '../lib/languageUtils';
 
-import { updateLanguage } from '../actions/settings';
+import { updateInputLang, updateOutputLang } from '../actions/settings';
 
 import Animation from './Animation';
 
@@ -89,13 +89,15 @@ ChooseLanguage.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onLanguageClick: (type, value) => {
-    let name = type;
-    if (type === 'ocrInputLang') name = 'inputLang';
-    if (type === 'ocrOutputLang') name = 'outputLang';
-
     const isOcr = type === 'ocrInputLang' || type === 'ocrOutputLang';
 
-    dispatch(updateLanguage(name, value, isOcr));
+    if (type === 'ocrInputLang' || type === 'inputLang') {
+      dispatch(updateInputLang(value, isOcr));
+    }
+    if (type === 'ocrOutputLang' || type === 'outputLang') {
+      dispatch(updateOutputLang(value, isOcr));
+    }
+
     dispatch(goBack());
   },
 });

@@ -7,7 +7,7 @@ import {
 
 import translateText from '../lib/translateText';
 
-import { updateSetting } from './settings';
+import { updateInputLang, updateOutputLang } from './settings';
 
 const phrasebookDb = new PouchDB('favorites');
 
@@ -88,8 +88,8 @@ export const updateInputText = (inputText) => ((dispatch, getState) => {
 
 export const translateWithInfo = (inputLang, outputLang, inputText) =>
   ((dispatch) => {
-    dispatch(updateSetting('inputLang', inputLang));
-    dispatch(updateSetting('outputLang', outputLang));
+    dispatch(updateInputLang(inputLang));
+    dispatch(updateOutputLang(outputLang));
 
     dispatch({
       type: UPDATE_HOME_MULTIPLE,
@@ -104,8 +104,8 @@ export const loadInfo = ({
   inputText, outputText,
   inputDict, outputDict,
 }) => ((dispatch) => {
-  if (inputLang) dispatch(updateSetting('inputLang', inputLang));
-  if (outputLang) dispatch(updateSetting('outputLang', outputLang));
+  if (inputLang) dispatch(updateInputLang(inputLang));
+  if (outputLang) dispatch(updateOutputLang(outputLang));
 
   dispatch(clearHome());
 
