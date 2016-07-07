@@ -1,5 +1,13 @@
 # What's New
 
+#### 5.1.2 (7th July 2016)
+Please apologize me for too many updates in such a short time. :(
+1. Fixed: Language list is not sorted by alphabet.
+2. [Lite version of Modern Translator](https://www.microsoft.com/store/apps/9nblggh5z36t) is now available on Windows Store with the same limitations as the trial one.
+
+---
+
+
 #### 5.1.1 (6th July 2016)
 1. Fixed: Back button does not work correctly.
 
