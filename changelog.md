@@ -1,5 +1,11 @@
 # What's New
 
+#### 5.2.0 (11th July 2016)
+1. Image translation (OCR) is more stable and supports more languages.
+
+---
+
+
 #### 5.1.2 (7th July 2016)
 Please apologize me for too many updates in such a short time. :(
 1. Fixed: Language list is not sorted by alphabet.

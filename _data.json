@@ -26,8 +26,11 @@
       "sd", "ps", "am"
     ],
     "ocrSupported": [
-      "en", "zh-CN", "zh-TW", "cs", "da", "nl", "fi", "fr", "de", "el", "hu", "it", "ja", "ko",
-      "no", "pl", "pt", "ru", "es", "sv", "tr"
+      "cs", "da", "nl", "en", "fi",
+      "fr", "de", "hu", "it", "no",
+      "pl", "pt", "ro", "sr", "sk",
+      "es", "sv", "zh-CN", "zh-TW",
+      "el", "ja", "ru", "tr", "ko"
     ],
     "languages": {
       "sn"		:		"Shona",
