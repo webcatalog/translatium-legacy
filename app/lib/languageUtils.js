@@ -38,31 +38,16 @@ const data = {
     'sw', 'sv', 'ta', 'th', 'tr', 'vi', 'cy',
   ],
   handwritingNotSupported: [
-    'hy', 'ka', 'ig', 'ha', 'yo', 'yi', 'st', 'kk', 'tg', 'uz', 'tlh', 'otq', 'yua',
+    'hy', 'ka', 'ig', 'ha', 'yo', 'yi', 'st', 'kk', 'tg', 'uz',
     'sd', 'ps', 'am',
   ],
-  ocrSpaceCodes: {
-    cs: 'ce',
-    da: 'dan',
-    nl: 'dut',
-    en: 'eng',
-    fi: 'fin',
-    de: 'ger',
-    hu: 'hun',
-    it: 'ita',
-    no: 'nor',
-    pl: 'pol',
-    pt: 'por',
-    es: 'spa',
-    sv: 'swe',
-    'zh-CN': 'chs',
-    'zh-TW': 'cht',
-    el: 'gre',
-    ja: 'jpn',
-    ru: 'rus',
-    tr: 'tur',
-    ko: 'kor',
-  },
+  ocrSupported: [
+    'cs', 'da', 'nl', 'en', 'fi',
+    'fr', 'de', 'hu', 'it', 'no',
+    'pl', 'pt', 'ro', 'sr', 'sk',
+    'es', 'sv', 'zh-CN', 'zh-TW',
+    'el', 'ja', 'ru', 'tr', 'ko',
+  ],
 };
 
 export const googleStandardlizedLanguage = lang => {
@@ -84,11 +69,9 @@ export const ocrStandardlizedLanguage = lang => {
   return lang;
 };
 
-export const ocrSpaceStandardlizedLanguage = lang =>
-  data.ocrSpaceCodes[ocrStandardlizedLanguage(lang)];
-
 // Check if language supports OCR
-export const isOcrSupported = lang => (ocrStandardlizedLanguage(lang) in data.ocrSpaceCodes);
+export const isOcrSupported = lang =>
+  (data.ocrSupported.indexOf(ocrStandardlizedLanguage(lang)) > -1);
 
 // Check if language is supported as input
 export const isInput = lang => !(data.all.indexOf(lang) > -1);

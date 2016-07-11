@@ -97,5 +97,6 @@
 	"how-are-about-a-rating"		:		"How about a rating on Windows Store, then?",
 	"ok-sure"		:		"Ok, sure!",
 	"no-thanks"		:		"No, thanks",
-	"would-you-mind-giving-us-some-feedback": "Would you mind giving us some feedback?"
+	"would-you-mind-giving-us-some-feedback"		:		"Would you mind giving us some feedback?",
+	"need-language-pack-installed"		:		"To continue, you need to open Settings app, go to Time and language, choose Add a language section, and then choose {1} to install the required software packages."
 }

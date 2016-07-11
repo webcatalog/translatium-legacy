@@ -1,36 +1,51 @@
 /* global Windows */
 import { UPDATE_OCR_MULTIPLE, TOGGLE_SHOW_ORIGINAL } from '../constants/actions';
 
-import translateImage from '../lib/translateImage';
+import { ocrStandardlizedLanguage } from '../lib/languageUtils';
+import translateArray from '../lib/translateArray';
 
-const apiKey = '0088228ab088957';
-
-export const resetOcr = () => ({
-  type: UPDATE_OCR_MULTIPLE,
-  newValue: {
-    ocrStatus: 'loading',
-    originalText: null,
-    originalSegments: null,
-    translatedText: null,
-    translatedSegments: null,
-    imgHeight: null,
-    imgWidth: null,
-    ratio: null,
-    inputFile: null,
-    showOriginal: false,
-  },
-});
+let promise;
 
 export const initOcr = (inputFile) => ((dispatch, getState) => {
   const { inputLang, outputLang } = getState().settings;
 
-  dispatch(resetOcr());
+  dispatch({
+    type: UPDATE_OCR_MULTIPLE,
+    newValue: {
+      ocrStatus: 'loading',
+      originalText: null,
+      originalSegments: null,
+      translatedText: null,
+      translatedSegments: null,
+      imgHeight: null,
+      imgWidth: null,
+      ratio: null,
+      inputFile,
+      showOriginal: false,
+    },
+  });
+
+  if (promise) promise.cancel();
+
+  const ocrEngine = Windows.Media.Ocr.OcrEngine.tryCreateFromLanguage(
+    new Windows.Globalization.Language(ocrStandardlizedLanguage(inputLang))
+  );
+
+  if (!ocrEngine) {
+    dispatch({
+      type: UPDATE_OCR_MULTIPLE,
+      newValue: {
+        ocrStatus: 'needOcrLang',
+      },
+    });
+    return;
+  }
 
   let imgWidth;
   let imgHeight;
   let ratio;
-  const inMemoryRandomAccessStream = new Windows.Storage.Streams.InMemoryRandomAccessStream();
-  inputFile.openAsync(Windows.Storage.FileAccessMode.read)
+
+  promise = inputFile.openAsync(Windows.Storage.FileAccessMode.read)
     .then(stream => {
       const bitmapDecoder = Windows.Graphics.Imaging.BitmapDecoder;
       return bitmapDecoder.createAsync(stream);
@@ -51,21 +66,64 @@ export const initOcr = (inputFile) => ((dispatch, getState) => {
       imgHeight = Math.floor(imgHeight * ratio);
       imgWidth = Math.floor(imgWidth * ratio);
 
-      return Windows.Graphics.Imaging.BitmapEncoder.createForTranscodingAsync(
-        inMemoryRandomAccessStream, decoder
+
+      if (ratio === 1) return decoder.getSoftwareBitmapAsync();
+
+      const bitmapTransform = new Windows.Graphics.Imaging.BitmapTransform();
+      bitmapTransform.scaledHeight = imgHeight;
+      bitmapTransform.scaledWidth = imgWidth;
+
+      return decoder.getSoftwareBitmapAsync(
+        Windows.Graphics.Imaging.BitmapPixelFormat.unknown,
+        Windows.Graphics.Imaging.BitmapAlphaMode.premultiplied,
+        bitmapTransform,
+        Windows.Graphics.Imaging.ExifOrientationMode.ignoreExifOrientation,
+        Windows.Graphics.Imaging.ColorManagementMode.doNotColorManage
       );
     })
-    .then(encoder => {
-      const e = encoder;
-      if (ratio !== 1) {
-        e.bitmapTransform.scaledHeight = imgHeight;
-        e.bitmapTransform.scaledWidth = imgWidth;
-      }
-      return e.flushAsync();
-    })
-    .then(() => inMemoryRandomAccessStream.flushAsync())
-    .then(() => {
-      translateImage(inputLang, outputLang, inMemoryRandomAccessStream, apiKey)
+    .then(bitmap => ocrEngine.recognizeAsync(bitmap))
+    .then(result => {
+      Promise.resolve()
+        .then(() => {
+          const originalText = result.text;
+          const originalSegments = result.lines;
+          if (inputLang === outputLang) {
+            return {
+              originalText,
+              originalSegments,
+              translatedText: originalText,
+              translatedSegments: originalSegments,
+            };
+          }
+
+          const inputArr = originalSegments.map(line => {
+            let lineText = '';
+            line.words.forEach(word => {
+              lineText += `${word.text} `;
+            });
+            return lineText;
+          });
+
+          return translateArray(inputLang, outputLang, inputArr)
+            .then(({ outputArr }) => {
+              const translatedSegments = originalSegments.map((line, i) => ({
+                text: outputArr[i],
+                boundingRect: line.words[0].boundingRect,
+              }));
+
+              let translatedText = '';
+              translatedSegments.forEach(line => {
+                translatedText += `${line.text}\n`;
+              });
+
+              return {
+                originalText,
+                originalSegments,
+                translatedText,
+                translatedSegments,
+              };
+            });
+        })
         .then(({
           originalText,
           originalSegments,
@@ -88,23 +146,22 @@ export const initOcr = (inputFile) => ((dispatch, getState) => {
             },
           });
         })
-        .catch(err => {
-          if (err.message === 'OCRSpace failed to recognize your image.') {
-            dispatch({
-              type: UPDATE_OCR_MULTIPLE,
-              newValue: {
-                ocrStatus: 'noTextRecognized',
-              },
-            });
-          } else {
-            dispatch({
-              type: UPDATE_OCR_MULTIPLE,
-              newValue: {
-                ocrStatus: 'failedToConnect',
-              },
-            });
-          }
+        .catch(() => {
+          dispatch({
+            type: UPDATE_OCR_MULTIPLE,
+            newValue: {
+              ocrStatus: 'failedToConnect',
+            },
+          });
         });
+    })
+    .then(null, () => {
+      dispatch({
+        type: UPDATE_OCR_MULTIPLE,
+        newValue: {
+          ocrStatus: 'noTextRecognized',
+        },
+      });
     });
 });
 

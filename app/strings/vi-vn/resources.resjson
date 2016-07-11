@@ -97,5 +97,6 @@
 	"how-are-about-a-rating"		:		"Vậy bạn có thể đánh giá ứng dụng của chúng tôi trên Windows Store chứ?",
 	"ok-sure"		:		"OK, không thành vấn đề!",
 	"no-thanks"		:		"Không, cảm ơn",
-	"would-you-mind-giving-us-some-feedback"		:		"Bạn có thể cho chúng tôi một vài góp ý được không?"
+	"would-you-mind-giving-us-some-feedback"		:		"Bạn có thể cho chúng tôi một vài góp ý được không?",
+	"need-language-pack-installed"		:		"Để tiếp tục, bạn cần mở ứng dụng Cài đặt, vào mục Thời gian và ngôn ngữ, chọn Thêm ngôn ngữ, sau đó chọn {1} để cài đặt các gói phần mềm cần thiết."
 }

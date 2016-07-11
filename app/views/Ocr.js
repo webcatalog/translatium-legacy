@@ -8,6 +8,7 @@ import { goBack } from 'react-router-redux';
 import Animation from './Animation';
 
 import i18n from '../i18n';
+import openUri from '../openUri';
 
 import { initOcr, toggleShowOriginal } from '../actions/ocr';
 import { loadInfo } from '../actions/home';
@@ -40,6 +41,7 @@ class Ocr extends React.Component {
 
   render() {
     const {
+      inputLang,
       ocrStatus, imgHeight, imgWidth, ratio,
       originalText, translatedText,
       originalSegments, translatedSegments, inputFile, showOriginal,
@@ -53,6 +55,24 @@ class Ocr extends React.Component {
       <Animation name="enterPage">
         <div className="app-ocr-page">
           {(() => {
+            if (ocrStatus === 'needOcrLang') {
+              return (
+                <div style={{ textAlign: 'center', padding: 18 }}>
+                  <h2 className="win-h2">{i18n('oops')}</h2>
+                  <h5 className="win-h5" style={{ marginTop: 12 }}>
+                    {i18n('need-language-pack-installed')
+                      .replace('{1}', i18n(`/languages/${inputLang}`))}
+                  </h5>
+                  <button
+                    className="win-button"
+                    style={{ marginTop: 12 }}
+                    onClick={() => openUri('ms-settings:')}
+                  >
+                    {i18n('open-settings-app')}
+                  </button>
+                </div>
+              );
+            }
             if (ocrStatus === 'noTextRecognized') {
               return (
                 <div style={{ textAlign: 'center', padding: 18 }}>
@@ -209,12 +229,13 @@ class Ocr extends React.Component {
 }
 
 Ocr.propTypes = {
+  inputLang: React.PropTypes.string.isRequired,
   ocrStatus: React.PropTypes.string,
   imgHeight: React.PropTypes.number,
   imgWidth: React.PropTypes.number,
   ratio: React.PropTypes.number,
   originalText: React.PropTypes.string,
-  originalSegments: React.PropTypes.array,
+  originalSegments: React.PropTypes.object,
   translatedText: React.PropTypes.string,
   translatedSegments: React.PropTypes.array,
   inputFile: React.PropTypes.object,
@@ -227,6 +248,7 @@ Ocr.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  inputLang: state.settings.inputLang,
   ocrStatus: state.ocr.ocrStatus,
   imgHeight: state.ocr.imgHeight,
   imgWidth: state.ocr.imgWidth,

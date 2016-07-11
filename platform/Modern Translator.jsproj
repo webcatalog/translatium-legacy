@@ -130,6 +130,6 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <AppxPackageDir>C:\b\</AppxPackageDir>
+    <AppxPackageDir>C:\c\</AppxPackageDir>
   </PropertyGroup>
 </Project>
