@@ -11,7 +11,7 @@ const getGoogleTkk = () => {
     })
     .then(body => {
       const startStr = 'campaign_tracker_id:\'1h\',tkk:';
-      const endStr = ',enable_formality:false';
+      const endStr = ',experiment_ids:';
       const startI = body.indexOf(startStr) + startStr.length;
       const endI = body.indexOf(endStr);
       const tkkEval = body.substring(startI, endI);

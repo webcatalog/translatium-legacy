@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="55974nhutquang97.5translate" Version="2016.711.1000.0" Publisher="CN=C635F506-DEEB-41A4-8CAA-16689F486ED2" />
+  <Identity Name="55974nhutquang97.5translate" Version="2016.721.1000.0" Publisher="CN=C635F506-DEEB-41A4-8CAA-16689F486ED2" />
   <mp:PhoneIdentity PhoneProductId="c0b63b78-00d7-4e11-bec5-ffecef0bdd2e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Modern Translator</DisplayName>
@@ -26,15 +26,15 @@
         <uap:SplashScreen Image="images\Splash620x300.png" BackgroundColor="#43A047" />
       </uap:VisualElements>
       <Extensions>
-        <uap:Extension Category="windows.shareTarget">
-          <uap:ShareTarget>
-            <uap:DataFormat>Text</uap:DataFormat>
-          </uap:ShareTarget>
-        </uap:Extension>
         <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="modern-translator">
             <uap:DisplayName>Modern Translator</uap:DisplayName>
           </uap:Protocol>
+        </uap:Extension>
+        <uap:Extension Category="windows.shareTarget">
+          <uap:ShareTarget>
+            <uap:DataFormat>Text</uap:DataFormat>
+          </uap:ShareTarget>
         </uap:Extension>
       </Extensions>
     </Application>

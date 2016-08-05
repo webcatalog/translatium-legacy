@@ -130,6 +130,6 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <AppxPackageDir>C:\c-lite\</AppxPackageDir>
+    <AppxPackageDir>C:\d-lite\</AppxPackageDir>
   </PropertyGroup>
 </Project>

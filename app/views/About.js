@@ -17,7 +17,7 @@ const About = () => (
         <h4 className="win-h4" style={{ marginTop: 18 }}>
           {process.env.APP_PROFILE === 'lite' ? 'Modern Translator Lite' : 'Modern Translator'}
         </h4>
-        <h5 className="win-h5">5.2.0</h5>
+        <h5 className="win-h5">5.2.1</h5>
         <button
           className="win-button"
           onClick={() => openUri('https://moderntranslator.com')}
