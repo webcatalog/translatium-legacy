@@ -29,29 +29,6 @@
                 onclickBack: binding.initializer(function () {
                     nav.back();
                 }),
-                onclickClearAll: binding.initializer(function () {
-                    var msg = new Windows.UI.Popups.MessageDialog(WinJS.Resources.getString("erase_all_tip").value, WinJS.Resources.getString("erase_all").value);
-                    msg.commands.append(new Windows.UI.Popups.UICommand(
-                        WinJS.Resources.getString("erase_all_short").value,
-                        function () {
-                            var tmpPurchase = localSettings.values["purchased"];
-                            Custom.SQLite.localDatabase.close();
-                            applicationData.clearAsync().then(function () {
-                                return Custom.SQLite.setupDatabase();
-                            }).then(function () {
-                                localSettings.values["purchased"] = tmpPurchase;
-                                Custom.UI.applyTheme();
-                                Custom.UI.applyStatusbar();
-                                nav.history.current.initialPlaceholder = true;
-                                nav.navigate("/pages/settings/settings.html");
-                            });
-                        })
-                    );
-                    msg.commands.append(new Windows.UI.Popups.UICommand(WinJS.Resources.getString("cancel").value));
-                    msg.defaultCommandIndex = 0;
-                    msg.cancelCommandIndex = 1;
-                    return msg.showAsync();
-                }),
                 onclickSignIn: binding.initializer(function() {
                     Custom.Sync.signIn();
                 }),
@@ -62,9 +39,6 @@
                 toggleRealtimeTranslation: binding.initializer(function (e) {
                     localSettings.values["realtime-translation"] = e.srcElement.winControl.checked;
                 }),
-                toggleBing: binding.initializer(function (e) {
-                    localSettings.values["bing"] = e.srcElement.winControl.checked;
-                }),
                 toggleEnterToTranslate: binding.initializer(function (e) {
                     localSettings.values["enter-to-translate"] = e.srcElement.winControl.checked;
                 }),
@@ -73,9 +47,6 @@
                 }),
                 toggleChineseServer: binding.initializer(function (e) {
                     localSettings.values["chinese-server"] = e.srcElement.winControl.checked;
-                }),
-                toggleHTTPS: binding.initializer(function (e) {
-                    localSettings.values["https"] = e.srcElement.winControl.checked;
                 })
             };
             binding.processAll(element, this.bindingData);

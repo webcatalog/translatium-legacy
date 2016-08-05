@@ -193,14 +193,16 @@
               })
               .then(function(body) {
                 var startStr = 'campaign_tracker_id:\'1h\',tkk:';
-                var endStr = ',enable_formality:false';
+                var endStr = ',experiment_ids:';
                 var startI = body.indexOf(startStr) + startStr.length;
                 var endI = body.indexOf(endStr);
                 var tkkEval = body.substring(startI, endI);
 
+                /* eslint-disable */
                 var x = eval(eval(tkkEval));
-                sessionStorage.setItem("googleTkk", x);
-                return sessionStorage.getItem("googleTkk");
+                /* eslint-enable */
+                sessionStorage.setItem('googleTkk', x);
+                return sessionStorage.getItem('googleTkk');
               });
           }
           else {
@@ -215,7 +217,6 @@
 
             return that.getGoogleTkk()
               .then(function(tkk) {
-                console.log(tkk);
                 var url = encodeURI("https://translate.google.com/translate_tts?ie=UTF-8&tl=" + lang + "&q=" + text + "&textlen=" + text.length + "&idx=" + idx + " &total=" + total +"&client=t&prev=input&tk=" + TL(tkk, text));
                 return WinJS.xhr({ url: url, responseType: "blob" })
               })

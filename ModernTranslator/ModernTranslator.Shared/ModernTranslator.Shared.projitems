@@ -8,7 +8,6 @@
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)bundle.min.js" />
     <Content Include="$(MSBuildThisFileDirectory)default.html" />
-    <Content Include="$(MSBuildThisFileDirectory)images\for-advertising.png" />
     <Content Include="$(MSBuildThisFileDirectory)main.css" />
     <Content Include="$(MSBuildThisFileDirectory)Microsoft.WinJS.4.0\css\ui-dark.css" />
     <Content Include="$(MSBuildThisFileDirectory)Microsoft.WinJS.4.0\css\ui-light.css" />
@@ -64,5 +63,11 @@
     <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\fonts\Roboto-Thin.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\material-design-iconic-font\css\material-design-iconic-font.css" />
     <Content Include="$(MSBuildThisFileDirectory)WinJS.Material\material-design-iconic-font\fonts\Material-Design-Iconic-Font.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="$(MSBuildThisFileDirectory)strings\en-US\languages.resjson" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)strings\en-US\resources.resjson" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)strings\vi-VN\languages.resjson" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)strings\vi-VN\resources.resjson" />
   </ItemGroup>
 </Project>

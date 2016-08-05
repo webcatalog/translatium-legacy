@@ -17,14 +17,16 @@
         })
         .then(function(body) {
           var startStr = 'campaign_tracker_id:\'1h\',tkk:';
-          var endStr = ',enable_formality:false';
+          var endStr = ',experiment_ids:';
           var startI = body.indexOf(startStr) + startStr.length;
           var endI = body.indexOf(endStr);
           var tkkEval = body.substring(startI, endI);
 
+          /* eslint-disable */
           var x = eval(eval(tkkEval));
-          sessionStorage.setItem("googleTkk", x);
-          return sessionStorage.getItem("googleTkk");
+          /* eslint-enable */
+          sessionStorage.setItem('googleTkk', x);
+          return sessionStorage.getItem('googleTkk');
         });
     }
     else {
@@ -115,8 +117,7 @@
           })
           .then(function (response) {
           var raw = response.response;
-          raw = Custom.Utils.standardlizeJSON(raw);
-          var result = JSON.parse(raw);
+          var result = eval(raw);
 
           var outputText = "";
           var inputRoman = "";
@@ -172,233 +173,25 @@
     });
   }
 
-  function translateinBatchByGoogle(inputLang, outputLang, inputArr) {
-    return getGoogleTkk()
-      .then(function(tkk) {
-        var url = Custom.Utils.getDomain() + "/translate_a/t?client=mt&sl=" + inputLang + "&tl=" + outputLang + "&hl=en&v=1.0&tk=" + TL(tkk, inputArr.join(""));
-
-        var nextArr = [];
-
-        for (var i = 0; i < inputArr.length; i++) {
-          if (encodeURI(url + "&q" + inputArr[i]).length > 2000) {
-            nextArr = inputArr.slice(i, inputArr.length);
-            break;
-          }
-          else {
-            url += "&q=";
-            url += inputArr[i];
-          }
-        }
-        url = encodeURI(url);
-
-
-        return WinJS.xhr({
-          type: "get",
-          url: url,
-          responseType: "json"
-        });
-      })
-      .then(function (response) {
-        return JSON.parse(response.response);
-      });
-  }
-
-  function translateByBing(inputLang, outputLang, inputText) {
-
-    return WinJS.Promise.as().then(function () {
-      if (app.sessionState.bingAppId)
-      return app.sessionState.bingAppId;
-      var url = "http://www.bing.com/translator/dynamic/213366/js/LandingPage.js";
-      return WinJS.xhr({
-        type: "get",
-        url: url,
-      }).then(function (response) {
-        app.sessionState.bingAppId = response.response.substr(response.response.indexOf("appId:") + 6, 47);
-        return app.sessionState.bingAppId;
-      });
-    }).then(function (appId) {
-      var tmpinputLang = inputLang;
-      if (tmpinputLang == "auto")
-      tmpinputLang = "";
-      else if (tmpinputLang == "zh")
-      tmpinputLang = "zh-CHS";
-      else if (tmpinputLang == "zh-TW")
-      tmpinputLang = "zh-CHT";
-
-      var tmpoutputLang = outputLang;
-      if (tmpoutputLang == "zh")
-      tmpoutputLang = "zh-CHS";
-      else if (tmpoutputLang == "zh-TW")
-      tmpoutputLang = "zh-CHT";
-
-      var texts = inputText.split("\n");
-      var url = encodeURI("http://api.microsofttranslator.com/v2/ajax.svc/TranslateArray2?appId=" + appId + "&texts=" + JSON.stringify(texts) + "&from=" + tmpinputLang + "&to=" + tmpoutputLang + "&options={}");
-      return WinJS.xhr({
-        type: "get",
-        url: url,
-        responseType: "json"
-      }).then(function (response) {
-        var result = JSON.parse(response.response);
-        if (typeof result != "object") {
-          app.sessionState.bingAppId = null;
-          throw "appid_expired";
-        }
-
-        if (inputLang == "auto") {
-          inputLang = result[0].From;
-          if (inputLang == "zh-CHS")
-          inputLang = "zh";
-          else if (inputLang == "zh-CHT")
-          inputLang = "zh-TW";
-        }
-
-        var outputText = "";
-        result.forEach(function (x) {
-          outputText += x.TranslatedText + "\n";
-        });
-
-        return {
-          inputLang: inputLang,
-          suggestedinputLang: null,
-          inputText: inputText,
-          suggestedinputText: null,
-          inputRoman: "",
-          inputDict: "",
-
-          outputLang: outputLang,
-          outputText: outputText,
-          outputRoman: "",
-          outputDict: "",
-          source: "bing"
-        };
-      });
-    }).then(function (data) {
-      if (inputText.indexOf(" ") > -1)
-      return data;
-      var url = encodeURI("http://www.microsofttranslator.com/dictionary.ashx?from=" + inputLang + "&to=" + outputLang + "&text=" + inputText);
-      return WinJS.xhr({
-        type: "get",
-        url: url,
-        responseType: "json"
-      }).then(function (response) {
-        if (response.response.length <= 25)
-        return data;
-        data.outputDict = response.response.substring(21, response.response.length - 4);
-        return data;
-      }, function (err) {
-        return data;
-      })
-    });
-  }
-
-  function translateinBatchByBing(inputLang, outputLang, inputArr) {
-
-    return WinJS.Promise.as().then(function () {
-      if (app.sessionState.bingAppId)
-      return app.sessionState.bingAppId;
-      var url = "http://www.bing.com/translator/dynamic/0/js/LandingPage.js";
-      return WinJS.xhr({
-        type: "get",
-        url: url,
-      }).then(function (response) {
-        app.sessionState.bingAppId = response.response.substr(459, 47);
-        return app.sessionState.bingAppId;
-      });
-    }).then(function (appId) {
-      if (inputLang == "auto")
-      inputLang = "";
-      else if (inputLang == "zh")
-      inputLang = "zh-CHS";
-      else if (inputLang == "zh-TW")
-      inputLang = "zh-CHT";
-      var inputTexts = JSON.stringify(inputArr);
-      var url = encodeURI("http://api.microsofttranslator.com/v2/ajax.svc/TranslateArray2?appId=" + appId + "&texts=" + inputTexts + "&from=" + inputLang + "&to=" + outputLang + "&options={}");
-      return WinJS.xhr({
-        type: "get",
-        url: url,
-        responseType: "json"
-      }).then(function (response) {
-        var result = JSON.parse(response.response);
-        if (typeof result != "object") {
-          app.sessionState.bingAppId = null;
-          throw "appid_expired";
-        }
-        var arr = [];
-        result.forEach(function (x) {
-          arr.push(x.TranslatedText);
-        });
-        return arr;
-      });
-    });
-  }
-
-  var supportedbyBing = ["auto", "he", "pl", "ar", "hi", "pt", "bg", "ca", "hu", "ro", "zh", "id",
-  "ru", "zh-TW", "it", "sk", "cs", "ja", "sl", "da", "es", "nl", "sv", "en",
-  "ko", "th", "et", "lv", "tr", "fi", "lt", "uk", "fr", "ms", "ur", "de", "mt",
-  "vi", "el", "no", "cy", "ht", "fa", "tlh", "otq", "yua"];
-
   function translate(inputLang, outputLang, inputText) {
     return WinJS.Promise.as().then(function () {
       if (inputText.length < 1) return;
-
-      if (["tlh", "otq", "yua"].indexOf(inputLang) > -1) {
-        if (supportedbyBing.indexOf(outputLang) > -1)
-        return Custom.Translate.translateByBing(inputLang, outputLang, inputText);
-
-        return Custom.Translate.translateByBing(inputLang, "en", inputText).then(function (result) {
-          return Custom.Translate.translateByGoogle("en", outputLang, result.outputText);
-        });
-      }
-
-      if (["tlh", "otq", "yua"].indexOf(outputLang) > -1) {
-        if (supportedbyBing.indexOf(inputLang) > -1)
-        return Custom.Translate.translateByBing(inputLang, outputLang, inputText);
-
-        return Custom.Translate.translateByGoogle(inputLang, "en", inputText).then(function (result) {
-          return Custom.Translate.translateByBing("en", outputLang, result.outputText);
-        });
-      }
-
-      if ((localSettings.values["bing"] == true) && (supportedbyBing.indexOf(inputLang) > -1) && (supportedbyBing.indexOf(outputLang) > -1))
-      return Custom.Translate.translateByBing(inputLang, outputLang, inputText);
 
       return Custom.Translate.translateByGoogle(inputLang, outputLang, inputText);
     }).then(null, function (err) {});
   }
 
   function translateinBatch(inputLang, outputLang, inputArr) {
-    return WinJS.Promise.as().then(function () {
-
-      if (["tlh", "otq", "yua"].indexOf(inputLang) > -1) {
-        if (supportedbyBing.indexOf(outputLang) > -1)
-        return Custom.Translate.translateinBatchByBing(inputLang, outputLang, inputArr);
-
-        return Custom.Translate.translateinBatchByBing(inputLang, "en", inputArr).then(function (result) {
-          return Custom.Translate.translateinBatchByGoogle("en", outputLang, result);
-        });
-      }
-
-      if (["tlh", "otq", "yua"].indexOf(outputLang) > -1) {
-        if (supportedbyBing.indexOf(inputLang) > -1)
-        return Custom.Translate.translateinBatchByBing(inputLang, outputLang, inputArr);
-
-        return Custom.Translate.translateinBatchByGoogle(inputLang, "en", inputArr).then(function (result) {
-          return Custom.Translate.translateinBatchByBing("en", outputLang, result.outputText);
-        });
-      }
-
-      if ((localSettings.values["bing"] == true) && (supportedbyBing.indexOf(inputLang) > -1) && (supportedbyBing.indexOf(outputLang) > -1))
-      return Custom.Translate.translateinBatchByBing(inputLang, outputLang, inputArr);
-
-      return Custom.Translate.translateinBatchByGoogle(inputLang, outputLang, inputArr);
-    }).then(null, function (err) {});
+    var inputText = inputArr.join('\n');
+    return translate(inputLang, outputLang, inputText)
+      .then(function(result) {
+        var outputText = result.outputText;
+        return outputText.split('\n');
+      });
   }
 
   WinJS.Namespace.define("Custom.Translate", {
     translateByGoogle: translateByGoogle,
-    translateinBatchByGoogle: translateinBatchByGoogle,
-    translateByBing: translateByBing,
-    translateinBatchByBing: translateinBatchByBing,
     translate: translate,
     translateinBatch: translateinBatch
   });

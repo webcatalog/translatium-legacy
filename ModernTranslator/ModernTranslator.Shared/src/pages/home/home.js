@@ -53,7 +53,7 @@
                         var div = document.createElement("div");
                         div.className = "language-item material-text";
                         div.innerText = (item.data.language_name) ? item.data.language_name
-                                            : WinJS.Resources.getString(item.data.language_id).value;
+                                            : WinJS.Resources.getString('/languages/' + item.data.language_id).value;
                         return div;
                     });
                 }),
@@ -580,7 +580,7 @@
             recentArr.forEach(function (x) {
                 Custom.Data.languageList.push({
                     language_id: x,
-                    language_name: WinJS.Resources.getString(x).value,
+                    language_name: WinJS.Resources.getString('/languages/' + x).value,
                     main: 0
                 })
             });

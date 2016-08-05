@@ -41,19 +41,8 @@
             .about .material-content p {
                 font-weight: 700;
             }
-            
+
             .about .material-content li, .about .material-content .description .lang-list {
                 font-weight: 400;
                 text-align: justify;
             }
-
-    .about .material-content .special-thank {
-        font-size: 1em;
-        text-align: left;
-    }
-
-        .about .material-content .special-thank p {
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-

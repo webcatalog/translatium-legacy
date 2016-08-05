@@ -16,24 +16,6 @@
 
     app.onactivated = function (args) {
         var p = WinJS.Promise.as().then(function () {
-            var currentAppLang = Windows.Globalization.ApplicationLanguages.languages[0];
-            if ((currentAppLang == "zh-CN") && (typeof localSettings.values["chinese-server"] != 'undefined'))
-                localSettings.values["chinese-server"] = true;
-            if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
-               if ((Custom.Device.isPhone)
-               && (currentAppLang == "en-US")) {
-                  var uri = new Windows.Foundation.Uri("ms-appx:///cortana.xml");
-                  Windows.Storage.StorageFile.getFileFromApplicationUriAsync(uri).then(function (vcd) {
-                      return Windows.Media.SpeechRecognition.VoiceCommandManager.installCommandSetsFromStorageFileAsync(vcd);
-                  }).then(function () {
-                      var phraseList = [];
-                      Custom.Data.langArr.forEach(function (lang_id) {
-                          phraseList.push(WinJS.Resources.getString(lang_id).value);
-                      });
-                      return Windows.Media.SpeechRecognition.VoiceCommandManager.installedCommandSets.lookup("ModernTranslator").setPhraseListAsync("outputLang", phraseList);
-                  }).then(null, function (err) {});
-              }
-            }
             return Custom.UI.applyTheme().then(function () {
                 return Custom.UI.applyStatusbar();
             }).then(function () {
@@ -93,34 +75,6 @@
                         }
                     );
                 }
-            }
-
-            if (args.detail.kind === activation.ActivationKind.voiceCommand) {
-                var speechRecognitionResult = args.detail.result;
-                var type = speechRecognitionResult.rulePath[0];
-                var inputText = speechRecognitionResult.semanticInterpretation.properties.inputText[0];
-                var outputLangName = speechRecognitionResult.semanticInterpretation.properties.outputLang[0];
-
-                var outputLang = "en";
-                for (var i = 0; i < Custom.Data.langArr.length; i++) {
-                    var lang_id = Custom.Data.langArr[i];
-                    var lang_str = WinJS.Resources.getString(lang_id).value;
-                    if (outputLangName == lang_str) {
-                        outputLang = lang_id;
-                        break;
-                    }
-                }
-
-                nav.history = app.sessionState.history || {};
-                nav.history.current.initialPlaceholder = true;
-                ui.disableAnimations();
-                return ui.processAll().then(function () {
-                    Custom.Data.loadlanguageList();
-                    localSettings.values["inputLang"] = "auto";
-                    localSettings.values["outputLang"] = outputLang;
-                    app.sessionState.inputText = inputText;
-                    return nav.navigate(Custom.Navigation.navigator.home);
-                });
             }
 
             if (args.detail.kind === activation.ActivationKind.pickFileContinuation) {
@@ -192,8 +146,8 @@
         }
 
         if (nav.history.current.location == "/pages/p-livecamera/p-livecamera.html") {
-            var pageControl = Custom.Navigation.navigator.pageControl;
-            pageControl.disposeCamera();
+          var pageControl = Custom.Navigation.navigator.pageControl;
+          pageControl.disposeCamera();
         }
     };
 

@@ -2,18 +2,35 @@
     "use strict";
 
 
-    var langArr = ["af", "sq", "ar", "hy", "az", "eu", "be", "bn", "bs", "bg", "ca", "ceb", "ny", "zh", "zh-TW", "hr", "cs", "da", "nl", "en", "eo", "et", "tl",
-                    "fi", "fr", "gl", "ka", "de", "el", "gu", "ht", "ha", "iw", "hi", "hmn", "hu", "is", "ig", "id", "ga", "it", "ja", "jw", "kn", "kk", "km",
-                    "ko", "lo", "la", "lv", "lt", "mk", "mg", "ms", "ml", "mt", "mi", "mr", "mn", "my", "ne", "no", "fa", "pl", "pt", "pa", "ro", "ru", "sr", "st",
-                    "si", "sk", "sl", "so", "es", "su", "sw", "sv", "tg", "ta", "te", "th", "tr", "uk", "ur", "uz", "vi", "cy", "yi", "yo", "zu",
-                    "tlh", "otq", "yua"];
+    var langArr = [
+    'af', 'sq',
+    'ar', 'ar-DZ', 'ar-BH', 'ar-EG', 'ar-IL', 'ar-JO', 'ar-KW', 'ar-LB', 'ar-MA', 'ar-OM',
+    'ar-PS', 'ar-QA', 'ar-SA', 'ar-TN', 'ar-AE',
+    'hy', 'az', 'eu', 'be', 'bn', 'bs', 'bg', 'ca', 'ceb', 'ny',
+    'zh', 'zh-CN', 'zh-HK', 'zh-TW', 'zh-YUE',
+    'hr', 'cs', 'da', 'nl',
+    'en', 'en-AU', 'en-CA', 'en-IN', 'en-IE', 'en-NZ', 'en-PH', 'en-ZA', 'en-US', 'en-UK',
+    'eo', 'et', 'tl', 'fi', 'fr', 'gl', 'ka', 'de', 'el', 'gu', 'ht', 'ha', 'iw', 'hi',
+    'hmn', 'hu', 'is', 'ig', 'id', 'ga',
+    'it', 'ja', 'jw', 'kn', 'kk', 'km',
+    'ko', 'lo', 'la', 'lv', 'lt', 'mk', 'mg', 'ms', 'ml',
+    'mt', 'mi', 'mr', 'mn', 'my', 'ne', 'no', 'fa', 'pl',
+    'pt', 'pt-PT', 'pt-BR',
+    'pa', 'ro', 'ru', 'sr', 'st',
+    'si', 'sk', 'sl', 'so',
+    'es', 'es-AR', 'es-BO', 'es-CL', 'es-CO', 'es-CR', 'es-DO',
+    'es-EC', 'es-SV', 'es-GT', 'es-HN', 'es-MX', 'es-NI', 'es-PA',
+    'es-PY', 'es-PE', 'es-PR', 'es-ES', 'es-US', 'es-UY', 'es-VE',
+    'su', 'sw', 'sv', 'tg', 'ta', 'te', 'th', 'tr', 'uk', 'ur', 'uz', 'vi', 'cy', 'yi', 'yo', 'zu',
+    'am', 'co', 'fy', 'ky', 'haw', 'ku', 'lb', 'sm', 'gd', 'sn', 'sd', 'ps', 'xh',
+  ];
 
     function loadlanguageList() {
         Custom.Data.languageList.splice(0, Custom.Data.languageList.length);
         Custom.Data.langArr.forEach(function (language_id) {
             Custom.Data.languageList.push({
                 language_id: language_id,
-                language_name: WinJS.Resources.getString(language_id).value,
+                language_name: WinJS.Resources.getString("/languages/" + language_id).value,
                 main: 1
             });
         });

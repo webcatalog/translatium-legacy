@@ -90,19 +90,6 @@
       <SpecificVersion>True</SpecificVersion>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <PRIResource Include="strings\ar\resources.resjson" />
-    <PRIResource Include="strings\de-DE\resources.resjson" />
-    <PRIResource Include="strings\en-US\resources.resjson" />
-    <PRIResource Include="strings\fr-FR\resources.resjson" />
-    <PRIResource Include="strings\it-IT\resources.resjson" />
-    <PRIResource Include="strings\pt-BR\resources.resjson" />
-    <PRIResource Include="strings\pt-PT\resources.resjson" />
-    <PRIResource Include="strings\ru-RU\resources.resjson" />
-    <PRIResource Include="strings\th\resources.resjson" />
-    <PRIResource Include="strings\vi\resources.resjson" />
-    <PRIResource Include="strings\zh-CN\resources.resjson" />
-  </ItemGroup>
   <Import Project="..\ModernTranslator.Shared\ModernTranslator.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <Import Project="..\..\packages\Microsoft.Windows.Ocr.1.0.0\build\wpa81\Microsoft.Windows.Ocr.targets" Condition="Exists('..\..\packages\Microsoft.Windows.Ocr.1.0.0\build\wpa81\Microsoft.Windows.Ocr.targets')" />

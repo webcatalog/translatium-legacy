@@ -10,13 +10,12 @@
     ready: function (element, options) {
       var p = Windows.ApplicationModel.Package.current.id.version;
       this.bindingData = WinJS.Binding.as({
-        appVersion: "3.9.14",
-        poweredBy: WinJS.Resources.getString("powered_by").value.replace("{1}", "<a href=\"http://translate.google.com\">Google</a> & <a href=\"http://bing.com/translator\">Bing</a>"),
+        appVersion: "3.10.0",
         onclickBack: binding.initializer(function () {
           nav.back();
         }),
         onclickContact: binding.initializer(function () {
-          var uri = new Windows.Foundation.Uri("mailto:support@modernlab.xyz");
+          var uri = new Windows.Foundation.Uri("mailto:support@moderntranslator.com");
           return Windows.System.Launcher.launchUriAsync(uri);
         }),
         onclickWebsite: binding.initializer(function () {

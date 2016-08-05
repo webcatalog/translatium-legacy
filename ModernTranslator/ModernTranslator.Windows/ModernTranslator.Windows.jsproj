@@ -50,7 +50,7 @@
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <PackageCertificateKeyFile>ModernTranslator.Windows_StoreKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>A5A9194BEBFB4776598E81EBFD1039448AD9122B</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>1B4CC3A12AFCF9F74CC1C19D98C66A91EF6FE711</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
@@ -94,27 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SQLite.PC\SQLite.Windows.vcxproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="WindowsPreview.Media.Ocr">
-      <HintPath>..\..\packages\Microsoft.Windows.Ocr.1.0.0\lib\win81\x86\WindowsPreview.Media.Ocr.winmd</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-      <CopyLocal>True</CopyLocal>
-      <SpecificVersion>True</SpecificVersion>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <PRIResource Include="strings\ar\resources.resjson" />
-    <PRIResource Include="strings\de-DE\resources.resjson" />
-    <PRIResource Include="strings\en-US\resources.resjson" />
-    <PRIResource Include="strings\fr-FR\resources.resjson" />
-    <PRIResource Include="strings\it-IT\resources.resjson" />
-    <PRIResource Include="strings\pt-BR\resources.resjson" />
-    <PRIResource Include="strings\pt-PT\resources.resjson" />
-    <PRIResource Include="strings\ru-RU\resources.resjson" />
-    <PRIResource Include="strings\th\resources.resjson" />
-    <PRIResource Include="strings\vi\resources.resjson" />
-    <PRIResource Include="strings\zh-CN\resources.resjson" />
   </ItemGroup>
   <Import Project="..\ModernTranslator.Shared\ModernTranslator.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />

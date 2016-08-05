@@ -10,6 +10,14 @@
     var applicationData = Windows.Storage.ApplicationData.current;
     var localSettings = applicationData.localSettings;
 
+    function ocrStandardlizedLanguage(lang) {
+      if (['zh-CN', 'zh-HK'].indexOf(lang) > -1) return 'zh-CN';
+      if (['zh-TW', 'zh-YUE'].indexOf(lang) > -1) return 'zh-TW';
+      if (lang === 'zh') return 'zh-CN';
+      if (lang.length > 2) return lang.substring(0, 2);
+      return lang;
+    };
+
     WinJS.UI.Pages.define("/pages/p-camera/p-camera.html", {
 
         ready: function (element, options) {
@@ -218,7 +226,7 @@
 
         getOCRlang: function (language_id) {
             var lang = WindowsPreview.Media.Ocr.OcrLanguage;
-            switch (language_id) {
+            switch (ocrStandardlizedLanguage(language_id)) {
                 case "en":
                     return lang.english;
                 case "zh":
