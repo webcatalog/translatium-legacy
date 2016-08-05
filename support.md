@@ -8,6 +8,23 @@ Yes. Currently, Modern Translator requires an active 3G or Wifi connection.
 ### Can I help localizing Modern Translator?
 I am sorry but at the moment, Modern Translation is not open for localization.
 
+### Special Thanks
+* [Martin Šindler](http://dotekomanie.cz)
+* Azzan Al-Muqbali
+* Abd Alrahman Hijji
+* Hayati Kadiroğlu
+* Wenyi He
+* [Enrico Dell'Oste](http://smartpixel.it)
+* Simón López
+* Artsiom Markevich
+* Andrey Pikhtin
+* Nik Neiman (German)
+* Louis Grasset (French)
+* Elchin Mirach (Azerbaijani)
+* Marcos Vinícius Gonçalves
+* Danupol Intranurak
+* Mariano Mercuri
+
 ---
 
 <section class="section has-text-centered">
