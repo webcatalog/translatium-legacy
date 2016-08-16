@@ -4,7 +4,7 @@
 1. Bring the app back to work!
 2. Add new languages & dialects.
 3. Remove Cortana.
-4. Only English and Vietnamese localization is supported. Others are removed.
+4. Only English and Vietnamese localizations are supported. Others are removed.
 5. Remove "Use HTTPS" options. From this version, the app always use HTTPS.
 6. Remove Bing Translator.
 7. All features are now unlocked on Windows 8.1 and Windows Phone 8.1.
