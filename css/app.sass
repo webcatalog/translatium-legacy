@@ -8,7 +8,36 @@ $red: #F44336
 $turquoise: #009688
 $yellow: #FFEB3B
 
-@import "../_node_modules/bulma/bulma"
+@import "../_node_modules/bulma/sass/base/base"
+
+@import "../_node_modules/bulma/sass/elements/elements"
+
+@import "../_node_modules/bulma/sass/components/components"
+
+@import "../_node_modules/bulma/sass/grid/grid"
+
+@import "../_node_modules/bulma/sass/layout/hero"
+@import "../_node_modules/bulma/sass/layout/section"
+
+.footer
+  background-color: transparent
+  padding: 40px 20px 80px
+  p, strong
+    color: #FFF
+  a
+    &,
+    &:visited
+      color: #FFF
+      &:hover
+        color: #FFF
+      &:not(.icon)
+        border-bottom: 1px solid #FFF
+        &:hover
+          border-bottom-color: #FFF
+
+body
+  background: url("/images/overlay.png"), linear-gradient(45deg, #388E3C 15%, #43A047 85%)
+
 
 .nav-item img
   padding-left: 12px
@@ -25,3 +54,12 @@ $yellow: #FFEB3B
   img
     height: 50px
     margin-left: 15px
+
+.is-transparent
+  background: none !important
+
+.custom-container
+  background-color: #FFF
+  border-radius: 4px
+  padding: 40px 20px
+  max-width: 1024px
