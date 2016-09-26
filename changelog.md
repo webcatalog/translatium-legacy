@@ -5,7 +5,7 @@
 2. Add new languages & dialects.
 3. Remove Cortana.
 4. Only English and Vietnamese localizations are supported. Others are removed.
-5. Remove "Use HTTPS" options. From this version, the app always use HTTPS.
+5. Remove "Use HTTPS" options. From this version, the app always uses HTTPS.
 6. Remove Bing Translator.
 7. All features are now unlocked on Windows 8.1 and Windows Phone 8.1.
 
@@ -37,7 +37,7 @@ Please apologize me for too many updates in such a short time. :(
 ---
 
 #### 5.1.0 (6th July 2016)
-1. Fixed: Cannot connect to server on Windows Insider builds.
+1. Fixed: Cannot connect to the server on Windows Insider builds.
 2. Fixed: Preventing screen lock's not working.
 3. Translate when pressing Enter.
 4. Small bug fixes & improvements.
@@ -45,7 +45,7 @@ Please apologize me for too many updates in such a short time. :(
 ---
 
 #### 5.0.0 (2nd July 2016)
-1. No more hamburger button! Tab bar is the future!
+1. No more hamburger button! The tab bar is the future!
 2. Many UI & UX changes.
 3. Improved: stability & performance.
 
@@ -104,7 +104,7 @@ Please apologize me for too many updates in such a short time. :(
 1. Fixed: Language List is not sorted correctly.
 2. Improve camera translation speed.
 3. Dictionary is now displayed below the translation card.
-4. Ads is added back as the IAP problem has been resolved.
+4. Ads are added back as the IAP problem has been resolved.
 5. Small bug fixes.
 
 ---
@@ -125,9 +125,9 @@ Please apologize me for too many updates in such a short time. :(
 ---
 
 #### 4.4.1, 4.4.2 (16th December 2015)
-1. Fixed: In-app purchase does not sync across devices properly. (All paid users have to re-active the license).
+1. Fixed: In-app purchase does not sync across devices properly. (All paid users to have to re-active the license).
 
-We're really sorry for releasing too many bad updates in one single day. If you are accidentally pay for the app again, please contact us.
+We're really sorry for releasing too many bad updates in one single day. If you accidentally pay for the app again, please contact us.
 
 ---
 
@@ -150,7 +150,7 @@ We're really sorry for releasing too many bad updates in one single day. If you 
 
 #### 4.3.2 (6th December 2015)
 1. Small improvements
-2. Update localizations
+2. Updated localizations
 
 ---
 
@@ -211,13 +211,13 @@ We're really sorry for releasing too many bad updates in one single day. If you 
 ---
 
 #### 4.1.5 (3rd November 2015)
-1. Better implement for users who have purchased or received the app before March 29, 2015 to upgrade to PRO for free.
+1. Better implement for users who have purchased or received the app before March 29, 2015, to upgrade to PRO for free.
 2. Swap button
 
 ---
 
 #### 3.9.1 (3rd November 2015)
-1. Better implement for users who have purchased or received the app before March 29, 2015 to upgrade to PRO for free.
+1. Better implement for users who have purchased or received the app before March 29, 2015, to upgrade to PRO for free.
 2. Display language is removed from app settings. Languages will be chosen automatically.
 3. App settings won't be synced between devices anymore.
 
@@ -240,7 +240,7 @@ We're really sorry for releasing too many bad updates in one single day. If you 
 2. Brand new Windows 10 design
 3. Dialect support
 
-and many more...
+and much more...
 
 BROKEN CHANGES:
 1. Display language is removed from app settings. Languages will be chosen automatically.
