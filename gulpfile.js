@@ -4,12 +4,10 @@ const gulp = require('gulp');
 const stylus = require('gulp-stylus');
 const rename = require('gulp-rename');
 const bom = require('gulp-bom');
-const babelify = require('babelify');
-const browserify = require('browserify');
 const source = require('vinyl-source-stream');
-const buffer = require('vinyl-buffer');
-const uglify = require('gulp-uglify');
-const envify = require('envify/custom');
+
+const webpack = require('webpack-stream');
+const webpackConfig = require('./webpack.config.js');
 
 const targetDir = 'platform';
 
@@ -32,30 +30,12 @@ gulp.task('stylus', () =>
 );
 
 
-gulp.task('bro', () => {
-  const b = browserify({
-    entries: 'app/index.js',
-    debug: false,
-    transform: [
-      babelify.configure({ presets: ['es2015', 'react'] }),
-      envify({
-        NODE_ENV: 'production',
-        APP_PROFILE: 'main',
-      }),
-    ],
-  });
-
-  return b.bundle()
+gulp.task('webpack', () =>
+  gulp.src('app/index.js')
     .pipe(source('app.js'))
-    .pipe(buffer())
-    .pipe(rename({
-      basename: 'bundle',
-      suffix: '.min',
-    }))
-    .pipe(uglify())
-    .pipe(bom())
-    .pipe(gulp.dest(`${targetDir}/www/`));
-});
+    .pipe(webpack(webpackConfig))
+    .pipe(gulp.dest(`${targetDir}/www/`))
+);
 
 gulp.task('strings', () =>
   gulp.src('app/strings/**/**')
@@ -81,5 +61,5 @@ gulp.task('winjs-localization', () =>
 );
 
 gulp.task('prepare', ['strings', 'images', 'winjs', 'winjs-localization']);
-gulp.task('build', ['html', 'stylus', 'bro']);
+gulp.task('build', ['html', 'stylus', 'webpack']);
 gulp.task('default', ['prepare', 'build']);
