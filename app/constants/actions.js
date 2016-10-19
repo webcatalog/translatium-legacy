@@ -1,1 +1,3 @@
 export const SCREEN_RESIZE = 'SCREEN_RESIZE';
+
+export const UPDATE_SETTING = 'UPDATE_SETTING';

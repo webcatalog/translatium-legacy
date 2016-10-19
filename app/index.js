@@ -1,4 +1,5 @@
 /* global Windows */
+import 'whatwg-fetch';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -7,19 +8,26 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import store from './store';
 import renderRoutes from './renderRoutes';
 
-const runApp = () => {
-  /* global document */
+import fetchLocal from './libs/fetchLocal';
 
-  // onTouchTap for material-ui
-  injectTapEventPlugin();
+const runApp = () =>
+  /* global document fetch */
+  fetchLocal('./strings/en-us.json')
+    .then(res => res.json())
+    .then((strings) => {
+      /* global window */
+      window.strings = strings;
 
-  render(
-    <Provider store={store}>
-      {renderRoutes()}
-    </Provider>,
-    document.getElementById('app')
-  );
-};
+      // onTouchTap for material-ui
+      injectTapEventPlugin();
+
+      render(
+        <Provider store={store}>
+          {renderRoutes()}
+        </Provider>,
+        document.getElementById('app')
+      );
+    });
 
 switch (process.env.PLATFORM) {
   case 'windows': {

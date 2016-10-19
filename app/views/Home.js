@@ -1,7 +1,9 @@
+/* global strings */
 import React from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
-import { fullWhite, minBlack, grey100 } from 'material-ui/styles/colors';
+import { fullWhite, minBlack, grey100, fullBlack, darkWhite } from 'material-ui/styles/colors';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
@@ -20,8 +22,12 @@ import ContentGesture from 'material-ui/svg-icons/content/gesture';
 import AVVolumeUp from 'material-ui/svg-icons/av/volume-up';
 import AVMic from 'material-ui/svg-icons/av/mic';
 
+import { swapLanguages } from '../actions/settings';
+
 class Home extends React.Component {
   getStyles() {
+    const { theme } = this.props;
+
     const {
       appBar,
       button: {
@@ -32,7 +38,7 @@ class Home extends React.Component {
     return {
       container: {
         flex: 1,
-        backgroundColor: grey100,
+        backgroundColor: (theme === 'dark') ? fullBlack : grey100,
         display: 'flex',
         flexDirection: 'column',
       },
@@ -73,12 +79,14 @@ class Home extends React.Component {
         height: 160,
         display: 'flex',
         flexDirection: 'column',
+        zIndex: 100000,
       },
       textarea: {
         borderTop: 0,
         borderLeft: 0,
         borderRight: 0,
-        borderBottom: `1px solid ${minBlack}`,
+        backgroundColor: (theme === 'dark') ? '#303030' : fullWhite,
+        borderBottom: `1px solid ${(theme === 'dark') ? darkWhite : minBlack}`,
         outline: 0,
         padding: 12,
         fontSize: 16,
@@ -109,7 +117,11 @@ class Home extends React.Component {
   }
 
   render() {
-    const { screenWidth } = this.props;
+    const {
+      screenWidth, theme,
+      inputLang, outputLang,
+      onLanguageTouchTap, onSwapButtonTouchTap,
+    } = this.props;
     const styles = this.getStyles();
 
     const controllers = [
@@ -144,19 +156,19 @@ class Home extends React.Component {
           showMenuIconButton={false}
           title={(
             <div style={styles.innerContainer}>
-              <div style={styles.languageTitle}>
-                <span style={styles.languageTitleSpan}>English</span>
+              <div style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('inputLang')}>
+                <span style={styles.languageTitleSpan}>{strings[inputLang]}</span>
                 <div style={styles.dropDownIconContainer}>
                   <NavigationArrowDropDown color={fullWhite} />
                 </div>
               </div>
-              <div style={styles.swapIconContainer}>
+              <div style={styles.swapIconContainer} onTouchTap={onSwapButtonTouchTap}>
                 <IconButton>
                   <ActionSwapHoriz color={fullWhite} />
                 </IconButton>
               </div>
-              <div style={styles.languageTitle}>
-                <span style={styles.languageTitleSpan}>English</span>
+              <div style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('outputLang')}>
+                <span style={styles.languageTitleSpan}>{strings[outputLang]}</span>
                 <div style={styles.dropDownIconContainer}>
                   <NavigationArrowDropDown color={fullWhite} />
                 </div>
@@ -194,15 +206,15 @@ class Home extends React.Component {
               ) : null}
             </div>
             <div style={styles.controllerContainerRight}>
-              <RaisedButton label="Translate" primary />
+              <RaisedButton label="Translate" primary={theme === 'light'} />
             </div>
           </div>
         </Paper>
         <div style={styles.resultContainer}>
           <Card initiallyExpanded>
             <CardHeader
-              title="Vietnamese"
-              subtitle="from English"
+              title={strings[outputLang]}
+              subtitle={`<- ${strings[inputLang]}`}
               actAsExpander
               showExpandableButton
             />
@@ -241,10 +253,30 @@ class Home extends React.Component {
 
 Home.propTypes = {
   screenWidth: React.PropTypes.number,
+  theme: React.PropTypes.string,
+  inputLang: React.PropTypes.string,
+  outputLang: React.PropTypes.string,
+  onLanguageTouchTap: React.PropTypes.func,
+  onSwapButtonTouchTap: React.PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   screenWidth: state.screen.screenWidth,
+  theme: state.settings.theme,
+  inputLang: state.settings.inputLang,
+  outputLang: state.settings.outputLang,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onLanguageTouchTap: (type) => {
+    dispatch(push({
+      pathname: '/language-list',
+      query: { type },
+    }));
+  },
+  onSwapButtonTouchTap: () => {
+    dispatch(swapLanguages());
+  },
 });
 
 Home.contextTypes = {
@@ -252,5 +284,5 @@ Home.contextTypes = {
 };
 
 export default connect(
-  mapStateToProps
+  mapStateToProps, mapDispatchToProps
 )(Home);
