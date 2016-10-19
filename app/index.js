@@ -2,67 +2,16 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import store from './store';
 import renderRoutes from './renderRoutes';
 
-import { isInput, isOutput } from './lib/languageUtils';
-import { clearHome, updateInputText } from './actions/home';
-import { updateInputLang, updateOutputLang } from './actions/settings';
+const runApp = () => {
+  /* global document */
 
-Windows.UI.WebUI.WebUIApplication.onactivated = (args) => {
-  switch (args.kind) {
-    case Windows.ApplicationModel.Activation.ActivationKind.protocol: {
-      if (args.uri.path === 'translate') {
-        const params = (() => {
-          const query = args.uri.query.substring(1);
-          const result = {};
-          query.split('&').forEach(part => {
-            const item = part.split('=');
-            result[item[0]] = decodeURIComponent(item[1]);
-          });
-          return result;
-        })();
-
-        store.dispatch(clearHome());
-
-        if (params.outputLang && isOutput(params.outputLang)) {
-          store.dispatch(updateOutputLang(params.outputLang));
-        }
-        if (params.inputLang && isInput(params.inputLang)) {
-          store.dispatch(updateInputLang(params.inputLang));
-        }
-      }
-      break;
-    }
-
-    case Windows.ApplicationModel.Activation.ActivationKind.shareTarget: {
-      const shareOperation = args.shareOperation;
-      if (shareOperation.data.contains(
-        Windows.ApplicationModel.DataTransfer.StandardDataFormats.text
-      )) {
-        shareOperation.data.getTextAsync()
-          .then(inputText => {
-            store.dispatch(updateInputText(inputText));
-          });
-      }
-      break;
-    }
-
-    case Windows.ApplicationModel.Activation.ActivationKind.launch: {
-      if (args.arguments.substr(0, 13) === 'tile_shortcut') {
-        const lang = args.arguments
-            .substr(13, args.arguments.length - 13)
-            .split('_');
-        store.dispatch(updateInputLang(lang[0]));
-        store.dispatch(updateOutputLang(lang[1]));
-      }
-      break;
-    }
-
-    default:
-      break;
-  }
+  // onTouchTap for material-ui
+  injectTapEventPlugin();
 
   render(
     <Provider store={store}>
@@ -71,3 +20,21 @@ Windows.UI.WebUI.WebUIApplication.onactivated = (args) => {
     document.getElementById('app')
   );
 };
+
+switch (process.env.PLATFORM) {
+  case 'windows': {
+    Windows.UI.WebUI.WebUIApplication.onactivated = () => {
+      runApp();
+    };
+    break;
+  }
+  case 'mac': {
+    runApp();
+    break;
+  }
+  default: {
+    /* eslint-disable no-console */
+    console.log('Undetected Platfom');
+    /* eslint-enable no-console */
+  }
+}

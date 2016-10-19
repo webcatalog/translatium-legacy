@@ -1,5 +1,6 @@
 import { SCREEN_RESIZE } from '../constants/actions';
 
+/* global window */
 const initialState = {
   screenWidth: typeof window === 'object' ? window.innerWidth : null,
 };

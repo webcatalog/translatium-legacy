@@ -4,3 +4,4 @@ node_modules
 npm-debug.log
 app0
 .eslintcache
+_app
