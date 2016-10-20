@@ -1,0 +1,50 @@
+a {
+  color: #ff4081;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+html, body, #app, .fs {
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+.dictionary h1, .dictionary h2, .dictionary h3, .dictionary h4, .dictionary h5, .dictionary h6 {
+  font-weight: 400;
+}
+
+.dictionary h2, .dictionary h3, .dictionary h4, .dictionary h5, .dictionary h6 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.dictionary h1 {
+  margin-top: 16px;
+  margin-bottom: 12px;
+}
+
+.dictionary h2 {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+a {
+  cursor: pointer;
+}
+
+body {
+  font-size: 15px;
+  line-height: 24px;
+}

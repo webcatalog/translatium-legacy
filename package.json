@@ -39,6 +39,7 @@
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "clean-webpack-plugin": "^0.1.13",
+    "copy-webpack-plugin": "^3.0.1",
     "eslint": "^3.7.1",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^1.16.0",

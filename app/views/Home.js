@@ -209,7 +209,7 @@ class Home extends React.Component {
               {(showMoreButton) ? (
                 <IconMenu
                   iconButtonElement={(
-                    <IconButton tooltip="More" tooltipPosition="bottom-center">
+                    <IconButton tooltip={strings.more} tooltipPosition="bottom-center">
                       <NavigationMoreVert />
                     </IconButton>
                   )}
@@ -340,7 +340,7 @@ class Home extends React.Component {
               {(showMoreButton) ? (
                 <IconMenu
                   iconButtonElement={(
-                    <IconButton tooltip="More" tooltipPosition="bottom-center">
+                    <IconButton tooltip={strings.more} tooltipPosition="bottom-center">
                       <NavigationMoreVert />
                     </IconButton>
                   )}

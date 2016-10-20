@@ -45,7 +45,7 @@ export const updateInputText = (inputText, selectionStart, selectionEnd) =>
 
     dispatch({ type: UPDATE_INPUT_TEXT, inputText, selectionStart, selectionEnd });
 
-    if (realtime === true) {
+    if (realtime === true && inputText.length > 0) {
       dispatch(translate());
     } else {
       dispatch({
