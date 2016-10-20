@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "history": "^4.3.0",
+    "immutable": "^3.8.1",
     "material-ui": "^0.16.0",
     "pouchdb-browser": "^6.0.7",
     "react": "^15.3.2",

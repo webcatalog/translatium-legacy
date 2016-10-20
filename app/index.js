@@ -10,8 +10,18 @@ import renderRoutes from './renderRoutes';
 
 import fetchLocal from './libs/fetchLocal';
 
-const runApp = () =>
-  /* global document fetch */
+const runApp = () => {
+  /* global document */
+
+  // Mock user agent
+  Object.defineProperty(
+    window.navigator,
+    'userAgent',
+    {
+      get: () => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36',
+    }
+  );
+
   fetchLocal('./strings/en-us.json')
     .then(res => res.json())
     .then((strings) => {
@@ -28,6 +38,7 @@ const runApp = () =>
         document.getElementById('app')
       );
     });
+};
 
 switch (process.env.PLATFORM) {
   case 'windows': {

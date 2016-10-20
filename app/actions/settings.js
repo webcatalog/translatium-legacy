@@ -1,11 +1,9 @@
 import {
-  UPDATE_SETTING,
+  UPDATE_SETTING, UPDATE_OUTPUT,
 } from '../constants/actions';
 
 import { isOutput } from '../libs/languageUtils';
-
-const translate = () => {};
-const clearHome = () => {};
+import { translate } from './home';
 
 export const updateSetting = (name, value) => ({
   type: UPDATE_SETTING,
@@ -26,7 +24,10 @@ const runAfterLanguageChange = language => ((dispatch, getState) => {
   if (realtime === true) {
     dispatch(translate());
   } else {
-    dispatch(clearHome());
+    dispatch({
+      type: UPDATE_OUTPUT,
+      output: null,
+    });
   }
 
   if (!language) return;

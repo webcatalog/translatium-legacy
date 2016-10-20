@@ -29,6 +29,7 @@ class Settings extends React.Component {
     const {
       theme,
       primaryColorId,
+      realtime,
       preventScreenLock,
       translateWhenPressingEnter,
       onToggle,
@@ -66,11 +67,21 @@ class Settings extends React.Component {
           </SelectField>
           <br /><br />
           <Toggle
-            label={strings.preventScreenLock}
-            toggled={preventScreenLock}
-            onToggle={() => onToggle('preventScreenLock')}
+            label={strings.realtime}
+            toggled={realtime}
+            onToggle={() => onToggle('realtime')}
           />
           <br />
+          {
+            (process.env.PLATFORM === 'windows') ? [
+              <Toggle
+                label={strings.preventScreenLock}
+                toggled={preventScreenLock}
+                onToggle={() => onToggle('preventScreenLock')}
+              />,
+              <br />,
+            ] : null
+          }
           <Toggle
             label={strings.translateWhenPressingEnter}
             toggled={translateWhenPressingEnter}
@@ -87,6 +98,7 @@ Settings.propTypes = {
   primaryColorId: React.PropTypes.string,
   preventScreenLock: React.PropTypes.bool,
   translateWhenPressingEnter: React.PropTypes.bool,
+  realtime: React.PropTypes.bool,
   onToggle: React.PropTypes.func,
   onSelectFieldChange: React.PropTypes.func,
 };
@@ -96,6 +108,7 @@ const mapStateToProps = state => ({
   primaryColorId: state.settings.primaryColorId,
   preventScreenLock: state.settings.preventScreenLock,
   translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
+  realtime: state.settings.realtime,
 });
 
 const mapDispatchToProps = dispatch => ({

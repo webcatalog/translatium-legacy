@@ -37,7 +37,7 @@ class LanguageList extends React.Component {
   }
 
   render() {
-    const { type, onCloseTouchTap } = this.props;
+    const { type, onCloseTouchTap, onLanguageTouchTap } = this.props;
     const styles = this.getStyles();
 
     let languages;
@@ -71,9 +71,10 @@ class LanguageList extends React.Component {
         />
         <div style={styles.listContainer}>
           {Object.keys(groups).map(groupId => [(
-            <List>
+            <List key={groupId}>
               {groups[groupId].map((langId, i) => (
                 <ListItem
+                  key={`lang_${langId}`}
                   primaryText={strings[langId]}
                   leftIcon={i === 0 ? (
                     <Avatar backgroundColor={transparent} style={{ left: 8, top: 4 }}>
@@ -81,6 +82,7 @@ class LanguageList extends React.Component {
                     </Avatar>
                   ) : null}
                   insetChildren={i > 0}
+                  onTouchTap={() => onLanguageTouchTap(type, langId)}
                 />
               ))}
             </List>
@@ -93,9 +95,8 @@ class LanguageList extends React.Component {
 
 LanguageList.propTypes = {
   type: React.PropTypes.string,
-  // primaryColorId: React.PropTypes.string,
   onCloseTouchTap: React.PropTypes.func,
-  // onLanguageTouchTap: React.PropTypes.func,
+  onLanguageTouchTap: React.PropTypes.func,
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -103,19 +104,17 @@ const mapDispatchToProps = dispatch => ({
     dispatch(goBack());
   },
   onLanguageTouchTap: (type, value) => {
+    dispatch(goBack());
+
     if (type === 'inputLang') {
       dispatch(updateInputLang(value));
-    }
-    if (type === 'outputLang') {
+    } else if (type === 'outputLang') {
       dispatch(updateOutputLang(value));
     }
-
-    dispatch(goBack());
   },
 });
 
 const mapStateToProps = (state, ownProps) => ({
-  primaryColorId: state.settings.primaryColorId,
   recentLanguages: state.settings.recentLanguages,
   type: ownProps.location.query.type,
 });

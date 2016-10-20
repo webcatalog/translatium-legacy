@@ -15,6 +15,7 @@ import ActionSettings from 'material-ui/svg-icons/action/settings';
 import ActionHelp from 'material-ui/svg-icons/action/help';
 
 import { screenResize } from '../actions/screen';
+import { updateImeMode } from '../actions/home';
 import colorPairs from '../constants/colorPairs';
 
 /* global window */
@@ -30,9 +31,9 @@ class App extends React.Component {
     pTheme.palette.primary1Color = primary1Color;
     pTheme.palette.primary2Color = primary2Color;
     pTheme.palette.accent1Color = red500;
+    pTheme.palette.alternateTextColor = fullWhite;
     pTheme.appBar = {};
     pTheme.appBar.height = 56;
-    pTheme.appBar.textColor = fullWhite;
 
     return {
       muiTheme: getMuiTheme(pTheme),
@@ -81,8 +82,8 @@ class App extends React.Component {
           Modern Translator
         </div>
         {children}
-        {bottomNavigationSelectedIndex > 1 ? (
-          <Paper zDepth={1}>
+        {bottomNavigationSelectedIndex > -1 ? (
+          <Paper zDepth={2} style={{ zIndex: 1000 }}>
             <BottomNavigation selectedIndex={bottomNavigationSelectedIndex}>
               <BottomNavigationItem
                 label={strings.home}
@@ -155,6 +156,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => ({
   onResize: () => {
     dispatch(screenResize(window.innerWidth));
+    dispatch(updateImeMode(null));
   },
   onBottomNavigationItemClick: (pathname) => {
     dispatch(replace(pathname));
