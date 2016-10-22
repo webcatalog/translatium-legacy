@@ -35,11 +35,12 @@ class Handwriting extends React.Component {
 
   componentDidMount() {
     const canvas = this.canvas;
-    const { theme, onResetSuggestions } = this.props;
+    const { onResetSuggestions } = this.props;
+    const { textColor } = this.context.muiTheme.palette;
     this.canvasContext = canvas.getContext('2d');
     this.canvasContext.canvas.height = canvas.clientHeight;
     this.canvasContext.canvas.width = canvas.clientWidth;
-    this.canvasContext.strokeStyle = (theme === 'light') ? '#000' : '#fff';
+    this.canvasContext.strokeStyle = textColor;
     this.canvasContext.lineJoin = 'round';
     this.canvasContext.lineWidth = 5;
     this.offsetTop = canvas.offsetParent.offsetTop + canvas.offsetTop;
@@ -299,7 +300,6 @@ class Handwriting extends React.Component {
 }
 
 Handwriting.propTypes = {
-  theme: React.PropTypes.string,
   screenWidth: React.PropTypes.number,
   inputText: React.PropTypes.string,
   selectionStart: React.PropTypes.number,
@@ -309,6 +309,10 @@ Handwriting.propTypes = {
   onLoadSuggestions: React.PropTypes.func,
   onResetSuggestions: React.PropTypes.func,
   onTurnOffHandwriting: React.PropTypes.func,
+};
+
+Handwriting.contextTypes = {
+  muiTheme: React.PropTypes.object,
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -327,7 +331,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  theme: state.settings.theme,
   inputText: state.home.inputText,
   selectionStart: state.home.selectionStart,
   selectionEnd: state.home.selectionEnd,

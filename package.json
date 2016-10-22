@@ -26,6 +26,7 @@
     "react-router-redux": "^4.0.6",
     "react-tap-event-plugin": "^1.0.0",
     "react-winjs": "git+https://github.com/quanglam2807/react-winjs.git",
+    "recordrtc": "^5.4.0",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
     "whatwg-fetch": "^1.0.0",

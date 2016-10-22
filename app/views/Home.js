@@ -30,11 +30,21 @@ import ActionSwapVert from 'material-ui/svg-icons/action/swap-vert';
 import ToggleStarBorder from 'material-ui/svg-icons/toggle/star-border';
 import ToggleStar from 'material-ui/svg-icons/toggle/star';
 
+import {
+  isOutput,
+  isTtsSupported,
+  isVoiceRecognitionSupported,
+  isHandwritingSupported,
+  isOcrSupported,
+} from '../libs/languageUtils';
+
 import { swapLanguages } from '../actions/settings';
 import { updateInputText, translate, updateImeMode } from '../actions/home';
 import { playTextToSpeech, stopTextToSpeech } from '../actions/textToSpeech';
+
 import Dictionary from './Dictionary';
 import Handwriting from './Handwriting';
+import Speech from './Speech';
 
 class Home extends React.Component {
   getStyles() {
@@ -138,7 +148,11 @@ class Home extends React.Component {
   }
 
   renderOutput(styles) {
-    const { output, screenWidth, textToSpeechPlaying, onListenButtonTouchTap } = this.props;
+    const {
+      output, screenWidth,
+      outputLang,
+      textToSpeechPlaying, onListenButtonTouchTap,
+    } = this.props;
 
     if (!output) return null;
 
@@ -156,6 +170,7 @@ class Home extends React.Component {
             icon: textToSpeechPlaying ? <AVStop /> : <AVVolumeUp />,
             tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
             onTouchTap: () => onListenButtonTouchTap(textToSpeechPlaying, output.get('outputLang'), output.get('outputText')),
+            disabled: !isTtsSupported(outputLang),
           },
           {
             icon: <ActionSwapVert />,
@@ -196,16 +211,20 @@ class Home extends React.Component {
               {output.get('outputText')}
             </CardText>
             <CardActions>
-              {controllers.slice(0, maxVisibleIcon).map(({ icon, tooltip, onTouchTap }, i) => (
-                <IconButton
-                  tooltip={tooltip}
-                  tooltipPosition="bottom-center"
-                  key={`dIconButton_${i}`}
-                  onTouchTap={onTouchTap}
-                >
-                  {icon}
-                </IconButton>
-              ))}
+              {
+                controllers.slice(0, maxVisibleIcon)
+                .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
+                  <IconButton
+                    tooltip={tooltip}
+                    tooltipPosition="bottom-center"
+                    disabled={disabled}
+                    key={`dIconButton_${i}`}
+                    onTouchTap={onTouchTap}
+                  >
+                    {icon}
+                  </IconButton>
+                ))
+              }
               {(showMoreButton) ? (
                 <IconMenu
                   iconButtonElement={(
@@ -219,10 +238,11 @@ class Home extends React.Component {
                   {
                     controllers
                       .slice(maxVisibleIcon, controllers.length)
-                      .map(({ icon, tooltip, onTouchTap }, i) => (
+                      .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
                         <MenuItem
                           primaryText={tooltip}
                           leftIcon={icon}
+                          disabled={disabled}
                           key={`dMenuItem_${i}`}
                           onTouchTap={onTouchTap}
                         />
@@ -255,6 +275,7 @@ class Home extends React.Component {
       onClearButtonTouchTap,
       onListenButtonTouchTap,
       onWriteButtonTouchTap,
+      onSpeakButtonTouchTap,
       onTranslateButtonTouchTap,
     } = this.props;
     const styles = this.getStyles();
@@ -269,19 +290,24 @@ class Home extends React.Component {
         icon: textToSpeechPlaying ? <AVStop /> : <AVVolumeUp />,
         tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
         onTouchTap: () => onListenButtonTouchTap(textToSpeechPlaying, inputLang, inputText),
+        disabled: !isTtsSupported(inputLang),
       },
       {
         icon: <AVMic />,
         tooltip: strings.speak,
+        onTouchTap: onSpeakButtonTouchTap,
+        disabled: !isVoiceRecognitionSupported(inputLang),
       },
       {
         icon: <ContentGesture />,
         tooltip: strings.draw,
         onTouchTap: onWriteButtonTouchTap,
+        disabled: !isHandwritingSupported(inputLang),
       },
       {
         icon: <ImageCameraAlt />,
         tooltip: strings.camera,
+        disabled: !isOcrSupported(inputLang),
       },
     ];
 
@@ -301,7 +327,7 @@ class Home extends React.Component {
                 </div>
               </div>
               <div style={styles.swapIconContainer} onTouchTap={onSwapButtonTouchTap}>
-                <IconButton>
+                <IconButton disabled={!isOutput(inputLang)}>
                   <ActionSwapHoriz color={fullWhite} />
                 </IconButton>
               </div>
@@ -327,16 +353,20 @@ class Home extends React.Component {
           />
           <div style={styles.controllerContainer}>
             <div style={styles.controllerContainerLeft}>
-              {controllers.slice(0, maxVisibleIcon).map(({ icon, tooltip, onTouchTap }, i) => (
-                <IconButton
-                  tooltip={tooltip}
-                  tooltipPosition="bottom-center"
-                  key={`cIconButton_${i}`}
-                  onTouchTap={onTouchTap}
-                >
-                  {icon}
-                </IconButton>
-              ))}
+              {
+                controllers.slice(0, maxVisibleIcon)
+                .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
+                  <IconButton
+                    tooltip={tooltip}
+                    tooltipPosition="bottom-center"
+                    disabled={disabled}
+                    key={`cIconButton_${i}`}
+                    onTouchTap={onTouchTap}
+                  >
+                    {icon}
+                  </IconButton>
+                ))
+              }
               {(showMoreButton) ? (
                 <IconMenu
                   iconButtonElement={(
@@ -350,10 +380,11 @@ class Home extends React.Component {
                   {
                     controllers
                       .slice(maxVisibleIcon, controllers.length)
-                      .map(({ icon, tooltip, onTouchTap }, i) => (
+                      .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
                         <MenuItem
                           primaryText={tooltip}
                           leftIcon={icon}
+                          disabled={disabled}
                           key={`cMenuItem_${i}`}
                           onTouchTap={onTouchTap}
                         />
@@ -372,6 +403,7 @@ class Home extends React.Component {
         </div>
 
         {imeMode === 'handwriting' ? <Handwriting /> : null}
+        {imeMode === 'speech' ? <Speech /> : null}
       </div>
     );
   }
@@ -395,6 +427,7 @@ Home.propTypes = {
   onListenButtonTouchTap: React.PropTypes.func,
   onTranslateButtonTouchTap: React.PropTypes.func,
   onWriteButtonTouchTap: React.PropTypes.func,
+  onSpeakButtonTouchTap: React.PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -454,6 +487,9 @@ const mapDispatchToProps = dispatch => ({
     } else {
       dispatch(switchIme('handwriting'));
     }*/
+  },
+  onSpeakButtonTouchTap: () => {
+    dispatch(updateImeMode('speech'));
   },
 });
 

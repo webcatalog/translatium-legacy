@@ -21,8 +21,8 @@
 
 	"fromLanguage": "from {1}",
 
-	"chooseAnInputLanguage": "Choose an input language",
-	"chooseAnOutputLanguage": "Choose an output language",
+	"chooseAnInputLanguage": "Translate from",
+	"chooseAnOutputLanguage": "Translate to",
 
 	"delete": "Delete",
 	"spaceBar": "Space bar",

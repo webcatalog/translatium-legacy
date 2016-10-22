@@ -12,7 +12,7 @@ export const translate = () => ((dispatch, getState) => {
   const { inputText } = home;
 
   // Safe
-  if (inputText.length < 1) return;
+  if (inputText.trim().length < 1) return;
 
   dispatch({
     type: UPDATE_OUTPUT,
@@ -45,7 +45,7 @@ export const updateInputText = (inputText, selectionStart, selectionEnd) =>
 
     dispatch({ type: UPDATE_INPUT_TEXT, inputText, selectionStart, selectionEnd });
 
-    if (realtime === true && inputText.length > 0) {
+    if (realtime === true && inputText.trim().length > 0) {
       dispatch(translate());
     } else {
       dispatch({

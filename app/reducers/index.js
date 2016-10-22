@@ -7,6 +7,7 @@ import home from './home';
 import settings from './settings';
 import textToSpeech from './textToSpeech';
 import handwriting from './handwriting';
+import speech from './speech';
 
 const rootReducer = combineReducers({
   screen,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   settings,
   textToSpeech,
   handwriting,
+  speech,
   routing: routerReducer,
 });
 

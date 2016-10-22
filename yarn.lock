@@ -3810,6 +3810,10 @@ recompose@^0.20.2:
     hoist-non-react-statics "^1.0.0"
     symbol-observable "^0.2.4"
 
+recordrtc:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/recordrtc/-/recordrtc-5.4.0.tgz#c71ad45437d4a0859f2d4606d3f86d961ec7c423"
+
 redent@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/redent/-/redent-1.0.0.tgz#cf916ab1fd5f1f16dfb20822dd6ec7f730c2afde"

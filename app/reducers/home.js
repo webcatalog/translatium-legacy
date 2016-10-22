@@ -4,8 +4,8 @@ import {
 
 const initialState = {
   inputText: '',
-  selectionStart: null,
-  selectionEnd: null,
+  selectionStart: 0,
+  selectionEnd: 0,
   output: null,
 };
 
