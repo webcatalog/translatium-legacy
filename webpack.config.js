@@ -39,7 +39,7 @@ const common = {
 
 const config = (() => {
   switch (process.env.npm_lifecycle_event) {
-    case 'build-mac':
+    case 'build-macos':
     case 'build-windows':
       return merge(common, {
         plugins: [
@@ -60,7 +60,7 @@ const config = (() => {
           new webpack.optimize.AggressiveMergingPlugin(),
         ],
       });
-    case 'dev-mac':
+    case 'dev-macos':
     case 'dev-windows':
       return merge(common, {
         plugins: [
