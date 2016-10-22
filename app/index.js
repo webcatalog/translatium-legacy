@@ -47,7 +47,7 @@ switch (process.env.PLATFORM) {
     };
     break;
   }
-  case 'macos': {
+  case 'mac': {
     runApp();
     break;
   }

@@ -8,10 +8,10 @@
     "node": "6.9.0"
   },
   "scripts": {
-    "dev-macos": "PLATFORM=macos NODE_ENV=development webpack -d --watch",
-    "build-macos": "PLATFORM=macos NODE_ENV=production webpack -p",
-    "package-macos": "npm run build-macos && node platforms/macos/bin/packager.js",
-    "start-macos": "./platforms/macos/node_modules/.bin/electron platforms/macos",
+    "dev-mac": "PLATFORM=mac NODE_ENV=development webpack -d --watch",
+    "build-mac": "PLATFORM=mac NODE_ENV=production webpack -p",
+    "package-mac": "npm run build-mac && node platforms/mac/bin/packager.js",
+    "start-mac": "./platforms/mac/node_modules/.bin/electron platforms/mac",
     "build-windows": "PLATFORM=windows NODE_ENV=production webpack -p",
     "lint": "eslint ./app --ext .js --cache"
   },
