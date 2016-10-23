@@ -7,6 +7,7 @@ import store from './store';
 import Layout from './views/Layout';
 
 import Home from './views/Home';
+import Phrasebook from './views/Phrasebook';
 import Settings from './views/Settings';
 import LanguageList from './views/LanguageList';
 
@@ -16,6 +17,7 @@ const renderRoutes = () => (
   <Router history={history}>
     <Route path="/" component={Layout}>
       <IndexRoute component={Home} />
+      <Route path="phrasebook" component={Phrasebook} />
       <Route path="settings" component={Settings} />
       <Route path="language-list" component={LanguageList} />
     </Route>

@@ -5,6 +5,8 @@ import {
 } from '../constants/actions';
 
 import translateText from '../libs/translateText';
+import phrasebookDb from '../libs/phrasebookDb';
+
 
 export const translate = () => ((dispatch, getState) => {
   const { settings, home } = getState();
@@ -54,6 +56,36 @@ export const updateInputText = (inputText, selectionStart, selectionEnd) =>
       });
     }
   });
+
+export const togglePhrasebook = () => ((dispatch, getState) => {
+  const { output } = getState().home;
+
+  const phrasebookId = output.get('phrasebookId');
+
+  if (phrasebookId) {
+    phrasebookDb.get(phrasebookId)
+      .then(doc => phrasebookDb.remove(doc))
+      .then(() => {
+        dispatch({
+          type: UPDATE_OUTPUT,
+          output: output.delete('phrasebookId'),
+        });
+      });
+  } else {
+    const newPhrasebookId = new Date().toJSON();
+    phrasebookDb.put({
+      _id: newPhrasebookId,
+      data: output.toJS(),
+      phrasebookVersion: 3,
+    })
+    .then(() => {
+      dispatch({
+        type: UPDATE_OUTPUT,
+        output: output.set('phrasebookId', newPhrasebookId),
+      });
+    });
+  }
+});
 
 export const updateImeMode = imeMode => ({
   type: UPDATE_IME_MODE,

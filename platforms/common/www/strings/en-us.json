@@ -24,6 +24,8 @@
 	"chooseAnInputLanguage": "Translate from",
 	"chooseAnOutputLanguage": "Translate to",
 
+	"phrasebookIsEmpty": "Phrasebook is empty.",
+
 	"delete": "Delete",
 	"spaceBar": "Space bar",
 	"done": "Done",

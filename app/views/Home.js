@@ -39,7 +39,7 @@ import {
 } from '../libs/languageUtils';
 
 import { swapLanguages } from '../actions/settings';
-import { updateInputText, translate, updateImeMode } from '../actions/home';
+import { updateInputText, translate, updateImeMode, togglePhrasebook } from '../actions/home';
 import { playTextToSpeech, stopTextToSpeech } from '../actions/textToSpeech';
 
 import Dictionary from './Dictionary';
@@ -99,7 +99,7 @@ class Home extends React.Component {
         paddingTop: (appBar.height - iconButtonSize) / 2,
       },
       inputContainer: {
-        height: 160,
+        height: 140,
         display: 'flex',
         flexDirection: 'column',
         zIndex: 1000,
@@ -152,6 +152,7 @@ class Home extends React.Component {
       output, screenWidth,
       outputLang,
       textToSpeechPlaying, onListenButtonTouchTap,
+      onTogglePhrasebookTouchTap,
     } = this.props;
 
     if (!output) return null;
@@ -173,6 +174,11 @@ class Home extends React.Component {
             disabled: !isTtsSupported(outputLang),
           },
           {
+            icon: output.has('phrasebookId') ? <ToggleStar /> : <ToggleStarBorder />,
+            tooltip: output.has('phrasebookId') ? strings.removeFromPhrasebook : strings.addToPhrasebook,
+            onTouchTap: onTogglePhrasebookTouchTap,
+          },
+          {
             icon: <ActionSwapVert />,
             tooltip: strings.swap,
           },
@@ -188,13 +194,9 @@ class Home extends React.Component {
             icon: <SocialShare />,
             tooltip: strings.share,
           },
-          {
-            icon: output.has('phrasebookId') ? <ToggleStar /> : <ToggleStarBorder />,
-            tooltip: output.has('phrasebookId') ? strings.removeFromPhrasebook : strings.addToPhrasebook,
-          },
         ];
 
-        const maxVisibleIcon = Math.min(Math.round((screenWidth - 100) / 56), controllers.length);
+        const maxVisibleIcon = Math.min(Math.round((screenWidth - 120) / 56), controllers.length);
         const showMoreButton = (maxVisibleIcon < controllers.length);
 
         const hasDict = output.get('inputDict') !== undefined && output.get('outputDict') !== undefined;
@@ -213,17 +215,20 @@ class Home extends React.Component {
             <CardActions>
               {
                 controllers.slice(0, maxVisibleIcon)
-                .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
-                  <IconButton
-                    tooltip={tooltip}
-                    tooltipPosition="bottom-center"
-                    disabled={disabled}
-                    key={`dIconButton_${i}`}
-                    onTouchTap={onTouchTap}
-                  >
-                    {icon}
-                  </IconButton>
-                ))
+                .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
+                  if (disabled) return null;
+
+                  return (
+                    <IconButton
+                      tooltip={tooltip}
+                      tooltipPosition="bottom-center"
+                      key={`dIconButton_${i}`}
+                      onTouchTap={onTouchTap}
+                    >
+                      {icon}
+                    </IconButton>
+                  );
+                })
               }
               {(showMoreButton) ? (
                 <IconMenu
@@ -238,15 +243,19 @@ class Home extends React.Component {
                   {
                     controllers
                       .slice(maxVisibleIcon, controllers.length)
-                      .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
-                        <MenuItem
-                          primaryText={tooltip}
-                          leftIcon={icon}
-                          disabled={disabled}
-                          key={`dMenuItem_${i}`}
-                          onTouchTap={onTouchTap}
-                        />
-                      ))
+                      .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
+                        if (disabled) return null;
+
+                        return (
+                          <MenuItem
+                            primaryText={tooltip}
+                            leftIcon={icon}
+                            disabled={disabled}
+                            key={`dMenuItem_${i}`}
+                            onTouchTap={onTouchTap}
+                          />
+                        );
+                      })
                   }
                 </IconMenu>
               ) : null}
@@ -355,17 +364,20 @@ class Home extends React.Component {
             <div style={styles.controllerContainerLeft}>
               {
                 controllers.slice(0, maxVisibleIcon)
-                .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
-                  <IconButton
-                    tooltip={tooltip}
-                    tooltipPosition="bottom-center"
-                    disabled={disabled}
-                    key={`cIconButton_${i}`}
-                    onTouchTap={onTouchTap}
-                  >
-                    {icon}
-                  </IconButton>
-                ))
+                .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
+                  if (disabled) return null;
+
+                  return (
+                    <IconButton
+                      tooltip={tooltip}
+                      tooltipPosition="bottom-center"
+                      key={`dIconButton_${i}`}
+                      onTouchTap={onTouchTap}
+                    >
+                      {icon}
+                    </IconButton>
+                  );
+                })
               }
               {(showMoreButton) ? (
                 <IconMenu
@@ -380,15 +392,19 @@ class Home extends React.Component {
                   {
                     controllers
                       .slice(maxVisibleIcon, controllers.length)
-                      .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
-                        <MenuItem
-                          primaryText={tooltip}
-                          leftIcon={icon}
-                          disabled={disabled}
-                          key={`cMenuItem_${i}`}
-                          onTouchTap={onTouchTap}
-                        />
-                      ))
+                      .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
+                        if (disabled) return null;
+
+                        return (
+                          <MenuItem
+                            primaryText={tooltip}
+                            leftIcon={icon}
+                            disabled={disabled}
+                            key={`dMenuItem_${i}`}
+                            onTouchTap={onTouchTap}
+                          />
+                        );
+                      })
                   }
                 </IconMenu>
               ) : null}
@@ -428,6 +444,7 @@ Home.propTypes = {
   onTranslateButtonTouchTap: React.PropTypes.func,
   onWriteButtonTouchTap: React.PropTypes.func,
   onSpeakButtonTouchTap: React.PropTypes.func,
+  onTogglePhrasebookTouchTap: React.PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -490,6 +507,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onSpeakButtonTouchTap: () => {
     dispatch(updateImeMode('speech'));
+  },
+  onTogglePhrasebookTouchTap: () => {
+    dispatch(togglePhrasebook());
   },
 });
 
