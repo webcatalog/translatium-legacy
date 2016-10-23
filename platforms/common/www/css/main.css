@@ -19,9 +19,6 @@ html {
 
 body, h1, h2, h3, h4, h5, h6 {
   margin: 0;
-}
-
-.dictionary h1, .dictionary h2, .dictionary h3, .dictionary h4, .dictionary h5, .dictionary h6 {
   font-weight: 400;
 }
 

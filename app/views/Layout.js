@@ -78,9 +78,11 @@ class App extends React.Component {
 
     return (
       <div className="fs" style={styles.container}>
-        <div style={styles.fakeTitleBar}>
-          Modern Translator
-        </div>
+        {process.env.PLATFORM === 'mac' ? (
+          <div style={styles.fakeTitleBar}>
+            Modern Translator
+          </div>
+        ) : null}
         {children}
         {bottomNavigationSelectedIndex > -1 ? (
           <Paper zDepth={2} style={{ zIndex: 1000 }}>

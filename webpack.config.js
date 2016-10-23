@@ -33,6 +33,7 @@ const common = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM),
+      'process.env.VERSION': JSON.stringify(process.env.npm_package_version),
     }),
   ],
 };
