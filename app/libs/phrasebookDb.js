@@ -1,4 +1,4 @@
-import PouchDB from 'pouchdb';
+import PouchDB from 'pouchdb-browser';
 
 const phrasebookDb = new PouchDB('favorites');
 
