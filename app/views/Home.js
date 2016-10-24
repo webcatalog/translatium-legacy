@@ -60,6 +60,7 @@ class Home extends React.Component {
     return {
       container: {
         flex: 1,
+        height: '100%',
         backgroundColor: (theme === 'dark') ? fullBlack : grey100,
         display: 'flex',
         flexDirection: 'column',

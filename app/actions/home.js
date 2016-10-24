@@ -33,7 +33,9 @@ export const translate = () => ((dispatch, getState) => {
         output: Immutable.fromJS(r),
       });
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
+
       dispatch({
         type: UPDATE_OUTPUT,
         output: Immutable.fromJS({ status: 'failed' }),

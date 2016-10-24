@@ -52,7 +52,7 @@ const all = {
 
   // The release version of the application. Maps to the `ProductVersion` metadata
   // property on Windows, and `CFBundleShortVersionString` on Mac.
-  'app-version': config.APP_VERSION,
+  'app-version': process.env.npm_package_version,
 
   // Package the application's source code into an archive, using Electron's archive
   // format. Mitigates issues around long path names on Windows and slightly speeds up
@@ -60,13 +60,13 @@ const all = {
   asar: {
     // A glob expression, that unpacks the files with matching names to the
     // "app.asar.unpacked" directory.
-    unpack: 'WebCatalog*',
+    unpack: 'ModernTranslator*',
   },
 
   // The build version of the application. Maps to the FileVersion metadata property on
   // Windows, and CFBundleVersion on Mac. Note: Windows requires the build version to
   // start with a number. We're using the version of the underlying WebCatalog library.
-  'build-version': config.APP_VERSION,
+  'build-version': process.env.npm_package_version,
 
   // The application source directory.
   dir: config.ROOT_PATH,

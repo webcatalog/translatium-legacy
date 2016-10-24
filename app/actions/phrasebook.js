@@ -19,7 +19,6 @@ export const loadPhrasebook = () => ((dispatch, getState) => {
     phrasebookLoading: true,
   });
 
-  console.log(phrasebookItems);
 
   let items = phrasebookItems;
 
@@ -55,7 +54,6 @@ export const loadPhrasebook = () => ((dispatch, getState) => {
 
           items = items.push(Immutable.fromJS(data));
 
-          console.log(items);
         } else {
           const {
             _id, _rev,

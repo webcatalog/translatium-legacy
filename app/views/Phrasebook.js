@@ -27,6 +27,7 @@ class Phrasebook extends React.Component {
       emptyContainer: {
         flex: 1,
         display: 'flex',
+        height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
       },

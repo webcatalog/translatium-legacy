@@ -12,16 +12,14 @@ html, body, #app, .fs {
   width: 100%;
 }
 
-html {
-  font-family: 'Roboto', sans-serif;
+* {
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
 
 body, h1, h2, h3, h4, h5, h6 {
   margin: 0;
-}
-
-.dictionary h1, .dictionary h2, .dictionary h3, .dictionary h4, .dictionary h5, .dictionary h6 {
   font-weight: 400;
 }
 

@@ -2,7 +2,6 @@ const path = require('path');
 
 const APP_NAME = 'Modern Translator';
 const APP_TEAM = 'Quang Lam';
-const APP_VERSION = '6.0.0';
 const APP_URL = 'https://moderntranslator.com';
 
 const IMAGE_PATH = path.join(__dirname, '..', 'images');
@@ -10,7 +9,6 @@ const IMAGE_PATH = path.join(__dirname, '..', 'images');
 module.exports = {
   APP_NAME,
   APP_TEAM,
-  APP_VERSION,
   APP_COPYRIGHT: `Copyright © 2016 ${APP_TEAM}`,
   ROOT_PATH: path.join(__dirname, '..'),
   IMAGE_PATH,

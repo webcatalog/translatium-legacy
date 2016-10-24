@@ -100,22 +100,16 @@
     <Content Include="images\Wide310x150.scale-150.png" />
     <Content Include="images\Wide310x150.scale-200.png" />
     <Content Include="images\Wide310x150.scale-400.png" />
-    <Content Include="www\winjs\css\ui-dark.min.css" />
-    <Content Include="www\winjs\css\ui-light.min.css" />
-    <Content Include="www\winjs\js\base.min.js" />
-    <Content Include="www\winjs\js\ui.min.js" />
-    <Content Include="www\app-dark.min.css" />
-    <Content Include="www\app-light.min.css" />
-    <Content Include="www\bundle.min.js" />
+    <Content Include="www\bundle.js" />
+    <Content Include="www\css\main.css" />
     <Content Include="www\index.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <PRIResource Include="strings\en-us\languages.resjson" />
-    <PRIResource Include="strings\en-us\resources.resjson" />
-    <PRIResource Include="strings\vi-vn\languages.resjson" />
-    <PRIResource Include="strings\vi-vn\resources.resjson" />
-    <PRIResource Include="www\winjs-localization\en-us\Microsoft.WinJS.resjson" />
-    <PRIResource Include="www\winjs-localization\vi-vn\Microsoft.WinJS.resjson" />
+    <Content Include="www\roboto-v15\font.css" />
+    <Content Include="www\roboto-v15\roboto-v15-latin_cyrillic-ext_vietnamese_cyrillic_greek_latin-ext_greek-ext-regular.eot" />
+    <Content Include="www\roboto-v15\roboto-v15-latin_cyrillic-ext_vietnamese_cyrillic_greek_latin-ext_greek-ext-regular.svg" />
+    <Content Include="www\roboto-v15\roboto-v15-latin_cyrillic-ext_vietnamese_cyrillic_greek_latin-ext_greek-ext-regular.ttf" />
+    <Content Include="www\roboto-v15\roboto-v15-latin_cyrillic-ext_vietnamese_cyrillic_greek_latin-ext_greek-ext-regular.woff" />
+    <Content Include="www\roboto-v15\roboto-v15-latin_cyrillic-ext_vietnamese_cyrillic_greek_latin-ext_greek-ext-regular.woff2" />
+    <Content Include="www\strings\en-us.json" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <Target Name="BeforeBuild">
