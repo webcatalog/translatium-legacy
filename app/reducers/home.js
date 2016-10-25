@@ -16,10 +16,11 @@ const home = (state = initialState, action) => {
       return Object.assign({}, state, {
         imeMode: action.imeMode,
       });
-    case UPDATE_OUTPUT:
+    case UPDATE_OUTPUT: {
       return Object.assign({}, state, {
         output: action.output,
       });
+    }
     case UPDATE_INPUT_TEXT:
       return Object.assign({}, state, {
         inputText: action.inputText,

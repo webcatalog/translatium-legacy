@@ -1,15 +1,15 @@
 import Immutable from 'immutable';
 
-import { UPDATE_PHRASEBOOK } from '../constants/actions';
+import { UPDATE_PHRASEBOOK, UPDATE_OUTPUT } from '../constants/actions';
 import phrasebookDb from '../libs/phrasebookDb';
 
-const options = {
+const defaultOptions = {
   include_docs: true,
   descending: true,
   limit: 10,
 };
 
-export const loadPhrasebook = () => ((dispatch, getState) => {
+export const loadPhrasebook = init => ((dispatch, getState) => {
   const { phrasebookItems, canLoadMore } = getState().phrasebook;
 
   dispatch({
@@ -20,11 +20,12 @@ export const loadPhrasebook = () => ((dispatch, getState) => {
   });
 
 
-  let items = phrasebookItems;
+  let items = (init === true) ? Immutable.fromJS([]) : phrasebookItems;
 
+  const options = Object.assign({}, defaultOptions);
   const l = items.size;
   if (l > 0) {
-    options.startkey = items.get(l - 1).id;
+    options.startkey = items.getIn([l - 1, 'phrasebookId']);
     options.skip = 1;
   }
 
@@ -83,20 +84,10 @@ export const loadPhrasebook = () => ((dispatch, getState) => {
     });
 });
 
-
-export const initPhrasebook = () => ((dispatch) => {
-  dispatch({
-    type: UPDATE_PHRASEBOOK,
-    phrasebookItems: Immutable.fromJS([]),
-    canLoadMore: false,
-    phrasebookLoading: true,
-  });
-
-  dispatch(loadPhrasebook());
-});
-
 export const deletePhrasebookItem = (id, rev) => ((dispatch, getState) => {
-  const { phrasebookItems, phrasebookLoading, canLoadMore } = getState().phrasebook;
+  const { home, phrasebook } = getState();
+  const { phrasebookItems, phrasebookLoading, canLoadMore } = phrasebook;
+  const { output } = home;
 
   let items = phrasebookItems;
 
@@ -114,6 +105,14 @@ export const deletePhrasebookItem = (id, rev) => ((dispatch, getState) => {
     phrasebookLoading,
     canLoadMore,
   });
+
+  // Update toggle star status of output
+  if (output && id === output.get('phrasebookId')) {
+    dispatch({
+      type: UPDATE_OUTPUT,
+      output: output.delete('phrasebookId'),
+    });
+  }
 
   phrasebookDb.remove(id, rev)
     .then(() => {

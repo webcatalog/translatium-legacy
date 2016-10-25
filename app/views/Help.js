@@ -5,6 +5,13 @@ import AppBar from 'material-ui/AppBar';
 
 class Help extends React.Component {
   getStyles() {
+    const {
+      palette: {
+        textColor,
+      },
+    } = this.context.muiTheme;
+
+
     return {
       container: {
         flex: 1,
@@ -26,6 +33,9 @@ class Help extends React.Component {
         height: 128,
         width: 128,
       },
+      text: {
+        color: textColor,
+      },
     };
   }
 
@@ -41,13 +51,17 @@ class Help extends React.Component {
         <div style={styles.contentContainer}>
           <div style={styles.innerContentContainer}>
             <img src="../images/icon.png" role="presentation" style={styles.icon} />
-            <h3>Modern Translator</h3>
-            <h4>Version {process.env.VERSION}</h4>
+            <h3 style={styles.text}>Modern Translator</h3>
+            <h4 style={styles.text}>Version {process.env.VERSION}</h4>
           </div>
         </div>
       </div>
     );
   }
 }
+
+Help.contextTypes = {
+  muiTheme: React.PropTypes.object,
+};
 
 export default Help;

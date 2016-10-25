@@ -18,6 +18,8 @@ import { screenResize } from '../actions/screen';
 import { updateImeMode } from '../actions/home';
 import colorPairs from '../constants/colorPairs';
 
+import Alert from './Alert';
+
 /* global window */
 
 class App extends React.Component {
@@ -121,6 +123,7 @@ class App extends React.Component {
 
     return (
       <div className="fs" style={styles.container}>
+        <Alert />
         {process.env.PLATFORM === 'mac' ? (
           <div style={styles.fakeTitleBar}>
             Modern Translator

@@ -7,21 +7,40 @@ import Immutable from 'immutable';
 
 import AppBar from 'material-ui/AppBar';
 import Paper from 'material-ui/Paper';
+import LinearProgress from 'material-ui/LinearProgress';
 import IconButton from 'material-ui/IconButton';
 import ToggleStar from 'material-ui/svg-icons/toggle/star';
 
-import { initPhrasebook, deletePhrasebookItem, loadPhrasebook } from '../actions/phrasebook';
-import { loadInfo } from '../actions/home';
+import { deletePhrasebookItem, loadPhrasebook } from '../actions/phrasebook';
+import { loadOutput } from '../actions/home';
 
 class Phrasebook extends React.Component {
   componentDidMount() {
-    const { onEnterPhrasebook } = this.props;
+    const { onEnterPhrasebook, onLoadMore } = this.props;
 
     onEnterPhrasebook();
+
+    this.listView.onscroll = () => {
+      const { scrollTop, clientHeight, scrollHeight } = this.listView;
+      if (scrollTop + clientHeight > scrollHeight - 200) {
+        if (this.props.canLoadMore === true && this.props.phrasebookLoading === false) {
+          onLoadMore();
+        }
+      }
+    };
+  }
+
+  componentWillUnmount() {
+    this.listView.onscroll = null;
   }
 
   getStyles() {
-    const { card } = this.context.muiTheme;
+    const {
+      palette: {
+        textColor,
+      },
+      card,
+    } = this.context.muiTheme;
 
     return {
       emptyContainer: {
@@ -33,6 +52,7 @@ class Phrasebook extends React.Component {
       },
       emptyInnerContainer: {
         textAlign: 'center',
+        color: textColor,
       },
       bigIcon: {
         height: 96,
@@ -47,7 +67,7 @@ class Phrasebook extends React.Component {
         flex: 1,
         height: '100%',
         overflowY: 'auto',
-        padding: 12,
+        padding: '0 12px 12px 12px',
         boxSizing: 'border-box',
       },
       paper: {
@@ -55,6 +75,7 @@ class Phrasebook extends React.Component {
         boxSizing: 'border-box',
         display: 'flex',
         marginTop: 12,
+        cursor: 'pointer',
       },
       paperLeftContainer: {
         flex: 1,
@@ -76,13 +97,18 @@ class Phrasebook extends React.Component {
         overflow: 'hidden',
         textOverflow: 'ellipsis',
       },
+      progress: {
+        marginTop: 12,
+      },
     };
   }
 
   render() {
-    const { phrasebookItems, phrasebookLoading, onDeleteButtonTouchTap } = this.props;
+    const {
+      phrasebookItems, phrasebookLoading,
+      onDeleteButtonTouchTap, onItemTouchTap,
+    } = this.props;
     const styles = this.getStyles();
-
 
     return (
       <div style={styles.container}>
@@ -103,9 +129,14 @@ class Phrasebook extends React.Component {
           }
 
           return (
-            <div style={styles.listContainer}>
+            <div style={styles.listContainer} ref={(c) => { this.listView = c; }}>
               {phrasebookItems.map(item => (
-                <Paper key={`phrasebookItem_${item.get('phrasebookId')}`} zDepth={1} style={styles.paper}>
+                <Paper
+                  key={`phrasebookItem_${item.get('phrasebookId')}`}
+                  zDepth={1}
+                  style={styles.paper}
+                  onTouchTap={() => onItemTouchTap(item)}
+                >
                   <div style={styles.paperLeftContainer}>
                     <p style={styles.title}>{item.get('outputText')}</p>
                     <p style={styles.subtitle}>{item.get('inputText')}</p>
@@ -113,83 +144,33 @@ class Phrasebook extends React.Component {
                   <div style={styles.paperRightContainer}>
                     <IconButton
                       tooltip={strings.removeFromPhrasebook}
-                      onTouchTap={() => onDeleteButtonTouchTap(
-                        item.get('phrasebookId'),
-                        item.get('rev')
-                      )}
+                      tooltipPosition="bottom-left"
+                      onTouchTap={(ev) => {
+                        let e = ev;
+                        /* global window */
+                        if (!e) e = window.event;
+                        e.cancelBubble = true;
+                        if (e.stopPropagation) e.stopPropagation();
+
+                        onDeleteButtonTouchTap(
+                          item.get('phrasebookId'),
+                          item.get('rev')
+                        );
+                      }}
                     >
                       <ToggleStar />
                     </IconButton>
                   </div>
                 </Paper>
               ))}
+              {phrasebookLoading === true ? (
+                <LinearProgress mode="indeterminate" style={styles.progress} />
+              ) : null}
             </div>
           );
         })()}
       </div>
     );
-
-    /*
-    return (
-      <div>
-        <div className="app-history-page">
-          {(() => {
-            if (phrasebookItems.length < 1 && phrasebookLoading === false) {
-              return (
-                <div className="app-empty-box">
-                  <div className="app-big-icon"></div>
-                  <h2 className="win-h2">{strings.phrasebookIsEmpty}</h2>
-                </div>
-              );
-            }
-
-            return (
-              <div>
-                {phrasebookItems.map((data, i) => (
-                  <div
-                    className="app-item"
-                    key={i}
-                    onTouchTap={() => onItemTouchTap()}
-                  >
-                    <div className="app-control-container">
-                      <div className="win-h5 app-language-title">
-                        English
-                        <span>{' > '}</span>
-                        Vietnamese
-                      </div>
-                      <div className="app-toolbar-container win-interactive">
-                        <ReactWinJS.ToolBar>
-                          <ReactWinJS.ToolBar.Button
-                            key="delete"
-                            icon=""
-                            label={strings.removeFromPhrasebook}
-                            // onTouchTap={() => onDeleteButtonTouchTap(id, rev)}
-                          />
-                        </ReactWinJS.ToolBar>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                {canLoadMore === true && phrasebookLoading === false ? (
-                  <div className="app-footer">
-                    <button
-                      className="win-button"
-                      onTouchTap={onLoadMoreButtonTouchTap}
-                    >
-                      {i18n('load-more')}
-                    </button>
-                  </div>
-                ) : null}
-                {phrasebookLoading === true ? (
-                  <progress className="win-progress-ring win-large app-ring" />
-                ) : null}
-              </div>
-            );
-          })()}
-        </div>
-      </div>
-    );
-    */
   }
 }
 
@@ -200,7 +181,7 @@ Phrasebook.propTypes = {
   onItemTouchTap: React.PropTypes.func,
   onEnterPhrasebook: React.PropTypes.func,
   onDeleteButtonTouchTap: React.PropTypes.func,
-  onLoadMoreButtonTouchTap: React.PropTypes.func,
+  onLoadMore: React.PropTypes.func,
 };
 
 Phrasebook.contextTypes = {
@@ -214,17 +195,17 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onItemTouchTap: (itemData) => {
-    dispatch(loadInfo(itemData));
+  onItemTouchTap: (output) => {
+    dispatch(loadOutput(output));
     dispatch(replace('/'));
   },
   onDeleteButtonTouchTap: (id, rev) => {
     dispatch(deletePhrasebookItem(id, rev));
   },
   onEnterPhrasebook: () => {
-    dispatch(initPhrasebook());
+    dispatch(loadPhrasebook(true));
   },
-  onLoadMoreButtonTouchTap: () => {
+  onLoadMore: () => {
     dispatch(loadPhrasebook());
   },
 });

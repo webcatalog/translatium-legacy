@@ -7,6 +7,8 @@ import { updateInputText } from './home';
 import insertAtCursor from '../libs/insertAtCursor';
 import deleteAtCursor from '../libs/deleteAtCursor';
 
+import { openAlert } from './alert';
+
 export const resetSuggestions = () => ({
   type: UPDATE_HANDWRITING_SUGGESTION_LIST,
   suggestions: null,
@@ -74,11 +76,6 @@ export const loadSuggestions = (
     });
   })
   .catch(() => {
-    /*
-    const title = i18n('connect-problem');
-    const content = i18n('check-connect');
-    const msg = new Windows.UI.Popups.MessageDialog(content, title);
-    msg.showAsync().done();
-    */
+    dispatch(openAlert('cannotConnectToServer'));
   });
 });

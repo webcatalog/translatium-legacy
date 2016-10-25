@@ -7,6 +7,8 @@ import {
 import translateText from '../libs/translateText';
 import phrasebookDb from '../libs/phrasebookDb';
 
+import { openAlert } from './alert';
+import { updateSetting } from './settings';
 
 export const translate = () => ((dispatch, getState) => {
   const { settings, home } = getState();
@@ -50,18 +52,25 @@ export const translate = () => ((dispatch, getState) => {
         outputLang !== currentState.settings.outputLang
       ) return;
 
+      dispatch(openAlert('cannotConnectToServer'));
+
       dispatch({
         type: UPDATE_OUTPUT,
-        output: Immutable.fromJS({ status: 'failed' }),
+        output: null,
       });
     });
 });
 
 export const updateInputText = (inputText, selectionStart, selectionEnd) =>
   ((dispatch, getState) => {
-    const realtime = getState().settings.realtime;
+    const { settings, home } = getState();
+    const realtime = settings.realtime;
+    const currentInputText = home.inputText;
 
     dispatch({ type: UPDATE_INPUT_TEXT, inputText, selectionStart, selectionEnd });
+
+    // No change in inputText, no need to re-run task
+    if (currentInputText === inputText) return;
 
     if (realtime === true && inputText.trim().length > 0) {
       // delay to save bandwidth
@@ -106,6 +115,24 @@ export const togglePhrasebook = () => ((dispatch, getState) => {
       });
     });
   }
+});
+
+export const loadOutput = output => ((dispatch) => {
+  // First load output
+  dispatch({
+    type: UPDATE_OUTPUT,
+    output,
+  });
+
+  // Update inputLang, outputLang, inputText without running anything;
+  dispatch(updateSetting('inputLang', output.get('inputLang')));
+  dispatch(updateSetting('outputLang', output.get('outputLang')));
+  dispatch({
+    type: UPDATE_INPUT_TEXT,
+    inputText: output.get('inputText'),
+    selectionStart: 0,
+    selectionEnd: 0,
+  });
 });
 
 export const updateImeMode = imeMode => ({

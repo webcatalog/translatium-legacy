@@ -9,6 +9,8 @@ import { updateInputText } from './home';
 import insertAtCursor from '../libs/insertAtCursor';
 import winXhr from '../libs/winXhr';
 
+import { openAlert } from './alert';
+
 const DURATION = 5 * 1000;
 
 // global for electron/common
@@ -129,17 +131,15 @@ export const stopRecording = () => ((dispatch, getState) => {
               .then(insertText)
               .then(() => {
                 soundStream = null;
-                dispatch({
-                  type: UPDATE_SPEECH_STATUS,
-                  status: 'none',
-                });
               })
               .catch(() => {
+                dispatch(openAlert('cannotConnectToServer'));
+              })
+              .then(() => {
                 dispatch({
                   type: UPDATE_SPEECH_STATUS,
                   status: 'none',
                 });
-                // Error
               });
           });
       }
@@ -170,9 +170,13 @@ export const stopRecording = () => ((dispatch, getState) => {
         })
         .then(insertText)
         .catch(() => {
-          // console.log(err);
+          dispatch(openAlert('cannotConnectToServer'));
         })
         .then(() => {
+          dispatch({
+            type: UPDATE_SPEECH_STATUS,
+            status: 'none',
+          });
           // clean
           recorder.clearRecordedData();
           recorder = null;
@@ -238,7 +242,7 @@ export const startRecording = () => ((dispatch) => {
 
         recorder.startRecording();
       }, () => {
-        // error
+        dispatch(openAlert('cannotActivateMicrophone'));
       });
     }
   }

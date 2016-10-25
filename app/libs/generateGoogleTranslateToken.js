@@ -3,7 +3,7 @@
 import winXhr from './winXhr';
 
 const getGoogleTkk = () => {
-  if (sessionStorage.getItem('googleTkk') === null) {
+  if (sessionStorage.getItem('googleTkk') == null) {
     const uri = 'https://translate.google.com/m/translate';
 
     return Promise.resolve()

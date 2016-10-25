@@ -16,7 +16,7 @@ const defaultState = {
 const getInitialValue = (name) => {
   /* global localStorage */
   const localValue = localStorage.getItem(`mt-${name}`);
-  if (localValue === null) {
+  if (localValue == null) {
     return defaultState[name];
   }
   return JSON.parse(localValue);

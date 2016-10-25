@@ -187,7 +187,7 @@ class Handwriting extends React.Component {
         position: 'absolute',
         width: '100%',
         height: 240,
-        zIndex: 10000,
+        zIndex: 1499,
         bottom: 0,
         left: 0,
         display: 'flex',
