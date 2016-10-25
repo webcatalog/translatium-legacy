@@ -12,6 +12,7 @@
     "build-mac": "PLATFORM=mac NODE_ENV=production webpack -p",
     "package-mac": "npm run build-mac && node platforms/mac/bin/packager.js",
     "start-mac": "./platforms/mac/node_modules/.bin/electron platforms/mac",
+    "dev-windows": "PLATFORM=windows NODE_ENV=development webpack -d --watch",
     "build-windows": "PLATFORM=windows NODE_ENV=production webpack -p",
     "lint": "eslint ./app --ext .js --cache"
   },

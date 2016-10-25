@@ -62,7 +62,7 @@ class Settings extends React.Component {
             onChange={(e, index, value) => onSelectFieldChange('primaryColorId', value)}
           >
             {Object.keys(colorPairs).map(colorId => (
-              <MenuItem key={colorId} value={colorId} primaryText={strings[colorId]} />
+              <MenuItem key={`color_${colorId}`} value={colorId} primaryText={strings[colorId]} />
             ))}
           </SelectField>
           <br /><br />
@@ -73,14 +73,16 @@ class Settings extends React.Component {
           />
           <br />
           {
-            (process.env.PLATFORM === 'windows') ? [
-              <Toggle
-                label={strings.preventScreenLock}
-                toggled={preventScreenLock}
-                onToggle={() => onToggle('preventScreenLock')}
-              />,
-              <br />,
-            ] : null
+            (process.env.PLATFORM === 'windows') ? (
+              <div>
+                <Toggle
+                  label={strings.preventScreenLock}
+                  toggled={preventScreenLock}
+                  onToggle={() => onToggle('preventScreenLock')}
+                />
+                <br />
+              </div>
+            ) : null
           }
           <Toggle
             label={strings.translateWhenPressingEnter}

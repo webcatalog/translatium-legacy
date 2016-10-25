@@ -23,6 +23,14 @@ export const translate = () => ((dispatch, getState) => {
 
   translateText(inputLang, outputLang, inputText)
     .then((result) => {
+      // Prevent slow request to display outdated info
+      const currentState = getState();
+      if (
+        inputText !== currentState.home.inputText ||
+        inputLang !== currentState.settings.inputLang ||
+        outputLang !== currentState.settings.outputLang
+      ) return;
+
       const r = result;
       r.status = 'done';
       r.inputLang = inputLang;
@@ -33,8 +41,14 @@ export const translate = () => ((dispatch, getState) => {
         output: Immutable.fromJS(r),
       });
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
+      // Prevent slow request to display outdated error
+      const currentState = getState();
+      if (
+        inputText !== currentState.home.inputText ||
+        inputLang !== currentState.settings.inputLang ||
+        outputLang !== currentState.settings.outputLang
+      ) return;
 
       dispatch({
         type: UPDATE_OUTPUT,
@@ -50,7 +64,12 @@ export const updateInputText = (inputText, selectionStart, selectionEnd) =>
     dispatch({ type: UPDATE_INPUT_TEXT, inputText, selectionStart, selectionEnd });
 
     if (realtime === true && inputText.trim().length > 0) {
-      dispatch(translate());
+      // delay to save bandwidth
+      const tmpHome = getState().home;
+      setTimeout(() => {
+        if (getState().home.inputText !== inputText) return;
+        dispatch(translate());
+      }, tmpHome.output ? 300 : 0);
     } else {
       dispatch({
         type: UPDATE_OUTPUT,

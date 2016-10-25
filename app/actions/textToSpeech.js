@@ -3,6 +3,7 @@
 import { PLAY_TEXT_TO_SPEECH, STOP_TEXT_TO_SPEECH } from '../constants/actions';
 
 import generateGoogleTranslateToken from '../libs/generateGoogleTranslateToken';
+import winXhr from '../libs/winXhr';
 
 let player = null;
 let currentTimestamp;
@@ -15,9 +16,21 @@ const textToSpeechShortText = (lang, text, idx, total) =>
         + `&q=${text}&textlen=${text.length}&idx=${idx}&total=${total}`
         + `&client=t&prev=input&tk=${token}`
       );
-      return fetch(uri);
+
+      switch (process.env.PLATFORM) {
+        case 'windows': {
+          return winXhr({
+            type: 'get',
+            uri,
+            responseType: 'blob',
+          });
+        }
+        default: {
+          return fetch(uri)
+            .then(response => response.blob());
+        }
+      }
     })
-    .then(response => response.blob())
     .then((blob) => {
       if (blob) {
         /* global URL Audio */

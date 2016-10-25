@@ -99,7 +99,7 @@ class App extends React.Component {
       container: {
         display: 'flex',
         flexDirection: 'column',
-        height: '100vh',
+        height: '100%',
         overflowY: 'hidden',
         backgroundColor: (theme === 'dark') ? fullBlack : fullWhite,
       },

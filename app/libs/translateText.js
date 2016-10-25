@@ -2,6 +2,7 @@
 
 import generateGoogleTranslateToken from './generateGoogleTranslateToken';
 import * as languageUtils from './languageUtils';
+import winXhr from './winXhr';
 
 // Maximum encoded inputText length: 2000
 const translateShortText = (inputLang, outputLang, inputText) =>
@@ -13,9 +14,20 @@ const translateShortText = (inputLang, outputLang, inputText) =>
               + 'bd&dt=ex&dt=ld&dt=md&dt=qc&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8'
               + `&source=btn&kc=0&ssel=4&tsel=4&tk=${token}&q=${inputText}`);
 
-      return fetch(uri);
+      switch (process.env.PLATFORM) {
+        case 'windows': {
+          return winXhr({
+            type: 'get',
+            uri,
+            responseType: 'text',
+          });
+        }
+        default: {
+          return fetch(uri)
+            .then(response => response.text());
+        }
+      }
     })
-    .then(response => response.text())
     /* eslint-disable */
     .then(body => eval(body))
     /* eslint-enable */

@@ -5,6 +5,6 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "class-methods-use-this": [0],
     "import/prefer-default-export": [0],
-    "linebreak-style": ["error", "unix"]
+    "linebreak-style": [0]
   }
 }

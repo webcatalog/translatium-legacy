@@ -1,9 +1,27 @@
 /* global sessionStorage fetch */
 
+import winXhr from './winXhr';
+
 const getGoogleTkk = () => {
   if (sessionStorage.getItem('googleTkk') === null) {
-    return fetch('https://translate.google.com/m/translate')
-      .then(response => response.text())
+    const uri = 'https://translate.google.com/m/translate';
+
+    return Promise.resolve()
+      .then(() => {
+        switch (process.env.PLATFORM) {
+          case 'windows': {
+            return winXhr({
+              type: 'get',
+              uri,
+              responseType: 'text',
+            });
+          }
+          default: {
+            return fetch(uri)
+              .then(response => response.text());
+          }
+        }
+      })
       .then((body) => {
         const startStr = 'campaign_tracker_id:\'1h\',tkk:';
         const endStr = ',experiment_ids:';

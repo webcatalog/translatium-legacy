@@ -1,4 +1,4 @@
-/* global fetch navigator */
+/* global fetch navigator Windows */
 
 import RecordRTC from 'recordrtc';
 
@@ -7,83 +7,179 @@ import { UPDATE_SPEECH_STATUS } from '../constants/actions';
 import { updateInputText } from './home';
 
 import insertAtCursor from '../libs/insertAtCursor';
+import winXhr from '../libs/winXhr';
 
+const DURATION = 5 * 1000;
+
+// global for electron/common
 let recorder;
 
-export const releaseDevice = () => ((dispatch) => {
-  if (!recorder) return;
+// global for windows
+let mediaCaptureMgr;
+let soundStream;
+let checkTime;
 
-  recorder.stopRecording(() => {
+
+export const releaseDevice = () => ((dispatch, getState) => {
+  switch (process.env.PLATFORM) {
+    case 'windows': {
+      const { status } = getState().speech;
+      if (status === 'recording' || mediaCaptureMgr) {
+        clearInterval(checkTime);
+        dispatch({
+          type: UPDATE_SPEECH_STATUS,
+          status: 'none',
+        });
+        if (mediaCaptureMgr) {
+          mediaCaptureMgr.close();
+          mediaCaptureMgr = null;
+        }
+        const systemMediaControls = Windows.Media.SystemMediaTransportControls.getForCurrentView();
+        systemMediaControls.onpropertychanged = null;
+      }
+      break;
+    }
+    default: {
+      if (!recorder) return;
+
+      recorder.stopRecording(() => {
+        dispatch({
+          type: UPDATE_SPEECH_STATUS,
+          status: 'none',
+        });
+
+        recorder.clearRecordedData();
+        recorder = null;
+      });
+    }
+  }
+});
+
+export const stopRecording = () => ((dispatch, getState) => {
+  const { home, settings, speech } = getState();
+  const { inputText, selectionStart, selectionEnd } = home;
+  const { inputLang } = settings;
+  const { status } = speech;
+
+  const uri = `https://www.google.com/speech-api/v2/recognize?output=json&lang=${inputLang}`
+            + '&key=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw';
+
+  const insertText = (recognizedText) => {
     dispatch({
       type: UPDATE_SPEECH_STATUS,
       status: 'none',
     });
 
-    recorder.clearRecordedData();
-    recorder = null;
-  });
-});
+    if (recognizedText.length < 1) return;
 
-export const stopRecording = () => ((dispatch, getState) => {
-  const { home, settings } = getState();
-  const { inputText, selectionStart, selectionEnd } = home;
-  const { inputLang } = settings;
+    const insertedText = insertAtCursor(
+      inputText,
+      recognizedText,
+      selectionStart,
+      selectionEnd
+    );
 
-  recorder.stopRecording(() => {
-    dispatch({
-      type: UPDATE_SPEECH_STATUS,
-      status: 'recognizing',
-    });
+    dispatch(updateInputText(
+      insertedText.text,
+      insertedText.selectionStart,
+      insertedText.selectionEnd
+    ));
+  };
 
-    const uri = `https://www.google.com/speech-api/v2/recognize?output=json&lang=${inputLang}`
-              + '&key=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw';
+  switch (process.env.PLATFORM) {
+    case 'windows': {
+      clearInterval(checkTime);
+      if (status === 'recording') {
+        dispatch({
+          type: UPDATE_SPEECH_STATUS,
+          status: 'recognizing',
+        });
+        mediaCaptureMgr.stopRecordAsync()
+          .then(() => {
+            mediaCaptureMgr.close();
+            mediaCaptureMgr = null;
+            const systemMediaControls =
+              Windows.Media.SystemMediaTransportControls.getForCurrentView();
+            systemMediaControls.onpropertychanged = null;
+            return soundStream.flushAsync();
+          })
+          .then(() => {
+            Promise.resolve()
+              .then(() => {
+                const data =
+                  new Windows.Web.Http.HttpStreamContent(soundStream.getInputStreamAt(0));
+                data.headers.contentType =
+                  new Windows.Web.Http.Headers.HttpMediaTypeHeaderValue('audio/l16; rate=16000');
 
-    return fetch(uri, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'audio/l16; rate=44100',
-      },
-      body: recorder.getBlob(),
-    })
-    .then(response => response.text())
-    .then((text) => {
-      if (text.length > 14) {
-        const xmlStr = text.substring(14, text.length);
-        const outputText = JSON.parse(xmlStr).result[0].alternative[0].transcript;
-        return outputText;
+                return winXhr({
+                  type: 'post',
+                  uri,
+                  responseType: 'text',
+                  data,
+                });
+              })
+              .then((text) => {
+                if (text.length > 14) {
+                  const xmlStr = text.substring(14, text.length);
+                  const outputText = JSON.parse(xmlStr).result[0].alternative[0].transcript;
+                  return outputText;
+                }
+                return Promise.reject(new Error('JSON is not valid'));
+              })
+              .then(insertText)
+              .then(() => {
+                soundStream = null;
+                dispatch({
+                  type: UPDATE_SPEECH_STATUS,
+                  status: 'none',
+                });
+              })
+              .catch(() => {
+                dispatch({
+                  type: UPDATE_SPEECH_STATUS,
+                  status: 'none',
+                });
+                // Error
+              });
+          });
       }
-      return '';
-    })
-    .then((recognizedText) => {
-      dispatch({
-        type: UPDATE_SPEECH_STATUS,
-        status: 'none',
+      break;
+    }
+    default: {
+      recorder.stopRecording(() => {
+        dispatch({
+          type: UPDATE_SPEECH_STATUS,
+          status: 'recognizing',
+        });
+
+        return fetch(uri, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'audio/l16; rate=44100',
+          },
+          body: recorder.getBlob(),
+        })
+        .then(response => response.text())
+        .then((text) => {
+          if (text.length > 14) {
+            const xmlStr = text.substring(14, text.length);
+            const outputText = JSON.parse(xmlStr).result[0].alternative[0].transcript;
+            return outputText;
+          }
+          return '';
+        })
+        .then(insertText)
+        .catch(() => {
+          // console.log(err);
+        })
+        .then(() => {
+          // clean
+          recorder.clearRecordedData();
+          recorder = null;
+        });
       });
-
-      if (recognizedText.length < 1) return;
-
-      const insertedText = insertAtCursor(
-        inputText,
-        recognizedText,
-        selectionStart,
-        selectionEnd
-      );
-
-      dispatch(updateInputText(
-        insertedText.text,
-        insertedText.selectionStart,
-        insertedText.selectionEnd
-      ));
-    })
-    .catch(() => {
-      // console.log(err);
-    })
-    .then(() => {
-      // clean
-      recorder.clearRecordedData();
-      recorder = null;
-    });
-  });
+    }
+  }
 });
 
 
@@ -93,16 +189,57 @@ export const startRecording = () => ((dispatch) => {
     status: 'recording',
   });
 
-  navigator.getUserMedia({ audio: true, video: false }, (stream) => {
-    recorder = new RecordRTC(stream, {
-      type: 'audio',
-      audioType: 'audio/wav',
-      sampleRate: 44100,
-      numberOfAudioChannels: 1,
-    });
+  switch (process.env.PLATFORM) {
+    case 'windows': {
+      if (!mediaCaptureMgr) {
+        mediaCaptureMgr = new Windows.Media.Capture.MediaCapture();
+        const systemMediaControls = Windows.Media.SystemMediaTransportControls.getForCurrentView();
+        systemMediaControls.onpropertychanged = (e) => {
+          if (e.property === Windows.Media.SystemMediaTransportControlsProperty.soundLevel) {
+            if (e.target.soundLevel === Windows.Media.SoundLevel.muted) {
+              dispatch(releaseDevice());
+            }
+          }
+        };
+      }
 
-    recorder.startRecording();
-  }, () => {
-    // error
-  });
+      const captureInitSettings = new Windows.Media.Capture.MediaCaptureInitializationSettings();
+      captureInitSettings.audioDeviceId = '';
+      captureInitSettings.videoDeviceId = '';
+      captureInitSettings.streamingCaptureMode = Windows.Media.Capture.StreamingCaptureMode.audio;
+      mediaCaptureMgr.initializeAsync(captureInitSettings)
+        .then(() => {
+          checkTime = setInterval(() => {
+            dispatch(stopRecording());
+          }, 10000);
+          const encodingProfile = Windows.Media.MediaProperties.MediaEncodingProfile.createWav(
+                                    Windows.Media.MediaProperties.AudioEncodingQuality.auto
+                                  );
+          encodingProfile.audio.sampleRate = 16000;
+          encodingProfile.audio.channelCount = 1;
+          soundStream = new Windows.Storage.Streams.InMemoryRandomAccessStream();
+          return mediaCaptureMgr.startRecordToStreamAsync(encodingProfile, soundStream);
+        })
+        .then(null, () => {});
+      break;
+    }
+    default: {
+      navigator.getUserMedia({ audio: true, video: false }, (stream) => {
+        recorder = new RecordRTC(stream, {
+          type: 'audio',
+          audioType: 'audio/wav',
+          sampleRate: 44100,
+          numberOfAudioChannels: 1,
+        });
+
+        recorder.setRecordingDuration(DURATION).onRecordingStopped(() => {
+          dispatch(stopRecording());
+        });
+
+        recorder.startRecording();
+      }, () => {
+        // error
+      });
+    }
+  }
 });

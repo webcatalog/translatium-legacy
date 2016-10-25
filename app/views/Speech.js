@@ -1,4 +1,4 @@
-/* global strings */
+/* global strings Windows */
 
 import React from 'react';
 import { connect } from 'react-redux';
@@ -14,8 +14,21 @@ import { updateImeMode } from '../actions/home';
 import { releaseDevice, startRecording, stopRecording } from '../actions/speech';
 
 class Speech extends React.Component {
+  componentWillMount() {
+    if (process.env.PLATFORM === 'windows') {
+      const { onReleaseDevice } = this.props;
+      Windows.UI.WebUI.WebUIApplication.addEventListener('suspending', onReleaseDevice);
+    }
+  }
+
   componentWillUnmount() {
-    this.props.onReleaseDevice();
+    const { onReleaseDevice } = this.props;
+
+    onReleaseDevice();
+
+    if (process.env.PLATFORM === 'windows') {
+      Windows.UI.WebUI.WebUIApplication.removeEventListener('suspending', onReleaseDevice);
+    }
   }
 
   getStyles() {

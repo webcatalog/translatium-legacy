@@ -1,4 +1,4 @@
-/* global strings */
+/* global strings Windows */
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
@@ -47,6 +47,23 @@ import Handwriting from './Handwriting';
 import Speech from './Speech';
 
 class Home extends React.Component {
+  componentDidMount() {
+    if (process.env.PLATFORM === 'windows') {
+      const { preventScreenLock } = this.props;
+      if (preventScreenLock === true) {
+        this.dispRequest = new Windows.System.Display.DisplayRequest();
+        this.dispRequest.requestActive();
+      }
+    }
+  }
+  componentWillUnmount() {
+    if (process.env.PLATFORM === 'windows') {
+      if (this.dispRequest) {
+        this.dispRequest.requestRelease();
+      }
+    }
+  }
+
   getStyles() {
     const { theme } = this.props;
 
@@ -64,10 +81,12 @@ class Home extends React.Component {
         backgroundColor: (theme === 'dark') ? fullBlack : grey100,
         display: 'flex',
         flexDirection: 'column',
+        overflow: 'hidden',
       },
       innerContainer: {
         flex: 1,
         display: 'flex',
+        height: '100%',
       },
       languageTitle: {
         flex: 1,
@@ -353,7 +372,11 @@ class Home extends React.Component {
         <Paper zDepth={2} style={styles.inputContainer}>
           <textarea
             style={styles.textarea}
-            placeholder="Type something here..."
+            placeholder={strings.typeSomethingHere}
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
             onKeyDown={translateWhenPressingEnter ? e => onKeyDown(e) : null}
             onInput={onInputText}
             onKeyUp={onInputText}
@@ -430,6 +453,7 @@ Home.propTypes = {
   screenWidth: React.PropTypes.number,
   theme: React.PropTypes.string,
   translateWhenPressingEnter: React.PropTypes.bool,
+  preventScreenLock: React.PropTypes.bool,
   inputLang: React.PropTypes.string,
   outputLang: React.PropTypes.string,
   inputText: React.PropTypes.string,
@@ -452,6 +476,7 @@ const mapStateToProps = state => ({
   screenWidth: state.screen.screenWidth,
   theme: state.settings.theme,
   translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
+  preventScreenLock: state.settings.preventingScreenLock,
   inputLang: state.settings.inputLang,
   outputLang: state.settings.outputLang,
   inputText: state.home.inputText,

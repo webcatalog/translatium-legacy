@@ -53,7 +53,6 @@ export const loadPhrasebook = () => ((dispatch, getState) => {
           /* eslint-enable no-underscore-dangle */
 
           items = items.push(Immutable.fromJS(data));
-
         } else {
           const {
             _id, _rev,
