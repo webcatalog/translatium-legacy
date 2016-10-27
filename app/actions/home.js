@@ -164,7 +164,15 @@ export const loadImage = fromCamera => (dispatch, getState) => {
         }),
       });
       // Tesseract seems to use non-standard Promise, so no return;
-      Tesseract.recognize(blob, {
+      const t = Tesseract.create({
+        workerPath: 'tesseract.js/worker.js',
+        langPath: 'https://cdn.rawgit.com/naptha/tessdata/gh-pages/3.02/',
+        corePath: 'tesseract.js-core/index.js',
+      });
+
+      console.log(toTesseractLanguage(inputLang));
+
+      t.recognize(blob, {
         lang: toTesseractLanguage(inputLang),
       })
       .then((result) => {
@@ -230,7 +238,9 @@ export const loadImage = fromCamera => (dispatch, getState) => {
         }
       });
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
+
       dispatch({
         type: UPDATE_OUTPUT,
         output: null,

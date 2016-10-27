@@ -4376,7 +4376,7 @@ tesseract.js:
     png.js "^0.2.1"
     tesseract.js-core "^1.0.2"
 
-tesseract.js-core@^1.0.2:
+tesseract.js-core, tesseract.js-core@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/tesseract.js-core/-/tesseract.js-core-1.0.2.tgz#1ce33a29dc812357b8356a30ededf8b188043b37"
 
