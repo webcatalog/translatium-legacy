@@ -19,6 +19,10 @@ const common = {
   module: {
     loaders: [
       {
+        test: /\.json$/,
+        loader: 'json',
+      },
+      {
         test: /\.js?$/,
         exclude: /(node_modules|bower_components)/,
         include: APP_DIR,
@@ -67,6 +71,7 @@ const config = (() => {
         plugins: [
           new CopyWebpackPlugin([
             { from: 'platforms/common/www' },
+            { from: 'node_modules/tesseract.js/dist/*.js', to: `${BUILD_DIR}/tesseract.js`, flatten: true },
           ]),
           new webpack.HotModuleReplacementPlugin({
             multiStep: true,

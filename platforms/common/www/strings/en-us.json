@@ -12,11 +12,13 @@
 	"speak": "Speak",
 	"draw": "Draw",
 	"camera": "Camera",
+	"openImageFile": "Open image file",
 	"more": "More",
 
 	"errorOccured": "An error has occured",
 	"cannotConnectToServer": "The app cannot to server. Please check your Internet connection.",
 	"cannotActivateMicrophone": "The app cannot activate your microphone.",
+	"cannotOpenTheFile": "The app cannot open the file you selected",
 
 	"swap": "Swap",
 	"biggerText": "Bigger text",
@@ -24,6 +26,8 @@
 	"share": "Share",
 	"addToPhrasebook": "Add to Phrasebook",
 	"removeFromPhrasebook": "Remove from Phrasebook",
+
+	"translatedByGoogle": "Translated by Google.",
 
 	"fromLanguage": "from {1}",
 

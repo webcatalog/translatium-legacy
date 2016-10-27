@@ -9,7 +9,7 @@ const defaultOptions = {
   limit: 10,
 };
 
-export const loadPhrasebook = init => ((dispatch, getState) => {
+export const loadPhrasebook = (init, limit) => ((dispatch, getState) => {
   const { phrasebookItems, canLoadMore } = getState().phrasebook;
 
   dispatch({
@@ -28,6 +28,7 @@ export const loadPhrasebook = init => ((dispatch, getState) => {
     options.startkey = items.getIn([l - 1, 'phrasebookId']);
     options.skip = 1;
   }
+  if (limit) options.limit = limit;
 
   phrasebookDb.allDocs(options)
     .then((response) => {
@@ -116,8 +117,8 @@ export const deletePhrasebookItem = (id, rev) => ((dispatch, getState) => {
 
   phrasebookDb.remove(id, rev)
     .then(() => {
-      if (phrasebookItems.size === 0) {
-        dispatch(loadPhrasebook());
+      if (canLoadMore) {
+        dispatch(loadPhrasebook(false, 1));
       }
     });
 });

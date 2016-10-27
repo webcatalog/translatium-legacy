@@ -41,37 +41,99 @@ const data = {
     'hy', 'ka', 'ig', 'ha', 'yo', 'yi', 'st', 'kk', 'tg', 'uz',
     'sd', 'ps', 'am',
   ],
-  ocrSupported: [
-    'cs', 'da', 'nl', 'en', 'fi',
-    'fr', 'de', 'hu', 'it', 'no',
-    'pl', 'pt', 'ro', 'sr', 'sk',
-    'es', 'sv', 'zh-CN', 'zh-TW',
-    'el', 'ja', 'ru', 'tr', 'ko',
-  ],
+  tesseract: {
+    /* eslint-disable no-tabs */
+    /* eslint-disable quote-props */
+    'af': 'afr',
+    'ar': 'ara',
+    'az': 'aze',
+    'be': 'bel',
+    'bn': 'ben',
+    'bg': 'bul',
+    'ca': 'cat',
+    'cs': 'ces',
+    'zh': 'chi_sim',
+    'zh-YUE': 'chi_tra',
+    'zh-CN': 'chi_sim',
+    'zh-HK': 'chi_sim',
+    'zh-TW': 'chi_tra',
+    'chr': 'chr', // Cherokee, not supported yet
+    'da': 'dan',
+    'de': 'deu',
+    'el': 'ell',
+    'en': 'eng',
+    'enm': 'enm',	// English (Old)
+    'eo': 'epo',
+    'epo_alt': 'epo_alt',	// Esperanto alternative
+    'equ': 'equ',	// Math
+    'et': 'est',
+    'eu': 'eus',
+    'fi': 'fin',
+    'fr': 'fra',
+    'frk': 'frk',	// Frankish
+    'frm': 'frm',	// French (Old)
+    'gl': 'glg',
+    'grc': 'grc',	// Ancient Greek
+    'iw': 'heb',
+    'hi': 'hin',
+    'hr': 'hrv',
+    'hu': 'hun',
+    'id': 'ind',
+    'is': 'isl',
+    'it': 'ita',
+    'ita_old': 'ita_old', // Italian (Old)
+    'ja': 'jpn',
+    'kn': 'kan',
+    'ko': 'kor',
+    'lv': 'lav',
+    'lt': 'lit',
+    'ml': 'mal',
+    'mk': 'mkd',
+    'mt': 'mlt',
+    'ms': 'msa',
+    'nl': 'nld',
+    'no': 'nor',
+    'pl': 'pol',
+    'pt': 'por',
+    'ro': 'ron',
+    'ru': 'rus',
+    'sk': 'slk',
+    'sl': 'slv',
+    'es': 'spa',
+    'spa_old': 'spa_old', // Old Spanish
+    'sq': 'sqi',
+    'sr': 'srp',
+    'sw': 'swa',
+    'sv': 'swe',
+    'ta': 'tam',
+    'te': 'tel',
+    'tgl': 'tgl', // Tagalog
+    'th': 'tha',
+    'tr': 'tur',
+    'uk': 'ukr',
+    'vi': 'vie',
+    /* eslint-enable quote-props */
+    /* eslint-enable no-tabs */
+  },
 };
 
-export const googleStandardlizedLanguage = (lang) => {
+export const toGoogleStandardlizedLanguage = (lang) => {
   if (lang === 'zh-YUE') return 'zh-HK';
   return lang;
 };
 
-export const countryRemovedLanguage = (lang) => {
+export const toCountryRemovedLanguage = (lang) => {
   const i = lang.indexOf('-');
   if (i > 0) return lang.slice(0, i);
   return lang;
 };
 
-export const ocrStandardlizedLanguage = (lang) => {
-  if (['zh-CN', 'zh-HK'].indexOf(lang) > -1) return 'zh-CN';
-  if (['zh-TW', 'zh-YUE'].indexOf(lang) > -1) return 'zh-TW';
-  if (lang === 'zh') return 'zh-CN';
-  if (lang.length > 2) return lang.substring(0, 2);
-  return lang;
-};
+export const toTesseractLanguage = lang =>
+  data.tesseract[lang] || data.tesseract[toCountryRemovedLanguage(lang)] || null;
 
 // Check if language supports OCR
 export const isOcrSupported = lang =>
-  (data.ocrSupported.indexOf(ocrStandardlizedLanguage(lang)) > -1);
+  (toTesseractLanguage(lang) !== null);
 
 // Check if language is supported as input
 export const isInput = lang => !(data.all.indexOf(lang) > -1);
@@ -81,11 +143,11 @@ export const isOutput = lang => !(data.outputNotSupported.indexOf(lang) > -1);
 
 // Check if language supports Voice recognition
 export const isVoiceRecognitionSupported = lang =>
-  (data.voiceRecognitionSupported.indexOf(countryRemovedLanguage(lang)) > -1);
+  (data.voiceRecognitionSupported.indexOf(toCountryRemovedLanguage(lang)) > -1);
 
 // Check if language supports Text-to-speech
 export const isTtsSupported = lang =>
-  (data.ttsSupported.indexOf(countryRemovedLanguage(lang)) > -1);
+  (data.ttsSupported.indexOf(toCountryRemovedLanguage(lang)) > -1);
 
 // Check if language supports Handwriting recognition
 export const isHandwritingSupported = lang => !(data.handwritingNotSupported.indexOf(lang) > -1);
@@ -112,5 +174,5 @@ export const getVoiceRecognitionSupportedLanguages = () =>
   data.all.filter(lang => isVoiceRecognitionSupported(lang));
 
 // Get list of all languages support TTS
-export const getTtsSupportedLanguages = () =>
+export const getTTSSupportedLanguages = () =>
   data.all.filter(lang => isTtsSupported(lang));

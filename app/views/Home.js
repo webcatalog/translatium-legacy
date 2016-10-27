@@ -19,6 +19,7 @@ import NavigationArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop
 import ContentClear from 'material-ui/svg-icons/content/clear';
 import NavigationMoreVert from 'material-ui/svg-icons/navigation/more-vert';
 import ImageCameraAlt from 'material-ui/svg-icons/image/camera-alt';
+import ImageImage from 'material-ui/svg-icons/image/image';
 import ContentGesture from 'material-ui/svg-icons/content/gesture';
 import AVVolumeUp from 'material-ui/svg-icons/av/volume-up';
 import AVStop from 'material-ui/svg-icons/av/stop';
@@ -39,7 +40,13 @@ import {
 } from '../libs/languageUtils';
 
 import { swapLanguages } from '../actions/settings';
-import { updateInputText, translate, updateImeMode, togglePhrasebook } from '../actions/home';
+import {
+  updateInputText,
+  translate,
+  updateImeMode,
+  togglePhrasebook,
+  loadImage,
+} from '../actions/home';
 import { playTextToSpeech, stopTextToSpeech } from '../actions/textToSpeech';
 
 import Dictionary from './Dictionary';
@@ -68,6 +75,9 @@ class Home extends React.Component {
     const { theme } = this.props;
 
     const {
+      palette: {
+        textColor,
+      },
       appBar,
       button: {
         iconButtonSize,
@@ -152,7 +162,7 @@ class Home extends React.Component {
       },
       resultContainer: {
         flex: 1,
-        padding: '24px 12px',
+        padding: '0 12px 12px 12px',
         boxSizing: 'border-box',
         height: '100%',
         overflowY: 'auto',
@@ -163,6 +173,26 @@ class Home extends React.Component {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+      },
+      inputRoman: {
+        color: textColor,
+        margin: '12px 0 0 0',
+        padding: 0,
+        fontSize: 15,
+      },
+      outputText: {
+        fontSize: 16,
+        whiteSpace: 'pre',
+      },
+      outputRoman: {
+        fontSize: 15,
+      },
+      outputCard: {
+        marginTop: 12,
+      },
+      googleCopyright: {
+        fontSize: 14,
+        textAlign: 'right',
       },
     };
   }
@@ -180,8 +210,10 @@ class Home extends React.Component {
     switch (output.get('status')) {
       case 'loading': {
         return (
-          <div style={styles.progressContainer} >
-            <CircularProgress size={80} thickness={5} />
+          <div style={styles.resultContainer}>
+            <div style={styles.progressContainer} >
+              <CircularProgress size={80} thickness={5} />
+            </div>
           </div>
         );
       }
@@ -222,70 +254,81 @@ class Home extends React.Component {
         const hasDict = output.get('inputDict') !== undefined && output.get('outputDict') !== undefined;
 
         return (
-          <Card initiallyExpanded>
-            <CardHeader
-              title={strings[output.get('outputLang')]}
-              subtitle={strings.fromLanguage.replace('{1}', strings[output.get('inputLang')])}
-              actAsExpander={hasDict}
-              showExpandableButton={hasDict}
-            />
-            <CardText style={{ fontSize: 20 }}>
-              {output.get('outputText')}
-            </CardText>
-            <CardActions>
-              {
-                controllers.slice(0, maxVisibleIcon)
-                .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
-                  if (disabled) return null;
-
-                  return (
-                    <IconButton
-                      tooltip={tooltip}
-                      tooltipPosition="bottom-center"
-                      key={`dIconButton_${i}`}
-                      onTouchTap={onTouchTap}
-                    >
-                      {icon}
-                    </IconButton>
-                  );
-                })
-              }
-              {(showMoreButton) ? (
-                <IconMenu
-                  iconButtonElement={(
-                    <IconButton tooltip={strings.more} tooltipPosition="bottom-center">
-                      <NavigationMoreVert />
-                    </IconButton>
-                  )}
-                  anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
-                  targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-                >
-                  {
-                    controllers
-                      .slice(maxVisibleIcon, controllers.length)
-                      .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
-                        if (disabled) return null;
-
-                        return (
-                          <MenuItem
-                            primaryText={tooltip}
-                            leftIcon={icon}
-                            disabled={disabled}
-                            key={`dMenuItem_${i}`}
-                            onTouchTap={onTouchTap}
-                          />
-                        );
-                      })
-                  }
-                </IconMenu>
-              ) : null}
-            </CardActions>
-            {hasDict ? (
-              <CardText expandable>
-                <Dictionary output={output} />
-              </CardText>
+          <div style={styles.resultContainer}>
+            {output.get('inputRoman') ? (
+              <p style={styles.inputRoman}>{output.get('inputRoman')}</p>
             ) : null}
-          </Card>
+            <Card initiallyExpanded style={styles.outputCard}>
+              <CardHeader
+                title={strings[output.get('outputLang')]}
+                subtitle={strings.fromLanguage.replace('{1}', strings[output.get('inputLang')])}
+                actAsExpander={hasDict}
+                showExpandableButton={hasDict}
+              />
+              <CardText style={styles.outputText}>
+                {output.get('outputText')}
+              </CardText>
+              {output.get('outputRoman') ? (
+                <CardText style={styles.outputRoman}>
+                  {output.get('outputRoman')}
+                </CardText>
+              ) : null}
+              <CardActions>
+                {
+                  controllers.slice(0, maxVisibleIcon)
+                  .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
+                    if (disabled) return null;
+
+                    return (
+                      <IconButton
+                        tooltip={tooltip}
+                        tooltipPosition="bottom-center"
+                        key={`dIconButton_${i}`}
+                        onTouchTap={onTouchTap}
+                      >
+                        {icon}
+                      </IconButton>
+                    );
+                  })
+                }
+                {(showMoreButton) ? (
+                  <IconMenu
+                    iconButtonElement={(
+                      <IconButton tooltip={strings.more} tooltipPosition="bottom-center">
+                        <NavigationMoreVert />
+                      </IconButton>
+                    )}
+                    anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+                    targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+                  >
+                    {
+                      controllers
+                        .slice(maxVisibleIcon, controllers.length)
+                        .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
+                          if (disabled) return null;
+
+                          return (
+                            <MenuItem
+                              primaryText={tooltip}
+                              leftIcon={icon}
+                              disabled={disabled}
+                              key={`dMenuItem_${i}`}
+                              onTouchTap={onTouchTap}
+                            />
+                          );
+                        })
+                    }
+                  </IconMenu>
+                ) : null}
+              </CardActions>
+              {hasDict ? (
+                <CardText expandable>
+                  <Dictionary output={output} />
+                </CardText>
+              ) : null}
+            </Card>
+            <p style={styles.googleCopyright}>{strings.translatedByGoogle}</p>
+          </div>
         );
       }
     }
@@ -306,6 +349,8 @@ class Home extends React.Component {
       onWriteButtonTouchTap,
       onSpeakButtonTouchTap,
       onTranslateButtonTouchTap,
+      onOpenImageButtonTouchTap,
+      onCameraButtonTouchTap,
     } = this.props;
     const styles = this.getStyles();
 
@@ -334,11 +379,21 @@ class Home extends React.Component {
         disabled: !isHandwritingSupported(inputLang),
       },
       {
+        icon: <ImageImage />,
+        tooltip: strings.openImageFile,
+        disabled: !isOcrSupported(inputLang),
+        onTouchTap: onOpenImageButtonTouchTap,
+      },
+    ];
+
+    if (process.env.PLATFORM === 'windows') {
+      controllers.push({
         icon: <ImageCameraAlt />,
         tooltip: strings.camera,
         disabled: !isOcrSupported(inputLang),
-      },
-    ];
+        onTouchTap: onCameraButtonTouchTap,
+      });
+    }
 
     const maxVisibleIcon = Math.min(Math.round((screenWidth - 200) / 56), controllers.length);
     const showMoreButton = (maxVisibleIcon < controllers.length);
@@ -438,10 +493,7 @@ class Home extends React.Component {
             </div>
           </div>
         </Paper>
-        <div style={styles.resultContainer}>
-          {this.renderOutput(styles)}
-        </div>
-
+        {this.renderOutput(styles)}
         {imeMode === 'handwriting' ? <Handwriting /> : null}
         {imeMode === 'speech' ? <Speech /> : null}
       </div>
@@ -470,6 +522,8 @@ Home.propTypes = {
   onWriteButtonTouchTap: React.PropTypes.func,
   onSpeakButtonTouchTap: React.PropTypes.func,
   onTogglePhrasebookTouchTap: React.PropTypes.func,
+  onOpenImageButtonTouchTap: React.PropTypes.func,
+  onCameraButtonTouchTap: React.PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -536,6 +590,12 @@ const mapDispatchToProps = dispatch => ({
   },
   onTogglePhrasebookTouchTap: () => {
     dispatch(togglePhrasebook());
+  },
+  onOpenImageButtonTouchTap: () => {
+    dispatch(loadImage(false));
+  },
+  onCameraButtonTouchTap: () => {
+    dispatch(loadImage(true));
   },
 });
 

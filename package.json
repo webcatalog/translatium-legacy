@@ -31,6 +31,7 @@
     "recordrtc": "^5.4.0",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
+    "tesseract.js": "^1.0.10",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
@@ -51,6 +52,7 @@
     "gulp-bro": "^0.3.1",
     "gulp-rename": "^1.2.2",
     "gulp-stylus": "^2.5.0",
+    "json-loader": "^0.5.4",
     "vinyl-source-stream": "^1.1.0",
     "webpack": "^1.13.2",
     "webpack-merge": "^0.15.0",

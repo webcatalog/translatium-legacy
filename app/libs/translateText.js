@@ -9,8 +9,8 @@ const translateShortText = (inputLang, outputLang, inputText) =>
   generateGoogleTranslateToken(inputText)
     .then((token) => {
       const uri = encodeURI('https://translate.google.com/translate_a/single?client=t'
-              + `&sl=${languageUtils.googleStandardlizedLanguage(inputLang)}`
-              + `&tl=${languageUtils.googleStandardlizedLanguage(outputLang)}&hl=en&dt=`
+              + `&sl=${languageUtils.toGoogleStandardlizedLanguage(inputLang)}`
+              + `&tl=${languageUtils.toGoogleStandardlizedLanguage(outputLang)}&hl=en&dt=`
               + 'bd&dt=ex&dt=ld&dt=md&dt=qc&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8'
               + `&source=btn&kc=0&ssel=4&tsel=4&tk=${token}&q=${inputText}`);
 

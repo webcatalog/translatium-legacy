@@ -1,3 +1,5 @@
+/* global Tesseract */
+
 import Immutable from 'immutable';
 
 import {
@@ -5,7 +7,11 @@ import {
 } from '../constants/actions';
 
 import translateText from '../libs/translateText';
+import translateArray from '../libs/translateArray';
 import phrasebookDb from '../libs/phrasebookDb';
+import openFileToBlob from '../libs/openFileToBlob';
+import captureToBlob from '../libs/captureToBlob';
+import { toTesseractLanguage } from '../libs/languageUtils';
 
 import { openAlert } from './alert';
 import { updateSetting } from './settings';
@@ -18,46 +24,43 @@ export const translate = () => ((dispatch, getState) => {
   // Safe
   if (inputText.trim().length < 1) return;
 
+  const identifier = Date.now();
+
   dispatch({
     type: UPDATE_OUTPUT,
-    output: Immutable.fromJS({ status: 'loading' }),
+    output: Immutable.fromJS({
+      status: 'loading',
+      identifier,
+    }),
   });
 
   translateText(inputLang, outputLang, inputText)
     .then((result) => {
       // Prevent slow request to display outdated info
-      const currentState = getState();
-      if (
-        inputText !== currentState.home.inputText ||
-        inputLang !== currentState.settings.inputLang ||
-        outputLang !== currentState.settings.outputLang
-      ) return;
-
-      const r = result;
-      r.status = 'done';
-      r.inputLang = inputLang;
-      r.outputLang = outputLang;
-      r.inputText = inputText;
-      dispatch({
-        type: UPDATE_OUTPUT,
-        output: Immutable.fromJS(r),
-      });
+      const currentOutput = getState().home.output;
+      if (currentOutput && currentOutput.get('identifier') === identifier) {
+        const r = result;
+        r.status = 'done';
+        r.inputLang = inputLang;
+        r.outputLang = outputLang;
+        r.inputText = inputText;
+        dispatch({
+          type: UPDATE_OUTPUT,
+          output: Immutable.fromJS(r),
+        });
+      }
     })
     .catch(() => {
-      // Prevent slow request to display outdated error
-      const currentState = getState();
-      if (
-        inputText !== currentState.home.inputText ||
-        inputLang !== currentState.settings.inputLang ||
-        outputLang !== currentState.settings.outputLang
-      ) return;
+      // Prevent slow request to display outdated info
+      const currentOutput = getState().home.output;
+      if (currentOutput && currentOutput.get('identifier') === identifier) {
+        dispatch(openAlert('cannotConnectToServer'));
 
-      dispatch(openAlert('cannotConnectToServer'));
-
-      dispatch({
-        type: UPDATE_OUTPUT,
-        output: null,
-      });
+        dispatch({
+          type: UPDATE_OUTPUT,
+          output: null,
+        });
+      }
     });
 });
 
@@ -139,3 +142,100 @@ export const updateImeMode = imeMode => ({
   type: UPDATE_IME_MODE,
   imeMode,
 });
+
+export const loadImage = fromCamera => (dispatch, getState) => {
+  const { inputLang, outputLang } = getState().settings;
+
+  Promise.resolve()
+    .then(() => {
+      if (fromCamera === true) return captureToBlob();
+      return openFileToBlob();
+    })
+    .then((blob) => {
+      if (!blob) return;
+
+      const identifier = Date.now();
+
+      dispatch({
+        type: UPDATE_OUTPUT,
+        output: Immutable.fromJS({
+          status: 'loading',
+          identifier,
+        }),
+      });
+      // Tesseract seems to use non-standard Promise, so no return;
+      Tesseract.recognize(blob, {
+        lang: toTesseractLanguage(inputLang),
+      })
+      .then((result) => {
+        const inputLines = result.lines.map(line => ({
+          text: line.text.replace(/(\r\n|\n|\r)/gm, ''),
+          bbox: line.bbox,
+        }));
+
+        const inputArray = inputLines.map(line => line.text);
+
+        translateArray(inputLang, outputLang, inputArray)
+          .then((outputArr) => {
+            const currentOutput = getState().home.output;
+            if (currentOutput && currentOutput.get('identifier') === identifier) {
+              const outputLines = outputArr.map((text, i) => ({
+                text,
+                bbox: inputLines[i].bbox,
+              }));
+
+              let outputText = '';
+              outputArr.forEach((text) => { outputText += `${text}\r\n`; });
+
+              dispatch({
+                type: UPDATE_INPUT_TEXT,
+                inputText: result.text,
+                selectionStart: 0,
+                selectionEnd: 0,
+              });
+
+              dispatch({
+                type: UPDATE_OUTPUT,
+                output: Immutable.fromJS({
+                  status: 'done',
+                  image: {
+                    blob, inputLines, outputLines,
+                  },
+                  inputLang,
+                  outputLang,
+                  inputText: result.text,
+                  outputText,
+                }),
+              });
+            }
+          })
+          .catch(() => {
+            // Prevent slow request to display outdated info
+            const currentOutput = getState().home.output;
+            if (currentOutput && currentOutput.get('identifier') === identifier) {
+              dispatch(openAlert('cannotConnectToServer'));
+
+              dispatch({
+                type: UPDATE_OUTPUT,
+                output: null,
+              });
+            }
+          });
+      })
+      .catch(() => {
+        // Prevent slow request to display outdated info
+        const currentOutput = getState().home.output;
+        if (currentOutput && currentOutput.get('identifier') === identifier) {
+          dispatch(openAlert('cannotConnectToServer'));
+        }
+      });
+    })
+    .catch(() => {
+      dispatch({
+        type: UPDATE_OUTPUT,
+        output: null,
+      });
+
+      dispatch(openAlert('cannotOpenTheFile'));
+    });
+};

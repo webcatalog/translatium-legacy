@@ -71,7 +71,7 @@ class Phrasebook extends React.Component {
         boxSizing: 'border-box',
       },
       paper: {
-        padding: 12,
+        padding: '6px 12px',
         boxSizing: 'border-box',
         display: 'flex',
         marginTop: 12,

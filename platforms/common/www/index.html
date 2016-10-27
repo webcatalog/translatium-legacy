@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="manifest" href="manifest.json">
     <meta name="mobile-web-app-capable" content="yes">
 		<title>Modern Translator</title>
@@ -11,6 +11,13 @@
 	</head>
 	<body>
 		<div id="app"></div>
+		<script>
+			if (process.versions['electron']) {
+				var remote = require('electron').remote;
+				var fs = require('fs');
+			}
+		</script>
+		<script src="tesseract.js/tesseract.js"></script>
     <script src="bundle.js"></script>
 	</body>
 </html>

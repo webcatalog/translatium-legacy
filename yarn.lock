@@ -4,6 +4,12 @@ abbrev@1:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.0.9.tgz#91b4792588a7738c25f35dd6f63752a2f8776135"
 
+abstract-leveldown@~0.12.0:
+  version "0.12.4"
+  resolved "https://registry.yarnpkg.com/abstract-leveldown/-/abstract-leveldown-0.12.4.tgz#29e18e632e60e4e221d5810247852a63d7b2e410"
+  dependencies:
+    xtend "~3.0.0"
+
 accord@^0.24.1:
   version "0.24.1"
   resolved "https://registry.yarnpkg.com/accord/-/accord-0.24.1.tgz#af4fa2a121154b8f422080e6bb9f693be67f4159"
@@ -1709,6 +1715,10 @@ file-entry-cache@^2.0.0:
     flat-cache "^1.2.1"
     object-assign "^4.0.1"
 
+file-type@^3.8.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/file-type/-/file-type-3.9.0.tgz#257a078384d1db8087bc449d107d52a52672b9e9"
+
 filename-regex@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/filename-regex/-/filename-regex-2.0.0.tgz#996e3e80479b98b9897f15a8a58b3d084e926775"
@@ -2274,6 +2284,10 @@ iconv-lite@~0.4.13:
   version "0.4.13"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.13.tgz#1f88aba4ab0b1508e8312acc39345f36e992e2f2"
 
+idb-wrapper@^1.5.0:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/idb-wrapper/-/idb-wrapper-1.7.1.tgz#6a32670122e173a84ecc5cfa9668fa2ceb221b04"
+
 ieee754@^1.1.4:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
@@ -2531,6 +2545,10 @@ is-unc-path@^0.1.1:
   dependencies:
     unc-path-regex "^0.1.0"
 
+is-url@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/is-url/-/is-url-1.2.2.tgz#498905a593bf47cc2d9e7f738372bbf7696c7f26"
+
 is-utf8@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/is-utf8/-/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
@@ -2546,6 +2564,10 @@ isarray@^1.0.0, isarray@~1.0.0, isarray@1.0.0:
 isarray@~0.0.1, isarray@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
+
+isbuffer@~0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/isbuffer/-/isbuffer-0.0.0.tgz#38c146d9df528b8bf9b0701c3d43cf12df3fc39b"
 
 isexe@^1.1.1:
   version "1.1.2"
@@ -2574,6 +2596,10 @@ jodid25519@^1.0.0:
   dependencies:
     jsbn "~0.1.0"
 
+jpeg-js@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.2.0.tgz#53e448ec9d263e683266467e9442d2c5a2ef5482"
+
 js-tokens@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-1.0.3.tgz#14e56eb68c8f1a92c43d59f5014ec29dc20f2ae1"
@@ -2600,6 +2626,10 @@ jsesc@^1.3.0:
 jsesc@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
+
+json-loader:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/json-loader/-/json-loader-0.5.4.tgz#8baa1365a632f58a3c46d20175fc6002c96e37de"
 
 json-schema@0.2.3:
   version "0.2.3"
@@ -2705,6 +2735,17 @@ labeled-stream-splicer@^2.0.0:
 lazy-cache@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
+
+level-js@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/level-js/-/level-js-2.2.4.tgz#bc055f4180635d4489b561c9486fa370e8c11697"
+  dependencies:
+    abstract-leveldown "~0.12.0"
+    idb-wrapper "^1.5.0"
+    isbuffer "~0.0.0"
+    ltgt "^2.1.2"
+    typedarray-to-buffer "~1.0.0"
+    xtend "~2.1.2"
 
 levn@^0.3.0, levn@~0.3.0:
   version "0.3.0"
@@ -3067,6 +3108,10 @@ lru-cache@2:
   version "2.7.3"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.7.3.tgz#6d4524e8b955f95d4f5b58851ce21dd72fb4e952"
 
+ltgt@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/ltgt/-/ltgt-2.1.2.tgz#e7472324fee690afc0d5ecf900403ce5788a311d"
+
 map-cache@^0.2.0:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/map-cache/-/map-cache-0.2.2.tgz#c32abd0bd6525d9b051645bb4f26ac5dc98a0dbf"
@@ -3244,7 +3289,7 @@ node-dir@^0.1.10:
   dependencies:
     minimatch "^3.0.2"
 
-node-fetch@^1.0.1:
+node-fetch@^1.0.1, node-fetch@^1.6.3:
   version "1.6.3"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-1.6.3.tgz#dc234edd6489982d58e8f0db4f695029abcd8c04"
   dependencies:
@@ -3340,6 +3385,10 @@ object-assign@^3.0.0:
 object-assign@^4.0.1, object-assign@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.0.tgz#7a3b3d0e98063d43f4c03f2e8ae6cd51a86883a0"
+
+object-keys@~0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-0.4.0.tgz#28a6aae7428dd2c3a92f3d95f21335dd204e0336"
 
 object.omit@^2.0.0:
   version "2.0.0"
@@ -3539,6 +3588,10 @@ pkg-up@^1.0.0:
 pluralize@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-1.2.1.tgz#d1a21483fd22bb41e58a12fa3421823140897c45"
+
+png.js@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/png.js/-/png.js-0.2.1.tgz#da6b83c134bdc101940d9ab1c98e9154affbb1f2"
 
 pouchdb-browser:
   version "6.0.7"
@@ -4310,6 +4363,23 @@ tar@~2.2.0, tar@~2.2.1:
     fstream "^1.0.2"
     inherits "2"
 
+tesseract.js:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/tesseract.js/-/tesseract.js-1.0.10.tgz#e11a96ae76147939d9218f88e287fb69414b1e5d"
+  dependencies:
+    file-type "^3.8.0"
+    is-url "^1.2.2"
+    jpeg-js "^0.2.0"
+    level-js "^2.2.4"
+    node-fetch "^1.6.3"
+    object-assign "^4.1.0"
+    png.js "^0.2.1"
+    tesseract.js-core "^1.0.2"
+
+tesseract.js-core@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/tesseract.js-core/-/tesseract.js-core-1.0.2.tgz#1ce33a29dc812357b8356a30ededf8b188043b37"
+
 text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
@@ -4385,6 +4455,10 @@ type-check@~0.3.2:
   resolved "https://registry.yarnpkg.com/type-check/-/type-check-0.3.2.tgz#5884cab512cf1d355e3fb784f30804b2b520db72"
   dependencies:
     prelude-ls "~1.1.2"
+
+typedarray-to-buffer@~1.0.0:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/typedarray-to-buffer/-/typedarray-to-buffer-1.0.4.tgz#9bb8ba0e841fb3f4cf1fe7c245e9f3fa8a5fe99c"
 
 typedarray@~0.0.5:
   version "0.0.6"
@@ -4665,6 +4739,16 @@ write@^0.2.1:
 xtend@^4.0.0, "xtend@>=4.0.0 <4.1.0-0", xtend@~4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
+
+xtend@~2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/xtend/-/xtend-2.1.2.tgz#6efecc2a4dad8e6962c4901b337ce7ba87b5d28b"
+  dependencies:
+    object-keys "~0.4.0"
+
+xtend@~3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/xtend/-/xtend-3.0.0.tgz#5cce7407baf642cba7becda568111c493f59665a"
 
 yargs@~3.10.0:
   version "3.10.0"
