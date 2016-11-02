@@ -163,16 +163,8 @@ export const loadImage = fromCamera => (dispatch, getState) => {
           identifier,
         }),
       });
-      // Tesseract seems to use non-standard Promise, so no return;
-      const t = Tesseract.create({
-        workerPath: 'tesseract.js/worker.js',
-        langPath: 'https://cdn.rawgit.com/naptha/tessdata/gh-pages/3.02/',
-        corePath: 'tesseract.js-core/index.js',
-      });
 
-      console.log(toTesseractLanguage(inputLang));
-
-      t.recognize(blob, {
+      Tesseract.recognize(blob, {
         lang: toTesseractLanguage(inputLang),
       })
       .then((result) => {
@@ -231,6 +223,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
           });
       })
       .catch(() => {
+        dispatch(openAlert('cannotConnectToServer'));
         // Prevent slow request to display outdated info
         const currentOutput = getState().home.output;
         if (currentOutput && currentOutput.get('identifier') === identifier) {
@@ -238,9 +231,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
         }
       });
     })
-    .catch((err) => {
-      console.log(err);
-
+    .catch(() => {
       dispatch({
         type: UPDATE_OUTPUT,
         output: null,
