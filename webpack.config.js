@@ -39,21 +39,31 @@ const common = {
       'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM),
       'process.env.VERSION': JSON.stringify(process.env.npm_package_version),
     }),
-    new CopyWebpackPlugin([
-      { from: 'platforms/common/www' },
-      { from: 'node_modules/tesseract.js/dist/*.js', to: `${BUILD_DIR}/tesseract.js`, flatten: true },
-      { from: 'node_modules/tesseract.js-core/*.js', to: `${BUILD_DIR}/tesseract.js-core`, flatten: true },
-    ]),
   ],
 };
 
 const config = (() => {
+  const copyArr = [
+    { from: 'platforms/common/www' },
+  ];
+
+  switch (process.env.npm_lifecycle_event) {
+    case 'build-mac':
+    case 'dev-mac':
+      copyArr.push({ from: 'node_modules/tesseract.js/dist/*.js', to: `${BUILD_DIR}/tesseract.js`, flatten: true });
+      copyArr.push({ from: 'node_modules/tesseract.js-core/*.js', to: `${BUILD_DIR}/tesseract.js-core`, flatten: true });
+      break;
+    default:
+      break;
+  }
+
   switch (process.env.npm_lifecycle_event) {
     case 'build-mac':
     case 'build-windows':
       return merge(common, {
         plugins: [
           new CleanWebpackPlugin([BUILD_DIR]),
+          new CopyWebpackPlugin(copyArr),
           new webpack.optimize.OccurenceOrderPlugin(),
           new webpack.optimize.DedupePlugin(),
           new webpack.optimize.UglifyJsPlugin({
@@ -71,6 +81,7 @@ const config = (() => {
     case 'dev-windows':
       return merge(common, {
         plugins: [
+          new CopyWebpackPlugin(copyArr),
           new webpack.HotModuleReplacementPlugin({
             multiStep: true,
           }),

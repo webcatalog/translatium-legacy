@@ -20,18 +20,20 @@ class Phrasebook extends React.Component {
 
     onEnterPhrasebook();
 
-    this.listView.onscroll = () => {
-      const { scrollTop, clientHeight, scrollHeight } = this.listView;
-      if (scrollTop + clientHeight > scrollHeight - 200) {
-        if (this.props.canLoadMore === true && this.props.phrasebookLoading === false) {
-          onLoadMore();
+    if (this.listView) {
+      this.listView.onscroll = () => {
+        const { scrollTop, clientHeight, scrollHeight } = this.listView;
+        if (scrollTop + clientHeight > scrollHeight - 200) {
+          if (this.props.canLoadMore === true && this.props.phrasebookLoading === false) {
+            onLoadMore();
+          }
         }
-      }
-    };
+      };
+    }
   }
 
   componentWillUnmount() {
-    this.listView.onscroll = null;
+    if (this.listView) this.listView.onscroll = null;
   }
 
   getStyles() {

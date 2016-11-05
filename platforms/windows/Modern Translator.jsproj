@@ -110,9 +110,6 @@
     <Content Include="www\roboto-v15\roboto-v15-latin_cyrillic-ext_vietnamese_cyrillic_greek_latin-ext_greek-ext-regular.woff" />
     <Content Include="www\roboto-v15\roboto-v15-latin_cyrillic-ext_vietnamese_cyrillic_greek_latin-ext_greek-ext-regular.woff2" />
     <Content Include="www\strings\en-us.json" />
-    <Content Include="www\tesseract.js-core\index.js" />
-    <Content Include="www\tesseract.js\tesseract.js" />
-    <Content Include="www\tesseract.js\worker.js" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <Target Name="BeforeBuild">

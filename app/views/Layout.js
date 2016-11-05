@@ -33,6 +33,9 @@ class App extends React.Component {
     pTheme.palette.primary1Color = primary1Color;
     pTheme.palette.primary2Color = primary2Color;
     pTheme.palette.accent1Color = red500;
+    if (theme === 'dark') {
+      pTheme.palette.accent2Color = primary1Color;
+    }
     pTheme.palette.alternateTextColor = fullWhite;
     pTheme.appBar = {};
     pTheme.appBar.height = 56;
