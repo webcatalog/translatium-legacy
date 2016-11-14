@@ -41,79 +41,28 @@ const data = {
     'hy', 'ka', 'ig', 'ha', 'yo', 'yi', 'st', 'kk', 'tg', 'uz',
     'sd', 'ps', 'am',
   ],
-  tesseract: {
-    /* eslint-disable no-tabs */
-    /* eslint-disable quote-props */
-    'af': 'afr',
-    'ar': 'ara',
-    'az': 'aze',
-    'be': 'bel',
-    'bn': 'ben',
-    'bg': 'bul',
-    'ca': 'cat',
-    'cs': 'ces',
-    'zh': 'chi_sim',
-    'zh-YUE': 'chi_tra',
-    'zh-CN': 'chi_sim',
-    'zh-HK': 'chi_sim',
-    'zh-TW': 'chi_tra',
-    'chr': 'chr', // Cherokee, not supported yet
-    'da': 'dan',
-    'de': 'deu',
-    'el': 'ell',
-    'en': 'eng',
-    'enm': 'enm',	// English (Old)
-    'eo': 'epo',
-    'epo_alt': 'epo_alt',	// Esperanto alternative
-    'equ': 'equ',	// Math
-    'et': 'est',
-    'eu': 'eus',
-    'fi': 'fin',
-    'fr': 'fra',
-    'frk': 'frk',	// Frankish
-    'frm': 'frm',	// French (Old)
-    'gl': 'glg',
-    'grc': 'grc',	// Ancient Greek
-    'iw': 'heb',
-    'hi': 'hin',
-    'hr': 'hrv',
-    'hu': 'hun',
-    'id': 'ind',
-    'is': 'isl',
-    'it': 'ita',
-    'ita_old': 'ita_old', // Italian (Old)
-    'ja': 'jpn',
-    'kn': 'kan',
-    'ko': 'kor',
-    'lv': 'lav',
-    'lt': 'lit',
-    'ml': 'mal',
-    'mk': 'mkd',
-    'mt': 'mlt',
-    'ms': 'msa',
-    'nl': 'nld',
-    'no': 'nor',
-    'pl': 'pol',
-    'pt': 'por',
-    'ro': 'ron',
-    'ru': 'rus',
-    'sk': 'slk',
-    'sl': 'slv',
-    'es': 'spa',
-    'spa_old': 'spa_old', // Old Spanish
-    'sq': 'sqi',
-    'sr': 'srp',
-    'sw': 'swa',
-    'sv': 'swe',
-    'ta': 'tam',
-    'te': 'tel',
-    'tgl': 'tgl', // Tagalog
-    'th': 'tha',
-    'tr': 'tur',
-    'uk': 'ukr',
-    'vi': 'vie',
-    /* eslint-enable quote-props */
-    /* eslint-enable no-tabs */
+  ocrSpaceSupported: {
+    cz: 'ce',
+    da: 'dan',
+    nl: 'dut',
+    en: 'eng',
+    fi: 'fin',
+    fr: 'fre',
+    de: 'ger',
+    hu: 'hun',
+    it: 'ita',
+    no: 'nor',
+    pl: 'pol',
+    pt: 'por',
+    es: 'spa',
+    sv: 'swe',
+    'zh-CN': 'chs',
+    el: 'gre',
+    ja: 'jpn',
+    ru: 'rus',
+    tr: 'tur',
+    'zh-TW': 'cht',
+    ko: 'kor',
   },
 };
 
@@ -128,12 +77,16 @@ export const toCountryRemovedLanguage = (lang) => {
   return lang;
 };
 
-export const toTesseractLanguage = lang =>
-  data.tesseract[lang] || data.tesseract[toCountryRemovedLanguage(lang)] || null;
+export const toOcrSpaceLanguage = (lang) => {
+  if (lang === 'zh-YUE' || lang === 'zh-HK') return data.ocrSpaceSupported['zh-TW'];
+  if (lang === 'zh') return data.ocrSpaceSupported['zh-CN'];
+
+  return data.ocrSpaceSupported[toCountryRemovedLanguage(lang)] || null;
+};
 
 // Check if language supports OCR
 export const isOcrSupported = lang =>
-  (toTesseractLanguage(lang) !== null);
+  (toOcrSpaceLanguage(lang) !== null);
 
 // Check if language is supported as input
 export const isInput = lang => !(data.all.indexOf(lang) > -1);

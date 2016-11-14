@@ -49,16 +49,6 @@ const config = (() => {
 
   switch (process.env.npm_lifecycle_event) {
     case 'build-mac':
-    case 'dev-mac':
-      copyArr.push({ from: 'node_modules/tesseract.js/dist/*.js', to: `${BUILD_DIR}/tesseract.js`, flatten: true });
-      copyArr.push({ from: 'node_modules/tesseract.js-core/*.js', to: `${BUILD_DIR}/tesseract.js-core`, flatten: true });
-      break;
-    default:
-      break;
-  }
-
-  switch (process.env.npm_lifecycle_event) {
-    case 'build-mac':
     case 'build-windows':
       return merge(common, {
         plugins: [

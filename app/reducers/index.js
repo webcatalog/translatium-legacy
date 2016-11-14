@@ -10,6 +10,7 @@ import handwriting from './handwriting';
 import speech from './speech';
 import phrasebook from './phrasebook';
 import alert from './alert';
+import ocr from './ocr';
 
 const rootReducer = combineReducers({
   screen,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   phrasebook,
   alert,
   routing: routerReducer,
+  ocr,
 });
 
 export default rootReducer;

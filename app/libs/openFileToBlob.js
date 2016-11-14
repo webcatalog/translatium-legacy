@@ -25,10 +25,14 @@ const openFileToBlob = () =>
             }
             return file.openAsync(Windows.Storage.FileAccessMode.read)
               .then((stream) => {
+                const fileExt = file.fileType.substring(1);
                 const blob = window.MSApp.createBlobFromRandomAccessStream(
-                  getFileType(file.fileType.substring(1)), stream
+                  getFileType(fileExt), stream
                 );
-                resolve(blob);
+                resolve({
+                  fileName: `image.${fileExt}`,
+                  blob,
+                });
               });
           })
           .then(null, (err) => {
@@ -52,8 +56,15 @@ const openFileToBlob = () =>
                 reject(err);
                 return;
               }
-              const blob = new Blob([data], { type: getFileType(filePath.split('.').pop()) });
-              resolve(blob);
+
+              const fileExt = filePath.split('.').pop();
+
+              const blob = new Blob([data], { type: getFileType(fileExt) });
+
+              resolve({
+                fileName: `image.${fileExt}`,
+                blob,
+              });
             });
           } else {
             resolve(null);

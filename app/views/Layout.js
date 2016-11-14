@@ -1,7 +1,7 @@
 /* global strings */
 import React from 'react';
 import { connect } from 'react-redux';
-import { replace } from 'react-router-redux';
+import { push } from 'react-router-redux';
 
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
@@ -13,6 +13,7 @@ import ActionHome from 'material-ui/svg-icons/action/home';
 import ToggleStar from 'material-ui/svg-icons/toggle/star';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import ActionHelp from 'material-ui/svg-icons/action/help';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import { screenResize } from '../actions/screen';
 import { updateImeMode } from '../actions/home';
@@ -102,13 +103,28 @@ class App extends React.Component {
 
     return {
       container: {
-        display: 'flex',
-        flexDirection: 'column',
         height: '100%',
+        width: '100%',
         overflowY: 'hidden',
         backgroundColor: (theme === 'dark') ? fullBlack : fullWhite,
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+      },
+      fullPageProgress: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        height: '100%',
+        width: '100%',
+        zIndex: 10000,
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       },
       fakeTitleBar: {
+        flexBasis: 22,
         height: 22,
         backgroundColor: primary2Color,
         color: fullWhite,
@@ -117,48 +133,66 @@ class App extends React.Component {
         WebkitUserSelect: 'none',
         WebkitAppRegion: 'drag',
       },
+      contentContainer: {
+        flex: 1,
+        position: 'relative',
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      },
     };
   }
 
   render() {
-    const { children, bottomNavigationSelectedIndex, onBottomNavigationItemClick } = this.props;
+    const {
+      children,
+      bottomNavigationSelectedIndex,
+      fullPageLoading,
+      onBottomNavigationItemClick,
+    } = this.props;
     const styles = this.getStyles();
 
     return (
       <div className="fs" style={styles.container}>
-        <Alert />
         {process.env.PLATFORM === 'mac' ? (
           <div style={styles.fakeTitleBar}>
             Modern Translator
           </div>
         ) : null}
-        {children}
-        {bottomNavigationSelectedIndex > -1 ? (
-          <Paper zDepth={2} style={{ zIndex: 1000 }}>
-            <BottomNavigation selectedIndex={bottomNavigationSelectedIndex}>
-              <BottomNavigationItem
-                label={strings.home}
-                icon={<ActionHome />}
-                onTouchTap={() => onBottomNavigationItemClick('/')}
-              />
-              <BottomNavigationItem
-                label={strings.phrasebook}
-                icon={<ToggleStar />}
-                onTouchTap={() => onBottomNavigationItemClick('/phrasebook')}
-              />
-              <BottomNavigationItem
-                label={strings.settings}
-                icon={<ActionSettings />}
-                onTouchTap={() => onBottomNavigationItemClick('/settings')}
-              />
-              <BottomNavigationItem
-                label={strings.help}
-                icon={<ActionHelp />}
-                onTouchTap={() => onBottomNavigationItemClick('/help')}
-              />
-            </BottomNavigation>
-          </Paper>
-        ) : null}
+        <div style={styles.contentContainer}>
+          {fullPageLoading ? (<div style={styles.fullPageProgress}>
+            <CircularProgress size={80} thickness={5} />
+          </div>) : null}
+          <Alert />
+          {children}
+          {bottomNavigationSelectedIndex > -1 ? (
+            <Paper zDepth={2} style={{ zIndex: 1000 }}>
+              <BottomNavigation selectedIndex={bottomNavigationSelectedIndex}>
+                <BottomNavigationItem
+                  label={strings.home}
+                  icon={<ActionHome />}
+                  onTouchTap={() => onBottomNavigationItemClick('/')}
+                />
+                <BottomNavigationItem
+                  label={strings.phrasebook}
+                  icon={<ToggleStar />}
+                  onTouchTap={() => onBottomNavigationItemClick('/phrasebook')}
+                />
+                <BottomNavigationItem
+                  label={strings.settings}
+                  icon={<ActionSettings />}
+                  onTouchTap={() => onBottomNavigationItemClick('/settings')}
+                />
+                <BottomNavigationItem
+                  label={strings.help}
+                  icon={<ActionHelp />}
+                  onTouchTap={() => onBottomNavigationItemClick('/help')}
+                />
+              </BottomNavigation>
+            </Paper>
+          ) : null}
+        </div>
       </div>
     );
   }
@@ -168,6 +202,7 @@ App.propTypes = {
   children: React.PropTypes.element, // matched child route component
   theme: React.PropTypes.string,
   primaryColorId: React.PropTypes.string,
+  fullPageLoading: React.PropTypes.bool,
   bottomNavigationSelectedIndex: React.PropTypes.number,
   onResize: React.PropTypes.func,
   onBottomNavigationItemClick: React.PropTypes.func,
@@ -198,6 +233,7 @@ const mapStateToProps = (state, ownProps) => {
 
 
   return {
+    fullPageLoading: state.ocr && state.ocr.get('status') === 'loading',
     theme: state.settings.theme,
     primaryColorId: state.settings.primaryColorId,
     bottomNavigationSelectedIndex,
@@ -210,7 +246,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateImeMode(null));
   },
   onBottomNavigationItemClick: (pathname) => {
-    dispatch(replace(pathname));
+    dispatch(push(pathname));
   },
 });
 

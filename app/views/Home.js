@@ -45,8 +45,8 @@ import {
   translate,
   updateImeMode,
   togglePhrasebook,
-  loadImage,
 } from '../actions/home';
+import { loadImage } from '../actions/ocr';
 import { playTextToSpeech, stopTextToSpeech } from '../actions/textToSpeech';
 
 import Dictionary from './Dictionary';
@@ -182,7 +182,7 @@ class Home extends React.Component {
       },
       outputText: {
         fontSize: 16,
-        whiteSpace: 'pre',
+        whiteSpace: 'pre-wrap',
       },
       outputRoman: {
         fontSize: 15,
@@ -579,11 +579,6 @@ const mapDispatchToProps = dispatch => ({
   },
   onWriteButtonTouchTap: () => {
     dispatch(updateImeMode('handwriting'));
-    /* if (isFull() !== true) {
-      showUpgradeDialog();
-    } else {
-      dispatch(switchIme('handwriting'));
-    }*/
   },
   onSpeakButtonTouchTap: () => {
     dispatch(updateImeMode('speech'));

@@ -16,7 +16,10 @@ const captureToBlob = () =>
                 const blob = window.MSApp.createBlobFromRandomAccessStream(
                   'image/jpeg', stream
                 );
-                resolve(blob);
+                resolve({
+                  fileName: 'image.jpg',
+                  blob,
+                });
               });
           })
           .then(null, (err) => {

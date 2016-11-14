@@ -15,10 +15,11 @@
 	"openImageFile": "Open image file",
 	"more": "More",
 
-	"errorOccured": "An error has occured",
+	"errorOccured": "An error has occured.",
 	"cannotConnectToServer": "The app cannot to server. Please check your Internet connection.",
 	"cannotActivateMicrophone": "The app cannot activate your microphone.",
-	"cannotOpenTheFile": "The app cannot open the file you selected",
+	"cannotOpenTheFile": "The app cannot open the file you selected.",
+	"cannotRecognizeImage": "The app cannot recognize any text on your image.",
 
 	"swap": "Swap",
 	"biggerText": "Bigger text",
@@ -33,6 +34,9 @@
 
 	"chooseAnInputLanguage": "Translate from",
 	"chooseAnOutputLanguage": "Translate to",
+
+	"displayOriginalText": "Display original text",
+	"displayTranslatedText": "Display translated text",
 
 	"phrasebookIsEmpty": "Phrasebook is empty.",
 

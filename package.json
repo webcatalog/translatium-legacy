@@ -5,7 +5,7 @@
   "author": "Quang Lam",
   "license": "UNLICENSED",
   "engines": {
-    "node": "6.9.0"
+    "node": "6.9.1"
   },
   "scripts": {
     "dev-mac": "PLATFORM=mac NODE_ENV=development webpack -d --watch",
@@ -31,8 +31,6 @@
     "recordrtc": "^5.4.0",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
-    "tesseract.js": "^1.0.10",
-    "tesseract.js-core": "^1.0.2",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {

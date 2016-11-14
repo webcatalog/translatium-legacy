@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { replace } from 'react-router-redux';
+import { push } from 'react-router-redux';
 import Immutable from 'immutable';
 
 import AppBar from 'material-ui/AppBar';
@@ -199,7 +199,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onItemTouchTap: (output) => {
     dispatch(loadOutput(output));
-    dispatch(replace('/'));
+    dispatch(push('/'));
   },
   onDeleteButtonTouchTap: (id, rev) => {
     dispatch(deletePhrasebookItem(id, rev));

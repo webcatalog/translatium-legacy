@@ -11,6 +11,7 @@ import Phrasebook from './views/Phrasebook';
 import Settings from './views/Settings';
 import Help from './views/Help';
 import LanguageList from './views/LanguageList';
+import Ocr from './views/Ocr';
 
 const history = syncHistoryWithStore(hashHistory, store);
 
@@ -22,6 +23,7 @@ const renderRoutes = () => (
       <Route path="settings" component={Settings} />
       <Route path="help" component={Help} />
       <Route path="language-list" component={LanguageList} />
+      <Route path="ocr" component={Ocr} />
     </Route>
   </Router>
 );

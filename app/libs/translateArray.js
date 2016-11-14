@@ -8,6 +8,9 @@ const translateArray = (inputLang, outputLang, inputArr) =>
       const inputText = inputArr.join('\n');
       return translateText(inputLang, outputLang, inputText);
     })
-    .then(({ outputText }) => outputText.split('\n'));
+    .then(({ outputText }) => ({
+      outputText,
+      outputArr: outputText.split('\n'),
+    }));
 
 export default translateArray;

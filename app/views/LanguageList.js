@@ -1,7 +1,7 @@
 /* global strings */
 import React from 'react';
 import { connect } from 'react-redux';
-import { goBack } from 'react-router-redux';
+import { push } from 'react-router-redux';
 
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
@@ -102,10 +102,10 @@ LanguageList.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   onCloseTouchTap: () => {
-    dispatch(goBack());
+    dispatch(push('/'));
   },
   onLanguageTouchTap: (type, value) => {
-    dispatch(goBack());
+    dispatch(push('/'));
 
     if (type === 'inputLang') {
       dispatch(updateInputLang(value));
