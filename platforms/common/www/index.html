@@ -13,7 +13,7 @@
 		<div id="app"></div>
 		<script>
 			if (process.versions['electron']) {
-				var { remote, webFrame } = require('electron');
+				var { remote, webFrame, shell } = require('electron');
 				webFrame.setZoomLevelLimits(1, 1);
 				var fs = require('fs');
 			}

@@ -3,6 +3,8 @@ import React from 'react';
 
 import AppBar from 'material-ui/AppBar';
 
+import openUri from '../libs/openUri';
+
 class Help extends React.Component {
   getStyles() {
     const {
@@ -30,8 +32,9 @@ class Help extends React.Component {
         textAlign: 'center',
       },
       icon: {
-        height: 128,
-        width: 128,
+        height: 100,
+        width: 100,
+        borderRadius: 50,
       },
       text: {
         color: textColor,
@@ -50,9 +53,15 @@ class Help extends React.Component {
         />
         <div style={styles.contentContainer}>
           <div style={styles.innerContentContainer}>
-            <img src="../images/icon.png" role="presentation" style={styles.icon} />
+            <img src="images/logo.png" role="presentation" style={styles.icon} />
             <h3 style={styles.text}>Modern Translator</h3>
             <h4 style={styles.text}>Version {process.env.VERSION}</h4>
+
+            <p><a onTouchTap={() => openUri('mailto:support@moderntranslator.com')}>Support</a></p>
+
+            <p><a onTouchTap={() => openUri('https://moderntranslator.com')}>Website</a></p>
+
+            <p><a onTouchTap={() => openUri('https://moderntranslator.com/release-notes')}>Release Notes</a></p>
           </div>
         </div>
       </div>

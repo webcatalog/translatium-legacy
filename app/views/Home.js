@@ -30,6 +30,9 @@ import EditorFormatSize from 'material-ui/svg-icons/editor/format-size';
 import ActionSwapVert from 'material-ui/svg-icons/action/swap-vert';
 import ToggleStarBorder from 'material-ui/svg-icons/toggle/star-border';
 import ToggleStar from 'material-ui/svg-icons/toggle/star';
+import NavigationFullscreen from 'material-ui/svg-icons/navigation/fullscreen';
+import NavigationFullscreenExit from 'material-ui/svg-icons/navigation/fullscreen-exit';
+
 
 import {
   isOutput,
@@ -45,6 +48,7 @@ import {
   translate,
   updateImeMode,
   togglePhrasebook,
+  toggleFullscreenInputBox,
 } from '../actions/home';
 import { loadImage } from '../actions/ocr';
 import { playTextToSpeech, stopTextToSpeech } from '../actions/textToSpeech';
@@ -75,7 +79,7 @@ class Home extends React.Component {
   }
 
   getStyles() {
-    const { theme } = this.props;
+    const { theme, fullscreenInputBox } = this.props;
 
     const {
       palette: {
@@ -132,7 +136,8 @@ class Home extends React.Component {
         paddingTop: (appBar.height - iconButtonSize) / 2,
       },
       inputContainer: {
-        height: 140,
+        flex: fullscreenInputBox ? 1 : null,
+        height: fullscreenInputBox ? null : 140,
         display: 'flex',
         flexDirection: 'column',
         zIndex: 1000,
@@ -357,6 +362,7 @@ class Home extends React.Component {
       inputText,
       imeMode,
       textToSpeechPlaying,
+      fullscreenInputBox,
       onLanguageTouchTap, onSwapButtonTouchTap,
       onKeyDown, onInputText,
       onClearButtonTouchTap,
@@ -366,6 +372,7 @@ class Home extends React.Component {
       onTranslateButtonTouchTap,
       onOpenImageButtonTouchTap,
       onCameraButtonTouchTap,
+      onFullscreenButtonTouchTap,
     } = this.props;
     const styles = this.getStyles();
 
@@ -399,10 +406,15 @@ class Home extends React.Component {
         disabled: !isOcrSupported(inputLang),
         onTouchTap: onOpenImageButtonTouchTap,
       },
+      {
+        icon: fullscreenInputBox ? <NavigationFullscreenExit /> : <NavigationFullscreen />,
+        tooltip: fullscreenInputBox ? strings.exitFullscreen : strings.fullscreen,
+        onTouchTap: onFullscreenButtonTouchTap,
+      },
     ];
 
     if (process.env.PLATFORM === 'windows') {
-      controllers.push({
+      controllers.splice(controllers.length - 2, 0, {
         icon: <ImageCameraAlt />,
         tooltip: strings.camera,
         disabled: !isOcrSupported(inputLang),
@@ -412,6 +424,8 @@ class Home extends React.Component {
 
     const maxVisibleIcon = Math.min(Math.round((screenWidth - 200) / 56), controllers.length);
     const showMoreButton = (maxVisibleIcon < controllers.length);
+
+    const tooltipPos = fullscreenInputBox ? 'top-center' : 'bottom-center';
 
     return (
       <div style={styles.container}>
@@ -464,7 +478,7 @@ class Home extends React.Component {
                   return (
                     <IconButton
                       tooltip={tooltip}
-                      tooltipPosition="bottom-center"
+                      tooltipPosition={tooltipPos}
                       key={`dIconButton_${i}`}
                       onTouchTap={onTouchTap}
                     >
@@ -476,7 +490,7 @@ class Home extends React.Component {
               {(showMoreButton) ? (
                 <IconMenu
                   iconButtonElement={(
-                    <IconButton tooltip={strings.more} tooltipPosition="bottom-center">
+                    <IconButton tooltip={strings.more} tooltipPosition={tooltipPos}>
                       <NavigationMoreVert />
                     </IconButton>
                   )}
@@ -504,7 +518,11 @@ class Home extends React.Component {
               ) : null}
             </div>
             <div style={styles.controllerContainerRight}>
-              <RaisedButton label="Translate" primary onTouchTap={onTranslateButtonTouchTap} />
+              <RaisedButton
+                label={strings.translate}
+                primary
+                onTouchTap={onTranslateButtonTouchTap}
+              />
             </div>
           </div>
         </Paper>
@@ -527,6 +545,7 @@ Home.propTypes = {
   output: React.PropTypes.instanceOf(Immutable.Map),
   imeMode: React.PropTypes.string,
   textToSpeechPlaying: React.PropTypes.bool,
+  fullscreenInputBox: React.PropTypes.bool,
   onLanguageTouchTap: React.PropTypes.func,
   onSwapButtonTouchTap: React.PropTypes.func,
   onKeyDown: React.PropTypes.func,
@@ -541,6 +560,7 @@ Home.propTypes = {
   onCameraButtonTouchTap: React.PropTypes.func,
   onSwapOutputButtonTouchTap: React.PropTypes.func,
   onBiggerTextButtonTouchTap: React.PropTypes.func,
+  onFullscreenButtonTouchTap: React.PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -554,6 +574,7 @@ const mapStateToProps = state => ({
   output: state.home.output,
   imeMode: state.home.imeMode,
   textToSpeechPlaying: state.textToSpeech.textToSpeechPlaying,
+  fullscreenInputBox: state.home.fullscreenInputBox,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -619,6 +640,9 @@ const mapDispatchToProps = dispatch => ({
       pathname: '/bigger-text',
       query: { text },
     }));
+  },
+  onFullscreenButtonTouchTap: () => {
+    dispatch(toggleFullscreenInputBox());
   },
 });
 

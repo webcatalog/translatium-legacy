@@ -14,6 +14,9 @@
 	"camera": "Camera",
 	"openImageFile": "Open image file",
 	"more": "More",
+	"fullscreen": "Fullscreen",
+	"exitFullscreen": "Exit fullscreen",
+	"translate": "Translate",
 
 	"errorOccured": "An error has occured.",
 	"cannotConnectToServer": "The app cannot to server. Please check your Internet connection.",

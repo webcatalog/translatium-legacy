@@ -1,5 +1,5 @@
 import {
-  UPDATE_INPUT_TEXT, UPDATE_OUTPUT, UPDATE_IME_MODE,
+  UPDATE_INPUT_TEXT, UPDATE_OUTPUT, UPDATE_IME_MODE, TOGGLE_FULLSCREEN_INPUT_BOX,
 } from '../constants/actions';
 
 const initialState = {
@@ -7,11 +7,16 @@ const initialState = {
   selectionStart: 0,
   selectionEnd: 0,
   output: null,
+  fullscreenInputBox: false,
 };
 
 
 const home = (state = initialState, action) => {
   switch (action.type) {
+    case TOGGLE_FULLSCREEN_INPUT_BOX:
+      return Object.assign({}, state, {
+        fullscreenInputBox: !state.fullscreenInputBox,
+      });
     case UPDATE_IME_MODE:
       return Object.assign({}, state, {
         imeMode: action.imeMode,

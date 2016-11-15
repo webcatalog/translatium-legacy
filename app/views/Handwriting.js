@@ -69,7 +69,8 @@ class Handwriting extends React.Component {
       pageX = e.pageX;
       pageY = e.pageY;
     }
-    this.addTouchTap(pageX - this.offsetLeft, pageY - this.offsetTop);
+    const titleBarHeight = (process.env.PLATFORM === 'mac') ? 22 : 0;
+    this.addTouchTap(pageX - this.offsetLeft, pageY - this.offsetTop - titleBarHeight);
   }
 
   onMouseMove(e) {
@@ -84,7 +85,10 @@ class Handwriting extends React.Component {
         pageX = e.pageX;
         pageY = e.pageY;
       }
-      this.addTouchTap(pageX - this.offsetLeft, pageY - this.offsetTop, true);
+
+      const titleBarHeight = (process.env.PLATFORM === 'mac') ? 22 : 0;
+
+      this.addTouchTap(pageX - this.offsetLeft, pageY - this.offsetTop - titleBarHeight, true);
     }
   }
 

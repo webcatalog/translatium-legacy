@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 
 import {
-  UPDATE_INPUT_TEXT, UPDATE_OUTPUT, UPDATE_IME_MODE,
+  UPDATE_INPUT_TEXT, UPDATE_OUTPUT, UPDATE_IME_MODE, TOGGLE_FULLSCREEN_INPUT_BOX,
 } from '../constants/actions';
 
 import translateText from '../libs/translateText';
@@ -63,13 +63,14 @@ export const updateInputText = (inputText, selectionStart, selectionEnd) =>
     const { settings, home } = getState();
     const realtime = settings.realtime;
     const currentInputText = home.inputText;
+    const fullscreenInputBox = home.fullscreenInputBox;
 
     dispatch({ type: UPDATE_INPUT_TEXT, inputText, selectionStart, selectionEnd });
 
     // No change in inputText, no need to re-run task
     if (currentInputText === inputText) return;
 
-    if (realtime === true && inputText.trim().length > 0) {
+    if (realtime === true && fullscreenInputBox === false && inputText.trim().length > 0) {
       // delay to save bandwidth
       const tmpHome = getState().home;
       setTimeout(() => {
@@ -135,4 +136,8 @@ export const loadOutput = output => ((dispatch) => {
 export const updateImeMode = imeMode => ({
   type: UPDATE_IME_MODE,
   imeMode,
+});
+
+export const toggleFullscreenInputBox = () => ({
+  type: TOGGLE_FULLSCREEN_INPUT_BOX,
 });
