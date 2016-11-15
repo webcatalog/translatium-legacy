@@ -39,7 +39,7 @@ import {
   isOcrSupported,
 } from '../libs/languageUtils';
 
-import { swapLanguages } from '../actions/settings';
+import { swapLanguages, updateInputLang, updateOutputLang } from '../actions/settings';
 import {
   updateInputText,
   translate,
@@ -48,6 +48,9 @@ import {
 } from '../actions/home';
 import { loadImage } from '../actions/ocr';
 import { playTextToSpeech, stopTextToSpeech } from '../actions/textToSpeech';
+
+import copyToClipboard from '../libs/copyToClipboard';
+import shareText from '../libs/shareText';
 
 import Dictionary from './Dictionary';
 import Handwriting from './Handwriting';
@@ -200,9 +203,10 @@ class Home extends React.Component {
   renderOutput(styles) {
     const {
       output, screenWidth,
-      outputLang,
       textToSpeechPlaying, onListenButtonTouchTap,
       onTogglePhrasebookTouchTap,
+      onSwapOutputButtonTouchTap,
+      onBiggerTextButtonTouchTap,
     } = this.props;
 
     if (!output) return null;
@@ -223,7 +227,7 @@ class Home extends React.Component {
             icon: textToSpeechPlaying ? <AVStop /> : <AVVolumeUp />,
             tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
             onTouchTap: () => onListenButtonTouchTap(textToSpeechPlaying, output.get('outputLang'), output.get('outputText')),
-            disabled: !isTtsSupported(outputLang),
+            disabled: !isTtsSupported(output.get('outputLang')),
           },
           {
             icon: output.has('phrasebookId') ? <ToggleStar /> : <ToggleStarBorder />,
@@ -233,20 +237,31 @@ class Home extends React.Component {
           {
             icon: <ActionSwapVert />,
             tooltip: strings.swap,
+            onTouchTap: () => onSwapOutputButtonTouchTap(
+              output.get('outputLang'),
+              output.get('inputLang'),
+              output.get('outputText')
+            ),
           },
           {
             icon: <EditorFormatSize />,
             tooltip: strings.biggerText,
+            onTouchTap: () => onBiggerTextButtonTouchTap(output.get('outputText')),
           },
           {
             icon: <ContentCopy />,
             tooltip: strings.copy,
-          },
-          {
-            icon: <SocialShare />,
-            tooltip: strings.share,
+            onTouchTap: () => copyToClipboard(output.get('outputText')),
           },
         ];
+
+        if (process.env.PLATFORM !== 'mac') {
+          controllers.push({
+            icon: <SocialShare />,
+            tooltip: strings.share,
+            onTouchTap: () => shareText(output.get('outputText')),
+          });
+        }
 
         const maxVisibleIcon = Math.min(Math.round((screenWidth - 120) / 56), controllers.length);
         const showMoreButton = (maxVisibleIcon < controllers.length);
@@ -524,6 +539,8 @@ Home.propTypes = {
   onTogglePhrasebookTouchTap: React.PropTypes.func,
   onOpenImageButtonTouchTap: React.PropTypes.func,
   onCameraButtonTouchTap: React.PropTypes.func,
+  onSwapOutputButtonTouchTap: React.PropTypes.func,
+  onBiggerTextButtonTouchTap: React.PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -591,6 +608,17 @@ const mapDispatchToProps = dispatch => ({
   },
   onCameraButtonTouchTap: () => {
     dispatch(loadImage(true));
+  },
+  onSwapOutputButtonTouchTap: (inputLang, outputLang, inputText) => {
+    dispatch(updateInputLang(inputLang));
+    dispatch(updateOutputLang(outputLang));
+    dispatch(updateInputText(inputText));
+  },
+  onBiggerTextButtonTouchTap: (text) => {
+    dispatch(push({
+      pathname: '/bigger-text',
+      query: { text },
+    }));
   },
 });
 

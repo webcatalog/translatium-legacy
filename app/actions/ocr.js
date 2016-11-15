@@ -1,4 +1,4 @@
-/* global fetch FormData URL */
+/* global fetch FormData URL document Image */
 import { push } from 'react-router-redux';
 import Immutable from 'immutable';
 
@@ -19,14 +19,45 @@ export const loadImage = fromCamera => (dispatch, getState) => {
       return openFileToBlob();
     })
     .then((result) => {
-      if (!result) return;
-
-      const { blob, fileName } = result;
+      if (!result) return null;
 
       dispatch({
         type: UPDATE_OCR,
         ocr: Immutable.fromJS({ status: 'loading' }),
       });
+
+      // compress
+      return new Promise((resolve) => {
+        const imageObj = new Image();
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+
+        imageObj.onload = function onLoad() {
+          const maxSize = 2600;
+          const ratio = maxSize / Math.max(this.width, this.height);
+          const maxWidth = Math.round(this.width * ratio);
+          const maxHeight = Math.round(this.height * ratio);
+
+          canvas.width = maxWidth;
+          canvas.height = maxHeight;
+          context.clearRect(0, 0, maxWidth, maxHeight);
+          context.drawImage(imageObj, 0, 0, this.width, this.height, 0, 0, maxWidth, maxHeight);
+
+          canvas.toBlob((blob) => {
+            resolve({
+              blob,
+              fileName: result.fileName,
+            });
+          }, 'image/jpeg', 50);
+        };
+
+        imageObj.src = URL.createObjectURL(result.blob, { oneTimeOnly: true });
+      });
+    })
+    .then((result) => {
+      if (!result) return;
+
+      const { blob, fileName } = result;
 
       const formData = new FormData();
       formData.append('apikey', '0088228ab088957');
@@ -47,6 +78,8 @@ export const loadImage = fromCamera => (dispatch, getState) => {
           });
 
           dispatch(openAlert('cannotRecognizeImage'));
+
+          return null;
         }
 
         const inputText = ParsedResults[0].ParsedText;

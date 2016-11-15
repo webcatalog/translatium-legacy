@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
+import { goBack } from 'react-router-redux';
 import Immutable from 'immutable';
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -163,7 +163,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onCloseTouchTap: () => {
-    dispatch(push('/'));
+    dispatch(goBack());
   },
   onZoomSliderChange: (event, value) => {
     dispatch(setZoomLevel(value));
@@ -179,7 +179,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(loadOutput(Immutable.fromJS({
       inputLang, outputLang, inputText, outputText,
     })));
-    dispatch(push('/'));
+    dispatch(goBack());
   },
 });
 

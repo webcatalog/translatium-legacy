@@ -11,6 +11,7 @@ const defaultState = {
   preventScreenLock: false,
   launchTime: 0,
   translateWhenPressingEnter: true,
+  biggerTextFontSize: 50,
 };
 
 const getInitialValue = (name) => {

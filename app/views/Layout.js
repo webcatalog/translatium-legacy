@@ -1,7 +1,7 @@
 /* global strings */
 import React from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
+import { replace } from 'react-router-redux';
 
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
@@ -246,7 +246,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateImeMode(null));
   },
   onBottomNavigationItemClick: (pathname) => {
-    dispatch(push(pathname));
+    dispatch(replace(pathname));
   },
 });
 
