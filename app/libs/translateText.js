@@ -45,6 +45,11 @@ const translateShortText = (inputLang, outputLang, inputText) =>
           }
         });
       }
+
+      if (inputRoman === inputText) inputRoman = undefined;
+
+      if (outputRoman === outputText) outputRoman = undefined;
+
       if (outputLang === 'zh-YUE') outputRoman = undefined;
 
       let outputSegments = [outputText];
@@ -72,7 +77,7 @@ const translateShortText = (inputLang, outputLang, inputText) =>
 
       let suggestedInputLang;
       // sometimes, suggestedInputLang === inputLang so compare to ensure it's not duplicated.
-      if (result[8] && result[8][0][0] !== inputLang) {
+      if (result[8] && result[8][0][0] !== languageUtils.toCountryRemovedLanguage(inputLang)) {
         suggestedInputLang = result[8][0][0];
       }
       if (suggestedInputLang === 'zh-CN') suggestedInputLang = 'zh';

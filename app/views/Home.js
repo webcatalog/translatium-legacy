@@ -169,6 +169,7 @@ class Home extends React.Component {
         paddingTop: 6,
       },
       resultContainer: {
+        display: fullscreenInputBox ? 'none' : null,
         flex: 1,
         padding: '0 12px 12px 12px',
         boxSizing: 'border-box',
