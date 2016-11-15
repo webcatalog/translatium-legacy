@@ -17,7 +17,7 @@ const shareText = (text) => {
     }
     default: {
       /* eslint-disable no-console */
-      console.log('Platform does not support copyToClipboard.');
+      console.log('Platform does not support shareText.');
       /* eslint-enable no-console */
     }
   }

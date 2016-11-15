@@ -20,6 +20,4 @@ const copyToClipboard = (text) => {
   }
 };
 
-copyToClipboard('YEAH');
-
 export default copyToClipboard;

@@ -32,9 +32,10 @@ export const loadPhrasebook = (init, limit) => ((dispatch, getState) => {
 
   phrasebookDb.allDocs(options)
     .then((response) => {
+      console.log(response.rows);
       response.rows.forEach((row) => {
         // Old data compatibility
-        if (row.doc.inputObj) {
+        if (row.doc.inputObj) { // Version 1
           const { inputLang, outputLang, inputText } = row.doc.inputObj;
           const { outputText } = row.doc.outputObj;
           const { _id, _rev } = row.doc;
@@ -47,7 +48,7 @@ export const loadPhrasebook = (init, limit) => ((dispatch, getState) => {
             inputText,
             outputText,
           }));
-        } else if (row.doc.phrasebookVersion === 3) {
+        } else if (row.doc.phrasebookVersion === 3) { // Latest
           const data = row.doc.data;
           /* eslint-disable no-underscore-dangle */
           data.phrasebookId = row.doc._id;
@@ -55,7 +56,7 @@ export const loadPhrasebook = (init, limit) => ((dispatch, getState) => {
           /* eslint-enable no-underscore-dangle */
 
           items = items.push(Immutable.fromJS(data));
-        } else {
+        } else { // Version 2
           const {
             _id, _rev,
             inputLang, outputLang,
