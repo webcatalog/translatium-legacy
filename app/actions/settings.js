@@ -39,16 +39,6 @@ const runAfterLanguageChange = language => ((dispatch, getState) => {
   dispatch(updateSetting('recentLanguages', recentLanguages.slice(0, 6)));
 });
 
-export const updateInputLang = value => ((dispatch) => {
-  dispatch(updateSetting('inputLang', value));
-  dispatch(runAfterLanguageChange(value));
-});
-
-export const updateOutputLang = value => ((dispatch) => {
-  dispatch(updateSetting('outputLang', value));
-  dispatch(runAfterLanguageChange(value));
-});
-
 export const swapLanguages = () => ((dispatch, getState) => {
   const { inputLang, outputLang } = getState().settings;
 
@@ -58,4 +48,24 @@ export const swapLanguages = () => ((dispatch, getState) => {
   dispatch(updateSetting('outputLang', inputLang));
 
   dispatch(runAfterLanguageChange());
+});
+
+export const updateInputLang = value => ((dispatch, getState) => {
+  if (getState().settings.outputLang === value) { // newInputLang === outputLang
+    dispatch(swapLanguages());
+    return;
+  }
+
+  dispatch(updateSetting('inputLang', value));
+  dispatch(runAfterLanguageChange(value));
+});
+
+export const updateOutputLang = value => ((dispatch, getState) => {
+  if (getState().settings.inputLang === value) { // newOutputLang === inputLang
+    dispatch(swapLanguages());
+    return;
+  }
+
+  dispatch(updateSetting('outputLang', value));
+  dispatch(runAfterLanguageChange(value));
 });
