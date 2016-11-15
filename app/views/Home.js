@@ -32,7 +32,7 @@ import ToggleStarBorder from 'material-ui/svg-icons/toggle/star-border';
 import ToggleStar from 'material-ui/svg-icons/toggle/star';
 import NavigationFullscreen from 'material-ui/svg-icons/navigation/fullscreen';
 import NavigationFullscreenExit from 'material-ui/svg-icons/navigation/fullscreen-exit';
-
+import ActionLightbulbOutline from 'material-ui/svg-icons/action/lightbulb-outline';
 
 import {
   isOutput,
@@ -184,9 +184,25 @@ class Home extends React.Component {
       },
       inputRoman: {
         color: textColor,
+        margin: '6px 0 0 0',
+        padding: 0,
+        fontSize: 14,
+      },
+      suggestion: {
+        color: textColor,
         margin: '12px 0 0 0',
         padding: 0,
         fontSize: 15,
+        height: 24,
+      },
+      suggestionSvg: {
+        float: 'left',
+        height: 24,
+        width: 24,
+      },
+      suggestionSpan: {
+        lineHeight: '24px',
+        float: 'left',
       },
       outputText: {
         fontSize: 16,
@@ -212,6 +228,8 @@ class Home extends React.Component {
       onTogglePhrasebookTouchTap,
       onSwapOutputButtonTouchTap,
       onBiggerTextButtonTouchTap,
+      onSuggestedInputLangTouchTap,
+      onSuggestedInputTextTouchTap,
     } = this.props;
 
     if (!output) return null;
@@ -278,6 +296,31 @@ class Home extends React.Component {
             {output.get('inputRoman') ? (
               <p style={styles.inputRoman}>{output.get('inputRoman')}</p>
             ) : null}
+
+            {output.get('suggestedInputLang') ? (
+              <p style={styles.suggestion}>
+                <ActionLightbulbOutline style={styles.suggestionSvg} />
+                <span style={styles.suggestionSpan}>
+                  <span>{strings.translateFrom}: </span>
+                  <a onTouchTap={() => onSuggestedInputLangTouchTap(output.get('suggestedInputLang'))}>
+                    {strings[output.get('suggestedInputLang')]}
+                  </a> ?
+                </span>
+              </p>
+            ) : null}
+
+            {output.get('suggestedInputText') ? (
+              <p style={styles.suggestion}>
+                <ActionLightbulbOutline style={styles.suggestionSvg} />
+                <span style={styles.suggestionSpan}>
+                  <span>{strings.didYouMean}: </span>
+                  <a onTouchTap={() => onSuggestedInputTextTouchTap(output.get('suggestedInputText'))}>
+                    {output.get('suggestedInputText')}
+                  </a> ?
+                </span>
+              </p>
+            ) : null}
+
             <Card initiallyExpanded style={styles.outputCard}>
               <CardHeader
                 title={strings[output.get('outputLang')]}
@@ -561,6 +604,8 @@ Home.propTypes = {
   onSwapOutputButtonTouchTap: React.PropTypes.func,
   onBiggerTextButtonTouchTap: React.PropTypes.func,
   onFullscreenButtonTouchTap: React.PropTypes.func,
+  onSuggestedInputLangTouchTap: React.PropTypes.func,
+  onSuggestedInputTextTouchTap: React.PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -643,6 +688,12 @@ const mapDispatchToProps = dispatch => ({
   },
   onFullscreenButtonTouchTap: () => {
     dispatch(toggleFullscreenInputBox());
+  },
+  onSuggestedInputLangTouchTap: (value) => {
+    dispatch(updateInputLang(value));
+  },
+  onSuggestedInputTextTouchTap: (text) => {
+    dispatch(updateInputText(text));
   },
 });
 

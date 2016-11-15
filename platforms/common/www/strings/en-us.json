@@ -17,6 +17,8 @@
 	"fullscreen": "Fullscreen",
 	"exitFullscreen": "Exit fullscreen",
 	"translate": "Translate",
+	"translateFrom": "Translate from",
+	"didYouMean": "Did you mean",
 
 	"errorOccured": "An error has occured.",
 	"cannotConnectToServer": "The app cannot to server. Please check your Internet connection.",

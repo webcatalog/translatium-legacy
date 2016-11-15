@@ -71,13 +71,14 @@ const translateShortText = (inputLang, outputLang, inputText) =>
       const outputDict = result[1];
 
       let suggestedInputLang;
-      if (result[8]) {
+      // sometimes, suggestedInputLang === inputLang so compare to ensure it's not duplicated.
+      if (result[8] && result[8][0][0] !== inputLang) {
         suggestedInputLang = result[8][0][0];
       }
       if (suggestedInputLang === 'zh-CN') suggestedInputLang = 'zh';
 
       let suggestedInputText;
-      if (result[7]) {
+      if (result[7] && result[7][1].length < 100) { // only keep suggestion if length < 1000
         suggestedInputText = result[7][1];
       }
       return {
