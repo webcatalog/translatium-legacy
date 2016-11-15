@@ -264,7 +264,7 @@ class Home extends React.Component {
             onTouchTap: () => onSwapOutputButtonTouchTap(
               output.get('outputLang'),
               output.get('inputLang'),
-              output.get('outputText')
+              output.get('outputText'),
             ),
           },
           {
@@ -703,5 +703,5 @@ Home.contextTypes = {
 };
 
 export default connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps, mapDispatchToProps,
 )(Home);

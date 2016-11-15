@@ -156,7 +156,7 @@ class Phrasebook extends React.Component {
 
                         onDeleteButtonTouchTap(
                           item.get('phrasebookId'),
-                          item.get('rev')
+                          item.get('rev'),
                         );
                       }}
                     >
@@ -213,5 +213,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps, mapDispatchToProps,
 )(Phrasebook);

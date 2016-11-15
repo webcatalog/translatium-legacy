@@ -78,13 +78,13 @@ export const stopRecording = () => ((dispatch, getState) => {
       inputText,
       recognizedText,
       selectionStart,
-      selectionEnd
+      selectionEnd,
     );
 
     dispatch(updateInputText(
       insertedText.text,
       insertedText.selectionStart,
-      insertedText.selectionEnd
+      insertedText.selectionEnd,
     ));
   };
 
@@ -217,7 +217,7 @@ export const startRecording = () => ((dispatch) => {
             dispatch(stopRecording());
           }, 10000);
           const encodingProfile = Windows.Media.MediaProperties.MediaEncodingProfile.createWav(
-                                    Windows.Media.MediaProperties.AudioEncodingQuality.auto
+                                    Windows.Media.MediaProperties.AudioEncodingQuality.auto,
                                   );
           encodingProfile.audio.sampleRate = 16000;
           encodingProfile.audio.channelCount = 1;

@@ -1,6 +1,6 @@
 const electron = require('electron');
 
-// const menu = require('./menu');
+const menu = require('./menu');
 
 const config = require('../config');
 
@@ -34,7 +34,7 @@ function createWindow() {
     mainWindow = null;
   });
 
-  // menu.init(mainWindow);
+  menu.init(mainWindow);
 }
 
 // This method will be called when Electron has finished

@@ -104,7 +104,7 @@ class Handwriting extends React.Component {
     onLoadSuggestions(
       this.clickInk,
       this.canvasContext.canvas.height,
-      this.canvasContext.canvas.width
+      this.canvasContext.canvas.width,
     );
   }
 
@@ -125,13 +125,13 @@ class Handwriting extends React.Component {
       inputText,
       (suggestions) ? suggestions[0].length : 1,
       selectionStart,
-      selectionEnd
+      selectionEnd,
     );
 
     onUpdateInputText(
       deletedText.text,
       deletedText.selectionStart,
-      deletedText.selectionEnd
+      deletedText.selectionEnd,
     );
 
     this.clearCanvas();
@@ -144,13 +144,13 @@ class Handwriting extends React.Component {
       inputText,
       ' ',
       selectionStart,
-      selectionEnd
+      selectionEnd,
     );
 
     onUpdateInputText(
       insertedText.text,
       insertedText.selectionStart,
-      insertedText.selectionEnd
+      insertedText.selectionEnd,
     );
 
     this.clearCanvas();
@@ -166,20 +166,20 @@ class Handwriting extends React.Component {
       inputText,
       suggestions ? suggestions[0].length : 0,
       selectionStart,
-      selectionEnd
+      selectionEnd,
     );
 
     const insertedText = insertAtCursor(
       deletedText.text,
       rText,
       deletedText.selectionStart,
-      deletedText.selectionEnd
+      deletedText.selectionEnd,
     );
 
     onUpdateInputText(
       insertedText.text,
       insertedText.selectionStart,
-      insertedText.selectionEnd
+      insertedText.selectionEnd,
     );
 
     this.clearCanvas();
@@ -244,7 +244,7 @@ class Handwriting extends React.Component {
     this.canvasContext.clearRect(
       0, 0,
       this.canvasContext.canvas.width,
-      this.canvasContext.canvas.height
+      this.canvasContext.canvas.height,
     );
     this.clickInk = [];
     this.clickX = [];
@@ -342,5 +342,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps, mapDispatchToProps,
 )(onTouchTapOutside(Handwriting));

@@ -32,7 +32,6 @@ export const loadPhrasebook = (init, limit) => ((dispatch, getState) => {
 
   phrasebookDb.allDocs(options)
     .then((response) => {
-      console.log(response.rows);
       response.rows.forEach((row) => {
         // Old data compatibility
         if (row.doc.inputObj) { // Version 1

@@ -1,20 +1,12 @@
 {
-  "name": "Modern-Translator",
-  "version": "6.0.0",
-  "description": "Break through any language barrier.",
+  "name": "mac",
+  "version": "1.0.0",
+  "description": "",
   "main": "main.js",
-  "engines": {
-    "node": "6.9.0"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Quang Lam",
-  "license": "Unlicensed",
-  "homepage": "https://moderntranslator.com",
-  "devDependencies": {
-    "electron": "^1.4.1",
-    "electron-osx-sign": "^0.3.2",
-    "electron-packager": "^8.0.0",
-    "minimist": "^1.2.0",
-    "rimraf": "^2.5.4"
-  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {}
 }

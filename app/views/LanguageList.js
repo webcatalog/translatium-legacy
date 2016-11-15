@@ -11,7 +11,6 @@ import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
 import { transparent } from 'material-ui/styles/colors';
 
-
 import {
   getInputLanguages,
   getOutputLanguages,
@@ -121,5 +120,5 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 export default connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps, mapDispatchToProps,
 )(LanguageList);

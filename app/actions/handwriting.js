@@ -17,7 +17,7 @@ export const resetSuggestions = () => ({
 export const loadSuggestions = (
   inputInk,
   canvasHeight,
-  canvasWidth
+  canvasWidth,
 ) => ((dispatch, getState) => {
   const { settings, home, handwriting } = getState();
   const { inputLang } = settings;
@@ -54,20 +54,20 @@ export const loadSuggestions = (
       inputText,
       suggestions ? suggestions[0].length : 0,
       selectionStart,
-      selectionEnd
+      selectionEnd,
     );
 
     const insertedText = insertAtCursor(
       deletedText.text,
       outputArr[0],
       deletedText.selectionStart,
-      deletedText.selectionEnd
+      deletedText.selectionEnd,
     );
 
     dispatch(updateInputText(
       insertedText.text,
       insertedText.selectionStart,
-      insertedText.selectionEnd
+      insertedText.selectionEnd,
     ));
 
     dispatch({

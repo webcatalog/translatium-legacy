@@ -49,7 +49,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
                 new Windows.Storage.Streams.InMemoryRandomAccessStream();
               Windows.Graphics.Imaging.BitmapEncoder.createAsync(
                 Windows.Graphics.Imaging.BitmapEncoder.pngEncoderId,
-                inMemoryRandomAccessStream
+                inMemoryRandomAccessStream,
               )
               .then((encoder) => {
                 // Set the pixel data in the encoder
@@ -61,7 +61,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
                   96,
                   96,
                   new Uint8Array(
-                    context.getImageData(0, 0, canvas.width, canvas.height).data
+                    context.getImageData(0, 0, canvas.width, canvas.height).data,
                   ));
 
                 // Go do the encoding
@@ -69,7 +69,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
               })
               .then(() => {
                 const blob = MSApp.createBlobFromRandomAccessStream(
-                  'image/jpeg', inMemoryRandomAccessStream
+                  'image/jpeg', inMemoryRandomAccessStream,
                 );
                 resolve({
                   blob,

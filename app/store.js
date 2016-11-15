@@ -11,8 +11,8 @@ const configureStore = (initialState) => {
     initialState,
     applyMiddleware(
       thunkMiddleware,
-      routerMiddleware(hashHistory)
-    )
+      routerMiddleware(hashHistory),
+    ),
   );
 
   return store;

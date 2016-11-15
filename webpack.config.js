@@ -28,7 +28,7 @@ const common = {
         include: APP_DIR,
         loader: 'babel',
         query: {
-          presets: ['es2015', 'react'],
+          presets: ['es2015', 'es2017', 'react'],
         },
       },
     ],

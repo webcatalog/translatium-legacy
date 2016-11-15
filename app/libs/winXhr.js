@@ -14,7 +14,7 @@ const winXhr = ({ type, uri, responseType, data, headers }) => {
   const httpUri = new Windows.Foundation.Uri(uri);
 
   const httpMethod = new Windows.Web.Http.HttpMethod(
-    Windows.Web.Http.HttpMethod[type]
+    Windows.Web.Http.HttpMethod[type],
   );
 
   const request = new Windows.Web.Http.HttpRequestMessage(httpMethod, httpUri);
@@ -57,7 +57,7 @@ const winXhr = ({ type, uri, responseType, data, headers }) => {
       })
       .done(
         (res) => { resolve(res); },
-        (err) => { reject(err); }
+        (err) => { reject(err); },
       );
   });
 

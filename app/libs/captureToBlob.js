@@ -14,7 +14,7 @@ const captureToBlob = () =>
             return file.openAsync(Windows.Storage.FileAccessMode.read)
               .then((stream) => {
                 const blob = window.MSApp.createBlobFromRandomAccessStream(
-                  'image/jpeg', stream
+                  'image/jpeg', stream,
                 );
                 resolve({
                   fileName: 'image.jpg',

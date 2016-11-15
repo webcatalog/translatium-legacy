@@ -14,7 +14,7 @@ const textToSpeechShortText = (lang, text, idx, total) =>
       const uri = encodeURI(
         `https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}`
         + `&q=${text}&textlen=${text.length}&idx=${idx}&total=${total}`
-        + `&client=t&prev=input&tk=${token}`
+        + `&client=t&prev=input&tk=${token}`,
       );
 
       switch (process.env.PLATFORM) {
@@ -41,7 +41,7 @@ const textToSpeechShortText = (lang, text, idx, total) =>
             player.play();
             player.onended = () => resolve();
             player.onerror = () => reject();
-          }
+          },
         );
       }
       return Promise.reject(new Error('Fail to get blob'));

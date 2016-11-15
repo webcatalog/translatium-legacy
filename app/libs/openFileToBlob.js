@@ -27,7 +27,7 @@ const openFileToBlob = () =>
               .then((stream) => {
                 const fileExt = file.fileType.substring(1);
                 const blob = window.MSApp.createBlobFromRandomAccessStream(
-                  getFileType(fileExt), stream
+                  getFileType(fileExt), stream,
                 );
                 resolve({
                   fileName: `image.${fileExt}`,
@@ -68,7 +68,6 @@ const openFileToBlob = () =>
             });
           } else {
             resolve(null);
-            return;
           }
         });
       }

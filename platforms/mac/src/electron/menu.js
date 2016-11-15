@@ -37,27 +37,11 @@ function getMenuTemplate(mainWindow) {
       label: 'View',
       submenu: [
         {
-          label: 'Full Screen',
-          type: 'checkbox',
+          label: 'Toggle Full Screen',
           accelerator: process.platform === 'darwin'
             ? 'Ctrl+Command+F'
             : 'F11',
           click: () => mainWindow.setFullScreen(true),
-        },
-        {
-          type: 'separator',
-        },
-        {
-          label: 'Developer',
-          submenu: [
-            {
-              label: 'Developer Tools',
-              accelerator: process.platform === 'darwin'
-                ? 'Alt+Command+I'
-                : 'Ctrl+Shift+I',
-              click: () => mainWindow.toggleDevTools(),
-            },
-          ],
         },
       ],
     },
@@ -67,35 +51,23 @@ function getMenuTemplate(mainWindow) {
       submenu: [
         {
           label: `Learn more about ${config.APP_NAME}`,
-          click: () => electron.shell.openExternal(config.HOME_PAGE_URL),
+          click: () => electron.shell.openExternal(config.APP_URL),
         },
         {
           label: 'Report an Issue...',
-          click: () => electron.shell.openExternal(config.SUPPORT_EMAIL),
+          click: () => electron.shell.openExternal(`mailto:${config.SUPPORT_EMAIL}`),
         },
       ],
     },
   ];
 
   if (process.platform === 'darwin') {
-    // Add WebTorrent app menu (OS X)
     template.unshift({
       label: config.APP_NAME,
       submenu: [
         {
           label: `About ${config.APP_NAME}`,
           role: 'about',
-        },
-        {
-          type: 'separator',
-        },
-        {
-          type: 'separator',
-        },
-        {
-          label: 'Services',
-          role: 'services',
-          submenu: [],
         },
         {
           type: 'separator',
@@ -146,17 +118,6 @@ function getMenuTemplate(mainWindow) {
     });
   }
 
-  // On Windows and Linux, open dialogs do not support selecting both files and
-  // folders and files, so add an extra menu item so there is one for each type.
-  if (process.platform === 'linux' || process.platform === 'win32') {
-    // Help menu (Windows, Linux)
-    template[4].submenu.push(
-      {
-        label: `About ${config.APP_NAME}`,
-        click: () => { /* windows.about.init() */ },
-      }
-    );
-  }
   // Add "File > Quit" menu item so Linux distros where the system tray icon is
   // missing will have a way to quit the app.
   if (process.platform === 'linux') {

@@ -136,7 +136,7 @@ class Ocr extends React.Component {
           <MenuItem
             primaryText="Display text only"
             onTouchTap={() => onTextOnlyMenuItemTouchTap(
-              inputLang, outputLang, ocr.get('inputText'), ocr.get('outputText')
+              inputLang, outputLang, ocr.get('inputText'), ocr.get('outputText'),
             )}
           />
         </IconMenu>
