@@ -3,6 +3,7 @@ const path = require('path');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const BomPlugin = require('webpack-utf8-bom');
 
 const BUILD_DIR = path.resolve(__dirname, `platforms/${process.env.PLATFORM}/www`);
 const APP_DIR = path.resolve(__dirname, 'app');
@@ -65,6 +66,7 @@ const config = (() => {
             },
           }),
           new webpack.optimize.AggressiveMergingPlugin(),
+          new BomPlugin(true),
         ],
       });
     case 'dev-mac':

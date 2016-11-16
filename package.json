@@ -53,6 +53,7 @@
     "gulp-bom": "^1.0.0",
     "gulp-bro": "^0.3.1",
     "gulp-rename": "^1.2.2",
-    "json-loader": "^0.5.4"
+    "json-loader": "^0.5.4",
+    "webpack-utf8-bom": "^1.0.3"
   }
 }

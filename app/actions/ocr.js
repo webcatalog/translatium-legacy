@@ -48,7 +48,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
               const inMemoryRandomAccessStream =
                 new Windows.Storage.Streams.InMemoryRandomAccessStream();
               Windows.Graphics.Imaging.BitmapEncoder.createAsync(
-                Windows.Graphics.Imaging.BitmapEncoder.pngEncoderId,
+                Windows.Graphics.Imaging.BitmapEncoder.jpegEncoderId,
                 inMemoryRandomAccessStream,
               )
               .then((encoder) => {
@@ -98,6 +98,8 @@ export const loadImage = fromCamera => (dispatch, getState) => {
 
       const { blob, fileName } = result;
 
+      console.log(blob);
+
       const formData = new FormData();
       formData.append('apikey', '0088228ab088957');
       formData.append('file', blob, fileName);
@@ -109,7 +111,11 @@ export const loadImage = fromCamera => (dispatch, getState) => {
         body: formData,
       })
       .then(response => response.json())
-      .then(({ ParsedResults }) => {
+      .then((t) => {
+        console.log(t);
+
+        const { ParsedResults } = t;
+
         if (ParsedResults[0].FileParseExitCode !== 1) {
           dispatch({
             type: UPDATE_OCR,
@@ -162,7 +168,9 @@ export const loadImage = fromCamera => (dispatch, getState) => {
             dispatch(push('/ocr'));
           });
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
+
         dispatch({
           type: UPDATE_OCR,
           ocr: null,

@@ -126,7 +126,7 @@ export const stopRecording = () => ((dispatch, getState) => {
                   const outputText = JSON.parse(xmlStr).result[0].alternative[0].transcript;
                   return outputText;
                 }
-                return Promise.reject(new Error('JSON is not valid'));
+                return '';
               })
               .then(insertText)
               .then(() => {

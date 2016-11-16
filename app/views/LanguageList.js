@@ -6,6 +6,7 @@ import { goBack } from 'react-router-redux';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import ActionHistory from 'material-ui/svg-icons/action/history';
 import { List, ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
@@ -37,7 +38,7 @@ class LanguageList extends React.Component {
   }
 
   render() {
-    const { type, onCloseTouchTap, onLanguageTouchTap } = this.props;
+    const { type, recentLanguages, onCloseTouchTap, onLanguageTouchTap } = this.props;
     const styles = this.getStyles();
 
     let languages;
@@ -70,6 +71,24 @@ class LanguageList extends React.Component {
           onLeftIconButtonTouchTap={onCloseTouchTap}
         />
         <div style={styles.listContainer}>
+          <List>
+            {recentLanguages.map((langId, i) => (
+              <ListItem
+                key={`lang_recent_${langId}`}
+                primaryText={strings[langId]}
+                leftIcon={i === 0 ? (
+                  <Avatar
+                    icon={<ActionHistory />}
+                    backgroundColor={transparent}
+                    style={{ left: 0, top: -8 }}
+                  />
+                ) : null}
+                insetChildren={i > 0}
+                onTouchTap={() => onLanguageTouchTap(type, langId)}
+              />
+            ))}
+            <Divider inset />
+          </List>
           {Object.keys(groups).map(groupId => [(
             <List key={groupId}>
               {groups[groupId].map((langId, i) => (
@@ -94,6 +113,7 @@ class LanguageList extends React.Component {
 }
 
 LanguageList.propTypes = {
+  recentLanguages: React.PropTypes.arrayOf(React.PropTypes.string),
   type: React.PropTypes.string,
   onCloseTouchTap: React.PropTypes.func,
   onLanguageTouchTap: React.PropTypes.func,

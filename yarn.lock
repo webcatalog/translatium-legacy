@@ -4508,7 +4508,13 @@ webpack-stream@^3.2.0:
     vinyl "^1.1.0"
     webpack "^1.12.9"
 
-webpack@^1.12.9, webpack@^1.13.3:
+webpack-utf8-bom:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/webpack-utf8-bom/-/webpack-utf8-bom-1.0.3.tgz#75889c0fdefd627ced2763445865ce08102cdd74"
+  dependencies:
+    webpack "^1.12.13"
+
+webpack@^1.12.13, webpack@^1.12.9, webpack@^1.13.3:
   version "1.13.3"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-1.13.3.tgz#e79c46fe5a37c5ca70084ba0894c595cdcb42815"
   dependencies:
