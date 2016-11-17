@@ -5,6 +5,7 @@
 3. Windows 10: Image translation no longer requires to install OCR packages.
 4. Minor bug fixes & improvements.
 
+---
 
 # 5.x
 
