@@ -55,7 +55,7 @@ class App extends React.Component {
       const systemNavigationManager = Windows.UI.Core.SystemNavigationManager.getForCurrentView();
       systemNavigationManager.onbackrequested = (e) => {
         const { bottomNavigationSelectedIndex } = this.props;
-        if (bottomNavigationSelectedIndex > -1) {
+        if (bottomNavigationSelectedIndex < 0) {
           onBackClick();
           /* eslint-disable */
           e.handled = true;
