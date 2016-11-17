@@ -34,7 +34,7 @@ function createWindow() {
     mainWindow = null;
   });
 
-  menu.init(mainWindow);
+  // menu.init(mainWindow);
 }
 
 // This method will be called when Electron has finished

@@ -1,7 +1,7 @@
 /* global strings */
 import React from 'react';
 import { connect } from 'react-redux';
-import { replace } from 'react-router-redux';
+import { replace, goBack } from 'react-router-redux';
 
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
@@ -49,6 +49,19 @@ class App extends React.Component {
   componentDidMount() {
     if (process.env.PLATFORM === 'windows') {
       this.setAppTitleBar(this.props.primaryColorId);
+
+      const { onBackClick } = this.props;
+
+      const systemNavigationManager = Windows.UI.Core.SystemNavigationManager.getForCurrentView();
+      systemNavigationManager.onbackrequested = (e) => {
+        const { bottomNavigationSelectedIndex } = this.props;
+        if (bottomNavigationSelectedIndex > -1) {
+          onBackClick();
+          /* eslint-disable */
+          e.handled = true;
+          /* eslint-enable */
+        }
+      };
     }
 
     window.addEventListener('resize', this.props.onResize);
@@ -206,6 +219,7 @@ App.propTypes = {
   bottomNavigationSelectedIndex: React.PropTypes.number,
   onResize: React.PropTypes.func,
   onBottomNavigationItemClick: React.PropTypes.func,
+  onBackClick: React.PropTypes.func,
 };
 
 App.childContextTypes = {
@@ -247,6 +261,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onBottomNavigationItemClick: (pathname) => {
     dispatch(replace(pathname));
+  },
+  onBackClick: () => {
+    dispatch(goBack());
   },
 });
 
