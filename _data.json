@@ -5,8 +5,11 @@
   "support": {
     "title": "Support"
   },
-  "changelog": {
-    "title": "What's New"
+  "release-notes": {
+    "title": "Release Notes"
+  },
+  "privacy": {
+    "title": "Privacy Policy"
   },
   "languages": {
     "title": "Supported Languages",
