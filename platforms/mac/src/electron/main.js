@@ -1,3 +1,7 @@
+/* eslint import/no-unresolved: [2, { ignore: ['electron'] }] */
+/* eslint-disable import/no-extraneous-dependencies */
+
+
 const electron = require('electron');
 
 const menu = require('./menu');

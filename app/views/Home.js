@@ -40,6 +40,7 @@ import {
   isVoiceRecognitionSupported,
   isHandwritingSupported,
   isOcrSupported,
+  toCountryRemovedLanguage,
 } from '../libs/languageUtils';
 
 import { swapLanguages, updateInputLang, updateOutputLang } from '../actions/settings';
@@ -329,7 +330,7 @@ class Home extends React.Component {
                 actAsExpander={hasDict}
                 showExpandableButton={hasDict}
               />
-              <CardText style={styles.outputText}>
+              <CardText style={styles.outputText} lang={toCountryRemovedLanguage(output.get('outputLang'))}>
                 {output.get('outputText')}
               </CardText>
               {output.get('outputRoman') ? (
@@ -499,6 +500,7 @@ class Home extends React.Component {
         />
         <Paper zDepth={2} style={styles.inputContainer}>
           <textarea
+            lang={toCountryRemovedLanguage(inputLang)}
             style={styles.textarea}
             placeholder={strings.typeSomethingHere}
             autoComplete="off"

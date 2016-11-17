@@ -11,8 +11,11 @@ import LinearProgress from 'material-ui/LinearProgress';
 import IconButton from 'material-ui/IconButton';
 import ToggleStar from 'material-ui/svg-icons/toggle/star';
 
+import { toCountryRemovedLanguage } from '../libs/languageUtils';
+
 import { deletePhrasebookItem, loadPhrasebook } from '../actions/phrasebook';
 import { loadOutput } from '../actions/home';
+
 
 class Phrasebook extends React.Component {
   componentDidMount() {
@@ -140,8 +143,18 @@ class Phrasebook extends React.Component {
                   onTouchTap={() => onItemTouchTap(item)}
                 >
                   <div style={styles.paperLeftContainer}>
-                    <p style={styles.title}>{item.get('outputText')}</p>
-                    <p style={styles.subtitle}>{item.get('inputText')}</p>
+                    <p
+                      style={styles.title}
+                      lang={toCountryRemovedLanguage(item.get('outputLang'))}
+                    >
+                      {item.get('outputText')}
+                    </p>
+                    <p
+                      style={styles.subtitle}
+                      lang={toCountryRemovedLanguage(item.get('inputLang'))}
+                    >
+                      {item.get('inputText')}
+                    </p>
                   </div>
                   <div style={styles.paperRightContainer}>
                     <IconButton

@@ -170,3 +170,19 @@ body {
 		opacity: 0;
 	}
 }
+
+*:lang(ar),
+*:lang(dv),
+*:lang(fa),
+*:lang(he),
+*:lang(prs),
+*:lang(ps),
+*:lang(sd),
+*:lang(syr),
+*:lang(ug),
+*:lang(ur),
+*:lang(am),
+*:lang(sd),
+*:lang(ps) {
+  direction: rtl;
+}
