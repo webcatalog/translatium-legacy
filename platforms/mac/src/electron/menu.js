@@ -1,3 +1,6 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/no-extraneous-dependencies */
+
 let menu;
 
 const electron = require('electron');
