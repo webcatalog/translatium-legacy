@@ -1,32 +1,26 @@
-# What's New
+# 6.x
+#### 6.0 (16th November 2016)
+1. Brand new Material Design.
+2. Now available on Mac App Store.
+3. Windows 10: Image translation no longer requires to install OCR packages.
+4. Minor bug fixes & improvements.
 
-#### 3.10.0 (5th August 2016)
-1. Bring the app back to work!
-2. Add new languages & dialects.
-3. Remove Cortana.
-4. Only English and Vietnamese localizations are supported. Others are removed.
-5. Remove "Use HTTPS" options. From this version, the app always uses HTTPS.
-6. Remove Bing Translator.
-7. All features are now unlocked on Windows 8.1 and Windows Phone 8.1.
 
----
+# 5.x
 
 #### 5.2.1 (21st July 2016)
 1. Bring the app back to work!
 
 ---
 
-
 #### 5.2.0 (11th July 2016)
 1. Image translation (OCR) is more stable and supports more languages.
 
 ---
 
-
 #### 5.1.2 (7th July 2016)
 Please apologize me for too many updates in such a short time. :(
 1. Fixed: Language list is not sorted by alphabet.
-2. [Lite version of Modern Translator](https://www.microsoft.com/store/apps/9nblggh5z36t) is now available on Windows Store with the same limitations as the trial one.
 
 ---
 
@@ -51,6 +45,8 @@ Please apologize me for too many updates in such a short time. :(
 
 ---
 
+# 4.x
+
 #### 4.7.0 (18th June 2016)
 1. Fixed: Text-to-speech's not working on mobile.
 2. Fixed: Cannot close handwriting & speech panel.
@@ -60,27 +56,22 @@ Please apologize me for too many updates in such a short time. :(
 
 ---
 
-#### 3.9.14 & 4.6.1 (30th May 2016)
-1. Critical bug fix. (The app may not work properly on **mobile** without this update).
-
----
-
 #### 4.6.0 (29th May 2016)
 1. Critical bug fix. (The app may not work properly without this update).
 2. Improve speed & stability.
 
 ---
 
-#### 3.9.13 (29th May 2016)
-1. Critical bug fix. (The app may not work properly without this update).
-
----
-
-#### 3.9.12 & 4.5.3 (12th May 2016)
+### 4.5.3 (12th May 2016)
 1. Critical bug fix (The app won't continue working without this update).
 
 ---
 
+#### 4.5.2 (29th January 2016)
+1. Because of the declining of Windows, the lack of supports from Microsoft and the unstable IAP system of Windows 10, the app is no longer free (without free trial at the moment). If you have already downloaded the app before 29/01/2016, you can continue to use Modern Translator and receive new updates. Still, we are considering to release a Lite version and Free trial in the future. We are really sorry for this change.
+2. Removed Pinyin from Cantonese translation (Jyutping will take time for us to implement). (Thanks to a few Hong Kong users for the suggestion).
+
+---
 
 #### 4.5.2 (29th January 2016)
 1. Because of the declining of Windows, the lack of supports from Microsoft and the unstable IAP system of Windows 10, the app is no longer free (without free trial at the moment). If you have already downloaded the app before 29/01/2016, you can continue to use Modern Translator and receive new updates. Still, we are considering to release a Lite version and Free trial in the future. We are really sorry for this change.
@@ -88,17 +79,11 @@ Please apologize me for too many updates in such a short time. :(
 
 ---
 
-
-#### 4.5.2 (29th January 2016)
-1. Because of the declining of Windows, the lack of supports from Microsoft and the unstable IAP system of Windows 10, the app is no longer free (without free trial at the moment). If you have already downloaded the app before 29/01/2016, you can continue to use Modern Translator and receive new updates. Still, we are considering to release a Lite version and Free trial in the future. We are really sorry for this change.
-2. Removed Pinyin from Cantonese translation (Jyutping will take time for us to implement). (Thanks to a few Hong Kong users for the suggestion).
-
----
-
-#### 4.5.1, 3.9.11 (19th January 2016)
+#### 4.5.1 (19th January 2016)
 1. Bug fixes
 
 ---
+
 
 #### 4.5.0 (28th December 2015)
 1. Fixed: Language List is not sorted correctly.
@@ -114,12 +99,12 @@ Please apologize me for too many updates in such a short time. :(
 
 ---
 
-#### 4.4.4, 3.9.10 (19th December 2015)
+#### 4.4.4 (19th December 2015)
 1. Fixed: Text-to-speech is not working.
 
 ---
 
-#### 4.4.3, 3.9.9 (19th December 2015)
+#### 4.4.3 (19th December 2015)
 1. Fixed: Unable to connect to Google Translate.
 
 ---
@@ -131,20 +116,10 @@ We're really sorry for releasing too many bad updates in one single day. If you 
 
 ---
 
-#### 3.9.8 (16th December 2015)
-1. Ads are removed to ensure user experience. (only Windows 8.1 & Windows Phone 8.1)
-
----
-
 #### 4.4.0 (13th December 2015)
 1. Personalization is now available for all users with IAP to remove ads. All paid users remain ad-free.
 2. Fixed: Too long app name on Live Tile.
 3. Fixed: Language is not touchable on Windows 10 mobile.
-
----
-
-#### 3.9.7 (13th December 2015)
-1. Personalization is now available for all users with IAP to remove ads. All paid users remain ad-free.
 
 ---
 
@@ -158,11 +133,6 @@ We're really sorry for releasing too many bad updates in one single day. If you 
 1. ON/OFF, minor details are now fully localized.
 2. Fixed: Crash after rating
 3. Small improvements
-
----
-
-#### 3.9.5 (2nd December 2015)
-1. Portuguese Localization
 
 ---
 
@@ -184,13 +154,6 @@ We're really sorry for releasing too many bad updates in one single day. If you 
 
 ---
 
-#### 3.9.3 (22nd November 2015)
-1. Rebranding "Modern Translate" => "Modern Translator"
-2. Rebranding "Modern Translate Team" => "Modern Lab"
-3. Fixed: Missing icons in language tiles
-
----
-
 #### 4.2.5 (18th November 2015)
 1. Bug fixes
 2. Speed + UI improvements
@@ -205,21 +168,9 @@ We're really sorry for releasing too many bad updates in one single day. If you 
 
 ---
 
-#### 3.9.2 (4th November 2015)
-1. Bug fixes
-
----
-
 #### 4.1.5 (3rd November 2015)
 1. Better implement for users who have purchased or received the app before March 29, 2015, to upgrade to PRO for free.
 2. Swap button
-
----
-
-#### 3.9.1 (3rd November 2015)
-1. Better implement for users who have purchased or received the app before March 29, 2015, to upgrade to PRO for free.
-2. Display language is removed from app settings. Languages will be chosen automatically.
-3. App settings won't be synced between devices anymore.
 
 ---
 
@@ -227,7 +178,6 @@ We're really sorry for releasing too many bad updates in one single day. If you 
 1. Bug fixes
 
 ---
-
 
 #### 4.1.1 (2nd November 2015)
 1. Fixed: Crash on startup after updating.
@@ -255,12 +205,6 @@ BROKEN CHANGES:
 
 ---
 
-#### 3.9.0 (31st October 2015)
-1. Asking-to-upgrade dialog removed.
-2. Branding changes (logo + PREMIUM -> PRO)
-
----
-
 #### 4.0.8 RC Preview (30th October 2015)
 1. Bug fixes and performance improvements.
 2. Mobile UI/UX improvements.
@@ -280,13 +224,6 @@ BROKEN CHANGES:
 
 ---
 
-#### 3.8.9 (25th October 2015)
-1. Fixed: Unable to connect to Google Text-to-speech (TTS)
-2. Fixed: Language-shortcut tile is not working. *Added tiles will be automatically removed*.
-3. Remove unnecessary capabilities
-
----
-
 #### 4.0.2 Preview (19th October 2015)
 1. OCR (Camera translation) is back
 2. New "About" & "Upgrade to Premium" page
@@ -299,6 +236,96 @@ BROKEN CHANGES:
 1. Faster & lighter (25.31 MB - 75.62 MB to < 1 MB)
 2. New design (*aka* Windows 10 design)
 3. New custom colors
+
+---
+
+# 3.x
+
+#### 3.10.0 (5th August 2016)
+1. Bring the app back to work!
+2. Add new languages & dialects.
+3. Remove Cortana.
+4. Only English and Vietnamese localizations are supported. Others are removed.
+5. Remove "Use HTTPS" options. From this version, the app always uses HTTPS.
+6. Remove Bing Translator.
+7. All features are now unlocked on Windows 8.1 and Windows Phone 8.1.
+
+---
+
+#### 3.9.14 & 4.6.1 (30th May 2016)
+1. Critical bug fix. (The app may not work properly on **mobile** without this update).
+
+---
+
+#### 3.9.13 (29th May 2016)
+1. Critical bug fix. (The app may not work properly without this update).
+
+---
+
+#### 3.9.12 (12th May 2016)
+1. Critical bug fix (The app won't continue working without this update).
+
+---
+
+#### 3.9.11 (19th January 2016)
+1. Bug fixes
+
+---
+
+#### 3.9.10 (19th December 2015)
+1. Fixed: Text-to-speech is not working.
+
+---
+
+#### 3.9.9 (19th December 2015)
+1. Fixed: Unable to connect to Google Translate.
+
+---
+
+#### 3.9.8 (16th December 2015)
+1. Ads are removed to ensure user experience. (only Windows 8.1 & Windows Phone 8.1)
+
+---
+
+#### 3.9.7 (13th December 2015)
+1. Personalization is now available for all users with IAP to remove ads. All paid users remain ad-free.
+
+---
+
+#### 3.9.5 (2nd December 2015)
+1. Portuguese Localization
+
+---
+
+#### 3.9.3 (22nd November 2015)
+1. Rebranding "Modern Translate" => "Modern Translator"
+2. Rebranding "Modern Translate Team" => "Modern Lab"
+3. Fixed: Missing icons in language tiles
+
+---
+
+#### 3.9.2 (4th November 2015)
+1. Bug fixes
+
+---
+
+#### 3.9.1 (3rd November 2015)
+1. Better implement for users who have purchased or received the app before March 29, 2015, to upgrade to PRO for free.
+2. Display language is removed from app settings. Languages will be chosen automatically.
+3. App settings won't be synced between devices anymore.
+
+---
+
+#### 3.9.0 (31st October 2015)
+1. Asking-to-upgrade dialog removed.
+2. Branding changes (logo + PREMIUM -> PRO)
+
+---
+
+#### 3.8.9 (25th October 2015)
+1. Fixed: Unable to connect to Google Text-to-speech (TTS)
+2. Fixed: Language-shortcut tile is not working. *Added tiles will be automatically removed*.
+3. Remove unnecessary capabilities
 
 ---
 

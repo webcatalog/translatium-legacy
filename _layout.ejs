@@ -13,20 +13,14 @@
     <link rel="stylesheet" href="/css/app.css">
   </head>
   <body>
-    <section class="hero is-dark is-transparent">
+    <section class="hero is-success">
       <div class="hero-head">
         <div class="container">
           <nav class="nav">
             <div class="nav-left">
               <a class="nav-item" href="/">
                 <img src="/images/b.png" alt="Modern Translator: Break through any language barrier">
-              </a>
-            </div>
-            <div class="nav-center">
-              <a class="nav-item" href="https://twitter.com/mdrtranslator/">
-                <span class="icon">
-                  <i class="fa fa-twitter"></i>
-                </span>
+                <span>Modern Translator</span>
               </a>
             </div>
             <span id="nav-toggle" class="nav-toggle">
@@ -35,44 +29,33 @@
               <span></span>
             </span>
             <div id="nav-menu" class="nav-right nav-menu">
-              <a class="nav-item<%- current.source == 'index' ? ' is-active' : '' %>" href="/">Features</a>
-              <a class="nav-item<%- current.source == 'changelog' ? ' is-active' : '' %>" href="/changelog">What's New</a>
+              <a class="nav-item<%- current.source == 'index' ? ' is-active' : '' %>" href="/">Homes</a>
+              <a class="nav-item<%- current.source == 'release-notes' ? ' is-active' : '' %>" href="/release-notes">Release Notes</a>
+              <a class="nav-item<%- current.source == 'release-notes' ? ' is-active' : '' %>" href="/languages">Supported Languages</a>
               <a class="nav-item<%- current.source == 'support' ? ' is-active' : '' %>" href="/support">Support</a>
               <a class="nav-item" href="https://www.dropbox.com/sh/4355wn181tfi38d/AADyCId09GiLrd18ezv6YmI6a?dl=0" target="_blank">Presskit</a>
             </div>
           </nav>
         </div>
       </div>
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <p class="title">
-            Modern Translator
-          </p>
-          <p class="subtitle">
-            BREAK THROUGH ANY LANGUAGE BARRIER
-          </p>
-          <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing">
-            <img class="download-button" src="/images/microsoft-store.png" alt="Download from Microsoft Store">
-          </a>
-        </div>
-      </div>
     </section>
-    <section>
-      <div class="container custom-container">
-        <div class="content">
-          <%- yield %>
-        </div>
-      </div>
-    </section>
+    <%- yield %>
     <footer class="footer">
       <div class="container">
         <div class="content has-text-centered">
+          <p>
+            <a href="/">Homes</a> |
+            <a href="/release-notes">Release Notes</a> |
+            <a href="/languages">Supported Languages</a> |
+            <a href="/support">Support</a> |
+            <a href="https://www.dropbox.com/sh/4355wn181tfi38d/AADyCId09GiLrd18ezv6YmI6a?dl=0" target="_blank">Presskit</a> |
+          </p>
           <p>
             A product of <a href="https://quanglam.me/">Quang Lam</a>.
             Made with <span style="color: #F44336">&hearts;</span> in <strong>Vietnam</strong>.
           </p>
           <p>
-            © 2015 - 2016 Modern Translator. All rights reserved.
+            © 2014 - 2016 Modern Translator. All rights reserved.
           </p>
         </div>
       </div>

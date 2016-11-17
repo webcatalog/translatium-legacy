@@ -20,20 +20,19 @@ $yellow: #FFEB3B
 @import "../_node_modules/bulma/sass/layout/section"
 
 .footer
-  background-color: transparent
+  background-color: whitesmoke
   padding: 40px 20px 80px
-  p, strong
-    color: #FFF
-  a
-    color: #FFF !important
-    border-bottom: 1px solid #FFF
 
-body
+.hero.is-success
   background: url("/images/overlay.png"), linear-gradient(45deg, #388E3C 15%, #43A047 85%)
-
 
 .nav-item img
   padding-left: 12px
+  margin-right: 6px
+
+.image.is-screenshot img
+  width: 600px
+  margin: 0 auto
 
 @media screen and (min-width: 769px)
   .nav-right
@@ -42,6 +41,7 @@ body
 .download-button
   height: 52px
   width: auto
+  border-radius: 6px
 
 .press
   img
@@ -50,9 +50,3 @@ body
 
 .is-transparent
   background: none !important
-
-.custom-container
-  background-color: #FFF
-  border-radius: 4px
-  padding: 40px 20px
-  max-width: 1024px

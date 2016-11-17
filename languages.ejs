@@ -1,95 +1,110 @@
-<h1 class="title is-centered">Supported Languages</h1>
-<div class="columns">
-  <div class="column is-centered">
-    <span class="icon is-small">
-      <i class="fa fa-headphones"></i>
-    </span>
-    Text-to-speech
+<section class="hero is-success">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <p class="title">
+        Supported Languages
+      </p>
+    </div>
   </div>
-  <div class="column is-centered">
-    <span class="icon is-small">
-      <i class="fa fa-microphone"></i>
-    </span>
-    Speech recognition
-  </div>
-  <div class="column is-centered">
-    <span class="icon is-small">
-      <i class="fa fa-camera"></i>
-    </span>
-    Camera translation (OCR)
-  </div>
-  <div class="column is-centered">
-    <span class="icon is-small">
-      <i class="fa fa-pencil"></i>
-    </span>
-    Handwriting recognition
-  </div>
-</div>
-<table class="table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Code</th>
-      <th>Language</th>
-      <th>Supported Technologies</th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <th>#</th>
-      <th>Code</th>
-      <th>Language</th>
-      <th>Supported Technologies</th>
-    </tr>
-  </tfoot>
-  <tbody>
-    <%
-      function countryRemoved(lang) {
-        var i = lang.indexOf("-");
-        if (i > 0) return lang.slice(0, i);
-        return lang;
-      }
-      function ocrStandardlized(lang) {
-        if (["zh-CN", "zh-HK"].indexOf(lang) > -1) return "zh-CN";
-        if (["zh-TW", "zh-YUE"].indexOf(lang) > -1) return "zh-TW";
-        if (lang == "zh") return "zh-CN";
-        if (lang.length > 2) return lang.substring(0, 2);
-        return lang;
-      }
+</section>
 
-      var languageKeys = Object.keys(languages);
-      languageKeys.sort(function (x, y) {
-        return languages[x].localeCompare(languages[y])
-      })
-    %>
-    <% languageKeys.forEach(function(key, i) { %>
-      <tr>
-        <td><%= i+1 %></td>
-        <td><%= key %></td>
-        <td><%= languages[key] %></td>
-        <td>
-          <% if (listenSupported.indexOf(countryRemoved(key)) > -1) { %>
-            <span class="icon is-small">
-              <i class="fa fa-headphones"></i>
-            </span>
-          <% } %>
-          <% if (speakSupported.indexOf(countryRemoved(key)) > -1) { %>
+<section class="section">
+  <div class="container custom-container">
+    <div class="content">
+      <div class="columns">
+        <div class="column is-centered">
+          <span class="icon is-small">
+            <i class="fa fa-headphones"></i>
+          </span>
+          Text-to-speech
+        </div>
+        <div class="column is-centered">
           <span class="icon is-small">
             <i class="fa fa-microphone"></i>
           </span>
-          <% } %>
-          <% if (ocrSupported.indexOf(ocrStandardlized(key)) > -1) { %>
+          Speech recognition
+        </div>
+        <div class="column is-centered">
           <span class="icon is-small">
             <i class="fa fa-camera"></i>
           </span>
-          <% } %>
-          <% if (writeNotSupported.indexOf(key) == -1) { %>
+          Camera translation (OCR)
+        </div>
+        <div class="column is-centered">
           <span class="icon is-small">
             <i class="fa fa-pencil"></i>
           </span>
-          <% } %>
-        </td>
-      </tr>
-    <% }); %>
-  </tbody>
-</table>
+          Handwriting recognition
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Code</th>
+            <th>Language</th>
+            <th>Supported Technologies</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>#</th>
+            <th>Code</th>
+            <th>Language</th>
+            <th>Supported Technologies</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <%
+            function countryRemoved(lang) {
+              var i = lang.indexOf("-");
+              if (i > 0) return lang.slice(0, i);
+              return lang;
+            }
+            function ocrStandardlized(lang) {
+              if (["zh-CN", "zh-HK"].indexOf(lang) > -1) return "zh-CN";
+              if (["zh-TW", "zh-YUE"].indexOf(lang) > -1) return "zh-TW";
+              if (lang == "zh") return "zh-CN";
+              if (lang.length > 2) return lang.substring(0, 2);
+              return lang;
+            }
+
+            var languageKeys = Object.keys(languages);
+            languageKeys.sort(function (x, y) {
+              return languages[x].localeCompare(languages[y])
+            })
+          %>
+          <% languageKeys.forEach(function(key, i) { %>
+            <tr>
+              <td><%= i+1 %></td>
+              <td><%= key %></td>
+              <td><%= languages[key] %></td>
+              <td>
+                <% if (listenSupported.indexOf(countryRemoved(key)) > -1) { %>
+                  <span class="icon is-small">
+                    <i class="fa fa-headphones"></i>
+                  </span>
+                <% } %>
+                <% if (speakSupported.indexOf(countryRemoved(key)) > -1) { %>
+                <span class="icon is-small">
+                  <i class="fa fa-microphone"></i>
+                </span>
+                <% } %>
+                <% if (ocrSupported.indexOf(ocrStandardlized(key)) > -1) { %>
+                <span class="icon is-small">
+                  <i class="fa fa-camera"></i>
+                </span>
+                <% } %>
+                <% if (writeNotSupported.indexOf(key) == -1) { %>
+                <span class="icon is-small">
+                  <i class="fa fa-pencil"></i>
+                </span>
+                <% } %>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
