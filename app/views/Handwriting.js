@@ -334,12 +334,35 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const mapStateToProps = state => ({
-  inputText: state.home.inputText,
-  selectionStart: state.home.selectionStart,
-  selectionEnd: state.home.selectionEnd,
-  suggestions: state.handwriting.suggestions,
-});
+const mapStateToProps = (state) => {
+  let eventTypes;
+  /* global Windows */
+  /* mousedown & touchstart call at the same time on WIndows Mobile. */
+  /* Workaround: disable mousedown on touch, disable touch on Continuum */
+  if ((process.env.PLATFORM === 'windows') && (Windows.System.Profile.AnalyticsInfo.versionInfo.deviceFamily === 'Windows.Mobile')) {
+    switch (Windows.UI.ViewManagement.UIViewSettings.getForCurrentView().userInteractionMode) {
+      case Windows.UI.ViewManagement.UserInteractionMode.mouse: {
+        eventTypes = 'mousedown';
+        break;
+      }
+      case Windows.UI.ViewManagement.UserInteractionMode.touch: {
+        eventTypes = 'touchstart';
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  }
+
+  return {
+    inputText: state.home.inputText,
+    selectionStart: state.home.selectionStart,
+    selectionEnd: state.home.selectionEnd,
+    suggestions: state.handwriting.suggestions,
+    eventTypes,
+  };
+};
 
 export default connect(
   mapStateToProps, mapDispatchToProps,
