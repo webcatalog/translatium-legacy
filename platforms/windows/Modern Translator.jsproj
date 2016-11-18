@@ -125,6 +125,6 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <AppxPackageDir>C:\Users\quanglam2807\Desktop\x</AppxPackageDir>
+    <AppxPackageDir>C:\Users\quanglam2807\Desktop\x2</AppxPackageDir>
   </PropertyGroup>
 </Project>
