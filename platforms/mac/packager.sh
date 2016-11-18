@@ -1,5 +1,5 @@
 APP_VERSION=6.0
-BUILD_VERSION=6.0.2
+BUILD_VERSION=6.0.3
 ELECTRON_VERSION=1.4.6
 
 # Name of your app.
@@ -8,10 +8,13 @@ APP="Modern Translator"
 APP_PATH="Modern Translator-mas-x64/Modern Translator.app"
 # The path of distribution provisioning profile
 PROVISION_PROFILE_PATH="distribution.provisionprofile"
+# The path of your plist files.
+CHILD_PLIST="child.plist"
+PARENT_PLIST="parent.plist"
 
-electron-packager ./ "Modern Translator" --app-bundle-id=com.moderntranslator.app --helper-bundle-id=com.moderntranslator.app.helper --app-version=$APP_VERSION --build-version=$BUILD_VERSION --platform=mas --arch=x64 --version=$ELECTRON_VERSION --icon=images/icon.icns --overwrite
+electron-packager ./ "Modern Translator" --app-bundle-id=com.moderntranslator.app --helper-bundle-id=com.moderntranslator.app.helper --app-version=$APP_VERSION --build-version=$BUILD_VERSION --platform=mas --arch=x64 --version=$ELECTRON_VERSION --icon=images/icon.icns --ignore=.*\.\(provisionprofile\|plist\) --overwrite
 
-electron-osx-sign "$APP_PATH" --version=$ELECTRON_VERSION --provisioning-profile=$PROVISION_PROFILE_PATH
+electron-osx-sign "$APP_PATH" --version=$ELECTRON_VERSION --provisioning-profile=$PROVISION_PROFILE_PATH --type=distribution --entitlements="$PARENT_PLIST" --entitlements-inherit="$CHILD_PLIST"
 
 electron-osx-flat "$APP_PATH"
 

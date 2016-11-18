@@ -38,7 +38,9 @@ function createWindow() {
     mainWindow = null;
   });
 
-  // menu.init(mainWindow);
+  // mainWindow.webContents.openDevTools();
+
+  menu.init(mainWindow);
 }
 
 // This method will be called when Electron has finished
