@@ -15,9 +15,9 @@ npm run start-mac
 
 2. Ensure certificate is installed.
 
-3. Ensure `electron-packager` are installed.
+3. Ensure `electron-packager` & `electron-osx-sign` are installed.
 ```
-npm install electron-packager -g
+npm install electron-packager electron-osx-sign -g
 ```
 
 3. Run
