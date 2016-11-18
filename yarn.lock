@@ -1686,15 +1686,7 @@ fast-levenshtein@~2.0.4:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.5.tgz#bd33145744519ab1c36c3ee9f31f08e9079b67f2"
 
-fbjs@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.2.1.tgz#622061630a43e11f845017b9044aaa648ed3f731"
-  dependencies:
-    core-js "^1.0.0"
-    promise "^7.0.3"
-    whatwg-fetch "^0.9.0"
-
-fbjs@^0.8.1, fbjs@^0.8.4:
+fbjs@^0.8.1, fbjs@^0.8.4, fbjs@^0.8.6:
   version "0.8.6"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.6.tgz#7eb67d6986b2d5007a9b6e92e0e7cb6f75cad290"
   dependencies:
@@ -2175,16 +2167,7 @@ hawk@~3.1.3:
     hoek "2.x.x"
     sntp "1.x.x"
 
-history@^3.0.0:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/history/-/history-3.2.1.tgz#71c7497f4e6090363d19a6713bb52a1bfcdd99aa"
-  dependencies:
-    invariant "^2.2.1"
-    loose-envify "^1.2.0"
-    query-string "^4.2.2"
-    warning "^3.0.0"
-
-history@^4.4.0:
+history:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/history/-/history-4.4.0.tgz#b1369588cb9e5d80219d0b1f866b0ac62c14a7f8"
   dependencies:
@@ -2192,6 +2175,15 @@ history@^4.4.0:
     loose-envify "^1.2.0"
     resolve-pathname "^2.0.0"
     value-equal "^0.1.1"
+    warning "^3.0.0"
+
+history@^3.0.0:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/history/-/history-3.2.1.tgz#71c7497f4e6090363d19a6713bb52a1bfcdd99aa"
+  dependencies:
+    invariant "^2.2.1"
+    loose-envify "^1.2.0"
+    query-string "^4.2.2"
     warning "^3.0.0"
 
 hoek@2.x.x:
@@ -2260,7 +2252,7 @@ immediate@~3.0.5:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
 
-immutable@^3.8.1:
+immutable:
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
 
@@ -3026,9 +3018,9 @@ map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
 
-material-ui@^0.16.2:
-  version "0.16.2"
-  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.16.2.tgz#4bdd966b1fd2f6a6def9d19d13fff13db6c8bfcb"
+material-ui:
+  version "0.16.4"
+  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.16.4.tgz#b1ff4ea57069a89611b7e02a83d47c649e13c798"
   dependencies:
     babel-runtime "^6.11.6"
     inline-style-prefixer "^2.0.1"
@@ -3492,7 +3484,7 @@ pluralize@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-1.2.1.tgz#d1a21483fd22bb41e58a12fa3421823140897c45"
 
-pouchdb-browser@^6.0.7:
+pouchdb-browser:
   version "6.0.7"
   resolved "https://registry.yarnpkg.com/pouchdb-browser/-/pouchdb-browser-6.0.7.tgz#8edb6f11cb4f77683d13e808f0be0709312f6772"
   dependencies:
@@ -3533,7 +3525,7 @@ progress@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/progress/-/progress-1.1.8.tgz#e260c78f6161cdd9b0e56cc3e0a85de17c7a57be"
 
-promise@^7.0.3, promise@^7.1.1:
+promise@^7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/promise/-/promise-7.1.1.tgz#489654c692616b8aa55b0724fa809bb7db49c5bf"
   dependencies:
@@ -3600,6 +3592,14 @@ rc@~1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~1.0.4"
 
+react:
+  version "15.4.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-15.4.0.tgz#736c1c7c542e8088127106e1f450b010f86d172b"
+  dependencies:
+    fbjs "^0.8.4"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.0"
+
 react-addons-create-fragment@^15.0.0:
   version "15.3.2"
   resolved "https://registry.yarnpkg.com/react-addons-create-fragment/-/react-addons-create-fragment-15.3.2.tgz#0e589c8c7add0e5db5db48367b5167cbed9c5852"
@@ -3612,9 +3612,13 @@ react-addons-transition-group@^15.0.0:
   version "15.3.2"
   resolved "https://registry.yarnpkg.com/react-addons-transition-group/-/react-addons-transition-group-15.3.2.tgz#64f758d18bd1e59128726b1c9a4db79127c4f1ed"
 
-react-dom@^15.3.2:
-  version "15.3.2"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.3.2.tgz#c46b0aa5380d7b838e7a59c4a7beff2ed315531f"
+react-dom:
+  version "15.4.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.4.0.tgz#6a97a69000966570db48c746bc4b7b0ca50d1534"
+  dependencies:
+    fbjs "^0.8.1"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.0"
 
 react-event-listener@^0.4.0:
   version "0.4.0"
@@ -3629,7 +3633,7 @@ react-onclickoutside@^5.7.1:
   dependencies:
     object-assign "^4.0.1"
 
-react-redux@^4.4.6:
+react-redux:
   version "4.4.6"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-4.4.6.tgz#4b9d32985307a11096a2dd61561980044fcc6209"
   dependencies:
@@ -3638,11 +3642,7 @@ react-redux@^4.4.6:
     lodash "^4.2.0"
     loose-envify "^1.1.0"
 
-react-router-redux@^4.0.7:
-  version "4.0.7"
-  resolved "https://registry.yarnpkg.com/react-router-redux/-/react-router-redux-4.0.7.tgz#9b1fde4e70106c50f47214e12bdd888cfb96e2a6"
-
-react-router@^3.0.0:
+react-router:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-3.0.0.tgz#3f313e4dbaf57048c48dd0a8c3cac24d93667dff"
   dependencies:
@@ -3652,19 +3652,15 @@ react-router@^3.0.0:
     loose-envify "^1.2.0"
     warning "^3.0.0"
 
-react-tap-event-plugin@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-tap-event-plugin/-/react-tap-event-plugin-1.0.0.tgz#7a248505a9e9abecc352b2dab313d17685c51adf"
-  dependencies:
-    fbjs "^0.2.1"
+react-router-redux:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/react-router-redux/-/react-router-redux-4.0.7.tgz#9b1fde4e70106c50f47214e12bdd888cfb96e2a6"
 
-react@^15.3.2:
-  version "15.3.2"
-  resolved "https://registry.yarnpkg.com/react/-/react-15.3.2.tgz#a7bccd2fee8af126b0317e222c28d1d54528d09e"
+react-tap-event-plugin:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-tap-event-plugin/-/react-tap-event-plugin-2.0.1.tgz#316beb3bc6556e29ec869a7293e89c826a9074d2"
   dependencies:
-    fbjs "^0.8.4"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
+    fbjs "^0.8.6"
 
 read-only-stream@^2.0.0:
   version "2.0.0"
@@ -3772,7 +3768,7 @@ recompose@^0.20.2:
     hoist-non-react-statics "^1.0.0"
     symbol-observable "^0.2.4"
 
-recordrtc@^5.4.0:
+recordrtc:
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/recordrtc/-/recordrtc-5.4.0.tgz#c71ad45437d4a0859f2d4606d3f86d961ec7c423"
 
@@ -3783,11 +3779,7 @@ redent@^1.0.0:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
 
-redux-thunk@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.1.0.tgz#c724bfee75dbe352da2e3ba9bc14302badd89a98"
-
-redux@^3.6.0:
+redux:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.6.0.tgz#887c2b3d0b9bd86eca2be70571c27654c19e188d"
   dependencies:
@@ -3795,6 +3787,10 @@ redux@^3.6.0:
     lodash-es "^4.2.1"
     loose-envify "^1.1.0"
     symbol-observable "^1.0.2"
+
+redux-thunk:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.1.0.tgz#c724bfee75dbe352da2e3ba9bc14302badd89a98"
 
 regenerate@^1.2.1:
   version "1.3.2"
@@ -4480,41 +4476,7 @@ watchpack@^0.2.1:
     chokidar "^1.0.0"
     graceful-fs "^4.1.2"
 
-webpack-core@~0.6.0:
-  version "0.6.8"
-  resolved "https://registry.yarnpkg.com/webpack-core/-/webpack-core-0.6.8.tgz#edf9135de00a6a3c26dd0f14b208af0aa4af8d0a"
-  dependencies:
-    source-list-map "~0.1.0"
-    source-map "~0.4.1"
-
-webpack-merge@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/webpack-merge/-/webpack-merge-0.16.0.tgz#1b76bfd7d69f349cd805e2094a36dbfccf63bc99"
-  dependencies:
-    lodash.find "^3.2.1"
-    lodash.isequal "^4.2.0"
-    lodash.isplainobject "^3.2.0"
-    lodash.merge "^3.3.2"
-
-webpack-stream@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/webpack-stream/-/webpack-stream-3.2.0.tgz#3a1d160fb11d41727b7ce6f32f722464f98b2186"
-  dependencies:
-    gulp-util "^3.0.7"
-    lodash.clone "^4.3.2"
-    lodash.some "^4.2.2"
-    memory-fs "^0.3.0"
-    through "^2.3.8"
-    vinyl "^1.1.0"
-    webpack "^1.12.9"
-
-webpack-utf8-bom:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/webpack-utf8-bom/-/webpack-utf8-bom-1.0.3.tgz#75889c0fdefd627ced2763445865ce08102cdd74"
-  dependencies:
-    webpack "^1.12.13"
-
-webpack@^1.12.13, webpack@^1.12.9, webpack@^1.13.3:
+webpack, webpack@^1.12.13, webpack@^1.12.9:
   version "1.13.3"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-1.13.3.tgz#e79c46fe5a37c5ca70084ba0894c595cdcb42815"
   dependencies:
@@ -4534,11 +4496,45 @@ webpack@^1.12.13, webpack@^1.12.9, webpack@^1.13.3:
     watchpack "^0.2.1"
     webpack-core "~0.6.0"
 
-whatwg-fetch@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-0.9.0.tgz#0e3684c6cb9995b43efc9df03e4c365d95fd9cc0"
+webpack-core@~0.6.0:
+  version "0.6.8"
+  resolved "https://registry.yarnpkg.com/webpack-core/-/webpack-core-0.6.8.tgz#edf9135de00a6a3c26dd0f14b208af0aa4af8d0a"
+  dependencies:
+    source-list-map "~0.1.0"
+    source-map "~0.4.1"
 
-whatwg-fetch@^2.0.0, whatwg-fetch@>=0.10.0:
+webpack-merge:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/webpack-merge/-/webpack-merge-0.17.0.tgz#3548ef319e3a72676f831edfe7cba687aa781c84"
+  dependencies:
+    lodash.find "^3.2.1"
+    lodash.isequal "^4.2.0"
+    lodash.isplainobject "^3.2.0"
+    lodash.merge "^3.3.2"
+
+webpack-stream:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/webpack-stream/-/webpack-stream-3.2.0.tgz#3a1d160fb11d41727b7ce6f32f722464f98b2186"
+  dependencies:
+    gulp-util "^3.0.7"
+    lodash.clone "^4.3.2"
+    lodash.some "^4.2.2"
+    memory-fs "^0.3.0"
+    through "^2.3.8"
+    vinyl "^1.1.0"
+    webpack "^1.12.9"
+
+webpack-utf8-bom:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/webpack-utf8-bom/-/webpack-utf8-bom-1.0.3.tgz#75889c0fdefd627ced2763445865ce08102cdd74"
+  dependencies:
+    webpack "^1.12.13"
+
+whatwg-fetch:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.1.tgz#078b9461bbe91cea73cbce8bb122a05f9e92b772"
+
+whatwg-fetch@>=0.10.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.0.tgz#cde428ac2b1dab717c96bc6785feb557619b249e"
 

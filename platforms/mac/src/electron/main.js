@@ -4,8 +4,6 @@
 
 const electron = require('electron');
 
-const menu = require('./menu');
-
 const config = require('../config');
 
 // Module to control application life.
@@ -16,8 +14,139 @@ const BrowserWindow = electron.BrowserWindow;
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let menu;
+let createWindow;
 
-function createWindow() {
+const getMenuTemplate = () => {
+  const template = [
+    {
+      label: config.APP_NAME,
+      submenu: [
+        {
+          role: 'about',
+          label: `About ${config.APP_NAME}`,
+        },
+        {
+          type: 'separator',
+        },
+        {
+          role: 'hide',
+          label: `Hide ${config.APP_NAME}`,
+        },
+        {
+          role: 'hideothers',
+        },
+        {
+          role: 'unhide',
+        },
+        {
+          type: 'separator',
+        },
+        {
+          role: 'quit',
+          label: `Quit ${config.APP_NAME}`,
+        },
+      ],
+    },
+    {
+      label: 'Edit',
+      submenu: [
+        {
+          role: 'undo',
+        },
+        {
+          role: 'redo',
+        },
+        {
+          type: 'separator',
+        },
+        {
+          role: 'cut',
+        },
+        {
+          role: 'copy',
+        },
+        {
+          role: 'paste',
+        },
+        {
+          role: 'delete',
+        },
+        {
+          role: 'selectall',
+        },
+      ],
+    },
+    {
+      label: 'View',
+      submenu: [
+        {
+          label: 'Toggle Full Screen',
+          accelerator: process.platform === 'darwin'
+            ? 'Ctrl+Command+F'
+            : 'F11',
+          click: () => mainWindow.setFullScreen(true),
+        },
+      ],
+    },
+    {
+      role: 'window',
+      submenu: [
+        {
+          role: 'minimize',
+        },
+        {
+          role: 'zoom',
+        },
+        {
+          type: 'separator',
+        },
+        {
+          role: 'close',
+        },
+        {
+          type: 'separator',
+        },
+        {
+          role: 'front',
+        },
+      ],
+    },
+    {
+      role: 'help',
+      submenu: [
+        {
+          label: `Learn more about ${config.APP_NAME}`,
+          click: () => electron.shell.openExternal(config.APP_URL),
+        },
+        {
+          label: 'Report an Issue...',
+          click: () => electron.shell.openExternal(`mailto:${config.SUPPORT_EMAIL}`),
+        },
+      ],
+    },
+  ];
+
+  if (!mainWindow) {
+    template[3].submenu.push({
+      type: 'separator',
+    });
+    template[3].submenu.push({
+      label: config.APP_NAME,
+      type: 'checkbox',
+      click: () => createWindow(),
+    });
+  }
+
+  return template;
+};
+
+const initMenu = () => {
+  menu = electron.Menu.buildFromTemplate(getMenuTemplate());
+  electron.Menu.setApplicationMenu(menu);
+};
+
+createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 500,
@@ -36,12 +165,13 @@ function createWindow() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
+    initMenu();
   });
 
   // mainWindow.webContents.openDevTools();
 
-  menu.init(mainWindow);
-}
+  // initMenu(mainWindow);
+};
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -64,6 +194,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.

@@ -116,8 +116,6 @@ class App extends React.Component {
 
     return {
       container: {
-        height: '100%',
-        width: '100%',
         overflowY: 'hidden',
         backgroundColor: (theme === 'dark') ? fullBlack : fullWhite,
         position: 'relative',
@@ -128,8 +126,8 @@ class App extends React.Component {
         position: 'absolute',
         left: 0,
         top: 0,
-        height: '100%',
-        width: '100%',
+        height: '100vh',
+        width: '100vw',
         zIndex: 10000,
         backgroundColor: 'rgba(0, 0, 0, 0.8)',
         display: 'flex',

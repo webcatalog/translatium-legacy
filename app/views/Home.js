@@ -249,12 +249,6 @@ class Home extends React.Component {
       default: {
         const controllers = [
           {
-            icon: textToSpeechPlaying ? <AVStop /> : <AVVolumeUp />,
-            tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
-            onTouchTap: () => onListenButtonTouchTap(textToSpeechPlaying, output.get('outputLang'), output.get('outputText')),
-            disabled: !isTtsSupported(output.get('outputLang')),
-          },
-          {
             icon: output.has('phrasebookId') ? <ToggleStar /> : <ToggleStarBorder />,
             tooltip: output.has('phrasebookId') ? strings.removeFromPhrasebook : strings.addToPhrasebook,
             onTouchTap: onTogglePhrasebookTouchTap,
@@ -279,6 +273,14 @@ class Home extends React.Component {
             onTouchTap: () => copyToClipboard(output.get('outputText')),
           },
         ];
+
+        if (isTtsSupported(output.get('outputLang'))) {
+          controllers.unshift({
+            icon: textToSpeechPlaying ? <AVStop /> : <AVVolumeUp />,
+            tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
+            onTouchTap: () => onListenButtonTouchTap(textToSpeechPlaying, output.get('outputLang'), output.get('outputText')),
+          });
+        }
 
         if (process.env.PLATFORM !== 'mac') {
           controllers.push({
@@ -341,20 +343,16 @@ class Home extends React.Component {
               <CardActions>
                 {
                   controllers.slice(0, maxVisibleIcon)
-                  .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
-                    if (disabled) return null;
-
-                    return (
-                      <IconButton
-                        tooltip={tooltip}
-                        tooltipPosition="bottom-center"
-                        key={`dIconButton_${i}`}
-                        onTouchTap={onTouchTap}
-                      >
-                        {icon}
-                      </IconButton>
-                    );
-                  })
+                  .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
+                    <IconButton
+                      tooltip={tooltip}
+                      tooltipPosition="bottom-center"
+                      key={`dIconButton_${i}`}
+                      onTouchTap={onTouchTap}
+                    >
+                      {icon}
+                    </IconButton>
+                  ))
                 }
                 {(showMoreButton) ? (
                   <IconMenu
@@ -427,36 +425,45 @@ class Home extends React.Component {
         tooltip: strings.clear,
         onTouchTap: onClearButtonTouchTap,
       },
-      {
+    ];
+
+    if (isTtsSupported(inputLang)) {
+      controllers.push({
         icon: textToSpeechPlaying ? <AVStop /> : <AVVolumeUp />,
         tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
         onTouchTap: () => onListenButtonTouchTap(textToSpeechPlaying, inputLang, inputText),
-        disabled: !isTtsSupported(inputLang),
-      },
-      {
+      });
+    }
+
+    if (isVoiceRecognitionSupported(inputLang)) {
+      controllers.push({
         icon: <AVMic />,
         tooltip: strings.speak,
         onTouchTap: onSpeakButtonTouchTap,
-        disabled: !isVoiceRecognitionSupported(inputLang),
-      },
-      {
+      });
+    }
+
+    if (isHandwritingSupported(inputLang)) {
+      controllers.push({
         icon: <ContentGesture />,
         tooltip: strings.draw,
         onTouchTap: onWriteButtonTouchTap,
-        disabled: !isHandwritingSupported(inputLang),
-      },
-      {
+      });
+    }
+
+    if (isOcrSupported(inputLang)) {
+      controllers.push({
         icon: <ImageImage />,
         tooltip: strings.openImageFile,
-        disabled: !isOcrSupported(inputLang),
         onTouchTap: onOpenImageButtonTouchTap,
-      },
-      {
-        icon: fullscreenInputBox ? <NavigationFullscreenExit /> : <NavigationFullscreen />,
-        tooltip: fullscreenInputBox ? strings.exitFullscreen : strings.fullscreen,
-        onTouchTap: onFullscreenButtonTouchTap,
-      },
-    ];
+      });
+    }
+
+    controllers.push({
+      icon: fullscreenInputBox ? <NavigationFullscreenExit /> : <NavigationFullscreen />,
+      tooltip: fullscreenInputBox ? strings.exitFullscreen : strings.fullscreen,
+      onTouchTap: onFullscreenButtonTouchTap,
+    });
 
     if (process.env.PLATFORM === 'windows') {
       controllers.splice(controllers.length - 2, 0, {
@@ -468,6 +475,7 @@ class Home extends React.Component {
     }
 
     const maxVisibleIcon = Math.min(Math.round((screenWidth - 200) / 56), controllers.length);
+
     const showMoreButton = (maxVisibleIcon < controllers.length);
 
     const tooltipPos = fullscreenInputBox ? 'top-center' : 'bottom-center';
@@ -546,19 +554,15 @@ class Home extends React.Component {
                   {
                     controllers
                       .slice(maxVisibleIcon, controllers.length)
-                      .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
-                        if (disabled) return null;
-
-                        return (
-                          <MenuItem
-                            primaryText={tooltip}
-                            leftIcon={icon}
-                            disabled={disabled}
-                            key={`dMenuItem_${i}`}
-                            onTouchTap={onTouchTap}
-                          />
-                        );
-                      })
+                      .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
+                        <MenuItem
+                          primaryText={tooltip}
+                          leftIcon={icon}
+                          disabled={disabled}
+                          key={`dMenuItem_${i}`}
+                          onTouchTap={onTouchTap}
+                        />
+                      ))
                   }
                 </IconMenu>
               ) : null}
