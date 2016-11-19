@@ -1,5 +1,8 @@
 <span class="tag is-success is-large">6.x</span>
 ### 6.0
+#### 6.0.4 (19th November 2016)
+1. Bug fixes.
+
 #### 6.0.3 (18th November 2016)
 1. Windows 10 Mobile: Fixed handwriting and speech recognition.
 
