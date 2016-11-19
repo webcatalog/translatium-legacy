@@ -170,7 +170,7 @@ createWindow = () => {
 
   // mainWindow.webContents.openDevTools();
 
-  // initMenu(mainWindow);
+  initMenu(mainWindow);
 };
 
 // This method will be called when Electron has finished
