@@ -6,12 +6,11 @@ import { replace } from 'react-router-redux';
 import Immutable from 'immutable';
 
 import AppBar from 'material-ui/AppBar';
-import Paper from 'material-ui/Paper';
 import LinearProgress from 'material-ui/LinearProgress';
 import IconButton from 'material-ui/IconButton';
+import { List, ListItem } from 'material-ui/List';
 import ToggleStar from 'material-ui/svg-icons/toggle/star';
-
-import { toCountryRemovedLanguage } from '../libs/languageUtils';
+import Divider from 'material-ui/Divider';
 
 import { deletePhrasebookItem, loadPhrasebook } from '../actions/phrasebook';
 import { loadOutput } from '../actions/home';
@@ -44,7 +43,6 @@ class Phrasebook extends React.Component {
       palette: {
         textColor,
       },
-      card,
     } = this.context.muiTheme;
 
     return {
@@ -75,35 +73,8 @@ class Phrasebook extends React.Component {
         flex: 1,
         height: '100%',
         overflowY: 'auto',
-        padding: '0 12px 12px 12px',
+        padding: 0,
         boxSizing: 'border-box',
-      },
-      paper: {
-        padding: '6px 12px',
-        boxSizing: 'border-box',
-        display: 'flex',
-        marginTop: 12,
-        cursor: 'pointer',
-      },
-      paperLeftContainer: {
-        flex: 1,
-        overflow: 'hidden',
-      },
-      title: {
-        color: card.titleColor,
-        display: 'block',
-        fontSize: 15,
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-      },
-      subtitle: {
-        color: card.subtitleColor,
-        display: 'block',
-        fontSize: 14,
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
       },
       progress: {
         marginTop: 12,
@@ -138,49 +109,36 @@ class Phrasebook extends React.Component {
 
           return (
             <div style={styles.listContainer} ref={(c) => { this.listView = c; }}>
-              {phrasebookItems.map(item => (
-                <Paper
-                  key={`phrasebookItem_${item.get('phrasebookId')}`}
-                  zDepth={1}
-                  style={styles.paper}
-                  onTouchTap={() => onItemTouchTap(item)}
-                >
-                  <div style={styles.paperLeftContainer}>
-                    <p
-                      style={styles.title}
-                      lang={toCountryRemovedLanguage(item.get('outputLang'))}
-                    >
-                      {item.get('outputText')}
-                    </p>
-                    <p
-                      style={styles.subtitle}
-                      lang={toCountryRemovedLanguage(item.get('inputLang'))}
-                    >
-                      {item.get('inputText')}
-                    </p>
-                  </div>
-                  <div style={styles.paperRightContainer}>
-                    <IconButton
-                      tooltip={strings.removeFromPhrasebook}
-                      tooltipPosition="bottom-left"
-                      onTouchTap={(ev) => {
-                        let e = ev;
-                        /* global window */
-                        if (!e) e = window.event;
-                        e.cancelBubble = true;
-                        if (e.stopPropagation) e.stopPropagation();
+              <List>
+                {phrasebookItems.map(item => [(
+                  <ListItem
+                    key={`phrasebookItem_${item.get('phrasebookId')}`}
+                    onTouchTap={() => onItemTouchTap(item)}
+                    rightIconButton={(
+                      <IconButton
+                        tooltip={strings.removeFromPhrasebook}
+                        tooltipPosition="bottom-left"
+                        onTouchTap={(ev) => {
+                          let e = ev;
+                          /* global window */
+                          if (!e) e = window.event;
+                          e.cancelBubble = true;
+                          if (e.stopPropagation) e.stopPropagation();
 
-                        onDeleteButtonTouchTap(
-                          item.get('phrasebookId'),
-                          item.get('rev'),
-                        );
-                      }}
-                    >
-                      <ToggleStar />
-                    </IconButton>
-                  </div>
-                </Paper>
-              ))}
+                          onDeleteButtonTouchTap(
+                            item.get('phrasebookId'),
+                            item.get('rev'),
+                          );
+                        }}
+                      >
+                        <ToggleStar />
+                      </IconButton>
+                    )}
+                    primaryText={item.get('outputText')}
+                    secondaryText={item.get('inputText')}
+                  />
+                ), <Divider inset={false} />])}
+              </List>
               {phrasebookLoading === true ? (
                 <LinearProgress mode="indeterminate" style={styles.progress} />
               ) : null}

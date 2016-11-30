@@ -12,6 +12,7 @@ const defaultState = {
   launchTime: 0,
   translateWhenPressingEnter: true,
   biggerTextFontSize: 50,
+  chinaMode: false,
 };
 
 const getInitialValue = (name) => {

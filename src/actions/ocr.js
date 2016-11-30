@@ -11,7 +11,7 @@ import { toOcrSpaceLanguage } from '../libs/languageUtils';
 import { openAlert } from './alert';
 
 export const loadImage = fromCamera => (dispatch, getState) => {
-  const { inputLang, outputLang } = getState().settings;
+  const { inputLang, outputLang, chinaMode } = getState().settings;
 
   Promise.resolve()
     .then(() => {
@@ -33,7 +33,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
         const context = canvas.getContext('2d');
 
         imageObj.onload = function onLoad() {
-          const maxSize = 2600;
+          const maxSize = 1500;
           const ratio = maxSize / Math.max(this.width, this.height);
           const maxWidth = Math.round(this.width * ratio);
           const maxHeight = Math.round(this.height * ratio);
@@ -139,7 +139,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
 
         const inputArr = inputLines.map(line => line.text);
 
-        return translateArray(inputLang, outputLang, inputArr)
+        return translateArray(inputLang, outputLang, inputArr, chinaMode)
           .then(({ outputArr, outputText }) => {
             const outputLines = outputArr.map((text, i) => ({
               height: inputLines[i].height,

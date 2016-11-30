@@ -12,7 +12,7 @@ import { updateSetting } from './settings';
 
 export const translate = () => ((dispatch, getState) => {
   const { settings, home } = getState();
-  const { inputLang, outputLang } = settings;
+  const { inputLang, outputLang, chinaMode } = settings;
   const { inputText } = home;
 
   // Safe
@@ -28,7 +28,7 @@ export const translate = () => ((dispatch, getState) => {
     }),
   });
 
-  translateText(inputLang, outputLang, inputText)
+  translateText(inputLang, outputLang, inputText, chinaMode)
     .then((result) => {
       // Prevent slow request to display outdated info
       const currentOutput = getState().home.output;

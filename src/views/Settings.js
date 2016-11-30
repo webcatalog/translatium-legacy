@@ -10,6 +10,7 @@ import Toggle from 'material-ui/Toggle';
 import { toggleSetting, updateSetting } from '../actions/settings';
 
 import colorPairs from '../constants/colorPairs';
+import openUri from '../libs/openUri';
 
 class Settings extends React.Component {
   getStyles() {
@@ -30,6 +31,7 @@ class Settings extends React.Component {
       theme,
       primaryColorId,
       realtime,
+      chinaMode,
       preventScreenLock,
       translateWhenPressingEnter,
       onToggle,
@@ -89,6 +91,13 @@ class Settings extends React.Component {
             toggled={translateWhenPressingEnter}
             onToggle={() => onToggle('translateWhenPressingEnter')}
           />
+          <br />
+          <Toggle
+            label={strings.chinaMode}
+            toggled={chinaMode}
+            onToggle={() => onToggle('chinaMode')}
+          />
+          <a onTouchTap={() => openUri('https://moderntranslator.com/support#chinaMode')}>{strings.learnMore}</a>
         </div>
       </div>
     );
@@ -101,6 +110,7 @@ Settings.propTypes = {
   preventScreenLock: React.PropTypes.bool,
   translateWhenPressingEnter: React.PropTypes.bool,
   realtime: React.PropTypes.bool,
+  chinaMode: React.PropTypes.bool,
   onToggle: React.PropTypes.func,
   onSelectFieldChange: React.PropTypes.func,
 };
@@ -111,6 +121,7 @@ const mapStateToProps = state => ({
   preventScreenLock: state.settings.preventScreenLock,
   translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
   realtime: state.settings.realtime,
+  chinaMode: state.settings.chinaMode,
 });
 
 const mapDispatchToProps = dispatch => ({

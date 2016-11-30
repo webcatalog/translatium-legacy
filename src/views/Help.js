@@ -57,6 +57,22 @@ class Help extends React.Component {
             <h3 style={styles.text}>Modern Translator</h3>
             <h4 style={styles.text}>Version {process.env.VERSION}</h4>
 
+            {process.env.PLATFORM === 'mac' ? (
+              <p>
+                <a onTouchTap={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')}>
+                  {strings.rateMacAppStore}
+                </a>
+              </p>
+            ) : null}
+
+            {process.env.PLATFORM === 'windows' ? (
+              <p>
+                <a onTouchTap={() => openUri('ms-windows-store://review/?ProductId=9WZDNCRFHVJL')}>
+                  {strings.rateWindowsStore}
+                </a>
+              </p>
+            ) : null}
+
             <p><a onTouchTap={() => openUri('mailto:support@moderntranslator.com')}>Support</a></p>
 
             <p><a onTouchTap={() => openUri('https://moderntranslator.com')}>Website</a></p>

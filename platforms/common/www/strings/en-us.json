@@ -21,7 +21,7 @@
 	"didYouMean": "Did you mean",
 
 	"errorOccured": "An error has occured.",
-	"cannotConnectToServer": "The app cannot to server. Please check your Internet connection.",
+	"cannotConnectToServer": "The app cannot to server. Please check your Internet connection or turn on China Mode if you are in China.",
 	"cannotActivateMicrophone": "The app cannot activate your microphone.",
 	"cannotOpenTheFile": "The app cannot open the file you selected.",
 	"cannotRecognizeImage": "The app cannot recognize any text on your image.",
@@ -70,6 +70,8 @@
 	"preventScreenLock": "Prevent screen lock",
 	"translateWhenPressingEnter": "Translate when pressing Enter",
 	"realtime": "Real-time translation",
+	"chinaMode": "China Mode",
+	"learnMore": "Learn more",
 
 	"translations" : "Translations",
 	"definitions" : "Definitions",
@@ -85,6 +87,9 @@
 	"abbreviation" : "Abbreviation",
 	"interjection" :	"Interjection",
 	"preposition": "Preposition",
+
+	"rateMacAppStore": "Rate Modern Translator on Mac App Store",
+	"rateWindowsStore": "Rate Modern Translator on Windows Store",
 
 	"sn" : "Shona",
 	"sd" : "Sindhi",

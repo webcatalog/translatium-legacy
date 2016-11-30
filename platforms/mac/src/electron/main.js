@@ -3,6 +3,7 @@
 
 
 const electron = require('electron');
+const menubar = require('menubar');
 
 const config = require('../config');
 
@@ -15,9 +16,8 @@ const BrowserWindow = electron.BrowserWindow;
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 let menu;
-let createWindow;
 
-const getMenuTemplate = () => {
+function getMenuTemplate() {
   const template = [
     {
       label: config.APP_NAME,
@@ -131,22 +131,17 @@ const getMenuTemplate = () => {
     template[3].submenu.push({
       type: 'separator',
     });
-    template[3].submenu.push({
-      label: config.APP_NAME,
-      type: 'checkbox',
-      click: () => createWindow(),
-    });
   }
 
   return template;
-};
+}
 
-const initMenu = () => {
+function initMenu() {
   menu = electron.Menu.buildFromTemplate(getMenuTemplate());
   electron.Menu.setApplicationMenu(menu);
-};
+}
 
-createWindow = () => {
+function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 500,
@@ -170,8 +165,8 @@ createWindow = () => {
 
   // mainWindow.webContents.openDevTools();
 
-  initMenu(mainWindow);
-};
+  // initMenu(mainWindow);
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -193,4 +188,14 @@ app.on('activate', () => {
   if (mainWindow == null) {
     createWindow();
   }
+});
+
+
+// Menubar
+menubar({
+  dir: `${config.ROOT_PATH}/www/`,
+  icon: `${config.ROOT_PATH}/images/iconTemplate.png`,
+  width: 400,
+  height: 500,
+  showDockIcon: true,
 });

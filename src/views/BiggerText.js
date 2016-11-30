@@ -12,6 +12,7 @@ import { updateSetting } from '../actions/settings';
 class BiggerText extends React.Component {
   getStyles() {
     const { muiTheme } = this.context;
+    const { biggerTextFontSize } = this.props;
 
     return {
       container: {
@@ -20,6 +21,7 @@ class BiggerText extends React.Component {
         padding: '64px 16px 16px 16px',
         boxSizing: 'border-box',
         color: muiTheme.baseTheme.palette.textColor,
+        overflow: 'auto',
       },
       closeButton: {
         position: 'absolute',
@@ -32,6 +34,10 @@ class BiggerText extends React.Component {
         position: 'absolute',
         bottom: -16,
         left: 16,
+      },
+      textContainer: {
+        fontSize: biggerTextFontSize,
+        lineHeight: 'normal',
       },
     };
   }
@@ -48,7 +54,7 @@ class BiggerText extends React.Component {
         >
           <NavigationClose />
         </FloatingActionButton>
-        <span style={{ fontSize: biggerTextFontSize, lineHeight: 'normal' }}>
+        <span style={styles.textContainer}>
           {text}
         </span>
         <Slider

@@ -20,11 +20,13 @@ export const loadSuggestions = (
   canvasWidth,
 ) => ((dispatch, getState) => {
   const { settings, home, handwriting } = getState();
-  const { inputLang } = settings;
+  const { inputLang, chinaMode } = settings;
   const { inputText, selectionStart, selectionEnd } = home;
   const { suggestions } = handwriting;
 
-  const uri = 'https://www.google.com/inputtools/request?ime=handwriting&app=mobilesearch&cs=1&oe=UTF-8';
+  const endpoint = chinaMode === true ? 'http://www.google.cn' : 'https://www.google.com';
+
+  const uri = `${endpoint}/inputtools/request?ime=handwriting&app=mobilesearch&cs=1&oe=UTF-8`;
   const jsData = {
     device: navigator.userAgent,
     options: 'enable_pre_space',

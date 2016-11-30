@@ -5,10 +5,12 @@ import * as languageUtils from './languageUtils';
 import winXhr from './winXhr';
 
 // Maximum encoded inputText length: 2000
-const translateShortText = (inputLang, outputLang, inputText) =>
+const translateShortText = (inputLang, outputLang, inputText, chinaMode) =>
   generateGoogleTranslateToken(inputText)
     .then((token) => {
-      const uri = 'https://translate.google.com/translate_a/single?client=t'
+      const endpoint = chinaMode === true ? 'http://translate.google.cn' : 'https://translate.google.com';
+
+      const uri = `${endpoint}/translate_a/single?client=t`
               + `&sl=${languageUtils.toGoogleStandardlizedLanguage(inputLang)}`
               + `&tl=${languageUtils.toGoogleStandardlizedLanguage(outputLang)}&hl=en&dt=`
               + 'bd&dt=ex&dt=ld&dt=md&dt=qc&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8'
@@ -100,7 +102,7 @@ const translateShortText = (inputLang, outputLang, inputText) =>
     });
 
 // Split text to chucks of short-length strings, translate with Google and then merge them together
-const translateText = (inputLang, outputLang, inputText) =>
+const translateText = (inputLang, outputLang, inputText, chinaMode) =>
   Promise.resolve()
     .then(() => {
       if (encodeURIComponent(inputText).length < 1000) {
@@ -122,12 +124,12 @@ const translateText = (inputLang, outputLang, inputText) =>
       let leftRes;
       let rightRes;
       const promises = [];
-      promises.push(translateShortText(inputLang, outputLang, leftInputText)
+      promises.push(translateShortText(inputLang, outputLang, leftInputText, chinaMode)
         .then((result) => {
           leftRes = result;
         }));
 
-      promises.push(translateText(inputLang, outputLang, rightInputText)
+      promises.push(translateText(inputLang, outputLang, rightInputText, chinaMode)
         .then((result) => {
           rightRes = result;
         }));
