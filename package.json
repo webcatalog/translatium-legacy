@@ -13,14 +13,18 @@
     "start-mac": "electron platforms/mac",
     "dev-windows": "PLATFORM=windows NODE_ENV=development webpack -d",
     "build-windows": "PLATFORM=windows NODE_ENV=production webpack -p",
+    "dev-cordova": "PLATFORM=cordova NODE_ENV=development webpack -d --watch",
+    "build-cordova": "PLATFORM=cordova NODE_ENV=production webpack -p",
     "lint": "eslint ./app --ext .js --cache"
   },
   "dependencies": {
+    "blueimp-canvas-to-blob": "^3.6.0",
     "history": "^4.4.0",
     "immutable": "^3.8.1",
     "material-ui": "^0.16.4",
     "pouchdb-browser": "^6.0.7",
     "react": "^15.4.0",
+    "react-addons-css-transition-group": "^15.4.1",
     "react-dom": "^15.4.0",
     "react-onclickoutside": "^5.7.1",
     "react-redux": "^4.4.6",

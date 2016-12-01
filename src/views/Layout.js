@@ -3,6 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { replace, goBack } from 'react-router-redux';
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import { red500, fullWhite, fullBlack } from 'material-ui/styles/colors';
@@ -38,15 +40,24 @@ class App extends React.Component {
       pTheme.palette.accent2Color = primary1Color;
     }
     pTheme.palette.alternateTextColor = fullWhite;
-    pTheme.appBar = {};
-    pTheme.appBar.height = 56;
+
+    const muiTheme = getMuiTheme(pTheme);
+    muiTheme.appBar.height = 56;
+    muiTheme.bottomNavigation.selectedFontSize = muiTheme.bottomNavigation.unselectedFontSize;
 
     return {
-      muiTheme: getMuiTheme(pTheme),
+      muiTheme,
     };
   }
 
   componentDidMount() {
+    if (process.env.PLATFORM === 'cordova') {
+      /* global StatusBar */
+      StatusBar.backgroundColorByHexString(
+        colorPairs[this.props.primaryColorId].primary2Color,
+      );
+    }
+
     if (process.env.PLATFORM === 'windows') {
       this.setAppTitleBar(this.props.primaryColorId);
 
@@ -70,8 +81,16 @@ class App extends React.Component {
   componentWillUpdate(nextProps) {
     const { primaryColorId } = this.props;
 
-    if (process.env.PLATFORM === 'windows' && primaryColorId !== nextProps.primaryColorId) {
-      this.setAppTitleBar(nextProps.primaryColorId);
+    if (primaryColorId !== nextProps.primaryColorId) {
+      if (process.env.PLATFORM === 'windows') {
+        this.setAppTitleBar(nextProps.primaryColorId);
+      }
+      if (process.env.PLATFORM === 'cordova') {
+        /* global StatusBar */
+        StatusBar.backgroundColorByHexString(
+          colorPairs[nextProps.primaryColorId].primary2Color,
+        );
+      }
     }
   }
 
@@ -158,6 +177,7 @@ class App extends React.Component {
   render() {
     const {
       children,
+      pathname,
       bottomNavigationSelectedIndex,
       fullPageLoading,
       onBottomNavigationItemClick,
@@ -176,7 +196,25 @@ class App extends React.Component {
             <CircularProgress size={80} thickness={5} />
           </div>) : null}
           <Alert />
-          {children}
+          <ReactCSSTransitionGroup
+            transitionName="background"
+            transitionEnterTimeout={1000}
+            transitionLeaveTimeout={1000}
+            style={{
+              flex: 1,
+              height: '100%',
+              position: 'relative',
+            }}
+          >
+            <div
+              key={pathname}
+              style={{
+                height: '100%',
+              }}
+            >
+              {children}
+            </div>
+          </ReactCSSTransitionGroup>
           {bottomNavigationSelectedIndex > -1 ? (
             <Paper zDepth={2} style={{ zIndex: 1000 }}>
               <BottomNavigation selectedIndex={bottomNavigationSelectedIndex}>
@@ -211,6 +249,7 @@ class App extends React.Component {
 
 App.propTypes = {
   children: React.PropTypes.element, // matched child route component
+  pathname: React.PropTypes.string,
   theme: React.PropTypes.string,
   primaryColorId: React.PropTypes.string,
   fullPageLoading: React.PropTypes.bool,
@@ -245,6 +284,7 @@ const mapStateToProps = (state, ownProps) => {
 
 
   return {
+    pathname: ownProps.location.pathname,
     fullPageLoading: state.ocr && state.ocr.get('status') === 'loading',
     theme: state.settings.theme,
     primaryColorId: state.settings.primaryColorId,

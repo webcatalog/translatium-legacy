@@ -17,11 +17,18 @@ class Settings extends React.Component {
     return {
       container: {
         flex: 1,
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
       },
       innerContainer: {
+        flex: 1,
+        height: '100%',
         padding: '12px 24px',
         boxSizing: 'border-box',
         maxWidth: 500,
+        overflowY: 'auto',
+        webkitOverflowScrolling: 'touch',
       },
     };
   }

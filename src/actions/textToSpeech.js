@@ -5,6 +5,8 @@ import { PLAY_TEXT_TO_SPEECH, STOP_TEXT_TO_SPEECH } from '../constants/actions';
 import generateGoogleTranslateToken from '../libs/generateGoogleTranslateToken';
 import winXhr from '../libs/winXhr';
 
+import { openAlert } from './alert';
+
 let player = null;
 let currentTimestamp;
 
@@ -100,12 +102,7 @@ export const playTextToSpeech = (textToSpeechLang, textToSpeechText) => ((dispat
     })
     .catch(() => {
       dispatch({ type: STOP_TEXT_TO_SPEECH });
-      /*
-      const title = i18n('connect-problem');
-      const content = i18n('check-connect');
-      const msg = new Windows.UI.Popups.MessageDialog(content, title);
-      msg.showAsync().done();
-      */
+      dispatch(openAlert('cannotConnectToServer'));
     });
 });
 

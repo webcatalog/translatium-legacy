@@ -53,6 +53,10 @@ switch (process.env.PLATFORM) {
     runApp();
     break;
   }
+  case 'cordova': {
+    document.addEventListener('deviceready', () => runApp(), false);
+    break;
+  }
   default: {
     /* eslint-disable no-console */
     console.log('Undetected Platfom');

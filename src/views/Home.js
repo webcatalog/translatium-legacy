@@ -144,12 +144,9 @@ class Home extends React.Component {
         zIndex: 1000,
       },
       textarea: {
-        borderTop: 0,
-        borderLeft: 0,
-        borderRight: 0,
+        border: 0,
         color: (theme === 'dark') ? fullWhite : null,
         backgroundColor: (theme === 'dark') ? '#303030' : fullWhite,
-        borderBottom: `1px solid ${(theme === 'dark') ? darkWhite : minBlack}`,
         outline: 0,
         padding: 12,
         fontSize: 16,
@@ -161,6 +158,7 @@ class Home extends React.Component {
         paddingLeft: 8,
         paddingRight: 8,
         boxSizing: 'border-box',
+        borderTop: `1px solid ${(theme === 'dark') ? darkWhite : minBlack}`,
       },
       controllerContainerLeft: {
         float: 'left',
@@ -176,8 +174,10 @@ class Home extends React.Component {
         boxSizing: 'border-box',
         height: '100%',
         overflowY: 'auto',
+        webkitOverflowScrolling: 'touch',
       },
       progressContainer: {
+        flex: 1,
         height: '100%',
         width: '100%',
         display: 'flex',
@@ -239,10 +239,8 @@ class Home extends React.Component {
     switch (output.get('status')) {
       case 'loading': {
         return (
-          <div style={styles.resultContainer}>
-            <div style={styles.progressContainer} >
-              <CircularProgress size={80} thickness={5} />
-            </div>
+          <div style={styles.progressContainer} >
+            <CircularProgress size={80} thickness={5} />
           </div>
         );
       }
@@ -298,7 +296,7 @@ class Home extends React.Component {
         return (
           <div style={styles.resultContainer}>
             {output.get('inputRoman') ? (
-              <p style={styles.inputRoman}>{output.get('inputRoman')}</p>
+              <p className="text-selectable" style={styles.inputRoman}>{output.get('inputRoman')}</p>
             ) : null}
 
             {output.get('suggestedInputLang') ? (
@@ -332,11 +330,11 @@ class Home extends React.Component {
                 actAsExpander={hasDict}
                 showExpandableButton={hasDict}
               />
-              <CardText style={styles.outputText} lang={toCountryRemovedLanguage(output.get('outputLang'))}>
+              <CardText className="text-selectable" style={styles.outputText} lang={toCountryRemovedLanguage(output.get('outputLang'))}>
                 {output.get('outputText')}
               </CardText>
               {output.get('outputRoman') ? (
-                <CardText style={styles.outputRoman}>
+                <CardText className="text-selectable" style={styles.outputRoman}>
                   {output.get('outputRoman')}
                 </CardText>
               ) : null}
@@ -465,7 +463,7 @@ class Home extends React.Component {
       onTouchTap: onFullscreenButtonTouchTap,
     });
 
-    if (process.env.PLATFORM === 'windows') {
+    if (process.env.PLATFORM === 'windows' || process.env.PLATFORM === 'cordova') {
       controllers.splice(controllers.length - 2, 0, {
         icon: <ImageCameraAlt />,
         tooltip: strings.camera,
@@ -508,6 +506,7 @@ class Home extends React.Component {
         />
         <Paper zDepth={2} style={styles.inputContainer}>
           <textarea
+            className="text-selectable"
             lang={toCountryRemovedLanguage(inputLang)}
             style={styles.textarea}
             placeholder={strings.typeSomethingHere}

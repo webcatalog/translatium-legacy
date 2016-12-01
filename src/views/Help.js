@@ -24,11 +24,9 @@ class Help extends React.Component {
       contentContainer: {
         flex: 1,
         height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      innerContentContainer: {
+        padding: '12px 24px',
+        overflowY: 'auto',
+        webkitOverflowScrolling: 'touch',
         textAlign: 'center',
       },
       icon: {
@@ -52,33 +50,31 @@ class Help extends React.Component {
           showMenuIconButton={false}
         />
         <div style={styles.contentContainer}>
-          <div style={styles.innerContentContainer}>
-            <img src="images/logo.png" role="presentation" style={styles.icon} />
-            <h3 style={styles.text}>Modern Translator</h3>
-            <h4 style={styles.text}>Version {process.env.VERSION}</h4>
+          <img src="images/logo.png" role="presentation" style={styles.icon} />
+          <h3 style={styles.text}>Modern Translator</h3>
+          <h4 style={styles.text}>Version {process.env.VERSION}</h4>
 
-            {process.env.PLATFORM === 'mac' ? (
-              <p>
-                <a onTouchTap={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')}>
-                  {strings.rateMacAppStore}
-                </a>
-              </p>
-            ) : null}
+          {process.env.PLATFORM === 'mac' ? (
+            <p>
+              <a onTouchTap={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')}>
+                {strings.rateMacAppStore}
+              </a>
+            </p>
+          ) : null}
 
-            {process.env.PLATFORM === 'windows' ? (
-              <p>
-                <a onTouchTap={() => openUri('ms-windows-store://review/?ProductId=9WZDNCRFHVJL')}>
-                  {strings.rateWindowsStore}
-                </a>
-              </p>
-            ) : null}
+          {process.env.PLATFORM === 'windows' ? (
+            <p>
+              <a onTouchTap={() => openUri('ms-windows-store://review/?ProductId=9WZDNCRFHVJL')}>
+                {strings.rateWindowsStore}
+              </a>
+            </p>
+          ) : null}
 
-            <p><a onTouchTap={() => openUri('mailto:support@moderntranslator.com')}>Support</a></p>
+          <p><a onTouchTap={() => openUri('mailto:support@moderntranslator.com')}>Support</a></p>
 
-            <p><a onTouchTap={() => openUri('https://moderntranslator.com')}>Website</a></p>
+          <p><a onTouchTap={() => openUri('https://moderntranslator.com')}>Website</a></p>
 
-            <p><a onTouchTap={() => openUri('https://moderntranslator.com/release-notes')}>Release Notes</a></p>
-          </div>
+          <p><a onTouchTap={() => openUri('https://moderntranslator.com/release-notes')}>Release Notes</a></p>
         </div>
       </div>
     );
