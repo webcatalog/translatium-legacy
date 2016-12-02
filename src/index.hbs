@@ -6,21 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="manifest" href="manifest.json">
     <meta name="mobile-web-app-capable" content="yes">
-		<title>Modern Translator</title>
+		<title>{{htmlWebpackPlugin.options.title}}</title>
 		<link href="roboto-v15/font.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 	</head>
 	<body>
 		<div id="app"></div>
-		<script>
-			if (process.versions['electron']) {
+		{{#if htmlWebpackPlugin.options.isMac}}
+			<script>
 				var { remote, webFrame, shell } = require('electron');
 				webFrame.setZoomLevelLimits(1, 1);
 				var fs = require('fs');
-			}
-		</script>
+			</script>
+		{{/if}}
 		<script src="cordova.js"></script>
-		<script src="canvas-to-blob.min.js"></script>
+		{{#if htmlWebpackPlugin.options.isCordova}}
+			<script src="canvas-to-blob.min.js"></script>
+		{{/if}}
     <script src="bundle.js"></script>
 	</body>
 </html>

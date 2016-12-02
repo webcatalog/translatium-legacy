@@ -4,6 +4,8 @@ const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BomPlugin = require('webpack-utf8-bom');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 
 const BUILD_DIR = path.resolve(__dirname, `platforms/${process.env.PLATFORM}/www`);
 const APP_DIR = path.resolve(__dirname, 'src');
@@ -19,6 +21,10 @@ const common = {
   },
   module: {
     loaders: [
+      {
+        test: /\.hbs$/,
+        loader: 'handlebars',
+      },
       {
         test: /\.json$/,
         loader: 'json',
@@ -49,9 +55,10 @@ const config = (() => {
   ];
 
   if (process.env.PLATFORM === 'cordova') {
-    copyArr.push({
-      from: 'node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js',
-    });
+    copyArr.push([
+      { from: 'node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js' },
+      { from: 'node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js.map' },
+    ]);
   }
 
   switch (process.env.npm_lifecycle_event) {
@@ -62,6 +69,12 @@ const config = (() => {
         plugins: [
           new CleanWebpackPlugin([BUILD_DIR]),
           new CopyWebpackPlugin(copyArr),
+          new HtmlWebpackPlugin({
+            isWindows: process.env.PLATFORM === 'windows',
+            isMac: process.env.PLATFORM === 'mac',
+            isCordova: process.env.PLATFORM === 'cordova',
+            template: 'src/index.hbs',
+          }),
           new webpack.optimize.OccurenceOrderPlugin(),
           new webpack.optimize.DedupePlugin(),
           new webpack.optimize.UglifyJsPlugin({

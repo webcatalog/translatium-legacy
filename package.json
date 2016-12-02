@@ -23,9 +23,9 @@
     "immutable": "^3.8.1",
     "material-ui": "^0.16.4",
     "pouchdb-browser": "^6.0.7",
-    "react": "^15.4.0",
+    "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.4.1",
-    "react-dom": "^15.4.0",
+    "react-dom": "^15.4.1",
     "react-onclickoutside": "^5.7.1",
     "react-redux": "^4.4.6",
     "react-router": "^3.0.0",
@@ -34,9 +34,6 @@
     "recordrtc": "^5.4.0",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
-    "webpack": "^1.13.3",
-    "webpack-merge": "^0.17.0",
-    "webpack-stream": "^3.2.0",
     "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
@@ -57,7 +54,13 @@
     "gulp-bom": "^1.0.0",
     "gulp-bro": "^0.3.1",
     "gulp-rename": "^1.2.2",
+    "handlebars": "^4.0.6",
+    "handlebars-loader": "^1.4.0",
+    "html-webpack-plugin": "^2.24.1",
     "json-loader": "^0.5.4",
+    "webpack": "^1.13.3",
+    "webpack-merge": "^0.17.0",
+    "webpack-stream": "^3.2.0",
     "webpack-utf8-bom": "^1.0.3"
   }
 }
