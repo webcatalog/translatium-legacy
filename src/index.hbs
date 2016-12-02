@@ -14,15 +14,13 @@
 		<div id="app"></div>
 		{{#if htmlWebpackPlugin.options.isMac}}
 			<script>
-				var { remote, webFrame, shell } = require('electron');
-				webFrame.setZoomLevelLimits(1, 1);
-				var fs = require('fs');
+				var { remote, webFrame, shell } = require('electron'); var fs = require('fs'); webFrame.setZoomLevelLimits(1, 1);
 			</script>
 		{{/if}}
-		<script src="cordova.js"></script>
 		{{#if htmlWebpackPlugin.options.isCordova}}
-			<script src="canvas-to-blob.min.js"></script>
+			<script type="text/javascript" src="cordova.js"></script>
+			<script type="text/javascript" src="canvas-to-blob.min.js"></script>
 		{{/if}}
-    <script src="bundle.js"></script>
+    <script type="text/javascript" src="bundle.js"></script>
 	</body>
 </html>

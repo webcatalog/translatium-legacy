@@ -70,6 +70,12 @@ const config = (() => {
           new CleanWebpackPlugin([BUILD_DIR]),
           new CopyWebpackPlugin(copyArr),
           new HtmlWebpackPlugin({
+            inject: false,
+            minify: {
+              removeComments: true,
+              collapseWhitespace: true,
+              html5: true,
+            },
             isWindows: process.env.PLATFORM === 'windows',
             isMac: process.env.PLATFORM === 'mac',
             isCordova: process.env.PLATFORM === 'cordova',
