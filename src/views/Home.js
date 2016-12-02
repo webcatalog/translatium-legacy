@@ -174,7 +174,7 @@ class Home extends React.Component {
         boxSizing: 'border-box',
         height: '100%',
         overflowY: 'auto',
-        webkitOverflowScrolling: 'touch',
+        WebkitOverflowScrolling: 'touch',
       },
       progressContainer: {
         flex: 1,

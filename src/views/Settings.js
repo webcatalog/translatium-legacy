@@ -28,7 +28,7 @@ class Settings extends React.Component {
         boxSizing: 'border-box',
         maxWidth: 500,
         overflowY: 'auto',
-        webkitOverflowScrolling: 'touch',
+        WebkitOverflowScrolling: 'touch',
       },
     };
   }

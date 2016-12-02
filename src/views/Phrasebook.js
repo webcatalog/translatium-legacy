@@ -73,7 +73,7 @@ class Phrasebook extends React.Component {
         flex: 1,
         height: '100%',
         overflowY: 'auto',
-        webkitOverflowScrolling: 'touch',
+        WebkitOverflowScrolling: 'touch',
         padding: 0,
         boxSizing: 'border-box',
       },

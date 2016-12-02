@@ -3,8 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { replace, goBack } from 'react-router-redux';
 
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import { red500, fullWhite, fullBlack } from 'material-ui/styles/colors';
@@ -177,7 +175,6 @@ class App extends React.Component {
   render() {
     const {
       children,
-      pathname,
       bottomNavigationSelectedIndex,
       fullPageLoading,
       onBottomNavigationItemClick,
@@ -196,25 +193,7 @@ class App extends React.Component {
             <CircularProgress size={80} thickness={5} />
           </div>) : null}
           <Alert />
-          <ReactCSSTransitionGroup
-            transitionName="background"
-            transitionEnterTimeout={1000}
-            transitionLeaveTimeout={1000}
-            style={{
-              flex: 1,
-              height: '100%',
-              position: 'relative',
-            }}
-          >
-            <div
-              key={pathname}
-              style={{
-                height: '100%',
-              }}
-            >
-              {children}
-            </div>
-          </ReactCSSTransitionGroup>
+          {children}
           {bottomNavigationSelectedIndex > -1 ? (
             <Paper zDepth={2} style={{ zIndex: 1000 }}>
               <BottomNavigation selectedIndex={bottomNavigationSelectedIndex}>
@@ -249,7 +228,6 @@ class App extends React.Component {
 
 App.propTypes = {
   children: React.PropTypes.element, // matched child route component
-  pathname: React.PropTypes.string,
   theme: React.PropTypes.string,
   primaryColorId: React.PropTypes.string,
   fullPageLoading: React.PropTypes.bool,

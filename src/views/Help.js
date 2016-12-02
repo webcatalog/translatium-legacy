@@ -26,7 +26,7 @@ class Help extends React.Component {
         height: '100%',
         padding: '12px 24px',
         overflowY: 'auto',
-        webkitOverflowScrolling: 'touch',
+        WebkitOverflowScrolling: 'touch',
         textAlign: 'center',
       },
       icon: {

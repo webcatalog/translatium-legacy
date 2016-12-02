@@ -33,7 +33,7 @@ class LanguageList extends React.Component {
         flex: 1,
         height: '100%',
         overflowY: 'auto',
-        webkitOverflowScrolling: 'touch',
+        WebkitOverflowScrolling: 'touch',
       },
     };
   }
@@ -57,7 +57,6 @@ class LanguageList extends React.Component {
 
     const groups = {};
     languages.forEach((x) => {
-      console.log(x);
       const y = strings[x][0];
       if (groups[y]) {
         groups[y].push(x);
