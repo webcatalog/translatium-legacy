@@ -22,7 +22,6 @@ class Settings extends React.Component {
       },
       innerContainer: {
         flex: 1,
-        height: '100%',
         padding: '12px 24px',
         boxSizing: 'border-box',
         maxWidth: 500,

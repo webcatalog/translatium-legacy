@@ -25,13 +25,11 @@ class LanguageList extends React.Component {
     return {
       container: {
         flex: 1,
-        height: '100%',
         display: 'flex',
         flexDirection: 'column',
       },
       listContainer: {
         flex: 1,
-        height: '100%',
         overflowY: 'auto',
         WebkitOverflowScrolling: 'touch',
       },

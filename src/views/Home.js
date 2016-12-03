@@ -107,7 +107,6 @@ class Home extends React.Component {
       innerContainer: {
         flex: 1,
         display: 'flex',
-        height: '100%',
       },
       languageTitle: {
         flex: 1,
@@ -175,14 +174,11 @@ class Home extends React.Component {
         flex: 1,
         padding: '0 12px 12px 12px',
         boxSizing: 'border-box',
-        height: '100%',
         overflowY: 'auto',
         WebkitOverflowScrolling: 'touch',
       },
       progressContainer: {
         flex: 1,
-        height: '100%',
-        width: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
