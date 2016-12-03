@@ -17,7 +17,6 @@ class Settings extends React.Component {
     return {
       container: {
         flex: 1,
-        height: '100%',
         display: 'flex',
         flexDirection: 'column',
       },

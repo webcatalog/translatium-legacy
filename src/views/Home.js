@@ -95,11 +95,14 @@ class Home extends React.Component {
     return {
       container: {
         flex: 1,
-        height: '100%',
         backgroundColor: (theme === 'dark') ? fullBlack : grey100,
         display: 'flex',
-        flexDirection: 'column',
         overflow: 'hidden',
+      },
+      anotherContainer: {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
       },
       innerContainer: {
         flex: 1,
@@ -414,6 +417,7 @@ class Home extends React.Component {
       onOpenImageButtonTouchTap,
       onCameraButtonTouchTap,
       onFullscreenButtonTouchTap,
+      onAnotherContainerTouchTap,
     } = this.props;
     const styles = this.getStyles();
 
@@ -480,102 +484,104 @@ class Home extends React.Component {
 
     return (
       <div style={styles.container}>
-        <AppBar
-          showMenuIconButton={false}
-          title={(
-            <div style={styles.innerContainer}>
-              <div style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('inputLang')}>
-                <span style={styles.languageTitleSpan}>{strings[inputLang]}</span>
-                <div style={styles.dropDownIconContainer}>
-                  <NavigationArrowDropDown color={fullWhite} />
+        <div style={styles.anotherContainer} onTouchTap={() => onAnotherContainerTouchTap(imeMode)}>
+          <AppBar
+            showMenuIconButton={false}
+            title={(
+              <div style={styles.innerContainer}>
+                <div style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('inputLang')}>
+                  <span style={styles.languageTitleSpan}>{strings[inputLang]}</span>
+                  <div style={styles.dropDownIconContainer}>
+                    <NavigationArrowDropDown color={fullWhite} />
+                  </div>
+                </div>
+                <div style={styles.swapIconContainer} onTouchTap={onSwapButtonTouchTap}>
+                  <IconButton disabled={!isOutput(inputLang)}>
+                    <ActionSwapHoriz color={fullWhite} />
+                  </IconButton>
+                </div>
+                <div style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('outputLang')}>
+                  <span style={styles.languageTitleSpan}>{strings[outputLang]}</span>
+                  <div style={styles.dropDownIconContainer}>
+                    <NavigationArrowDropDown color={fullWhite} />
+                  </div>
                 </div>
               </div>
-              <div style={styles.swapIconContainer} onTouchTap={onSwapButtonTouchTap}>
-                <IconButton disabled={!isOutput(inputLang)}>
-                  <ActionSwapHoriz color={fullWhite} />
-                </IconButton>
-              </div>
-              <div style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('outputLang')}>
-                <span style={styles.languageTitleSpan}>{strings[outputLang]}</span>
-                <div style={styles.dropDownIconContainer}>
-                  <NavigationArrowDropDown color={fullWhite} />
-                </div>
-              </div>
-            </div>
-          )}
-        />
-        <Paper zDepth={2} style={styles.inputContainer}>
-          <textarea
-            className="text-selectable"
-            lang={toCountryRemovedLanguage(inputLang)}
-            style={styles.textarea}
-            placeholder={strings.typeSomethingHere}
-            autoComplete="off"
-            autoCorrect="off"
-            autoCapitalize="off"
-            spellCheck="false"
-            onKeyDown={translateWhenPressingEnter ? e => onKeyDown(e) : null}
-            onInput={onInputText}
-            onKeyUp={onInputText}
-            onTouchTap={onInputText}
-            onChange={onInputText}
-            value={inputText}
+            )}
           />
-          <div style={styles.controllerContainer}>
-            <div style={styles.controllerContainerLeft}>
-              {
-                controllers.slice(0, maxVisibleIcon)
-                .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
-                  if (disabled) return null;
+          <Paper zDepth={2} style={styles.inputContainer}>
+            <textarea
+              className="text-selectable"
+              lang={toCountryRemovedLanguage(inputLang)}
+              style={styles.textarea}
+              placeholder={strings.typeSomethingHere}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              onKeyDown={translateWhenPressingEnter ? e => onKeyDown(e) : null}
+              onInput={onInputText}
+              onKeyUp={onInputText}
+              onTouchTap={onInputText}
+              onChange={onInputText}
+              value={inputText}
+            />
+            <div style={styles.controllerContainer}>
+              <div style={styles.controllerContainerLeft}>
+                {
+                  controllers.slice(0, maxVisibleIcon)
+                  .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
+                    if (disabled) return null;
 
-                  return (
-                    <IconButton
-                      tooltip={tooltip}
-                      tooltipPosition={tooltipPos}
-                      key={`dIconButton_${i}`}
-                      onTouchTap={onTouchTap}
-                    >
-                      {icon}
-                    </IconButton>
-                  );
-                })
-              }
-              {(showMoreButton) ? (
-                <IconMenu
-                  iconButtonElement={(
-                    <IconButton tooltip={strings.more} tooltipPosition={tooltipPos}>
-                      <NavigationMoreVert />
-                    </IconButton>
-                  )}
-                  anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
-                  targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-                >
-                  {
-                    controllers
-                      .slice(maxVisibleIcon, controllers.length)
-                      .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
-                        <MenuItem
-                          primaryText={tooltip}
-                          leftIcon={icon}
-                          disabled={disabled}
-                          key={`dMenuItem_${i}`}
-                          onTouchTap={onTouchTap}
-                        />
-                      ))
-                  }
-                </IconMenu>
-              ) : null}
+                    return (
+                      <IconButton
+                        tooltip={tooltip}
+                        tooltipPosition={tooltipPos}
+                        key={`dIconButton_${i}`}
+                        onTouchTap={onTouchTap}
+                      >
+                        {icon}
+                      </IconButton>
+                    );
+                  })
+                }
+                {(showMoreButton) ? (
+                  <IconMenu
+                    iconButtonElement={(
+                      <IconButton tooltip={strings.more} tooltipPosition={tooltipPos}>
+                        <NavigationMoreVert />
+                      </IconButton>
+                    )}
+                    anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+                    targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+                  >
+                    {
+                      controllers
+                        .slice(maxVisibleIcon, controllers.length)
+                        .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
+                          <MenuItem
+                            primaryText={tooltip}
+                            leftIcon={icon}
+                            disabled={disabled}
+                            key={`dMenuItem_${i}`}
+                            onTouchTap={onTouchTap}
+                          />
+                        ))
+                    }
+                  </IconMenu>
+                ) : null}
+              </div>
+              <div style={styles.controllerContainerRight}>
+                <RaisedButton
+                  label={strings.translate}
+                  primary
+                  onTouchTap={onTranslateButtonTouchTap}
+                />
+              </div>
             </div>
-            <div style={styles.controllerContainerRight}>
-              <RaisedButton
-                label={strings.translate}
-                primary
-                onTouchTap={onTranslateButtonTouchTap}
-              />
-            </div>
-          </div>
-        </Paper>
-        {this.renderOutput(styles)}
+          </Paper>
+          {this.renderOutput(styles)}
+        </div>
         {imeMode === 'handwriting' ? <Handwriting /> : null}
         {imeMode === 'speech' ? <Speech /> : null}
       </div>
@@ -612,6 +618,7 @@ Home.propTypes = {
   onFullscreenButtonTouchTap: React.PropTypes.func,
   onSuggestedInputLangTouchTap: React.PropTypes.func,
   onSuggestedInputTextTouchTap: React.PropTypes.func,
+  onAnotherContainerTouchTap: React.PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -700,6 +707,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onSuggestedInputTextTouchTap: (text) => {
     dispatch(updateInputText(text));
+  },
+  onAnotherContainerTouchTap: (imeMode) => {
+    if (imeMode) dispatch(updateImeMode(null));
   },
 });
 

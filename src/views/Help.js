@@ -17,13 +17,11 @@ class Help extends React.Component {
     return {
       container: {
         flex: 1,
-        height: '100%',
         display: 'flex',
         flexDirection: 'column',
       },
       contentContainer: {
         flex: 1,
-        height: '100%',
         padding: '12px 24px',
         overflowY: 'auto',
         WebkitOverflowScrolling: 'touch',
