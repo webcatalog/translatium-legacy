@@ -106,7 +106,7 @@ const translateText = (inputLang, outputLang, inputText, chinaMode) =>
   Promise.resolve()
     .then(() => {
       if (encodeURIComponent(inputText).length < 1000) {
-        return translateShortText(inputLang, outputLang, inputText);
+        return translateShortText(inputLang, outputLang, inputText, chinaMode);
       }
 
       let tmp = inputText.substr(0, 100);
