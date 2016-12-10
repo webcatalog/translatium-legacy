@@ -17,7 +17,6 @@ class BiggerText extends React.Component {
     return {
       container: {
         flex: 1,
-        height: '100%',
         padding: '64px 16px 16px 16px',
         boxSizing: 'border-box',
         color: muiTheme.baseTheme.palette.textColor,

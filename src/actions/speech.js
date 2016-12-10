@@ -41,7 +41,7 @@ export const releaseDevice = () => ((dispatch, getState) => {
       }
       break;
     }
-    default: {
+    case 'mac': {
       if (!recorder) return;
 
       recorder.stopRecording(() => {
@@ -53,6 +53,13 @@ export const releaseDevice = () => ((dispatch, getState) => {
         recorder.clearRecordedData();
         recorder = null;
       });
+
+      break;
+    }
+    default: {
+      /* eslint-disable no-console */
+      console.log('Platform does not support');
+      /* eslint-enable no-console */
     }
   }
 });
@@ -147,7 +154,7 @@ export const stopRecording = () => ((dispatch, getState) => {
       }
       break;
     }
-    default: {
+    case 'mac': {
       recorder.stopRecording(() => {
         dispatch({
           type: UPDATE_SPEECH_STATUS,
@@ -184,6 +191,12 @@ export const stopRecording = () => ((dispatch, getState) => {
           recorder = null;
         });
       });
+      break;
+    }
+    default: {
+      /* eslint-disable no-console */
+      console.log('Platform does not support');
+      /* eslint-enable no-console */
     }
   }
 });
@@ -229,7 +242,7 @@ export const startRecording = () => ((dispatch) => {
         .then(null, () => {});
       break;
     }
-    default: {
+    case 'mac': {
       navigator.getUserMedia({ audio: true, video: false }, (stream) => {
         recorder = new RecordRTC(stream, {
           type: 'audio',
@@ -246,6 +259,12 @@ export const startRecording = () => ((dispatch) => {
       }, () => {
         dispatch(openAlert('cannotActivateMicrophone'));
       });
+      break;
+    }
+    default: {
+      /* eslint-disable no-console */
+      console.log('Platform does not support');
+      /* eslint-enable no-console */
     }
   }
 });

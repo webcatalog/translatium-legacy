@@ -95,16 +95,19 @@ class Home extends React.Component {
     return {
       container: {
         flex: 1,
-        height: '100%',
         backgroundColor: (theme === 'dark') ? fullBlack : grey100,
         display: 'flex',
-        flexDirection: 'column',
         overflow: 'hidden',
+      },
+      anotherContainer: {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
       },
       innerContainer: {
         flex: 1,
         display: 'flex',
-        height: '100%',
       },
       languageTitle: {
         flex: 1,
@@ -144,13 +147,11 @@ class Home extends React.Component {
         zIndex: 1000,
       },
       textarea: {
-        borderTop: 0,
-        borderLeft: 0,
-        borderRight: 0,
+        border: 0,
         color: (theme === 'dark') ? fullWhite : null,
         backgroundColor: (theme === 'dark') ? '#303030' : fullWhite,
-        borderBottom: `1px solid ${(theme === 'dark') ? darkWhite : minBlack}`,
         outline: 0,
+        margin: 0,
         padding: 12,
         fontSize: 16,
         boxSizing: 'border-box',
@@ -161,6 +162,7 @@ class Home extends React.Component {
         paddingLeft: 8,
         paddingRight: 8,
         boxSizing: 'border-box',
+        borderTop: `1px solid ${(theme === 'dark') ? darkWhite : minBlack}`,
       },
       controllerContainerLeft: {
         float: 'left',
@@ -174,12 +176,11 @@ class Home extends React.Component {
         flex: 1,
         padding: '0 12px 12px 12px',
         boxSizing: 'border-box',
-        height: '100%',
         overflowY: 'auto',
+        WebkitOverflowScrolling: 'touch',
       },
       progressContainer: {
-        height: '100%',
-        width: '100%',
+        flex: 1,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -239,10 +240,8 @@ class Home extends React.Component {
     switch (output.get('status')) {
       case 'loading': {
         return (
-          <div style={styles.resultContainer}>
-            <div style={styles.progressContainer} >
-              <CircularProgress size={80} thickness={5} />
-            </div>
+          <div style={styles.progressContainer} >
+            <CircularProgress size={80} thickness={5} />
           </div>
         );
       }
@@ -298,7 +297,7 @@ class Home extends React.Component {
         return (
           <div style={styles.resultContainer}>
             {output.get('inputRoman') ? (
-              <p style={styles.inputRoman}>{output.get('inputRoman')}</p>
+              <p className="text-selectable" style={styles.inputRoman}>{output.get('inputRoman')}</p>
             ) : null}
 
             {output.get('suggestedInputLang') ? (
@@ -332,18 +331,18 @@ class Home extends React.Component {
                 actAsExpander={hasDict}
                 showExpandableButton={hasDict}
               />
-              <CardText style={styles.outputText} lang={toCountryRemovedLanguage(output.get('outputLang'))}>
+              <CardText className="text-selectable" style={styles.outputText} lang={toCountryRemovedLanguage(output.get('outputLang'))}>
                 {output.get('outputText')}
               </CardText>
               {output.get('outputRoman') ? (
-                <CardText style={styles.outputRoman}>
+                <CardText className="text-selectable" style={styles.outputRoman}>
                   {output.get('outputRoman')}
                 </CardText>
               ) : null}
               <CardActions>
                 {
                   controllers.slice(0, maxVisibleIcon)
-                  .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
+                  .map(({ icon, tooltip, onTouchTap }, i) => (
                     <IconButton
                       tooltip={tooltip}
                       tooltipPosition="bottom-center"
@@ -367,19 +366,14 @@ class Home extends React.Component {
                     {
                       controllers
                         .slice(maxVisibleIcon, controllers.length)
-                        .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
-                          if (disabled) return null;
-
-                          return (
-                            <MenuItem
-                              primaryText={tooltip}
-                              leftIcon={icon}
-                              disabled={disabled}
-                              key={`dMenuItem_${i}`}
-                              onTouchTap={onTouchTap}
-                            />
-                          );
-                        })
+                        .map(({ icon, tooltip, onTouchTap }, i) => (
+                          <MenuItem
+                            primaryText={tooltip}
+                            leftIcon={icon}
+                            key={`dMenuItem_${i}`}
+                            onTouchTap={onTouchTap}
+                          />
+                        ))
                     }
                   </IconMenu>
                 ) : null}
@@ -416,6 +410,7 @@ class Home extends React.Component {
       onOpenImageButtonTouchTap,
       onCameraButtonTouchTap,
       onFullscreenButtonTouchTap,
+      onAnotherContainerTouchTap,
     } = this.props;
     const styles = this.getStyles();
 
@@ -465,13 +460,14 @@ class Home extends React.Component {
       onTouchTap: onFullscreenButtonTouchTap,
     });
 
-    if (process.env.PLATFORM === 'windows') {
-      controllers.splice(controllers.length - 2, 0, {
-        icon: <ImageCameraAlt />,
-        tooltip: strings.camera,
-        disabled: !isOcrSupported(inputLang),
-        onTouchTap: onCameraButtonTouchTap,
-      });
+    if (process.env.PLATFORM === 'windows' || process.env.PLATFORM === 'cordova') {
+      if (isOcrSupported(inputLang)) {
+        controllers.splice(controllers.length - 2, 0, {
+          icon: <ImageCameraAlt />,
+          tooltip: strings.camera,
+          onTouchTap: onCameraButtonTouchTap,
+        });
+      }
     }
 
     const maxVisibleIcon = Math.min(Math.round((screenWidth - 200) / 56), controllers.length);
@@ -482,54 +478,53 @@ class Home extends React.Component {
 
     return (
       <div style={styles.container}>
-        <AppBar
-          showMenuIconButton={false}
-          title={(
-            <div style={styles.innerContainer}>
-              <div style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('inputLang')}>
-                <span style={styles.languageTitleSpan}>{strings[inputLang]}</span>
-                <div style={styles.dropDownIconContainer}>
-                  <NavigationArrowDropDown color={fullWhite} />
+        <div style={styles.anotherContainer} onTouchTap={() => onAnotherContainerTouchTap(imeMode)}>
+          <AppBar
+            showMenuIconButton={false}
+            title={(
+              <div style={styles.innerContainer}>
+                <div style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('inputLang')}>
+                  <span style={styles.languageTitleSpan}>{strings[inputLang]}</span>
+                  <div style={styles.dropDownIconContainer}>
+                    <NavigationArrowDropDown color={fullWhite} />
+                  </div>
+                </div>
+                <div style={styles.swapIconContainer} onTouchTap={onSwapButtonTouchTap}>
+                  <IconButton disabled={!isOutput(inputLang)}>
+                    <ActionSwapHoriz color={fullWhite} />
+                  </IconButton>
+                </div>
+                <div style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('outputLang')}>
+                  <span style={styles.languageTitleSpan}>{strings[outputLang]}</span>
+                  <div style={styles.dropDownIconContainer}>
+                    <NavigationArrowDropDown color={fullWhite} />
+                  </div>
                 </div>
               </div>
-              <div style={styles.swapIconContainer} onTouchTap={onSwapButtonTouchTap}>
-                <IconButton disabled={!isOutput(inputLang)}>
-                  <ActionSwapHoriz color={fullWhite} />
-                </IconButton>
-              </div>
-              <div style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('outputLang')}>
-                <span style={styles.languageTitleSpan}>{strings[outputLang]}</span>
-                <div style={styles.dropDownIconContainer}>
-                  <NavigationArrowDropDown color={fullWhite} />
-                </div>
-              </div>
-            </div>
-          )}
-        />
-        <Paper zDepth={2} style={styles.inputContainer}>
-          <textarea
-            lang={toCountryRemovedLanguage(inputLang)}
-            style={styles.textarea}
-            placeholder={strings.typeSomethingHere}
-            autoComplete="off"
-            autoCorrect="off"
-            autoCapitalize="off"
-            spellCheck="false"
-            onKeyDown={translateWhenPressingEnter ? e => onKeyDown(e) : null}
-            onInput={onInputText}
-            onKeyUp={onInputText}
-            onTouchTap={onInputText}
-            onChange={onInputText}
-            value={inputText}
+            )}
           />
-          <div style={styles.controllerContainer}>
-            <div style={styles.controllerContainerLeft}>
-              {
-                controllers.slice(0, maxVisibleIcon)
-                .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
-                  if (disabled) return null;
-
-                  return (
+          <Paper zDepth={2} style={styles.inputContainer}>
+            <textarea
+              className="text-selectable"
+              lang={toCountryRemovedLanguage(inputLang)}
+              style={styles.textarea}
+              placeholder={strings.typeSomethingHere}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              onKeyDown={translateWhenPressingEnter ? e => onKeyDown(e) : null}
+              onInput={onInputText}
+              onKeyUp={onInputText}
+              onTouchTap={onInputText}
+              onChange={onInputText}
+              value={inputText}
+            />
+            <div style={styles.controllerContainer}>
+              <div style={styles.controllerContainerLeft}>
+                {
+                  controllers.slice(0, maxVisibleIcon)
+                  .map(({ icon, tooltip, onTouchTap }, i) => (
                     <IconButton
                       tooltip={tooltip}
                       tooltipPosition={tooltipPos}
@@ -538,45 +533,44 @@ class Home extends React.Component {
                     >
                       {icon}
                     </IconButton>
-                  );
-                })
-              }
-              {(showMoreButton) ? (
-                <IconMenu
-                  iconButtonElement={(
-                    <IconButton tooltip={strings.more} tooltipPosition={tooltipPos}>
-                      <NavigationMoreVert />
-                    </IconButton>
-                  )}
-                  anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
-                  targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-                >
-                  {
-                    controllers
-                      .slice(maxVisibleIcon, controllers.length)
-                      .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
-                        <MenuItem
-                          primaryText={tooltip}
-                          leftIcon={icon}
-                          disabled={disabled}
-                          key={`dMenuItem_${i}`}
-                          onTouchTap={onTouchTap}
-                        />
-                      ))
-                  }
-                </IconMenu>
-              ) : null}
+                  ))
+                }
+                {(showMoreButton) ? (
+                  <IconMenu
+                    iconButtonElement={(
+                      <IconButton tooltip={strings.more} tooltipPosition={tooltipPos}>
+                        <NavigationMoreVert />
+                      </IconButton>
+                    )}
+                    anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+                    targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+                  >
+                    {
+                      controllers
+                        .slice(maxVisibleIcon, controllers.length)
+                        .map(({ icon, tooltip, onTouchTap }, i) => (
+                          <MenuItem
+                            primaryText={tooltip}
+                            leftIcon={icon}
+                            key={`dMenuItem_${i}`}
+                            onTouchTap={onTouchTap}
+                          />
+                        ))
+                    }
+                  </IconMenu>
+                ) : null}
+              </div>
+              <div style={styles.controllerContainerRight}>
+                <RaisedButton
+                  label={strings.translate}
+                  primary
+                  onTouchTap={onTranslateButtonTouchTap}
+                />
+              </div>
             </div>
-            <div style={styles.controllerContainerRight}>
-              <RaisedButton
-                label={strings.translate}
-                primary
-                onTouchTap={onTranslateButtonTouchTap}
-              />
-            </div>
-          </div>
-        </Paper>
-        {this.renderOutput(styles)}
+          </Paper>
+          {this.renderOutput(styles)}
+        </div>
         {imeMode === 'handwriting' ? <Handwriting /> : null}
         {imeMode === 'speech' ? <Speech /> : null}
       </div>
@@ -613,6 +607,7 @@ Home.propTypes = {
   onFullscreenButtonTouchTap: React.PropTypes.func,
   onSuggestedInputLangTouchTap: React.PropTypes.func,
   onSuggestedInputTextTouchTap: React.PropTypes.func,
+  onAnotherContainerTouchTap: React.PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -701,6 +696,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onSuggestedInputTextTouchTap: (text) => {
     dispatch(updateInputText(text));
+  },
+  onAnotherContainerTouchTap: (imeMode) => {
+    if (imeMode) dispatch(updateImeMode(null));
   },
 });
 

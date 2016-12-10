@@ -1,0 +1,11 @@
+{
+    "ios": {
+        "debug": {
+            "developmentTeam": "FVFM95DDPG"
+        },
+        "release": {
+            "codeSignIdentity": "iPhone Developer",
+            "developmentTeam": "FVFM95DDPG"
+        }
+    }
+}

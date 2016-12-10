@@ -4,6 +4,7 @@ const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BomPlugin = require('webpack-utf8-bom');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const BUILD_DIR = path.resolve(__dirname, `platforms/${process.env.PLATFORM}/www`);
 const APP_DIR = path.resolve(__dirname, 'src');
@@ -19,6 +20,10 @@ const common = {
   },
   module: {
     loaders: [
+      {
+        test: /\.hbs$/,
+        loader: 'handlebars',
+      },
       {
         test: /\.json$/,
         loader: 'json',
@@ -40,6 +45,18 @@ const common = {
       'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM),
       'process.env.VERSION': JSON.stringify(process.env.npm_package_version),
     }),
+    new HtmlWebpackPlugin({
+      inject: false,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        html5: true,
+      },
+      isWindows: process.env.PLATFORM === 'windows',
+      isMac: process.env.PLATFORM === 'mac',
+      isCordova: process.env.PLATFORM === 'cordova',
+      template: 'src/index.hbs',
+    }),
   ],
 };
 
@@ -48,9 +65,16 @@ const config = (() => {
     { from: 'platforms/common/www' },
   ];
 
+  if (process.env.PLATFORM === 'cordova') {
+    copyArr.push({ from: 'node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js' });
+    copyArr.push({ from: 'node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js.map' });
+    copyArr.push({ from: 'node_modules/blueimp-load-image/js/load-image.all.min.js' });
+  }
+
   switch (process.env.npm_lifecycle_event) {
     case 'build-mac':
     case 'build-windows':
+    case 'build-cordova':
       return merge(common, {
         plugins: [
           new CleanWebpackPlugin([BUILD_DIR]),
@@ -71,6 +95,7 @@ const config = (() => {
       });
     case 'dev-mac':
     case 'dev-windows':
+    case 'dev-cordova':
       return merge(common, {
         plugins: [
           new CopyWebpackPlugin(copyArr),

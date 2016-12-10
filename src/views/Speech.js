@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import onTouchTapOutside from 'react-onclickoutside';
 
 import Paper from 'material-ui/Paper';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -38,7 +37,7 @@ class Speech extends React.Component {
     return {
       container: {
         position: 'absolute',
-        width: '100%',
+        width: '100vw',
         height: 240,
         zIndex: 1499,
         bottom: 0,
@@ -79,11 +78,6 @@ class Speech extends React.Component {
     };
   }
 
-  handleClickOutside() {
-    const { onTurnOffSpeechRecognition } = this.props;
-    onTurnOffSpeechRecognition();
-  }
-
   render() {
     const { speechStatus, onControlButtonTouchTap } = this.props;
     const styles = this.getStyles();
@@ -113,7 +107,6 @@ class Speech extends React.Component {
 Speech.propTypes = {
   speechStatus: React.PropTypes.string.isRequired,
   onControlButtonTouchTap: React.PropTypes.func.isRequired,
-  onTurnOffSpeechRecognition: React.PropTypes.func.isRequired,
   onReleaseDevice: React.PropTypes.func.isRequired,
 };
 
@@ -137,33 +130,10 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const mapStateToProps = (state) => {
-  let eventTypes;
-  /* global Windows */
-  /* mousedown & touchstart call at the same time on WIndows Mobile. */
-  /* Workaround: disable mousedown on touch, disable touch on Continuum */
-  if ((process.env.PLATFORM === 'windows') && (Windows.System.Profile.AnalyticsInfo.versionInfo.deviceFamily === 'Windows.Mobile')) {
-    switch (Windows.UI.ViewManagement.UIViewSettings.getForCurrentView().userInteractionMode) {
-      case Windows.UI.ViewManagement.UserInteractionMode.mouse: {
-        eventTypes = 'mousedown';
-        break;
-      }
-      case Windows.UI.ViewManagement.UserInteractionMode.touch: {
-        eventTypes = 'touchstart';
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-  }
-
-  return {
-    speechStatus: state.speech.status,
-    eventTypes,
-  };
-};
+const mapStateToProps = state => ({
+  speechStatus: state.speech.status,
+});
 
 export default connect(
   mapStateToProps, mapDispatchToProps,
-)(onTouchTapOutside(Speech));
+)(Speech);

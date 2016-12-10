@@ -27,7 +27,6 @@ class Ocr extends React.Component {
     return {
       container: {
         flex: 1,
-        height: '100%',
         display: 'flex',
         position: 'relative',
         backgroundColor: '#000',
@@ -40,8 +39,6 @@ class Ocr extends React.Component {
       },
       zoomContainer: {
         flex: 1,
-        height: '100%',
-        width: '100%',
         overflow: 'auto',
         padding: 56,
         boxSizing: 'border-box',

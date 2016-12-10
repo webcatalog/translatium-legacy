@@ -38,15 +38,24 @@ class App extends React.Component {
       pTheme.palette.accent2Color = primary1Color;
     }
     pTheme.palette.alternateTextColor = fullWhite;
-    pTheme.appBar = {};
-    pTheme.appBar.height = 56;
+
+    const muiTheme = getMuiTheme(pTheme);
+    muiTheme.appBar.height = 56;
+    muiTheme.bottomNavigation.selectedFontSize = muiTheme.bottomNavigation.unselectedFontSize;
 
     return {
-      muiTheme: getMuiTheme(pTheme),
+      muiTheme,
     };
   }
 
   componentDidMount() {
+    if (process.env.PLATFORM === 'cordova') {
+      /* global StatusBar */
+      StatusBar.backgroundColorByHexString(
+        colorPairs[this.props.primaryColorId].primary2Color,
+      );
+    }
+
     if (process.env.PLATFORM === 'windows') {
       this.setAppTitleBar(this.props.primaryColorId);
 
@@ -70,8 +79,16 @@ class App extends React.Component {
   componentWillUpdate(nextProps) {
     const { primaryColorId } = this.props;
 
-    if (process.env.PLATFORM === 'windows' && primaryColorId !== nextProps.primaryColorId) {
-      this.setAppTitleBar(nextProps.primaryColorId);
+    if (primaryColorId !== nextProps.primaryColorId) {
+      if (process.env.PLATFORM === 'windows') {
+        this.setAppTitleBar(nextProps.primaryColorId);
+      }
+      if (process.env.PLATFORM === 'cordova') {
+        /* global StatusBar */
+        StatusBar.backgroundColorByHexString(
+          colorPairs[nextProps.primaryColorId].primary2Color,
+        );
+      }
     }
   }
 
@@ -147,8 +164,6 @@ class App extends React.Component {
       contentContainer: {
         flex: 1,
         position: 'relative',
-        height: '100%',
-        width: '100%',
         display: 'flex',
         flexDirection: 'column',
       },
@@ -245,6 +260,7 @@ const mapStateToProps = (state, ownProps) => {
 
 
   return {
+    pathname: ownProps.location.pathname,
     fullPageLoading: state.ocr && state.ocr.get('status') === 'loading',
     theme: state.settings.theme,
     primaryColorId: state.settings.primaryColorId,

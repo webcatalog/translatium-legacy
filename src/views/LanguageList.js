@@ -25,14 +25,13 @@ class LanguageList extends React.Component {
     return {
       container: {
         flex: 1,
-        height: '100%',
         display: 'flex',
         flexDirection: 'column',
       },
       listContainer: {
         flex: 1,
-        height: '100%',
         overflowY: 'auto',
+        WebkitOverflowScrolling: 'touch',
       },
     };
   }
@@ -46,11 +45,13 @@ class LanguageList extends React.Component {
     else if (type === 'ocrInputLang') languages = getOcrSupportedLanguages();
     else languages = getOutputLanguages();
 
+    /* Need to add back for localizing in the future
     languages.sort((x, y) => {
       if (x === 'auto') return -1;
       if (y === 'auto') return 1;
       return strings[x].localeCompare(strings[y]);
     });
+    */
 
     const groups = {};
     languages.forEach((x) => {

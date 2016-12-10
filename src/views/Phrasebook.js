@@ -49,7 +49,6 @@ class Phrasebook extends React.Component {
       emptyContainer: {
         flex: 1,
         display: 'flex',
-        height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
       },
@@ -65,14 +64,13 @@ class Phrasebook extends React.Component {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        height: '100%',
         position: 'relative',
         overflow: 'hidden',
       },
       listContainer: {
         flex: 1,
-        height: '100%',
         overflowY: 'auto',
+        WebkitOverflowScrolling: 'touch',
         padding: 0,
         boxSizing: 'border-box',
       },

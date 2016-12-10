@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob: cdvfile: gap: https://ssl.gstatic.com https://*.google.com https://google.com google.cn *.google.cn https://api.ocr.space 'unsafe-inline' 'unsafe-eval'; media-src *;">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Modern Translator</title>
+		<link href="roboto-v15/font.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+	</head>
+	<body>
+		<div id="app"></div>
+		{{#if htmlWebpackPlugin.options.isMac}}
+			<script>
+				var { remote, webFrame, shell } = require('electron'); var fs = require('fs'); webFrame.setZoomLevelLimits(1, 1);
+			</script>
+		{{/if}}
+		{{#if htmlWebpackPlugin.options.isCordova}}
+			<script type="text/javascript" src="canvas-to-blob.min.js"></script>
+			<script type="text/javascript" src="load-image.all.min.js"></script>
+			<script type="text/javascript" src="cordova.js"></script>
+		{{/if}}
+    <script type="text/javascript" src="bundle.js"></script>
+	</body>
+</html>
