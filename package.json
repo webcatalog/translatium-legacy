@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "blueimp-canvas-to-blob": "^3.6.0",
+    "blueimp-load-image": "^2.10.0",
     "history": "^4.4.0",
     "immutable": "^3.8.1",
     "material-ui": "^0.16.4",

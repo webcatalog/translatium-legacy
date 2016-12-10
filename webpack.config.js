@@ -45,6 +45,18 @@ const common = {
       'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM),
       'process.env.VERSION': JSON.stringify(process.env.npm_package_version),
     }),
+    new HtmlWebpackPlugin({
+      inject: false,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        html5: true,
+      },
+      isWindows: process.env.PLATFORM === 'windows',
+      isMac: process.env.PLATFORM === 'mac',
+      isCordova: process.env.PLATFORM === 'cordova',
+      template: 'src/index.hbs',
+    }),
   ],
 };
 
@@ -54,10 +66,9 @@ const config = (() => {
   ];
 
   if (process.env.PLATFORM === 'cordova') {
-    copyArr.push([
-      { from: 'node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js' },
-      { from: 'node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js.map' },
-    ]);
+    copyArr.push({ from: 'node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js' });
+    copyArr.push({ from: 'node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js.map' });
+    copyArr.push({ from: 'node_modules/blueimp-load-image/js/load-image.all.min.js' });
   }
 
   switch (process.env.npm_lifecycle_event) {
@@ -68,18 +79,6 @@ const config = (() => {
         plugins: [
           new CleanWebpackPlugin([BUILD_DIR]),
           new CopyWebpackPlugin(copyArr),
-          new HtmlWebpackPlugin({
-            inject: false,
-            minify: {
-              removeComments: true,
-              collapseWhitespace: true,
-              html5: true,
-            },
-            isWindows: process.env.PLATFORM === 'windows',
-            isMac: process.env.PLATFORM === 'mac',
-            isCordova: process.env.PLATFORM === 'cordova',
-            template: 'src/index.hbs',
-          }),
           new webpack.optimize.OccurenceOrderPlugin(),
           new webpack.optimize.DedupePlugin(),
           new webpack.optimize.UglifyJsPlugin({

@@ -103,6 +103,7 @@ class Home extends React.Component {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
+        width: '100%',
       },
       innerContainer: {
         flex: 1,
@@ -150,6 +151,7 @@ class Home extends React.Component {
         color: (theme === 'dark') ? fullWhite : null,
         backgroundColor: (theme === 'dark') ? '#303030' : fullWhite,
         outline: 0,
+        margin: 0,
         padding: 12,
         fontSize: 16,
         boxSizing: 'border-box',
@@ -340,7 +342,7 @@ class Home extends React.Component {
               <CardActions>
                 {
                   controllers.slice(0, maxVisibleIcon)
-                  .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
+                  .map(({ icon, tooltip, onTouchTap }, i) => (
                     <IconButton
                       tooltip={tooltip}
                       tooltipPosition="bottom-center"
@@ -364,19 +366,14 @@ class Home extends React.Component {
                     {
                       controllers
                         .slice(maxVisibleIcon, controllers.length)
-                        .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
-                          if (disabled) return null;
-
-                          return (
-                            <MenuItem
-                              primaryText={tooltip}
-                              leftIcon={icon}
-                              disabled={disabled}
-                              key={`dMenuItem_${i}`}
-                              onTouchTap={onTouchTap}
-                            />
-                          );
-                        })
+                        .map(({ icon, tooltip, onTouchTap }, i) => (
+                          <MenuItem
+                            primaryText={tooltip}
+                            leftIcon={icon}
+                            key={`dMenuItem_${i}`}
+                            onTouchTap={onTouchTap}
+                          />
+                        ))
                     }
                   </IconMenu>
                 ) : null}
@@ -464,12 +461,13 @@ class Home extends React.Component {
     });
 
     if (process.env.PLATFORM === 'windows' || process.env.PLATFORM === 'cordova') {
-      controllers.splice(controllers.length - 2, 0, {
-        icon: <ImageCameraAlt />,
-        tooltip: strings.camera,
-        disabled: !isOcrSupported(inputLang),
-        onTouchTap: onCameraButtonTouchTap,
-      });
+      if (isOcrSupported(inputLang)) {
+        controllers.splice(controllers.length - 2, 0, {
+          icon: <ImageCameraAlt />,
+          tooltip: strings.camera,
+          onTouchTap: onCameraButtonTouchTap,
+        });
+      }
     }
 
     const maxVisibleIcon = Math.min(Math.round((screenWidth - 200) / 56), controllers.length);
@@ -526,20 +524,16 @@ class Home extends React.Component {
               <div style={styles.controllerContainerLeft}>
                 {
                   controllers.slice(0, maxVisibleIcon)
-                  .map(({ icon, tooltip, disabled, onTouchTap }, i) => {
-                    if (disabled) return null;
-
-                    return (
-                      <IconButton
-                        tooltip={tooltip}
-                        tooltipPosition={tooltipPos}
-                        key={`dIconButton_${i}`}
-                        onTouchTap={onTouchTap}
-                      >
-                        {icon}
-                      </IconButton>
-                    );
-                  })
+                  .map(({ icon, tooltip, onTouchTap }, i) => (
+                    <IconButton
+                      tooltip={tooltip}
+                      tooltipPosition={tooltipPos}
+                      key={`dIconButton_${i}`}
+                      onTouchTap={onTouchTap}
+                    >
+                      {icon}
+                    </IconButton>
+                  ))
                 }
                 {(showMoreButton) ? (
                   <IconMenu
@@ -554,11 +548,10 @@ class Home extends React.Component {
                     {
                       controllers
                         .slice(maxVisibleIcon, controllers.length)
-                        .map(({ icon, tooltip, disabled, onTouchTap }, i) => (
+                        .map(({ icon, tooltip, onTouchTap }, i) => (
                           <MenuItem
                             primaryText={tooltip}
                             leftIcon={icon}
-                            disabled={disabled}
                             key={`dMenuItem_${i}`}
                             onTouchTap={onTouchTap}
                           />

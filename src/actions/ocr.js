@@ -26,6 +26,9 @@ export const loadImage = fromCamera => (dispatch, getState) => {
         ocr: Immutable.fromJS({ status: 'loading' }),
       });
 
+      // if < 0.9 mb no compress
+      if (result.blob.size < 900000) return result;
+
       // compress
       return new Promise((resolve, reject) => {
         const imageObj = new Image();

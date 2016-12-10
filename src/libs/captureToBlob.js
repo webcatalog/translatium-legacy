@@ -29,24 +29,30 @@ const captureToBlob = () =>
           break;
         }
         case 'cordova': {
-          /* global Camera navigator Blob resolveLocalFileSystemURL FileReader */
+          /* global Camera navigator Blob resolveLocalFileSystemURL loadImage */
 
           // capture callback
           const captureSuccess = (filePath) => {
             resolveLocalFileSystemURL(filePath, (fileEntry) => {
               fileEntry.file((xFile) => {
-                const reader = new FileReader();
-
-                reader.onloadend = function onReadEnd() {
-                  const blob = new Blob([this.result], { type: 'image/jpeg' });
-
-                  resolve({
-                    fileName: 'image.jpg',
-                    blob,
-                  });
-                };
-
-                reader.readAsArrayBuffer(xFile);
+                console.log(xFile);
+                loadImage(
+                  xFile,
+                  (canvas) => {
+                    console.log(canvas);
+                    canvas.toBlob((blob) => {
+                      resolve({
+                        blob,
+                        fileName: 'image.jpg',
+                      });
+                    }, 'image/jpeg', 50);
+                  },
+                  {
+                    canvas: true,
+                    maxHeight: 1500,
+                    maxWidth: 1500,
+                  },
+               );
               },
               (err) => {
                 reject(err);
