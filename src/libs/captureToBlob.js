@@ -28,54 +28,6 @@ const captureToBlob = () =>
             });
           break;
         }
-        case 'cordova': {
-          /* global Camera navigator Blob resolveLocalFileSystemURL loadImage */
-
-          // capture callback
-          const captureSuccess = (filePath) => {
-            resolveLocalFileSystemURL(filePath, (fileEntry) => {
-              fileEntry.file((xFile) => {
-                console.log(xFile);
-                loadImage(
-                  xFile,
-                  (canvas) => {
-                    console.log(canvas);
-                    canvas.toBlob((blob) => {
-                      resolve({
-                        blob,
-                        fileName: 'image.jpg',
-                      });
-                    }, 'image/jpeg', 50);
-                  },
-                  {
-                    canvas: true,
-                    maxHeight: 1500,
-                    maxWidth: 1500,
-                  },
-               );
-              },
-              (err) => {
-                reject(err);
-              });
-            });
-          };
-
-          // capture error callback
-          const captureError = (err) => {
-            if (err.code === 3) {
-              resolve();
-              return;
-            }
-            reject(err);
-          };
-
-          navigator.camera.getPicture(captureSuccess, captureError, {
-            sourceType: Camera.PictureSourceType.CAMERA,
-            encodingType: Camera.EncodingType.JPEG,
-            destinationType: Camera.DestinationType.FILE_URI,
-          });
-          break;
-        }
         default:
         case 'mac': {
           /* eslint-disable no-console */

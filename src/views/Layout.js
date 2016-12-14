@@ -49,13 +49,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    if (process.env.PLATFORM === 'cordova') {
-      /* global StatusBar */
-      StatusBar.backgroundColorByHexString(
-        colorPairs[this.props.primaryColorId].primary2Color,
-      );
-    }
-
     if (process.env.PLATFORM === 'windows') {
       this.setAppTitleBar(this.props.primaryColorId);
 
@@ -82,12 +75,6 @@ class App extends React.Component {
     if (primaryColorId !== nextProps.primaryColorId) {
       if (process.env.PLATFORM === 'windows') {
         this.setAppTitleBar(nextProps.primaryColorId);
-      }
-      if (process.env.PLATFORM === 'cordova') {
-        /* global StatusBar */
-        StatusBar.backgroundColorByHexString(
-          colorPairs[nextProps.primaryColorId].primary2Color,
-        );
       }
     }
   }

@@ -54,7 +54,6 @@ const common = {
       },
       isWindows: process.env.PLATFORM === 'windows',
       isMac: process.env.PLATFORM === 'mac',
-      isCordova: process.env.PLATFORM === 'cordova',
       template: 'src/index.hbs',
     }),
   ],
@@ -65,16 +64,9 @@ const config = (() => {
     { from: 'platforms/common/www' },
   ];
 
-  if (process.env.PLATFORM === 'cordova') {
-    copyArr.push({ from: 'node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js' });
-    copyArr.push({ from: 'node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js.map' });
-    copyArr.push({ from: 'node_modules/blueimp-load-image/js/load-image.all.min.js' });
-  }
-
   switch (process.env.npm_lifecycle_event) {
     case 'build-mac':
     case 'build-windows':
-    case 'build-cordova':
       return merge(common, {
         plugins: [
           new CleanWebpackPlugin([BUILD_DIR]),
@@ -95,7 +87,6 @@ const config = (() => {
       });
     case 'dev-mac':
     case 'dev-windows':
-    case 'dev-cordova':
       return merge(common, {
         plugins: [
           new CopyWebpackPlugin(copyArr),

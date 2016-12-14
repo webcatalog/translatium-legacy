@@ -15,11 +15,6 @@
 				var { remote, webFrame, shell } = require('electron'); var fs = require('fs'); webFrame.setZoomLevelLimits(1, 1);
 			</script>
 		{{/if}}
-		{{#if htmlWebpackPlugin.options.isCordova}}
-			<script type="text/javascript" src="canvas-to-blob.min.js"></script>
-			<script type="text/javascript" src="load-image.all.min.js"></script>
-			<script type="text/javascript" src="cordova.js"></script>
-		{{/if}}
     <script type="text/javascript" src="bundle.js"></script>
 	</body>
 </html>

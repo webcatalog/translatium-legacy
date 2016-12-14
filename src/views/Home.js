@@ -460,7 +460,7 @@ class Home extends React.Component {
       onTouchTap: onFullscreenButtonTouchTap,
     });
 
-    if (process.env.PLATFORM === 'windows' || process.env.PLATFORM === 'cordova') {
+    if (process.env.PLATFORM === 'windows') {
       if (isOcrSupported(inputLang)) {
         controllers.splice(controllers.length - 2, 0, {
           icon: <ImageCameraAlt />,

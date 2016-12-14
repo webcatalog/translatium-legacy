@@ -10,15 +10,23 @@ import phrasebookDb from '../libs/phrasebookDb';
 import { openAlert } from './alert';
 import { updateSetting } from './settings';
 
+export const toggleFullscreenInputBox = () => ({
+  type: TOGGLE_FULLSCREEN_INPUT_BOX,
+});
+
 export const translate = () => ((dispatch, getState) => {
   const { settings, home } = getState();
   const { inputLang, outputLang, chinaMode } = settings;
-  const { inputText } = home;
+  const { inputText, fullscreenInputBox } = home;
 
   // Safe
   if (inputText.trim().length < 1) return;
 
   const identifier = Date.now();
+
+  if (fullscreenInputBox === true) {
+    dispatch(toggleFullscreenInputBox());
+  }
 
   dispatch({
     type: UPDATE_OUTPUT,
@@ -136,8 +144,4 @@ export const loadOutput = output => ((dispatch) => {
 export const updateImeMode = imeMode => ({
   type: UPDATE_IME_MODE,
   imeMode,
-});
-
-export const toggleFullscreenInputBox = () => ({
-  type: TOGGLE_FULLSCREEN_INPUT_BOX,
 });
