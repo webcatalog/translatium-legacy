@@ -1,5 +1,5 @@
 <span class="tag is-success is-large">6.x</span>
-### 6.1.0 (9th December 2016)
+### 6.1.0 (14th December 2016)
 1. Improves Phrasebook performance & user interface.
 2. Adds history.
 3. Adds China Mode ([Learn more](/support#chinaMode)).
