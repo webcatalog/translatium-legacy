@@ -1,12 +1,24 @@
 <span class="tag is-success is-large">6.x</span>
-### 6.0
-#### 6.0.4 (19th November 2016)
+### 6.1.0 (9th December 2016)
+1. Improves Phrasebook performance & user interface.
+2. Adds history.
+3. Adds China Mode ([Learn more](/support#chinaMode)).
+4. Adds menu bar support (macOS).
+5. Fixes many bugs.
+
+---
+
+### 6.0.4 (19th November 2016)
 1. Bug fixes.
 
-#### 6.0.3 (18th November 2016)
+---
+
+### 6.0.3 (18th November 2016)
 1. Windows 10 Mobile: Fixed handwriting and speech recognition.
 
-#### 6.0.0 (16th November 2016)
+---
+
+### 6.0.0 (16th November 2016)
 1. Brand new Material Design.
 2. Now available on Mac App Store.
 3. Windows 10: Image translation no longer requires to install OCR packages.
