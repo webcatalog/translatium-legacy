@@ -19,6 +19,7 @@ class Help extends React.Component {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
+        overflow: 'hidden',
       },
       contentContainer: {
         flex: 1,
@@ -62,7 +63,7 @@ class Help extends React.Component {
 
           {process.env.PLATFORM === 'windows' ? (
             <p>
-              <a onTouchTap={() => openUri('ms-windows-store://review/?ProductId=9WZDNCRFHVJL')}>
+              <a onTouchTap={() => openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}>
                 {strings.rateWindowsStore}
               </a>
             </p>

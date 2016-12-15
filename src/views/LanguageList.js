@@ -27,6 +27,7 @@ class LanguageList extends React.Component {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
+        overflow: 'hidden',
       },
       listContainer: {
         flex: 1,

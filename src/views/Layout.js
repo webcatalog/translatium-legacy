@@ -120,7 +120,7 @@ class App extends React.Component {
 
     return {
       container: {
-        overflowY: 'hidden',
+        overflow: 'hidden',
         backgroundColor: (theme === 'dark') ? fullBlack : fullWhite,
         position: 'relative',
         display: 'flex',
@@ -153,6 +153,7 @@ class App extends React.Component {
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
+        overflow: 'hidden',
       },
     };
   }

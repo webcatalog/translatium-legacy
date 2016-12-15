@@ -30,6 +30,7 @@ class Ocr extends React.Component {
         display: 'flex',
         position: 'relative',
         backgroundColor: '#000',
+        overflow: 'hidden',
       },
       closeButton: {
         position: 'absolute',
