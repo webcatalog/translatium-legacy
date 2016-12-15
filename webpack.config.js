@@ -34,7 +34,7 @@ const common = {
         include: APP_DIR,
         loader: 'babel',
         query: {
-          presets: ['es2015', 'es2017', 'react'],
+          presets: ['es2015', 'react'],
         },
       },
     ],
@@ -49,8 +49,6 @@ const common = {
       inject: false,
       minify: {
         removeComments: true,
-        collapseWhitespace: true,
-        html5: true,
       },
       isWindows: process.env.PLATFORM === 'windows',
       isMac: process.env.PLATFORM === 'mac',

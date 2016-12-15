@@ -121,10 +121,10 @@
   </Target>
   <PropertyGroup>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-    <PackageCertificateThumbprint>4B81D1B15152761696E5BADBDCA7C71F6ABB6910</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>B6E14A654459C9764E09750A939B11C99A4C4E61</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <AppxPackageDir>C:\Users\quanglam2807\Desktop\x3</AppxPackageDir>
+    <AppxPackageDir>C:\Users\quanglam2807\Desktop\x5</AppxPackageDir>
   </PropertyGroup>
 </Project>
