@@ -5,7 +5,7 @@
   "author": "Quang Lam",
   "license": "UNLICENSED",
   "engines": {
-    "node": "6.9.1"
+    "node": "6.9.2"
   },
   "scripts": {
     "dev-mac": "PLATFORM=mac NODE_ENV=development webpack -d --watch",

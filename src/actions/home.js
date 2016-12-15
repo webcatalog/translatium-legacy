@@ -6,6 +6,8 @@ import {
 
 import translateText from '../libs/translateText';
 import phrasebookDb from '../libs/phrasebookDb';
+import historyDb from '../libs/historyDb';
+
 
 import { openAlert } from './alert';
 import { updateSetting } from './settings';
@@ -14,7 +16,7 @@ export const toggleFullscreenInputBox = () => ({
   type: TOGGLE_FULLSCREEN_INPUT_BOX,
 });
 
-export const translate = () => ((dispatch, getState) => {
+export const translate = saveToHistory => ((dispatch, getState) => {
   const { settings, home } = getState();
   const { inputLang, outputLang, chinaMode } = settings;
   const { inputText, fullscreenInputBox } = home;
@@ -46,6 +48,16 @@ export const translate = () => ((dispatch, getState) => {
         r.inputLang = inputLang;
         r.outputLang = outputLang;
         r.inputText = inputText;
+
+        if (saveToHistory === true) {
+          const newHistoryId = new Date().toJSON();
+          historyDb.put({
+            _id: newHistoryId,
+            data: r,
+            phrasebookVersion: 3,
+          });
+        }
+
         dispatch({
           type: UPDATE_OUTPUT,
           output: Immutable.fromJS(r),

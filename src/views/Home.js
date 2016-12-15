@@ -60,6 +60,7 @@ import shareText from '../libs/shareText';
 import Dictionary from './Dictionary';
 import Handwriting from './Handwriting';
 import Speech from './Speech';
+import History from './History';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -226,7 +227,7 @@ class Home extends React.Component {
 
   renderOutput(styles) {
     const {
-      output, screenWidth,
+      output, screenWidth, fullscreenInputBox,
       textToSpeechPlaying, onListenButtonTouchTap,
       onTogglePhrasebookTouchTap,
       onSwapOutputButtonTouchTap,
@@ -235,7 +236,11 @@ class Home extends React.Component {
       onSuggestedInputTextTouchTap,
     } = this.props;
 
-    if (!output) return null;
+    if (fullscreenInputBox === true) {
+      return null;
+    }
+
+    if (!output) return <History />;
 
     switch (output.get('status')) {
       case 'loading': {
@@ -636,7 +641,7 @@ const mapDispatchToProps = dispatch => ({
   },
   onKeyDown: (e) => {
     if ((e.keyCode || e.which) === 13) {
-      dispatch(translate());
+      dispatch(translate(true));
       e.target.blur();
     }
 
@@ -660,7 +665,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(playTextToSpeech(lang, text));
   },
   onTranslateButtonTouchTap: () => {
-    dispatch(translate());
+    dispatch(translate(true));
   },
   onWriteButtonTouchTap: () => {
     dispatch(updateImeMode('handwriting'));

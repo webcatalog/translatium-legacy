@@ -1,6 +1,6 @@
 APP_VERSION=6.1.0
 BUILD_VERSION=6.1.0
-ELECTRON_VERSION=1.4.8
+ELECTRON_VERSION=1.4.12
 
 # Name of your app.
 APP="Modern Translator"
