@@ -3,9 +3,12 @@
   "version": "6.1.1",
   "main": "src/app.js",
   "author": "Quang Lam",
-  "license": "UNLICENSED",
+  "licenses": [{
+    "type": "Apache-2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  }],
   "engines": {
-    "node": "6.9.2"
+    "node": "6.x.x"
   },
   "scripts": {
     "dev-mac": "PLATFORM=mac NODE_ENV=development webpack -d --watch",
