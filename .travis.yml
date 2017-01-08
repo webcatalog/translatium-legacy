@@ -1,0 +1,13 @@
+language: node_js
+node_js: 6
+os: linux
+cache:
+  directories:
+  - node_modules
+script:
+- npm install -g harp
+- npm install -g surge
+- npm install bulma@0.3.0
+- mv ./node_modules ./_node_modules
+- harp compile
+- surge --project ./www --domain moderntranslator.com
