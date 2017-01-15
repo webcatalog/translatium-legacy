@@ -56,6 +56,8 @@ import { playTextToSpeech, stopTextToSpeech } from '../actions/textToSpeech';
 
 import copyToClipboard from '../libs/copyToClipboard';
 import shareText from '../libs/shareText';
+import isTrial from '../libs/isTrial';
+import askToPurchase from '../libs/askToPurchase';
 
 import Dictionary from './Dictionary';
 import Handwriting from './Handwriting';
@@ -668,18 +670,38 @@ const mapDispatchToProps = dispatch => ({
     dispatch(translate(true));
   },
   onWriteButtonTouchTap: () => {
+    if (isTrial()) {
+      askToPurchase();
+      return;
+    }
     dispatch(updateImeMode('handwriting'));
   },
   onSpeakButtonTouchTap: () => {
+    if (isTrial()) {
+      askToPurchase();
+      return;
+    }
     dispatch(updateImeMode('speech'));
   },
   onTogglePhrasebookTouchTap: () => {
+    if (isTrial()) {
+      askToPurchase();
+      return;
+    }
     dispatch(togglePhrasebook());
   },
   onOpenImageButtonTouchTap: () => {
+    if (isTrial()) {
+      askToPurchase();
+      return;
+    }
     dispatch(loadImage(false));
   },
   onCameraButtonTouchTap: () => {
+    if (isTrial()) {
+      askToPurchase();
+      return;
+    }
     dispatch(loadImage(true));
   },
   onSwapOutputButtonTouchTap: (inputLang, outputLang, inputText) => {

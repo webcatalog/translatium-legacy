@@ -10,7 +10,10 @@ import Toggle from 'material-ui/Toggle';
 import { toggleSetting, updateSetting } from '../actions/settings';
 
 import colorPairs from '../constants/colorPairs';
+
 import openUri from '../libs/openUri';
+import isTrial from '../libs/isTrial';
+import askToPurchase from '../libs/askToPurchase';
 
 class Settings extends React.Component {
   getStyles() {
@@ -134,6 +137,13 @@ const mapDispatchToProps = dispatch => ({
     dispatch(toggleSetting(name));
   },
   onSelectFieldChange: (name, value) => {
+    if (name === 'theme' || name === 'primaryColorId') {
+      if (isTrial()) {
+        askToPurchase();
+        return;
+      }
+    }
+
     dispatch(updateSetting(name, value));
   },
 });

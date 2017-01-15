@@ -13,7 +13,6 @@ import Divider from 'material-ui/Divider';
 import { deleteHistoryItem, loadHistory } from '../actions/history';
 import { loadOutput } from '../actions/home';
 
-
 class History extends React.Component {
   componentDidMount() {
     const { onEnterHistory, onLoadMore } = this.props;

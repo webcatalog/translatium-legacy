@@ -6,12 +6,17 @@ import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import store from './store';
+import { updateSetting } from './actions/settings';
 import renderRoutes from './renderRoutes';
 
 import fetchLocal from './libs/fetchLocal';
 
 const runApp = () => {
   /* global document */
+
+  const launchTime = store.getState().settings.launchTime;
+  console.log(launchTime);
+  store.dispatch(updateSetting('launchTime', launchTime + 1));
 
   if (process.env.PLATFORM === 'mac') {
     // Mock user agent

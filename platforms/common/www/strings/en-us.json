@@ -91,6 +91,10 @@
 	"rateMacAppStore": "Rate Modern Translator on Mac App Store",
 	"rateWindowsStore": "Rate Modern Translator on Windows Store",
 
+	"onlyAvailableFullVersion": "This feature is only available in the full version of Modern Translator.",
+	"buyNow": "Buy now",
+	"later": "Later",
+
 	"sn" : "Shona",
 	"sd" : "Sindhi",
 	"ps" : "Pashto",

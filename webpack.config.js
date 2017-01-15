@@ -54,8 +54,8 @@ const config = (() => {
   ];
 
   switch (process.env.npm_lifecycle_event) {
-    case 'build-mac':
-    case 'build-windows':
+    case 'compile-mac':
+    case 'compile-windows':
       return merge(common, {
         plugins: [
           new CleanWebpackPlugin([BUILD_DIR]),

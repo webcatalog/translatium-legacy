@@ -14,10 +14,10 @@
   },
   "scripts": {
     "dev-mac": "cross-env PLATFORM=mac NODE_ENV=development webpack -d --watch",
-    "build-mac": "cross-env PLATFORM=mac NODE_ENV=production webpack -p",
+    "compile-mac": "cross-env PLATFORM=mac NODE_ENV=production webpack -p",
     "start-mac": "electron platforms/mac",
     "dev-windows": "cross-env PLATFORM=windows NODE_ENV=development webpack -d",
-    "build-windows": "cross-env PLATFORM=windows NODE_ENV=production webpack -p",
+    "compile-windows": "cross-env PLATFORM=windows NODE_ENV=production webpack -p",
     "lint": "eslint ./app --ext .js --cache"
   },
   "dependencies": {
