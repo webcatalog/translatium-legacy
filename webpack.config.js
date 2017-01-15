@@ -19,23 +19,14 @@ const common = {
     chunkFilename: '[id].js',
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.hbs$/,
-        loader: 'handlebars',
-      },
-      {
-        test: /\.json$/,
-        loader: 'json',
+        loader: 'handlebars-loader',
       },
       {
         test: /\.js?$/,
-        exclude: /(node_modules|bower_components)/,
-        include: APP_DIR,
-        loader: 'babel',
-        query: {
-          presets: ['es2015', 'react'],
-        },
+        loader: 'babel-loader',
       },
     ],
   },
@@ -69,16 +60,7 @@ const config = (() => {
         plugins: [
           new CleanWebpackPlugin([BUILD_DIR]),
           new CopyWebpackPlugin(copyArr),
-          new webpack.optimize.OccurenceOrderPlugin(),
-          new webpack.optimize.DedupePlugin(),
-          new webpack.optimize.UglifyJsPlugin({
-            compress: {
-              warnings: false,
-            },
-            output: {
-              comments: false,
-            },
-          }),
+          new webpack.optimize.UglifyJsPlugin(),
           new webpack.optimize.AggressiveMergingPlugin(),
           new BomPlugin(true),
         ],

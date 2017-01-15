@@ -12,10 +12,6 @@ Available on [Windows Store](https://www.microsoft.com/store/apps/9wzdncrcsg9k?c
 
 #### Development
 
-1. Ensure `electron` is installed
-```
-yarn global add electron
-```
 2. Run
 ```
 yarn
