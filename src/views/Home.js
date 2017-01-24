@@ -692,10 +692,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateImeMode('speech'));
   },
   onTogglePhrasebookTouchTap: () => {
-    if (isTrial()) {
-      askToPurchase();
-      return;
-    }
     dispatch(togglePhrasebook());
   },
   onOpenImageButtonTouchTap: () => {
