@@ -91,6 +91,14 @@
 	"rateMacAppStore": "Rate Modern Translator on Mac App Store",
 	"rateWindowsStore": "Rate Modern Translator on Windows Store",
 
+	"enjoy": "Enjoy Modern Translator?",
+	"notReally": "Not really",
+	"yes": "Yes!",
+	"howAboutRating": "How about a 5-star rating, then?",
+	"noThanks": "No, thanks",
+	"okSure": "OK, sure",
+	"wouldYouMindGivingFeedback": "Would you mind giving us some feedback?",
+
 	"onlyAvailableFullVersion": "This feature is only available in the full version of Modern Translator.",
 	"buyNow": "Buy now",
 	"later": "Later",

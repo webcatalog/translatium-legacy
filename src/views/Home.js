@@ -58,6 +58,7 @@ import copyToClipboard from '../libs/copyToClipboard';
 import shareText from '../libs/shareText';
 import isTrial from '../libs/isTrial';
 import askToPurchase from '../libs/askToPurchase';
+import askIfEnjoy from '../libs/askIfEnjoy';
 
 import Dictionary from './Dictionary';
 import Handwriting from './Handwriting';
@@ -72,6 +73,11 @@ class Home extends React.Component {
         this.dispRequest = new Windows.System.Display.DisplayRequest();
         this.dispRequest.requestActive();
       }
+    }
+
+    const { launchCount } = this.props;
+    if (launchCount === 5) {
+      askIfEnjoy();
     }
   }
   componentWillUnmount() {
@@ -597,6 +603,7 @@ Home.propTypes = {
   imeMode: React.PropTypes.string,
   textToSpeechPlaying: React.PropTypes.bool,
   fullscreenInputBox: React.PropTypes.bool,
+  launchCount: React.PropTypes.number,
   onLanguageTouchTap: React.PropTypes.func,
   onSwapButtonTouchTap: React.PropTypes.func,
   onKeyDown: React.PropTypes.func,
@@ -629,6 +636,7 @@ const mapStateToProps = state => ({
   imeMode: state.home.imeMode,
   textToSpeechPlaying: state.textToSpeech.textToSpeechPlaying,
   fullscreenInputBox: state.home.fullscreenInputBox,
+  launchCount: state.settings.launchCount,
 });
 
 const mapDispatchToProps = dispatch => ({

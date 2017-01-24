@@ -9,7 +9,7 @@ const defaultState = {
   bigTextFontSize: 50,
   recentLanguages: ['en', 'zh'],
   preventScreenLock: false,
-  launchTime: 0,
+  launchCount: 0,
   translateWhenPressingEnter: true,
   biggerTextFontSize: 50,
   chinaMode: false,
