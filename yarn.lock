@@ -4882,9 +4882,9 @@ webpack-utf8-bom@^1.0.3:
   dependencies:
     webpack "^1.12.13"
 
-webpack@2.2.0-rc.5:
-  version "2.2.0-rc.5"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-2.2.0-rc.5.tgz#ab471ea69b4e21d2dd5f1ba868dbcc4483aac3a0"
+webpack@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-2.2.0.tgz#09246336b5581c9002353f75bcadb598a648f977"
   dependencies:
     acorn "^4.0.4"
     acorn-dynamic-import "^2.0.0"
