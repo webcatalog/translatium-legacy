@@ -1,4 +1,4 @@
-/* global Windows strings */
+/* global Windows strings remote */
 import openUri from './openUri';
 
 import store from '../store';
@@ -11,20 +11,47 @@ const createDialog = ({
   defaultFunc,
   cancelFunc,
 }) => {
-  const msg = new Windows.UI.Popups.MessageDialog(message);
+  switch (process.env.PLATFORM) {
+    case 'windows': {
+      const msg = new Windows.UI.Popups.MessageDialog(message);
 
-  // Add commands and set their command handlers
-  msg.commands.append(new Windows.UI.Popups.UICommand(defaultButtonText, defaultFunc));
-  msg.commands.append(new Windows.UI.Popups.UICommand(cancelButtonText, cancelFunc));
+      // Add commands and set their command handlers
+      msg.commands.append(new Windows.UI.Popups.UICommand(defaultButtonText, defaultFunc));
+      msg.commands.append(new Windows.UI.Popups.UICommand(cancelButtonText, cancelFunc));
 
-  // Set the command that will be invoked by default
-  msg.defaultCommandIndex = 0;
+      // Set the command that will be invoked by default
+      msg.defaultCommandIndex = 0;
 
-  // Set the command to be invoked when escape is pressed
-  msg.cancelCommandIndex = 1;
+      // Set the command to be invoked when escape is pressed
+      msg.cancelCommandIndex = 1;
 
 
-  msg.showAsync();
+      msg.showAsync();
+
+      return;
+    }
+    case 'mac': {
+      remote.dialog.showMessageBox({
+        type: 'info',
+        buttons: [defaultButtonText, cancelButtonText],
+        defaultId: 1,
+        message,
+      }, (response) => {
+        if (response === 0) {
+          defaultFunc();
+          return;
+        }
+        cancelFunc();
+      });
+
+      return;
+    }
+    default: {
+      /* eslint-disable no-console */
+      console.log('Platform does not support dialog.');
+      /* eslint-enable no-console */
+    }
+  }
 };
 
 const askToReview = () => {
