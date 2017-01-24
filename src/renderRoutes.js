@@ -6,26 +6,60 @@ import store from './store';
 
 import Layout from './views/Layout';
 
-import Home from './views/Home';
-import Phrasebook from './views/Phrasebook';
-import Settings from './views/Settings';
-import Help from './views/Help';
-import LanguageList from './views/LanguageList';
-import Ocr from './views/Ocr';
-import BiggerText from './views/BiggerText';
-
 const history = syncHistoryWithStore(hashHistory, store);
+
+const loadRoute = cb => module => cb(null, module.default);
+
+const errorLoading = (err) => {
+  /* eslint-disable no-console */
+  console.error('Dynamic page loading failed', err);
+  /* eslint-enable no-console */
+};
 
 const renderRoutes = () => (
   <Router history={history}>
     <Route path="/" component={Layout}>
-      <IndexRoute component={Home} />
-      <Route path="phrasebook" component={Phrasebook} />
-      <Route path="settings" component={Settings} />
-      <Route path="help" component={Help} />
-      <Route path="language-list" component={LanguageList} />
-      <Route path="ocr" component={Ocr} />
-      <Route path="bigger-text" component={BiggerText} />
+      <IndexRoute
+        getComponent={(location, cb) => {
+          System.import('./views/Home').then(loadRoute(cb)).catch(errorLoading);
+        }}
+      />
+      <Route
+        path="phrasebook"
+        getComponent={(location, cb) => {
+          System.import('./views/Phrasebook').then(loadRoute(cb)).catch(errorLoading);
+        }}
+      />
+      <Route
+        path="settings"
+        getComponent={(location, cb) => {
+          System.import('./views/Settings').then(loadRoute(cb)).catch(errorLoading);
+        }}
+      />
+      <Route
+        path="help"
+        getComponent={(location, cb) => {
+          System.import('./views/Help').then(loadRoute(cb)).catch(errorLoading);
+        }}
+      />
+      <Route
+        path="language-list"
+        getComponent={(location, cb) => {
+          System.import('./views/LanguageList').then(loadRoute(cb)).catch(errorLoading);
+        }}
+      />
+      <Route
+        path="ocr"
+        getComponent={(location, cb) => {
+          System.import('./views/Ocr').then(loadRoute(cb)).catch(errorLoading);
+        }}
+      />
+      <Route
+        path="bigger-text"
+        getComponent={(location, cb) => {
+          System.import('./views/BiggerText').then(loadRoute(cb)).catch(errorLoading);
+        }}
+      />
     </Route>
   </Router>
 );

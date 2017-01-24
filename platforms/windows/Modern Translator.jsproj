@@ -102,6 +102,12 @@
     <Content Include="images\Wide310x150.scale-400.png" />
     <None Include="Modern Translator_TemporaryKey.pfx" />
     <None Include="Modern Translator_StoreKey.pfx" />
+    <Content Include="www\0.js" />
+    <Content Include="www\1.js" />
+    <Content Include="www\2.js" />
+    <Content Include="www\3.js" />
+    <Content Include="www\4.js" />
+    <Content Include="www\5.js" />
     <Content Include="www\bundle.js" />
     <Content Include="www\css\main.css" />
     <Content Include="www\images\logo.png" />
