@@ -33,8 +33,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "recordrtc": "^5.4.0",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.1.0",
-    "whatwg-fetch": "^2.0.1"
+    "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
