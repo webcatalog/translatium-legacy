@@ -33,7 +33,7 @@ yarn global add electron-packager electron-osx-sign
 4. Run
 ```
 yarn
-yarn run build-mac
+yarn run compile-mac
 cd platforms/mac
 ./packager.sh
 ```
@@ -57,6 +57,6 @@ yarn run dev-windows
 1. Run
 ```
 yarn
-yarn run build-windows
+yarn run compile-windows
 ```
 2. Open `platforms/windows/Modern Translator.sln` with Visual Studio and build the project.
