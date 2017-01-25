@@ -18,6 +18,7 @@ const common = {
     filename: 'bundle.js',
     chunkFilename: '[id].js',
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -60,7 +61,9 @@ const config = (() => {
         plugins: [
           new CleanWebpackPlugin([BUILD_DIR]),
           new CopyWebpackPlugin(copyArr),
-          new webpack.optimize.UglifyJsPlugin(),
+          new webpack.optimize.UglifyJsPlugin({
+            sourceMap: true,
+          }),
           new webpack.optimize.AggressiveMergingPlugin(),
           new BomPlugin(true),
         ],

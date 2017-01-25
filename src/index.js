@@ -3,6 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import Raven from 'raven-js';
 
 import store from './store';
 import { updateSetting } from './actions/settings';
@@ -12,6 +13,13 @@ import fetchLocal from './libs/fetchLocal';
 
 const runApp = () => {
   /* global document */
+
+  /* bug tracker */
+  Raven
+    .config('https://41abf1c6e02448b1b4fd3943f9104bfb:c79081de91f44981b1c9a052d7c7b008@sentry.io/132200', {
+      allowSecretKey: true, // https://docs.sentry.io/clients/javascript/config/
+    })
+    .install();
 
   const launchCount = store.getState().settings.launchCount;
   store.dispatch(updateSetting('launchCount', launchCount + 1));
