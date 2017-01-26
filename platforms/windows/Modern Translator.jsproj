@@ -52,7 +52,7 @@
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile>Modern Translator_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Modern Translator_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -101,7 +101,6 @@
     <Content Include="images\Wide310x150.scale-200.png" />
     <Content Include="images\Wide310x150.scale-400.png" />
     <None Include="Modern Translator_TemporaryKey.pfx" />
-    <None Include="Modern Translator_StoreKey.pfx" />
     <Content Include="www\0.js" />
     <Content Include="www\0.js.map" />
     <Content Include="www\1.js" />
@@ -134,10 +133,10 @@
   </Target>
   <PropertyGroup>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-    <PackageCertificateThumbprint>B6E14A654459C9764E09750A939B11C99A4C4E61</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>FF53D54A379357723F5385454C8B396202B9D45C</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <AppxPackageDir>C:\Users\quanglam2807\Desktop\x5</AppxPackageDir>
+    <AppxPackageDir>C:\Users\lamqu01\Downloads\10</AppxPackageDir>
   </PropertyGroup>
 </Project>
