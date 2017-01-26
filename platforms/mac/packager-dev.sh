@@ -1,6 +1,4 @@
-APP_VERSION=6.1.1
-BUILD_VERSION=6.1.1
-ELECTRON_VERSION=1.4.12
+APP_VERSION=$(node -e "console.log(require('./package.json').version);")
 
 # Name of your app.
 APP="Modern Translator"
@@ -14,7 +12,7 @@ PARENT_PLIST="parent.plist"
 
 export DEBUG=electron-packager,electron-osx-sign*
 
-electron-packager ./ "Modern Translator" --app-bundle-id=com.moderntranslator.app --helper-bundle-id=com.moderntranslator.app.helper --app-version=$APP_VERSION --build-version=$BUILD_VERSION --platform=mas --arch=x64 --version=$ELECTRON_VERSION --icon=images/icon.icns --ignore=.*\.\(provisionprofile\|plist\) --overwrite
+electron-packager ./ "Modern Translator" --app-bundle-id=com.moderntranslator.app --helper-bundle-id=com.moderntranslator.app.helper --app-version=$APP_VERSION --build-version=$APP_VERSION --platform=mas --arch=x64 --version=$ELECTRON_VERSION --icon=images/icon.icns --ignore=.*\.\(provisionprofile\|plist\) --overwrite
 
 echo $PROVISION_PROFILE_PATH
 
