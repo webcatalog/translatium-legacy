@@ -10,7 +10,7 @@ PROVISION_PROFILE_PATH="distribution.provisionprofile"
 CHILD_PLIST="child.plist"
 PARENT_PLIST="parent.plist"
 
-electron-packager ./ "Modern Translator" --app-bundle-id=com.moderntranslator.app --helper-bundle-id=com.moderntranslator.app.helper --app-version=$APP_VERSION --build-version=$APP_VERSION --platform=mas --arch=x64 --version=$ELECTRON_VERSION --icon=images/icon.icns --ignore=.*\.\(provisionprofile\|plist\) --overwrite
+electron-packager ./ "Modern Translator" --app-bundle-id=com.moderntranslator.app --helper-bundle-id=com.moderntranslator.app.helper --app-version=$APP_VERSION --build-version=$APP_VERSION --platform=mas --arch=x64 --icon=images/icon.icns --ignore=.*\.\(provisionprofile\|plist\) --overwrite
 
 electron-osx-sign "$APP_PATH" --provisioning-profile=$PROVISION_PROFILE_PATH --type=distribution --entitlements="$PARENT_PLIST" --entitlements-inherit="$CHILD_PLIST"
 
