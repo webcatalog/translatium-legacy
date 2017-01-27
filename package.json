@@ -1,6 +1,6 @@
 {
   "name": "modern-translator",
-  "version": "6.2.0",
+  "version": "6.2.1",
   "main": "src/app.js",
   "author": "Quang Lam",
   "licenses": [
