@@ -19,6 +19,9 @@ const runApp = () => {
     Raven
       .config('https://41abf1c6e02448b1b4fd3943f9104bfb:c79081de91f44981b1c9a052d7c7b008@sentry.io/132200', {
         allowSecretKey: true, // https://docs.sentry.io/clients/javascript/config/
+        tags: {
+          appVersion: process.env.VERSION,
+        },
       })
       .install();
   }

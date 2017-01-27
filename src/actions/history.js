@@ -34,13 +34,18 @@ export const loadHistory = (init, limit) => ((dispatch, getState) => {
   historyDb.allDocs(options)
     .then((response) => {
       response.rows.forEach((row) => {
-        const data = row.doc.data;
         /* eslint-disable no-underscore-dangle */
-        data.historyId = row.doc._id;
-        data.rev = row.doc._rev;
-        /* eslint-enable no-underscore-dangle */
+        if (!row.doc.data) {
+          // Delete broken data
+          historyDb.remove(row.doc._id, row.doc._rev);
+        } else {
+          const data = row.doc.data;
+          data.historyId = row.doc._id;
+          data.rev = row.doc._rev;
 
-        items = items.push(Immutable.fromJS(data));
+          items = items.push(Immutable.fromJS(data));
+        }
+        /* eslint-enable no-underscore-dangle */
       });
 
       dispatch({

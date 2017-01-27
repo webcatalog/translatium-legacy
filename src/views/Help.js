@@ -49,7 +49,12 @@ class Help extends React.Component {
           showMenuIconButton={false}
         />
         <div style={styles.contentContainer}>
-          <img src="images/logo.png" role="presentation" style={styles.icon} />
+          <img
+            src="images/logo.png"
+            role="presentation"
+            style={styles.icon}
+            alt="Modern Translator"
+          />
           <h3 style={styles.text}>Modern Translator</h3>
           <h4 style={styles.text}>Version {process.env.VERSION}</h4>
 
