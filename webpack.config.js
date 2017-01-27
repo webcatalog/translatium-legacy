@@ -18,7 +18,7 @@ const common = {
     filename: 'bundle.js',
     chunkFilename: '[id].js',
   },
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   module: {
     rules: [
       {
