@@ -1,4 +1,14 @@
 <span class="tag is-success is-large">6.x</span>
+### 6.2.1 (27th January 2017)
+1. Fixes history bug on Windows 10 Mobile.
+
+---
+
+### 6.2.0 (24th January 2017)
+1. Fixes bugs & improves performance.
+
+---
+
 ### 6.1.1 (15th December 2016)
 1. Improves Phrasebook performance & user interface.
 2. Adds history.
