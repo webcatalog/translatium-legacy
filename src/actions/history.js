@@ -35,13 +35,11 @@ export const loadHistory = (init, limit) => ((dispatch, getState) => {
     .then((response) => {
       response.rows.forEach((row) => {
         /* eslint-disable no-underscore-dangle */
-        if (row.doc.data) {
-          const data = row.doc.data;
-          data.historyId = row.doc._id;
-          data.rev = row.doc._rev;
+        const data = row.doc.data;
+        data.historyId = row.doc._id;
+        data.rev = row.doc._rev;
 
-          items = items.push(Immutable.fromJS(data));
-        }
+        items = items.push(Immutable.fromJS(data));
         /* eslint-enable no-underscore-dangle */
       });
 
