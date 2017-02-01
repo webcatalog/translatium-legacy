@@ -35,10 +35,7 @@ export const loadHistory = (init, limit) => ((dispatch, getState) => {
     .then((response) => {
       response.rows.forEach((row) => {
         /* eslint-disable no-underscore-dangle */
-        if (!row.doc.data) {
-          // Delete broken data
-          historyDb.remove(row.doc._id, row.doc._rev);
-        } else {
+        if (row.doc.data) {
           const data = row.doc.data;
           data.historyId = row.doc._id;
           data.rev = row.doc._rev;
