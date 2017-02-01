@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import Immutable from 'immutable';
+import shortid from 'shortid';
 
 import { fullWhite, minBlack, grey100, fullBlack, darkWhite } from 'material-ui/styles/colors';
 import AppBar from 'material-ui/AppBar';
@@ -355,11 +356,11 @@ class Home extends React.Component {
               <CardActions>
                 {
                   controllers.slice(0, maxVisibleIcon)
-                  .map(({ icon, tooltip, onTouchTap }, i) => (
+                  .map(({ icon, tooltip, onTouchTap }) => (
                     <IconButton
                       tooltip={tooltip}
                       tooltipPosition="bottom-center"
-                      key={`dIconButton_${i}`}
+                      key={shortid.generate()}
                       onTouchTap={onTouchTap}
                     >
                       {icon}
@@ -379,11 +380,11 @@ class Home extends React.Component {
                     {
                       controllers
                         .slice(maxVisibleIcon, controllers.length)
-                        .map(({ icon, tooltip, onTouchTap }, i) => (
+                        .map(({ icon, tooltip, onTouchTap }) => (
                           <MenuItem
                             primaryText={tooltip}
                             leftIcon={icon}
-                            key={`dMenuItem_${i}`}
+                            key={shortid.generate()}
                             onTouchTap={onTouchTap}
                           />
                         ))
@@ -537,11 +538,11 @@ class Home extends React.Component {
               <div style={styles.controllerContainerLeft}>
                 {
                   controllers.slice(0, maxVisibleIcon)
-                  .map(({ icon, tooltip, onTouchTap }, i) => (
+                  .map(({ icon, tooltip, onTouchTap }) => (
                     <IconButton
                       tooltip={tooltip}
                       tooltipPosition={tooltipPos}
-                      key={`dIconButton_${i}`}
+                      key={shortid.generate()}
                       onTouchTap={onTouchTap}
                     >
                       {icon}
@@ -561,11 +562,11 @@ class Home extends React.Component {
                     {
                       controllers
                         .slice(maxVisibleIcon, controllers.length)
-                        .map(({ icon, tooltip, onTouchTap }, i) => (
+                        .map(({ icon, tooltip, onTouchTap }) => (
                           <MenuItem
                             primaryText={tooltip}
                             leftIcon={icon}
-                            key={`dMenuItem_${i}`}
+                            key={shortid.generate()}
                             onTouchTap={onTouchTap}
                           />
                         ))

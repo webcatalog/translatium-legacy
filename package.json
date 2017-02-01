@@ -18,7 +18,7 @@
     "start-mac": "electron platforms/mac",
     "dev-windows": "cross-env PLATFORM=windows NODE_ENV=development webpack -d",
     "compile-windows": "cross-env PLATFORM=windows NODE_ENV=production webpack -p",
-    "lint": "eslint ./app --ext .js --cache"
+    "lint": "eslint ./src --ext .js --cache"
   },
   "dependencies": {
     "history": "^4.5.1",
@@ -34,7 +34,8 @@
     "react-tap-event-plugin": "^2.0.1",
     "recordrtc": "^5.4.0",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "shortid": "^2.2.6"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",

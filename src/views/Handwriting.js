@@ -1,6 +1,7 @@
 /* global strings */
 import React from 'react';
 import { connect } from 'react-redux';
+import shortid from 'shortid';
 
 import Paper from 'material-ui/Paper';
 import Chip from 'material-ui/Chip';
@@ -265,9 +266,9 @@ class Handwriting extends React.Component {
     return (
       <Paper zDepth={2} style={styles.container}>
         <div style={styles.wrapper}>
-          {suggestions.map((suggestion, i) => (
+          {suggestions.map(suggestion => (
             <Chip
-              key={i}
+              key={shortid.generate()}
               style={styles.suggestionItem}
               onTouchTap={() => onSuggestionsItemTouchTap(suggestion)}
             >

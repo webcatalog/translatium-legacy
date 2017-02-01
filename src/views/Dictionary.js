@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
+import shortid from 'shortid';
 
 import Divider from 'material-ui/Divider';
 
@@ -22,11 +23,11 @@ const Dictionary = ({
           {output.getIn(['inputDict', 1]) ? (
             <div key="definitions">
               <h1>{strings.definitions}</h1>
-              {output.getIn(['inputDict', 1]).map((x, i) => (
-                <div key={`definitionSubSection${i}`}>
+              {output.getIn(['inputDict', 1]).map(x => (
+                <div key={shortid.generate()}>
                   <h2>{strings[x.get(0)]}</h2>
                   {x.get(1).map((y, v) => (
-                    <div key={`definitionItem${v}`}>
+                    <div key={shortid.generate()}>
                       <h3 style={{ display: 'inline' }}>
                         <span>{v + 1}. </span>
                         <a
@@ -56,14 +57,14 @@ const Dictionary = ({
           {output.getIn(['inputDict', 0]) ? (
             <div key="synonyms">
               <h1>{strings.synonyms}</h1>
-              {output.getIn(['inputDict', 0]).map((x, i) => (
-                <div key={`synonymSubSection${i}`}>
+              {output.getIn(['inputDict', 0]).map(x => (
+                <div key={shortid.generate()}>
                   <h2>{strings[x.get(0)]}</h2>
                   <ul>
-                    {x.get(1).map((wl, j) => (
-                      <li key={`synonymLi${j}`}>
+                    {x.get(1).map(wl => (
+                      <li key={shortid.generate()}>
                         {wl.get(0).map((word, k) => (
-                          <h3 key={`synonymSpan${k}`} style={{ display: 'inline' }}>
+                          <h3 key={shortid.generate()} style={{ display: 'inline' }}>
                             {(k > 0) ? (<span>, </span>) : null}
                             <a
                               onTouchTap={() => onLinkTouchTap(inputLang, outputLang, word)}
@@ -87,7 +88,7 @@ const Dictionary = ({
                 {output.getIn(['inputDict', 2, 0]).map((x, i) => {
                   const text = x.get(0).replace(/(<([^>]+)>)/ig, '');
                   return (
-                    <div key={`exampleItem${i}`}>
+                    <div key={shortid.generate()}>
                       <h3>
                         <span>{i + 1}. </span>
                         <a
@@ -107,13 +108,13 @@ const Dictionary = ({
             <div key="seeAlso">
               <h1>{strings.seeAlso}</h1>
               <div>
-                {output.getIn(['inputDict', 3]).map((x, i) => (
-                  <div key={`seeAlsoItem${i}`}>
+                {output.getIn(['inputDict', 3]).map(x => (
+                  <div key={shortid.generate()}>
                     <h3>
                       {x.map((y, j) => {
                         const text = y.replace(/(<([^>]+)>)/ig, '');
                         return (
-                          <span key={`seeAlsoSpan${j}`} style={{ display: 'inline' }}>
+                          <span key={shortid.generate()} style={{ display: 'inline' }}>
                             {(j > 0) ? (<span>, </span>) : null}
                             <a
                               onTouchTap={() => onLinkTouchTap(inputLang, outputLang, text)}
@@ -140,7 +141,7 @@ const Dictionary = ({
             <div key={x.get(0)}>
               <h2>{strings[x.get(0)]}</h2>
               {x.get(2).map((y, j) => (
-                <div key={`translationItem${j}`}>
+                <div key={shortid.generate()}>
                   <h3>
                     <span>{j + 1}. </span>
                     <a
@@ -151,7 +152,7 @@ const Dictionary = ({
                   </h3>
                   <h4 style={{ display: 'inline' }}>
                     {y.get(1).map((meaning, k) => (
-                      <span key={`meaningSpan${k}`}>
+                      <span key={shortid.generate()}>
                         {(k > 0) ? (<span>, </span>) : null}
                         <a
                           onTouchTap={() => onLinkTouchTap(outputLang, inputLang, meaning)}

@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 import Immutable from 'immutable';
+import shortid from 'shortid';
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
@@ -85,9 +86,9 @@ class Ocr extends React.Component {
           <div
             style={{ zoom: ocr.get('zoomLevel') || 1, position: 'relative' }}
           >
-            {ocr.get(lineVarName).map((line, i) => (
+            {ocr.get(lineVarName).map(line => (
               <div
-                key={`key_${i}`}
+                key={shortid.generate()}
                 style={{
                   backgroundColor: 'rgba(0, 0, 0, 0.75)',
                   color: '#fff',
@@ -102,7 +103,7 @@ class Ocr extends React.Component {
                 {line.get('text')}
               </div>
             ))}
-            <img src={ocr.get('imageUrl')} role="presentation" />
+            <img src={ocr.get('imageUrl')} alt="" />
           </div>
         </div>
         <Slider
