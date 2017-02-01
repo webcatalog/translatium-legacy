@@ -12,13 +12,16 @@ const APP_DIR = path.resolve(__dirname, 'src');
 /* eslint-disable no-console */
 
 const common = {
-  entry: `${APP_DIR}/index.js`,
+  entry: {
+    main: `${APP_DIR}/index.js`,
+    vendor: ['react', 'react-dom', 'react-redux'],
+  },
   output: {
     path: BUILD_DIR,
-    filename: 'bundle.js',
-    chunkFilename: '[id].js',
+    filename: '[name].bundle.js',
+    chunkFilename: '[id].chunk.js',
   },
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -32,6 +35,11 @@ const common = {
     ],
   },
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.bundle.js',
+      minChunks: 2,
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM),
@@ -54,9 +62,8 @@ const config = (() => {
     { from: 'platforms/common/www' },
   ];
 
-  switch (process.env.npm_lifecycle_event) {
-    case 'compile-mac':
-    case 'compile-windows':
+  switch (process.env.NODE_ENV) {
+    case 'production':
       return merge(common, {
         plugins: [
           new CleanWebpackPlugin([BUILD_DIR]),
@@ -68,8 +75,7 @@ const config = (() => {
           new BomPlugin(true),
         ],
       });
-    case 'dev-mac':
-    case 'dev-windows':
+    case 'development':
       return merge(common, {
         plugins: [
           new CopyWebpackPlugin(copyArr),
