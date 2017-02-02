@@ -1,4 +1,11 @@
 <span class="tag is-success is-large">6.x</span>
+### 6.3.0 (2nd February 2017)
+1. Fixes bugs & improves performance.
+2. Adds ability to receive text from share menu (Windows only).
+3. Improves copy user interface.
+
+---
+
 ### 6.2.1 (27th January 2017)
 1. Fixes history bug on Windows 10 Mobile.
 
@@ -13,7 +20,7 @@
 1. Improves Phrasebook performance & user interface.
 2. Adds history.
 3. Adds China Mode ([Learn more](/support#chinaMode)).
-4. Adds menu bar support (macOS).
+4. Adds menu bar support (macOS only).
 5. Fixes many bugs.
 
 ---
