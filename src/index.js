@@ -23,6 +23,8 @@ const runApp = () => {
         release: process.env.VERSION,
       })
       .install();
+
+    Raven.captureException(new Error('test'));
   }
 
   const launchCount = store.getState().settings.launchCount;
