@@ -22,6 +22,7 @@ class History extends React.Component {
     if (this.listView) {
       this.listView.onscroll = () => {
         const { scrollTop, clientHeight, scrollHeight } = this.listView;
+
         if (scrollTop + clientHeight > scrollHeight - 200) {
           if (this.props.canLoadMore === true && this.props.historyLoading === false) {
             onLoadMore();
@@ -102,13 +103,7 @@ class History extends React.Component {
                       <IconButton
                         tooltip={strings.removeFromHistory}
                         tooltipPosition="bottom-left"
-                        onTouchTap={(ev) => {
-                          let e = ev;
-                          /* global window */
-                          if (!e) e = window.event;
-                          e.cancelBubble = true;
-                          if (e.stopPropagation) e.stopPropagation();
-
+                        onTouchTap={() => {
                           onDeleteButtonTouchTap(
                             item.get('historyId'),
                             item.get('rev'),
@@ -149,9 +144,9 @@ History.contextTypes = {
 };
 
 const mapStateToProps = state => ({
-  historyItems: state.history.historyItems,
+  historyItems: state.history.items,
   canLoadMore: state.history.canLoadMore,
-  historyLoading: state.history.historyLoading,
+  historyLoading: state.history.loading,
 });
 
 const mapDispatchToProps = dispatch => ({

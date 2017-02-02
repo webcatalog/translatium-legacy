@@ -6,11 +6,10 @@ import {
 
 import translateText from '../libs/translateText';
 import phrasebookDb from '../libs/phrasebookDb';
-import historyDb from '../libs/historyDb';
-
 
 import { openAlert } from './alert';
 import { updateSetting } from './settings';
+import { addHistoryItem } from './history';
 
 export const toggleFullscreenInputBox = () => ({
   type: TOGGLE_FULLSCREEN_INPUT_BOX,
@@ -50,12 +49,7 @@ export const translate = saveToHistory => ((dispatch, getState) => {
         r.inputText = inputText;
 
         if (saveToHistory === true) {
-          const newHistoryId = new Date().toJSON();
-          historyDb.put({
-            _id: newHistoryId,
-            data: r,
-            phrasebookVersion: 3,
-          });
+          dispatch(addHistoryItem(r));
         }
 
         dispatch({

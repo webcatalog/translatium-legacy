@@ -3,22 +3,22 @@ import Immutable from 'immutable';
 import { UPDATE_PHRASEBOOK } from '../constants/actions';
 
 const initialState = {
-  phrasebookItems: Immutable.fromJS([]),
+  items: Immutable.fromJS([]),
   canLoadMore: false,
-  phrasebookLoading: true,
+  loading: true,
 };
 
-const screen = (state = initialState, action) => {
+const phrasebook = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_PHRASEBOOK:
       return Object.assign({}, state, {
-        phrasebookItems: action.phrasebookItems,
+        items: action.items,
         canLoadMore: action.canLoadMore,
-        phrasebookLoading: action.phrasebookLoading,
+        loading: action.loading,
       });
     default:
       return state;
   }
 };
 
-export default screen;
+export default phrasebook;

@@ -10,17 +10,17 @@ const defaultOptions = {
 };
 
 export const loadPhrasebook = (init, limit) => ((dispatch, getState) => {
-  const { phrasebookItems, canLoadMore } = getState().phrasebook;
+  const { phrasebook } = getState();
+  const { canLoadMore } = phrasebook;
+
+  const items = (init === true) ? Immutable.fromJS([]) : phrasebook.items;
 
   dispatch({
     type: UPDATE_PHRASEBOOK,
-    phrasebookItems,
+    items,
     canLoadMore,
-    phrasebookLoading: true,
+    loading: true,
   });
-
-
-  let items = (init === true) ? Immutable.fromJS([]) : phrasebookItems;
 
   const options = Object.assign({}, defaultOptions);
   const l = items.size;
@@ -32,91 +32,90 @@ export const loadPhrasebook = (init, limit) => ((dispatch, getState) => {
 
   phrasebookDb.allDocs(options)
     .then((response) => {
-      response.rows.forEach((row) => {
-        // Old data compatibility
-        if (row.doc.inputObj) { // Version 1
-          const { inputLang, outputLang, inputText } = row.doc.inputObj;
-          const { outputText } = row.doc.outputObj;
-          const { _id, _rev } = row.doc;
+      const newItems = items.withMutations((list) => {
+        response.rows.forEach((row) => {
+          // Old data compatibility
+          if (row.doc.inputObj) { // Version 1
+            const { inputLang, outputLang, inputText } = row.doc.inputObj;
+            const { outputText } = row.doc.outputObj;
+            const { _id, _rev } = row.doc;
 
-          items = items.push(Immutable.fromJS({
-            phrasebookId: _id,
-            rev: _rev,
-            inputLang,
-            outputLang,
-            inputText,
-            outputText,
-          }));
-        } else if (row.doc.phrasebookVersion === 3) { // Latest
-          const data = row.doc.data;
-          /* eslint-disable no-underscore-dangle */
-          data.phrasebookId = row.doc._id;
-          data.rev = row.doc._rev;
-          /* eslint-enable no-underscore-dangle */
+            list.push(Immutable.fromJS({
+              phrasebookId: _id,
+              rev: _rev,
+              inputLang,
+              outputLang,
+              inputText,
+              outputText,
+            }));
+          } else if (row.doc.phrasebookVersion === 3) { // Latest
+            const data = row.doc.data;
+            /* eslint-disable no-underscore-dangle */
+            data.phrasebookId = row.doc._id;
+            data.rev = row.doc._rev;
+            /* eslint-enable no-underscore-dangle */
 
-          items = items.push(Immutable.fromJS(data));
-        } else { // Version 2
-          const {
-            _id, _rev,
-            inputLang, outputLang,
-            inputText, outputText,
-            inputDict, outputDict,
-          } = row.doc;
+            list.push(Immutable.fromJS(data));
+          } else { // Version 2
+            const {
+              _id, _rev,
+              inputLang, outputLang,
+              inputText, outputText,
+              inputDict, outputDict,
+            } = row.doc;
 
-          items = items.push(Immutable.fromJS({
-            phrasebookId: _id,
-            rev: _rev,
-            inputLang,
-            outputLang,
-            inputText,
-            outputText,
-            inputDict,
-            outputDict,
-          }));
-        }
+            list.push(Immutable.fromJS({
+              phrasebookId: _id,
+              rev: _rev,
+              inputLang,
+              outputLang,
+              inputText,
+              outputText,
+              inputDict,
+              outputDict,
+            }));
+          }
+        });
       });
 
       dispatch({
         type: UPDATE_PHRASEBOOK,
-        phrasebookItems: items,
+        items: newItems,
         canLoadMore: (response.total_rows > 0 && items.size < response.total_rows),
-        phrasebookLoading: false,
+        loading: false,
       });
     });
 });
 
 export const deletePhrasebookItem = (id, rev) => ((dispatch, getState) => {
   const { home, phrasebook } = getState();
-  const { phrasebookItems, phrasebookLoading, canLoadMore } = phrasebook;
+  const { items, loading, canLoadMore } = phrasebook;
   const { output } = home;
-
-  let items = phrasebookItems;
-
-  items.every((doc, i) => {
-    if (doc.get('phrasebookId') === id) {
-      items = items.delete(i);
-      return false;
-    }
-    return true;
-  });
-
-  dispatch({
-    type: UPDATE_PHRASEBOOK,
-    phrasebookItems: items,
-    phrasebookLoading,
-    canLoadMore,
-  });
-
-  // Update toggle star status of output
-  if (output && id === output.get('phrasebookId')) {
-    dispatch({
-      type: UPDATE_OUTPUT,
-      output: output.delete('phrasebookId'),
-    });
-  }
 
   phrasebookDb.remove(id, rev)
     .then(() => {
+      items.every((doc, i) => {
+        if (doc.get('phrasebookId') === id) {
+          dispatch({
+            type: UPDATE_PHRASEBOOK,
+            items: items.delete(i),
+            loading,
+            canLoadMore,
+          });
+
+          return false;
+        }
+        return true;
+      });
+
+      // Update toggle star status of output
+      if (output && id === output.get('phrasebookId')) {
+        dispatch({
+          type: UPDATE_OUTPUT,
+          output: output.delete('phrasebookId'),
+        });
+      }
+
       if (canLoadMore) {
         dispatch(loadPhrasebook(false, 1));
       }

@@ -6,21 +6,22 @@ import historyDb from '../libs/historyDb';
 const defaultOptions = {
   include_docs: true,
   descending: true,
-  limit: 8,
+  limit: 10,
 };
 
 export const loadHistory = (init, limit) => ((dispatch, getState) => {
-  const { historyItems, canLoadMore } = getState().history;
+  const { items, canLoadMore } = getState().history;
+
+  // only init once.
+  if (init === true && items.size > 0) return;
 
   dispatch({
     type: UPDATE_HISTORY,
-    historyItems,
+    items,
     canLoadMore,
-    historyLoading: true,
+    loading: true,
   });
 
-
-  let items = (init === true) ? Immutable.fromJS([]) : historyItems;
 
   const options = Object.assign({}, defaultOptions);
   const l = items.size;
@@ -32,58 +33,83 @@ export const loadHistory = (init, limit) => ((dispatch, getState) => {
 
   historyDb.allDocs(options)
     .then((response) => {
-      response.rows.forEach((row) => {
-        /* eslint-disable no-underscore-dangle */
-        const data = row.doc.data;
-        data.historyId = row.doc._id;
-        data.rev = row.doc._rev;
+      const newItems = items.withMutations((list) => {
+        response.rows.forEach((row) => {
+          /* eslint-disable no-underscore-dangle */
+          const data = row.doc.data;
+          data.historyId = row.doc._id;
+          data.rev = row.doc._rev;
 
-        items = items.push(Immutable.fromJS(data));
-        /* eslint-enable no-underscore-dangle */
+          list.push(Immutable.fromJS(data));
+          /* eslint-enable no-underscore-dangle */
+        });
       });
 
       dispatch({
         type: UPDATE_HISTORY,
-        historyItems: items,
+        items: newItems,
         canLoadMore: (response.total_rows > 0 && items.size < response.total_rows),
-        historyLoading: false,
+        loading: false,
       });
     })
     .catch(() => {
       dispatch({
         type: UPDATE_HISTORY,
-        historyItems: items,
+        items,
         canLoadMore: false,
-        historyLoading: false,
+        loading: false,
       });
     });
 });
 
 export const deleteHistoryItem = (id, rev) => ((dispatch, getState) => {
   const { history } = getState();
-  const { historyItems, historyLoading, canLoadMore } = history;
-
-  let items = historyItems;
-
-  items.every((doc, i) => {
-    if (doc.get('historyId') === id) {
-      items = items.delete(i);
-      return false;
-    }
-    return true;
-  });
-
-  dispatch({
-    type: UPDATE_HISTORY,
-    historyItems: items,
-    historyLoading,
-    canLoadMore,
-  });
+  const { items, loading, canLoadMore } = history;
 
   historyDb.remove(id, rev)
     .then(() => {
+      items.every((doc, i) => {
+        if (doc.get('historyId') === id) {
+          dispatch({
+            type: UPDATE_HISTORY,
+            items: items.delete(i),
+            loading,
+            canLoadMore,
+          });
+
+          return false;
+        }
+        return true;
+      });
+
       if (canLoadMore) {
         dispatch(loadHistory(false, 1));
       }
-    });
+    })
+    .catch(() => {});
 });
+
+export const addHistoryItem = data => (dispatch, getState) => {
+  const { history } = getState();
+  const { items, loading, canLoadMore } = history;
+
+  const newHistoryId = new Date().toJSON();
+  historyDb.put({
+    _id: newHistoryId,
+    data,
+    phrasebookVersion: 3,
+  })
+  .then(({ id, rev }) => {
+    const newData = data;
+    newData.historyId = id;
+    newData.rev = rev;
+
+    dispatch({
+      type: UPDATE_HISTORY,
+      items: items.unshift(Immutable.fromJS(newData)),
+      loading,
+      canLoadMore,
+    });
+  })
+  .catch(() => {});
+};

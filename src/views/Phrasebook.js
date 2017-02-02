@@ -116,13 +116,7 @@ class Phrasebook extends React.Component {
                       <IconButton
                         tooltip={strings.removeFromPhrasebook}
                         tooltipPosition="bottom-left"
-                        onTouchTap={(ev) => {
-                          let e = ev;
-                          /* global window */
-                          if (!e) e = window.event;
-                          e.cancelBubble = true;
-                          if (e.stopPropagation) e.stopPropagation();
-
+                        onTouchTap={() => {
                           onDeleteButtonTouchTap(
                             item.get('phrasebookId'),
                             item.get('rev'),
@@ -163,9 +157,9 @@ Phrasebook.contextTypes = {
 };
 
 const mapStateToProps = state => ({
-  phrasebookItems: state.phrasebook.phrasebookItems,
+  phrasebookItems: state.phrasebook.items,
   canLoadMore: state.phrasebook.canLoadMore,
-  phrasebookLoading: state.phrasebook.phrasebookLoading,
+  phrasebookLoading: state.phrasebook.loading,
 });
 
 const mapDispatchToProps = dispatch => ({

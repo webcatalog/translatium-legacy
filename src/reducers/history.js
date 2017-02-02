@@ -3,22 +3,22 @@ import Immutable from 'immutable';
 import { UPDATE_HISTORY } from '../constants/actions';
 
 const initialState = {
-  historyItems: Immutable.fromJS([]),
+  items: Immutable.fromJS([]),
   canLoadMore: false,
-  historyLoading: true,
+  loading: true,
 };
 
-const screen = (state = initialState, action) => {
+const history = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_HISTORY:
       return Object.assign({}, state, {
-        historyItems: action.historyItems,
+        items: action.items,
         canLoadMore: action.canLoadMore,
-        historyLoading: action.historyLoading,
+        loading: action.loading,
       });
     default:
       return state;
   }
 };
 
-export default screen;
+export default history;
