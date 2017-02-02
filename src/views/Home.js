@@ -54,6 +54,7 @@ import {
 } from '../actions/home';
 import { loadImage } from '../actions/ocr';
 import { playTextToSpeech, stopTextToSpeech } from '../actions/textToSpeech';
+import { openSnackbar } from '../actions/snackbar';
 
 import copyToClipboard from '../libs/copyToClipboard';
 import shareText from '../libs/shareText';
@@ -241,6 +242,7 @@ class Home extends React.Component {
       onBiggerTextButtonTouchTap,
       onSuggestedInputLangTouchTap,
       onSuggestedInputTextTouchTap,
+      onRequestCopyToClipboard,
     } = this.props;
 
     if (fullscreenInputBox === true) {
@@ -281,7 +283,7 @@ class Home extends React.Component {
           {
             icon: <ContentCopy />,
             tooltip: strings.copy,
-            onTouchTap: () => copyToClipboard(output.get('outputText')),
+            onTouchTap: () => onRequestCopyToClipboard(output.get('outputText')),
           },
         ];
 
@@ -621,6 +623,7 @@ Home.propTypes = {
   onSuggestedInputLangTouchTap: React.PropTypes.func,
   onSuggestedInputTextTouchTap: React.PropTypes.func,
   onAnotherContainerTouchTap: React.PropTypes.func,
+  onRequestCopyToClipboard: React.PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -729,6 +732,10 @@ const mapDispatchToProps = dispatch => ({
   },
   onAnotherContainerTouchTap: (imeMode) => {
     if (imeMode) dispatch(updateImeMode(null));
+  },
+  onRequestCopyToClipboard: (text) => {
+    copyToClipboard(text);
+    dispatch(openSnackbar(strings.copied));
   },
 });
 

@@ -5,7 +5,7 @@ import { replace, goBack } from 'react-router-redux';
 
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import { red500, fullWhite, fullBlack } from 'material-ui/styles/colors';
+import { red500, grey100, fullWhite, fullBlack } from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Paper from 'material-ui/Paper';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
@@ -14,9 +14,12 @@ import ToggleStar from 'material-ui/svg-icons/toggle/star';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import ActionHelp from 'material-ui/svg-icons/action/help';
 import CircularProgress from 'material-ui/CircularProgress';
+import Snackbar from 'material-ui/Snackbar';
 
 import { screenResize } from '../actions/screen';
 import { updateImeMode } from '../actions/home';
+import { closeSnackbar } from '../actions/snackbar';
+
 import colorPairs from '../constants/colorPairs';
 
 import Alert from './Alert';
@@ -42,6 +45,8 @@ class App extends React.Component {
     const muiTheme = getMuiTheme(pTheme);
     muiTheme.appBar.height = 56;
     muiTheme.bottomNavigation.selectedFontSize = muiTheme.bottomNavigation.unselectedFontSize;
+    muiTheme.snackbar.backgroundColor = (theme === 'dark') ? fullBlack : grey100;
+    muiTheme.snackbar.textColor = (theme === 'dark') ? fullWhite : fullBlack;
 
     return {
       muiTheme,
@@ -163,6 +168,9 @@ class App extends React.Component {
       children,
       bottomNavigationSelectedIndex,
       fullPageLoading,
+      snackbarOpen,
+      snackbarMessage,
+      onRequestCloseSnackbar,
       onBottomNavigationItemClick,
     } = this.props;
     const styles = this.getStyles();
@@ -179,6 +187,12 @@ class App extends React.Component {
             <CircularProgress size={80} thickness={5} />
           </div>) : null}
           <Alert />
+          <Snackbar
+            open={snackbarOpen}
+            message={snackbarMessage || ''}
+            autoHideDuration={4000}
+            onRequestClose={() => onRequestCloseSnackbar()}
+          />
           {children}
           {bottomNavigationSelectedIndex > -1 ? (
             <Paper zDepth={2} style={{ zIndex: 1000 }}>
@@ -218,9 +232,12 @@ App.propTypes = {
   primaryColorId: React.PropTypes.string,
   fullPageLoading: React.PropTypes.bool,
   bottomNavigationSelectedIndex: React.PropTypes.number,
+  snackbarOpen: React.PropTypes.bool,
+  snackbarMessage: React.PropTypes.string,
   onResize: React.PropTypes.func,
   onBottomNavigationItemClick: React.PropTypes.func,
   onBackClick: React.PropTypes.func,
+  onRequestCloseSnackbar: React.PropTypes.func,
 };
 
 App.childContextTypes = {
@@ -253,6 +270,8 @@ const mapStateToProps = (state, ownProps) => {
     theme: state.settings.theme,
     primaryColorId: state.settings.primaryColorId,
     bottomNavigationSelectedIndex,
+    snackbarOpen: state.snackbar.open,
+    snackbarMessage: state.snackbar.message,
   };
 };
 
@@ -266,6 +285,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onBackClick: () => {
     dispatch(goBack());
+  },
+  onRequestCloseSnackbar: () => {
+    dispatch(closeSnackbar());
   },
 });
 
