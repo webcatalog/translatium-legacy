@@ -71,6 +71,7 @@ const config = (() => {
           new CleanWebpackPlugin([BUILD_DIR]),
           new CopyWebpackPlugin(copyArr),
           new webpack.optimize.UglifyJsPlugin({
+            comments: false,
             sourceMap: true,
           }),
           new webpack.optimize.AggressiveMergingPlugin(),
