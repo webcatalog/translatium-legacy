@@ -6,10 +6,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BomPlugin = require('webpack-utf8-bom');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const BUILD_DIR = path.resolve(__dirname, `platforms/${process.env.PLATFORM}/www`);
+const BUILD_DIR = path.resolve(__dirname, `platforms/${process.platform === 'win32' ? 'windows' : 'mac'}/www`);
 const APP_DIR = path.resolve(__dirname, 'src');
 
 /* eslint-disable no-console */
+
+console.log(`Compiling on ${process.platform}`);
 
 const common = {
   entry: {
@@ -42,7 +44,7 @@ const common = {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM),
+      'process.env.PLATFORM': JSON.stringify(process.platform === 'win32' ? 'windows' : 'mac'),
       'process.env.VERSION': JSON.stringify(process.env.npm_package_version),
     }),
     new HtmlWebpackPlugin({
@@ -50,8 +52,8 @@ const common = {
       minify: {
         removeComments: true,
       },
-      isWindows: process.env.PLATFORM === 'windows',
-      isMac: process.env.PLATFORM === 'mac',
+      isWindows: process.platform === 'win32',
+      isMac: process.platform === 'darwin',
       template: 'src/index.hbs',
     }),
   ],
