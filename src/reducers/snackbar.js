@@ -5,7 +5,7 @@ const initialState = {
   message: null,
 };
 
-const screen = (state = initialState, action) => {
+const snackbar = (state = initialState, action) => {
   switch (action.type) {
     case OPEN_SNACKBAR:
       return Object.assign({}, state, {
@@ -21,4 +21,4 @@ const screen = (state = initialState, action) => {
   }
 };
 
-export default screen;
+export default snackbar;

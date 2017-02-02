@@ -1,4 +1,5 @@
 import Immutable from 'immutable';
+import Raven from 'raven-js';
 
 import { UPDATE_HISTORY } from '../constants/actions';
 import historyDb from '../libs/historyDb';
@@ -52,7 +53,8 @@ export const loadHistory = (init, limit) => ((dispatch, getState) => {
         loading: false,
       });
     })
-    .catch(() => {
+    .catch((e) => {
+      Raven.captureException(e);
       dispatch({
         type: UPDATE_HISTORY,
         items,
@@ -86,7 +88,9 @@ export const deleteHistoryItem = (id, rev) => ((dispatch, getState) => {
         dispatch(loadHistory(false, 1));
       }
     })
-    .catch(() => {});
+    .catch((e) => {
+      Raven.captureException(e);
+    });
 });
 
 export const addHistoryItem = data => (dispatch, getState) => {
@@ -111,5 +115,7 @@ export const addHistoryItem = data => (dispatch, getState) => {
       canLoadMore,
     });
   })
-  .catch(() => {});
+  .catch((e) => {
+    Raven.captureException(e);
+  });
 };
