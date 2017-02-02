@@ -206,7 +206,6 @@ class Home extends React.Component {
         margin: '12px 0 0 0',
         padding: 0,
         fontSize: 15,
-        height: 24,
       },
       suggestionSvg: {
         float: 'left',
@@ -215,7 +214,6 @@ class Home extends React.Component {
       },
       suggestionSpan: {
         lineHeight: '24px',
-        float: 'left',
       },
       outputText: {
         fontSize: 16,
