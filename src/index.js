@@ -7,6 +7,7 @@ import Raven from 'raven-js';
 
 import store from './store';
 import { updateSetting } from './actions/settings';
+import { updateInputText } from './actions/home';
 import renderRoutes from './renderRoutes';
 
 import fetchLocal from './libs/fetchLocal';
@@ -58,8 +59,20 @@ const runApp = () => {
 
 switch (process.env.PLATFORM) {
   case 'windows': {
-    Windows.UI.WebUI.WebUIApplication.onactivated = () => {
-      runApp();
+    Windows.UI.WebUI.WebUIApplication.onactivated = (args) => {
+      if (
+        (args.kind === Windows.ApplicationModel.Activation.ActivationKind.shareTarget)
+        && (args.shareOperation.data.contains(
+          Windows.ApplicationModel.DataTransfer.StandardDataFormats.text,
+        ))
+      ) {
+        args.shareOperation.data.getTextAsync().done((text) => {
+          store.dispatch(updateInputText(text));
+          runApp();
+        });
+      } else {
+        runApp();
+      }
     };
     break;
   }
