@@ -26,8 +26,6 @@ const runApp = () => {
         release: process.env.VERSION,
       })
       .install();
-
-    Raven.captureException(new Error('test'));
   }
 
   if (process.env.PLATFORM === 'mac') {
