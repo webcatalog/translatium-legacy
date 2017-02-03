@@ -1,4 +1,9 @@
 <span class="tag is-success is-large">6.x</span>
+### 6.3.1 (3rd February 2017)
+1. Fixes bugs.
+
+---
+
 ### 6.3.0 (2nd February 2017)
 1. Fixes bugs & improves performance.
 2. Adds ability to receive text from share menu (Windows only).
