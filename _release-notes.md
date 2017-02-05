@@ -1,5 +1,5 @@
 <span class="tag is-success is-large">6.x</span>
-### 6.3.1 (3rd February 2017)
+### 6.3.1 (4th February 2017)
 1. Fixes bugs.
 
 ---
