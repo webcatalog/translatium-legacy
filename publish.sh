@@ -9,4 +9,5 @@ git init
 git checkout -b gh-pages
 git add .
 git -c user.name='Quang Lam' -c user.email='quang.lam2807@gmail.com' commit -m init
-git push -f -q https://quanglam2807:$GH_TOKEN@github.com/modern-translator/website gh-pages
+git remote add origin "https://$GH_TOKEN@github.com/modern-translator/website.git"
+git push origin gh-pages -f
