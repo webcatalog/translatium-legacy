@@ -9,7 +9,6 @@ global:
     - secure: "NMEx57TSGjHvRZE8GIFCL+3Atf2enO7j08B4ZY0yyZJBNKG1TwJMscjXrzwpkfK+CO5EGdKGxm+RSMj4+VAhx2nUIXV8h3ePUb/jlhQWZYEvkEavR3XPVN2DG4kSwvXz1AYKsi9LlZglVM0FJ5Mnr193KxtH0aLBAacqnFgdRs7VfjzskWt9I8H6yMHV6oMtpRlTJ6YxfovEGCs8FkPnjc2OEkY89jlUbFjRe0B/D6m1GtJgwEBIV43qc30790sa2XQ0LYGZ3glN4ESNyCKI+YhC+6LmZqTfwh3Kh8xtcQdOOratcFnbCCFiloxWurzpCdPARJUZPWuOdJbiuEPLnWbj9zAmAeQMDF20zvLLUCfct9RoykQt3fFyNtADj7/oEqRfrVvvnJfzbl+u3iKMpN9iL+5tDSvPYzGc0yJFwNO0Zme4CRqYJhhZ2rf1h3/z4XNOXd8RKxXa4A45gVm0LHYBixje+9np9EpitzAR1LD2uCPnc51erqz2/rWtuARTyoEFy2W4KrJDRViTOZhxFnP4dYT4AJht/rBNNIUmcy7lZVnzyum5q8uJS2PnUxuMFVT4osEo85SEKl7DwSeDT0+cPfw/1TX4AIRYINYGV/LSdWGMYDeBw9lrs58ZijWtjYbneNaEh9W/lDjCfgVCnUvQzMZXTyM7d/E8WFXEDR0="
 script:
 - npm install -g harp
-- npm install -g surge
 - npm install bulma@0.3.1
 - mv ./node_modules ./_node_modules
 - harp compile
