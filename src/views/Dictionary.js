@@ -144,24 +144,27 @@ const Dictionary = ({
                 <div key={shortid.generate()}>
                   <h3>
                     <span>{j + 1}. </span>
+                    {y.get(4) ? (<span>{y.get(4)} </span>) : null}
                     <a
                       onTouchTap={() => onLinkTouchTap(inputLang, outputLang, y.get(0))}
                     >
                       {y.get(0)}
                     </a>
                   </h3>
-                  <h4 style={{ display: 'inline' }}>
-                    {y.get(1).map((meaning, k) => (
-                      <span key={shortid.generate()}>
-                        {(k > 0) ? (<span>, </span>) : null}
-                        <a
-                          onTouchTap={() => onLinkTouchTap(outputLang, inputLang, meaning)}
-                        >
-                          {meaning}
-                        </a>
-                      </span>
-                    ))}
-                  </h4>
+                  {y.get(1) ? (
+                    <h4 style={{ display: 'inline' }}>
+                      {y.get(1).map((meaning, k) => (
+                        <span key={shortid.generate()}>
+                          {(k > 0) ? (<span>, </span>) : null}
+                          <a
+                            onTouchTap={() => onLinkTouchTap(outputLang, inputLang, meaning)}
+                          >
+                            {meaning}
+                          </a>
+                        </span>
+                      ))}
+                    </h4>
+                  ) : null}
                 </div>
               ))}
             </div>

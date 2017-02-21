@@ -104,7 +104,6 @@
     <Content Include="www\images\logo.png" />
     <Content Include="www\index.html" />
     <Content Include="www\main.bundle.js" />
-    <Content Include="www\main.bundle.js.map" />
     <Content Include="www\roboto-v15\font.css" />
     <Content Include="www\roboto-v15\roboto-v15-latin_cyrillic-ext_vietnamese_cyrillic_greek_latin-ext_greek-ext-regular.eot" />
     <Content Include="www\roboto-v15\roboto-v15-latin_cyrillic-ext_vietnamese_cyrillic_greek_latin-ext_greek-ext-regular.svg" />
@@ -113,7 +112,6 @@
     <Content Include="www\roboto-v15\roboto-v15-latin_cyrillic-ext_vietnamese_cyrillic_greek_latin-ext_greek-ext-regular.woff2" />
     <Content Include="www\strings\en-us.json" />
     <Content Include="www\vendor.bundle.js" />
-    <Content Include="www\vendor.bundle.js.map" />
     <None Include="Modern Translator_TemporaryKey.pfx" />
     <None Include="Modern Translator_StoreKey.pfx" />
   </ItemGroup>
