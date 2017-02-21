@@ -33,6 +33,11 @@ class Help extends React.Component {
         width: 100,
         borderRadius: 50,
       },
+      smallerIcon: {
+        height: 60,
+        width: 60,
+        borderRadius: 30,
+      },
       text: {
         color: textColor,
       },
@@ -50,7 +55,7 @@ class Help extends React.Component {
         />
         <div style={styles.contentContainer}>
           <img
-            src="images/logo.png"
+            src="images/modern-translator@2x.png"
             role="presentation"
             style={styles.icon}
             alt="Modern Translator"
@@ -60,7 +65,7 @@ class Help extends React.Component {
 
           {process.env.PLATFORM === 'mac' ? (
             <p>
-              <a onTouchTap={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')}>
+              <a onTouchTap={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')} tabIndex={0}>
                 {strings.rateMacAppStore}
               </a>
             </p>
@@ -68,17 +73,31 @@ class Help extends React.Component {
 
           {process.env.PLATFORM === 'windows' ? (
             <p>
-              <a onTouchTap={() => openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}>
+              <a onTouchTap={() => openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k')} tabIndex={0}>
                 {strings.rateWindowsStore}
               </a>
             </p>
           ) : null}
 
-          <p><a onTouchTap={() => openUri('mailto:support@moderntranslator.com')}>Support</a></p>
+          <p><a onTouchTap={() => openUri('mailto:support@moderntranslator.com')} tabIndex={0}>Support</a></p>
 
-          <p><a onTouchTap={() => openUri('https://moderntranslator.com')}>Website</a></p>
+          <p><a onTouchTap={() => openUri('https://moderntranslator.com')} tabIndex={0}>Website</a></p>
 
-          <p><a onTouchTap={() => openUri('https://moderntranslator.com/release-notes')}>Release Notes</a></p>
+          <p><a onTouchTap={() => openUri('https://moderntranslator.com/release-notes')} tabIndex={0}>Release Notes</a></p>
+
+          <h2 style={{ marginTop: 60 }}>Other Apps</h2>
+          <a onTouchTap={() => openUri('https://getwebcatalog.com')}>
+            <img
+              src="images/webcatalog@2x.png"
+              role="presentation"
+              style={styles.smallerIcon}
+              alt="Modern Translator"
+            />
+          </a>
+          <h3 style={styles.text}><a onTouchTap={() => openUri('https://getwebcatalog.com')} tabIndex={0}>WebCatalog</a></h3>
+          <h4 style={styles.text}>Run your favorite web apps natively</h4>
+
+          <div style={{ height: 24 }} />
         </div>
       </div>
     );

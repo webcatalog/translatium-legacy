@@ -102,6 +102,8 @@
     <Content Include="images\Wide310x150.scale-400.png" />
     <Content Include="www\css\main.css" />
     <Content Include="www\images\logo.png" />
+    <Content Include="www\images\modern-translator%402x.png" />
+    <Content Include="www\images\webcatalog%402x.png" />
     <Content Include="www\index.html" />
     <Content Include="www\main.bundle.js" />
     <Content Include="www\roboto-v15\font.css" />
