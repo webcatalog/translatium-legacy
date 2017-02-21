@@ -100,6 +100,8 @@
     <Content Include="images\Wide310x150.scale-150.png" />
     <Content Include="images\Wide310x150.scale-200.png" />
     <Content Include="images\Wide310x150.scale-400.png" />
+    <None Include="Modern Translator_TemporaryKey.pfx" />
+    <None Include="Modern Translator_StoreKey.pfx" />
     <Content Include="www\css\main.css" />
     <Content Include="www\images\logo.png" />
     <Content Include="www\images\modern-translator%402x.png" />
@@ -114,8 +116,6 @@
     <Content Include="www\roboto-v15\roboto-v15-latin_cyrillic-ext_vietnamese_cyrillic_greek_latin-ext_greek-ext-regular.woff2" />
     <Content Include="www\strings\en-us.json" />
     <Content Include="www\vendor.bundle.js" />
-    <None Include="Modern Translator_TemporaryKey.pfx" />
-    <None Include="Modern Translator_StoreKey.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <Target Name="BeforeBuild">
@@ -124,10 +124,10 @@
   </Target>
   <PropertyGroup>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-    <PackageCertificateThumbprint>96629333E9C181C7D7690286CF3ADD4A3534B44B</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>A5EACBE83115D56471D7D7EB3CEA30D4B14E4073</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <AppxPackageDir>C:\Users\lamqu01\Downloads\12</AppxPackageDir>
+    <AppxPackageDir>C:\Users\quanglam2807\Downloads\123\</AppxPackageDir>
   </PropertyGroup>
 </Project>
