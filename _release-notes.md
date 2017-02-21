@@ -1,4 +1,10 @@
 <span class="tag is-success is-large">6.x</span>
+### 6.4.0 (20th February 2017)
+1. Fixes bugs.
+2. Improves keyboard navigation.
+
+---
+
 ### 6.3.1 (4th February 2017)
 1. Fixes bugs.
 
