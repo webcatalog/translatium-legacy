@@ -14,6 +14,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
+import EnhancedButton from 'material-ui/internal/EnhancedButton';
 
 import ActionSwapHoriz from 'material-ui/svg-icons/action/swap-horiz';
 import NavigationArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
@@ -497,23 +498,23 @@ class Home extends React.Component {
             showMenuIconButton={false}
             title={(
               <div style={styles.innerContainer}>
-                <div style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('inputLang')}>
+                <EnhancedButton style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('inputLang')} tabIndex={0}>
                   <span style={styles.languageTitleSpan}>{strings[inputLang]}</span>
                   <div style={styles.dropDownIconContainer}>
                     <NavigationArrowDropDown color={fullWhite} />
                   </div>
-                </div>
-                <div style={styles.swapIconContainer} onTouchTap={onSwapButtonTouchTap}>
-                  <IconButton disabled={!isOutput(inputLang)}>
+                </EnhancedButton>
+                <div style={styles.swapIconContainer}>
+                  <IconButton disabled={!isOutput(inputLang)} onTouchTap={onSwapButtonTouchTap}>
                     <ActionSwapHoriz color={fullWhite} />
                   </IconButton>
                 </div>
-                <div style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('outputLang')}>
+                <EnhancedButton style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('outputLang')} tabIndex={0}>
                   <span style={styles.languageTitleSpan}>{strings[outputLang]}</span>
                   <div style={styles.dropDownIconContainer}>
                     <NavigationArrowDropDown color={fullWhite} />
                   </div>
-                </div>
+                </EnhancedButton>
               </div>
             )}
           />
@@ -652,7 +653,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(swapLanguages());
   },
   onKeyDown: (e) => {
-    if ((e.keyCode || e.which) === 13) {
+    if (e.key === 'Enter') {
       dispatch(translate(true));
       e.target.blur();
     }

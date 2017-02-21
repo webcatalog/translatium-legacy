@@ -1,4 +1,4 @@
-/* global strings */
+/* global strings document */
 import React from 'react';
 import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
@@ -21,6 +21,20 @@ import {
 import { updateInputLang, updateOutputLang } from '../actions/settings';
 
 class LanguageList extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleEscKey = this.handleEscKey.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleEscKey);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleEscKey);
+  }
+
   getStyles() {
     return {
       container: {
@@ -35,6 +49,13 @@ class LanguageList extends React.Component {
         WebkitOverflowScrolling: 'touch',
       },
     };
+  }
+
+  handleEscKey(evt) {
+    const { onCloseTouchTap } = this.props;
+    if (evt.key === 'Escape' || evt.key === 'Esc') {
+      onCloseTouchTap();
+    }
   }
 
   render() {
