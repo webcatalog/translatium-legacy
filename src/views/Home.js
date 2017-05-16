@@ -60,8 +60,6 @@ import { openSnackbar } from '../actions/snackbar';
 
 import copyToClipboard from '../libs/copyToClipboard';
 import shareText from '../libs/shareText';
-import isTrial from '../libs/isTrial';
-import askToPurchase from '../libs/askToPurchase';
 import askIfEnjoy from '../libs/askIfEnjoy';
 
 import Dictionary from './Dictionary';
@@ -682,34 +680,18 @@ const mapDispatchToProps = dispatch => ({
     dispatch(translate(true));
   },
   onWriteButtonTouchTap: () => {
-    if (isTrial()) {
-      askToPurchase();
-      return;
-    }
     dispatch(updateImeMode('handwriting'));
   },
   onSpeakButtonTouchTap: () => {
-    if (isTrial()) {
-      askToPurchase();
-      return;
-    }
     dispatch(updateImeMode('speech'));
   },
   onTogglePhrasebookTouchTap: () => {
     dispatch(togglePhrasebook());
   },
   onOpenImageButtonTouchTap: () => {
-    if (isTrial()) {
-      askToPurchase();
-      return;
-    }
     dispatch(loadImage(false));
   },
   onCameraButtonTouchTap: () => {
-    if (isTrial()) {
-      askToPurchase();
-      return;
-    }
     dispatch(loadImage(true));
   },
   onSwapOutputButtonTouchTap: (inputLang, outputLang, inputText) => {
