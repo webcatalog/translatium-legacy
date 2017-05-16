@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|AnyCPU">
       <Configuration>Debug</Configuration>
@@ -38,7 +38,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>940899d8-49f3-41b5-bcae-9a3d67037d79</ProjectGuid>
+    <ProjectGuid>53e6a1b4-df8f-4606-9fdd-33adc2aa43b4</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
@@ -48,19 +48,16 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile>Modern Translator_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>windows_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Package.StoreAssociation.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="images\Splash620x300.scale-100.png" />
     <Content Include="images\Splash620x300.scale-125.png" />
     <Content Include="images\Splash620x300.scale-150.png" />
@@ -100,8 +97,6 @@
     <Content Include="images\Wide310x150.scale-150.png" />
     <Content Include="images\Wide310x150.scale-200.png" />
     <Content Include="images\Wide310x150.scale-400.png" />
-    <None Include="Modern Translator_TemporaryKey.pfx" />
-    <None Include="Modern Translator_StoreKey.pfx" />
     <Content Include="www\css\main.css" />
     <Content Include="www\images\logo.png" />
     <Content Include="www\images\modern-translator%402x.png" />
@@ -116,18 +111,18 @@
     <Content Include="www\roboto-v15\roboto-v15-latin_cyrillic-ext_vietnamese_cyrillic_greek_latin-ext_greek-ext-regular.woff2" />
     <Content Include="www\strings\en-us.json" />
     <Content Include="www\vendor.bundle.js" />
+    <None Include="windows_TemporaryKey.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
+  <!-- To modify your build process, add your task inside one of the targets below then uncomment
+       that target and the DisableFastUpToDateCheck PropertyGroup. 
+       Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
   </Target>
   <PropertyGroup>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-    <PackageCertificateThumbprint>A5EACBE83115D56471D7D7EB3CEA30D4B14E4073</PackageCertificateThumbprint>
-    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <AppxPackageDir>C:\Users\quanglam2807\Downloads\123\</AppxPackageDir>
   </PropertyGroup>
+  -->
 </Project>

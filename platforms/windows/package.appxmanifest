@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="55974nhutquang97.5translate" Version="2017.220.2030.0" Publisher="CN=C635F506-DEEB-41A4-8CAA-16689F486ED2" />
-  <mp:PhoneIdentity PhoneProductId="a24242da-76ac-4c3e-8c81-623b60e62eea" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="55974nhutquang97.5translate" Version="1.1.0.0" Publisher="CN=C635F506-DEEB-41A4-8CAA-16689F486ED2" />
+  <mp:PhoneIdentity PhoneProductId="47b794c1-0911-4663-8c2f-b7e696301d35" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Modern Translator</DisplayName>
     <PublisherDisplayName>Quang Lam</PublisherDisplayName>
     <Logo>images\Store.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
   </Dependencies>
   <Resources>
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" StartPage="www/index.html">
+    <Application Id="App" StartPage="www\index.html">
       <uap:VisualElements DisplayName="Modern Translator" Description="Modern Translator" BackgroundColor="transparent" Square150x150Logo="images\Square150x150.png" Square44x44Logo="images\Square44x44.png">
-        <uap:DefaultTile Wide310x150Logo="images\Wide310x150.png" Square310x310Logo="images\Square310x310.png" Square71x71Logo="images\Square71x71.png" ShortName="Translator">
+        <uap:DefaultTile Wide310x150Logo="images\Wide310x150.png" ShortName="Translator" Square310x310Logo="images\Square310x310.png" Square71x71Logo="images\Square71x71.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
             <uap:ShowOn Tile="wide310x150Logo" />
