@@ -24,3 +24,5 @@ export const UPDATE_OCR = 'UPDATE_OCR';
 
 export const OPEN_SNACKBAR = 'OPEN_SNACKBAR';
 export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
+
+export const UPDATE_SHOULD_SHOW_AD = 'UPDATE_SHOULD_SHOW_AD';

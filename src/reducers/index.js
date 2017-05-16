@@ -13,6 +13,7 @@ import phrasebook from './phrasebook';
 import alert from './alert';
 import ocr from './ocr';
 import snackbar from './snackbar';
+import ad from './ad';
 
 const rootReducer = combineReducers({
   screen,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   routing: routerReducer,
   ocr,
   snackbar,
+  ad,
 });
 
 export default rootReducer;

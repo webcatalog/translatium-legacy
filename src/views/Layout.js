@@ -23,6 +23,7 @@ import { closeSnackbar } from '../actions/snackbar';
 import colorPairs from '../constants/colorPairs';
 
 import Alert from './Alert';
+import Ad from './Ad';
 
 /* global window */
 
@@ -170,6 +171,7 @@ class App extends React.Component {
       fullPageLoading,
       snackbarOpen,
       snackbarMessage,
+      shouldShowAd,
       onRequestCloseSnackbar,
       onBottomNavigationItemClick,
     } = this.props;
@@ -215,6 +217,7 @@ class App extends React.Component {
               </BottomNavigation>
             </Paper>
           ) : null}
+          {process.env.PLATFORM === 'windows' && shouldShowAd ? <Ad /> : null}
         </div>
       </div>
     );
@@ -229,6 +232,7 @@ App.propTypes = {
   bottomNavigationSelectedIndex: PropTypes.number,
   snackbarOpen: PropTypes.bool,
   snackbarMessage: PropTypes.string,
+  shouldShowAd: PropTypes.bool,
   onResize: PropTypes.func,
   onBottomNavigationItemClick: PropTypes.func,
   onBackClick: PropTypes.func,
@@ -267,6 +271,7 @@ const mapStateToProps = (state, ownProps) => {
     bottomNavigationSelectedIndex,
     snackbarOpen: state.snackbar.open,
     snackbarMessage: state.snackbar.message,
+    shouldShowAd: state.ad.shouldShowAd,
   };
 };
 

@@ -1,4 +1,4 @@
-/* global strings */
+/* global strings Windows */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -13,7 +13,11 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 
+import { parseString as parseXMLString } from 'xml2js';
+
 import { toggleSetting, updateSetting } from '../actions/settings';
+import { updateShouldShowAd } from '../actions/ad';
+import { openSnackbar } from '../actions/snackbar';
 
 import colorPairs from '../constants/colorPairs';
 
@@ -44,10 +48,13 @@ class Settings extends React.Component {
       realtime,
       primaryColorId,
       chinaMode,
+      shouldShowAd,
       preventScreenLock,
       translateWhenPressingEnter,
       onToggle,
       onSettingChange,
+      onRemoveAdTouchTap,
+      onRestorePurchaseTouchTap,
     } = this.props;
     const styles = this.getStyles();
 
@@ -129,6 +136,26 @@ class Settings extends React.Component {
               secondaryText={strings.chinaModeDesc}
             />
             <Divider />
+            {process.env.PLATFORM === 'windows' && shouldShowAd ? (
+              <ListItem
+                primaryText={strings.removeAds}
+                onTouchTap={onRemoveAdTouchTap}
+              />
+            ) : null}
+            {process.env.PLATFORM === 'windows' && shouldShowAd ? (
+              <ListItem
+                primaryText={strings.restorePurchase}
+                secondaryText={strings.restorePurchaseDesc}
+                onTouchTap={onRestorePurchaseTouchTap}
+              />
+            ) : null}
+            {process.env.PLATFORM === 'windows' && !shouldShowAd ? (
+              <ListItem
+                primaryText={strings.removeAds}
+                secondaryText={strings.activated}
+              />
+            ) : null}
+            <Divider />
             {process.env.PLATFORM === 'windows' ? (
               <ListItem
                 primaryText={strings.rateWindowsStore}
@@ -159,8 +186,11 @@ Settings.propTypes = {
   translateWhenPressingEnter: PropTypes.bool,
   realtime: PropTypes.bool,
   chinaMode: PropTypes.bool,
+  shouldShowAd: PropTypes.bool,
   onToggle: PropTypes.func,
   onSettingChange: PropTypes.func,
+  onRemoveAdTouchTap: PropTypes.func,
+  onRestorePurchaseTouchTap: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -170,6 +200,7 @@ const mapStateToProps = state => ({
   translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
   realtime: state.settings.realtime,
   chinaMode: state.settings.chinaMode,
+  shouldShowAd: state.ad.shouldShowAd,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -178,6 +209,51 @@ const mapDispatchToProps = dispatch => ({
   },
   onSettingChange: (name, value) => {
     dispatch(updateSetting(name, value));
+  },
+  onRemoveAdTouchTap: () => {
+    const currentApp = process.env.NODE_ENV === 'production' ? Windows.ApplicationModel.Store.CurrentApp
+                    : Windows.ApplicationModel.Store.CurrentAppSimulator;
+
+    const purchaseStatus = Windows.ApplicationModel.Store.ProductPurchaseStatus;
+
+    currentApp.requestProductPurchaseAsync('remove.ads.durable')
+      .done((purchaseResults) => {
+        if (purchaseResults.status === purchaseStatus.succeeded) {
+          dispatch(updateShouldShowAd(false));
+        }
+      }, () => {
+        dispatch(openSnackbar(strings.somethingWentWrong));
+      });
+  },
+  onRestorePurchaseTouchTap: () => {
+    const currentApp = process.env.NODE_ENV === 'production' ? Windows.ApplicationModel.Store.CurrentApp
+                    : Windows.ApplicationModel.Store.CurrentAppSimulator;
+
+    const purchaseStatus = Windows.ApplicationModel.Store.ProductPurchaseStatus;
+
+    currentApp.getAppReceiptAsync().done((xmlReceipt) => {
+      parseXMLString(xmlReceipt, (err, receipt) => {
+        if (err) return;
+        // const licenseType = receipt.Receipt.AppReceipt[0].$.LicenseType;
+
+        const purchaseDate = receipt.Receipt.AppReceipt[0].$.PurchaseDate;
+
+        if (new Date(purchaseDate) <= new Date('2017-05-15T05:00:00Z')) {
+          currentApp.requestProductPurchaseAsync('remove.ads.durable')
+            .done((purchaseResults) => {
+              if (purchaseResults.status === purchaseStatus.succeeded) {
+                dispatch(updateShouldShowAd(false));
+              }
+            }, () => {
+              dispatch(openSnackbar(strings.somethingWentWrong));
+            });
+        } else {
+          dispatch(openSnackbar(strings.notQualified));
+        }
+      });
+    }, () => {
+      dispatch(openSnackbar(strings.somethingWentWrong));
+    });
   },
 });
 
