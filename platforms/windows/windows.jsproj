@@ -101,9 +101,10 @@
     <None Include="Package.StoreAssociation.xml" />
     <None Include="windows_StoreKey.pfx" />
     <Content Include="www\css\main.css" />
+    <Content Include="www\images\ad320x50.png" />
+    <Content Include="www\images\ad728x90.png" />
     <Content Include="www\images\logo.png" />
     <Content Include="www\images\modern-translator%402x.png" />
-    <Content Include="www\images\webcatalog%402x.png" />
     <Content Include="www\index.html" />
     <Content Include="www\main.bundle.js" />
     <Content Include="www\roboto-v15\font.css" />

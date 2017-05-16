@@ -1,6 +1,8 @@
 /* global MicrosoftNSJS Windows */
 import React from 'react';
 
+import openUri from '../libs/openUri';
+
 class Ad extends React.Component {
   componentDidMount() {
     this.msAd = new MicrosoftNSJS.Advertising.AdControl(this.adEl, {
@@ -15,13 +17,39 @@ class Ad extends React.Component {
 
   render() {
     // https://msdn.microsoft.com/windows/hardware/commercialize/customize/desktop/unattend/microsoft-windows-deployment-deviceform
-    const isMobile = Windows.System.Profile.AnalyticsInfo.deviceFamily === 'Windows.Desktop';
+    const isMobile = Windows.System.Profile.AnalyticsInfo.deviceFamily === 'Windows.Mobile';
+    const adHeight = isMobile ? 50 : 90;
+    const adWidth = isMobile ? 320 : 728;
 
     return (
-      <div style={{ width: '100vw', backgroundColor: '#000' }}>
+      <div style={{ width: '100vw', height: adHeight, backgroundColor: '#000', zIndex: 10000, position: 'relative' }}>
         <div
           ref={(el) => { this.adEl = el; }}
-          style={{ width: isMobile ? 320 : 728, height: isMobile ? 50 : 90, margin: '0 auto' }}
+          style={{
+            width: adWidth,
+            height: adHeight,
+            margin: '0 auto',
+            zIndex: 2,
+            position: 'absolute',
+            left: 0,
+            right: 0,
+          }}
+        />
+        <div
+          style={{
+            width: adWidth,
+            height: adHeight,
+            margin: '0 auto',
+            zIndex: 1,
+            backgroundImage: `url("images/ad${adWidth}x${adHeight}.png")`,
+            backgroundSize: `${adWidth}px ${adHeight}px`,
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center center',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+          }}
+          onTouchTap={() => openUri('https://getwebcatalog.com/?ref=producthunt')}
         />
       </div>
     );
