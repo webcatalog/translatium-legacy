@@ -1,5 +1,3 @@
-/* global Windows */
-
 import translateText from './translateText';
 
 const translateArray = (inputLang, outputLang, inputArr, chinaMode) =>

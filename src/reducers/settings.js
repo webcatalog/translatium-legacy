@@ -3,7 +3,7 @@ import { UPDATE_SETTING } from '../constants/actions';
 const defaultState = {
   inputLang: 'en',
   outputLang: 'zh',
-  theme: 'light',
+  darkMode: false,
   primaryColorId: 'green',
   realtime: true,
   bigTextFontSize: 50,

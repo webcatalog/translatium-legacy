@@ -1,6 +1,5 @@
 import { UPDATE_ALERT_MESSAGE } from '../constants/actions';
 
-/* global window */
 const initialState = {
   message: null,
 };

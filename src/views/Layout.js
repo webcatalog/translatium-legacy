@@ -13,7 +13,6 @@ import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNaviga
 import ActionHome from 'material-ui/svg-icons/action/home';
 import ToggleStar from 'material-ui/svg-icons/toggle/star';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
-import ActionHelp from 'material-ui/svg-icons/action/help';
 import CircularProgress from 'material-ui/CircularProgress';
 import Snackbar from 'material-ui/Snackbar';
 
@@ -29,16 +28,16 @@ import Alert from './Alert';
 
 class App extends React.Component {
   getChildContext() {
-    const { theme, primaryColorId } = this.props;
+    const { darkMode, primaryColorId } = this.props;
 
-    const pTheme = (theme === 'dark') ? darkBaseTheme : lightBaseTheme;
+    const pTheme = darkMode ? darkBaseTheme : lightBaseTheme;
 
     const { primary1Color, primary2Color } = colorPairs[primaryColorId];
 
     pTheme.palette.primary1Color = primary1Color;
     pTheme.palette.primary2Color = primary2Color;
     pTheme.palette.accent1Color = red500;
-    if (theme === 'dark') {
+    if (darkMode) {
       pTheme.palette.accent2Color = primary1Color;
     }
     pTheme.palette.alternateTextColor = fullWhite;
@@ -46,8 +45,8 @@ class App extends React.Component {
     const muiTheme = getMuiTheme(pTheme);
     muiTheme.appBar.height = 56;
     muiTheme.bottomNavigation.selectedFontSize = muiTheme.bottomNavigation.unselectedFontSize;
-    muiTheme.snackbar.backgroundColor = (theme === 'dark') ? fullBlack : grey100;
-    muiTheme.snackbar.textColor = (theme === 'dark') ? fullWhite : fullBlack;
+    muiTheme.snackbar.backgroundColor = darkMode ? fullBlack : grey100;
+    muiTheme.snackbar.textColor = darkMode ? fullWhite : fullBlack;
 
     return {
       muiTheme,
@@ -121,13 +120,13 @@ class App extends React.Component {
   }
 
   getStyles() {
-    const { theme, primaryColorId } = this.props;
+    const { darkMode, primaryColorId } = this.props;
     const { primary2Color } = colorPairs[primaryColorId];
 
     return {
       container: {
         overflow: 'hidden',
-        backgroundColor: (theme === 'dark') ? fullBlack : fullWhite,
+        backgroundColor: darkMode ? fullBlack : fullWhite,
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
@@ -213,11 +212,6 @@ class App extends React.Component {
                   icon={<ActionSettings />}
                   onTouchTap={() => onBottomNavigationItemClick('/settings')}
                 />
-                <BottomNavigationItem
-                  label={strings.help}
-                  icon={<ActionHelp />}
-                  onTouchTap={() => onBottomNavigationItemClick('/help')}
-                />
               </BottomNavigation>
             </Paper>
           ) : null}
@@ -229,7 +223,7 @@ class App extends React.Component {
 
 App.propTypes = {
   children: PropTypes.element, // matched child route component
-  theme: PropTypes.string,
+  darkMode: PropTypes.bool,
   primaryColorId: PropTypes.string,
   fullPageLoading: PropTypes.bool,
   bottomNavigationSelectedIndex: PropTypes.number,
@@ -268,7 +262,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     pathname: ownProps.location.pathname,
     fullPageLoading: state.ocr && state.ocr.get('status') === 'loading',
-    theme: state.settings.theme,
+    darkMode: state.settings.darkMode,
     primaryColorId: state.settings.primaryColorId,
     bottomNavigationSelectedIndex,
     snackbarOpen: state.snackbar.open,

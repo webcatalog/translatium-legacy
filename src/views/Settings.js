@@ -4,17 +4,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import AppBar from 'material-ui/AppBar';
-import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Toggle from 'material-ui/Toggle';
+import { List, ListItem } from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+import { grey400 } from 'material-ui/styles/colors';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import IconMenu from 'material-ui/IconMenu';
 
 import { toggleSetting, updateSetting } from '../actions/settings';
 
 import colorPairs from '../constants/colorPairs';
 
 import openUri from '../libs/openUri';
-import isTrial from '../libs/isTrial';
-import askToPurchase from '../libs/askToPurchase';
 
 class Settings extends React.Component {
   getStyles() {
@@ -27,7 +30,7 @@ class Settings extends React.Component {
       },
       innerContainer: {
         flex: 1,
-        padding: '12px 24px',
+        padding: 0,
         boxSizing: 'border-box',
         overflowY: 'auto',
         WebkitOverflowScrolling: 'touch',
@@ -37,14 +40,14 @@ class Settings extends React.Component {
 
   render() {
     const {
-      theme,
-      primaryColorId,
+      darkMode,
       realtime,
+      primaryColorId,
       chinaMode,
       preventScreenLock,
       translateWhenPressingEnter,
       onToggle,
-      onSelectFieldChange,
+      onSettingChange,
     } = this.props;
     const styles = this.getStyles();
 
@@ -55,58 +58,94 @@ class Settings extends React.Component {
           showMenuIconButton={false}
         />
         <div style={styles.innerContainer}>
-          <SelectField
-            value={theme}
-            floatingLabelText={strings.theme}
-            floatingLabelFixed
-            onChange={(e, index, value) => onSelectFieldChange('theme', value)}
-          >
-            <MenuItem key="light" value="light" primaryText="Light" />
-            <MenuItem key="dark" value="dark" primaryText="Dark" />
-          </SelectField>
-          <br />
-          <SelectField
-            value={primaryColorId}
-            floatingLabelText={strings.primaryColor}
-            floatingLabelFixed
-            maxHeight={200}
-            onChange={(e, index, value) => onSelectFieldChange('primaryColorId', value)}
-          >
-            {Object.keys(colorPairs).map(colorId => (
-              <MenuItem key={`color_${colorId}`} value={colorId} primaryText={strings[colorId]} />
-            ))}
-          </SelectField>
-          <br /><br />
-          <Toggle
-            label={strings.realtime}
-            toggled={realtime}
-            onToggle={() => onToggle('realtime')}
-          />
-          <br />
-          {
-            (process.env.PLATFORM === 'windows') ? (
-              <div>
+          <List>
+            <ListItem
+              rightIconButton={(
+                <IconMenu
+                  iconButtonElement={(
+                    <IconButton
+                      touch
+                      tooltip="more"
+                      tooltipPosition="bottom-left"
+                    >
+                      <MoreVertIcon color={grey400} />
+                    </IconButton>
+                  )}
+                >
+                  {Object.keys(colorPairs).map(colorId => (
+                    <MenuItem key={`color_${colorId}`} value={colorId} primaryText={strings[colorId]} onTouchTap={() => onSettingChange('primaryColorId', colorId)} />
+                  ))}
+                </IconMenu>
+              )}
+              primaryText={strings.primaryColor}
+              secondaryText={strings[primaryColorId]}
+            />
+            <ListItem
+              primaryText={strings.darkMode}
+              rightToggle={(
                 <Toggle
-                  label={strings.preventScreenLock}
-                  toggled={preventScreenLock}
-                  onToggle={() => onToggle('preventScreenLock')}
+                  toggled={darkMode}
+                  onToggle={() => onToggle('darkMode')}
                 />
-                <br />
-              </div>
-            ) : null
-          }
-          <Toggle
-            label={strings.translateWhenPressingEnter}
-            toggled={translateWhenPressingEnter}
-            onToggle={() => onToggle('translateWhenPressingEnter')}
-          />
-          <br />
-          <Toggle
-            label={strings.chinaMode}
-            toggled={chinaMode}
-            onToggle={() => onToggle('chinaMode')}
-          />
-          <a onTouchTap={() => openUri('https://moderntranslator.com/support#chinaMode')}>{strings.learnMore}</a>
+              )}
+            />
+            <ListItem
+              primaryText={strings.realtime}
+              rightToggle={(
+                <Toggle
+                  toggled={realtime}
+                  onToggle={() => onToggle('realtime')}
+                />
+              )}
+            />
+            {process.env.PLATFORM === 'windows' ? (
+              <ListItem
+                primaryText={strings.preventScreenLock}
+                rightToggle={(
+                  <Toggle
+                    toggled={preventScreenLock}
+                    onToggle={() => onToggle('preventScreenLock')}
+                  />
+                )}
+              />
+            ) : null}
+            <ListItem
+              primaryText={strings.translateWhenPressingEnter}
+              rightToggle={(
+                <Toggle
+                  toggled={translateWhenPressingEnter}
+                  onToggle={() => onToggle('translateWhenPressingEnter')}
+                />
+              )}
+            />
+            <ListItem
+              primaryText={strings.chinaMode}
+              rightToggle={(
+                <Toggle
+                  toggled={chinaMode}
+                  onToggle={() => onToggle('chinaMode')}
+                />
+              )}
+              secondaryText={strings.chinaModeDesc}
+            />
+            <Divider />
+            {process.env.PLATFORM === 'windows' ? (
+              <ListItem
+                primaryText={strings.rateWindowsStore}
+                onTouchTap={() => openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}
+              />
+            ) : null}
+            {process.env.PLATFORM === 'mac' ? (
+              <ListItem
+                primaryText={strings.rateMacAppStore}
+                onTouchTap={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')}
+              />
+            ) : null}
+            <ListItem primaryText={strings.help} onTouchTap={() => openUri('https://moderntranslator.com/support')} />
+            <ListItem primaryText={strings.website} onTouchTap={() => openUri('https://moderntranslator.com')} />
+            <Divider />
+            <ListItem primaryText={`Version ${process.env.VERSION}`} />
+          </List>
         </div>
       </div>
     );
@@ -114,18 +153,18 @@ class Settings extends React.Component {
 }
 
 Settings.propTypes = {
-  theme: PropTypes.string,
+  darkMode: PropTypes.bool,
   primaryColorId: PropTypes.string,
   preventScreenLock: PropTypes.bool,
   translateWhenPressingEnter: PropTypes.bool,
   realtime: PropTypes.bool,
   chinaMode: PropTypes.bool,
   onToggle: PropTypes.func,
-  onSelectFieldChange: PropTypes.func,
+  onSettingChange: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
-  theme: state.settings.theme,
+  darkMode: state.settings.darkMode,
   primaryColorId: state.settings.primaryColorId,
   preventScreenLock: state.settings.preventScreenLock,
   translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
@@ -137,14 +176,7 @@ const mapDispatchToProps = dispatch => ({
   onToggle: (name) => {
     dispatch(toggleSetting(name));
   },
-  onSelectFieldChange: (name, value) => {
-    if (name === 'theme' || name === 'primaryColorId') {
-      if (isTrial()) {
-        askToPurchase();
-        return;
-      }
-    }
-
+  onSettingChange: (name, value) => {
     dispatch(updateSetting(name, value));
   },
 });

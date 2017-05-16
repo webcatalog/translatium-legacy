@@ -93,7 +93,7 @@ class Home extends React.Component {
   }
 
   getStyles() {
-    const { theme, fullscreenInputBox } = this.props;
+    const { darkMode, fullscreenInputBox } = this.props;
 
     const {
       palette: {
@@ -108,7 +108,7 @@ class Home extends React.Component {
     return {
       container: {
         flex: 1,
-        backgroundColor: (theme === 'dark') ? fullBlack : grey100,
+        backgroundColor: darkMode ? fullBlack : grey100,
         display: 'flex',
         overflow: 'hidden',
       },
@@ -161,8 +161,8 @@ class Home extends React.Component {
       },
       textarea: {
         border: 0,
-        color: (theme === 'dark') ? fullWhite : null,
-        backgroundColor: (theme === 'dark') ? '#303030' : fullWhite,
+        color: (darkMode) ? fullWhite : null,
+        backgroundColor: (darkMode) ? '#303030' : fullWhite,
         outline: 0,
         margin: 0,
         padding: 12,
@@ -175,7 +175,7 @@ class Home extends React.Component {
         paddingLeft: 8,
         paddingRight: 8,
         boxSizing: 'border-box',
-        borderTop: `1px solid ${(theme === 'dark') ? darkWhite : minBlack}`,
+        borderTop: `1px solid ${(darkMode) ? darkWhite : minBlack}`,
       },
       controllerContainerLeft: {
         float: 'left',
@@ -596,7 +596,7 @@ class Home extends React.Component {
 
 Home.propTypes = {
   screenWidth: PropTypes.number,
-  theme: PropTypes.string,
+  darkMode: PropTypes.bool,
   translateWhenPressingEnter: PropTypes.bool,
   preventScreenLock: PropTypes.bool,
   inputLang: PropTypes.string,
@@ -630,7 +630,7 @@ Home.propTypes = {
 
 const mapStateToProps = state => ({
   screenWidth: state.screen.screenWidth,
-  theme: state.settings.theme,
+  darkMode: state.settings.darkMode,
   translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
   preventScreenLock: state.settings.preventingScreenLock,
   inputLang: state.settings.inputLang,

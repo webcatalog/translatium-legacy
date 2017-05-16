@@ -2,7 +2,9 @@
 	"home": "Home",
 	"phrasebook": "Phrasebook",
 	"settings": "Settings",
+
 	"help": "Help",
+	"website": "Website",
 
 	"typeSomethingHere": "Type something here...",
 
@@ -66,13 +68,13 @@
 	"brown": "Brown",
 	"blueGrey": "Blue Grey",
 
-	"theme": "Theme",
+	"darkMode": "Dark mode",
 	"primaryColor": "Primary color",
 	"preventScreenLock": "Prevent screen lock",
 	"translateWhenPressingEnter": "Translate when pressing Enter",
 	"realtime": "Real-time translation",
 	"chinaMode": "China Mode",
-	"learnMore": "Learn more",
+	"chinaModeDesc": "If this mode is turned on, Modern Translator will transmit data to and from Google Translate through domain google.cn instead of google.com.",
 
 	"translations" : "Translations",
 	"definitions" : "Definitions",
