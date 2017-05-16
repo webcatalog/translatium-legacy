@@ -1,5 +1,6 @@
 /* global strings */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { replace, goBack } from 'react-router-redux';
 
@@ -227,21 +228,21 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  children: React.PropTypes.element, // matched child route component
-  theme: React.PropTypes.string,
-  primaryColorId: React.PropTypes.string,
-  fullPageLoading: React.PropTypes.bool,
-  bottomNavigationSelectedIndex: React.PropTypes.number,
-  snackbarOpen: React.PropTypes.bool,
-  snackbarMessage: React.PropTypes.string,
-  onResize: React.PropTypes.func,
-  onBottomNavigationItemClick: React.PropTypes.func,
-  onBackClick: React.PropTypes.func,
-  onRequestCloseSnackbar: React.PropTypes.func,
+  children: PropTypes.element, // matched child route component
+  theme: PropTypes.string,
+  primaryColorId: PropTypes.string,
+  fullPageLoading: PropTypes.bool,
+  bottomNavigationSelectedIndex: PropTypes.number,
+  snackbarOpen: PropTypes.bool,
+  snackbarMessage: PropTypes.string,
+  onResize: PropTypes.func,
+  onBottomNavigationItemClick: PropTypes.func,
+  onBackClick: PropTypes.func,
+  onRequestCloseSnackbar: PropTypes.func,
 };
 
 App.childContextTypes = {
-  muiTheme: React.PropTypes.object,
+  muiTheme: PropTypes.object,
 };
 
 const mapStateToProps = (state, ownProps) => {

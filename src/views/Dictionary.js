@@ -1,5 +1,6 @@
 /* global strings */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
 import shortid from 'shortid';
@@ -176,8 +177,8 @@ const Dictionary = ({
 };
 
 Dictionary.propTypes = {
-  output: React.PropTypes.instanceOf(Immutable.Map),
-  onLinkTouchTap: React.PropTypes.func,
+  output: PropTypes.instanceOf(Immutable.Map),
+  onLinkTouchTap: PropTypes.func,
 };
 
 const mapDispatchToProps = dispatch => ({

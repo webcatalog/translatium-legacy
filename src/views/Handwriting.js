@@ -1,5 +1,6 @@
 /* global strings */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
 
@@ -298,19 +299,19 @@ class Handwriting extends React.Component {
 }
 
 Handwriting.propTypes = {
-  screenWidth: React.PropTypes.number,
-  inputText: React.PropTypes.string,
-  selectionStart: React.PropTypes.number,
-  selectionEnd: React.PropTypes.number,
-  suggestions: React.PropTypes.arrayOf(React.PropTypes.string),
-  onUpdateInputText: React.PropTypes.func,
-  onLoadSuggestions: React.PropTypes.func,
-  onResetSuggestions: React.PropTypes.func,
-  onTurnOffHandwriting: React.PropTypes.func,
+  screenWidth: PropTypes.number,
+  inputText: PropTypes.string,
+  selectionStart: PropTypes.number,
+  selectionEnd: PropTypes.number,
+  suggestions: PropTypes.arrayOf(PropTypes.string),
+  onUpdateInputText: PropTypes.func,
+  onLoadSuggestions: PropTypes.func,
+  onResetSuggestions: PropTypes.func,
+  onTurnOffHandwriting: PropTypes.func,
 };
 
 Handwriting.contextTypes = {
-  muiTheme: React.PropTypes.object,
+  muiTheme: PropTypes.object,
 };
 
 const mapDispatchToProps = dispatch => ({

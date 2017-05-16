@@ -1,6 +1,6 @@
 /* global strings */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 import Immutable from 'immutable';
@@ -145,13 +145,13 @@ class Ocr extends React.Component {
 }
 
 Ocr.propTypes = {
-  inputLang: React.PropTypes.string,
-  outputLang: React.PropTypes.string,
-  ocr: React.PropTypes.instanceOf(Immutable.Map),
-  onCloseTouchTap: React.PropTypes.func,
-  onZoomSliderChange: React.PropTypes.func,
-  onModeMenuItemTouchTap: React.PropTypes.func,
-  onTextOnlyMenuItemTouchTap: React.PropTypes.func,
+  inputLang: PropTypes.string,
+  outputLang: PropTypes.string,
+  ocr: PropTypes.instanceOf(Immutable.Map),
+  onCloseTouchTap: PropTypes.func,
+  onZoomSliderChange: PropTypes.func,
+  onModeMenuItemTouchTap: PropTypes.func,
+  onTextOnlyMenuItemTouchTap: PropTypes.func,
 };
 
 const mapStateToProps = state => ({

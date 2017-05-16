@@ -1,5 +1,6 @@
 /* global strings */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Dialog from 'material-ui/Dialog';
@@ -30,8 +31,8 @@ const Alert = ({ alertMessage, onClose }) => {
 };
 
 Alert.propTypes = {
-  alertMessage: React.PropTypes.string,
-  onClose: React.PropTypes.func,
+  alertMessage: PropTypes.string,
+  onClose: PropTypes.func,
 };
 
 const mapStateToProps = state => ({

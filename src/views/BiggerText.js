@@ -1,5 +1,5 @@
-/* global strings */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 
@@ -71,14 +71,14 @@ class BiggerText extends React.Component {
 }
 
 BiggerText.propTypes = {
-  text: React.PropTypes.string,
-  biggerTextFontSize: React.PropTypes.number,
-  onCloseTouchTap: React.PropTypes.func,
-  onSliderChange: React.PropTypes.func,
+  text: PropTypes.string,
+  biggerTextFontSize: PropTypes.number,
+  onCloseTouchTap: PropTypes.func,
+  onSliderChange: PropTypes.func,
 };
 
 BiggerText.contextTypes = {
-  muiTheme: React.PropTypes.object,
+  muiTheme: PropTypes.object,
 };
 
 

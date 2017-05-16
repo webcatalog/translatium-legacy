@@ -1,6 +1,7 @@
 /* global strings */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
 
@@ -130,17 +131,17 @@ class History extends React.Component {
 }
 
 History.propTypes = {
-  historyItems: React.PropTypes.instanceOf(Immutable.List),
-  canLoadMore: React.PropTypes.bool,
-  historyLoading: React.PropTypes.bool,
-  onItemTouchTap: React.PropTypes.func,
-  onEnterHistory: React.PropTypes.func,
-  onDeleteButtonTouchTap: React.PropTypes.func,
-  onLoadMore: React.PropTypes.func,
+  historyItems: PropTypes.instanceOf(Immutable.List),
+  canLoadMore: PropTypes.bool,
+  historyLoading: PropTypes.bool,
+  onItemTouchTap: PropTypes.func,
+  onEnterHistory: PropTypes.func,
+  onDeleteButtonTouchTap: PropTypes.func,
+  onLoadMore: PropTypes.func,
 };
 
 History.contextTypes = {
-  muiTheme: React.PropTypes.object,
+  muiTheme: PropTypes.object,
 };
 
 const mapStateToProps = state => ({

@@ -1,5 +1,6 @@
 /* global strings */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import AppBar from 'material-ui/AppBar';
@@ -113,14 +114,14 @@ class Settings extends React.Component {
 }
 
 Settings.propTypes = {
-  theme: React.PropTypes.string,
-  primaryColorId: React.PropTypes.string,
-  preventScreenLock: React.PropTypes.bool,
-  translateWhenPressingEnter: React.PropTypes.bool,
-  realtime: React.PropTypes.bool,
-  chinaMode: React.PropTypes.bool,
-  onToggle: React.PropTypes.func,
-  onSelectFieldChange: React.PropTypes.func,
+  theme: PropTypes.string,
+  primaryColorId: PropTypes.string,
+  preventScreenLock: PropTypes.bool,
+  translateWhenPressingEnter: PropTypes.bool,
+  realtime: PropTypes.bool,
+  chinaMode: PropTypes.bool,
+  onToggle: PropTypes.func,
+  onSelectFieldChange: PropTypes.func,
 };
 
 const mapStateToProps = state => ({

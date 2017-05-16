@@ -1,5 +1,6 @@
 /* global strings Windows */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import Immutable from 'immutable';
@@ -594,37 +595,37 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  screenWidth: React.PropTypes.number,
-  theme: React.PropTypes.string,
-  translateWhenPressingEnter: React.PropTypes.bool,
-  preventScreenLock: React.PropTypes.bool,
-  inputLang: React.PropTypes.string,
-  outputLang: React.PropTypes.string,
-  inputText: React.PropTypes.string,
-  output: React.PropTypes.instanceOf(Immutable.Map),
-  imeMode: React.PropTypes.string,
-  textToSpeechPlaying: React.PropTypes.bool,
-  fullscreenInputBox: React.PropTypes.bool,
-  launchCount: React.PropTypes.number,
-  onLanguageTouchTap: React.PropTypes.func,
-  onSwapButtonTouchTap: React.PropTypes.func,
-  onKeyDown: React.PropTypes.func,
-  onInputText: React.PropTypes.func,
-  onClearButtonTouchTap: React.PropTypes.func,
-  onListenButtonTouchTap: React.PropTypes.func,
-  onTranslateButtonTouchTap: React.PropTypes.func,
-  onWriteButtonTouchTap: React.PropTypes.func,
-  onSpeakButtonTouchTap: React.PropTypes.func,
-  onTogglePhrasebookTouchTap: React.PropTypes.func,
-  onOpenImageButtonTouchTap: React.PropTypes.func,
-  onCameraButtonTouchTap: React.PropTypes.func,
-  onSwapOutputButtonTouchTap: React.PropTypes.func,
-  onBiggerTextButtonTouchTap: React.PropTypes.func,
-  onFullscreenButtonTouchTap: React.PropTypes.func,
-  onSuggestedInputLangTouchTap: React.PropTypes.func,
-  onSuggestedInputTextTouchTap: React.PropTypes.func,
-  onAnotherContainerTouchTap: React.PropTypes.func,
-  onRequestCopyToClipboard: React.PropTypes.func,
+  screenWidth: PropTypes.number,
+  theme: PropTypes.string,
+  translateWhenPressingEnter: PropTypes.bool,
+  preventScreenLock: PropTypes.bool,
+  inputLang: PropTypes.string,
+  outputLang: PropTypes.string,
+  inputText: PropTypes.string,
+  output: PropTypes.instanceOf(Immutable.Map),
+  imeMode: PropTypes.string,
+  textToSpeechPlaying: PropTypes.bool,
+  fullscreenInputBox: PropTypes.bool,
+  launchCount: PropTypes.number,
+  onLanguageTouchTap: PropTypes.func,
+  onSwapButtonTouchTap: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onInputText: PropTypes.func,
+  onClearButtonTouchTap: PropTypes.func,
+  onListenButtonTouchTap: PropTypes.func,
+  onTranslateButtonTouchTap: PropTypes.func,
+  onWriteButtonTouchTap: PropTypes.func,
+  onSpeakButtonTouchTap: PropTypes.func,
+  onTogglePhrasebookTouchTap: PropTypes.func,
+  onOpenImageButtonTouchTap: PropTypes.func,
+  onCameraButtonTouchTap: PropTypes.func,
+  onSwapOutputButtonTouchTap: PropTypes.func,
+  onBiggerTextButtonTouchTap: PropTypes.func,
+  onFullscreenButtonTouchTap: PropTypes.func,
+  onSuggestedInputLangTouchTap: PropTypes.func,
+  onSuggestedInputTextTouchTap: PropTypes.func,
+  onAnotherContainerTouchTap: PropTypes.func,
+  onRequestCopyToClipboard: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -741,7 +742,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Home.contextTypes = {
-  muiTheme: React.PropTypes.object,
+  muiTheme: PropTypes.object,
 };
 
 export default connect(

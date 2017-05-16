@@ -1,6 +1,7 @@
-/* global strings Windows */
+/* global Windows */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Paper from 'material-ui/Paper';
@@ -105,13 +106,13 @@ class Speech extends React.Component {
 }
 
 Speech.propTypes = {
-  speechStatus: React.PropTypes.string.isRequired,
-  onControlButtonTouchTap: React.PropTypes.func.isRequired,
-  onReleaseDevice: React.PropTypes.func.isRequired,
+  speechStatus: PropTypes.string.isRequired,
+  onControlButtonTouchTap: PropTypes.func.isRequired,
+  onReleaseDevice: PropTypes.func.isRequired,
 };
 
 Speech.contextTypes = {
-  muiTheme: React.PropTypes.object,
+  muiTheme: PropTypes.object,
 };
 
 const mapDispatchToProps = dispatch => ({

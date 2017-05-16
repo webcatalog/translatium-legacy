@@ -1,5 +1,6 @@
 /* global strings document */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 
@@ -136,10 +137,10 @@ class LanguageList extends React.Component {
 }
 
 LanguageList.propTypes = {
-  recentLanguages: React.PropTypes.arrayOf(React.PropTypes.string),
-  type: React.PropTypes.string,
-  onCloseTouchTap: React.PropTypes.func,
-  onLanguageTouchTap: React.PropTypes.func,
+  recentLanguages: PropTypes.arrayOf(PropTypes.string),
+  type: PropTypes.string,
+  onCloseTouchTap: PropTypes.func,
+  onLanguageTouchTap: PropTypes.func,
 };
 
 const mapDispatchToProps = dispatch => ({

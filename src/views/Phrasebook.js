@@ -1,6 +1,7 @@
 /* global strings */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import Immutable from 'immutable';
@@ -143,17 +144,17 @@ class Phrasebook extends React.Component {
 }
 
 Phrasebook.propTypes = {
-  phrasebookItems: React.PropTypes.instanceOf(Immutable.List),
-  canLoadMore: React.PropTypes.bool,
-  phrasebookLoading: React.PropTypes.bool,
-  onItemTouchTap: React.PropTypes.func,
-  onEnterPhrasebook: React.PropTypes.func,
-  onDeleteButtonTouchTap: React.PropTypes.func,
-  onLoadMore: React.PropTypes.func,
+  phrasebookItems: PropTypes.instanceOf(Immutable.List),
+  canLoadMore: PropTypes.bool,
+  phrasebookLoading: PropTypes.bool,
+  onItemTouchTap: PropTypes.func,
+  onEnterPhrasebook: PropTypes.func,
+  onDeleteButtonTouchTap: PropTypes.func,
+  onLoadMore: PropTypes.func,
 };
 
 Phrasebook.contextTypes = {
-  muiTheme: React.PropTypes.object,
+  muiTheme: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
