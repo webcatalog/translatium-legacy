@@ -1,8 +1,7 @@
 #!/bin/bash
 
 npm install -g harp
-npm install bulma@0.4.0
-mv ./node_modules ./_node_modules
+yarn
 harp compile
 cd www
 git init

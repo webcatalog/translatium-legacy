@@ -1,0 +1,11 @@
+{
+  "name": "modern-translator-website",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/modern-translator/modern-translator-website.git",
+  "author": "Quang Lam <quang.lam2807@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bulma": "^0.4.1"
+  }
+}
