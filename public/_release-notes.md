@@ -1,4 +1,11 @@
 <span class="tag is-success is-large">6.x</span>
+### 6.5.0 (23th May 2017)
+1. All features are open to everyone with ad-supported. Anyone who bought the app prior to May 15th 2017 can remove ads for free.
+2. Merges Help & Settings tabs.
+3. Fixes bugs & improves performance.
+
+---
+
 ### 6.4.0 (20th February 2017)
 1. Fixes bugs.
 2. Improves keyboard navigation.
