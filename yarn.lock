@@ -1098,7 +1098,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2:
     create-hash "^1.1.0"
     inherits "^2.0.1"
 
-create-react-class@^15.5.1:
+create-react-class@^15.5.1, create-react-class@^15.5.3:
   version "15.5.3"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.5.3.tgz#fb0f7cae79339e9a179e194ef466efa3923820fe"
   dependencies:
@@ -1364,9 +1364,9 @@ electron-download@^3.0.1:
     semver "^5.3.0"
     sumchecker "^1.2.0"
 
-electron@^1.6.7:
-  version "1.6.7"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-1.6.7.tgz#08b90812912a66f80cfb47bdaef6edfd6b78aa81"
+electron@^1.6.8:
+  version "1.6.8"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-1.6.8.tgz#41cbbe7272ccd93339c040f856c0d6372a4ddb07"
   dependencies:
     electron-download "^3.0.1"
     extract-zip "^1.0.3"
@@ -1553,9 +1553,9 @@ eslint-plugin-import@^2.2.0:
     minimatch "^3.0.3"
     pkg-up "^1.0.0"
 
-eslint-plugin-jsx-a11y@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsx-a11y/-/eslint-plugin-jsx-a11y-5.0.1.tgz#48e678891fec9fe1e53ef53adc2f7d05fee6640c"
+eslint-plugin-jsx-a11y@^5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsx-a11y/-/eslint-plugin-jsx-a11y-5.0.3.tgz#4a939f76ec125010528823331bf948cc573380b6"
   dependencies:
     aria-query "^0.5.0"
     array-includes "^3.0.3"
@@ -2007,9 +2007,9 @@ handlebars-loader@^1.5.0:
     loader-utils "1.0.x"
     object-assign "^4.1.0"
 
-handlebars@^4.0.8:
-  version "4.0.8"
-  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.8.tgz#22b875cd3f0e6cbea30314f144e82bc7a72ff420"
+handlebars@^4.0.10:
+  version "4.0.10"
+  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.10.tgz#3d30c718b09a3d96f23ea4cc1f403c4d3ba9ff4f"
   dependencies:
     async "^1.4.0"
     optimist "^0.6.1"
@@ -3268,7 +3268,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.0.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@~15.5.7:
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@~15.5.7:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -3362,17 +3362,17 @@ react-event-listener@^0.4.5:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-react-redux@^5.0.4:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.4.tgz#1563babadcfb2672f57f9ceaa439fb16bf85d55b"
+react-redux@^5.0.5:
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.5.tgz#f8e8c7b239422576e52d6b7db06439469be9846a"
   dependencies:
-    create-react-class "^15.5.1"
+    create-react-class "^15.5.3"
     hoist-non-react-statics "^1.0.3"
     invariant "^2.0.0"
     lodash "^4.2.0"
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
-    prop-types "^15.0.0"
+    prop-types "^15.5.10"
 
 react-router-redux@^4.0.8:
   version "4.0.8"
@@ -4089,9 +4089,9 @@ uglify-js@2.7.x, uglify-js@^2.6, uglify-js@~2.7.3:
     uglify-to-browserify "~1.0.0"
     yargs "~3.10.0"
 
-uglify-js@^2.8.5:
-  version "2.8.25"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.25.tgz#11b776e7c3925802853e4c3dd6d0ffad8eb72336"
+uglify-js@^2.8.27:
+  version "2.8.27"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.27.tgz#47787f912b0f242e5b984343be8e35e95f694c9c"
   dependencies:
     source-map "~0.5.1"
     yargs "~3.10.0"
@@ -4217,9 +4217,9 @@ webpack-core@~0.6.9:
     source-list-map "~0.1.7"
     source-map "~0.4.1"
 
-webpack-merge@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/webpack-merge/-/webpack-merge-3.0.0.tgz#f2c9c28691bc44fdb124745cb84a8fab74125701"
+webpack-merge@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/webpack-merge/-/webpack-merge-4.1.0.tgz#6ad72223b3e0b837e531e4597c199f909361511e"
   dependencies:
     lodash "^4.17.4"
 
@@ -4268,9 +4268,9 @@ webpack@^1.12.13, webpack@^1.12.9:
     watchpack "^0.2.1"
     webpack-core "~0.6.9"
 
-webpack@^2.5.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-2.5.1.tgz#61742f0cf8af555b87460a9cd8bba2f1e3ee2fce"
+webpack@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-2.6.0.tgz#7e650a92816abff5db5f43316b0b8b19b13d76c1"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"
@@ -4289,7 +4289,7 @@ webpack@^2.5.1:
     source-map "^0.5.3"
     supports-color "^3.1.0"
     tapable "~0.2.5"
-    uglify-js "^2.8.5"
+    uglify-js "^2.8.27"
     watchpack "^1.3.1"
     webpack-sources "^0.2.3"
     yargs "^6.0.0"
