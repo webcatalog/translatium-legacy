@@ -8,6 +8,12 @@ class Ad extends React.Component {
     this.msAd = new MicrosoftNSJS.Advertising.AdControl(this.adEl, {
       applicationId: process.env.NODE_ENV === 'production' ? '9wzdncrcsg9k' : '3f83fe91-d6be-434d-a0ae-7351c5a997f1',
       adUnitId: process.env.NODE_ENV === 'production' ? '11683627' : 'test',
+      onErrorOccurred: () => {
+        this.adEl.style.display = 'none';
+      },
+      onAdRefreshed: () => {
+        this.adEl.style.display = null;
+      },
     });
   }
 
@@ -29,10 +35,10 @@ class Ad extends React.Component {
             width: adWidth,
             height: adHeight,
             margin: '0 auto',
-            zIndex: 2,
             position: 'absolute',
             left: 0,
             right: 0,
+            zIndex: 2,
           }}
         />
         <div
@@ -40,7 +46,6 @@ class Ad extends React.Component {
             width: adWidth,
             height: adHeight,
             margin: '0 auto',
-            zIndex: 1,
             backgroundImage: `url("images/ad${adWidth}x${adHeight}.png")`,
             backgroundSize: `${adWidth}px ${adHeight}px`,
             backgroundRepeat: 'no-repeat',
@@ -48,8 +53,10 @@ class Ad extends React.Component {
             position: 'absolute',
             left: 0,
             right: 0,
+            cursor: 'pointer',
+            zIndex: 1,
           }}
-          onTouchTap={() => openUri('https://getwebcatalog.com/?ref=producthunt')}
+          onTouchTap={() => openUri('https://getwebcatalog.com/?ref=moderntranslator')}
         />
       </div>
     );

@@ -239,7 +239,7 @@ const mapDispatchToProps = dispatch => ({
         const purchaseDate = receipt.Receipt.AppReceipt[0].$.PurchaseDate;
 
         if (new Date(purchaseDate) <= new Date('2017-05-15T05:00:00Z')) {
-          currentApp.requestProductPurchaseAsync('remove.ads.durable')
+          currentApp.requestProductPurchaseAsync('remove.ads.free')
             .done((purchaseResults) => {
               if (purchaseResults.status === purchaseStatus.succeeded) {
                 dispatch(updateShouldShowAd(false));
