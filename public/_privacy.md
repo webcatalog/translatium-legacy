@@ -14,7 +14,7 @@ In addition, the Application may collect certain information automatically, incl
 This Application does not collect precise information about the location of your mobile device.
 
 ## Do third parties see and/or have access to information obtained by the Application?
-Only aggregated, anonymized data is periodically transmitted to external services (translate.google.com, translate.google.cn (if China Mode is turned on) and ocr.space) to help us operate and improve the Application and our service. We will share your information with third parties only in the ways that are described in this privacy statement.
+Only aggregated, anonymized data is periodically transmitted to external services (translate.google.com, translate.google.cn (if China Mode is turned on), sentry.io and ocr.space) to help us operate and improve the Application and our service. We will share your information with third parties only in the ways that are described in this privacy statement.
 
 We may disclose User Provided and Automatically Collected Information:
 * as required by law, such as to comply with a subpoena, or similar legal process;
