@@ -24,7 +24,6 @@
     "material-ui": "^0.18.1",
     "pouchdb-browser": "^6.2.0",
     "prop-types": "^15.5.10",
-    "raven-js": "^3.15.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.5",

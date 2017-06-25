@@ -1,5 +1,4 @@
 import Immutable from 'immutable';
-import Raven from 'raven-js';
 
 import { UPDATE_PHRASEBOOK, UPDATE_OUTPUT } from '../constants/actions';
 import phrasebookDb from '../libs/phrasebookDb';
@@ -87,7 +86,8 @@ export const loadPhrasebook = (init, limit) => ((dispatch, getState) => {
       });
     })
     .catch((e) => {
-      Raven.captureException(e);
+      // eslint-disable-next-line
+      console.log(e);
     });
 });
 
@@ -125,6 +125,7 @@ export const deletePhrasebookItem = (id, rev) => ((dispatch, getState) => {
       }
     })
     .catch((e) => {
-      Raven.captureException(e);
+      // eslint-disable-next-line
+      console.log(e);
     });
 });
