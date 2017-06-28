@@ -1,11 +1,11 @@
 /* eslint import/no-unresolved: [2, { ignore: ['electron'] }] */
 /* eslint-disable import/no-extraneous-dependencies */
 
-
 const electron = require('electron');
 const menubar = require('menubar');
+const path = require('path');
 
-const config = require('../config');
+const config = require('./config');
 
 // Module to control application life.
 const app = electron.app;
@@ -193,8 +193,8 @@ app.on('activate', () => {
 
 // Menubar
 menubar({
-  dir: `${config.ROOT_PATH}/www/`,
-  icon: `${config.ROOT_PATH}/images/iconTemplate.png`,
+  dir: path.resolve(__dirname, '..', 'www'),
+  icon: path.resolve(__dirname, '..', 'build', 'iconTemplate.png'),
   width: 400,
   height: 500,
   showDockIcon: true,
