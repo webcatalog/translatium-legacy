@@ -10,6 +10,8 @@ import FlatButton from 'material-ui/FlatButton';
 
 import { updateInputText, updateImeMode } from '../actions/home';
 import { loadSuggestions, resetSuggestions } from '../actions/handwriting';
+
+import getPlatform from '../libs/getPlatform';
 import insertAtCursor from '../libs/insertAtCursor';
 import deleteAtCursor from '../libs/deleteAtCursor';
 
@@ -70,7 +72,7 @@ class Handwriting extends React.Component {
       pageX = e.pageX;
       pageY = e.pageY;
     }
-    const titleBarHeight = (process.env.PLATFORM === 'mac') ? 22 : 0;
+    const titleBarHeight = (getPlatform() === 'mac') ? 22 : 0;
     this.addTouchTap(pageX - this.offsetLeft, pageY - this.offsetTop - titleBarHeight);
   }
 
@@ -87,7 +89,7 @@ class Handwriting extends React.Component {
         pageY = e.pageY;
       }
 
-      const titleBarHeight = (process.env.PLATFORM === 'mac') ? 22 : 0;
+      const titleBarHeight = (getPlatform() === 'mac') ? 22 : 0;
 
       this.addTouchTap(pageX - this.offsetLeft, pageY - this.offsetTop - titleBarHeight, true);
     }

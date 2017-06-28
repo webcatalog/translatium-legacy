@@ -152,7 +152,7 @@ function createWindow() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL(`file://${config.ROOT_PATH}/www/index.html`);
+  mainWindow.loadURL(`file://${path.resolve(__dirname, 'index.html')}`);
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
@@ -193,8 +193,8 @@ app.on('activate', () => {
 
 // Menubar
 menubar({
-  dir: path.resolve(__dirname, '..', 'www'),
-  icon: path.resolve(__dirname, '..', 'build', 'iconTemplate.png'),
+  dir: path.resolve(__dirname),
+  icon: path.resolve(__dirname, 'images', 'iconTemplate.png'),
   width: 400,
   height: 500,
   showDockIcon: true,

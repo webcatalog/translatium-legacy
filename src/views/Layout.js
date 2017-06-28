@@ -22,6 +22,8 @@ import { closeSnackbar } from '../actions/snackbar';
 
 import colorPairs from '../constants/colorPairs';
 
+import getPlatform from '../libs/getPlatform';
+
 import Alert from './Alert';
 import Ad from './Ad';
 
@@ -55,7 +57,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    if (process.env.PLATFORM === 'windows') {
+    if (getPlatform() === 'windows') {
       this.setAppTitleBar(this.props.primaryColorId);
 
       const { onBackClick } = this.props;
@@ -79,7 +81,7 @@ class App extends React.Component {
     const { primaryColorId } = this.props;
 
     if (primaryColorId !== nextProps.primaryColorId) {
-      if (process.env.PLATFORM === 'windows') {
+      if (getPlatform() === 'windows') {
         this.setAppTitleBar(nextProps.primaryColorId);
       }
     }
@@ -179,7 +181,7 @@ class App extends React.Component {
 
     return (
       <div className="fs" style={styles.container}>
-        {process.env.PLATFORM === 'mac' ? (
+        {getPlatform() === 'mac' ? (
           <div style={styles.fakeTitleBar}>
             Modern Translator
           </div>
@@ -217,7 +219,7 @@ class App extends React.Component {
               </BottomNavigation>
             </Paper>
           ) : null}
-          {process.env.PLATFORM === 'windows' && shouldShowAd ? <Ad /> : null}
+          {getPlatform() === 'windows' && shouldShowAd ? <Ad /> : null}
         </div>
       </div>
     );

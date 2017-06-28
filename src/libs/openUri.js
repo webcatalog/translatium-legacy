@@ -1,7 +1,8 @@
 /* global Windows shell */
+import getPlatform from './getPlatform';
 
 const openUri = (uriStr) => {
-  switch (process.env.PLATFORM) {
+  switch (getPlatform()) {
     case 'windows': {
       const uri = new Windows.Foundation.Uri(uriStr);
       Windows.System.Launcher.launchUriAsync(uri);

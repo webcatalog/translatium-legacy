@@ -21,6 +21,7 @@ import { openSnackbar } from '../actions/snackbar';
 
 import colorPairs from '../constants/colorPairs';
 
+import getPlatform from '../libs/getPlatform';
 import openUri from '../libs/openUri';
 
 class Settings extends React.Component {
@@ -105,7 +106,7 @@ class Settings extends React.Component {
                 />
               )}
             />
-            {process.env.PLATFORM === 'windows' ? (
+            {getPlatform() === 'windows' ? (
               <ListItem
                 primaryText={strings.preventScreenLock}
                 rightToggle={(
@@ -136,33 +137,33 @@ class Settings extends React.Component {
               secondaryText={strings.chinaModeDesc}
             />
             <Divider />
-            {process.env.PLATFORM === 'windows' && shouldShowAd ? (
+            {getPlatform() === 'windows' && shouldShowAd ? (
               <ListItem
                 primaryText={strings.removeAds}
                 onTouchTap={onRemoveAdTouchTap}
               />
             ) : null}
-            {process.env.PLATFORM === 'windows' && shouldShowAd ? (
+            {getPlatform() === 'windows' && shouldShowAd ? (
               <ListItem
                 primaryText={strings.restorePurchase}
                 secondaryText={strings.restorePurchaseDesc}
                 onTouchTap={onRestorePurchaseTouchTap}
               />
             ) : null}
-            {process.env.PLATFORM === 'windows' && !shouldShowAd ? (
+            {getPlatform() === 'windows' && !shouldShowAd ? (
               <ListItem
                 primaryText={strings.removeAds}
                 secondaryText={strings.activated}
               />
             ) : null}
             <Divider />
-            {process.env.PLATFORM === 'windows' ? (
+            {getPlatform() === 'windows' ? (
               <ListItem
                 primaryText={strings.rateWindowsStore}
                 onTouchTap={() => openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}
               />
             ) : null}
-            {process.env.PLATFORM === 'mac' ? (
+            {getPlatform() === 'mac' ? (
               <ListItem
                 primaryText={strings.rateMacAppStore}
                 onTouchTap={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')}

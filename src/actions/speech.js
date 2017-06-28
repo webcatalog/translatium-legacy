@@ -6,6 +6,7 @@ import { UPDATE_SPEECH_STATUS } from '../constants/actions';
 
 import { updateInputText } from './home';
 
+import getPlatform from '../libs/getPlatform';
 import insertAtCursor from '../libs/insertAtCursor';
 import winXhr from '../libs/winXhr';
 
@@ -23,7 +24,7 @@ let checkTime;
 
 
 export const releaseDevice = () => ((dispatch, getState) => {
-  switch (process.env.PLATFORM) {
+  switch (getPlatform()) {
     case 'windows': {
       const { status } = getState().speech;
       if (status === 'recording' || mediaCaptureMgr) {
@@ -97,7 +98,7 @@ export const stopRecording = () => ((dispatch, getState) => {
     ));
   };
 
-  switch (process.env.PLATFORM) {
+  switch (getPlatform()) {
     case 'windows': {
       clearInterval(checkTime);
       if (status === 'recording') {
@@ -208,7 +209,7 @@ export const startRecording = () => ((dispatch) => {
     status: 'recording',
   });
 
-  switch (process.env.PLATFORM) {
+  switch (getPlatform()) {
     case 'windows': {
       if (!mediaCaptureMgr) {
         mediaCaptureMgr = new Windows.Media.Capture.MediaCapture();

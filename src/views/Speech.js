@@ -13,9 +13,11 @@ import AVStop from 'material-ui/svg-icons/av/stop';
 import { updateImeMode } from '../actions/home';
 import { releaseDevice, startRecording, stopRecording } from '../actions/speech';
 
+import getPlatform from '../libs/getPlatform';
+
 class Speech extends React.Component {
   componentWillMount() {
-    if (process.env.PLATFORM === 'windows') {
+    if (getPlatform() === 'windows') {
       const { onReleaseDevice } = this.props;
       Windows.UI.WebUI.WebUIApplication.addEventListener('suspending', onReleaseDevice);
     }
@@ -26,7 +28,7 @@ class Speech extends React.Component {
 
     onReleaseDevice();
 
-    if (process.env.PLATFORM === 'windows') {
+    if (getPlatform() === 'windows') {
       Windows.UI.WebUI.WebUIApplication.removeEventListener('suspending', onReleaseDevice);
     }
   }

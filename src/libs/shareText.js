@@ -1,7 +1,8 @@
 /* global Windows */
+import getPlatform from './getPlatform';
 
 const shareText = (text) => {
-  switch (process.env.PLATFORM) {
+  switch (getPlatform()) {
     case 'windows': {
       const dataTransferManager =
         Windows.ApplicationModel.DataTransfer.DataTransferManager.getForCurrentView();

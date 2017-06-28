@@ -2,8 +2,10 @@
 
 import { UPDATE_SHOULD_SHOW_AD } from '../constants/actions';
 
+import getPlatform from '../libs/getPlatform';
+
 let shouldShowAd = false;
-if (process.env.PLATFORM === 'windows') {
+if (getPlatform() === 'windows') {
   const currentApp = process.env.NODE_ENV === 'production' ? Windows.ApplicationModel.Store.CurrentApp
                   : Windows.ApplicationModel.Store.CurrentAppSimulator;
 

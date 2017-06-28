@@ -2,6 +2,7 @@
 
 import { PLAY_TEXT_TO_SPEECH, STOP_TEXT_TO_SPEECH } from '../constants/actions';
 
+import getPlatform from '../libs/getPlatform';
 import generateGoogleTranslateToken from '../libs/generateGoogleTranslateToken';
 import winXhr from '../libs/winXhr';
 
@@ -19,7 +20,7 @@ const textToSpeechShortText = (lang, text, idx, total) =>
         + `&client=t&prev=input&tk=${token}`,
       );
 
-      switch (process.env.PLATFORM) {
+      switch (getPlatform()) {
         case 'windows': {
           return winXhr({
             type: 'get',

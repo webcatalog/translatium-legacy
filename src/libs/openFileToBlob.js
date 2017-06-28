@@ -1,3 +1,5 @@
+import getPlatform from './getPlatform';
+
 const getFileType = (ext) => {
   switch (ext) {
     case 'png':
@@ -9,7 +11,7 @@ const getFileType = (ext) => {
 
 const openFileToBlob = () =>
   new Promise((resolve, reject) => {
-    switch (process.env.PLATFORM) {
+    switch (getPlatform()) {
       case 'windows': {
         /* global Windows window */
         const picker = new Windows.Storage.Pickers.FileOpenPicker();

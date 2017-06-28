@@ -4,6 +4,7 @@ import Immutable from 'immutable';
 
 import { UPDATE_OCR } from '../constants/actions';
 
+import getPlatform from '../libs/getPlatform';
 import translateArray from '../libs/translateArray';
 import openFileToBlob from '../libs/openFileToBlob';
 import captureToBlob from '../libs/captureToBlob';
@@ -46,7 +47,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
           context.clearRect(0, 0, maxWidth, maxHeight);
           context.drawImage(imageObj, 0, 0, this.width, this.height, 0, 0, maxWidth, maxHeight);
 
-          switch (process.env.PLATFORM) {
+          switch (getPlatform()) {
             case 'windows': {
               const inMemoryRandomAccessStream =
                 new Windows.Storage.Streams.InMemoryRandomAccessStream();

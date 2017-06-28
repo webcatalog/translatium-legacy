@@ -1,5 +1,5 @@
 /* global fetch */
-
+import getPlatform from './getPlatform';
 import generateGoogleTranslateToken from './generateGoogleTranslateToken';
 import * as languageUtils from './languageUtils';
 import winXhr from './winXhr';
@@ -16,7 +16,7 @@ const translateShortText = (inputLang, outputLang, inputText, chinaMode) =>
               + 'bd&dt=ex&dt=ld&dt=md&dt=qc&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8'
               + `&source=btn&kc=0&ssel=4&tsel=4&tk=${token}&q=${encodeURIComponent(inputText)}`;
 
-      switch (process.env.PLATFORM) {
+      switch (getPlatform()) {
         case 'windows': {
           return winXhr({
             type: 'get',

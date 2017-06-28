@@ -1,7 +1,8 @@
 /* global Windows remote */
+import getPlatform from './getPlatform';
 
 const copyToClipboard = (text) => {
-  switch (process.env.PLATFORM) {
+  switch (getPlatform()) {
     case 'windows': {
       const dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
       dataPackage.setText(text);

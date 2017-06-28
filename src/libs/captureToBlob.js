@@ -1,7 +1,9 @@
+import getPlatform from './getPlatform';
+
 const captureToBlob = () =>
   new Promise((resolve, reject) => {
     try {
-      switch (process.env.PLATFORM) {
+      switch (getPlatform()) {
         case 'windows': {
           /* global Windows window */
           const captureUI = new Windows.Media.Capture.CameraCaptureUI();

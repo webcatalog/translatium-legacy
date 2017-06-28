@@ -58,6 +58,7 @@ import { loadImage } from '../actions/ocr';
 import { playTextToSpeech, stopTextToSpeech } from '../actions/textToSpeech';
 import { openSnackbar } from '../actions/snackbar';
 
+import getPlatform from '../libs/getPlatform';
 import copyToClipboard from '../libs/copyToClipboard';
 import shareText from '../libs/shareText';
 import askIfEnjoy from '../libs/askIfEnjoy';
@@ -69,7 +70,7 @@ import History from './History';
 
 class Home extends React.Component {
   componentDidMount() {
-    if (process.env.PLATFORM === 'windows') {
+    if (getPlatform() === 'windows') {
       const { preventScreenLock } = this.props;
       if (preventScreenLock === true) {
         this.dispRequest = new Windows.System.Display.DisplayRequest();
@@ -83,7 +84,7 @@ class Home extends React.Component {
     }
   }
   componentWillUnmount() {
-    if (process.env.PLATFORM === 'windows') {
+    if (getPlatform() === 'windows') {
       if (this.dispRequest) {
         this.dispRequest.requestRelease();
       }
@@ -295,7 +296,7 @@ class Home extends React.Component {
           });
         }
 
-        if (process.env.PLATFORM !== 'mac') {
+        if (getPlatform() !== 'mac') {
           controllers.push({
             icon: <SocialShare />,
             tooltip: strings.share,
@@ -474,7 +475,7 @@ class Home extends React.Component {
       onTouchTap: onFullscreenButtonTouchTap,
     });
 
-    if (process.env.PLATFORM === 'windows') {
+    if (getPlatform() === 'windows') {
       if (isOcrSupported(inputLang)) {
         controllers.splice(controllers.length - 2, 0, {
           icon: <ImageCameraAlt />,

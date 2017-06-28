@@ -1,5 +1,6 @@
 /* global sessionStorage fetch */
 
+import getPlatform from './getPlatform';
 import winXhr from './winXhr';
 
 const getGoogleTkk = () => {
@@ -8,7 +9,7 @@ const getGoogleTkk = () => {
 
     return Promise.resolve()
       .then(() => {
-        switch (process.env.PLATFORM) {
+        switch (getPlatform()) {
           case 'windows': {
             return winXhr({
               type: 'get',

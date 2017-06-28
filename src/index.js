@@ -9,7 +9,10 @@ import { updateSetting } from './actions/settings';
 import { updateInputText } from './actions/home';
 import renderRoutes from './renderRoutes';
 
+import getPlatform from './libs/getPlatform';
 import fetchLocal from './libs/fetchLocal';
+
+import './main.css';
 
 const runApp = () => {
   /* global document */
@@ -17,7 +20,7 @@ const runApp = () => {
   const launchCount = store.getState().settings.launchCount;
   store.dispatch(updateSetting('launchCount', launchCount + 1));
 
-  if (process.env.PLATFORM === 'mac') {
+  if (getPlatform() === 'mac') {
     // Mock user agent
     Object.defineProperty(
       window.navigator,
@@ -28,7 +31,7 @@ const runApp = () => {
     );
   }
 
-  fetchLocal('./strings/en-us.json')
+  fetchLocal(`${process.env.PUBLIC_URL}/strings/en-us.json`)
     .then(res => res.json())
     .then((strings) => {
       /* global window */
@@ -46,7 +49,7 @@ const runApp = () => {
     });
 };
 
-switch (process.env.PLATFORM) {
+switch (getPlatform()) {
   case 'windows': {
     Windows.UI.WebUI.WebUIApplication.onactivated = (args) => {
       if (

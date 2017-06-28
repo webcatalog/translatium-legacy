@@ -1,4 +1,5 @@
 /* global Windows strings remote */
+import getPlatform from './getPlatform';
 import openUri from './openUri';
 
 import store from '../store';
@@ -11,7 +12,7 @@ const createDialog = ({
   defaultFunc,
   cancelFunc,
 }) => {
-  switch (process.env.PLATFORM) {
+  switch (getPlatform()) {
     case 'windows': {
       const msg = new Windows.UI.Popups.MessageDialog(message);
 
@@ -60,9 +61,9 @@ const askToReview = () => {
     defaultButtonText: strings.okSure,
     cancelButtonText: strings.noThanks,
     defaultFunc: () => {
-      if (process.env.PLATFORM === 'mac') {
+      if (getPlatform() === 'mac') {
         openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12');
-      } else if (process.env.PLATFORM === 'windows') {
+      } else if (getPlatform() === 'windows') {
         openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k');
       }
     },
