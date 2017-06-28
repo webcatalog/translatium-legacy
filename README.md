@@ -1,4 +1,5 @@
 <img src="build-resources/icon.png" height="128" width="128" alt="Modenr Translator" />
+
 ## Modern Translator Desktop
 [![Apache 2.0 License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/modern-translator/desktop/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/modern-translator/modern-translator.svg?branch=master)](https://travis-ci.org/modern-translator/modern-translator)
