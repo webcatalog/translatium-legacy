@@ -5,6 +5,8 @@ const electron = require('electron');
 const menubar = require('menubar');
 const path = require('path');
 
+const isDev = require('electron-is-dev');
+
 const config = require('./config');
 
 // Module to control application life.
@@ -152,7 +154,7 @@ function createWindow() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL(`file://${path.resolve(__dirname, 'index.html')}`);
+  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.resolve(__dirname, 'index.html')}`);
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
