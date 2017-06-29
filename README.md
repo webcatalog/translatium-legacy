@@ -1,4 +1,4 @@
-<img src="build-resources/icon.png" height="128" width="128" alt="Modenr Translator" />
+<img src="build-resources/icon.png" height="128" width="128" alt="Modern Translator" />
 
 ## Modern Translator Desktop
 [![Apache 2.0 License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/modern-translator/desktop/blob/master/LICENSE)
