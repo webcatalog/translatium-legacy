@@ -151,18 +151,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onItemTouchTap: (output) => {
-    dispatch(loadOutput(output));
-  },
-  onDeleteButtonTouchTap: (id, rev) => {
-    dispatch(deleteHistoryItem(id, rev));
-  },
-  onEnterHistory: () => {
-    dispatch(loadHistory(true));
-  },
-  onLoadMore: () => {
-    dispatch(loadHistory());
-  },
+  onItemTouchTap: output => dispatch(loadOutput(output)),
+  onDeleteButtonTouchTap: (id, rev) => dispatch(deleteHistoryItem(id, rev)),
+  onEnterHistory: () => dispatch(loadHistory(true)),
+  onLoadMore: () => dispatch(loadHistory()),
 });
 
 export default connect(

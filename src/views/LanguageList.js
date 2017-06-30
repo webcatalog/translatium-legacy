@@ -144,9 +144,7 @@ LanguageList.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onCloseTouchTap: () => {
-    dispatch(goBack());
-  },
+  onCloseTouchTap: () => dispatch(goBack()),
   onLanguageTouchTap: (type, value) => {
     dispatch(goBack());
 

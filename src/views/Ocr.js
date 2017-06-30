@@ -161,12 +161,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onCloseTouchTap: () => {
-    dispatch(goBack());
-  },
-  onZoomSliderChange: (event, value) => {
-    dispatch(setZoomLevel(value));
-  },
+  onCloseTouchTap: () => dispatch(goBack()),
+  onZoomSliderChange: (event, value) => dispatch(setZoomLevel(value)),
   onModeMenuItemTouchTap: (currentMode) => {
     let newMode;
     if (currentMode === 'input') newMode = 'output';

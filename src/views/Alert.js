@@ -40,9 +40,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClose: () => {
-    dispatch(closeAlert());
-  },
+  onClose: () => dispatch(closeAlert()),
 });
 
 export default connect(

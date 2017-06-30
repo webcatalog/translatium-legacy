@@ -205,12 +205,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onToggle: (name) => {
-    dispatch(toggleSetting(name));
-  },
-  onSettingChange: (name, value) => {
-    dispatch(updateSetting(name, value));
-  },
+  onToggle: name => dispatch(toggleSetting(name)),
+  onSettingChange: (name, value) => dispatch(updateSetting(name, value)),
   onRemoveAdTouchTap: () => {
     const currentApp = process.env.NODE_ENV === 'production' ? Windows.ApplicationModel.Store.CurrentApp
                     : Windows.ApplicationModel.Store.CurrentAppSimulator;

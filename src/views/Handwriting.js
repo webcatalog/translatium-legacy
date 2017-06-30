@@ -317,18 +317,12 @@ Handwriting.contextTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onUpdateInputText: (inputText, selectionStart, selectionEnd) => {
-    dispatch(updateInputText(inputText, selectionStart, selectionEnd));
-  },
-  onLoadSuggestions: (inputInk, canvasHeight, canvasWidth) => {
-    dispatch(loadSuggestions(inputInk, canvasWidth, canvasHeight));
-  },
-  onResetSuggestions: () => {
-    dispatch(resetSuggestions());
-  },
-  onTurnOffHandwriting: () => {
-    dispatch(updateImeMode(null));
-  },
+  onUpdateInputText: (inputText, selectionStart, selectionEnd) =>
+    dispatch(updateInputText(inputText, selectionStart, selectionEnd)),
+  onLoadSuggestions: (inputInk, canvasHeight, canvasWidth) =>
+    dispatch(loadSuggestions(inputInk, canvasWidth, canvasHeight)),
+  onResetSuggestions: () => dispatch(resetSuggestions()),
+  onTurnOffHandwriting: () => dispatch(updateImeMode(null)),
 });
 
 const mapStateToProps = state => ({

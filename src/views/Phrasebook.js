@@ -168,15 +168,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(loadOutput(output));
     dispatch(replace('/'));
   },
-  onDeleteButtonTouchTap: (id, rev) => {
-    dispatch(deletePhrasebookItem(id, rev));
-  },
-  onEnterPhrasebook: () => {
-    dispatch(loadPhrasebook(true));
-  },
-  onLoadMore: () => {
-    dispatch(loadPhrasebook());
-  },
+  onDeleteButtonTouchTap: (id, rev) => dispatch(deletePhrasebookItem(id, rev)),
+  onEnterPhrasebook: () => dispatch(loadPhrasebook(true)),
+  onLoadMore: () => dispatch(loadPhrasebook()),
 });
 
 export default connect(

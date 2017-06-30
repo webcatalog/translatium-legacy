@@ -282,15 +282,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(screenResize(window.innerWidth));
     dispatch(updateImeMode(null));
   },
-  onBottomNavigationItemClick: (pathname) => {
-    dispatch(replace(pathname));
-  },
-  onBackClick: () => {
-    dispatch(goBack());
-  },
-  onRequestCloseSnackbar: () => {
-    dispatch(closeSnackbar());
-  },
+  onBottomNavigationItemClick: pathname => dispatch(replace(pathname)),
+  onBackClick: () => dispatch(goBack()),
+  onRequestCloseSnackbar: () => dispatch(closeSnackbar()),
 });
 
 export default connect(

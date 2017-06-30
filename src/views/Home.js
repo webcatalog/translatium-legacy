@@ -643,15 +643,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLanguageTouchTap: (type) => {
+  onLanguageTouchTap: type =>
     dispatch(push({
       pathname: '/language-list',
       query: { type },
-    }));
-  },
-  onSwapButtonTouchTap: () => {
-    dispatch(swapLanguages());
-  },
+    })),
+  onSwapButtonTouchTap: () => dispatch(swapLanguages()),
   onKeyDown: (e) => {
     if (e.key === 'Enter') {
       dispatch(translate(true));
@@ -667,9 +664,7 @@ const mapDispatchToProps = dispatch => ({
 
     dispatch(updateInputText(inputText, e.target.selectionStart, e.target.selectionEnd));
   },
-  onClearButtonTouchTap: () => {
-    dispatch(updateInputText(''));
-  },
+  onClearButtonTouchTap: () => dispatch(updateInputText('')),
   onListenButtonTouchTap: (toStop, lang, text) => {
     if (toStop) {
       dispatch(stopTextToSpeech());
@@ -677,44 +672,25 @@ const mapDispatchToProps = dispatch => ({
     }
     dispatch(playTextToSpeech(lang, text));
   },
-  onTranslateButtonTouchTap: () => {
-    dispatch(translate(true));
-  },
-  onWriteButtonTouchTap: () => {
-    dispatch(updateImeMode('handwriting'));
-  },
-  onSpeakButtonTouchTap: () => {
-    dispatch(updateImeMode('speech'));
-  },
-  onTogglePhrasebookTouchTap: () => {
-    dispatch(togglePhrasebook());
-  },
-  onOpenImageButtonTouchTap: () => {
-    dispatch(loadImage(false));
-  },
-  onCameraButtonTouchTap: () => {
-    dispatch(loadImage(true));
-  },
+  onTranslateButtonTouchTap: () => dispatch(translate(true)),
+  onWriteButtonTouchTap: () => dispatch(updateImeMode('handwriting')),
+  onSpeakButtonTouchTap: () => dispatch(updateImeMode('speech')),
+  onTogglePhrasebookTouchTap: () => dispatch(togglePhrasebook()),
+  onOpenImageButtonTouchTap: () => dispatch(loadImage(false)),
+  onCameraButtonTouchTap: () => dispatch(loadImage(true)),
   onSwapOutputButtonTouchTap: (inputLang, outputLang, inputText) => {
     dispatch(updateInputLang(inputLang));
     dispatch(updateOutputLang(outputLang));
     dispatch(updateInputText(inputText));
   },
-  onBiggerTextButtonTouchTap: (text) => {
+  onBiggerTextButtonTouchTap: text =>
     dispatch(push({
       pathname: '/bigger-text',
       query: { text },
-    }));
-  },
-  onFullscreenButtonTouchTap: () => {
-    dispatch(toggleFullscreenInputBox());
-  },
-  onSuggestedInputLangTouchTap: (value) => {
-    dispatch(updateInputLang(value));
-  },
-  onSuggestedInputTextTouchTap: (text) => {
-    dispatch(updateInputText(text));
-  },
+    })),
+  onFullscreenButtonTouchTap: () => dispatch(toggleFullscreenInputBox()),
+  onSuggestedInputLangTouchTap: value => dispatch(updateInputLang(value)),
+  onSuggestedInputTextTouchTap: text => dispatch(updateInputText(text)),
   onAnotherContainerTouchTap: (imeMode) => {
     if (imeMode) dispatch(updateImeMode(null));
   },

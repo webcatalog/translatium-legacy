@@ -88,12 +88,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onCloseTouchTap: () => {
-    dispatch(goBack());
-  },
-  onSliderChange: (event, value) => {
-    dispatch(updateSetting('biggerTextFontSize', value));
-  },
+  onCloseTouchTap: () => dispatch(goBack()),
+  onSliderChange: (event, value) => dispatch(updateSetting('biggerTextFontSize', value)),
 });
 
 export default connect(

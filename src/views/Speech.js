@@ -125,12 +125,8 @@ const mapDispatchToProps = dispatch => ({
       dispatch(stopRecording());
     }
   },
-  onTurnOffSpeechRecognition: () => {
-    dispatch(updateImeMode(null));
-  },
-  onReleaseDevice: () => {
-    dispatch(releaseDevice());
-  },
+  onTurnOffSpeechRecognition: () => dispatch(updateImeMode(null)),
+  onReleaseDevice: () => dispatch(releaseDevice()),
 });
 
 const mapStateToProps = state => ({
