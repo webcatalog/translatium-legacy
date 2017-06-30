@@ -3,7 +3,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Immutable from 'immutable';
 
 import LinearProgress from 'material-ui/LinearProgress';
 import IconButton from 'material-ui/IconButton';
@@ -89,7 +88,7 @@ class History extends React.Component {
     return (
       <div style={styles.container}>
         {(() => {
-          if (historyItems.size < 1 && historyLoading === false) {
+          if (historyItems.length < 1 && historyLoading === false) {
             return null;
           }
 
@@ -98,7 +97,7 @@ class History extends React.Component {
               <List>
                 {historyItems.map(item => [(
                   <ListItem
-                    key={`historyItem_${item.get('historyId')}`}
+                    key={`historyItem_${item.historyId}`}
                     onTouchTap={() => onItemTouchTap(item)}
                     rightIconButton={(
                       <IconButton
@@ -106,16 +105,16 @@ class History extends React.Component {
                         tooltipPosition="bottom-left"
                         onTouchTap={() => {
                           onDeleteButtonTouchTap(
-                            item.get('historyId'),
-                            item.get('rev'),
+                            item.historyId,
+                            item.rev,
                           );
                         }}
                       >
                         <ActionDelete />
                       </IconButton>
                     )}
-                    primaryText={item.get('outputText')}
-                    secondaryText={item.get('inputText')}
+                    primaryText={item.outputText}
+                    secondaryText={item.inputText}
                   />
                 ), <Divider inset={false} />])}
               </List>
@@ -131,7 +130,7 @@ class History extends React.Component {
 }
 
 History.propTypes = {
-  historyItems: PropTypes.instanceOf(Immutable.List),
+  historyItems: PropTypes.arrayOf(PropTypes.object),
   canLoadMore: PropTypes.bool,
   historyLoading: PropTypes.bool,
   onItemTouchTap: PropTypes.func,

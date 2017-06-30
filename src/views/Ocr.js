@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
-import Immutable from 'immutable';
 import shortid from 'shortid';
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -71,7 +70,7 @@ class Ocr extends React.Component {
 
     if (!ocr) return null;
 
-    const lineVarName = `${ocr.get('mode') || 'output'}Lines`;
+    const lineVarName = `${ocr.mode || 'output'}Lines`;
 
     return (
       <div style={styles.container}>
@@ -84,9 +83,9 @@ class Ocr extends React.Component {
         </FloatingActionButton>
         <div style={styles.zoomContainer}>
           <div
-            style={{ zoom: ocr.get('zoomLevel') || 1, position: 'relative' }}
+            style={{ zoom: ocr.zoomLevel || 1, position: 'relative' }}
           >
-            {ocr.get(lineVarName).map(line => (
+            {ocr[lineVarName].map(line => (
               <div
                 key={shortid.generate()}
                 style={{
@@ -94,16 +93,16 @@ class Ocr extends React.Component {
                   color: '#fff',
                   whiteSpace: 'nowrap',
                   position: 'absolute',
-                  top: line.get('top'),
-                  left: line.get('left'),
-                  fontSize: line.get('height'),
-                  lineHeight: `${line.get('height')}px`,
+                  top: line.top,
+                  left: line.left,
+                  fontSize: line.height,
+                  lineHeight: `${line.height}px`,
                 }}
               >
-                {line.get('text')}
+                {line.text}
               </div>
             ))}
-            <img src={ocr.get('imageUrl')} alt="" />
+            <img src={ocr.imageUrl} alt="" />
           </div>
         </div>
         <Slider
@@ -112,7 +111,7 @@ class Ocr extends React.Component {
           max={3}
           step={0.1}
           defaultValue={1}
-          value={ocr.get('zoomLevel')}
+          value={ocr.zoomLevel}
           onChange={onZoomSliderChange}
         />
         <IconMenu
@@ -126,16 +125,16 @@ class Ocr extends React.Component {
         >
           <MenuItem
             primaryText={
-              ocr.get('mode') === 'input'
+              ocr.mode === 'input'
                 ? `${strings.displayTranslatedText} (${strings[outputLang]})`
                 : `${strings.displayOriginalText} (${strings[inputLang]})`
             }
-            onTouchTap={() => onModeMenuItemTouchTap(ocr.get('mode'))}
+            onTouchTap={() => onModeMenuItemTouchTap(ocr.mode)}
           />
           <MenuItem
             primaryText="Display text only"
             onTouchTap={() => onTextOnlyMenuItemTouchTap(
-              inputLang, outputLang, ocr.get('inputText'), ocr.get('outputText'),
+              inputLang, outputLang, ocr.inputText, ocr.outputText,
             )}
           />
         </IconMenu>
@@ -147,7 +146,8 @@ class Ocr extends React.Component {
 Ocr.propTypes = {
   inputLang: PropTypes.string,
   outputLang: PropTypes.string,
-  ocr: PropTypes.instanceOf(Immutable.Map),
+  // eslint-disable-next-line
+  ocr: PropTypes.object,
   onCloseTouchTap: PropTypes.func,
   onZoomSliderChange: PropTypes.func,
   onModeMenuItemTouchTap: PropTypes.func,
@@ -171,9 +171,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setMode(newMode));
   },
   onTextOnlyMenuItemTouchTap: (inputLang, outputLang, inputText, outputText) => {
-    dispatch(loadOutput(Immutable.fromJS({
+    dispatch(loadOutput({
       inputLang, outputLang, inputText, outputText,
-    })));
+    }));
     dispatch(goBack());
   },
 });

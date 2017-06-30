@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import Immutable from 'immutable';
 import shortid from 'shortid';
 
 import { fullWhite, minBlack, grey100, fullBlack, darkWhite } from 'material-ui/styles/colors';
@@ -252,7 +251,7 @@ class Home extends React.Component {
 
     if (!output) return <History />;
 
-    switch (output.get('status')) {
+    switch (output.status) {
       case 'loading': {
         return (
           <div style={styles.progressContainer} >
@@ -271,28 +270,29 @@ class Home extends React.Component {
             icon: <ActionSwapVert />,
             tooltip: strings.swap,
             onTouchTap: () => onSwapOutputButtonTouchTap(
-              output.get('outputLang'),
-              output.get('inputLang'),
-              output.get('outputText'),
+              output.outputLang,
+              output.inputLang,
+              output.outputText,
             ),
           },
           {
             icon: <EditorFormatSize />,
             tooltip: strings.biggerText,
-            onTouchTap: () => onBiggerTextButtonTouchTap(output.get('outputText')),
+            onTouchTap: () => onBiggerTextButtonTouchTap(output.outputText),
           },
           {
             icon: <ContentCopy />,
             tooltip: strings.copy,
-            onTouchTap: () => onRequestCopyToClipboard(output.get('outputText')),
+            onTouchTap: () => onRequestCopyToClipboard(output.outputText),
           },
         ];
 
-        if (isTtsSupported(output.get('outputLang'))) {
+        if (isTtsSupported(output.outputLang)) {
           controllers.unshift({
             icon: textToSpeechPlaying ? <AVStop /> : <AVVolumeUp />,
             tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
-            onTouchTap: () => onListenButtonTouchTap(textToSpeechPlaying, output.get('outputLang'), output.get('outputText')),
+            onTouchTap: () =>
+              onListenButtonTouchTap(textToSpeechPlaying, output.outputLang, output.outputText),
           });
         }
 
@@ -300,40 +300,40 @@ class Home extends React.Component {
           controllers.push({
             icon: <SocialShare />,
             tooltip: strings.share,
-            onTouchTap: () => shareText(output.get('outputText')),
+            onTouchTap: () => shareText(output.outputText),
           });
         }
 
         const maxVisibleIcon = Math.min(Math.round((screenWidth - 120) / 56), controllers.length);
         const showMoreButton = (maxVisibleIcon < controllers.length);
 
-        const hasDict = output.get('inputDict') !== undefined && output.get('outputDict') !== undefined;
+        const hasDict = output.inputDict !== undefined && output.outputDict !== undefined;
 
         return (
           <div style={styles.resultContainer}>
-            {output.get('inputRoman') ? (
-              <p className="text-selectable" style={styles.inputRoman}>{output.get('inputRoman')}</p>
+            {output.inputRoman ? (
+              <p className="text-selectable" style={styles.inputRoman}>{output.inputRoman}</p>
             ) : null}
 
-            {output.get('suggestedInputLang') ? (
+            {output.suggestedInputLang ? (
               <p style={styles.suggestion}>
                 <ActionLightbulbOutline style={styles.suggestionSvg} />
                 <span style={styles.suggestionSpan}>
                   <span>{strings.translateFrom}: </span>
-                  <a onTouchTap={() => onSuggestedInputLangTouchTap(output.get('suggestedInputLang'))}>
-                    {strings[output.get('suggestedInputLang')]}
+                  <a onTouchTap={() => onSuggestedInputLangTouchTap(output.suggestedInputLang)}>
+                    {strings[output.suggestedInputLang]}
                   </a> ?
                 </span>
               </p>
             ) : null}
 
-            {output.get('suggestedInputText') ? (
+            {output.suggestedInputText ? (
               <p style={styles.suggestion}>
                 <ActionLightbulbOutline style={styles.suggestionSvg} />
                 <span style={styles.suggestionSpan}>
                   <span>{strings.didYouMean}: </span>
-                  <a onTouchTap={() => onSuggestedInputTextTouchTap(output.get('suggestedInputText'))}>
-                    {output.get('suggestedInputText')}
+                  <a onTouchTap={() => onSuggestedInputTextTouchTap(output.suggestedInputText)}>
+                    {output.suggestedInputText}
                   </a> ?
                 </span>
               </p>
@@ -341,17 +341,21 @@ class Home extends React.Component {
 
             <Card initiallyExpanded style={styles.outputCard}>
               <CardHeader
-                title={strings[output.get('outputLang')]}
-                subtitle={strings.fromLanguage.replace('{1}', strings[output.get('inputLang')])}
+                title={strings[output.outputLang]}
+                subtitle={strings.fromLanguage.replace('{1}', strings[output.inputLang])}
                 actAsExpander={hasDict}
                 showExpandableButton={hasDict}
               />
-              <CardText className="text-selectable" style={styles.outputText} lang={toCountryRemovedLanguage(output.get('outputLang'))}>
-                {output.get('outputText')}
+              <CardText
+                className="text-selectable"
+                style={styles.outputText}
+                lang={toCountryRemovedLanguage(output.outputLang)}
+              >
+                {output.outputText}
               </CardText>
-              {output.get('outputRoman') ? (
+              {output.outputRoman ? (
                 <CardText className="text-selectable" style={styles.outputRoman}>
-                  {output.get('outputRoman')}
+                  {output.outputRoman}
                 </CardText>
               ) : null}
               <CardActions>
@@ -601,7 +605,8 @@ Home.propTypes = {
   inputLang: PropTypes.string,
   outputLang: PropTypes.string,
   inputText: PropTypes.string,
-  output: PropTypes.instanceOf(Immutable.Map),
+  // eslint-disable-next-line
+  output: PropTypes.object,
   imeMode: PropTypes.string,
   textToSpeechPlaying: PropTypes.bool,
   fullscreenInputBox: PropTypes.bool,

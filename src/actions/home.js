@@ -1,5 +1,3 @@
-import Immutable from 'immutable';
-
 import {
   UPDATE_INPUT_TEXT, UPDATE_OUTPUT, UPDATE_IME_MODE, TOGGLE_FULLSCREEN_INPUT_BOX,
 } from '../constants/actions';
@@ -31,17 +29,17 @@ export const translate = saveToHistory => ((dispatch, getState) => {
 
   dispatch({
     type: UPDATE_OUTPUT,
-    output: Immutable.fromJS({
+    output: {
       status: 'loading',
       identifier,
-    }),
+    },
   });
 
   translateText(inputLang, outputLang, inputText, chinaMode)
     .then((result) => {
       // Prevent slow request to display outdated info
       const currentOutput = getState().home.output;
-      if (currentOutput && currentOutput.get('identifier') === identifier) {
+      if (currentOutput && currentOutput.identifier === identifier) {
         const r = result;
         r.status = 'done';
         r.inputLang = inputLang;
@@ -54,14 +52,14 @@ export const translate = saveToHistory => ((dispatch, getState) => {
 
         dispatch({
           type: UPDATE_OUTPUT,
-          output: Immutable.fromJS(r),
+          output: r,
         });
       }
     })
     .catch(() => {
       // Prevent slow request to display outdated info
       const currentOutput = getState().home.output;
-      if (currentOutput && currentOutput.get('identifier') === identifier) {
+      if (currentOutput && currentOutput.identifier === identifier) {
         dispatch(openAlert('cannotConnectToServer'));
 
         dispatch({
@@ -102,7 +100,7 @@ export const updateInputText = (inputText, selectionStart, selectionEnd) =>
 export const togglePhrasebook = () => ((dispatch, getState) => {
   const { output } = getState().home;
 
-  const phrasebookId = output.get('phrasebookId');
+  const phrasebookId = output.phrasebookId;
 
   if (phrasebookId) {
     phrasebookDb.get(phrasebookId)
@@ -137,11 +135,11 @@ export const loadOutput = output => ((dispatch) => {
   });
 
   // Update inputLang, outputLang, inputText without running anything;
-  dispatch(updateSetting('inputLang', output.get('inputLang')));
-  dispatch(updateSetting('outputLang', output.get('outputLang')));
+  dispatch(updateSetting('inputLang', output.inputLang));
+  dispatch(updateSetting('outputLang', output.outputLang));
   dispatch({
     type: UPDATE_INPUT_TEXT,
-    inputText: output.get('inputText'),
+    inputText: output.inputText,
     selectionStart: 0,
     selectionEnd: 0,
   });

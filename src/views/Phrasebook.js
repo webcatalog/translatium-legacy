@@ -4,7 +4,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
-import Immutable from 'immutable';
 
 import AppBar from 'material-ui/AppBar';
 import LinearProgress from 'material-ui/LinearProgress';
@@ -95,7 +94,7 @@ class Phrasebook extends React.Component {
           showMenuIconButton={false}
         />
         {(() => {
-          if (phrasebookItems.size < 1 && phrasebookLoading === false) {
+          if (phrasebookItems.length < 1 && phrasebookLoading === false) {
             return (
               <div style={styles.emptyContainer}>
                 <div style={styles.emptyInnerContainer}>
@@ -111,7 +110,7 @@ class Phrasebook extends React.Component {
               <List>
                 {phrasebookItems.map(item => [(
                   <ListItem
-                    key={`phrasebookItem_${item.get('phrasebookId')}`}
+                    key={`phrasebookItem_${item.phrasebookId}`}
                     onTouchTap={() => onItemTouchTap(item)}
                     rightIconButton={(
                       <IconButton
@@ -119,16 +118,16 @@ class Phrasebook extends React.Component {
                         tooltipPosition="bottom-left"
                         onTouchTap={() => {
                           onDeleteButtonTouchTap(
-                            item.get('phrasebookId'),
-                            item.get('rev'),
+                            item.phrasebookId,
+                            item.rev,
                           );
                         }}
                       >
                         <ToggleStar />
                       </IconButton>
                     )}
-                    primaryText={item.get('outputText')}
-                    secondaryText={item.get('inputText')}
+                    primaryText={item.outputText}
+                    secondaryText={item.inputText}
                   />
                 ), <Divider inset={false} />])}
               </List>
@@ -144,7 +143,7 @@ class Phrasebook extends React.Component {
 }
 
 Phrasebook.propTypes = {
-  phrasebookItems: PropTypes.instanceOf(Immutable.List),
+  phrasebookItems: PropTypes.arrayOf(PropTypes.object),
   canLoadMore: PropTypes.bool,
   phrasebookLoading: PropTypes.bool,
   onItemTouchTap: PropTypes.func,

@@ -267,7 +267,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     pathname: ownProps.location.pathname,
-    fullPageLoading: state.ocr && state.ocr.get('status') === 'loading',
+    fullPageLoading: state.ocr && state.ocr.status === 'loading',
     darkMode: state.settings.darkMode,
     primaryColorId: state.settings.primaryColorId,
     bottomNavigationSelectedIndex,

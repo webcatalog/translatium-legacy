@@ -172,7 +172,7 @@ class Settings extends React.Component {
             <ListItem primaryText={strings.help} onTouchTap={() => openUri('https://moderntranslator.com/support')} />
             <ListItem primaryText={strings.website} onTouchTap={() => openUri('https://moderntranslator.com')} />
             <Divider />
-            <ListItem primaryText={`Version ${process.env.VERSION}`} />
+            <ListItem primaryText={`Version ${process.env.REACT_APP_VERSION}`} />
           </List>
         </div>
       </div>

@@ -1,9 +1,7 @@
-import Immutable from 'immutable';
-
 import { UPDATE_HISTORY } from '../constants/actions';
 
 const initialState = {
-  items: Immutable.fromJS([]),
+  items: [],
   canLoadMore: false,
   loading: true,
 };

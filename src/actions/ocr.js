@@ -1,6 +1,5 @@
 /* global fetch FormData URL document Image Windows MSApp */
 import { push } from 'react-router-redux';
-import Immutable from 'immutable';
 
 import { UPDATE_OCR } from '../constants/actions';
 
@@ -24,11 +23,11 @@ export const loadImage = fromCamera => (dispatch, getState) => {
 
       dispatch({
         type: UPDATE_OCR,
-        ocr: Immutable.fromJS({ status: 'loading' }),
+        ocr: { status: 'loading' },
       });
 
       // if < 0.9 mb no compress
-      if (result.blob.size < 900000) return result;
+      if (result.blob.length < 900000) return result;
 
       // compress
       return new Promise((resolve, reject) => {
@@ -154,14 +153,14 @@ export const loadImage = fromCamera => (dispatch, getState) => {
 
             dispatch({
               type: UPDATE_OCR,
-              ocr: Immutable.fromJS({
+              ocr: {
                 status: 'done',
                 imageUrl: URL.createObjectURL(blob, { oneTimeOnly: true }),
                 inputText,
                 inputLines,
                 outputText,
                 outputLines,
-              }),
+              },
             });
 
 

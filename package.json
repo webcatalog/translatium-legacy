@@ -14,9 +14,9 @@
     "node": "6"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_VERSION=$(node -p -e \"require('./package.json').version\") react-scripts start",
     "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "build": "react-scripts build",
+    "build": "REACT_APP_VERSION=$(node -p -e \"require('./package.json').version\") react-scripts build",
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "pack": "electron-builder --dir --mac mas",
@@ -40,7 +40,6 @@
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.1.0",
     "history": "^4.6.3",
-    "immutable": "^3.8.1",
     "material-ui": "^0.18.5",
     "pouchdb-browser": "^6.2.0",
     "prop-types": "^15.5.10",

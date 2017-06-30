@@ -1,9 +1,7 @@
-import Immutable from 'immutable';
-
 import { UPDATE_PHRASEBOOK } from '../constants/actions';
 
 const initialState = {
-  items: Immutable.fromJS([]),
+  items: [],
   canLoadMore: false,
   loading: true,
 };
