@@ -62,7 +62,7 @@ class Settings extends React.Component {
     return (
       <div style={styles.container}>
         <AppBar
-          title="Settings"
+          title={strings.settings}
           showMenuIconButton={false}
         />
         <div style={styles.innerContainer}>

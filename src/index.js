@@ -31,8 +31,31 @@ const runApp = () => {
     );
   }
 
-  fetchLocal(`${process.env.PUBLIC_URL}/strings/en-us.json`)
-    .then(res => res.json())
+  Promise.resolve()
+    .then(() => {
+      let strings;
+
+      const p = [];
+
+      p.push(
+        fetchLocal(`${process.env.PUBLIC_URL}/strings/en-us.app.json`)
+          .then(res => res.json())
+          .then((res) => {
+            strings = Object.assign({}, strings, res);
+          }),
+      );
+
+      p.push(
+        fetchLocal(`${process.env.PUBLIC_URL}/strings/en-us.languages.json`)
+          .then(res => res.json())
+          .then((res) => {
+            strings = Object.assign({}, strings, res);
+          }),
+      );
+
+      return Promise.all(p)
+        .then(() => strings);
+    })
     .then((strings) => {
       /* global window */
       window.strings = strings;
