@@ -1,4 +1,3 @@
-/* global strings */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -11,6 +10,7 @@ import { updateInputText } from '../actions/home';
 
 const Dictionary = ({
   output,
+  strings,
   onLinkTouchTap,
 }) => {
   const inputLang = output.inputLang;
@@ -178,6 +178,7 @@ const Dictionary = ({
 Dictionary.propTypes = {
   // eslint-disable-next-line
   output: PropTypes.object,
+  strings: PropTypes.objectOf(PropTypes.string).isRequired,
   onLinkTouchTap: PropTypes.func.isRequired,
 };
 

@@ -1,4 +1,4 @@
-/* global Windows strings remote */
+/* global Windows remote */
 import getPlatform from './getPlatform';
 import openUri from './openUri';
 
@@ -56,6 +56,8 @@ const createDialog = ({
 };
 
 const askToReview = () => {
+  const strings = store.getState().strings;
+
   createDialog({
     message: strings.howAboutRating,
     defaultButtonText: strings.okSure,
@@ -71,6 +73,8 @@ const askToReview = () => {
 };
 
 const askToGiveFeedback = () => {
+  const strings = store.getState().strings;
+
   createDialog({
     message: strings.wouldYouMindGivingFeedback,
     defaultButtonText: strings.okSure,
@@ -83,6 +87,8 @@ const askToGiveFeedback = () => {
 
 
 const askIfEnjoy = () => {
+  const strings = store.getState().strings;
+
   createDialog({
     message: strings.enjoy,
     defaultButtonText: strings.yes,

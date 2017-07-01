@@ -1,18 +1,19 @@
 import { UPDATE_SETTING } from '../constants/actions';
 
 const defaultState = {
-  inputLang: 'en',
-  outputLang: 'zh',
+  biggerTextFontSize: 50,
+  bigTextFontSize: 50,
+  chinaMode: false,
   darkMode: false,
+  displayLanguage: 'en-us',
+  inputLang: 'en',
+  launchCount: 0,
+  outputLang: 'zh',
+  preventScreenLock: false,
   primaryColorId: 'green',
   realtime: true,
-  bigTextFontSize: 50,
   recentLanguages: ['en', 'zh'],
-  preventScreenLock: false,
-  launchCount: 0,
   translateWhenPressingEnter: true,
-  biggerTextFontSize: 50,
-  chinaMode: false,
 };
 
 const getInitialValue = (name) => {

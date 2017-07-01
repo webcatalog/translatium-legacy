@@ -1,5 +1,3 @@
-/* global strings */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -80,8 +78,11 @@ class History extends React.Component {
 
   render() {
     const {
-      historyItems, historyLoading,
-      onDeleteButtonTouchTap, onItemTouchTap,
+      historyItems,
+      historyLoading,
+      strings,
+      onDeleteButtonTouchTap,
+      onItemTouchTap,
     } = this.props;
     const styles = this.getStyles();
 
@@ -133,6 +134,7 @@ History.propTypes = {
   historyItems: PropTypes.arrayOf(PropTypes.object),
   canLoadMore: PropTypes.bool,
   historyLoading: PropTypes.bool,
+  strings: PropTypes.objectOf(PropTypes.string).isRequired,
   onItemTouchTap: PropTypes.func.isRequired,
   onEnterHistory: PropTypes.func.isRequired,
   onDeleteButtonTouchTap: PropTypes.func.isRequired,
@@ -147,6 +149,7 @@ const mapStateToProps = state => ({
   historyItems: state.history.items,
   canLoadMore: state.history.canLoadMore,
   historyLoading: state.history.loading,
+  strings: state.strings,
 });
 
 const mapDispatchToProps = dispatch => ({

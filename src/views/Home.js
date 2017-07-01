@@ -1,4 +1,4 @@
-/* global strings Windows */
+/* global Windows */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -240,6 +240,7 @@ class Home extends React.Component {
       fullscreenInputBox,
       chinaMode,
       textToSpeechPlaying,
+      strings,
       onListenButtonTouchTap,
       onTogglePhrasebookTouchTap,
       onSwapOutputButtonTouchTap,
@@ -287,7 +288,7 @@ class Home extends React.Component {
           {
             icon: <ContentCopy />,
             tooltip: strings.copy,
-            onTouchTap: () => onRequestCopyToClipboard(output.outputText),
+            onTouchTap: () => onRequestCopyToClipboard(output.outputText, strings),
           },
         ];
 
@@ -425,7 +426,9 @@ class Home extends React.Component {
       imeMode,
       textToSpeechPlaying,
       fullscreenInputBox,
-      onLanguageTouchTap, onSwapButtonTouchTap,
+      strings,
+      onLanguageTouchTap,
+      onSwapButtonTouchTap,
       onKeyDown, onInputText,
       onClearButtonTouchTap,
       onListenButtonTouchTap,
@@ -618,6 +621,7 @@ Home.propTypes = {
   fullscreenInputBox: PropTypes.bool,
   launchCount: PropTypes.number,
   chinaMode: PropTypes.bool,
+  strings: PropTypes.objectOf(PropTypes.string).isRequired,
   onLanguageTouchTap: PropTypes.func.isRequired,
   onSwapButtonTouchTap: PropTypes.func.isRequired,
   onKeyDown: PropTypes.func.isRequired,
@@ -653,6 +657,7 @@ const mapStateToProps = state => ({
   fullscreenInputBox: state.home.fullscreenInputBox,
   launchCount: state.settings.launchCount,
   chinaMode: state.settings.chinaMode,
+  strings: state.strings,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -707,7 +712,7 @@ const mapDispatchToProps = dispatch => ({
   onAnotherContainerTouchTap: (imeMode) => {
     if (imeMode) dispatch(updateImeMode(null));
   },
-  onRequestCopyToClipboard: (text) => {
+  onRequestCopyToClipboard: (text, strings) => {
     copyToClipboard(text);
     dispatch(openSnackbar(strings.copied));
   },

@@ -1,4 +1,3 @@
-/* global strings */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -63,9 +62,14 @@ class Ocr extends React.Component {
   render() {
     const styles = this.getStyles();
     const {
-      inputLang, outputLang,
-      ocr, onCloseTouchTap, onZoomSliderChange,
-      onModeMenuItemTouchTap, onTextOnlyMenuItemTouchTap,
+      inputLang,
+      outputLang,
+      ocr,
+      strings,
+      onCloseTouchTap,
+      onZoomSliderChange,
+      onModeMenuItemTouchTap,
+      onTextOnlyMenuItemTouchTap,
     } = this.props;
 
     if (!ocr) return null;
@@ -148,6 +152,7 @@ Ocr.propTypes = {
   outputLang: PropTypes.string,
   // eslint-disable-next-line
   ocr: PropTypes.object,
+  strings: PropTypes.objectOf(PropTypes.string).isRequired,
   onCloseTouchTap: PropTypes.func.isRequired,
   onZoomSliderChange: PropTypes.func.isRequired,
   onModeMenuItemTouchTap: PropTypes.func.isRequired,
@@ -158,6 +163,7 @@ const mapStateToProps = state => ({
   inputLang: state.settings.inputLang,
   outputLang: state.settings.outputLang,
   ocr: state.ocr,
+  strings: state.strings,
 });
 
 const mapDispatchToProps = dispatch => ({

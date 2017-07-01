@@ -1,4 +1,4 @@
-/* global strings Windows */
+/* global Windows */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -16,6 +16,7 @@ import { parseString as parseXMLString } from 'xml2js';
 import { toggleSetting, updateSetting } from '../actions/settings';
 import { updateShouldShowAd } from '../actions/ad';
 import { openSnackbar } from '../actions/snackbar';
+import { updateStrings } from '../actions/strings';
 
 import colorPairs from '../constants/colorPairs';
 import displayLanguages from '../constants/displayLanguages';
@@ -48,13 +49,16 @@ class Settings extends React.Component {
       realtime,
       primaryColorId,
       chinaMode,
+      displayLanguage,
       shouldShowAd,
       preventScreenLock,
       translateWhenPressingEnter,
+      strings,
       onToggle,
       onSettingChange,
       onRemoveAdTouchTap,
       onRestorePurchaseTouchTap,
+      onUpdateStrings,
     } = this.props;
     const styles = this.getStyles();
 
@@ -71,7 +75,7 @@ class Settings extends React.Component {
                 <IconMenu
                   iconButtonElement={(
                     <RaisedButton
-                      label="Change"
+                      label={strings.change}
                       primary
                     />
                   )}
@@ -89,18 +93,28 @@ class Settings extends React.Component {
                 <IconMenu
                   iconButtonElement={(
                     <RaisedButton
-                      label="Change"
+                      label={strings.change}
                       primary
                     />
                   )}
                 >
                   {Object.keys(displayLanguages).map(langId => (
-                    <MenuItem key={`lang_${langId}`} value={langId} primaryText={displayLanguages[langId].displayName} />
+                    <MenuItem
+                      key={`lang_${langId}`}
+                      value={langId}
+                      primaryText={displayLanguages[langId].displayName}
+                      onTouchTap={() => {
+                        if (langId !== displayLanguage) {
+                          onSettingChange('displayLanguage', langId);
+                          onUpdateStrings(langId);
+                        }
+                      }}
+                    />
                   ))}
                 </IconMenu>
               )}
               primaryText={strings.displayLanguage}
-              secondaryText="English"
+              secondaryText={displayLanguages[displayLanguage].displayName}
             />
             <ListItem
               primaryText={strings.darkMode}
@@ -154,14 +168,14 @@ class Settings extends React.Component {
             {getPlatform() === 'windows' && shouldShowAd ? (
               <ListItem
                 primaryText={strings.removeAds}
-                onTouchTap={onRemoveAdTouchTap}
+                onTouchTap={() => onRemoveAdTouchTap(strings)}
               />
             ) : null}
             {getPlatform() === 'windows' && shouldShowAd ? (
               <ListItem
                 primaryText={strings.restorePurchase}
                 secondaryText={strings.restorePurchaseDesc}
-                onTouchTap={onRestorePurchaseTouchTap}
+                onTouchTap={() => onRestorePurchaseTouchTap(strings)}
               />
             ) : null}
             {getPlatform() === 'windows' && !shouldShowAd ? (
@@ -201,11 +215,14 @@ Settings.propTypes = {
   translateWhenPressingEnter: PropTypes.bool,
   realtime: PropTypes.bool,
   chinaMode: PropTypes.bool,
+  displayLanguage: PropTypes.string,
   shouldShowAd: PropTypes.bool,
+  strings: PropTypes.objectOf(PropTypes.string).isRequired,
   onToggle: PropTypes.func.isRequired,
   onSettingChange: PropTypes.func.isRequired,
   onRemoveAdTouchTap: PropTypes.func.isRequired,
   onRestorePurchaseTouchTap: PropTypes.func.isRequired,
+  onUpdateStrings: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -215,13 +232,15 @@ const mapStateToProps = state => ({
   translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
   realtime: state.settings.realtime,
   chinaMode: state.settings.chinaMode,
+  displayLanguage: state.settings.displayLanguage,
   shouldShowAd: state.ad.shouldShowAd,
+  strings: state.strings,
 });
 
 const mapDispatchToProps = dispatch => ({
   onToggle: name => dispatch(toggleSetting(name)),
   onSettingChange: (name, value) => dispatch(updateSetting(name, value)),
-  onRemoveAdTouchTap: () => {
+  onRemoveAdTouchTap: (strings) => {
     const currentApp = process.env.NODE_ENV === 'production' ? Windows.ApplicationModel.Store.CurrentApp
                     : Windows.ApplicationModel.Store.CurrentAppSimulator;
 
@@ -236,7 +255,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(openSnackbar(strings.somethingWentWrong));
       });
   },
-  onRestorePurchaseTouchTap: () => {
+  onRestorePurchaseTouchTap: (strings) => {
     const currentApp = process.env.NODE_ENV === 'production' ? Windows.ApplicationModel.Store.CurrentApp
                     : Windows.ApplicationModel.Store.CurrentAppSimulator;
 
@@ -266,8 +285,11 @@ const mapDispatchToProps = dispatch => ({
       dispatch(openSnackbar(strings.somethingWentWrong));
     });
   },
+  onUpdateStrings: langId => dispatch(updateStrings(langId)),
 });
 
 export default connect(
   mapStateToProps, mapDispatchToProps,
 )(Settings);
+
+// f

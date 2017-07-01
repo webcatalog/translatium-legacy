@@ -1,4 +1,3 @@
-/* global strings */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -8,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 import { closeAlert } from '../actions/alert';
 
-const Alert = ({ alertMessage, onClose }) => {
+const Alert = ({ alertMessage, strings, onClose }) => {
   const actions = [
     <FlatButton
       label="Close"
@@ -32,11 +31,13 @@ const Alert = ({ alertMessage, onClose }) => {
 
 Alert.propTypes = {
   alertMessage: PropTypes.string,
+  strings: PropTypes.objectOf(PropTypes.string).isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   alertMessage: state.alert.message,
+  strings: state.strings,
 });
 
 const mapDispatchToProps = dispatch => ({

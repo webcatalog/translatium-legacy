@@ -1,4 +1,3 @@
-/* global strings */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -174,6 +173,7 @@ class App extends React.Component {
       snackbarOpen,
       snackbarMessage,
       shouldShowAd,
+      strings,
       onRequestCloseSnackbar,
       onBottomNavigationItemClick,
     } = this.props;
@@ -235,6 +235,7 @@ App.propTypes = {
   snackbarOpen: PropTypes.bool,
   snackbarMessage: PropTypes.string,
   shouldShowAd: PropTypes.bool,
+  strings: PropTypes.objectOf(PropTypes.string).isRequired,
   onResize: PropTypes.func.isRequired,
   onBottomNavigationItemClick: PropTypes.func.isRequired,
   onBackClick: PropTypes.func.isRequired,
@@ -274,6 +275,7 @@ const mapStateToProps = (state, ownProps) => {
     snackbarOpen: state.snackbar.open,
     snackbarMessage: state.snackbar.message,
     shouldShowAd: state.ad.shouldShowAd,
+    strings: state.strings,
   };
 };
 

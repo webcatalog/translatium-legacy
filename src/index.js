@@ -1,4 +1,4 @@
-/* global Windows */
+/* global window Windows */
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -7,18 +7,20 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import store from './store';
 import { updateSetting } from './actions/settings';
 import { updateInputText } from './actions/home';
+import { updateStrings } from './actions/strings';
+
 import renderRoutes from './renderRoutes';
 
 import getPlatform from './libs/getPlatform';
-import fetchLocal from './libs/fetchLocal';
 
 import './main.css';
 
 const runApp = () => {
   /* global document */
-
-  const launchCount = store.getState().settings.launchCount;
+  const state = store.getState();
+  const launchCount = state.settings.launchCount;
   store.dispatch(updateSetting('launchCount', launchCount + 1));
+
 
   if (getPlatform() === 'mac') {
     // Mock user agent
@@ -31,35 +33,8 @@ const runApp = () => {
     );
   }
 
-  Promise.resolve()
+  store.dispatch(updateStrings(state.settings.displayLanguage))
     .then(() => {
-      let strings;
-
-      const p = [];
-
-      p.push(
-        fetchLocal(`${process.env.PUBLIC_URL}/strings/en-us.app.json`)
-          .then(res => res.json())
-          .then((res) => {
-            strings = Object.assign({}, strings, res);
-          }),
-      );
-
-      p.push(
-        fetchLocal(`${process.env.PUBLIC_URL}/strings/en-us.languages.json`)
-          .then(res => res.json())
-          .then((res) => {
-            strings = Object.assign({}, strings, res);
-          }),
-      );
-
-      return Promise.all(p)
-        .then(() => strings);
-    })
-    .then((strings) => {
-      /* global window */
-      window.strings = strings;
-
       // onTouchTap for material-ui
       injectTapEventPlugin();
 

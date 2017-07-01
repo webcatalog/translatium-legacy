@@ -1,8 +1,8 @@
 export default {
-  'en-US': {
+  'en-us': {
     displayName: 'English',
   },
-  'vi-VN': {
+  'vi-vn': {
     displayName: 'Tiếng Việt',
   },
 };

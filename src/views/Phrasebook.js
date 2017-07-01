@@ -1,5 +1,3 @@
-/* global strings */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -82,8 +80,11 @@ class Phrasebook extends React.Component {
 
   render() {
     const {
-      phrasebookItems, phrasebookLoading,
-      onDeleteButtonTouchTap, onItemTouchTap,
+      phrasebookItems,
+      phrasebookLoading,
+      strings,
+      onDeleteButtonTouchTap,
+      onItemTouchTap,
     } = this.props;
     const styles = this.getStyles();
 
@@ -146,6 +147,7 @@ Phrasebook.propTypes = {
   phrasebookItems: PropTypes.arrayOf(PropTypes.object),
   canLoadMore: PropTypes.bool,
   phrasebookLoading: PropTypes.bool,
+  strings: PropTypes.objectOf(PropTypes.string).isRequired,
   onItemTouchTap: PropTypes.func.isRequired,
   onEnterPhrasebook: PropTypes.func.isRequired,
   onDeleteButtonTouchTap: PropTypes.func.isRequired,
@@ -160,6 +162,7 @@ const mapStateToProps = state => ({
   phrasebookItems: state.phrasebook.items,
   canLoadMore: state.phrasebook.canLoadMore,
   phrasebookLoading: state.phrasebook.loading,
+  strings: state.strings,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -2,33 +2,35 @@ import { combineReducers } from 'redux';
 
 import { routerReducer } from 'react-router-redux';
 
-import screen from './screen';
-import home from './home';
-import settings from './settings';
-import textToSpeech from './textToSpeech';
-import handwriting from './handwriting';
-import speech from './speech';
-import history from './history';
-import phrasebook from './phrasebook';
-import alert from './alert';
-import ocr from './ocr';
-import snackbar from './snackbar';
 import ad from './ad';
+import alert from './alert';
+import handwriting from './handwriting';
+import history from './history';
+import home from './home';
+import ocr from './ocr';
+import phrasebook from './phrasebook';
+import screen from './screen';
+import settings from './settings';
+import snackbar from './snackbar';
+import speech from './speech';
+import strings from './strings';
+import textToSpeech from './textToSpeech';
 
 const rootReducer = combineReducers({
-  screen,
-  home,
-  settings,
-  textToSpeech,
-  handwriting,
-  speech,
-  history,
-  phrasebook,
-  alert,
-  routing: routerReducer,
-  ocr,
-  snackbar,
   ad,
+  alert,
+  handwriting,
+  history,
+  home,
+  ocr,
+  phrasebook,
+  routing: routerReducer,
+  screen,
+  settings,
+  snackbar,
+  speech,
+  strings,
+  textToSpeech,
 });
 
 export default rootReducer;

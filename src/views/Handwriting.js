@@ -1,4 +1,3 @@
-/* global strings */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -261,10 +260,17 @@ class Handwriting extends React.Component {
                         || [',', '.', '?', '!', ':', '\'', '"', ';', '@'];
 
     const {
-      onDeleteButtonTouchTap, onSpaceBarButtonTouchTap, onDoneButtonTouchTap,
+      onDeleteButtonTouchTap,
+      onSpaceBarButtonTouchTap,
+      onDoneButtonTouchTap,
       onSuggestionsItemTouchTap,
-      onMouseUp, onMouseDown, onMouseLeave, onMouseMove,
+      onMouseUp,
+      onMouseDown,
+      onMouseLeave,
+      onMouseMove,
     } = this;
+
+    const { strings } = this.props;
 
     return (
       <Paper zDepth={2} style={styles.container}>
@@ -305,6 +311,7 @@ Handwriting.propTypes = {
   inputText: PropTypes.string,
   selectionStart: PropTypes.number,
   selectionEnd: PropTypes.number,
+  strings: PropTypes.objectOf(PropTypes.string).isRequired,
   suggestions: PropTypes.arrayOf(PropTypes.string),
   onUpdateInputText: PropTypes.func.isRequired,
   onLoadSuggestions: PropTypes.func.isRequired,
@@ -330,6 +337,7 @@ const mapStateToProps = state => ({
   selectionStart: state.home.selectionStart,
   selectionEnd: state.home.selectionEnd,
   suggestions: state.handwriting.suggestions,
+  strings: state.strings,
 });
 
 export default connect(
