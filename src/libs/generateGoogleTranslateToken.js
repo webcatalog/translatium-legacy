@@ -5,7 +5,7 @@ import winXhr from './winXhr';
 
 const getGoogleTkk = () => {
   if (sessionStorage.getItem('googleTkk') == null) {
-    const uri = 'https://translate.google.com/m/translate';
+    const uri = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/m/translate' : 'https://translate.google.com/m/translate';
 
     return Promise.resolve()
       .then(() => {

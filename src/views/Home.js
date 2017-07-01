@@ -235,8 +235,12 @@ class Home extends React.Component {
 
   renderOutput(styles) {
     const {
-      output, screenWidth, fullscreenInputBox,
-      textToSpeechPlaying, onListenButtonTouchTap,
+      output,
+      screenWidth,
+      fullscreenInputBox,
+      chinaMode,
+      textToSpeechPlaying,
+      onListenButtonTouchTap,
       onTogglePhrasebookTouchTap,
       onSwapOutputButtonTouchTap,
       onBiggerTextButtonTouchTap,
@@ -262,8 +266,8 @@ class Home extends React.Component {
       default: {
         const controllers = [
           {
-            icon: output.has('phrasebookId') ? <ToggleStar /> : <ToggleStarBorder />,
-            tooltip: output.has('phrasebookId') ? strings.removeFromPhrasebook : strings.addToPhrasebook,
+            icon: output.phrasebookId ? <ToggleStar /> : <ToggleStarBorder />,
+            tooltip: output.phrasebookId ? strings.removeFromPhrasebook : strings.addToPhrasebook,
             onTouchTap: onTogglePhrasebookTouchTap,
           },
           {
@@ -292,7 +296,9 @@ class Home extends React.Component {
             icon: textToSpeechPlaying ? <AVStop /> : <AVVolumeUp />,
             tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
             onTouchTap: () =>
-              onListenButtonTouchTap(textToSpeechPlaying, output.outputLang, output.outputText),
+              onListenButtonTouchTap(
+                textToSpeechPlaying, output.outputLang, output.outputText, chinaMode,
+              ),
           });
         }
 
@@ -611,6 +617,7 @@ Home.propTypes = {
   textToSpeechPlaying: PropTypes.bool,
   fullscreenInputBox: PropTypes.bool,
   launchCount: PropTypes.number,
+  chinaMode: PropTypes.bool,
   onLanguageTouchTap: PropTypes.func.isRequired,
   onSwapButtonTouchTap: PropTypes.func.isRequired,
   onKeyDown: PropTypes.func.isRequired,
@@ -645,6 +652,7 @@ const mapStateToProps = state => ({
   textToSpeechPlaying: state.textToSpeech.textToSpeechPlaying,
   fullscreenInputBox: state.home.fullscreenInputBox,
   launchCount: state.settings.launchCount,
+  chinaMode: state.settings.chinaMode,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -670,12 +678,12 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateInputText(inputText, e.target.selectionStart, e.target.selectionEnd));
   },
   onClearButtonTouchTap: () => dispatch(updateInputText('')),
-  onListenButtonTouchTap: (toStop, lang, text) => {
+  onListenButtonTouchTap: (toStop, lang, text, chinaMode) => {
     if (toStop) {
       dispatch(stopTextToSpeech());
       return;
     }
-    dispatch(playTextToSpeech(lang, text));
+    dispatch(playTextToSpeech(lang, text, chinaMode));
   },
   onTranslateButtonTouchTap: () => dispatch(translate(true)),
   onWriteButtonTouchTap: () => dispatch(updateImeMode('handwriting')),

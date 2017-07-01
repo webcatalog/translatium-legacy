@@ -66,7 +66,7 @@ export const deleteHistoryItem = (id, rev) => ((dispatch, getState) => {
         if (doc.historyId === id) {
           dispatch({
             type: UPDATE_HISTORY,
-            items: items.delete(i),
+            items: items.filter((_, _i) => _i !== i),
             loading,
             canLoadMore,
           });

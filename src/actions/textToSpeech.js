@@ -3,6 +3,7 @@
 import { PLAY_TEXT_TO_SPEECH, STOP_TEXT_TO_SPEECH } from '../constants/actions';
 
 import getPlatform from '../libs/getPlatform';
+import getGoogleEndpoint from '../libs/getGoogleEndpoint';
 import generateGoogleTranslateToken from '../libs/generateGoogleTranslateToken';
 import winXhr from '../libs/winXhr';
 
@@ -11,11 +12,13 @@ import { openAlert } from './alert';
 let player = null;
 let currentTimestamp;
 
-const textToSpeechShortText = (lang, text, idx, total) =>
+const textToSpeechShortText = (lang, text, idx, total, chinaMode) =>
   generateGoogleTranslateToken(text)
     .then((token) => {
+      const endpoint = getGoogleEndpoint(chinaMode);
+
       const uri = encodeURI(
-        `https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}`
+        `${endpoint}/translate_tts?ie=UTF-8&tl=${lang}`
         + `&q=${text}&textlen=${text.length}&idx=${idx}&total=${total}`
         + `&client=t&prev=input&tk=${token}`,
       );
@@ -50,7 +53,7 @@ const textToSpeechShortText = (lang, text, idx, total) =>
       return Promise.reject(new Error('Fail to get blob'));
     });
 
-export const playTextToSpeech = (textToSpeechLang, textToSpeechText) => ((dispatch) => {
+export const playTextToSpeech = (textToSpeechLang, textToSpeechText, chinaMode) => ((dispatch) => {
   if (textToSpeechText.length < 1) return;
 
   dispatch({ type: PLAY_TEXT_TO_SPEECH, textToSpeechLang, textToSpeechText });
@@ -86,7 +89,7 @@ export const playTextToSpeech = (textToSpeechLang, textToSpeechText) => ((dispat
           return null;
         }
 
-        return textToSpeechShortText(textToSpeechLang, strArr[i], i, strArr.length)
+        return textToSpeechShortText(textToSpeechLang, strArr[i], i, strArr.length, chinaMode)
           .then(() => {
             if (i < strArr.length - 1) {
               i += 1;

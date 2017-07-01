@@ -106,22 +106,25 @@ export const togglePhrasebook = () => ((dispatch, getState) => {
     phrasebookDb.get(phrasebookId)
       .then(doc => phrasebookDb.remove(doc))
       .then(() => {
+        const newOutput = Object.assign({}, output);
+        delete output.phrasebookId;
+
         dispatch({
           type: UPDATE_OUTPUT,
-          output: output.delete('phrasebookId'),
+          output: newOutput,
         });
       });
   } else {
     const newPhrasebookId = new Date().toJSON();
     phrasebookDb.put({
       _id: newPhrasebookId,
-      data: output.toJS(),
+      data: output,
       phrasebookVersion: 3,
     })
     .then(() => {
       dispatch({
         type: UPDATE_OUTPUT,
-        output: output.set('phrasebookId', newPhrasebookId),
+        output: Object.assign({}, output, { phrasebookId: newPhrasebookId }),
       });
     });
   }

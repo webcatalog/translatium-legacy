@@ -140,7 +140,7 @@ function getMenuTemplate() {
 
 function initMenu() {
   menu = electron.Menu.buildFromTemplate(getMenuTemplate());
-  electron.Menu.setApplicationMenu(menu);
+  // electron.Menu.setApplicationMenu(menu);
 }
 
 function createWindow() {

@@ -185,7 +185,7 @@ export const setZoomLevel = zoomLevel => (dispatch, getState) => {
   const ocr = getState().ocr;
   dispatch({
     type: UPDATE_OCR,
-    ocr: ocr.set('zoomLevel', zoomLevel),
+    ocr: Object.assign({}, ocr, { zoomLevel }),
   });
 };
 
@@ -193,6 +193,6 @@ export const setMode = mode => (dispatch, getState) => {
   const ocr = getState().ocr;
   dispatch({
     type: UPDATE_OCR,
-    ocr: ocr.set('mode', mode),
+    ocr: Object.assign({}, ocr, { mode }),
   });
 };

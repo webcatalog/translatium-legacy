@@ -1,5 +1,6 @@
 /* global fetch */
 import getPlatform from './getPlatform';
+import getGoogleEndpoint from './getGoogleEndpoint';
 import generateGoogleTranslateToken from './generateGoogleTranslateToken';
 import * as languageUtils from './languageUtils';
 import winXhr from './winXhr';
@@ -8,7 +9,7 @@ import winXhr from './winXhr';
 const translateShortText = (inputLang, outputLang, inputText, chinaMode) =>
   generateGoogleTranslateToken(inputText)
     .then((token) => {
-      const endpoint = chinaMode === true ? 'http://translate.google.cn' : 'https://translate.google.com';
+      const endpoint = getGoogleEndpoint(chinaMode);
 
       const uri = `${endpoint}/translate_a/single?client=t`
               + `&sl=${languageUtils.toGoogleStandardlizedLanguage(inputLang)}`
