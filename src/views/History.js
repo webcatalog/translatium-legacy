@@ -133,10 +133,10 @@ History.propTypes = {
   historyItems: PropTypes.arrayOf(PropTypes.object),
   canLoadMore: PropTypes.bool,
   historyLoading: PropTypes.bool,
-  onItemTouchTap: PropTypes.func,
-  onEnterHistory: PropTypes.func,
-  onDeleteButtonTouchTap: PropTypes.func,
-  onLoadMore: PropTypes.func,
+  onItemTouchTap: PropTypes.func.isRequired,
+  onEnterHistory: PropTypes.func.isRequired,
+  onDeleteButtonTouchTap: PropTypes.func.isRequired,
+  onLoadMore: PropTypes.func.isRequired,
 };
 
 History.contextTypes = {

@@ -32,7 +32,7 @@ const Alert = ({ alertMessage, onClose }) => {
 
 Alert.propTypes = {
   alertMessage: PropTypes.string,
-  onClose: PropTypes.func,
+  onClose: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

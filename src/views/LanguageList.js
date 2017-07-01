@@ -139,8 +139,8 @@ class LanguageList extends React.Component {
 LanguageList.propTypes = {
   recentLanguages: PropTypes.arrayOf(PropTypes.string),
   type: PropTypes.string,
-  onCloseTouchTap: PropTypes.func,
-  onLanguageTouchTap: PropTypes.func,
+  onCloseTouchTap: PropTypes.func.isRequired,
+  onLanguageTouchTap: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

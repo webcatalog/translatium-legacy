@@ -73,8 +73,8 @@ class BiggerText extends React.Component {
 BiggerText.propTypes = {
   text: PropTypes.string,
   biggerTextFontSize: PropTypes.number,
-  onCloseTouchTap: PropTypes.func,
-  onSliderChange: PropTypes.func,
+  onCloseTouchTap: PropTypes.func.isRequired,
+  onSliderChange: PropTypes.func.isRequired,
 };
 
 BiggerText.contextTypes = {

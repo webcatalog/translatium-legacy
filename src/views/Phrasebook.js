@@ -146,10 +146,10 @@ Phrasebook.propTypes = {
   phrasebookItems: PropTypes.arrayOf(PropTypes.object),
   canLoadMore: PropTypes.bool,
   phrasebookLoading: PropTypes.bool,
-  onItemTouchTap: PropTypes.func,
-  onEnterPhrasebook: PropTypes.func,
-  onDeleteButtonTouchTap: PropTypes.func,
-  onLoadMore: PropTypes.func,
+  onItemTouchTap: PropTypes.func.isRequired,
+  onEnterPhrasebook: PropTypes.func.isRequired,
+  onDeleteButtonTouchTap: PropTypes.func.isRequired,
+  onLoadMore: PropTypes.func.isRequired,
 };
 
 Phrasebook.contextTypes = {

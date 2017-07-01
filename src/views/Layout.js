@@ -235,10 +235,10 @@ App.propTypes = {
   snackbarOpen: PropTypes.bool,
   snackbarMessage: PropTypes.string,
   shouldShowAd: PropTypes.bool,
-  onResize: PropTypes.func,
-  onBottomNavigationItemClick: PropTypes.func,
-  onBackClick: PropTypes.func,
-  onRequestCloseSnackbar: PropTypes.func,
+  onResize: PropTypes.func.isRequired,
+  onBottomNavigationItemClick: PropTypes.func.isRequired,
+  onBackClick: PropTypes.func.isRequired,
+  onRequestCloseSnackbar: PropTypes.func.isRequired,
 };
 
 App.childContextTypes = {

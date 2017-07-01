@@ -188,10 +188,10 @@ Settings.propTypes = {
   realtime: PropTypes.bool,
   chinaMode: PropTypes.bool,
   shouldShowAd: PropTypes.bool,
-  onToggle: PropTypes.func,
-  onSettingChange: PropTypes.func,
-  onRemoveAdTouchTap: PropTypes.func,
-  onRestorePurchaseTouchTap: PropTypes.func,
+  onToggle: PropTypes.func.isRequired,
+  onSettingChange: PropTypes.func.isRequired,
+  onRemoveAdTouchTap: PropTypes.func.isRequired,
+  onRestorePurchaseTouchTap: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

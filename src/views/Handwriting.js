@@ -306,10 +306,10 @@ Handwriting.propTypes = {
   selectionStart: PropTypes.number,
   selectionEnd: PropTypes.number,
   suggestions: PropTypes.arrayOf(PropTypes.string),
-  onUpdateInputText: PropTypes.func,
-  onLoadSuggestions: PropTypes.func,
-  onResetSuggestions: PropTypes.func,
-  onTurnOffHandwriting: PropTypes.func,
+  onUpdateInputText: PropTypes.func.isRequired,
+  onLoadSuggestions: PropTypes.func.isRequired,
+  onResetSuggestions: PropTypes.func.isRequired,
+  onTurnOffHandwriting: PropTypes.func.isRequired,
 };
 
 Handwriting.contextTypes = {

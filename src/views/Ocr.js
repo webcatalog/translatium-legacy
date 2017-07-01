@@ -148,10 +148,10 @@ Ocr.propTypes = {
   outputLang: PropTypes.string,
   // eslint-disable-next-line
   ocr: PropTypes.object,
-  onCloseTouchTap: PropTypes.func,
-  onZoomSliderChange: PropTypes.func,
-  onModeMenuItemTouchTap: PropTypes.func,
-  onTextOnlyMenuItemTouchTap: PropTypes.func,
+  onCloseTouchTap: PropTypes.func.isRequired,
+  onZoomSliderChange: PropTypes.func.isRequired,
+  onModeMenuItemTouchTap: PropTypes.func.isRequired,
+  onTextOnlyMenuItemTouchTap: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

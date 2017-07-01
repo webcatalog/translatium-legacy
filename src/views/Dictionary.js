@@ -178,7 +178,7 @@ const Dictionary = ({
 Dictionary.propTypes = {
   // eslint-disable-next-line
   output: PropTypes.object,
-  onLinkTouchTap: PropTypes.func,
+  onLinkTouchTap: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
