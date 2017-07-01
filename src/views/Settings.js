@@ -8,10 +8,8 @@ import MenuItem from 'material-ui/MenuItem';
 import Toggle from 'material-ui/Toggle';
 import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import { grey400 } from 'material-ui/styles/colors';
-import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import { parseString as parseXMLString } from 'xml2js';
 
@@ -20,6 +18,7 @@ import { updateShouldShowAd } from '../actions/ad';
 import { openSnackbar } from '../actions/snackbar';
 
 import colorPairs from '../constants/colorPairs';
+import displayLanguages from '../constants/displayLanguages';
 
 import getPlatform from '../libs/getPlatform';
 import openUri from '../libs/openUri';
@@ -71,13 +70,10 @@ class Settings extends React.Component {
               rightIconButton={(
                 <IconMenu
                   iconButtonElement={(
-                    <IconButton
-                      touch
-                      tooltip="more"
-                      tooltipPosition="bottom-left"
-                    >
-                      <MoreVertIcon color={grey400} />
-                    </IconButton>
+                    <RaisedButton
+                      label="Change"
+                      primary
+                    />
                   )}
                 >
                   {Object.keys(colorPairs).map(colorId => (
@@ -87,6 +83,24 @@ class Settings extends React.Component {
               )}
               primaryText={strings.primaryColor}
               secondaryText={strings[primaryColorId]}
+            />
+            <ListItem
+              rightIconButton={(
+                <IconMenu
+                  iconButtonElement={(
+                    <RaisedButton
+                      label="Change"
+                      primary
+                    />
+                  )}
+                >
+                  {Object.keys(displayLanguages).map(langId => (
+                    <MenuItem key={`lang_${langId}`} value={langId} primaryText={displayLanguages[langId].displayName} />
+                  ))}
+                </IconMenu>
+              )}
+              primaryText={strings.displayLanguage}
+              secondaryText="English"
             />
             <ListItem
               primaryText={strings.darkMode}
