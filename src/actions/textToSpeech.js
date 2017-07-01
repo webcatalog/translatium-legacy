@@ -3,7 +3,6 @@
 import { PLAY_TEXT_TO_SPEECH, STOP_TEXT_TO_SPEECH } from '../constants/actions';
 
 import getPlatform from '../libs/getPlatform';
-import getGoogleEndpoint from '../libs/getGoogleEndpoint';
 import generateGoogleTranslateToken from '../libs/generateGoogleTranslateToken';
 import winXhr from '../libs/winXhr';
 
@@ -15,7 +14,7 @@ let currentTimestamp;
 const textToSpeechShortText = (lang, text, idx, total, chinaMode) =>
   generateGoogleTranslateToken(text)
     .then((token) => {
-      const endpoint = getGoogleEndpoint(chinaMode);
+      const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || (chinaMode ? 'https://translate.google.com' : 'http://translate.google.cn');
 
       const uri = encodeURI(
         `${endpoint}/translate_tts?ie=UTF-8&tl=${lang}`

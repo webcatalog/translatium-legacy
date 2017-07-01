@@ -3,9 +3,11 @@
 import getPlatform from './getPlatform';
 import winXhr from './winXhr';
 
-const getGoogleTkk = () => {
+const getGoogleTkk = (chinaMode) => {
   if (sessionStorage.getItem('googleTkk') == null) {
-    const uri = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/m/translate' : 'https://translate.google.com/m/translate';
+    const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || (chinaMode ? 'https://translate.google.com' : 'http://translate.google.cn');
+
+    const uri = `${endpoint}/m/translate`;
 
     return Promise.resolve()
       .then(() => {

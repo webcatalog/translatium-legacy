@@ -14,13 +14,13 @@
     "node": "8"
   },
   "scripts": {
-    "start": "REACT_APP_VERSION=$(node -p -e \"require('./package.json').version\") react-scripts start",
-    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "start": "REACT_APP_GOOGLE_ENDPOINT=http://localhost:3000 REACT_APP_VERSION=$(node -p -e \"require('./package.json').version\") BROWSER=none react-scripts start",
+    "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "build": "REACT_APP_VERSION=$(node -p -e \"require('./package.json').version\") react-scripts build",
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "pack": "electron-builder --dir --mac mas",
-    "dist": "yarn build && electron-builder --mac mas",
+    "dist": "yarn build && electron-builder --mac zip mas",
     "lint": "eslint src public --ext js"
   },
   "dependencies": {
@@ -58,7 +58,25 @@
     "xml2js": "^0.4.17"
   },
   "homepage": "./",
-  "proxy": "https://translate.google.com",
+  "proxy": {
+    "/m/translate": {
+      "target": "https://translate.google.com",
+      "changeOrigin": true
+    },
+    "/translate_a": {
+      "target": "https://translate.google.com",
+      "changeOrigin": true
+    },
+    "/translate_tts": {
+      "target": "https://translate.google.com",
+      "changeOrigin": true,
+      "ws": true
+    },
+    "/speech-api": {
+      "target": "https://www.google.com",
+      "changeOrigin": true
+    }
+  },
   "build": {
     "appId": "com.moderntranslator.app",
     "productName": "Modern Translator",

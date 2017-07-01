@@ -71,7 +71,7 @@ export const stopRecording = () => ((dispatch, getState) => {
   const { inputLang, chinaMode } = settings;
   const { status } = speech;
 
-  const endpoint = chinaMode === true ? 'http://www.google.cn' : 'https://www.google.com';
+  const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || (chinaMode === true ? 'http://www.google.cn' : 'https://www.google.com');
 
   const uri = `${endpoint}/speech-api/v2/recognize?output=json&lang=${inputLang}`
             + '&key=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw';

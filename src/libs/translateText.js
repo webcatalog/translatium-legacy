@@ -1,15 +1,14 @@
 /* global fetch */
 import getPlatform from './getPlatform';
-import getGoogleEndpoint from './getGoogleEndpoint';
 import generateGoogleTranslateToken from './generateGoogleTranslateToken';
 import * as languageUtils from './languageUtils';
 import winXhr from './winXhr';
 
 // Maximum encoded inputText length: 2000
 const translateShortText = (inputLang, outputLang, inputText, chinaMode) =>
-  generateGoogleTranslateToken(inputText)
+  generateGoogleTranslateToken(inputText, chinaMode)
     .then((token) => {
-      const endpoint = getGoogleEndpoint(chinaMode);
+      const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || (chinaMode ? 'https://translate.google.com' : 'http://translate.google.cn');
 
       const uri = `${endpoint}/translate_a/single?client=t`
               + `&sl=${languageUtils.toGoogleStandardlizedLanguage(inputLang)}`
