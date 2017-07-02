@@ -28,8 +28,8 @@ Available on [Windows Store](https://www.microsoft.com/store/apps/9wzdncrcsg9k?c
 
 **Development**
 1. `yarn build`
-2. Open `platforms/windows/Modern Translator.sln` with Visual Studio and run the project.
+2. Open `windows.sln` with Visual Studio and run the project.
 
 **Release**
 1. `yarn build`
-2. Open `platforms/windows/Modern Translator.sln` with Visual Studio and build the project.
+2. Open `windows.sln` with Visual Studio and build the project.

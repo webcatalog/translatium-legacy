@@ -173,6 +173,7 @@ class App extends React.Component {
       snackbarOpen,
       snackbarMessage,
       shouldShowAd,
+      shouldShowBottomNav,
       strings,
       onRequestCloseSnackbar,
       onBottomNavigationItemClick,
@@ -198,7 +199,7 @@ class App extends React.Component {
             onRequestClose={() => onRequestCloseSnackbar()}
           />
           {children}
-          {bottomNavigationSelectedIndex > -1 ? (
+          {bottomNavigationSelectedIndex > -1 && shouldShowBottomNav ? (
             <Paper zDepth={2} style={{ zIndex: 1000 }}>
               <BottomNavigation selectedIndex={bottomNavigationSelectedIndex}>
                 <BottomNavigationItem
@@ -235,6 +236,7 @@ App.propTypes = {
   snackbarOpen: PropTypes.bool,
   snackbarMessage: PropTypes.string,
   shouldShowAd: PropTypes.bool,
+  shouldShowBottomNav: PropTypes.bool.isRequired,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
   onResize: PropTypes.func.isRequired,
   onBottomNavigationItemClick: PropTypes.func.isRequired,
@@ -275,6 +277,7 @@ const mapStateToProps = (state, ownProps) => {
     snackbarOpen: state.snackbar.open,
     snackbarMessage: state.snackbar.message,
     shouldShowAd: state.ad.shouldShowAd,
+    shouldShowBottomNav: !(state.home.imeMode === 'handwriting' || state.home.imeMode === 'speech'),
     strings: state.strings,
   };
 };

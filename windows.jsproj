@@ -104,24 +104,17 @@
     <Content Include="build-resources\windows-images\Wide310x150.scale-150.png" />
     <Content Include="build-resources\windows-images\Wide310x150.scale-200.png" />
     <Content Include="build-resources\windows-images\Wide310x150.scale-400.png" />
-    <Content Include="build\asset-manifest.json" />
-    <Content Include="build\config.js" />
-    <Content Include="build\electron.js" />
-    <Content Include="build\images\ad320x50.png" />
-    <Content Include="build\images\ad728x90.png" />
-    <Content Include="build\images\iconTemplate%402x.png" />
-    <Content Include="build\images\iconTemplate.png" />
-    <Content Include="build\images\logo.png" />
-    <Content Include="build\images\modern-translator%402x.png" />
-    <Content Include="build\index.html" />
-    <Content Include="build\service-worker.js" />
-    <Content Include="build\static\css\main.2ef3fb34.css" />
-    <Content Include="build\static\css\main.2ef3fb34.css.map" />
-    <Content Include="build\static\js\main.a4794ae8.js" />
-    <Content Include="build\static\js\main.a4794ae8.js.map" />
-    <Content Include="build\strings\en-us.json" />
+    <Content Include="build\**\**" />
+    <Content Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
+  <Import Project="packages\Microsoft.Advertising.JS.10.1705.16001\build\Microsoft.Advertising.JS.targets" Condition="Exists('packages\Microsoft.Advertising.JS.10.1705.16001\build\Microsoft.Advertising.JS.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.Advertising.JS.10.1705.16001\build\Microsoft.Advertising.JS.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Advertising.JS.10.1705.16001\build\Microsoft.Advertising.JS.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below then uncomment
        that target and the DisableFastUpToDateCheck PropertyGroup. 
        Other similar extension points exist, see Microsoft.Common.targets.

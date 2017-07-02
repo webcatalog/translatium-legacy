@@ -14,9 +14,9 @@
     "node": "8"
   },
   "scripts": {
-    "start": "REACT_APP_GOOGLE_ENDPOINT=http://localhost:3000 REACT_APP_VERSION=$(node -p -e \"require('./package.json').version\") BROWSER=none react-scripts start",
+    "start": "cross-env REACT_APP_GOOGLE_ENDPOINT=http://localhost:3000 BROWSER=none react-scripts start",
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "build": "REACT_APP_VERSION=$(node -p -e \"require('./package.json').version\") react-scripts build",
+    "build": "cross-env REACT_APP_VERSION=6.5.0 && react-scripts build",
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "pack": "electron-builder --dir --mac mas",

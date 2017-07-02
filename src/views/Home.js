@@ -109,6 +109,7 @@ class Home extends React.Component {
         backgroundColor: darkMode ? fullBlack : grey100,
         display: 'flex',
         overflow: 'hidden',
+        position: 'relative',
       },
       anotherContainer: {
         flex: 1,
