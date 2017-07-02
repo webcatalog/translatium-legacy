@@ -184,7 +184,7 @@ rcf/
 # Windows Store app package directories and files
 AppPackages/
 BundleArtifacts/
-Package.StoreAssociation.xml
+#Package.StoreAssociation.xml
 _pkginfo.txt
 
 # Visual Studio cache files
@@ -272,3 +272,5 @@ __pycache__/
 
 
 www
+
+/*.appx

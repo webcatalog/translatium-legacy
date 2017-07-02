@@ -53,7 +53,10 @@
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <PackageCertificateKeyFile>windows_StoreKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>4287188083B5BF422156C2B34EED9C9C80E339BC</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>7F15C190BEE5EF2C5F8CD114229F9A509BBF8659</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -105,7 +108,10 @@
     <Content Include="build-resources\windows-images\Wide310x150.scale-200.png" />
     <Content Include="build-resources\windows-images\Wide310x150.scale-400.png" />
     <Content Include="build\**\**" />
+    <None Include="windows_StoreKey.pfx" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="packages.config" />
+    <None Include="windows_TemporaryKey.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <Import Project="packages\Microsoft.Advertising.JS.10.1705.16001\build\Microsoft.Advertising.JS.targets" Condition="Exists('packages\Microsoft.Advertising.JS.10.1705.16001\build\Microsoft.Advertising.JS.targets')" />
