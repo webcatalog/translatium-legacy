@@ -91,7 +91,7 @@ class Phrasebook extends React.Component {
     return (
       <div style={styles.container}>
         <AppBar
-          title="Phrasebook"
+          title={strings.phrasebook}
           showMenuIconButton={false}
         />
         {(() => {

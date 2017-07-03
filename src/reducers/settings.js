@@ -1,11 +1,13 @@
 import { UPDATE_SETTING } from '../constants/actions';
 
+import getDefaultLangId from '../libs/getDefaultLangId';
+
 const defaultState = {
   biggerTextFontSize: 50,
   bigTextFontSize: 50,
   chinaMode: false,
   darkMode: false,
-  displayLanguage: 'en-us',
+  displayLanguage: getDefaultLangId(),
   inputLang: 'en',
   launchCount: 0,
   outputLang: 'zh',

@@ -8,7 +8,11 @@
 	<body>
 		<div id="app"></div>
 		<script>
-			var { remote, webFrame, shell } = require('electron'); var fs = require('fs'); webFrame.setZoomLevelLimits(1, 1);
+			var { remote, webFrame, shell } = require('electron');
+			var fs = require('fs');
+
+			webFrame.setVisualZoomLevelLimits(1, 1);
+			webFrame.setLayoutZoomLevelLimits(1, 1);
 		</script>
 		<script src="//Microsoft.Advertising.JavaScript/ad.js"></script>
 	</body>
