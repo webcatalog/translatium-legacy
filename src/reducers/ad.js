@@ -6,11 +6,16 @@ import getPlatform from '../libs/getPlatform';
 
 let shouldShowAd = false;
 if (getPlatform() === 'windows') {
-  const currentApp = process.env.NODE_ENV === 'production' ? Windows.ApplicationModel.Store.CurrentApp
-                  : Windows.ApplicationModel.Store.CurrentAppSimulator;
+  try {
+    const currentApp = process.env.NODE_ENV === 'production' ? Windows.ApplicationModel.Store.CurrentApp
+                    : Windows.ApplicationModel.Store.CurrentAppSimulator;
 
-  shouldShowAd = !(currentApp.licenseInformation.productLicenses.lookup('remove.ads.durable').isActive
-              || currentApp.licenseInformation.productLicenses.lookup('remove.ads.free').isActive);
+    shouldShowAd = !(currentApp.licenseInformation.productLicenses.lookup('remove.ads.durable').isActive
+                || currentApp.licenseInformation.productLicenses.lookup('remove.ads.free').isActive);
+  } catch (err) {
+    // eslint-disable-next-line
+    console.log(err);
+  }
 }
 
 const initialState = {
