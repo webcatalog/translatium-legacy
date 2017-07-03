@@ -1,7 +1,7 @@
 {
   "name": "modern-translator",
   "description": "Translator app for Mac & PC.",
-  "version": "6.5.0",
+  "version": "6.6.0",
   "main": "public/electron.js",
   "author": "Quang Lam",
   "licenses": [
@@ -16,15 +16,15 @@
   "scripts": {
     "start": "cross-env REACT_APP_GOOGLE_ENDPOINT=http://localhost:3000 BROWSER=none react-scripts start",
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "build": "cross-env REACT_APP_VERSION=6.5.0 && react-scripts build",
+    "build": "cross-env REACT_APP_VERSION=6.6.0 && react-scripts build",
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "pack": "electron-builder --dir --mac mas",
-    "dist": "yarn build && electron-builder --mac zip mas",
+    "dist": "yarn build && electron-builder --mac mas",
     "lint": "eslint src public --ext js"
   },
   "dependencies": {
-    "electron-is-dev": "^0.1.2",
+    "electron-is-dev": "^0.2.0",
     "menubar": "^5.2.3"
   },
   "devDependencies": {
@@ -33,11 +33,11 @@
     "concurrently": "^3.5.0",
     "cross-env": "^5.0.1",
     "electron": "^1.6.11",
-    "electron-builder": "^19.8.0",
+    "electron-builder": "^19.11.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
-    "eslint-plugin-import": "^2.6.0",
-    "eslint-plugin-jsx-a11y": "^5.0.3",
+    "eslint-plugin-import": "^2.6.1",
+    "eslint-plugin-jsx-a11y": "^5.1.0",
     "eslint-plugin-react": "^7.1.0",
     "history": "^4.6.3",
     "material-ui": "^0.18.5",
