@@ -20,7 +20,7 @@
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "pack": "electron-builder --dir --mac mas",
-    "dist": "yarn build && electron-builder --mac zip mas",
+    "dist": "yarn build && electron-builder --mac mas",
     "lint": "eslint src public --ext js"
   },
   "dependencies": {
