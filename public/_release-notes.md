@@ -1,4 +1,9 @@
 <span class="tag is-success is-large">6.x</span>
+### 6.6.1 (3rd July 2017)
+- Fixes bugs.
+
+---
+
 ### 6.6.0 (3rd July 2017)
 - Adds Vietnamese display language.
 - Fixes bugs.
