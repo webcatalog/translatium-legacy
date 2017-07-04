@@ -1,7 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Menu from 'material-ui/Menu';
+
+const styleSheet = createStyleSheet('EnhancedMenu', {
+  container: {
+    display: 'inline-flex',
+  },
+});
+
 
 class EnhancedMenu extends React.Component {
   constructor(props) {
@@ -28,11 +36,12 @@ class EnhancedMenu extends React.Component {
     const {
       buttonElement,
       children,
+      classes,
       id,
     } = this.props;
 
     return (
-      <div>
+      <div className={classes.container}>
         {React.cloneElement(buttonElement, {
           'aria-owns': id,
           'aria-haspopup': true,
@@ -58,8 +67,12 @@ class EnhancedMenu extends React.Component {
 
 EnhancedMenu.propTypes = {
   buttonElement: PropTypes.element.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]).isRequired,
+  classes: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
 };
 
-export default EnhancedMenu;
+export default withStyles(styleSheet)(EnhancedMenu);

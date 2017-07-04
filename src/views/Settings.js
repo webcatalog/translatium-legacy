@@ -92,7 +92,10 @@ class Settings extends React.Component {
                     <MenuItem
                       key={`color_${colorId}`}
                       value={colorId}
-                      onClick={() => onSettingChange('primaryColorId', colorId)}
+                      onClick={() => {
+                        onSettingChange('primaryColorId', colorId);
+                        window.location.reload();
+                      }}
                     >
                       {strings[colorId]}
                     </MenuItem>
@@ -136,7 +139,10 @@ class Settings extends React.Component {
               <ListItemSecondaryAction>
                 <Switch
                   checked={darkMode}
-                  onChange={() => onToggle('darkMode')}
+                  onChange={() => {
+                    onToggle('darkMode');
+                    window.location.reload();
+                  }}
                 />
               </ListItemSecondaryAction>
             </ListItem>
@@ -314,5 +320,3 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps, mapDispatchToProps,
 )(Settings);
-
-// f

@@ -20,7 +20,7 @@ a:hover {
   text-decoration: underline;
 }
 
-html, body, #app, .fs {
+html, body, #app {
   height: 100vh;
   width: 100vw;
 }
@@ -212,4 +212,8 @@ body {
 .background-leave.background-leave-active {
   transform: translate(-100%);
   transition: transform 1000ms ease-in-out;
+}
+
+[role=button], [role=link] {
+  cursor: pointer;
 }

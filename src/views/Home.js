@@ -4,19 +4,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import shortid from 'shortid';
+import classNames from 'classnames';
 
-import { fullWhite } from 'material-ui/styles/colors';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
-import Card, { CardActions, CardHeader, CardContent } from 'material-ui/Card';
+import Card, { CardActions, CardContent } from 'material-ui/Card';
 import { MenuItem } from 'material-ui/Menu';
 import Button from 'material-ui/Button';
 import { CircularProgress } from 'material-ui/Progress';
+import Typography from 'material-ui/Typography';
 
 import ActionSwapHoriz from 'material-ui-icons/SwapHoriz';
-import NavigationArrowDropDown from 'material-ui-icons/ArrowDropDown';
 import ContentClear from 'material-ui-icons/Clear';
 import NavigationMoreVert from 'material-ui-icons/MoreVert';
 import ImageCameraAlt from 'material-ui-icons/CameraAlt';
@@ -68,6 +69,80 @@ import Handwriting from './Handwriting';
 import Speech from './Speech';
 import History from './History';
 
+const styleSheet = createStyleSheet('Home', theme => ({
+  container: {
+    flex: 1,
+    display: 'flex',
+    overflow: 'hidden',
+    position: 'relative',
+  },
+  anotherContainer: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+  },
+  inputContainer: {
+    flex: '0 1 140px',
+    height: 140,
+    display: 'flex',
+    flexDirection: 'column',
+    zIndex: 1000,
+    transition: 'flex 0.5s',
+  },
+  inputContainerFullScreen: {
+    flex: 1,
+    height: '100%',
+  },
+  textarea: {
+    border: 0,
+    color: theme.palette.text.primary,
+    backgroundColor: theme.palette.background.paper,
+    outline: 0,
+    margin: 0,
+    padding: 12,
+    fontSize: 16,
+    boxSizing: 'border-box',
+    flex: 1,
+  },
+  controllerContainer: {
+    flexBasis: 48,
+    paddingLeft: 8,
+    paddingRight: 8,
+    boxSizing: 'border-box',
+    borderTop: `1px solid ${theme.palette.text.disabled}`,
+  },
+  controllerContainerLeft: {
+    float: 'left',
+  },
+  controllerContainerRight: {
+    float: 'right',
+    paddingTop: 6,
+  },
+  resultContainer: {
+    flex: 1,
+    padding: '0 12px 12px 12px',
+    boxSizing: 'border-box',
+    overflowY: 'auto',
+    WebkitOverflowScrolling: 'touch',
+  },
+  resultContainerHidden: {
+    flex: 0,
+  },
+  progressContainer: {
+    flex: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  outputCard: {
+    marginTop: 12,
+  },
+  languageTitle: {
+    flex: 1,
+  },
+}));
+
 class Home extends React.Component {
   componentDidMount() {
     if (getPlatform() === 'windows') {
@@ -93,19 +168,20 @@ class Home extends React.Component {
 
   renderOutput() {
     const {
-      output,
-      screenWidth,
-      fullscreenInputBox,
       chinaMode,
-      textToSpeechPlaying,
-      strings,
-      onListenButtonClick,
-      onTogglePhrasebookClick,
-      onSwapOutputButtonClick,
+      classes,
+      fullscreenInputBox,
       onBiggerTextButtonClick,
+      onListenButtonClick,
+      onRequestCopyToClipboard,
       onSuggestedInputLangClick,
       onSuggestedInputTextClick,
-      onRequestCopyToClipboard,
+      onSwapOutputButtonClick,
+      onTogglePhrasebookClick,
+      output,
+      screenWidth,
+      strings,
+      textToSpeechPlaying,
     } = this.props;
 
     if (fullscreenInputBox === true) {
@@ -117,7 +193,7 @@ class Home extends React.Component {
     switch (output.status) {
       case 'loading': {
         return (
-          <div>
+          <div className={classes.progressContainer} >
             <CircularProgress size={80} thickness={5} />
           </div>
         );
@@ -175,80 +251,91 @@ class Home extends React.Component {
         const hasDict = output.inputDict !== undefined && output.outputDict !== undefined;
 
         return (
-          <div>
-            {output.inputRoman ? (
-              <p className="text-selectable">{output.inputRoman}</p>
-            ) : null}
+          <div
+            className={classNames(
+              classes.resultContainer,
+              { [classes.resultContainerHidden]: fullscreenInputBox },
+            )}
+          >
+            {output.inputRoman && (
+              <p className={classNames('text-selectable', classes.inputRoman)}>{output.inputRoman}</p>
+            )}
 
-            {output.suggestedInputLang ? (
-              <p>
-                <ActionLightbulbOutline />
-                <span>
-                  <span>{strings.translateFrom}: </span>
-                  <a
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => onSuggestedInputLangClick(output.suggestedInputLang)}
-                  >
-                    {strings[output.suggestedInputLang]}
-                  </a> ?
-                </span>
-              </p>
-            ) : null}
+            {output.suggestedInputLang && (
+              <Typography
+                type="body"
+                align="left"
+              >
+                <span role="img" aria-label="">💡</span>
+                <span>{strings.translateFrom}:&#32;</span>
+                <a
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => onSuggestedInputLangClick(output.suggestedInputLang)}
+                >
+                  {strings[output.suggestedInputLang]}
+                </a>
+                <span>&#32;?&#32;</span>
+              </Typography>
+            )}
 
             {output.suggestedInputText ? (
-              <p>
+              <Typography
+                type="body"
+                align="left"
+              >
                 <ActionLightbulbOutline />
                 <span>
-                  <span>{strings.didYouMean}: </span>
+                  <span role="img" aria-label="">💡</span>
+                  <span>{strings.didYouMean}:&#32;</span>
                   <a
                     role="button"
                     tabIndex={0}
                     onClick={() => onSuggestedInputTextClick(output.suggestedInputText)}
                   >
                     {output.suggestedInputText}
-                  </a> ?
+                  </a>
+                  <span>&#32;?&#32;</span>
                 </span>
-              </p>
+              </Typography>
             ) : null}
 
-            <Card initiallyExpanded>
-              <CardHeader
-                title={strings[output.outputLang]}
-                subtitle={strings.fromLanguage.replace('{1}', strings[output.inputLang])}
-                actAsExpander={hasDict}
-                showExpandableButton={hasDict}
-              />
+            <Card className={classes.outputCard}>
               <CardContent
                 className="text-selectable"
-                lang={toCountryRemovedLanguage(output.outputLang)}
+
               >
-                {output.outputText}
+                <Typography type="body1">{strings[output.outputLang]}</Typography>
+
+                <Typography
+                  type="headline"
+                  lang={toCountryRemovedLanguage(output.outputLang)}
+                  className="text-selectable"
+                >
+                  {output.outputText}
+                </Typography>
+
+                {output.outputRoman ? (
+                  <Typography type="body1" className={classNames('text-selectable', classes.pos)}>
+                    {output.outputRoman}
+                  </Typography>
+                ) : null}
               </CardContent>
-              {output.outputRoman ? (
-                <CardContent className="text-selectable">
-                  {output.outputRoman}
-                </CardContent>
-              ) : null}
               <CardActions>
-                {
-                  controllers.slice(0, maxVisibleIcon)
-                  .map(({ icon, tooltip, onClick }) => (
-                    <IconButton
-                      tooltip={tooltip}
-                      tooltipPosition="bottom-center"
-                      key={shortid.generate()}
-                      onClick={onClick}
-                    >
-                      {icon}
-                    </IconButton>
-                  ))
-                }
+                {controllers.slice(0, maxVisibleIcon).map(({ icon, tooltip, onClick }) => (
+                  <IconButton
+                    aria-label={tooltip}
+                    key={shortid.generate()}
+                    onClick={onClick}
+                  >
+                    {icon}
+                  </IconButton>
+                ))}
                 {(showMoreButton) ? (
                   <EnhancedMenu
                     id="homeMore2"
                     buttonElement={(
-                      <IconButton tooltip={strings.more} tooltipPosition="bottom-center">
+                      <IconButton aria-label={strings.more} tooltipPosition="bottom-center">
                         <NavigationMoreVert />
                       </IconButton>
                     )}
@@ -271,13 +358,14 @@ class Home extends React.Component {
                   </EnhancedMenu>
                 ) : null}
               </CardActions>
-              {hasDict ? (
-                <CardContent expandable>
-                  <Dictionary output={output} />
-                </CardContent>
-              ) : null}
             </Card>
-            <p>{strings.translatedByGoogle}</p>
+            {hasDict && <Dictionary output={output} />}
+            <Typography
+              type="body2"
+              align="right"
+            >
+              {strings.translatedByGoogle}
+            </Typography>
           </div>
         );
       }
@@ -286,26 +374,27 @@ class Home extends React.Component {
 
   render() {
     const {
-      screenWidth,
-      translateWhenPressingEnter,
+      classes,
+      fullscreenInputBox,
+      imeMode,
       inputLang, outputLang,
       inputText,
-      imeMode,
-      textToSpeechPlaying,
-      fullscreenInputBox,
-      strings,
-      onLanguageClick,
-      onSwapButtonClick,
-      onKeyDown, onInputText,
-      onClearButtonClick,
-      onListenButtonClick,
-      onWriteButtonClick,
-      onSpeakButtonClick,
-      onTranslateButtonClick,
-      onOpenImageButtonClick,
-      onCameraButtonClick,
-      onFullscreenButtonClick,
       onAnotherContainerClick,
+      onCameraButtonClick,
+      onClearButtonClick,
+      onFullscreenButtonClick,
+      onKeyDown, onInputText,
+      onLanguageClick,
+      onListenButtonClick,
+      onOpenImageButtonClick,
+      onSpeakButtonClick,
+      onSwapButtonClick,
+      onTranslateButtonClick,
+      onWriteButtonClick,
+      screenWidth,
+      strings,
+      textToSpeechPlaying,
+      translateWhenPressingEnter,
     } = this.props;
 
     const controllers = [
@@ -368,47 +457,53 @@ class Home extends React.Component {
 
     const showMoreButton = (maxVisibleIcon < controllers.length);
 
-    const tooltipPos = fullscreenInputBox ? 'top-center' : 'bottom-center';
-
     return (
-      <div>
+      <div className={classes.container}>
         <div
-          role="button"
-          tabIndex={0}
+          className={classes.anotherContainer}
+          role="presentation"
           onClick={() => onAnotherContainerClick(imeMode)}
         >
           <AppBar position="static">
             <Toolbar>
-              <div
+              <Typography
+                type="title"
+                color="inherit"
+                align="center"
                 role="button"
-                tabIndex={0}
+                className={classes.languageTitle}
                 onClick={() => onLanguageClick('inputLang')}
               >
-                <span>{strings[inputLang]}</span>
-                <div>
-                  <NavigationArrowDropDown color={fullWhite} />
-                </div>
-              </div>
-              <div>
-                <IconButton disabled={!isOutput(inputLang)} onClick={onSwapButtonClick}>
-                  <ActionSwapHoriz color={fullWhite} />
-                </IconButton>
-              </div>
-              <div
+                {strings[inputLang]}
+              </Typography>
+              <IconButton
+                color="contrast"
+                disabled={!isOutput(inputLang)}
+                onClick={onSwapButtonClick}
+              >
+                <ActionSwapHoriz />
+              </IconButton>
+              <Typography
+                type="title"
+                color="inherit"
+                align="center"
                 role="button"
-                tabIndex={0}
+                className={classes.languageTitle}
                 onClick={() => onLanguageClick('outputLang')}
               >
-                <span>{strings[outputLang]}</span>
-                <div>
-                  <NavigationArrowDropDown color={fullWhite} />
-                </div>
-              </div>
+                {strings[outputLang]}
+              </Typography>
             </Toolbar>
           </AppBar>
-          <Paper zDepth={2}>
+          <Paper
+            elevation={2}
+            className={classNames(
+              classes.inputContainer,
+              { [classes.inputContainerFullScreen]: fullscreenInputBox },
+            )}
+          >
             <textarea
-              className="text-selectable"
+              className={classNames('text-selectable', classes.textarea)}
               lang={toCountryRemovedLanguage(inputLang)}
               placeholder={strings.typeSomethingHere}
               autoComplete="off"
@@ -422,26 +517,22 @@ class Home extends React.Component {
               onChange={onInputText}
               value={inputText}
             />
-            <div>
-              <div>
-                {
-                  controllers.slice(0, maxVisibleIcon)
-                  .map(({ icon, tooltip, onClick }) => (
-                    <IconButton
-                      tooltip={tooltip}
-                      tooltipPosition={tooltipPos}
-                      key={shortid.generate()}
-                      onClick={onClick}
-                    >
-                      {icon}
-                    </IconButton>
-                  ))
-                }
+            <div className={classes.controllerContainer}>
+              <div className={classes.controllerContainerLeft}>
+                {controllers.slice(0, maxVisibleIcon).map(({ icon, tooltip, onClick }) => (
+                  <IconButton
+                    aria-label={tooltip}
+                    key={shortid.generate()}
+                    onClick={onClick}
+                  >
+                    {icon}
+                  </IconButton>
+                ))}
                 {(showMoreButton) ? (
                   <EnhancedMenu
                     id="homeMore"
                     buttonElement={(
-                      <IconButton tooltip={strings.more} tooltipPosition={tooltipPos}>
+                      <IconButton aria-label={strings.more}>
                         <NavigationMoreVert />
                       </IconButton>
                     )}
@@ -462,7 +553,7 @@ class Home extends React.Component {
                   </EnhancedMenu>
                 ) : null}
               </div>
-              <div>
+              <div className={classes.controllerContainerRight}>
                 <Button raised color="primary" onClick={onTranslateButtonClick}>
                   {strings.translate}
                 </Button>
@@ -479,39 +570,40 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  screenWidth: PropTypes.number,
-  translateWhenPressingEnter: PropTypes.bool,
-  preventScreenLock: PropTypes.bool,
-  inputLang: PropTypes.string,
-  outputLang: PropTypes.string,
-  inputText: PropTypes.string,
   // eslint-disable-next-line
-  output: PropTypes.object,
-  imeMode: PropTypes.string,
-  textToSpeechPlaying: PropTypes.bool,
-  fullscreenInputBox: PropTypes.bool,
-  launchCount: PropTypes.number,
   chinaMode: PropTypes.bool,
-  strings: PropTypes.objectOf(PropTypes.string).isRequired,
-  onLanguageClick: PropTypes.func.isRequired,
-  onSwapButtonClick: PropTypes.func.isRequired,
-  onKeyDown: PropTypes.func.isRequired,
-  onInputText: PropTypes.func.isRequired,
-  onClearButtonClick: PropTypes.func.isRequired,
-  onListenButtonClick: PropTypes.func.isRequired,
-  onTranslateButtonClick: PropTypes.func.isRequired,
-  onWriteButtonClick: PropTypes.func.isRequired,
-  onSpeakButtonClick: PropTypes.func.isRequired,
-  onTogglePhrasebookClick: PropTypes.func.isRequired,
-  onOpenImageButtonClick: PropTypes.func.isRequired,
-  onCameraButtonClick: PropTypes.func.isRequired,
-  onSwapOutputButtonClick: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+  fullscreenInputBox: PropTypes.bool,
+  imeMode: PropTypes.string,
+  inputLang: PropTypes.string,
+  inputText: PropTypes.string,
+  launchCount: PropTypes.number,
+  onAnotherContainerClick: PropTypes.func.isRequired,
   onBiggerTextButtonClick: PropTypes.func.isRequired,
+  onCameraButtonClick: PropTypes.func.isRequired,
+  onClearButtonClick: PropTypes.func.isRequired,
   onFullscreenButtonClick: PropTypes.func.isRequired,
+  onInputText: PropTypes.func.isRequired,
+  onKeyDown: PropTypes.func.isRequired,
+  onLanguageClick: PropTypes.func.isRequired,
+  onListenButtonClick: PropTypes.func.isRequired,
+  onOpenImageButtonClick: PropTypes.func.isRequired,
+  onRequestCopyToClipboard: PropTypes.func.isRequired,
+  onSpeakButtonClick: PropTypes.func.isRequired,
   onSuggestedInputLangClick: PropTypes.func.isRequired,
   onSuggestedInputTextClick: PropTypes.func.isRequired,
-  onAnotherContainerClick: PropTypes.func.isRequired,
-  onRequestCopyToClipboard: PropTypes.func.isRequired,
+  onSwapButtonClick: PropTypes.func.isRequired,
+  onSwapOutputButtonClick: PropTypes.func.isRequired,
+  onTogglePhrasebookClick: PropTypes.func.isRequired,
+  onTranslateButtonClick: PropTypes.func.isRequired,
+  onWriteButtonClick: PropTypes.func.isRequired,
+  output: PropTypes.object,
+  outputLang: PropTypes.string,
+  preventScreenLock: PropTypes.bool,
+  screenWidth: PropTypes.number,
+  strings: PropTypes.objectOf(PropTypes.string).isRequired,
+  textToSpeechPlaying: PropTypes.bool,
+  translateWhenPressingEnter: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
@@ -590,4 +682,4 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(
   mapStateToProps, mapDispatchToProps,
-)(Home);
+)(withStyles(styleSheet)(Home));

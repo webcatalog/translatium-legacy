@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { LinearProgress } from 'material-ui/Progress';
 import IconButton from 'material-ui/IconButton';
 import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
@@ -10,6 +11,26 @@ import Divider from 'material-ui/Divider';
 
 import { deleteHistoryItem, loadHistory } from '../actions/history';
 import { loadOutput } from '../actions/home';
+
+const styleSheet = createStyleSheet('History', {
+  container: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  listContainer: {
+    flex: 1,
+    overflowY: 'auto',
+    WebkitOverflowScrolling: 'touch',
+    padding: 0,
+    boxSizing: 'border-box',
+  },
+  progress: {
+    marginTop: 12,
+  },
+});
 
 class History extends React.Component {
   componentDidMount() {
@@ -34,61 +55,25 @@ class History extends React.Component {
     if (this.listView) this.listView.onscroll = null;
   }
 
-  getStyles() {
-    return {
-      emptyContainer: {
-        flex: 1,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      emptyInnerContainer: {
-        textAlign: 'center',
-        // color: textColor,
-      },
-      bigIcon: {
-        height: 96,
-        width: 96,
-      },
-      container: {
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'relative',
-        overflow: 'hidden',
-      },
-      listContainer: {
-        flex: 1,
-        overflowY: 'auto',
-        WebkitOverflowScrolling: 'touch',
-        padding: 0,
-        boxSizing: 'border-box',
-      },
-      progress: {
-        marginTop: 12,
-      },
-    };
-  }
-
   render() {
     const {
+      classes,
       historyItems,
       historyLoading,
-      strings,
       onDeleteButtonClick,
       onItemClick,
+      strings,
     } = this.props;
-    const styles = this.getStyles();
 
     return (
-      <div style={styles.container}>
+      <div className={classes.container}>
         {(() => {
           if (historyItems.length < 1 && historyLoading === false) {
             return null;
           }
 
           return (
-            <div style={styles.listContainer} ref={(c) => { this.listView = c; }}>
+            <div className={classes.listContainer} ref={(c) => { this.listView = c; }}>
               <List>
                 {historyItems.map(item => [(
                   <ListItem
@@ -101,8 +86,7 @@ class History extends React.Component {
                     />
                     <ListItemSecondaryAction>
                       <IconButton
-                        tooltip={strings.removeFromHistory}
-                        tooltipPosition="bottom-left"
+                        aria-label={strings.removeFromHistory}
                         onClick={() => {
                           onDeleteButtonClick(
                             item.historyId,
@@ -117,7 +101,7 @@ class History extends React.Component {
                 ), <Divider inset={false} />])}
               </List>
               {historyLoading === true ? (
-                <LinearProgress mode="indeterminate" style={styles.progress} />
+                <LinearProgress mode="indeterminate" className={classes.progress} />
               ) : null}
             </div>
           );
@@ -128,14 +112,15 @@ class History extends React.Component {
 }
 
 History.propTypes = {
-  historyItems: PropTypes.arrayOf(PropTypes.object),
   canLoadMore: PropTypes.bool,
+  classes: PropTypes.object.isRequired,
+  historyItems: PropTypes.arrayOf(PropTypes.object),
   historyLoading: PropTypes.bool,
-  strings: PropTypes.objectOf(PropTypes.string).isRequired,
-  onItemClick: PropTypes.func.isRequired,
-  onEnterHistory: PropTypes.func.isRequired,
   onDeleteButtonClick: PropTypes.func.isRequired,
+  onEnterHistory: PropTypes.func.isRequired,
+  onItemClick: PropTypes.func.isRequired,
   onLoadMore: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -154,4 +139,4 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(
   mapStateToProps, mapDispatchToProps,
-)(History);
+)(withStyles(styleSheet)(History));

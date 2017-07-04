@@ -97,7 +97,7 @@ class Phrasebook extends React.Component {
               <div style={styles.emptyContainer}>
                 <div style={styles.emptyInnerContainer}>
                   <ToggleStar style={styles.bigIcon} />
-                  <h3>{strings.phrasebookIsEmpty}</h3>
+                  <Typography type="headline">{strings.phrasebookIsEmpty}</Typography>
                 </div>
               </div>
             );
@@ -117,8 +117,7 @@ class Phrasebook extends React.Component {
                     />
                     <ListItemSecondaryAction>
                       <IconButton
-                        tooltip={strings.removeFromPhrasebook}
-                        tooltipPosition="bottom-left"
+                        aria-label={strings.removeFromPhrasebook}
                         onClick={() => {
                           onDeleteButtonClick(
                             item.phrasebookId,

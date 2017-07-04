@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import List, { ListItem, ListItemText, ListItemIcon } from 'material-ui/List';
 import ActionHistory from 'material-ui-icons/History';
 import AppBar from 'material-ui/AppBar';
@@ -21,6 +22,21 @@ import {
 } from '../libs/languageUtils';
 
 import { updateInputLang, updateOutputLang } from '../actions/settings';
+
+const styleSheet = createStyleSheet('LanguageList', {
+  container: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'hidden',
+  },
+  listContainer: {
+    flex: 1,
+    overflowY: 'auto',
+    WebkitOverflowScrolling: 'touch',
+  },
+});
+
 
 class LanguageList extends React.Component {
   constructor(props) {
@@ -46,11 +62,12 @@ class LanguageList extends React.Component {
 
   render() {
     const {
-      type,
-      recentLanguages,
-      strings,
+      classes,
       onCloseClick,
       onLanguageClick,
+      recentLanguages,
+      strings,
+      type,
     } = this.props;
 
     let languages;
@@ -78,18 +95,18 @@ class LanguageList extends React.Component {
 
 
     return (
-      <div>
+      <div className={classes.container}>
         <AppBar position="static">
           <Toolbar>
+            <IconButton color="contrast" onClick={onCloseClick}>
+              <NavigationClose />
+            </IconButton>
             <Typography type="title" color="inherit">
               {type === 'inputLang' ? strings.chooseAnInputLanguage : strings.chooseAnOutputLanguage}
-              <IconButton color="contrast" onClick={onCloseClick}>
-                <NavigationClose />
-              </IconButton>
             </Typography>
           </Toolbar>
         </AppBar>
-        <div>
+        <div className={classes.listContainer}>
           <List>
             {recentLanguages.map((langId, i) => (
               <ListItem
@@ -108,18 +125,11 @@ class LanguageList extends React.Component {
           </List>
           {Object.keys(groups).map(groupId => [(
             <List key={groupId}>
-              {groups[groupId].map((langId, i) => (
+              {groups[groupId].map(langId => (
                 <ListItem
                   key={`lang_${langId}`}
                   onClick={() => onLanguageClick(type, langId)}
                 >
-                  {i === 0 && (
-                    <ListItemIcon>
-                      <Avatar>
-                        {groupId}
-                      </Avatar>
-                    </ListItemIcon>
-                  )}
                   <ListItemText primary={strings[langId]} />
                 </ListItem>
               ))}
@@ -132,11 +142,12 @@ class LanguageList extends React.Component {
 }
 
 LanguageList.propTypes = {
-  recentLanguages: PropTypes.arrayOf(PropTypes.string),
-  type: PropTypes.string,
-  strings: PropTypes.objectOf(PropTypes.string).isRequired,
+  classes: PropTypes.object.isRequired,
   onCloseClick: PropTypes.func.isRequired,
   onLanguageClick: PropTypes.func.isRequired,
+  recentLanguages: PropTypes.arrayOf(PropTypes.string),
+  strings: PropTypes.objectOf(PropTypes.string).isRequired,
+  type: PropTypes.string,
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -160,4 +171,4 @@ const mapStateToProps = (state, ownProps) => ({
 
 export default connect(
   mapStateToProps, mapDispatchToProps,
-)(LanguageList);
+)(withStyles(styleSheet)(LanguageList));

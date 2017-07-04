@@ -272,7 +272,7 @@ class Handwriting extends React.Component {
     const { strings } = this.props;
 
     return (
-      <Paper zDepth={2} style={styles.container}>
+      <Paper elevation={2} style={styles.container}>
         <div style={styles.wrapper}>
           {suggestions.map(suggestion => (
             <Chip

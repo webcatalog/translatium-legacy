@@ -5,6 +5,12 @@ import { Provider } from 'react-redux';
 
 import 'typeface-roboto/index.css';
 
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import createPalette from 'material-ui/styles/palette';
+import { red, pink } from 'material-ui/styles/colors';
+
+import './main.css';
+
 import store from './store';
 import { updateSetting } from './actions/settings';
 import { updateInputText } from './actions/home';
@@ -14,7 +20,8 @@ import renderRoutes from './renderRoutes';
 
 import getPlatform from './libs/getPlatform';
 
-import './main.css';
+import colorPairs from './constants/colorPairs';
+
 
 const runApp = () => {
   /* global document */
@@ -36,9 +43,20 @@ const runApp = () => {
 
   store.dispatch(updateStrings(state.settings.displayLanguage))
     .then(() => {
+      const theme = createMuiTheme({
+        palette: createPalette({
+          type: state.settings.darkMode ? 'dark' : 'light',
+          primary: colorPairs[state.settings.primaryColorId],
+          accent: pink,
+          error: red,
+        }),
+      });
+
       render(
         <Provider store={store}>
-          {renderRoutes()}
+          <MuiThemeProvider theme={theme}>
+            {renderRoutes()}
+          </MuiThemeProvider>
         </Provider>,
         document.getElementById('app'),
       );

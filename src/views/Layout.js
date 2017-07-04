@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { replace, goBack } from 'react-router-redux';
 
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import createPalette from 'material-ui/styles/palette';
-
-import { red, pink } from 'material-ui/styles/colors';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
 import { CircularProgress } from 'material-ui/Progress';
 import ActionHome from 'material-ui-icons/Home';
@@ -25,6 +22,47 @@ import getPlatform from '../libs/getPlatform';
 
 import Alert from './Alert';
 import Ad from './Ad';
+
+const styleSheet = createStyleSheet('App', theme => ({
+  container: {
+    height: '100vh',
+    width: '100vw',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.status,
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  fullPageProgress: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    height: '100vh',
+    width: '100vw',
+    zIndex: 10000,
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  fakeTitleBar: {
+    flexBasis: 22,
+    height: 22,
+    backgroundColor: theme.palette.primary[700],
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 13,
+    WebkitUserSelect: 'none',
+    WebkitAppRegion: 'drag',
+  },
+  contentContainer: {
+    flex: 1,
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'hidden',
+  },
+}));
 
 class App extends React.Component {
   componentDidMount() {
@@ -97,11 +135,10 @@ class App extends React.Component {
     const {
       bottomNavigationSelectedIndex,
       children,
-      darkMode,
+      classes,
       fullPageLoading,
       onBottomNavigationButtonClick,
       onRequestCloseSnackbar,
-      primaryColorId,
       shouldShowAd,
       shouldShowBottomNav,
       snackbarMessage,
@@ -109,60 +146,49 @@ class App extends React.Component {
       strings,
     } = this.props;
 
-    const theme = createMuiTheme({
-      palette: createPalette({
-        type: darkMode ? 'dark' : 'light',
-        primary: colorPairs[primaryColorId], // Purple and green play nicely together.
-        accent: pink,
-        error: red,
-      }),
-    });
-
     return (
-      <MuiThemeProvider theme={theme}>
-        <div className="fs">
-          {getPlatform() === 'mac' ? (
-            <div>
-              Modern Translator
-            </div>
-          ) : null}
-          <div>
-            {fullPageLoading ? (<div>
-              <CircularProgress size={80} thickness={5} />
-            </div>) : null}
-            <Alert />
-            <Snackbar
-              open={snackbarOpen}
-              message={snackbarMessage || ''}
-              autoHideDuration={4000}
-              onRequestClose={() => onRequestCloseSnackbar()}
-            />
-            {children}
-            {bottomNavigationSelectedIndex > -1 && shouldShowBottomNav ? (
-              <Paper zDepth={2} style={{ zIndex: 1000 }}>
-                <BottomNavigation index={bottomNavigationSelectedIndex} showLabels>
-                  <BottomNavigationButton
-                    label={strings.home}
-                    icon={<ActionHome />}
-                    onClick={() => onBottomNavigationButtonClick('/')}
-                  />
-                  <BottomNavigationButton
-                    label={strings.phrasebook}
-                    icon={<ToggleStar />}
-                    onClick={() => onBottomNavigationButtonClick('/phrasebook')}
-                  />
-                  <BottomNavigationButton
-                    label={strings.settings}
-                    icon={<ActionSettings />}
-                    onClick={() => onBottomNavigationButtonClick('/settings')}
-                  />
-                </BottomNavigation>
-              </Paper>
-            ) : null}
-            {getPlatform() === 'windows' && shouldShowAd && <Ad />}
+      <div className={classes.container}>
+        {getPlatform() === 'mac' ? (
+          <div className={classes.fakeTitleBar}>
+            Modern Translator
           </div>
+        ) : null}
+        <div className={classes.contentContainer}>
+          {fullPageLoading ? (<div className={classes.fullPageProgress}>
+            <CircularProgress size={80} thickness={5} />
+          </div>) : null}
+          <Alert />
+          <Snackbar
+            open={snackbarOpen}
+            message={snackbarMessage || ''}
+            autoHideDuration={4000}
+            onRequestClose={() => onRequestCloseSnackbar()}
+          />
+          {children}
+          {bottomNavigationSelectedIndex > -1 && shouldShowBottomNav ? (
+            <Paper elevation={2} style={{ zIndex: 1000 }}>
+              <BottomNavigation index={bottomNavigationSelectedIndex} showLabels>
+                <BottomNavigationButton
+                  label={strings.home}
+                  icon={<ActionHome />}
+                  onClick={() => onBottomNavigationButtonClick('/')}
+                />
+                <BottomNavigationButton
+                  label={strings.phrasebook}
+                  icon={<ToggleStar />}
+                  onClick={() => onBottomNavigationButtonClick('/phrasebook')}
+                />
+                <BottomNavigationButton
+                  label={strings.settings}
+                  icon={<ActionSettings />}
+                  onClick={() => onBottomNavigationButtonClick('/settings')}
+                />
+              </BottomNavigation>
+            </Paper>
+          ) : null}
+          {getPlatform() === 'windows' && shouldShowAd && <Ad />}
         </div>
-      </MuiThemeProvider>
+      </div>
     );
   }
 }
@@ -170,7 +196,7 @@ class App extends React.Component {
 App.propTypes = {
   bottomNavigationSelectedIndex: PropTypes.number,
   children: PropTypes.element, // matched child route component
-  darkMode: PropTypes.bool,
+  classes: PropTypes.object.isRequired,
   fullPageLoading: PropTypes.bool,
   onBackClick: PropTypes.func.isRequired,
   onBottomNavigationButtonClick: PropTypes.func.isRequired,
@@ -206,7 +232,6 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     bottomNavigationSelectedIndex,
-    darkMode: state.settings.darkMode,
     fullPageLoading: state.ocr && state.ocr.status === 'loading',
     pathname: ownProps.location.pathname,
     primaryColorId: state.settings.primaryColorId,
@@ -230,4 +255,4 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(
   mapStateToProps, mapDispatchToProps,
-)(App);
+)(withStyles(styleSheet)(App));
