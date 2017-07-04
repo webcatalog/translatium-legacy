@@ -182,6 +182,10 @@ Dictionary.propTypes = {
   onLinkTouchTap: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = state => ({
+  strings: state.strings,
+});
+
 const mapDispatchToProps = dispatch => ({
   onLinkTouchTap: (inputLang, outputLang, inputText) => {
     dispatch(updateInputLang(inputLang));
@@ -191,5 +195,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  null, mapDispatchToProps,
+  mapStateToProps, mapDispatchToProps,
 )(Dictionary);
