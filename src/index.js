@@ -4,8 +4,6 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import 'typeface-roboto/index.css';
-
 import store from './store';
 import { updateSetting } from './actions/settings';
 import { updateInputText } from './actions/home';
@@ -16,6 +14,7 @@ import renderRoutes from './renderRoutes';
 import getPlatform from './libs/getPlatform';
 
 import './main.css';
+import './fonts/roboto.css';
 
 const runApp = () => {
   /* global document */
