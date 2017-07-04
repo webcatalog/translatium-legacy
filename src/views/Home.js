@@ -463,7 +463,7 @@ class Home extends React.Component {
                 ) : null}
               </div>
               <div>
-                <Button raised primary onClick={onTranslateButtonClick}>
+                <Button raised color="primary" onClick={onTranslateButtonClick}>
                   {strings.translate}
                 </Button>
               </div>
@@ -516,7 +516,6 @@ Home.propTypes = {
 
 const mapStateToProps = state => ({
   screenWidth: state.screen.screenWidth,
-  darkMode: state.settings.darkMode,
   translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
   preventScreenLock: state.settings.preventingScreenLock,
   inputLang: state.settings.inputLang,

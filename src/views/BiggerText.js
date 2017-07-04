@@ -46,6 +46,7 @@ class BiggerText extends React.Component {
     return (
       <div style={styles.container}>
         <Button
+          color="primary"
           fab
           dense
           style={styles.closeButton}

@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 
 import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
 import { LinearProgress } from 'material-ui/Progress';
 import IconButton from 'material-ui/IconButton';
-import List, { ListItem, ListItemText } from 'material-ui/List';
+import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
 import ToggleStar from 'material-ui-icons/Star';
 import Divider from 'material-ui/Divider';
 
@@ -84,10 +86,11 @@ class Phrasebook extends React.Component {
 
     return (
       <div style={styles.container}>
-        <AppBar
-          title={strings.phrasebook}
-          showMenuIconButton={false}
-        />
+        <AppBar position="static">
+          <Toolbar>
+            <Typography type="title" color="inherit">{strings.phrasebook}</Typography>
+          </Toolbar>
+        </AppBar>
         {(() => {
           if (phrasebookItems.length < 1 && phrasebookLoading === false) {
             return (
@@ -107,7 +110,12 @@ class Phrasebook extends React.Component {
                   <ListItem
                     key={`phrasebookItem_${item.phrasebookId}`}
                     onClick={() => onItemClick(item)}
-                    rightIconButton={(
+                  >
+                    <ListItemText
+                      primary={item.outputText}
+                      secondary={item.inputText}
+                    />
+                    <ListItemSecondaryAction>
                       <IconButton
                         tooltip={strings.removeFromPhrasebook}
                         tooltipPosition="bottom-left"
@@ -120,12 +128,7 @@ class Phrasebook extends React.Component {
                       >
                         <ToggleStar />
                       </IconButton>
-                    )}
-                  >
-                    <ListItemText
-                      primary={item.outputText}
-                      secondary={item.inputText}
-                    />
+                    </ListItemSecondaryAction>
                   </ListItem>
                 ), <Divider inset={false} />])}
               </List>

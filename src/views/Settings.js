@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { parseString as parseXMLString } from 'xml2js';
 
 import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
 import { MenuItem } from 'material-ui/Menu';
 import Switch from 'material-ui/Switch';
 import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
@@ -65,10 +67,11 @@ class Settings extends React.Component {
 
     return (
       <div style={styles.container}>
-        <AppBar
-          title={strings.settings}
-          showMenuIconButton={false}
-        />
+        <AppBar position="static">
+          <Toolbar>
+            <Typography type="title" color="inherit">{strings.settings}</Typography>
+          </Toolbar>
+        </AppBar>
         <div style={styles.innerContainer}>
           <List>
             <ListItem>
@@ -80,7 +83,7 @@ class Settings extends React.Component {
                 <EnhancedMenu
                   id="changeColor"
                   buttonElement={(
-                    <Button raised primary>
+                    <Button raised color="primary">
                       {strings.change}
                     </Button>
                   )}
@@ -106,7 +109,7 @@ class Settings extends React.Component {
                 <EnhancedMenu
                   id="changeDisplayLanguage"
                   buttonElement={(
-                    <Button raised primary>
+                    <Button raised>
                       {strings.change}
                     </Button>
                   )}
@@ -115,14 +118,15 @@ class Settings extends React.Component {
                     <MenuItem
                       key={`lang_${langId}`}
                       value={langId}
-                      primaryText={displayLanguages[langId].displayName}
                       onClick={() => {
                         if (langId !== displayLanguage) {
                           onSettingChange('displayLanguage', langId);
                           onUpdateStrings(langId);
                         }
                       }}
-                    />
+                    >
+                      {displayLanguages[langId].displayName}
+                    </MenuItem>
                   ))}
                 </EnhancedMenu>
               </ListItemSecondaryAction>

@@ -10,7 +10,7 @@ const createDialog = ({
   defaultButtonText,
   cancelButtonText,
   defaultFunc,
-  cancelFunc,
+  cancelFunc = () => {},
 }) => {
   switch (getPlatform()) {
     case 'windows': {

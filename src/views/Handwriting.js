@@ -277,11 +277,10 @@ class Handwriting extends React.Component {
           {suggestions.map(suggestion => (
             <Chip
               key={shortid.generate()}
+              label={suggestion}
               style={styles.suggestionItem}
               onClick={() => onSuggestionsItemClick(suggestion)}
-            >
-              {suggestion}
-            </Chip>
+            />
           ))}
         </div>
         <canvas
@@ -302,7 +301,7 @@ class Handwriting extends React.Component {
           <Button onClick={onSpaceBarButtonClick}>
             {strings.spaceBar}
           </Button>
-          <Button primary onClick={onDoneButtonClick}>
+          <Button color="primary" onClick={onDoneButtonClick}>
             {strings.done}
           </Button>
         </div>

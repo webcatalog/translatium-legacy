@@ -2,27 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Dialog from 'material-ui/Dialog';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
 
 import { closeAlert } from '../actions/alert';
 
 const Alert = ({ alertMessage, strings, onClose }) => {
   const actions = [
-    <Button primary onClick={onClose}>
+    <Button color="primary" onClick={onClose}>
       {strings.close}
     </Button>,
   ];
 
   return (
     <Dialog
-      title={strings.errorOccured}
-      actions={actions}
-      modal={false}
       open={alertMessage != null}
       onRequestClose={onClose}
     >
-      {strings[alertMessage]}
+      <DialogTitle>{strings.errorOccured}</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          {strings[alertMessage]}
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        {actions}
+      </DialogActions>
     </Dialog>
   );
 };

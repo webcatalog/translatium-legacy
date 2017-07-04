@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { LinearProgress } from 'material-ui/Progress';
 import IconButton from 'material-ui/IconButton';
-import List, { ListItem, ListItemText } from 'material-ui/List';
+import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
 import ActionDelete from 'material-ui-icons/Delete';
 import Divider from 'material-ui/Divider';
 
@@ -94,7 +94,12 @@ class History extends React.Component {
                   <ListItem
                     key={`historyItem_${item.historyId}`}
                     onClick={() => onItemClick(item)}
-                    rightIconButton={(
+                  >
+                    <ListItemText
+                      primary={item.outputText}
+                      secondary={item.inputText}
+                    />
+                    <ListItemSecondaryAction>
                       <IconButton
                         tooltip={strings.removeFromHistory}
                         tooltipPosition="bottom-left"
@@ -107,12 +112,7 @@ class History extends React.Component {
                       >
                         <ActionDelete />
                       </IconButton>
-                    )}
-                  >
-                    <ListItemText
-                      primary={item.outputText}
-                      secondary={item.inputText}
-                    />
+                    </ListItemSecondaryAction>
                   </ListItem>
                 ), <Divider inset={false} />])}
               </List>

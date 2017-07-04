@@ -6,7 +6,7 @@ import { replace, goBack } from 'react-router-redux';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import createPalette from 'material-ui/styles/palette';
 
-import { blue, red, pink } from 'material-ui/styles/colors';
+import { red, pink } from 'material-ui/styles/colors';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
 import { CircularProgress } from 'material-ui/Progress';
 import ActionHome from 'material-ui-icons/Home';
@@ -95,21 +95,24 @@ class App extends React.Component {
 
   render() {
     const {
-      children,
       bottomNavigationSelectedIndex,
+      children,
+      darkMode,
       fullPageLoading,
-      snackbarOpen,
-      snackbarMessage,
+      onBottomNavigationButtonClick,
+      onRequestCloseSnackbar,
+      primaryColorId,
       shouldShowAd,
       shouldShowBottomNav,
+      snackbarMessage,
+      snackbarOpen,
       strings,
-      onRequestCloseSnackbar,
-      onBottomNavigationButtonClick,
     } = this.props;
 
     const theme = createMuiTheme({
       palette: createPalette({
-        primary: blue, // Purple and green play nicely together.
+        type: darkMode ? 'dark' : 'light',
+        primary: colorPairs[primaryColorId], // Purple and green play nicely together.
         accent: pink,
         error: red,
       }),
@@ -156,7 +159,7 @@ class App extends React.Component {
                 </BottomNavigation>
               </Paper>
             ) : null}
-            {getPlatform() === 'windows' && shouldShowAd ? <Ad /> : null}
+            {getPlatform() === 'windows' && shouldShowAd && <Ad />}
           </div>
         </div>
       </MuiThemeProvider>
@@ -165,19 +168,20 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  children: PropTypes.element, // matched child route component
-  primaryColorId: PropTypes.string,
-  fullPageLoading: PropTypes.bool,
   bottomNavigationSelectedIndex: PropTypes.number,
-  snackbarOpen: PropTypes.bool,
-  snackbarMessage: PropTypes.string,
+  children: PropTypes.element, // matched child route component
+  darkMode: PropTypes.bool,
+  fullPageLoading: PropTypes.bool,
+  onBackClick: PropTypes.func.isRequired,
+  onBottomNavigationButtonClick: PropTypes.func.isRequired,
+  onRequestCloseSnackbar: PropTypes.func.isRequired,
+  onResize: PropTypes.func.isRequired,
+  primaryColorId: PropTypes.string,
   shouldShowAd: PropTypes.bool,
   shouldShowBottomNav: PropTypes.bool.isRequired,
+  snackbarMessage: PropTypes.string,
+  snackbarOpen: PropTypes.bool,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
-  onResize: PropTypes.func.isRequired,
-  onBottomNavigationButtonClick: PropTypes.func.isRequired,
-  onBackClick: PropTypes.func.isRequired,
-  onRequestCloseSnackbar: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -201,14 +205,15 @@ const mapStateToProps = (state, ownProps) => {
 
 
   return {
-    pathname: ownProps.location.pathname,
-    fullPageLoading: state.ocr && state.ocr.status === 'loading',
-    primaryColorId: state.settings.primaryColorId,
     bottomNavigationSelectedIndex,
-    snackbarOpen: state.snackbar.open,
-    snackbarMessage: state.snackbar.message,
+    darkMode: state.settings.darkMode,
+    fullPageLoading: state.ocr && state.ocr.status === 'loading',
+    pathname: ownProps.location.pathname,
+    primaryColorId: state.settings.primaryColorId,
     shouldShowAd: state.ad.shouldShowAd,
     shouldShowBottomNav: !(state.home.imeMode === 'handwriting' || state.home.imeMode === 'speech'),
+    snackbarMessage: state.snackbar.message,
+    snackbarOpen: state.snackbar.open,
     strings: state.strings,
   };
 };
