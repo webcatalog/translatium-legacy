@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 
 import 'typeface-roboto/index.css';
 
+import 'typeface-roboto/index.css';
+
 import store from './store';
 import { updateSetting } from './actions/settings';
 import { updateInputText } from './actions/home';
