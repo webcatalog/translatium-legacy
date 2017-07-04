@@ -118,8 +118,7 @@ export const deletePhrasebookItem = (id, rev) => ((dispatch, getState) => {
 
       // Update toggle star status of output
       if (output && id === output.phrasebookId) {
-        const newOutput = Object.assign({}, output);
-        delete output.phrasebookId;
+        const newOutput = Object.assign({}, output, { phrasebookId: null });
 
         dispatch({
           type: UPDATE_OUTPUT,
