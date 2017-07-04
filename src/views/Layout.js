@@ -6,7 +6,7 @@ import { replace, goBack } from 'react-router-redux';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import createPalette from 'material-ui/styles/palette';
 
-import { blue, red, pink, fullWhite, fullBlack } from 'material-ui/styles/colors';
+import { blue, red, pink } from 'material-ui/styles/colors';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
 import { CircularProgress } from 'material-ui/Progress';
 import ActionHome from 'material-ui-icons/Home';
@@ -95,54 +95,11 @@ class App extends React.Component {
     }
   }
 
-  getStyles() {
-    const { darkMode, primaryColorId } = this.props;
-    const { primary2Color } = colorPairs[primaryColorId];
-
-    return {
-      container: {
-        overflow: 'hidden',
-        backgroundColor: darkMode ? fullBlack : fullWhite,
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-      },
-      fullPageProgress: {
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        height: '100vh',
-        width: '100vw',
-        zIndex: 10000,
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      fakeTitleBar: {
-        flexBasis: 22,
-        height: 22,
-        backgroundColor: primary2Color,
-        color: fullWhite,
-        textAlign: 'center',
-        fontSize: 13,
-        WebkitUserSelect: 'none',
-        WebkitAppRegion: 'drag',
-      },
-      contentContainer: {
-        flex: 1,
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden',
-      },
-    };
-  }
-
   render() {
     const {
       children,
       bottomNavigationSelectedIndex,
+      darkMode,
       fullPageLoading,
       snackbarOpen,
       snackbarMessage,
@@ -152,7 +109,8 @@ class App extends React.Component {
       onRequestCloseSnackbar,
       onBottomNavigationButtonClick,
     } = this.props;
-    const styles = this.getStyles();
+
+    console.log(darkMode);
 
     const theme = createMuiTheme({
       palette: createPalette({
@@ -164,14 +122,14 @@ class App extends React.Component {
 
     return (
       <MuiThemeProvider theme={theme}>
-        <div className="fs" style={styles.container}>
+        <div className="fs">
           {getPlatform() === 'mac' ? (
-            <div style={styles.fakeTitleBar}>
+            <div>
               Modern Translator
             </div>
           ) : null}
-          <div style={styles.contentContainer}>
-            {fullPageLoading ? (<div style={styles.fullPageProgress}>
+          <div>
+            {fullPageLoading ? (<div>
               <CircularProgress size={80} thickness={5} />
             </div>) : null}
             <Alert />

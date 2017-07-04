@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import shortid from 'shortid';
 
-import { fullWhite, minBlack, grey100, fullBlack, darkWhite } from 'material-ui/styles/colors';
+import { fullWhite } from 'material-ui/styles/colors';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
@@ -90,141 +90,7 @@ class Home extends React.Component {
     }
   }
 
-  getStyles() {
-    const { darkMode, fullscreenInputBox } = this.props;
-
-    return {
-      container: {
-        flex: 1,
-        backgroundColor: darkMode ? fullBlack : grey100,
-        display: 'flex',
-        overflow: 'hidden',
-        position: 'relative',
-      },
-      anotherContainer: {
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100%',
-      },
-      innerContainer: {
-        flex: 1,
-        display: 'flex',
-      },
-      languageTitle: {
-        flex: 1,
-        overflow: 'hidden',
-        margin: 0,
-        paddingTop: 0,
-        letterSpacing: 0,
-        fontSize: 16,
-        // fontWeight: appBar.titleFontWeight,
-        // color: appBar.textColor,
-        // height: appBar.height,
-        // lineHeight: `${appBar.height}px`,
-        display: 'flex',
-        justifyContent: 'center',
-        WebkitUserSelect: 'none',
-        cursor: 'pointer',
-      },
-      languageTitleSpan: {
-        float: 'left',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-      },
-      dropDownIconContainer: {
-        // height: appBar.height,
-        // paddingTop: (appBar.height - iconButtonSize) / 2,
-        float: 'left',
-      },
-      swapIconContainer: {
-        // paddingTop: (appBar.height - iconButtonSize) / 2,
-      },
-      inputContainer: {
-        flex: fullscreenInputBox ? 1 : null,
-        height: fullscreenInputBox ? null : 140,
-        display: 'flex',
-        flexDirection: 'column',
-        zIndex: 1000,
-      },
-      textarea: {
-        border: 0,
-        color: (darkMode) ? fullWhite : null,
-        backgroundColor: (darkMode) ? '#303030' : fullWhite,
-        outline: 0,
-        margin: 0,
-        padding: 12,
-        fontSize: 16,
-        boxSizing: 'border-box',
-        flex: 1,
-      },
-      controllerContainer: {
-        flexBasis: 48,
-        paddingLeft: 8,
-        paddingRight: 8,
-        boxSizing: 'border-box',
-        borderTop: `1px solid ${(darkMode) ? darkWhite : minBlack}`,
-      },
-      controllerContainerLeft: {
-        float: 'left',
-      },
-      controllerContainerRight: {
-        float: 'right',
-        paddingTop: 6,
-      },
-      resultContainer: {
-        display: fullscreenInputBox ? 'none' : null,
-        flex: 1,
-        padding: '0 12px 12px 12px',
-        boxSizing: 'border-box',
-        overflowY: 'auto',
-        WebkitOverflowScrolling: 'touch',
-      },
-      progressContainer: {
-        flex: 1,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      inputRoman: {
-        // color: textColor,
-        margin: '6px 0 0 0',
-        padding: 0,
-        fontSize: 14,
-      },
-      suggestion: {
-        // color: textColor,
-        margin: '12px 0 0 0',
-        padding: 0,
-        fontSize: 15,
-      },
-      suggestionSvg: {
-        float: 'left',
-        height: 24,
-        width: 24,
-      },
-      suggestionSpan: {
-        lineHeight: '24px',
-      },
-      outputText: {
-        fontSize: 16,
-        whiteSpace: 'pre-wrap',
-      },
-      outputRoman: {
-        fontSize: 15,
-      },
-      outputCard: {
-        marginTop: 12,
-      },
-      googleCopyright: {
-        fontSize: 14,
-        textAlign: 'right',
-      },
-    };
-  }
-
-  renderOutput(styles) {
+  renderOutput() {
     const {
       output,
       screenWidth,
@@ -250,7 +116,7 @@ class Home extends React.Component {
     switch (output.status) {
       case 'loading': {
         return (
-          <div style={styles.progressContainer} >
+          <div>
             <CircularProgress size={80} thickness={5} />
           </div>
         );
@@ -308,15 +174,15 @@ class Home extends React.Component {
         const hasDict = output.inputDict !== undefined && output.outputDict !== undefined;
 
         return (
-          <div style={styles.resultContainer}>
+          <div>
             {output.inputRoman ? (
-              <p className="text-selectable" style={styles.inputRoman}>{output.inputRoman}</p>
+              <p className="text-selectable">{output.inputRoman}</p>
             ) : null}
 
             {output.suggestedInputLang ? (
-              <p style={styles.suggestion}>
-                <ActionLightbulbOutline style={styles.suggestionSvg} />
-                <span style={styles.suggestionSpan}>
+              <p>
+                <ActionLightbulbOutline />
+                <span>
                   <span>{strings.translateFrom}: </span>
                   <a
                     role="button"
@@ -330,9 +196,9 @@ class Home extends React.Component {
             ) : null}
 
             {output.suggestedInputText ? (
-              <p style={styles.suggestion}>
-                <ActionLightbulbOutline style={styles.suggestionSvg} />
-                <span style={styles.suggestionSpan}>
+              <p>
+                <ActionLightbulbOutline />
+                <span>
                   <span>{strings.didYouMean}: </span>
                   <a
                     role="button"
@@ -345,7 +211,7 @@ class Home extends React.Component {
               </p>
             ) : null}
 
-            <Card initiallyExpanded style={styles.outputCard}>
+            <Card initiallyExpanded>
               <CardHeader
                 title={strings[output.outputLang]}
                 subtitle={strings.fromLanguage.replace('{1}', strings[output.inputLang])}
@@ -354,13 +220,12 @@ class Home extends React.Component {
               />
               <CardContent
                 className="text-selectable"
-                style={styles.outputText}
                 lang={toCountryRemovedLanguage(output.outputLang)}
               >
                 {output.outputText}
               </CardContent>
               {output.outputRoman ? (
-                <CardContent className="text-selectable" style={styles.outputRoman}>
+                <CardContent className="text-selectable">
                   {output.outputRoman}
                 </CardContent>
               ) : null}
@@ -410,7 +275,7 @@ class Home extends React.Component {
                 </CardContent>
               ) : null}
             </Card>
-            <p style={styles.googleCopyright}>{strings.translatedByGoogle}</p>
+            <p>{strings.translatedByGoogle}</p>
           </div>
         );
       }
@@ -440,7 +305,6 @@ class Home extends React.Component {
       onFullscreenButtonClick,
       onAnotherContainerClick,
     } = this.props;
-    const styles = this.getStyles();
 
     const controllers = [
       {
@@ -505,29 +369,27 @@ class Home extends React.Component {
     const tooltipPos = fullscreenInputBox ? 'top-center' : 'bottom-center';
 
     return (
-      <div style={styles.container}>
+      <div>
         <div
           role="button"
           tabIndex={0}
-          style={styles.anotherContainer}
           onClick={() => onAnotherContainerClick(imeMode)}
         >
           <AppBar
             showMenuIconButton={false}
             title={(
-              <div style={styles.innerContainer}>
+              <div>
                 <div
                   role="button"
                   tabIndex={0}
-                  style={styles.languageTitle}
                   onClick={() => onLanguageClick('inputLang')}
                 >
-                  <span style={styles.languageTitleSpan}>{strings[inputLang]}</span>
-                  <div style={styles.dropDownIconContainer}>
+                  <span>{strings[inputLang]}</span>
+                  <div>
                     <NavigationArrowDropDown color={fullWhite} />
                   </div>
                 </div>
-                <div style={styles.swapIconContainer}>
+                <div>
                   <IconButton disabled={!isOutput(inputLang)} onClick={onSwapButtonClick}>
                     <ActionSwapHoriz color={fullWhite} />
                   </IconButton>
@@ -535,22 +397,20 @@ class Home extends React.Component {
                 <div
                   role="button"
                   tabIndex={0}
-                  style={styles.languageTitle}
                   onClick={() => onLanguageClick('outputLang')}
                 >
-                  <span style={styles.languageTitleSpan}>{strings[outputLang]}</span>
-                  <div style={styles.dropDownIconContainer}>
+                  <span>{strings[outputLang]}</span>
+                  <div>
                     <NavigationArrowDropDown color={fullWhite} />
                   </div>
                 </div>
               </div>
             )}
           />
-          <Paper zDepth={2} style={styles.inputContainer}>
+          <Paper zDepth={2}>
             <textarea
               className="text-selectable"
               lang={toCountryRemovedLanguage(inputLang)}
-              style={styles.textarea}
               placeholder={strings.typeSomethingHere}
               autoComplete="off"
               autoCorrect="off"
@@ -563,8 +423,8 @@ class Home extends React.Component {
               onChange={onInputText}
               value={inputText}
             />
-            <div style={styles.controllerContainer}>
-              <div style={styles.controllerContainerLeft}>
+            <div>
+              <div>
                 {
                   controllers.slice(0, maxVisibleIcon)
                   .map(({ icon, tooltip, onClick }) => (
@@ -602,7 +462,7 @@ class Home extends React.Component {
                   </EnhancedMenu>
                 ) : null}
               </div>
-              <div style={styles.controllerContainerRight}>
+              <div>
                 <Button
                   raised
                   label={strings.translate}
@@ -612,7 +472,7 @@ class Home extends React.Component {
               </div>
             </div>
           </Paper>
-          {this.renderOutput(styles)}
+          {this.renderOutput()}
         </div>
         {imeMode === 'handwriting' ? <Handwriting /> : null}
         {imeMode === 'speech' ? <Speech /> : null}
@@ -623,7 +483,6 @@ class Home extends React.Component {
 
 Home.propTypes = {
   screenWidth: PropTypes.number,
-  darkMode: PropTypes.bool,
   translateWhenPressingEnter: PropTypes.bool,
   preventScreenLock: PropTypes.bool,
   inputLang: PropTypes.string,
