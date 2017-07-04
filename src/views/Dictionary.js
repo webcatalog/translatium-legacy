@@ -1,14 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import shortid from 'shortid';
 
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Divider from 'material-ui/Divider';
+import Typography from 'material-ui/Typography';
 
 import { updateInputLang, updateOutputLang } from '../actions/settings';
 import { updateInputText } from '../actions/home';
 
+const styleSheet = createStyleSheet('Dictionary', {
+  container: {
+    marginTop: 32,
+  },
+  inline: {
+    display: 'inline',
+  },
+  divider: {
+    marginTop: 8,
+    marginBottom: 8,
+  },
+  title: {
+    marginTop: 16,
+    marginBottom: 8,
+  },
+  subheading: {
+    marginTop: 8,
+  },
+});
+
 const Dictionary = ({
+  classes,
   output,
   strings,
   onLinkClick,
@@ -17,18 +39,22 @@ const Dictionary = ({
   const outputLang = output.outputLang;
 
   return (
-    <div className="dictionary">
+    <div className={classes.container}>
       {output.inputDict ? (
         <div>
           {output.inputDict[1] ? (
             <div key="definitions">
-              <h1>{strings.definitions}</h1>
+              <Typography type="title" align="left" className={classes.title}>
+                {strings.definitions}
+              </Typography>
               {output.inputDict[1].map(x => (
-                <div key={shortid.generate()}>
-                  <h2>{strings[x[0]]}</h2>
+                <div key={`definition_section_${x[0]}`}>
+                  <Typography type="subheading" align="left" className={classes.subheading}>
+                    {strings[x[0]]}
+                  </Typography>
                   {x[1].map((y, v) => (
-                    <div key={shortid.generate()}>
-                      <h3 style={{ display: 'inline' }}>
+                    <div key={`definition_${y[0]}`}>
+                      <Typography type="body1" align="left">
                         <span>{v + 1}. </span>
                         <a
                           role="button"
@@ -37,7 +63,7 @@ const Dictionary = ({
                         >
                           {y[0]}
                         </a>
-                      </h3>
+                      </Typography>
                       {(y[2]) ? (
                         <h4>
                           {'"'}
@@ -55,20 +81,24 @@ const Dictionary = ({
                   ))}
                 </div>
               ))}
+              <Divider className={classes.divider} />
             </div>
           ) : null}
-          <Divider />
           {output.inputDict[0] ? (
             <div key="synonyms">
-              <h1>{strings.synonyms}</h1>
+              <Typography type="title" align="left" className={classes.title}>
+                {strings.synonyms}
+              </Typography>
               {output.inputDict[0].map(x => (
-                <div key={shortid.generate()}>
-                  <h2>{strings[x[0]]}</h2>
+                <div key={`synonyms_section_${x[0]}`}>
+                  <Typography type="subheading" align="left" className={classes.subheading}>
+                    {strings[x[0]]}
+                  </Typography>
                   <ul>
                     {x[1].map(wl => (
-                      <li key={shortid.generate()}>
+                      <li key={`synonyms_line_${wl.join('-')}`}>
                         {wl[0].map((word, k) => (
-                          <h3 key={shortid.generate()} style={{ display: 'inline' }}>
+                          <Typography type="body1" align="left" key={`synonyms_word_${word}`} className={classes.inline}>
                             {(k > 0) ? (<span>, </span>) : null}
                             <a
                               role="button"
@@ -77,25 +107,27 @@ const Dictionary = ({
                             >
                               {word}
                             </a>
-                          </h3>
+                          </Typography>
                         ))}
                       </li>
                     ))}
                   </ul>
                 </div>
               ))}
+              <Divider className={classes.divider} />
             </div>
           ) : null}
-          <Divider />
           {output.inputDict[2] ? (
             <div key="examples">
-              <h1>{strings.examples}</h1>
+              <Typography type="title" align="left" className={classes.title}>
+                {strings.examples}
+              </Typography>
               <div>
                 {output.inputDict[2][0].map((x, i) => {
                   const text = x[0].replace(/(<([^>]+)>)/ig, '');
                   return (
-                    <div key={shortid.generate()}>
-                      <h3>
+                    <div key={`example_${text}`}>
+                      <Typography type="body1" align="left">
                         <span>{i + 1}. </span>
                         <a
                           role="button"
@@ -104,25 +136,27 @@ const Dictionary = ({
                         >
                           {text}
                         </a>
-                      </h3>
+                      </Typography>
                     </div>
                   );
                 })}
               </div>
+              <Divider className={classes.divider} />
             </div>
           ) : null}
-          <Divider />
           {output.inputDict[3] ? (
             <div key="seeAlso">
-              <h1>{strings.seeAlso}</h1>
+              <Typography type="title" align="left" className={classes.title}>
+                {strings.seeAlso}
+              </Typography>
               <div>
                 {output.inputDict[3].map(x => (
-                  <div key={shortid.generate()}>
-                    <h3>
+                  <div key={x.join('')}>
+                    <Typography type="body1" align="left">
                       {x.map((y, j) => {
                         const text = y.replace(/(<([^>]+)>)/ig, '');
                         return (
-                          <span key={shortid.generate()} style={{ display: 'inline' }}>
+                          <span key={`seeAlso_${text}`} style={{ display: 'inline' }}>
                             {(j > 0) ? (<span>, </span>) : null}
                             <a
                               role="button"
@@ -134,7 +168,7 @@ const Dictionary = ({
                           </span>
                         );
                       })}
-                    </h3>
+                    </Typography>
                   </div>
                 ))}
               </div>
@@ -145,14 +179,18 @@ const Dictionary = ({
 
       {output.outputDict ? (
         <div>
-          <Divider />
-          <h1>{strings.translations}</h1>
+          <Divider className={classes.divider} />
+          <Typography type="title" align="left" className={classes.title}>
+            {strings.translations}
+          </Typography>
           {output.outputDict.map(x => (
             <div key={x[0]}>
-              <h2>{strings[x[0]]}</h2>
+              <Typography type="subheading" align="left" className={classes.subheading}>
+                {strings[x[0]]}
+              </Typography>
               {x[2].map((y, j) => (
-                <div key={shortid.generate()}>
-                  <h3>
+                <div key={y[0]}>
+                  <Typography type="body1" align="left">
                     <span>{j + 1}. </span>
                     {y[4] ? (<span>{y[4]} </span>) : null}
                     <a
@@ -162,11 +200,11 @@ const Dictionary = ({
                     >
                       {y[0]}
                     </a>
-                  </h3>
+                  </Typography>
                   {y[1] ? (
-                    <h4 style={{ display: 'inline' }}>
+                    <Typography type="body2" align="left" className={classes.inline}>
                       {y[1].map((meaning, k) => (
-                        <span key={shortid.generate()}>
+                        <span key={meaning}>
                           {(k > 0) ? (<span>, </span>) : null}
                           <a
                             role="button"
@@ -177,7 +215,7 @@ const Dictionary = ({
                           </a>
                         </span>
                       ))}
-                    </h4>
+                    </Typography>
                   ) : null}
                 </div>
               ))}
@@ -190,8 +228,8 @@ const Dictionary = ({
 };
 
 Dictionary.propTypes = {
-  // eslint-disable-next-line
-  output: PropTypes.object,
+  classes: PropTypes.object.isRequired,
+  output: PropTypes.object.isRequired,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
   onLinkClick: PropTypes.func.isRequired,
 };
@@ -210,4 +248,4 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(
   mapStateToProps, mapDispatchToProps,
-)(Dictionary);
+)(withStyles(styleSheet)(Dictionary));

@@ -95,7 +95,7 @@ class Speech extends React.Component {
       <Paper elevation={2} className={classes.container}>
         {(speechStatus === 'recognizing')
         ? (
-          <CircularProgress size={80} thickness={5} />
+          <CircularProgress size={80} />
         ) :
           (
             <div>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
@@ -15,6 +16,39 @@ import Divider from 'material-ui/Divider';
 import { deletePhrasebookItem, loadPhrasebook } from '../actions/phrasebook';
 import { loadOutput } from '../actions/home';
 
+const styleSheet = createStyleSheet('Phrasebook', {
+  emptyContainer: {
+    flex: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  emptyInnerContainer: {
+    textAlign: 'center',
+    // color: textColor,
+  },
+  bigIcon: {
+    height: 96,
+    width: 96,
+  },
+  container: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  listContainer: {
+    flex: 1,
+    overflowY: 'auto',
+    WebkitOverflowScrolling: 'touch',
+    padding: 0,
+    boxSizing: 'border-box',
+  },
+  progress: {
+    marginTop: 12,
+  },
+});
 
 class Phrasebook extends React.Component {
   componentDidMount() {
@@ -38,54 +72,18 @@ class Phrasebook extends React.Component {
     if (this.listView) this.listView.onscroll = null;
   }
 
-  getStyles() {
-    return {
-      emptyContainer: {
-        flex: 1,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      emptyInnerContainer: {
-        textAlign: 'center',
-        // color: textColor,
-      },
-      bigIcon: {
-        height: 96,
-        width: 96,
-      },
-      container: {
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'relative',
-        overflow: 'hidden',
-      },
-      listContainer: {
-        flex: 1,
-        overflowY: 'auto',
-        WebkitOverflowScrolling: 'touch',
-        padding: 0,
-        boxSizing: 'border-box',
-      },
-      progress: {
-        marginTop: 12,
-      },
-    };
-  }
-
   render() {
     const {
+      classes,
       phrasebookItems,
       phrasebookLoading,
       strings,
       onDeleteButtonClick,
       onItemClick,
     } = this.props;
-    const styles = this.getStyles();
 
     return (
-      <div style={styles.container}>
+      <div className={classes.container}>
         <AppBar position="static">
           <Toolbar>
             <Typography type="title" color="inherit">{strings.phrasebook}</Typography>
@@ -94,9 +92,9 @@ class Phrasebook extends React.Component {
         {(() => {
           if (phrasebookItems.length < 1 && phrasebookLoading === false) {
             return (
-              <div style={styles.emptyContainer}>
-                <div style={styles.emptyInnerContainer}>
-                  <ToggleStar style={styles.bigIcon} />
+              <div className={classes.emptyContainer}>
+                <div className={classes.emptyInnerContainer}>
+                  <ToggleStar className={classes.bigIcon} />
                   <Typography type="headline">{strings.phrasebookIsEmpty}</Typography>
                 </div>
               </div>
@@ -104,7 +102,7 @@ class Phrasebook extends React.Component {
           }
 
           return (
-            <div style={styles.listContainer} ref={(c) => { this.listView = c; }}>
+            <div className={classes.listContainer} ref={(c) => { this.listView = c; }}>
               <List>
                 {phrasebookItems.map(item => [(
                   <ListItem
@@ -132,7 +130,7 @@ class Phrasebook extends React.Component {
                 ), <Divider inset={false} />])}
               </List>
               {phrasebookLoading === true ? (
-                <LinearProgress mode="indeterminate" style={styles.progress} />
+                <LinearProgress mode="indeterminate" className={classes.progress} />
               ) : null}
             </div>
           );
@@ -143,14 +141,15 @@ class Phrasebook extends React.Component {
 }
 
 Phrasebook.propTypes = {
-  phrasebookItems: PropTypes.arrayOf(PropTypes.object),
   canLoadMore: PropTypes.bool,
+  classes: PropTypes.object.isRequired,
+  onDeleteButtonClick: PropTypes.func.isRequired,
+  onEnterPhrasebook: PropTypes.func.isRequired,
+  onItemClick: PropTypes.func.isRequired,
+  onLoadMore: PropTypes.func.isRequired,
+  phrasebookItems: PropTypes.arrayOf(PropTypes.object),
   phrasebookLoading: PropTypes.bool,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
-  onItemClick: PropTypes.func.isRequired,
-  onEnterPhrasebook: PropTypes.func.isRequired,
-  onDeleteButtonClick: PropTypes.func.isRequired,
-  onLoadMore: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -172,4 +171,4 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(
   mapStateToProps, mapDispatchToProps,
-)(Phrasebook);
+)(withStyles(styleSheet)(Phrasebook));

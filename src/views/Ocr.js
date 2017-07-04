@@ -4,17 +4,60 @@ import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 import shortid from 'shortid';
 
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Button from 'material-ui/Button';
-import NavigationClose from 'material-ui-icons/Close';
+import CloseIcon from 'material-ui-icons/Close';
 import NavigationMoreVert from 'material-ui-icons/MoreVert';
-// import Slider from 'material-ui/Slider';
 import { MenuItem } from 'material-ui/Menu';
 import IconButton from 'material-ui/IconButton';
+import ZoomInIcon from 'material-ui-icons/ZoomIn';
+import ZoomOutIcon from 'material-ui-icons/ZoomOut';
 
 import EnhancedMenu from './EnhancedMenu';
 
 import { setZoomLevel, setMode } from '../actions/ocr';
 import { loadOutput } from '../actions/home';
+
+const styleSheet = createStyleSheet('Ocr', {
+  container: {
+    flex: 1,
+    display: 'flex',
+    position: 'relative',
+    backgroundColor: '#000',
+    overflow: 'hidden',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 16,
+    left: 16,
+    zIndex: 100,
+  },
+  zoomContainer: {
+    flex: 1,
+    overflow: 'auto',
+    padding: 56,
+    boxSizing: 'border-box',
+    position: 'relative',
+  },
+  moreButton: {
+    position: 'absolute',
+    bottom: 16,
+    right: 16,
+    zIndex: 100,
+  },
+  minusButton: {
+    position: 'absolute',
+    bottom: 16,
+    left: 16,
+    zIndex: 100,
+  },
+  plusButton: {
+    position: 'absolute',
+    bottom: 16,
+    left: 96,
+    zIndex: 100,
+  },
+});
 
 class Ocr extends React.Component {
   componentDidMount() {
@@ -23,52 +66,15 @@ class Ocr extends React.Component {
     }
   }
 
-  getStyles() {
-    return {
-      container: {
-        flex: 1,
-        display: 'flex',
-        position: 'relative',
-        backgroundColor: '#000',
-        overflow: 'hidden',
-      },
-      closeButton: {
-        position: 'absolute',
-        top: 16,
-        left: 16,
-        zIndex: 100,
-      },
-      zoomContainer: {
-        flex: 1,
-        overflow: 'auto',
-        padding: 56,
-        boxSizing: 'border-box',
-        position: 'relative',
-      },
-      moreButton: {
-        position: 'absolute',
-        bottom: 16,
-        right: 16,
-        zIndex: 100,
-      },
-      slider: {
-        width: 200,
-        position: 'absolute',
-        bottom: -16,
-        left: 16,
-      },
-    };
-  }
-
   render() {
-    const styles = this.getStyles();
     const {
+      classes,
       inputLang,
       outputLang,
       ocr,
       strings,
       onCloseClick,
-      onZoomSliderChange,
+      onUpdateZoomLevel,
       onModeMenuItemClick,
       onTextOnlyMenuItemClick,
     } = this.props;
@@ -78,16 +84,16 @@ class Ocr extends React.Component {
     const lineVarName = `${ocr.mode || 'output'}Lines`;
 
     return (
-      <div style={styles.container}>
+      <div className={classes.container}>
         <Button
           fab
           dense
-          style={styles.closeButton}
+          className={classes.closeButton}
           onClick={onCloseClick}
         >
-          <NavigationClose />
+          <CloseIcon />
         </Button>
-        <div style={styles.zoomContainer}>
+        <div className={classes.zoomContainer}>
           <div
             style={{ zoom: ocr.zoomLevel || 1, position: 'relative' }}
           >
@@ -111,21 +117,29 @@ class Ocr extends React.Component {
             <img src={ocr.imageUrl} alt="" />
           </div>
         </div>
-        <div
-          style={styles.slider}
-          min={0.1}
-          max={3}
-          step={0.1}
-          defaultValue={1}
-          value={ocr.zoomLevel}
-          onChange={onZoomSliderChange}
-        />
+        <Button
+          fab
+          dense
+          className={classes.minusButton}
+          onClick={() => {
+            if (ocr.zoomLevel < 0.1) return;
+            onUpdateZoomLevel(ocr.zoomLevel - 0.1 || 1);
+          }}
+        >
+          <ZoomOutIcon />
+        </Button>
+        <Button
+          fab
+          dense
+          className={classes.plusButton}
+          onClick={() => onUpdateZoomLevel(ocr.zoomLevel + 0.1 || 1)}
+        >
+          <ZoomInIcon />
+        </Button>
         <EnhancedMenu
           id="ocrMore"
-          iconButtonElement={(
-            <IconButton
-              style={styles.moreButton}
-            >
+          buttonElement={(
+            <IconButton className={classes.moreButton}>
               <NavigationMoreVert color="#fff" />
             </IconButton>
           )}
@@ -149,13 +163,13 @@ class Ocr extends React.Component {
 }
 
 Ocr.propTypes = {
+  classes: PropTypes.object.isRequired,
   inputLang: PropTypes.string,
   outputLang: PropTypes.string,
-  // eslint-disable-next-line
-  ocr: PropTypes.object,
+  ocr: PropTypes.object.isRequired,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
   onCloseClick: PropTypes.func.isRequired,
-  onZoomSliderChange: PropTypes.func.isRequired,
+  onUpdateZoomLevel: PropTypes.func.isRequired,
   onModeMenuItemClick: PropTypes.func.isRequired,
   onTextOnlyMenuItemClick: PropTypes.func.isRequired,
 };
@@ -169,7 +183,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onCloseClick: () => dispatch(goBack()),
-  onZoomSliderChange: (event, value) => dispatch(setZoomLevel(value)),
+  onUpdateZoomLevel: value => dispatch(setZoomLevel(value)),
   onModeMenuItemClick: (currentMode) => {
     let newMode;
     if (currentMode === 'input') newMode = 'output';
@@ -187,4 +201,4 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(
   mapStateToProps, mapDispatchToProps,
-)(Ocr);
+)(withStyles(styleSheet)(Ocr));

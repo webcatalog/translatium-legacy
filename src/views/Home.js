@@ -34,7 +34,6 @@ import ToggleStarBorder from 'material-ui-icons/StarBorder';
 import ToggleStar from 'material-ui-icons/Star';
 import NavigationFullscreen from 'material-ui-icons/Fullscreen';
 import NavigationFullscreenExit from 'material-ui-icons/FullscreenExit';
-import ActionLightbulbOutline from 'material-ui-icons/LightbulbOutline';
 
 import EnhancedMenu from './EnhancedMenu';
 
@@ -75,6 +74,7 @@ const styleSheet = createStyleSheet('Home', theme => ({
     display: 'flex',
     overflow: 'hidden',
     position: 'relative',
+    backgroundColor: theme.palette.background.contentFrame,
   },
   anotherContainer: {
     flex: 1,
@@ -140,6 +140,15 @@ const styleSheet = createStyleSheet('Home', theme => ({
   },
   languageTitle: {
     flex: 1,
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+  },
+  googleCopyright: {
+    color: theme.palette.text.disabled,
+  },
+  inputRoman: {
+    marginTop: 8,
   },
 }));
 
@@ -194,7 +203,7 @@ class Home extends React.Component {
       case 'loading': {
         return (
           <div className={classes.progressContainer} >
-            <CircularProgress size={80} thickness={5} />
+            <CircularProgress size={80} />
           </div>
         );
       }
@@ -258,12 +267,17 @@ class Home extends React.Component {
             )}
           >
             {output.inputRoman && (
-              <p className={classNames('text-selectable', classes.inputRoman)}>{output.inputRoman}</p>
+              <Typography
+                type="body1"
+                className={classNames('text-selectable', classes.inputRoman)}
+              >
+                {output.inputRoman}
+              </Typography>
             )}
 
             {output.suggestedInputLang && (
               <Typography
-                type="body"
+                type="body1"
                 align="left"
               >
                 <span role="img" aria-label="">💡</span>
@@ -281,10 +295,9 @@ class Home extends React.Component {
 
             {output.suggestedInputText ? (
               <Typography
-                type="body"
+                type="body1"
                 align="left"
               >
-                <ActionLightbulbOutline />
                 <span>
                   <span role="img" aria-label="">💡</span>
                   <span>{strings.didYouMean}:&#32;</span>
@@ -305,8 +318,6 @@ class Home extends React.Component {
                 className="text-selectable"
 
               >
-                <Typography type="body1">{strings[output.outputLang]}</Typography>
-
                 <Typography
                   type="headline"
                   lang={toCountryRemovedLanguage(output.outputLang)}
@@ -363,6 +374,7 @@ class Home extends React.Component {
             <Typography
               type="body2"
               align="right"
+              className={classes.googleCopyright}
             >
               {strings.translatedByGoogle}
             </Typography>

@@ -28,7 +28,7 @@ const styleSheet = createStyleSheet('App', theme => ({
     height: '100vh',
     width: '100vw',
     overflow: 'hidden',
-    backgroundColor: theme.palette.background.status,
+    backgroundColor: theme.palette.background.contentFrame,
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
@@ -155,7 +155,7 @@ class App extends React.Component {
         ) : null}
         <div className={classes.contentContainer}>
           {fullPageLoading ? (<div className={classes.fullPageProgress}>
-            <CircularProgress size={80} thickness={5} />
+            <CircularProgress size={80} />
           </div>) : null}
           <Alert />
           <Snackbar

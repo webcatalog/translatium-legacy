@@ -5,15 +5,13 @@ import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 
 import { withStyles, createStyleSheet } from 'material-ui/styles';
-import List, { ListItem, ListItemText, ListItemIcon } from 'material-ui/List';
-import ActionHistory from 'material-ui-icons/History';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
-import NavigationClose from 'material-ui-icons/Close';
+import CloseIcon from 'material-ui-icons/Close';
 
 import {
   getInputLanguages,
@@ -83,59 +81,37 @@ class LanguageList extends React.Component {
     });
     */
 
-    const groups = {};
-    languages.forEach((x) => {
-      const y = strings[x][0];
-      if (groups[y]) {
-        groups[y].push(x);
-      } else {
-        groups[y] = [x];
-      }
-    });
-
-
     return (
       <div className={classes.container}>
         <AppBar position="static">
           <Toolbar>
             <IconButton color="contrast" onClick={onCloseClick}>
-              <NavigationClose />
+              <CloseIcon />
             </IconButton>
             <Typography type="title" color="inherit">
               {type === 'inputLang' ? strings.chooseAnInputLanguage : strings.chooseAnOutputLanguage}
             </Typography>
           </Toolbar>
         </AppBar>
-        <div className={classes.listContainer}>
-          <List>
-            {recentLanguages.map((langId, i) => (
-              <ListItem
-                key={`lang_recent_${langId}`}
-                onClick={() => onLanguageClick(type, langId)}
-              >
-                {i === 0 && (
-                  <ListItemIcon>
-                    <Avatar><ActionHistory /></Avatar>
-                  </ListItemIcon>
-                )}
-                <ListItemText primary={strings[langId]} />
-              </ListItem>
-            ))}
-            <Divider />
-          </List>
-          {Object.keys(groups).map(groupId => [(
-            <List key={groupId}>
-              {groups[groupId].map(langId => (
-                <ListItem
-                  key={`lang_${langId}`}
-                  onClick={() => onLanguageClick(type, langId)}
-                >
-                  <ListItemText primary={strings[langId]} />
-                </ListItem>
-              ))}
-            </List>
-          ), <Divider inset />])}
-        </div>
+        <List className={classes.listContainer}>
+          {recentLanguages.map(langId => (
+            <ListItem
+              key={`lang_recent_${langId}`}
+              onClick={() => onLanguageClick(type, langId)}
+            >
+              <ListItemText primary={strings[langId]} />
+            </ListItem>
+          ))}
+          <Divider />
+          {languages.map(langId => (
+            <ListItem
+              key={`lang_${langId}`}
+              onClick={() => onLanguageClick(type, langId)}
+            >
+              <ListItemText primary={strings[langId]} />
+            </ListItem>
+          ))}
+        </List>
       </div>
     );
   }

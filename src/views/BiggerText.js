@@ -3,80 +3,97 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 
+import { withStyles, createStyleSheet } from 'material-ui/styles';
+import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-import NavigationClose from 'material-ui-icons/Close';
-// import Slider from 'material-ui/Slider';
+import CloseIcon from 'material-ui-icons/Close';
+import ZoomInIcon from 'material-ui-icons/ZoomIn';
+import ZoomOutIcon from 'material-ui-icons/ZoomOut';
 
 import { updateSetting } from '../actions/settings';
 
-class BiggerText extends React.Component {
-  getStyles() {
-    const { biggerTextFontSize } = this.props;
+const styleSheet = createStyleSheet('Settings', {
+  container: {
+    flex: 1,
+    padding: '16px 16px 16px 16px',
+    boxSizing: 'border-box',
+    overflow: 'auto',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 16,
+    left: 16,
+    zIndex: 100,
+  },
+  minusButton: {
+    position: 'absolute',
+    top: 16,
+    left: 96,
+    zIndex: 100,
+  },
+  plusButton: {
+    position: 'absolute',
+    top: 16,
+    left: 176,
+    zIndex: 100,
+  },
+  textContainer: {
+    marginTop: 80,
+    lineHeight: 'normal',
+  },
+});
 
-    return {
-      container: {
-        flex: 1,
-        padding: '64px 16px 16px 16px',
-        boxSizing: 'border-box',
-        // color: muiTheme.baseTheme.palette.textColor,
-        overflow: 'auto',
-      },
-      closeButton: {
-        position: 'absolute',
-        top: 16,
-        left: 16,
-        zIndex: 100,
-      },
-      slider: {
-        width: 'calc(100% - 32px)',
-        position: 'absolute',
-        bottom: -16,
-        left: 16,
-      },
-      textContainer: {
-        fontSize: biggerTextFontSize,
-        lineHeight: 'normal',
-      },
-    };
-  }
+const BiggerText = (props) => {
+  const {
+    biggerTextFontSize,
+    classes,
+    onCloseClick,
+    onUpdateBiggerTextFontSize,
+    text,
+  } = props;
 
-  render() {
-    const styles = this.getStyles();
-    const { text, biggerTextFontSize, onSliderChange, onCloseClick } = this.props;
-    return (
-      <div style={styles.container}>
-        <Button
-          color="primary"
-          fab
-          dense
-          style={styles.closeButton}
-          onClick={onCloseClick}
-        >
-          <NavigationClose />
-        </Button>
-        <span style={styles.textContainer}>
-          {text}
-        </span>
-        <div
-          key="NeedToChange"
-          style={styles.slider}
-          min={20}
-          max={200}
-          step={1}
-          defaultValue={biggerTextFontSize}
-          value={biggerTextFontSize}
-          onChange={onSliderChange}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={classes.container}>
+      <Button
+        fab
+        dense
+        className={classes.closeButton}
+        onClick={onCloseClick}
+      >
+        <CloseIcon />
+      </Button>
+      <Button
+        fab
+        dense
+        className={classes.minusButton}
+        onClick={() => {
+          if (biggerTextFontSize < 10) return;
+          onUpdateBiggerTextFontSize(biggerTextFontSize - 5);
+        }}
+      >
+        <ZoomOutIcon />
+      </Button>
+      <Button
+        fab
+        dense
+        className={classes.plusButton}
+        onClick={() => onUpdateBiggerTextFontSize(biggerTextFontSize + 5)}
+      >
+        <ZoomInIcon />
+      </Button>
+      <Typography className={classes.textContainer} style={{ fontSize: biggerTextFontSize }}>
+        {text}
+      </Typography>
+    </div>
+  );
+};
 
 BiggerText.propTypes = {
+  classes: PropTypes.object.isRequired,
   text: PropTypes.string,
   biggerTextFontSize: PropTypes.number,
   onCloseClick: PropTypes.func.isRequired,
-  onSliderChange: PropTypes.func.isRequired,
+  onUpdateBiggerTextFontSize: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -86,9 +103,9 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
   onCloseClick: () => dispatch(goBack()),
-  onSliderChange: (event, value) => dispatch(updateSetting('biggerTextFontSize', value)),
+  onUpdateBiggerTextFontSize: value => dispatch(updateSetting('biggerTextFontSize', value)),
 });
 
 export default connect(
   mapStateToProps, mapDispatchToProps,
-)(BiggerText);
+)(withStyles(styleSheet)(BiggerText));
