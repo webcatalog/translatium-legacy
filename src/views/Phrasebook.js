@@ -129,9 +129,9 @@ class Phrasebook extends React.Component {
                   </ListItem>
                 ), <Divider inset={false} />])}
               </List>
-              {phrasebookLoading === true ? (
+              {phrasebookLoading && (
                 <LinearProgress mode="indeterminate" className={classes.progress} />
-              ) : null}
+              )}
             </div>
           );
         })()}

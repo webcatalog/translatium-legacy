@@ -94,22 +94,19 @@ class Speech extends React.Component {
     return (
       <Paper elevation={2} className={classes.container}>
         {(speechStatus === 'recognizing')
-        ? (
-          <CircularProgress size={80} />
-        ) :
-          (
-            <div>
-              <Button
-                fab
-                color="primary"
-                onClick={() => onControlButtonClick(speechStatus)}
-              >
-                {speechStatus === 'recording' ? <AVStop /> : <AVMic />}
-              </Button>
-              <div className={classNames(classes.wave1, { [classes.wave1Recording]: speechStatus === 'recording' })} />
-              <div className={classNames(classes.wave2, { [classes.wave2Recording]: speechStatus === 'recording' })} />
-            </div>
-          )}
+        ? <CircularProgress size={80} />
+        :
+          (<div>
+            <Button
+              fab
+              color="primary"
+              onClick={() => onControlButtonClick(speechStatus)}
+            >
+              {speechStatus === 'recording' ? <AVStop /> : <AVMic />}
+            </Button>
+            <div className={classNames(classes.wave1, { [classes.wave1Recording]: speechStatus === 'recording' })} />
+            <div className={classNames(classes.wave2, { [classes.wave2Recording]: speechStatus === 'recording' })} />
+          </div>)}
       </Paper>
     );
   }

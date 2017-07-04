@@ -100,9 +100,9 @@ class History extends React.Component {
                   </ListItem>
                 ), <Divider inset={false} />])}
               </List>
-              {historyLoading === true ? (
+              {historyLoading && (
                 <LinearProgress mode="indeterminate" className={classes.progress} />
-              ) : null}
+              )}
             </div>
           );
         })()}

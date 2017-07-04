@@ -293,31 +293,26 @@ class Home extends React.Component {
               </Typography>
             )}
 
-            {output.suggestedInputText ? (
+            {output.suggestedInputText && (
               <Typography
                 type="body1"
                 align="left"
               >
-                <span>
-                  <span role="img" aria-label="">💡</span>
-                  <span>{strings.didYouMean}:&#32;</span>
-                  <a
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => onSuggestedInputTextClick(output.suggestedInputText)}
-                  >
-                    {output.suggestedInputText}
-                  </a>
-                  <span>&#32;?&#32;</span>
-                </span>
+                <span role="img" aria-label="">💡</span>
+                <span>{strings.didYouMean}:&#32;</span>
+                <a
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => onSuggestedInputTextClick(output.suggestedInputText)}
+                >
+                  {output.suggestedInputText}
+                </a>
+                <span>&#32;?&#32;</span>
               </Typography>
-            ) : null}
+            )}
 
             <Card className={classes.outputCard}>
-              <CardContent
-                className="text-selectable"
-
-              >
+              <CardContent className="text-selectable">
                 <Typography
                   type="headline"
                   lang={toCountryRemovedLanguage(output.outputLang)}
@@ -326,11 +321,11 @@ class Home extends React.Component {
                   {output.outputText}
                 </Typography>
 
-                {output.outputRoman ? (
+                {output.outputRoman && (
                   <Typography type="body1" className={classNames('text-selectable', classes.pos)}>
                     {output.outputRoman}
                   </Typography>
-                ) : null}
+                )}
               </CardContent>
               <CardActions>
                 {controllers.slice(0, maxVisibleIcon).map(({ icon, tooltip, onClick }) => (
@@ -342,7 +337,7 @@ class Home extends React.Component {
                     {icon}
                   </IconButton>
                 ))}
-                {(showMoreButton) ? (
+                {showMoreButton && (
                   <EnhancedMenu
                     id="homeMore2"
                     buttonElement={(
@@ -367,7 +362,7 @@ class Home extends React.Component {
                         ))
                     }
                   </EnhancedMenu>
-                ) : null}
+                )}
               </CardActions>
             </Card>
             {hasDict && <Dictionary output={output} />}
@@ -540,7 +535,7 @@ class Home extends React.Component {
                     {icon}
                   </IconButton>
                 ))}
-                {(showMoreButton) ? (
+                {showMoreButton && (
                   <EnhancedMenu
                     id="homeMore"
                     buttonElement={(
@@ -563,7 +558,7 @@ class Home extends React.Component {
                         ))
                     }
                   </EnhancedMenu>
-                ) : null}
+                )}
               </div>
               <div className={classes.controllerContainerRight}>
                 <Button raised color="primary" onClick={onTranslateButtonClick}>

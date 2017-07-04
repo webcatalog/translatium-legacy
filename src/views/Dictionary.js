@@ -40,9 +40,9 @@ const Dictionary = ({
 
   return (
     <div className={classes.container}>
-      {output.inputDict ? (
+      {output.inputDict && (
         <div>
-          {output.inputDict[1] ? (
+          {output.inputDict[1] && (
             <div key="definitions">
               <Typography type="title" align="left" className={classes.title}>
                 {strings.definitions}
@@ -64,7 +64,7 @@ const Dictionary = ({
                           {y[0]}
                         </a>
                       </Typography>
-                      {(y[2]) ? (
+                      {(y[2]) && (
                         <h4>
                           {'"'}
                           <a
@@ -76,15 +76,15 @@ const Dictionary = ({
                           </a>
                           {'"'}
                         </h4>
-                      ) : null}
+                      )}
                     </div>
                   ))}
                 </div>
               ))}
               <Divider className={classes.divider} />
             </div>
-          ) : null}
-          {output.inputDict[0] ? (
+          )}
+          {output.inputDict[0] && (
             <div key="synonyms">
               <Typography type="title" align="left" className={classes.title}>
                 {strings.synonyms}
@@ -99,7 +99,7 @@ const Dictionary = ({
                       <li key={`synonyms_line_${wl.join('-')}`}>
                         {wl[0].map((word, k) => (
                           <Typography type="body1" align="left" key={`synonyms_word_${word}`} className={classes.inline}>
-                            {(k > 0) ? (<span>, </span>) : null}
+                            {(k > 0) && (<span>, </span>)}
                             <a
                               role="button"
                               tabIndex="0"
@@ -116,8 +116,8 @@ const Dictionary = ({
               ))}
               <Divider className={classes.divider} />
             </div>
-          ) : null}
-          {output.inputDict[2] ? (
+          )}
+          {output.inputDict[2] && (
             <div key="examples">
               <Typography type="title" align="left" className={classes.title}>
                 {strings.examples}
@@ -143,8 +143,8 @@ const Dictionary = ({
               </div>
               <Divider className={classes.divider} />
             </div>
-          ) : null}
-          {output.inputDict[3] ? (
+          )}
+          {output.inputDict[3] && (
             <div key="seeAlso">
               <Typography type="title" align="left" className={classes.title}>
                 {strings.seeAlso}
@@ -157,7 +157,7 @@ const Dictionary = ({
                         const text = y.replace(/(<([^>]+)>)/ig, '');
                         return (
                           <span key={`seeAlso_${text}`} style={{ display: 'inline' }}>
-                            {(j > 0) ? (<span>, </span>) : null}
+                            {(j > 0) && (<span>, </span>)}
                             <a
                               role="button"
                               tabIndex="0"
@@ -173,11 +173,11 @@ const Dictionary = ({
                 ))}
               </div>
             </div>
-          ) : null}
+          )}
         </div>
-      ) : null}
+      )}
 
-      {output.outputDict ? (
+      {output.outputDict && (
         <div>
           <Divider className={classes.divider} />
           <Typography type="title" align="left" className={classes.title}>
@@ -192,7 +192,7 @@ const Dictionary = ({
                 <div key={y[0]}>
                   <Typography type="body1" align="left">
                     <span>{j + 1}. </span>
-                    {y[4] ? (<span>{y[4]} </span>) : null}
+                    {y[4] && (<span>{y[4]} </span>)}
                     <a
                       role="button"
                       tabIndex="0"
@@ -201,11 +201,11 @@ const Dictionary = ({
                       {y[0]}
                     </a>
                   </Typography>
-                  {y[1] ? (
+                  {y[1] && (
                     <Typography type="body2" align="left" className={classes.inline}>
                       {y[1].map((meaning, k) => (
                         <span key={meaning}>
-                          {(k > 0) ? (<span>, </span>) : null}
+                          {(k > 0) && (<span>, </span>)}
                           <a
                             role="button"
                             tabIndex="0"
@@ -216,13 +216,13 @@ const Dictionary = ({
                         </span>
                       ))}
                     </Typography>
-                  ) : null}
+                  )}
                 </div>
               ))}
             </div>
           ))}
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

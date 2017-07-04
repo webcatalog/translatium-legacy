@@ -148,15 +148,17 @@ class App extends React.Component {
 
     return (
       <div className={classes.container}>
-        {getPlatform() === 'mac' ? (
+        {getPlatform() === 'mac' && (
           <div className={classes.fakeTitleBar}>
             Modern Translator
           </div>
-        ) : null}
+        )}
         <div className={classes.contentContainer}>
-          {fullPageLoading ? (<div className={classes.fullPageProgress}>
-            <CircularProgress size={80} />
-          </div>) : null}
+          {fullPageLoading && (
+            <div className={classes.fullPageProgress}>
+              <CircularProgress size={80} />
+            </div>
+          )}
           <Alert />
           <Snackbar
             open={snackbarOpen}
@@ -165,7 +167,7 @@ class App extends React.Component {
             onRequestClose={() => onRequestCloseSnackbar()}
           />
           {children}
-          {bottomNavigationSelectedIndex > -1 && shouldShowBottomNav ? (
+          {bottomNavigationSelectedIndex > -1 && shouldShowBottomNav && (
             <Paper elevation={2} style={{ zIndex: 1000 }}>
               <BottomNavigation index={bottomNavigationSelectedIndex} showLabels>
                 <BottomNavigationButton
@@ -185,7 +187,7 @@ class App extends React.Component {
                 />
               </BottomNavigation>
             </Paper>
-          ) : null}
+          )}
           {getPlatform() === 'windows' && shouldShowAd && <Ad />}
         </div>
       </div>

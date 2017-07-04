@@ -208,16 +208,16 @@ const Settings = (props) => {
             </ListItem>
           )}
           <Divider />
-          {getPlatform() === 'windows' ? (
+          {getPlatform() === 'windows' && (
             <ListItem onClick={() => openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k')} role="link">
               <ListItemText primary={strings.rateWindowsStore} />
             </ListItem>
-          ) : null}
-          {getPlatform() === 'mac' ? (
+          )}
+          {getPlatform() === 'mac' && (
             <ListItem onClick={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')} role="link">
               <ListItemText primary={strings.rateMacAppStore} />
             </ListItem>
-          ) : null}
+          )}
           <ListItem onClick={() => openUri('https://moderntranslator.com/support')} role="link">
             <ListItemText primary={strings.help} />
           </ListItem>
