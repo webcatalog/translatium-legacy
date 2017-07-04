@@ -11,7 +11,7 @@ import { updateInputText } from '../actions/home';
 const Dictionary = ({
   output,
   strings,
-  onLinkTouchTap,
+  onLinkClick,
 }) => {
   const inputLang = output.inputLang;
   const outputLang = output.outputLang;
@@ -31,7 +31,9 @@ const Dictionary = ({
                       <h3 style={{ display: 'inline' }}>
                         <span>{v + 1}. </span>
                         <a
-                          onTouchTap={() => onLinkTouchTap(inputLang, outputLang, y[0])}
+                          role="button"
+                          tabIndex="0"
+                          onClick={() => onLinkClick(inputLang, outputLang, y[0])}
                         >
                           {y[0]}
                         </a>
@@ -40,7 +42,9 @@ const Dictionary = ({
                         <h4>
                           {'"'}
                           <a
-                            onTouchTap={() => onLinkTouchTap(inputLang, outputLang, y[2])}
+                            role="button"
+                            tabIndex="0"
+                            onClick={() => onLinkClick(inputLang, outputLang, y[2])}
                           >
                             {y[2]}
                           </a>
@@ -67,7 +71,9 @@ const Dictionary = ({
                           <h3 key={shortid.generate()} style={{ display: 'inline' }}>
                             {(k > 0) ? (<span>, </span>) : null}
                             <a
-                              onTouchTap={() => onLinkTouchTap(inputLang, outputLang, word)}
+                              role="button"
+                              tabIndex="0"
+                              onClick={() => onLinkClick(inputLang, outputLang, word)}
                             >
                               {word}
                             </a>
@@ -92,7 +98,9 @@ const Dictionary = ({
                       <h3>
                         <span>{i + 1}. </span>
                         <a
-                          onTouchTap={() => onLinkTouchTap(inputLang, outputLang, text)}
+                          role="button"
+                          tabIndex="0"
+                          onClick={() => onLinkClick(inputLang, outputLang, text)}
                         >
                           {text}
                         </a>
@@ -117,7 +125,9 @@ const Dictionary = ({
                           <span key={shortid.generate()} style={{ display: 'inline' }}>
                             {(j > 0) ? (<span>, </span>) : null}
                             <a
-                              onTouchTap={() => onLinkTouchTap(inputLang, outputLang, text)}
+                              role="button"
+                              tabIndex="0"
+                              onClick={() => onLinkClick(inputLang, outputLang, text)}
                             >
                               {text}
                             </a>
@@ -146,7 +156,9 @@ const Dictionary = ({
                     <span>{j + 1}. </span>
                     {y[4] ? (<span>{y[4]} </span>) : null}
                     <a
-                      onTouchTap={() => onLinkTouchTap(inputLang, outputLang, y[0])}
+                      role="button"
+                      tabIndex="0"
+                      onClick={() => onLinkClick(inputLang, outputLang, y[0])}
                     >
                       {y[0]}
                     </a>
@@ -157,7 +169,9 @@ const Dictionary = ({
                         <span key={shortid.generate()}>
                           {(k > 0) ? (<span>, </span>) : null}
                           <a
-                            onTouchTap={() => onLinkTouchTap(outputLang, inputLang, meaning)}
+                            role="button"
+                            tabIndex="0"
+                            onClick={() => onLinkClick(outputLang, inputLang, meaning)}
                           >
                             {meaning}
                           </a>
@@ -179,11 +193,11 @@ Dictionary.propTypes = {
   // eslint-disable-next-line
   output: PropTypes.object,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
-  onLinkTouchTap: PropTypes.func.isRequired,
+  onLinkClick: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  onLinkTouchTap: (inputLang, outputLang, inputText) => {
+  onLinkClick: (inputLang, outputLang, inputText) => {
     dispatch(updateInputLang(inputLang));
     dispatch(updateOutputLang(outputLang));
     dispatch(updateInputText(inputText));

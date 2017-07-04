@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import Button from 'material-ui/Button';
 
 import { closeAlert } from '../actions/alert';
 
 const Alert = ({ alertMessage, strings, onClose }) => {
   const actions = [
-    <FlatButton
+    <Button
       label="Close"
       primary
-      onTouchTap={onClose}
+      onClick={onClose}
     />,
   ];
 

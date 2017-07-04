@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { replace, goBack } from 'react-router-redux';
 
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import { red500, grey100, fullWhite, fullBlack } from 'material-ui/styles/colors';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import createPalette from 'material-ui/styles/palette';
+
+import { blue, red, pink, fullWhite, fullBlack } from 'material-ui/styles/colors';
+import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
+import { CircularProgress } from 'material-ui/Progress';
+import ActionHome from 'material-ui-icons/Home';
+import ActionSettings from 'material-ui-icons/Settings';
 import Paper from 'material-ui/Paper';
-import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
-import ActionHome from 'material-ui/svg-icons/action/home';
-import ToggleStar from 'material-ui/svg-icons/toggle/star';
-import ActionSettings from 'material-ui/svg-icons/action/settings';
-import CircularProgress from 'material-ui/CircularProgress';
 import Snackbar from 'material-ui/Snackbar';
+import ToggleStar from 'material-ui-icons/Star';
 
 import { screenResize } from '../actions/screen';
 import { updateImeMode } from '../actions/home';
@@ -29,32 +29,6 @@ import Ad from './Ad';
 /* global window */
 
 class App extends React.Component {
-  getChildContext() {
-    const { darkMode, primaryColorId } = this.props;
-
-    const pTheme = darkMode ? darkBaseTheme : lightBaseTheme;
-
-    const { primary1Color, primary2Color } = colorPairs[primaryColorId];
-
-    pTheme.palette.primary1Color = primary1Color;
-    pTheme.palette.primary2Color = primary2Color;
-    pTheme.palette.accent1Color = red500;
-    if (darkMode) {
-      pTheme.palette.accent2Color = primary1Color;
-    }
-    pTheme.palette.alternateTextColor = fullWhite;
-
-    const muiTheme = getMuiTheme(pTheme);
-    muiTheme.appBar.height = 56;
-    muiTheme.bottomNavigation.selectedFontSize = muiTheme.bottomNavigation.unselectedFontSize;
-    muiTheme.snackbar.backgroundColor = darkMode ? fullBlack : grey100;
-    muiTheme.snackbar.textColor = darkMode ? fullWhite : fullBlack;
-
-    return {
-      muiTheme,
-    };
-  }
-
   componentDidMount() {
     if (getPlatform() === 'windows') {
       this.setAppTitleBar(this.props.primaryColorId);
@@ -176,53 +150,63 @@ class App extends React.Component {
       shouldShowBottomNav,
       strings,
       onRequestCloseSnackbar,
-      onBottomNavigationItemClick,
+      onBottomNavigationButtonClick,
     } = this.props;
     const styles = this.getStyles();
 
+    const theme = createMuiTheme({
+      palette: createPalette({
+        primary: blue, // Purple and green play nicely together.
+        accent: pink,
+        error: red,
+      }),
+    });
+
     return (
-      <div className="fs" style={styles.container}>
-        {getPlatform() === 'mac' ? (
-          <div style={styles.fakeTitleBar}>
-            Modern Translator
-          </div>
-        ) : null}
-        <div style={styles.contentContainer}>
-          {fullPageLoading ? (<div style={styles.fullPageProgress}>
-            <CircularProgress size={80} thickness={5} />
-          </div>) : null}
-          <Alert />
-          <Snackbar
-            open={snackbarOpen}
-            message={snackbarMessage || ''}
-            autoHideDuration={4000}
-            onRequestClose={() => onRequestCloseSnackbar()}
-          />
-          {children}
-          {bottomNavigationSelectedIndex > -1 && shouldShowBottomNav ? (
-            <Paper zDepth={2} style={{ zIndex: 1000 }}>
-              <BottomNavigation selectedIndex={bottomNavigationSelectedIndex}>
-                <BottomNavigationItem
-                  label={strings.home}
-                  icon={<ActionHome />}
-                  onTouchTap={() => onBottomNavigationItemClick('/')}
-                />
-                <BottomNavigationItem
-                  label={strings.phrasebook}
-                  icon={<ToggleStar />}
-                  onTouchTap={() => onBottomNavigationItemClick('/phrasebook')}
-                />
-                <BottomNavigationItem
-                  label={strings.settings}
-                  icon={<ActionSettings />}
-                  onTouchTap={() => onBottomNavigationItemClick('/settings')}
-                />
-              </BottomNavigation>
-            </Paper>
+      <MuiThemeProvider theme={theme}>
+        <div className="fs" style={styles.container}>
+          {getPlatform() === 'mac' ? (
+            <div style={styles.fakeTitleBar}>
+              Modern Translator
+            </div>
           ) : null}
-          {getPlatform() === 'windows' && shouldShowAd ? <Ad /> : null}
+          <div style={styles.contentContainer}>
+            {fullPageLoading ? (<div style={styles.fullPageProgress}>
+              <CircularProgress size={80} thickness={5} />
+            </div>) : null}
+            <Alert />
+            <Snackbar
+              open={snackbarOpen}
+              message={snackbarMessage || ''}
+              autoHideDuration={4000}
+              onRequestClose={() => onRequestCloseSnackbar()}
+            />
+            {children}
+            {bottomNavigationSelectedIndex > -1 && shouldShowBottomNav ? (
+              <Paper zDepth={2} style={{ zIndex: 1000 }}>
+                <BottomNavigation index={bottomNavigationSelectedIndex} showLabels>
+                  <BottomNavigationButton
+                    label={strings.home}
+                    icon={<ActionHome />}
+                    onClick={() => onBottomNavigationButtonClick('/')}
+                  />
+                  <BottomNavigationButton
+                    label={strings.phrasebook}
+                    icon={<ToggleStar />}
+                    onClick={() => onBottomNavigationButtonClick('/phrasebook')}
+                  />
+                  <BottomNavigationButton
+                    label={strings.settings}
+                    icon={<ActionSettings />}
+                    onClick={() => onBottomNavigationButtonClick('/settings')}
+                  />
+                </BottomNavigation>
+              </Paper>
+            ) : null}
+            {getPlatform() === 'windows' && shouldShowAd ? <Ad /> : null}
+          </div>
         </div>
-      </div>
+      </MuiThemeProvider>
     );
   }
 }
@@ -239,7 +223,7 @@ App.propTypes = {
   shouldShowBottomNav: PropTypes.bool.isRequired,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
   onResize: PropTypes.func.isRequired,
-  onBottomNavigationItemClick: PropTypes.func.isRequired,
+  onBottomNavigationButtonClick: PropTypes.func.isRequired,
   onBackClick: PropTypes.func.isRequired,
   onRequestCloseSnackbar: PropTypes.func.isRequired,
 };
@@ -287,7 +271,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(screenResize(window.innerWidth));
     dispatch(updateImeMode(null));
   },
-  onBottomNavigationItemClick: pathname => dispatch(replace(pathname)),
+  onBottomNavigationButtonClick: pathname => dispatch(replace(pathname)),
   onBackClick: () => dispatch(goBack()),
   onRequestCloseSnackbar: () => dispatch(closeSnackbar()),
 });

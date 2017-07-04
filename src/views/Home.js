@@ -9,32 +9,32 @@ import { fullWhite, minBlack, grey100, fullBlack, darkWhite } from 'material-ui/
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
-import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
-import CircularProgress from 'material-ui/CircularProgress';
-import EnhancedButton from 'material-ui/internal/EnhancedButton';
+import Card, { CardActions, CardHeader, CardContent } from 'material-ui/Card';
+import { MenuItem } from 'material-ui/Menu';
+import Button from 'material-ui/Button';
+import { CircularProgress } from 'material-ui/Progress';
 
-import ActionSwapHoriz from 'material-ui/svg-icons/action/swap-horiz';
-import NavigationArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
-import ContentClear from 'material-ui/svg-icons/content/clear';
-import NavigationMoreVert from 'material-ui/svg-icons/navigation/more-vert';
-import ImageCameraAlt from 'material-ui/svg-icons/image/camera-alt';
-import ImageImage from 'material-ui/svg-icons/image/image';
-import ContentGesture from 'material-ui/svg-icons/content/gesture';
-import AVVolumeUp from 'material-ui/svg-icons/av/volume-up';
-import AVStop from 'material-ui/svg-icons/av/stop';
-import AVMic from 'material-ui/svg-icons/av/mic';
-import ContentCopy from 'material-ui/svg-icons/content/content-copy';
-import SocialShare from 'material-ui/svg-icons/social/share';
-import EditorFormatSize from 'material-ui/svg-icons/editor/format-size';
-import ActionSwapVert from 'material-ui/svg-icons/action/swap-vert';
-import ToggleStarBorder from 'material-ui/svg-icons/toggle/star-border';
-import ToggleStar from 'material-ui/svg-icons/toggle/star';
-import NavigationFullscreen from 'material-ui/svg-icons/navigation/fullscreen';
-import NavigationFullscreenExit from 'material-ui/svg-icons/navigation/fullscreen-exit';
-import ActionLightbulbOutline from 'material-ui/svg-icons/action/lightbulb-outline';
+import ActionSwapHoriz from 'material-ui-icons/SwapHoriz';
+import NavigationArrowDropDown from 'material-ui-icons/ArrowDropDown';
+import ContentClear from 'material-ui-icons/Clear';
+import NavigationMoreVert from 'material-ui-icons/MoreVert';
+import ImageCameraAlt from 'material-ui-icons/CameraAlt';
+import ImageImage from 'material-ui-icons/Image';
+import ContentGesture from 'material-ui-icons/Gesture';
+import AVVolumeUp from 'material-ui-icons/VolumeUp';
+import AVStop from 'material-ui-icons/Stop';
+import AVMic from 'material-ui-icons/Mic';
+import ContentCopy from 'material-ui-icons/ContentCopy';
+import SocialShare from 'material-ui-icons/Share';
+import EditorFormatSize from 'material-ui-icons/FormatSize';
+import ActionSwapVert from 'material-ui-icons/SwapVert';
+import ToggleStarBorder from 'material-ui-icons/StarBorder';
+import ToggleStar from 'material-ui-icons/Star';
+import NavigationFullscreen from 'material-ui-icons/Fullscreen';
+import NavigationFullscreenExit from 'material-ui-icons/FullscreenExit';
+import ActionLightbulbOutline from 'material-ui-icons/LightbulbOutline';
+
+import EnhancedMenu from './EnhancedMenu';
 
 import {
   isOutput,
@@ -93,16 +93,6 @@ class Home extends React.Component {
   getStyles() {
     const { darkMode, fullscreenInputBox } = this.props;
 
-    const {
-      palette: {
-        textColor,
-      },
-      appBar,
-      button: {
-        iconButtonSize,
-      },
-    } = this.context.muiTheme;
-
     return {
       container: {
         flex: 1,
@@ -128,10 +118,10 @@ class Home extends React.Component {
         paddingTop: 0,
         letterSpacing: 0,
         fontSize: 16,
-        fontWeight: appBar.titleFontWeight,
-        color: appBar.textColor,
-        height: appBar.height,
-        lineHeight: `${appBar.height}px`,
+        // fontWeight: appBar.titleFontWeight,
+        // color: appBar.textColor,
+        // height: appBar.height,
+        // lineHeight: `${appBar.height}px`,
         display: 'flex',
         justifyContent: 'center',
         WebkitUserSelect: 'none',
@@ -144,12 +134,12 @@ class Home extends React.Component {
         textOverflow: 'ellipsis',
       },
       dropDownIconContainer: {
-        height: appBar.height,
-        paddingTop: (appBar.height - iconButtonSize) / 2,
+        // height: appBar.height,
+        // paddingTop: (appBar.height - iconButtonSize) / 2,
         float: 'left',
       },
       swapIconContainer: {
-        paddingTop: (appBar.height - iconButtonSize) / 2,
+        // paddingTop: (appBar.height - iconButtonSize) / 2,
       },
       inputContainer: {
         flex: fullscreenInputBox ? 1 : null,
@@ -198,13 +188,13 @@ class Home extends React.Component {
         justifyContent: 'center',
       },
       inputRoman: {
-        color: textColor,
+        // color: textColor,
         margin: '6px 0 0 0',
         padding: 0,
         fontSize: 14,
       },
       suggestion: {
-        color: textColor,
+        // color: textColor,
         margin: '12px 0 0 0',
         padding: 0,
         fontSize: 15,
@@ -242,12 +232,12 @@ class Home extends React.Component {
       chinaMode,
       textToSpeechPlaying,
       strings,
-      onListenButtonTouchTap,
-      onTogglePhrasebookTouchTap,
-      onSwapOutputButtonTouchTap,
-      onBiggerTextButtonTouchTap,
-      onSuggestedInputLangTouchTap,
-      onSuggestedInputTextTouchTap,
+      onListenButtonClick,
+      onTogglePhrasebookClick,
+      onSwapOutputButtonClick,
+      onBiggerTextButtonClick,
+      onSuggestedInputLangClick,
+      onSuggestedInputTextClick,
       onRequestCopyToClipboard,
     } = this.props;
 
@@ -270,12 +260,12 @@ class Home extends React.Component {
           {
             icon: output.phrasebookId ? <ToggleStar /> : <ToggleStarBorder />,
             tooltip: output.phrasebookId ? strings.removeFromPhrasebook : strings.addToPhrasebook,
-            onTouchTap: onTogglePhrasebookTouchTap,
+            onClick: onTogglePhrasebookClick,
           },
           {
             icon: <ActionSwapVert />,
             tooltip: strings.swap,
-            onTouchTap: () => onSwapOutputButtonTouchTap(
+            onClick: () => onSwapOutputButtonClick(
               output.outputLang,
               output.inputLang,
               output.outputText,
@@ -284,12 +274,12 @@ class Home extends React.Component {
           {
             icon: <EditorFormatSize />,
             tooltip: strings.biggerText,
-            onTouchTap: () => onBiggerTextButtonTouchTap(output.outputText),
+            onClick: () => onBiggerTextButtonClick(output.outputText),
           },
           {
             icon: <ContentCopy />,
             tooltip: strings.copy,
-            onTouchTap: () => onRequestCopyToClipboard(output.outputText, strings),
+            onClick: () => onRequestCopyToClipboard(output.outputText, strings),
           },
         ];
 
@@ -297,8 +287,8 @@ class Home extends React.Component {
           controllers.unshift({
             icon: textToSpeechPlaying ? <AVStop /> : <AVVolumeUp />,
             tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
-            onTouchTap: () =>
-              onListenButtonTouchTap(
+            onClick: () =>
+              onListenButtonClick(
                 textToSpeechPlaying, output.outputLang, output.outputText, chinaMode,
               ),
           });
@@ -308,7 +298,7 @@ class Home extends React.Component {
           controllers.push({
             icon: <SocialShare />,
             tooltip: strings.share,
-            onTouchTap: () => shareText(output.outputText),
+            onClick: () => shareText(output.outputText),
           });
         }
 
@@ -328,7 +318,11 @@ class Home extends React.Component {
                 <ActionLightbulbOutline style={styles.suggestionSvg} />
                 <span style={styles.suggestionSpan}>
                   <span>{strings.translateFrom}: </span>
-                  <a onTouchTap={() => onSuggestedInputLangTouchTap(output.suggestedInputLang)}>
+                  <a
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => onSuggestedInputLangClick(output.suggestedInputLang)}
+                  >
                     {strings[output.suggestedInputLang]}
                   </a> ?
                 </span>
@@ -340,7 +334,11 @@ class Home extends React.Component {
                 <ActionLightbulbOutline style={styles.suggestionSvg} />
                 <span style={styles.suggestionSpan}>
                   <span>{strings.didYouMean}: </span>
-                  <a onTouchTap={() => onSuggestedInputTextTouchTap(output.suggestedInputText)}>
+                  <a
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => onSuggestedInputTextClick(output.suggestedInputText)}
+                  >
                     {output.suggestedInputText}
                   </a> ?
                 </span>
@@ -354,35 +352,36 @@ class Home extends React.Component {
                 actAsExpander={hasDict}
                 showExpandableButton={hasDict}
               />
-              <CardText
+              <CardContent
                 className="text-selectable"
                 style={styles.outputText}
                 lang={toCountryRemovedLanguage(output.outputLang)}
               >
                 {output.outputText}
-              </CardText>
+              </CardContent>
               {output.outputRoman ? (
-                <CardText className="text-selectable" style={styles.outputRoman}>
+                <CardContent className="text-selectable" style={styles.outputRoman}>
                   {output.outputRoman}
-                </CardText>
+                </CardContent>
               ) : null}
               <CardActions>
                 {
                   controllers.slice(0, maxVisibleIcon)
-                  .map(({ icon, tooltip, onTouchTap }) => (
+                  .map(({ icon, tooltip, onClick }) => (
                     <IconButton
                       tooltip={tooltip}
                       tooltipPosition="bottom-center"
                       key={shortid.generate()}
-                      onTouchTap={onTouchTap}
+                      onClick={onClick}
                     >
                       {icon}
                     </IconButton>
                   ))
                 }
                 {(showMoreButton) ? (
-                  <IconMenu
-                    iconButtonElement={(
+                  <EnhancedMenu
+                    id="homeMore2"
+                    buttonElement={(
                       <IconButton tooltip={strings.more} tooltipPosition="bottom-center">
                         <NavigationMoreVert />
                       </IconButton>
@@ -393,22 +392,22 @@ class Home extends React.Component {
                     {
                       controllers
                         .slice(maxVisibleIcon, controllers.length)
-                        .map(({ icon, tooltip, onTouchTap }) => (
+                        .map(({ icon, tooltip, onClick }) => (
                           <MenuItem
                             primaryText={tooltip}
                             leftIcon={icon}
                             key={shortid.generate()}
-                            onTouchTap={onTouchTap}
+                            onClick={onClick}
                           />
                         ))
                     }
-                  </IconMenu>
+                  </EnhancedMenu>
                 ) : null}
               </CardActions>
               {hasDict ? (
-                <CardText expandable>
+                <CardContent expandable>
                   <Dictionary output={output} />
-                </CardText>
+                </CardContent>
               ) : null}
             </Card>
             <p style={styles.googleCopyright}>{strings.translatedByGoogle}</p>
@@ -428,18 +427,18 @@ class Home extends React.Component {
       textToSpeechPlaying,
       fullscreenInputBox,
       strings,
-      onLanguageTouchTap,
-      onSwapButtonTouchTap,
+      onLanguageClick,
+      onSwapButtonClick,
       onKeyDown, onInputText,
-      onClearButtonTouchTap,
-      onListenButtonTouchTap,
-      onWriteButtonTouchTap,
-      onSpeakButtonTouchTap,
-      onTranslateButtonTouchTap,
-      onOpenImageButtonTouchTap,
-      onCameraButtonTouchTap,
-      onFullscreenButtonTouchTap,
-      onAnotherContainerTouchTap,
+      onClearButtonClick,
+      onListenButtonClick,
+      onWriteButtonClick,
+      onSpeakButtonClick,
+      onTranslateButtonClick,
+      onOpenImageButtonClick,
+      onCameraButtonClick,
+      onFullscreenButtonClick,
+      onAnotherContainerClick,
     } = this.props;
     const styles = this.getStyles();
 
@@ -447,7 +446,7 @@ class Home extends React.Component {
       {
         icon: <ContentClear />,
         tooltip: strings.clear,
-        onTouchTap: onClearButtonTouchTap,
+        onClick: onClearButtonClick,
       },
     ];
 
@@ -455,7 +454,7 @@ class Home extends React.Component {
       controllers.push({
         icon: textToSpeechPlaying ? <AVStop /> : <AVVolumeUp />,
         tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
-        onTouchTap: () => onListenButtonTouchTap(textToSpeechPlaying, inputLang, inputText),
+        onClick: () => onListenButtonClick(textToSpeechPlaying, inputLang, inputText),
       });
     }
 
@@ -463,7 +462,7 @@ class Home extends React.Component {
       controllers.push({
         icon: <AVMic />,
         tooltip: strings.speak,
-        onTouchTap: onSpeakButtonTouchTap,
+        onClick: onSpeakButtonClick,
       });
     }
 
@@ -471,7 +470,7 @@ class Home extends React.Component {
       controllers.push({
         icon: <ContentGesture />,
         tooltip: strings.draw,
-        onTouchTap: onWriteButtonTouchTap,
+        onClick: onWriteButtonClick,
       });
     }
 
@@ -479,14 +478,14 @@ class Home extends React.Component {
       controllers.push({
         icon: <ImageImage />,
         tooltip: strings.openImageFile,
-        onTouchTap: onOpenImageButtonTouchTap,
+        onClick: onOpenImageButtonClick,
       });
     }
 
     controllers.push({
       icon: fullscreenInputBox ? <NavigationFullscreenExit /> : <NavigationFullscreen />,
       tooltip: fullscreenInputBox ? strings.exitFullscreen : strings.fullscreen,
-      onTouchTap: onFullscreenButtonTouchTap,
+      onClick: onFullscreenButtonClick,
     });
 
     if (getPlatform() === 'windows') {
@@ -494,7 +493,7 @@ class Home extends React.Component {
         controllers.splice(controllers.length - 2, 0, {
           icon: <ImageCameraAlt />,
           tooltip: strings.camera,
-          onTouchTap: onCameraButtonTouchTap,
+          onClick: onCameraButtonClick,
         });
       }
     }
@@ -507,28 +506,43 @@ class Home extends React.Component {
 
     return (
       <div style={styles.container}>
-        <div style={styles.anotherContainer} onTouchTap={() => onAnotherContainerTouchTap(imeMode)}>
+        <div
+          role="button"
+          tabIndex={0}
+          style={styles.anotherContainer}
+          onClick={() => onAnotherContainerClick(imeMode)}
+        >
           <AppBar
             showMenuIconButton={false}
             title={(
               <div style={styles.innerContainer}>
-                <EnhancedButton style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('inputLang')} tabIndex={0}>
+                <div
+                  role="button"
+                  tabIndex={0}
+                  style={styles.languageTitle}
+                  onClick={() => onLanguageClick('inputLang')}
+                >
                   <span style={styles.languageTitleSpan}>{strings[inputLang]}</span>
                   <div style={styles.dropDownIconContainer}>
                     <NavigationArrowDropDown color={fullWhite} />
                   </div>
-                </EnhancedButton>
+                </div>
                 <div style={styles.swapIconContainer}>
-                  <IconButton disabled={!isOutput(inputLang)} onTouchTap={onSwapButtonTouchTap}>
+                  <IconButton disabled={!isOutput(inputLang)} onClick={onSwapButtonClick}>
                     <ActionSwapHoriz color={fullWhite} />
                   </IconButton>
                 </div>
-                <EnhancedButton style={styles.languageTitle} onTouchTap={() => onLanguageTouchTap('outputLang')} tabIndex={0}>
+                <div
+                  role="button"
+                  tabIndex={0}
+                  style={styles.languageTitle}
+                  onClick={() => onLanguageClick('outputLang')}
+                >
                   <span style={styles.languageTitleSpan}>{strings[outputLang]}</span>
                   <div style={styles.dropDownIconContainer}>
                     <NavigationArrowDropDown color={fullWhite} />
                   </div>
-                </EnhancedButton>
+                </div>
               </div>
             )}
           />
@@ -545,7 +559,7 @@ class Home extends React.Component {
               onKeyDown={translateWhenPressingEnter ? e => onKeyDown(e) : null}
               onInput={onInputText}
               onKeyUp={onInputText}
-              onTouchTap={onInputText}
+              onClick={onInputText}
               onChange={onInputText}
               value={inputText}
             />
@@ -553,47 +567,47 @@ class Home extends React.Component {
               <div style={styles.controllerContainerLeft}>
                 {
                   controllers.slice(0, maxVisibleIcon)
-                  .map(({ icon, tooltip, onTouchTap }) => (
+                  .map(({ icon, tooltip, onClick }) => (
                     <IconButton
                       tooltip={tooltip}
                       tooltipPosition={tooltipPos}
                       key={shortid.generate()}
-                      onTouchTap={onTouchTap}
+                      onClick={onClick}
                     >
                       {icon}
                     </IconButton>
                   ))
                 }
                 {(showMoreButton) ? (
-                  <IconMenu
-                    iconButtonElement={(
+                  <EnhancedMenu
+                    id="homeMore"
+                    buttonElement={(
                       <IconButton tooltip={strings.more} tooltipPosition={tooltipPos}>
                         <NavigationMoreVert />
                       </IconButton>
                     )}
-                    anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
-                    targetOrigin={{ horizontal: 'left', vertical: 'top' }}
                   >
                     {
                       controllers
                         .slice(maxVisibleIcon, controllers.length)
-                        .map(({ icon, tooltip, onTouchTap }) => (
+                        .map(({ icon, tooltip, onClick }) => (
                           <MenuItem
                             primaryText={tooltip}
                             leftIcon={icon}
                             key={shortid.generate()}
-                            onTouchTap={onTouchTap}
+                            onClick={onClick}
                           />
                         ))
                     }
-                  </IconMenu>
+                  </EnhancedMenu>
                 ) : null}
               </div>
               <div style={styles.controllerContainerRight}>
-                <RaisedButton
+                <Button
+                  raised
                   label={strings.translate}
                   primary
-                  onTouchTap={onTranslateButtonTouchTap}
+                  onClick={onTranslateButtonClick}
                 />
               </div>
             </div>
@@ -623,24 +637,24 @@ Home.propTypes = {
   launchCount: PropTypes.number,
   chinaMode: PropTypes.bool,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
-  onLanguageTouchTap: PropTypes.func.isRequired,
-  onSwapButtonTouchTap: PropTypes.func.isRequired,
+  onLanguageClick: PropTypes.func.isRequired,
+  onSwapButtonClick: PropTypes.func.isRequired,
   onKeyDown: PropTypes.func.isRequired,
   onInputText: PropTypes.func.isRequired,
-  onClearButtonTouchTap: PropTypes.func.isRequired,
-  onListenButtonTouchTap: PropTypes.func.isRequired,
-  onTranslateButtonTouchTap: PropTypes.func.isRequired,
-  onWriteButtonTouchTap: PropTypes.func.isRequired,
-  onSpeakButtonTouchTap: PropTypes.func.isRequired,
-  onTogglePhrasebookTouchTap: PropTypes.func.isRequired,
-  onOpenImageButtonTouchTap: PropTypes.func.isRequired,
-  onCameraButtonTouchTap: PropTypes.func.isRequired,
-  onSwapOutputButtonTouchTap: PropTypes.func.isRequired,
-  onBiggerTextButtonTouchTap: PropTypes.func.isRequired,
-  onFullscreenButtonTouchTap: PropTypes.func.isRequired,
-  onSuggestedInputLangTouchTap: PropTypes.func.isRequired,
-  onSuggestedInputTextTouchTap: PropTypes.func.isRequired,
-  onAnotherContainerTouchTap: PropTypes.func.isRequired,
+  onClearButtonClick: PropTypes.func.isRequired,
+  onListenButtonClick: PropTypes.func.isRequired,
+  onTranslateButtonClick: PropTypes.func.isRequired,
+  onWriteButtonClick: PropTypes.func.isRequired,
+  onSpeakButtonClick: PropTypes.func.isRequired,
+  onTogglePhrasebookClick: PropTypes.func.isRequired,
+  onOpenImageButtonClick: PropTypes.func.isRequired,
+  onCameraButtonClick: PropTypes.func.isRequired,
+  onSwapOutputButtonClick: PropTypes.func.isRequired,
+  onBiggerTextButtonClick: PropTypes.func.isRequired,
+  onFullscreenButtonClick: PropTypes.func.isRequired,
+  onSuggestedInputLangClick: PropTypes.func.isRequired,
+  onSuggestedInputTextClick: PropTypes.func.isRequired,
+  onAnotherContainerClick: PropTypes.func.isRequired,
   onRequestCopyToClipboard: PropTypes.func.isRequired,
 };
 
@@ -662,12 +676,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLanguageTouchTap: type =>
+  onLanguageClick: type =>
     dispatch(push({
       pathname: '/language-list',
       query: { type },
     })),
-  onSwapButtonTouchTap: () => dispatch(swapLanguages()),
+  onSwapButtonClick: () => dispatch(swapLanguages()),
   onKeyDown: (e) => {
     if (e.key === 'Enter') {
       dispatch(translate(true));
@@ -683,34 +697,34 @@ const mapDispatchToProps = dispatch => ({
 
     dispatch(updateInputText(inputText, e.target.selectionStart, e.target.selectionEnd));
   },
-  onClearButtonTouchTap: () => dispatch(updateInputText('')),
-  onListenButtonTouchTap: (toStop, lang, text, chinaMode) => {
+  onClearButtonClick: () => dispatch(updateInputText('')),
+  onListenButtonClick: (toStop, lang, text, chinaMode) => {
     if (toStop) {
       dispatch(stopTextToSpeech());
       return;
     }
     dispatch(playTextToSpeech(lang, text, chinaMode));
   },
-  onTranslateButtonTouchTap: () => dispatch(translate(true)),
-  onWriteButtonTouchTap: () => dispatch(updateImeMode('handwriting')),
-  onSpeakButtonTouchTap: () => dispatch(updateImeMode('speech')),
-  onTogglePhrasebookTouchTap: () => dispatch(togglePhrasebook()),
-  onOpenImageButtonTouchTap: () => dispatch(loadImage(false)),
-  onCameraButtonTouchTap: () => dispatch(loadImage(true)),
-  onSwapOutputButtonTouchTap: (inputLang, outputLang, inputText) => {
+  onTranslateButtonClick: () => dispatch(translate(true)),
+  onWriteButtonClick: () => dispatch(updateImeMode('handwriting')),
+  onSpeakButtonClick: () => dispatch(updateImeMode('speech')),
+  onTogglePhrasebookClick: () => dispatch(togglePhrasebook()),
+  onOpenImageButtonClick: () => dispatch(loadImage(false)),
+  onCameraButtonClick: () => dispatch(loadImage(true)),
+  onSwapOutputButtonClick: (inputLang, outputLang, inputText) => {
     dispatch(updateInputLang(inputLang));
     dispatch(updateOutputLang(outputLang));
     dispatch(updateInputText(inputText));
   },
-  onBiggerTextButtonTouchTap: text =>
+  onBiggerTextButtonClick: text =>
     dispatch(push({
       pathname: '/bigger-text',
       query: { text },
     })),
-  onFullscreenButtonTouchTap: () => dispatch(toggleFullscreenInputBox()),
-  onSuggestedInputLangTouchTap: value => dispatch(updateInputLang(value)),
-  onSuggestedInputTextTouchTap: text => dispatch(updateInputText(text)),
-  onAnotherContainerTouchTap: (imeMode) => {
+  onFullscreenButtonClick: () => dispatch(toggleFullscreenInputBox()),
+  onSuggestedInputLangClick: value => dispatch(updateInputLang(value)),
+  onSuggestedInputTextClick: text => dispatch(updateInputText(text)),
+  onAnotherContainerClick: (imeMode) => {
     if (imeMode) dispatch(updateImeMode(null));
   },
   onRequestCopyToClipboard: (text, strings) => {

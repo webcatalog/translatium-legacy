@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 
-import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import ActionHistory from 'material-ui/svg-icons/action/history';
 import { List, ListItem } from 'material-ui/List';
+import { transparent } from 'material-ui/styles/colors';
+import ActionHistory from 'material-ui-icons/History';
+import AppBar from 'material-ui/AppBar';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
-import { transparent } from 'material-ui/styles/colors';
+import IconButton from 'material-ui/IconButton';
+import NavigationClose from 'material-ui-icons/Close';
 
 import {
   getInputLanguages,
@@ -53,9 +53,9 @@ class LanguageList extends React.Component {
   }
 
   handleEscKey(evt) {
-    const { onCloseTouchTap } = this.props;
+    const { onCloseClick } = this.props;
     if (evt.key === 'Escape' || evt.key === 'Esc') {
-      onCloseTouchTap();
+      onCloseClick();
     }
   }
 
@@ -64,8 +64,8 @@ class LanguageList extends React.Component {
       type,
       recentLanguages,
       strings,
-      onCloseTouchTap,
-      onLanguageTouchTap,
+      onCloseClick,
+      onLanguageClick,
     } = this.props;
     const styles = this.getStyles();
 
@@ -98,7 +98,7 @@ class LanguageList extends React.Component {
         <AppBar
           title={type === 'inputLang' ? strings.chooseAnInputLanguage : strings.chooseAnOutputLanguage}
           iconElementLeft={<IconButton><NavigationClose /></IconButton>}
-          onLeftIconButtonTouchTap={onCloseTouchTap}
+          onLeftIconButtonClick={onCloseClick}
         />
         <div style={styles.listContainer}>
           <List>
@@ -114,7 +114,7 @@ class LanguageList extends React.Component {
                   />
                 ) : null}
                 insetChildren={i > 0}
-                onTouchTap={() => onLanguageTouchTap(type, langId)}
+                onClick={() => onLanguageClick(type, langId)}
               />
             ))}
             <Divider inset />
@@ -131,7 +131,7 @@ class LanguageList extends React.Component {
                     </Avatar>
                   ) : null}
                   insetChildren={i > 0}
-                  onTouchTap={() => onLanguageTouchTap(type, langId)}
+                  onClick={() => onLanguageClick(type, langId)}
                 />
               ))}
             </List>
@@ -146,13 +146,13 @@ LanguageList.propTypes = {
   recentLanguages: PropTypes.arrayOf(PropTypes.string),
   type: PropTypes.string,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
-  onCloseTouchTap: PropTypes.func.isRequired,
-  onLanguageTouchTap: PropTypes.func.isRequired,
+  onCloseClick: PropTypes.func.isRequired,
+  onLanguageClick: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  onCloseTouchTap: () => dispatch(goBack()),
-  onLanguageTouchTap: (type, value) => {
+  onCloseClick: () => dispatch(goBack()),
+  onLanguageClick: (type, value) => {
     dispatch(goBack());
 
     if (type === 'inputLang') {

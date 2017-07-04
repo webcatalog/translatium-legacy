@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import LinearProgress from 'material-ui/LinearProgress';
+import { LinearProgress } from 'material-ui/Progress';
 import IconButton from 'material-ui/IconButton';
-import { List, ListItem } from 'material-ui/List';
-import ActionDelete from 'material-ui/svg-icons/action/delete';
+import List, { ListItem } from 'material-ui/List';
+import ActionDelete from 'material-ui-icons/Delete';
 import Divider from 'material-ui/Divider';
 
 import { deleteHistoryItem, loadHistory } from '../actions/history';
@@ -35,12 +35,6 @@ class History extends React.Component {
   }
 
   getStyles() {
-    const {
-      palette: {
-        textColor,
-      },
-    } = this.context.muiTheme;
-
     return {
       emptyContainer: {
         flex: 1,
@@ -50,7 +44,7 @@ class History extends React.Component {
       },
       emptyInnerContainer: {
         textAlign: 'center',
-        color: textColor,
+        // color: textColor,
       },
       bigIcon: {
         height: 96,
@@ -81,8 +75,8 @@ class History extends React.Component {
       historyItems,
       historyLoading,
       strings,
-      onDeleteButtonTouchTap,
-      onItemTouchTap,
+      onDeleteButtonClick,
+      onItemClick,
     } = this.props;
     const styles = this.getStyles();
 
@@ -99,13 +93,13 @@ class History extends React.Component {
                 {historyItems.map(item => [(
                   <ListItem
                     key={`historyItem_${item.historyId}`}
-                    onTouchTap={() => onItemTouchTap(item)}
+                    onClick={() => onItemClick(item)}
                     rightIconButton={(
                       <IconButton
                         tooltip={strings.removeFromHistory}
                         tooltipPosition="bottom-left"
-                        onTouchTap={() => {
-                          onDeleteButtonTouchTap(
+                        onClick={() => {
+                          onDeleteButtonClick(
                             item.historyId,
                             item.rev,
                           );
@@ -135,9 +129,9 @@ History.propTypes = {
   canLoadMore: PropTypes.bool,
   historyLoading: PropTypes.bool,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
-  onItemTouchTap: PropTypes.func.isRequired,
+  onItemClick: PropTypes.func.isRequired,
   onEnterHistory: PropTypes.func.isRequired,
-  onDeleteButtonTouchTap: PropTypes.func.isRequired,
+  onDeleteButtonClick: PropTypes.func.isRequired,
   onLoadMore: PropTypes.func.isRequired,
 };
 
@@ -153,8 +147,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onItemTouchTap: output => dispatch(loadOutput(output)),
-  onDeleteButtonTouchTap: (id, rev) => dispatch(deleteHistoryItem(id, rev)),
+  onItemClick: output => dispatch(loadOutput(output)),
+  onDeleteButtonClick: (id, rev) => dispatch(deleteHistoryItem(id, rev)),
   onEnterHistory: () => dispatch(loadHistory(true)),
   onLoadMore: () => dispatch(loadHistory()),
 });

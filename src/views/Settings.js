@@ -3,15 +3,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import AppBar from 'material-ui/AppBar';
-import MenuItem from 'material-ui/MenuItem';
-import Toggle from 'material-ui/Toggle';
-import { List, ListItem } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import IconMenu from 'material-ui/IconMenu';
-import RaisedButton from 'material-ui/RaisedButton';
-
 import { parseString as parseXMLString } from 'xml2js';
+
+import AppBar from 'material-ui/AppBar';
+import { MenuItem } from 'material-ui/Menu';
+import Switch from 'material-ui/Switch';
+import List, { ListItem } from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+import Button from 'material-ui/Button';
+
+import EnhancedMenu from './EnhancedMenu';
 
 import { toggleSetting, updateSetting } from '../actions/settings';
 import { updateShouldShowAd } from '../actions/ad';
@@ -56,8 +57,8 @@ class Settings extends React.Component {
       strings,
       onToggle,
       onSettingChange,
-      onRemoveAdTouchTap,
-      onRestorePurchaseTouchTap,
+      onRemoveAdClick,
+      onRestorePurchaseClick,
       onUpdateStrings,
     } = this.props;
     const styles = this.getStyles();
@@ -72,27 +73,31 @@ class Settings extends React.Component {
           <List>
             <ListItem
               rightIconButton={(
-                <IconMenu
-                  iconButtonElement={(
-                    <RaisedButton
+                <EnhancedMenu
+                  id="changeColor"
+                  buttonElement={(
+                    <Button
+                      raised
                       label={strings.change}
                       primary
                     />
                   )}
                 >
                   {Object.keys(colorPairs).map(colorId => (
-                    <MenuItem key={`color_${colorId}`} value={colorId} primaryText={strings[colorId]} onTouchTap={() => onSettingChange('primaryColorId', colorId)} />
+                    <MenuItem key={`color_${colorId}`} value={colorId} primaryText={strings[colorId]} onClick={() => onSettingChange('primaryColorId', colorId)} />
                   ))}
-                </IconMenu>
+                </EnhancedMenu>
               )}
               primaryText={strings.primaryColor}
               secondaryText={strings[primaryColorId]}
             />
             <ListItem
               rightIconButton={(
-                <IconMenu
-                  iconButtonElement={(
-                    <RaisedButton
+                <EnhancedMenu
+                  id="changeDisplayLanguage"
+                  buttonElement={(
+                    <Button
+                      raised
                       label={strings.change}
                       primary
                     />
@@ -103,7 +108,7 @@ class Settings extends React.Component {
                       key={`lang_${langId}`}
                       value={langId}
                       primaryText={displayLanguages[langId].displayName}
-                      onTouchTap={() => {
+                      onClick={() => {
                         if (langId !== displayLanguage) {
                           onSettingChange('displayLanguage', langId);
                           onUpdateStrings(langId);
@@ -111,7 +116,7 @@ class Settings extends React.Component {
                       }}
                     />
                   ))}
-                </IconMenu>
+                </EnhancedMenu>
               )}
               primaryText={strings.displayLanguage}
               secondaryText={displayLanguages[displayLanguage].displayName}
@@ -119,18 +124,18 @@ class Settings extends React.Component {
             <ListItem
               primaryText={strings.darkMode}
               rightToggle={(
-                <Toggle
-                  toggled={darkMode}
-                  onToggle={() => onToggle('darkMode')}
+                <Switch
+                  checked={darkMode}
+                  onChange={() => onToggle('darkMode')}
                 />
               )}
             />
             <ListItem
               primaryText={strings.realtime}
               rightToggle={(
-                <Toggle
-                  toggled={realtime}
-                  onToggle={() => onToggle('realtime')}
+                <Switch
+                  checked={realtime}
+                  onChange={() => onToggle('realtime')}
                 />
               )}
             />
@@ -138,9 +143,9 @@ class Settings extends React.Component {
               <ListItem
                 primaryText={strings.preventScreenLock}
                 rightToggle={(
-                  <Toggle
-                    toggled={preventScreenLock}
-                    onToggle={() => onToggle('preventScreenLock')}
+                  <Switch
+                    checked={preventScreenLock}
+                    onChange={() => onToggle('preventScreenLock')}
                   />
                 )}
               />
@@ -148,18 +153,18 @@ class Settings extends React.Component {
             <ListItem
               primaryText={strings.translateWhenPressingEnter}
               rightToggle={(
-                <Toggle
-                  toggled={translateWhenPressingEnter}
-                  onToggle={() => onToggle('translateWhenPressingEnter')}
+                <Switch
+                  checked={translateWhenPressingEnter}
+                  onChange={() => onToggle('translateWhenPressingEnter')}
                 />
               )}
             />
             <ListItem
               primaryText={strings.chinaMode}
               rightToggle={(
-                <Toggle
-                  toggled={chinaMode}
-                  onToggle={() => onToggle('chinaMode')}
+                <Switch
+                  checked={chinaMode}
+                  onChange={() => onToggle('chinaMode')}
                 />
               )}
               secondaryText={strings.chinaModeDesc}
@@ -168,14 +173,14 @@ class Settings extends React.Component {
             {getPlatform() === 'windows' && shouldShowAd ? (
               <ListItem
                 primaryText={strings.removeAds}
-                onTouchTap={() => onRemoveAdTouchTap(strings)}
+                onClick={() => onRemoveAdClick(strings)}
               />
             ) : null}
             {getPlatform() === 'windows' && shouldShowAd ? (
               <ListItem
                 primaryText={strings.restorePurchase}
                 secondaryText={strings.restorePurchaseDesc}
-                onTouchTap={() => onRestorePurchaseTouchTap(strings)}
+                onClick={() => onRestorePurchaseClick(strings)}
               />
             ) : null}
             {getPlatform() === 'windows' && !shouldShowAd ? (
@@ -188,17 +193,17 @@ class Settings extends React.Component {
             {getPlatform() === 'windows' ? (
               <ListItem
                 primaryText={strings.rateWindowsStore}
-                onTouchTap={() => openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}
+                onClick={() => openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}
               />
             ) : null}
             {getPlatform() === 'mac' ? (
               <ListItem
                 primaryText={strings.rateMacAppStore}
-                onTouchTap={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')}
+                onClick={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')}
               />
             ) : null}
-            <ListItem primaryText={strings.help} onTouchTap={() => openUri('https://moderntranslator.com/support')} />
-            <ListItem primaryText={strings.website} onTouchTap={() => openUri('https://moderntranslator.com')} />
+            <ListItem primaryText={strings.help} onClick={() => openUri('https://moderntranslator.com/support')} />
+            <ListItem primaryText={strings.website} onClick={() => openUri('https://moderntranslator.com')} />
             <Divider />
             <ListItem primaryText={`Version ${process.env.REACT_APP_VERSION}`} />
           </List>
@@ -220,8 +225,8 @@ Settings.propTypes = {
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
   onToggle: PropTypes.func.isRequired,
   onSettingChange: PropTypes.func.isRequired,
-  onRemoveAdTouchTap: PropTypes.func.isRequired,
-  onRestorePurchaseTouchTap: PropTypes.func.isRequired,
+  onRemoveAdClick: PropTypes.func.isRequired,
+  onRestorePurchaseClick: PropTypes.func.isRequired,
   onUpdateStrings: PropTypes.func.isRequired,
 };
 
@@ -240,7 +245,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onToggle: name => dispatch(toggleSetting(name)),
   onSettingChange: (name, value) => dispatch(updateSetting(name, value)),
-  onRemoveAdTouchTap: (strings) => {
+  onRemoveAdClick: (strings) => {
     const currentApp = process.env.NODE_ENV === 'production' ? Windows.ApplicationModel.Store.CurrentApp
                     : Windows.ApplicationModel.Store.CurrentAppSimulator;
 
@@ -255,7 +260,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(openSnackbar(strings.somethingWentWrong));
       });
   },
-  onRestorePurchaseTouchTap: (strings) => {
+  onRestorePurchaseClick: (strings) => {
     const currentApp = process.env.NODE_ENV === 'production' ? Windows.ApplicationModel.Store.CurrentApp
                     : Windows.ApplicationModel.Store.CurrentAppSimulator;
 

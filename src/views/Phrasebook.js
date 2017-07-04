@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 
 import AppBar from 'material-ui/AppBar';
-import LinearProgress from 'material-ui/LinearProgress';
+import { LinearProgress } from 'material-ui/Progress';
 import IconButton from 'material-ui/IconButton';
-import { List, ListItem } from 'material-ui/List';
-import ToggleStar from 'material-ui/svg-icons/toggle/star';
+import List, { ListItem } from 'material-ui/List';
+import ToggleStar from 'material-ui-icons/Star';
 import Divider from 'material-ui/Divider';
 
 import { deletePhrasebookItem, loadPhrasebook } from '../actions/phrasebook';
@@ -37,12 +37,6 @@ class Phrasebook extends React.Component {
   }
 
   getStyles() {
-    const {
-      palette: {
-        textColor,
-      },
-    } = this.context.muiTheme;
-
     return {
       emptyContainer: {
         flex: 1,
@@ -52,7 +46,7 @@ class Phrasebook extends React.Component {
       },
       emptyInnerContainer: {
         textAlign: 'center',
-        color: textColor,
+        // color: textColor,
       },
       bigIcon: {
         height: 96,
@@ -83,8 +77,8 @@ class Phrasebook extends React.Component {
       phrasebookItems,
       phrasebookLoading,
       strings,
-      onDeleteButtonTouchTap,
-      onItemTouchTap,
+      onDeleteButtonClick,
+      onItemClick,
     } = this.props;
     const styles = this.getStyles();
 
@@ -112,13 +106,13 @@ class Phrasebook extends React.Component {
                 {phrasebookItems.map(item => [(
                   <ListItem
                     key={`phrasebookItem_${item.phrasebookId}`}
-                    onTouchTap={() => onItemTouchTap(item)}
+                    onClick={() => onItemClick(item)}
                     rightIconButton={(
                       <IconButton
                         tooltip={strings.removeFromPhrasebook}
                         tooltipPosition="bottom-left"
-                        onTouchTap={() => {
-                          onDeleteButtonTouchTap(
+                        onClick={() => {
+                          onDeleteButtonClick(
                             item.phrasebookId,
                             item.rev,
                           );
@@ -148,9 +142,9 @@ Phrasebook.propTypes = {
   canLoadMore: PropTypes.bool,
   phrasebookLoading: PropTypes.bool,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
-  onItemTouchTap: PropTypes.func.isRequired,
+  onItemClick: PropTypes.func.isRequired,
   onEnterPhrasebook: PropTypes.func.isRequired,
-  onDeleteButtonTouchTap: PropTypes.func.isRequired,
+  onDeleteButtonClick: PropTypes.func.isRequired,
   onLoadMore: PropTypes.func.isRequired,
 };
 
@@ -166,11 +160,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onItemTouchTap: (output) => {
+  onItemClick: (output) => {
     dispatch(loadOutput(output));
     dispatch(replace('/'));
   },
-  onDeleteButtonTouchTap: (id, rev) => dispatch(deletePhrasebookItem(id, rev)),
+  onDeleteButtonClick: (id, rev) => dispatch(deletePhrasebookItem(id, rev)),
   onEnterPhrasebook: () => dispatch(loadPhrasebook(true)),
   onLoadMore: () => dispatch(loadPhrasebook()),
 });

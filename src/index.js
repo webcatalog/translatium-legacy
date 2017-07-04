@@ -1,8 +1,9 @@
-/* global window Windows */
+/* global Windows */
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+
+import 'typeface-roboto/index.css';
 
 import store from './store';
 import { updateSetting } from './actions/settings';
@@ -35,9 +36,6 @@ const runApp = () => {
 
   store.dispatch(updateStrings(state.settings.displayLanguage))
     .then(() => {
-      // onTouchTap for material-ui
-      injectTapEventPlugin();
-
       render(
         <Provider store={store}>
           {renderRoutes()}

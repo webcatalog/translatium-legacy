@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Paper from 'material-ui/Paper';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import CircularProgress from 'material-ui/CircularProgress';
-import AVMic from 'material-ui/svg-icons/av/mic';
-import AVStop from 'material-ui/svg-icons/av/stop';
+import Button from 'material-ui/Button';
+import { CircularProgress } from 'material-ui/Progress';
+import AVMic from 'material-ui-icons/Mic';
+import AVStop from 'material-ui-icons/Stop';
 
 import { updateImeMode } from '../actions/home';
 import { releaseDevice, startRecording, stopRecording } from '../actions/speech';
@@ -34,7 +34,6 @@ class Speech extends React.Component {
   }
 
   getStyles() {
-    const { primary1Color, textColor } = this.context.muiTheme.palette;
     const { speechStatus } = this.props;
 
     return {
@@ -56,7 +55,7 @@ class Speech extends React.Component {
         left: 0,
         bottom: 0,
         right: 0,
-        border: `solid 1px ${textColor}`,
+        // border: `solid 1px ${textColor}`,
         animation: 'change-size 1.5s infinite',
         borderRadius: '50%',
         margin: 'auto',
@@ -70,7 +69,7 @@ class Speech extends React.Component {
         bottom: 0,
         right: 0,
         borderRadius: '50%',
-        border: `solid 1px ${primary1Color}`,
+        // border: `solid 1px ${primary1Color}`,
         animation: 'change-size-2 1.5s infinite',
         margin: 'auto',
         height: 64,
@@ -82,7 +81,7 @@ class Speech extends React.Component {
   }
 
   render() {
-    const { speechStatus, onControlButtonTouchTap } = this.props;
+    const { speechStatus, onControlButtonClick } = this.props;
     const styles = this.getStyles();
 
     return (
@@ -93,11 +92,12 @@ class Speech extends React.Component {
         ) :
           (
             <div>
-              <FloatingActionButton
-                onTouchTap={() => onControlButtonTouchTap(speechStatus)}
+              <Button
+                fab
+                onClick={() => onControlButtonClick(speechStatus)}
               >
                 {speechStatus === 'recording' ? <AVStop /> : <AVMic />}
-              </FloatingActionButton>
+              </Button>
               <div style={styles.wave1} />
               <div style={styles.wave2} />
             </div>
@@ -109,7 +109,7 @@ class Speech extends React.Component {
 
 Speech.propTypes = {
   speechStatus: PropTypes.string.isRequired,
-  onControlButtonTouchTap: PropTypes.func.isRequired,
+  onControlButtonClick: PropTypes.func.isRequired,
   onReleaseDevice: PropTypes.func.isRequired,
 };
 
@@ -118,7 +118,7 @@ Speech.contextTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onControlButtonTouchTap: (status) => {
+  onControlButtonClick: (status) => {
     if (status !== 'recording') {
       dispatch(startRecording());
     } else {

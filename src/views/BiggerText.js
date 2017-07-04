@@ -3,15 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import Slider from 'material-ui/Slider';
+import Button from 'material-ui/Button';
+import NavigationClose from 'material-ui-icons/Close';
+// import Slider from 'material-ui/Slider';
 
 import { updateSetting } from '../actions/settings';
 
 class BiggerText extends React.Component {
   getStyles() {
-    const { muiTheme } = this.context;
     const { biggerTextFontSize } = this.props;
 
     return {
@@ -19,7 +18,7 @@ class BiggerText extends React.Component {
         flex: 1,
         padding: '64px 16px 16px 16px',
         boxSizing: 'border-box',
-        color: muiTheme.baseTheme.palette.textColor,
+        // color: muiTheme.baseTheme.palette.textColor,
         overflow: 'auto',
       },
       closeButton: {
@@ -43,20 +42,22 @@ class BiggerText extends React.Component {
 
   render() {
     const styles = this.getStyles();
-    const { text, biggerTextFontSize, onSliderChange, onCloseTouchTap } = this.props;
+    const { text, biggerTextFontSize, onSliderChange, onCloseClick } = this.props;
     return (
       <div style={styles.container}>
-        <FloatingActionButton
-          mini
+        <Button
+          fab
+          dense
           style={styles.closeButton}
-          onTouchTap={onCloseTouchTap}
+          onClick={onCloseClick}
         >
           <NavigationClose />
-        </FloatingActionButton>
+        </Button>
         <span style={styles.textContainer}>
           {text}
         </span>
-        <Slider
+        <div
+          key="NeedToChange"
           style={styles.slider}
           min={20}
           max={200}
@@ -73,7 +74,7 @@ class BiggerText extends React.Component {
 BiggerText.propTypes = {
   text: PropTypes.string,
   biggerTextFontSize: PropTypes.number,
-  onCloseTouchTap: PropTypes.func.isRequired,
+  onCloseClick: PropTypes.func.isRequired,
   onSliderChange: PropTypes.func.isRequired,
 };
 
@@ -88,7 +89,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onCloseTouchTap: () => dispatch(goBack()),
+  onCloseClick: () => dispatch(goBack()),
   onSliderChange: (event, value) => dispatch(updateSetting('biggerTextFontSize', value)),
 });
 

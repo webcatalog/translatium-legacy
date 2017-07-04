@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 import shortid from 'shortid';
 
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import NavigationMoreVert from 'material-ui/svg-icons/navigation/more-vert';
-import Slider from 'material-ui/Slider';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
+import Button from 'material-ui/Button';
+import NavigationClose from 'material-ui-icons/Close';
+import NavigationMoreVert from 'material-ui-icons/MoreVert';
+// import Slider from 'material-ui/Slider';
+import { MenuItem } from 'material-ui/Menu';
 import IconButton from 'material-ui/IconButton';
+
+import EnhancedMenu from './EnhancedMenu';
 
 import { setZoomLevel, setMode } from '../actions/ocr';
 import { loadOutput } from '../actions/home';
@@ -18,7 +19,7 @@ import { loadOutput } from '../actions/home';
 class Ocr extends React.Component {
   componentDidMount() {
     if (!this.props.ocr) {
-      this.props.onCloseTouchTap();
+      this.props.onCloseClick();
     }
   }
 
@@ -66,10 +67,10 @@ class Ocr extends React.Component {
       outputLang,
       ocr,
       strings,
-      onCloseTouchTap,
+      onCloseClick,
       onZoomSliderChange,
-      onModeMenuItemTouchTap,
-      onTextOnlyMenuItemTouchTap,
+      onModeMenuItemClick,
+      onTextOnlyMenuItemClick,
     } = this.props;
 
     if (!ocr) return null;
@@ -78,13 +79,14 @@ class Ocr extends React.Component {
 
     return (
       <div style={styles.container}>
-        <FloatingActionButton
-          mini
+        <Button
+          fab
+          dense
           style={styles.closeButton}
-          onTouchTap={onCloseTouchTap}
+          onClick={onCloseClick}
         >
           <NavigationClose />
-        </FloatingActionButton>
+        </Button>
         <div style={styles.zoomContainer}>
           <div
             style={{ zoom: ocr.zoomLevel || 1, position: 'relative' }}
@@ -109,7 +111,7 @@ class Ocr extends React.Component {
             <img src={ocr.imageUrl} alt="" />
           </div>
         </div>
-        <Slider
+        <div
           style={styles.slider}
           min={0.1}
           max={3}
@@ -118,7 +120,8 @@ class Ocr extends React.Component {
           value={ocr.zoomLevel}
           onChange={onZoomSliderChange}
         />
-        <IconMenu
+        <EnhancedMenu
+          id="ocrMore"
           iconButtonElement={(
             <IconButton
               style={styles.moreButton}
@@ -133,15 +136,15 @@ class Ocr extends React.Component {
                 ? `${strings.displayTranslatedText} (${strings[outputLang]})`
                 : `${strings.displayOriginalText} (${strings[inputLang]})`
             }
-            onTouchTap={() => onModeMenuItemTouchTap(ocr.mode)}
+            onClick={() => onModeMenuItemClick(ocr.mode)}
           />
           <MenuItem
             primaryText="Display text only"
-            onTouchTap={() => onTextOnlyMenuItemTouchTap(
+            onClick={() => onTextOnlyMenuItemClick(
               inputLang, outputLang, ocr.inputText, ocr.outputText,
             )}
           />
-        </IconMenu>
+        </EnhancedMenu>
       </div>
     );
   }
@@ -153,10 +156,10 @@ Ocr.propTypes = {
   // eslint-disable-next-line
   ocr: PropTypes.object,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
-  onCloseTouchTap: PropTypes.func.isRequired,
+  onCloseClick: PropTypes.func.isRequired,
   onZoomSliderChange: PropTypes.func.isRequired,
-  onModeMenuItemTouchTap: PropTypes.func.isRequired,
-  onTextOnlyMenuItemTouchTap: PropTypes.func.isRequired,
+  onModeMenuItemClick: PropTypes.func.isRequired,
+  onTextOnlyMenuItemClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -167,16 +170,16 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onCloseTouchTap: () => dispatch(goBack()),
+  onCloseClick: () => dispatch(goBack()),
   onZoomSliderChange: (event, value) => dispatch(setZoomLevel(value)),
-  onModeMenuItemTouchTap: (currentMode) => {
+  onModeMenuItemClick: (currentMode) => {
     let newMode;
     if (currentMode === 'input') newMode = 'output';
     else newMode = 'input';
 
     dispatch(setMode(newMode));
   },
-  onTextOnlyMenuItemTouchTap: (inputLang, outputLang, inputText, outputText) => {
+  onTextOnlyMenuItemClick: (inputLang, outputLang, inputText, outputText) => {
     dispatch(loadOutput({
       inputLang, outputLang, inputText, outputText,
     }));
