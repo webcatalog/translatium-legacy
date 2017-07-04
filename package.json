@@ -1,7 +1,7 @@
 {
   "name": "modern-translator",
   "description": "Translator app for Mac & PC.",
-  "version": "6.6.1",
+  "version": "6.6.2",
   "main": "public/electron.js",
   "author": "Quang Lam",
   "licenses": [
@@ -16,7 +16,7 @@
   "scripts": {
     "start": "cross-env REACT_APP_GOOGLE_ENDPOINT=http://localhost:3000 BROWSER=none react-scripts start",
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "build": "cross-env REACT_APP_VERSION=6.6.1 && react-scripts build && node add-bom.js",
+    "build": "cross-env REACT_APP_VERSION=6.6.2 && react-scripts build && node add-bom.js",
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "pack": "electron-builder --dir --mac mas",
