@@ -106,7 +106,7 @@ export const togglePhrasebook = () => ((dispatch, getState) => {
     phrasebookDb.get(phrasebookId)
       .then(doc => phrasebookDb.remove(doc))
       .then(() => {
-        const newOutput = Object.assign({}, output);
+        const newOutput = Object.assign({}, output, { phrasebookId });
         delete output.phrasebookId;
 
         dispatch({
