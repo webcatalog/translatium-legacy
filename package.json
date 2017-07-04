@@ -55,7 +55,6 @@
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
     "shortid": "^2.2.8",
-    "typeface-roboto": "^0.0.29",
     "wait-on": "^2.0.2",
     "xml2js": "^0.4.17"
   },
