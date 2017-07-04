@@ -9,11 +9,9 @@ import { closeAlert } from '../actions/alert';
 
 const Alert = ({ alertMessage, strings, onClose }) => {
   const actions = [
-    <Button
-      label="Close"
-      primary
-      onClick={onClose}
-    />,
+    <Button primary onClick={onClose}>
+      {strings.close}
+    </Button>,
   ];
 
   return (

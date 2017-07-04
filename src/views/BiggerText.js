@@ -78,11 +78,6 @@ BiggerText.propTypes = {
   onSliderChange: PropTypes.func.isRequired,
 };
 
-BiggerText.contextTypes = {
-  muiTheme: PropTypes.object,
-};
-
-
 const mapStateToProps = (state, ownProps) => ({
   text: ownProps.location.query.text,
   biggerTextFontSize: state.settings.biggerTextFontSize,

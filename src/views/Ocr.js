@@ -130,20 +130,18 @@ class Ocr extends React.Component {
             </IconButton>
           )}
         >
-          <MenuItem
-            primaryText={
-              ocr.mode === 'input'
+          <MenuItem onClick={() => onModeMenuItemClick(ocr.mode)}>
+            {ocr.mode === 'input'
                 ? `${strings.displayTranslatedText} (${strings[outputLang]})`
-                : `${strings.displayOriginalText} (${strings[inputLang]})`
-            }
-            onClick={() => onModeMenuItemClick(ocr.mode)}
-          />
+                : `${strings.displayOriginalText} (${strings[inputLang]})`}
+          </MenuItem>
           <MenuItem
-            primaryText="Display text only"
             onClick={() => onTextOnlyMenuItemClick(
               inputLang, outputLang, ocr.inputText, ocr.outputText,
             )}
-          />
+          >
+            {strings.displayTextOnly}
+          </MenuItem>
         </EnhancedMenu>
       </div>
     );

@@ -6,7 +6,7 @@ import { replace } from 'react-router-redux';
 import AppBar from 'material-ui/AppBar';
 import { LinearProgress } from 'material-ui/Progress';
 import IconButton from 'material-ui/IconButton';
-import List, { ListItem } from 'material-ui/List';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 import ToggleStar from 'material-ui-icons/Star';
 import Divider from 'material-ui/Divider';
 
@@ -121,9 +121,12 @@ class Phrasebook extends React.Component {
                         <ToggleStar />
                       </IconButton>
                     )}
-                    primaryText={item.outputText}
-                    secondaryText={item.inputText}
-                  />
+                  >
+                    <ListItemText
+                      primary={item.outputText}
+                      secondary={item.inputText}
+                    />
+                  </ListItem>
                 ), <Divider inset={false} />])}
               </List>
               {phrasebookLoading === true ? (
@@ -146,10 +149,6 @@ Phrasebook.propTypes = {
   onEnterPhrasebook: PropTypes.func.isRequired,
   onDeleteButtonClick: PropTypes.func.isRequired,
   onLoadMore: PropTypes.func.isRequired,
-};
-
-Phrasebook.contextTypes = {
-  muiTheme: PropTypes.object,
 };
 
 const mapStateToProps = state => ({

@@ -8,7 +8,7 @@ import { parseString as parseXMLString } from 'xml2js';
 import AppBar from 'material-ui/AppBar';
 import { MenuItem } from 'material-ui/Menu';
 import Switch from 'material-ui/Switch';
-import List, { ListItem } from 'material-ui/List';
+import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Button from 'material-ui/Button';
 
@@ -71,36 +71,44 @@ class Settings extends React.Component {
         />
         <div style={styles.innerContainer}>
           <List>
-            <ListItem
-              rightIconButton={(
+            <ListItem>
+              <ListItemText
+                primary={strings.primaryColor}
+                secondary={strings[primaryColorId]}
+              />
+              <ListItemSecondaryAction>
                 <EnhancedMenu
                   id="changeColor"
                   buttonElement={(
-                    <Button
-                      raised
-                      label={strings.change}
-                      primary
-                    />
+                    <Button raised primary>
+                      {strings.change}
+                    </Button>
                   )}
                 >
                   {Object.keys(colorPairs).map(colorId => (
-                    <MenuItem key={`color_${colorId}`} value={colorId} primaryText={strings[colorId]} onClick={() => onSettingChange('primaryColorId', colorId)} />
+                    <MenuItem
+                      key={`color_${colorId}`}
+                      value={colorId}
+                      onClick={() => onSettingChange('primaryColorId', colorId)}
+                    >
+                      {strings[colorId]}
+                    </MenuItem>
                   ))}
                 </EnhancedMenu>
-              )}
-              primaryText={strings.primaryColor}
-              secondaryText={strings[primaryColorId]}
-            />
-            <ListItem
-              rightIconButton={(
+              </ListItemSecondaryAction>
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                primary={strings.displayLanguage}
+                secondary={displayLanguages[displayLanguage].displayName}
+              />
+              <ListItemSecondaryAction>
                 <EnhancedMenu
                   id="changeDisplayLanguage"
                   buttonElement={(
-                    <Button
-                      raised
-                      label={strings.change}
-                      primary
-                    />
+                    <Button raised primary>
+                      {strings.change}
+                    </Button>
                   )}
                 >
                   {Object.keys(displayLanguages).map(langId => (
@@ -117,95 +125,101 @@ class Settings extends React.Component {
                     />
                   ))}
                 </EnhancedMenu>
-              )}
-              primaryText={strings.displayLanguage}
-              secondaryText={displayLanguages[displayLanguage].displayName}
-            />
-            <ListItem
-              primaryText={strings.darkMode}
-              rightToggle={(
+              </ListItemSecondaryAction>
+            </ListItem>
+            <ListItem>
+              <ListItemText primary={strings.darkMode} />
+              <ListItemSecondaryAction>
                 <Switch
                   checked={darkMode}
                   onChange={() => onToggle('darkMode')}
                 />
-              )}
-            />
-            <ListItem
-              primaryText={strings.realtime}
-              rightToggle={(
+              </ListItemSecondaryAction>
+            </ListItem>
+            <ListItem>
+              <ListItemText primary={strings.realtime} />
+              <ListItemSecondaryAction>
                 <Switch
                   checked={realtime}
                   onChange={() => onToggle('realtime')}
                 />
-              )}
-            />
-            {getPlatform() === 'windows' ? (
-              <ListItem
-                primaryText={strings.preventScreenLock}
-                rightToggle={(
+              </ListItemSecondaryAction>
+            </ListItem>
+            {getPlatform() === 'windows' && (
+              <ListItem>
+                <ListItemText primary={strings.preventScreenLock} />
+                <ListItemSecondaryAction>
                   <Switch
                     checked={preventScreenLock}
                     onChange={() => onToggle('preventScreenLock')}
                   />
-                )}
-              />
-            ) : null}
-            <ListItem
-              primaryText={strings.translateWhenPressingEnter}
-              rightToggle={(
+                </ListItemSecondaryAction>
+              </ListItem>
+            )}
+            <ListItem>
+              <ListItemText primary={strings.translateWhenPressingEnter} />
+              <ListItemSecondaryAction>
                 <Switch
                   checked={translateWhenPressingEnter}
                   onChange={() => onToggle('translateWhenPressingEnter')}
                 />
-              )}
-            />
-            <ListItem
-              primaryText={strings.chinaMode}
-              rightToggle={(
+              </ListItemSecondaryAction>
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                primary={strings.chinaMode}
+                secondary={strings.chinaModeDesc}
+              />
+              <ListItemSecondaryAction>
                 <Switch
                   checked={chinaMode}
                   onChange={() => onToggle('chinaMode')}
                 />
-              )}
-              secondaryText={strings.chinaModeDesc}
-            />
+              </ListItemSecondaryAction>
+            </ListItem>
             <Divider />
-            {getPlatform() === 'windows' && shouldShowAd ? (
-              <ListItem
-                primaryText={strings.removeAds}
-                onClick={() => onRemoveAdClick(strings)}
-              />
-            ) : null}
-            {getPlatform() === 'windows' && shouldShowAd ? (
-              <ListItem
-                primaryText={strings.restorePurchase}
-                secondaryText={strings.restorePurchaseDesc}
-                onClick={() => onRestorePurchaseClick(strings)}
-              />
-            ) : null}
-            {getPlatform() === 'windows' && !shouldShowAd ? (
-              <ListItem
-                primaryText={strings.removeAds}
-                secondaryText={strings.activated}
-              />
-            ) : null}
+            {getPlatform() === 'windows' && shouldShowAd && (
+              <ListItem onClick={() => onRemoveAdClick(strings)}>
+                <ListItemText primary={strings.removeAds} />
+              </ListItem>
+            )}
+            {getPlatform() === 'windows' && shouldShowAd && (
+              <ListItem onClick={() => onRestorePurchaseClick(strings)}>
+                <ListItemText
+                  primary={strings.restorePurchase}
+                  secondary={strings.restorePurchaseDesc}
+                />
+              </ListItem>
+            )}
+            {getPlatform() === 'windows' && !shouldShowAd && (
+              <ListItem>
+                <ListItemText
+                  primary={strings.removeAds}
+                  secondary={strings.activated}
+                />
+              </ListItem>
+            )}
             <Divider />
             {getPlatform() === 'windows' ? (
-              <ListItem
-                primaryText={strings.rateWindowsStore}
-                onClick={() => openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}
-              />
+              <ListItem onClick={() => openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}>
+                <ListItemText primary={strings.rateWindowsStore} />
+              </ListItem>
             ) : null}
             {getPlatform() === 'mac' ? (
-              <ListItem
-                primaryText={strings.rateMacAppStore}
-                onClick={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')}
-              />
+              <ListItem onClick={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')}>
+                <ListItemText primary={strings.rateMacAppStore} />
+              </ListItem>
             ) : null}
-            <ListItem primaryText={strings.help} onClick={() => openUri('https://moderntranslator.com/support')} />
-            <ListItem primaryText={strings.website} onClick={() => openUri('https://moderntranslator.com')} />
+            <ListItem onClick={() => openUri('https://moderntranslator.com/support')}>
+              <ListItemText primary={strings.help} />
+            </ListItem>
+            <ListItem onClick={() => openUri('https://moderntranslator.com')}>
+              <ListItemText primary={strings.website} />
+            </ListItem>
             <Divider />
-            <ListItem primaryText={`Version ${process.env.REACT_APP_VERSION}`} />
+            <ListItem>
+              <ListItemText primary={`Version ${process.env.REACT_APP_VERSION}`} />
+            </ListItem>
           </List>
         </div>
       </div>

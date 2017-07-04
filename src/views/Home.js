@@ -7,6 +7,7 @@ import shortid from 'shortid';
 
 import { fullWhite } from 'material-ui/styles/colors';
 import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
 import Card, { CardActions, CardHeader, CardContent } from 'material-ui/Card';
@@ -259,11 +260,12 @@ class Home extends React.Component {
                         .slice(maxVisibleIcon, controllers.length)
                         .map(({ icon, tooltip, onClick }) => (
                           <MenuItem
-                            primaryText={tooltip}
                             leftIcon={icon}
                             key={shortid.generate()}
                             onClick={onClick}
-                          />
+                          >
+                            {tooltip}
+                          </MenuItem>
                         ))
                     }
                   </EnhancedMenu>
@@ -375,38 +377,35 @@ class Home extends React.Component {
           tabIndex={0}
           onClick={() => onAnotherContainerClick(imeMode)}
         >
-          <AppBar
-            showMenuIconButton={false}
-            title={(
-              <div>
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => onLanguageClick('inputLang')}
-                >
-                  <span>{strings[inputLang]}</span>
-                  <div>
-                    <NavigationArrowDropDown color={fullWhite} />
-                  </div>
-                </div>
+          <AppBar position="static">
+            <Toolbar>
+              <div
+                role="button"
+                tabIndex={0}
+                onClick={() => onLanguageClick('inputLang')}
+              >
+                <span>{strings[inputLang]}</span>
                 <div>
-                  <IconButton disabled={!isOutput(inputLang)} onClick={onSwapButtonClick}>
-                    <ActionSwapHoriz color={fullWhite} />
-                  </IconButton>
-                </div>
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => onLanguageClick('outputLang')}
-                >
-                  <span>{strings[outputLang]}</span>
-                  <div>
-                    <NavigationArrowDropDown color={fullWhite} />
-                  </div>
+                  <NavigationArrowDropDown color={fullWhite} />
                 </div>
               </div>
-            )}
-          />
+              <div>
+                <IconButton disabled={!isOutput(inputLang)} onClick={onSwapButtonClick}>
+                  <ActionSwapHoriz color={fullWhite} />
+                </IconButton>
+              </div>
+              <div
+                role="button"
+                tabIndex={0}
+                onClick={() => onLanguageClick('outputLang')}
+              >
+                <span>{strings[outputLang]}</span>
+                <div>
+                  <NavigationArrowDropDown color={fullWhite} />
+                </div>
+              </div>
+            </Toolbar>
+          </AppBar>
           <Paper zDepth={2}>
             <textarea
               className="text-selectable"
@@ -452,23 +451,21 @@ class Home extends React.Component {
                         .slice(maxVisibleIcon, controllers.length)
                         .map(({ icon, tooltip, onClick }) => (
                           <MenuItem
-                            primaryText={tooltip}
                             leftIcon={icon}
                             key={shortid.generate()}
                             onClick={onClick}
-                          />
+                          >
+                            {tooltip}
+                          </MenuItem>
                         ))
                     }
                   </EnhancedMenu>
                 ) : null}
               </div>
               <div>
-                <Button
-                  raised
-                  label={strings.translate}
-                  primary
-                  onClick={onTranslateButtonClick}
-                />
+                <Button raised primary onClick={onTranslateButtonClick}>
+                  {strings.translate}
+                </Button>
               </div>
             </div>
           </Paper>
@@ -591,10 +588,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(openSnackbar(strings.copied));
   },
 });
-
-Home.contextTypes = {
-  muiTheme: PropTypes.object,
-};
 
 export default connect(
   mapStateToProps, mapDispatchToProps,

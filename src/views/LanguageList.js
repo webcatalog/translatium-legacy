@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 
-import { List, ListItem } from 'material-ui/List';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 import { transparent } from 'material-ui/styles/colors';
 import ActionHistory from 'material-ui-icons/History';
 import AppBar from 'material-ui/AppBar';
@@ -36,22 +36,6 @@ class LanguageList extends React.Component {
     document.removeEventListener('keydown', this.handleEscKey);
   }
 
-  getStyles() {
-    return {
-      container: {
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden',
-      },
-      listContainer: {
-        flex: 1,
-        overflowY: 'auto',
-        WebkitOverflowScrolling: 'touch',
-      },
-    };
-  }
-
   handleEscKey(evt) {
     const { onCloseClick } = this.props;
     if (evt.key === 'Escape' || evt.key === 'Esc') {
@@ -67,7 +51,6 @@ class LanguageList extends React.Component {
       onCloseClick,
       onLanguageClick,
     } = this.props;
-    const styles = this.getStyles();
 
     let languages;
     if (type === 'inputLang') languages = getInputLanguages();
@@ -94,18 +77,17 @@ class LanguageList extends React.Component {
 
 
     return (
-      <div style={styles.container}>
+      <div>
         <AppBar
           title={type === 'inputLang' ? strings.chooseAnInputLanguage : strings.chooseAnOutputLanguage}
           iconElementLeft={<IconButton><NavigationClose /></IconButton>}
           onLeftIconButtonClick={onCloseClick}
         />
-        <div style={styles.listContainer}>
+        <div>
           <List>
             {recentLanguages.map((langId, i) => (
               <ListItem
                 key={`lang_recent_${langId}`}
-                primaryText={strings[langId]}
                 leftIcon={i === 0 ? (
                   <Avatar
                     icon={<ActionHistory />}
@@ -115,7 +97,11 @@ class LanguageList extends React.Component {
                 ) : null}
                 insetChildren={i > 0}
                 onClick={() => onLanguageClick(type, langId)}
-              />
+              >
+                <ListItemText
+                  primary={strings[langId]}
+                />
+              </ListItem>
             ))}
             <Divider inset />
           </List>
@@ -124,7 +110,6 @@ class LanguageList extends React.Component {
               {groups[groupId].map((langId, i) => (
                 <ListItem
                   key={`lang_${langId}`}
-                  primaryText={strings[langId]}
                   leftIcon={i === 0 ? (
                     <Avatar backgroundColor={transparent} style={{ left: 8, top: 4 }}>
                       {groupId}
@@ -132,7 +117,11 @@ class LanguageList extends React.Component {
                   ) : null}
                   insetChildren={i > 0}
                   onClick={() => onLanguageClick(type, langId)}
-                />
+                >
+                  <ListItemText
+                    primary={strings[langId]}
+                  />
+                </ListItem>
               ))}
             </List>
           ), <Divider inset />])}

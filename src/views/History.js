@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { LinearProgress } from 'material-ui/Progress';
 import IconButton from 'material-ui/IconButton';
-import List, { ListItem } from 'material-ui/List';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 import ActionDelete from 'material-ui-icons/Delete';
 import Divider from 'material-ui/Divider';
 
@@ -108,9 +108,12 @@ class History extends React.Component {
                         <ActionDelete />
                       </IconButton>
                     )}
-                    primaryText={item.outputText}
-                    secondaryText={item.inputText}
-                  />
+                  >
+                    <ListItemText
+                      primary={item.outputText}
+                      secondary={item.inputText}
+                    />
+                  </ListItem>
                 ), <Divider inset={false} />])}
               </List>
               {historyLoading === true ? (
@@ -133,10 +136,6 @@ History.propTypes = {
   onEnterHistory: PropTypes.func.isRequired,
   onDeleteButtonClick: PropTypes.func.isRequired,
   onLoadMore: PropTypes.func.isRequired,
-};
-
-History.contextTypes = {
-  muiTheme: PropTypes.object,
 };
 
 const mapStateToProps = state => ({

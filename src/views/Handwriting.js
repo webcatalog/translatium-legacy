@@ -296,9 +296,15 @@ class Handwriting extends React.Component {
           onTouchMove={onMouseMove}
         />
         <div style={styles.wrapper}>
-          <Button label={strings.delete} secondary onClick={onDeleteButtonClick} />
-          <Button label={strings.spaceBar} onClick={onSpaceBarButtonClick} />
-          <Button label={strings.done} primary onClick={onDoneButtonClick} />
+          <Button secondary onClick={onDeleteButtonClick}>
+            {strings.delete}
+          </Button>
+          <Button onClick={onSpaceBarButtonClick}>
+            {strings.spaceBar}
+          </Button>
+          <Button primary onClick={onDoneButtonClick}>
+            {strings.done}
+          </Button>
         </div>
       </Paper>
     );
@@ -316,10 +322,6 @@ Handwriting.propTypes = {
   onLoadSuggestions: PropTypes.func.isRequired,
   onResetSuggestions: PropTypes.func.isRequired,
   onTurnOffHandwriting: PropTypes.func.isRequired,
-};
-
-Handwriting.contextTypes = {
-  muiTheme: PropTypes.object,
 };
 
 const mapDispatchToProps = dispatch => ({

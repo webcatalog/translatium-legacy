@@ -26,8 +26,6 @@ import getPlatform from '../libs/getPlatform';
 import Alert from './Alert';
 import Ad from './Ad';
 
-/* global window */
-
 class App extends React.Component {
   componentDidMount() {
     if (getPlatform() === 'windows') {
@@ -99,7 +97,6 @@ class App extends React.Component {
     const {
       children,
       bottomNavigationSelectedIndex,
-      darkMode,
       fullPageLoading,
       snackbarOpen,
       snackbarMessage,
@@ -109,8 +106,6 @@ class App extends React.Component {
       onRequestCloseSnackbar,
       onBottomNavigationButtonClick,
     } = this.props;
-
-    console.log(darkMode);
 
     const theme = createMuiTheme({
       palette: createPalette({
@@ -171,7 +166,6 @@ class App extends React.Component {
 
 App.propTypes = {
   children: PropTypes.element, // matched child route component
-  darkMode: PropTypes.bool,
   primaryColorId: PropTypes.string,
   fullPageLoading: PropTypes.bool,
   bottomNavigationSelectedIndex: PropTypes.number,
@@ -184,10 +178,6 @@ App.propTypes = {
   onBottomNavigationButtonClick: PropTypes.func.isRequired,
   onBackClick: PropTypes.func.isRequired,
   onRequestCloseSnackbar: PropTypes.func.isRequired,
-};
-
-App.childContextTypes = {
-  muiTheme: PropTypes.object,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -213,7 +203,6 @@ const mapStateToProps = (state, ownProps) => {
   return {
     pathname: ownProps.location.pathname,
     fullPageLoading: state.ocr && state.ocr.status === 'loading',
-    darkMode: state.settings.darkMode,
     primaryColorId: state.settings.primaryColorId,
     bottomNavigationSelectedIndex,
     snackbarOpen: state.snackbar.open,

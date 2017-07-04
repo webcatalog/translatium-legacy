@@ -113,10 +113,6 @@ Speech.propTypes = {
   onReleaseDevice: PropTypes.func.isRequired,
 };
 
-Speech.contextTypes = {
-  muiTheme: PropTypes.object,
-};
-
 const mapDispatchToProps = dispatch => ({
   onControlButtonClick: (status) => {
     if (status !== 'recording') {
