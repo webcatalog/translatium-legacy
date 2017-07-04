@@ -6,8 +6,8 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Divider from 'material-ui/Divider';
 import Typography from 'material-ui/Typography';
 
-import { updateInputLang, updateOutputLang } from '../actions/settings';
-import { updateInputText } from '../actions/home';
+import { updateInputLang, updateOutputLang } from '../../actions/settings';
+import { updateInputText } from '../../actions/home';
 
 const styleSheet = createStyleSheet('Dictionary', {
   container: {

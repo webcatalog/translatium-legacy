@@ -8,12 +8,12 @@ import Paper from 'material-ui/Paper';
 import Chip from 'material-ui/Chip';
 import Button from 'material-ui/Button';
 
-import { updateInputText, updateImeMode } from '../actions/home';
-import { loadSuggestions, resetSuggestions } from '../actions/handwriting';
+import { updateInputText, updateImeMode } from '../../actions/home';
+import { loadSuggestions, resetSuggestions } from '../../actions/handwriting';
 
-import getPlatform from '../libs/getPlatform';
-import insertAtCursor from '../libs/insertAtCursor';
-import deleteAtCursor from '../libs/deleteAtCursor';
+import getPlatform from '../../libs/getPlatform';
+import insertAtCursor from '../../libs/insertAtCursor';
+import deleteAtCursor from '../../libs/deleteAtCursor';
 
 const styleSheet = createStyleSheet('Handwriting', {
   container: {
@@ -292,7 +292,7 @@ class Handwriting extends React.Component {
           onTouchMove={onMouseMove}
         />
         <div className={classes.wrapper}>
-          <Button secondary onClick={onDeleteButtonClick}>
+          <Button color="secondary" onClick={onDeleteButtonClick}>
             {strings.delete}
           </Button>
           <Button onClick={onSpaceBarButtonClick}>

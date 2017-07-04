@@ -1,7 +1,7 @@
 /* global MicrosoftNSJS Windows */
 import React from 'react';
 
-import openUri from '../libs/openUri';
+import openUri from '../../libs/openUri';
 
 class Ad extends React.Component {
   componentDidMount() {

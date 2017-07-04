@@ -10,7 +10,7 @@ import Dialog, {
 } from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
 
-import { closeAlert } from '../actions/alert';
+import { closeAlert } from '../../actions/alert';
 
 const Alert = ({ alertMessage, strings, onClose }) => (
   <Dialog

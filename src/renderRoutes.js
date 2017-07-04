@@ -4,20 +4,20 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 import store from './store';
 
-import Layout from './views/Layout';
+import App from './components/App';
 
-import Home from './views/Home';
-import Phrasebook from './views/Phrasebook';
-import Settings from './views/Settings';
-import LanguageList from './views/LanguageList';
-import Ocr from './views/Ocr';
-import BiggerText from './views/BiggerText';
+import Home from './components/Home';
+import Phrasebook from './components/Phrasebook';
+import Settings from './components/Settings';
+import LanguageList from './components/LanguageList';
+import Ocr from './components/Ocr';
+import BiggerText from './components/BiggerText';
 
 const history = syncHistoryWithStore(hashHistory, store);
 
 const renderRoutes = () => (
   <Router history={history}>
-    <Route path="/" component={Layout}>
+    <Route path="/" component={App}>
       <IndexRoute component={Home} />
       <Route path="phrasebook" component={Phrasebook} />
       <Route path="settings" component={Settings} />

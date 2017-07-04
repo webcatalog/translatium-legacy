@@ -35,7 +35,7 @@ import ToggleStar from 'material-ui-icons/Star';
 import NavigationFullscreen from 'material-ui-icons/Fullscreen';
 import NavigationFullscreenExit from 'material-ui-icons/FullscreenExit';
 
-import EnhancedMenu from './EnhancedMenu';
+import EnhancedMenu from '../EnhancedMenu';
 
 import {
   isOutput,
@@ -44,24 +44,28 @@ import {
   isHandwritingSupported,
   isOcrSupported,
   toCountryRemovedLanguage,
-} from '../libs/languageUtils';
+} from '../../libs/languageUtils';
 
-import { swapLanguages, updateInputLang, updateOutputLang } from '../actions/settings';
+import {
+  swapLanguages,
+  updateInputLang,
+  updateOutputLang,
+} from '../../actions/settings';
 import {
   updateInputText,
   translate,
   updateImeMode,
   togglePhrasebook,
   toggleFullscreenInputBox,
-} from '../actions/home';
-import { loadImage } from '../actions/ocr';
-import { playTextToSpeech, stopTextToSpeech } from '../actions/textToSpeech';
-import { openSnackbar } from '../actions/snackbar';
+} from '../../actions/home';
+import { loadImage } from '../../actions/ocr';
+import { playTextToSpeech, stopTextToSpeech } from '../../actions/textToSpeech';
+import { openSnackbar } from '../../actions/snackbar';
 
-import getPlatform from '../libs/getPlatform';
-import copyToClipboard from '../libs/copyToClipboard';
-import shareText from '../libs/shareText';
-import askIfEnjoy from '../libs/askIfEnjoy';
+import getPlatform from '../../libs/getPlatform';
+import copyToClipboard from '../../libs/copyToClipboard';
+import shareText from '../../libs/shareText';
+import askIfEnjoy from '../../libs/askIfEnjoy';
 
 import Dictionary from './Dictionary';
 import Handwriting from './Handwriting';
@@ -148,6 +152,9 @@ const styleSheet = createStyleSheet('Home', theme => ({
     color: theme.palette.text.disabled,
   },
   inputRoman: {
+    marginTop: 8,
+  },
+  suggestion: {
     marginTop: 8,
   },
 }));
@@ -279,6 +286,7 @@ class Home extends React.Component {
               <Typography
                 type="body1"
                 align="left"
+                className={classes.suggestion}
               >
                 <span role="img" aria-label="">💡</span>
                 <span>{strings.translateFrom}:&#32;</span>
@@ -297,6 +305,7 @@ class Home extends React.Component {
               <Typography
                 type="body1"
                 align="left"
+                className={classes.suggestion}
               >
                 <span role="img" aria-label="">💡</span>
                 <span>{strings.didYouMean}:&#32;</span>

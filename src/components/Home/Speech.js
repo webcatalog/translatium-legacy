@@ -12,10 +12,10 @@ import { CircularProgress } from 'material-ui/Progress';
 import AVMic from 'material-ui-icons/Mic';
 import AVStop from 'material-ui-icons/Stop';
 
-import { updateImeMode } from '../actions/home';
-import { releaseDevice, startRecording, stopRecording } from '../actions/speech';
+import { updateImeMode } from '../../actions/home';
+import { releaseDevice, startRecording, stopRecording } from '../../actions/speech';
 
-import getPlatform from '../libs/getPlatform';
+import getPlatform from '../../libs/getPlatform';
 
 const styleSheet = createStyleSheet('Speech', theme => ({
   container: {

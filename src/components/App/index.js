@@ -12,13 +12,13 @@ import Paper from 'material-ui/Paper';
 import Snackbar from 'material-ui/Snackbar';
 import ToggleStar from 'material-ui-icons/Star';
 
-import { screenResize } from '../actions/screen';
-import { updateImeMode } from '../actions/home';
-import { closeSnackbar } from '../actions/snackbar';
+import { screenResize } from '../../actions/screen';
+import { updateImeMode } from '../../actions/home';
+import { closeSnackbar } from '../../actions/snackbar';
 
-import colorPairs from '../constants/colorPairs';
+import colorPairs from '../../constants/colorPairs';
 
-import getPlatform from '../libs/getPlatform';
+import getPlatform from '../../libs/getPlatform';
 
 import Alert from './Alert';
 import Ad from './Ad';

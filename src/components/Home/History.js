@@ -9,8 +9,8 @@ import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-
 import ActionDelete from 'material-ui-icons/Delete';
 import Divider from 'material-ui/Divider';
 
-import { deleteHistoryItem, loadHistory } from '../actions/history';
-import { loadOutput } from '../actions/home';
+import { deleteHistoryItem, loadHistory } from '../../actions/history';
+import { loadOutput } from '../../actions/home';
 
 const styleSheet = createStyleSheet('History', {
   container: {
