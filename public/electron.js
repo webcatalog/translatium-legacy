@@ -24,94 +24,45 @@ function getMenuTemplate() {
     {
       label: config.APP_NAME,
       submenu: [
-        {
-          role: 'about',
-          label: `About ${config.APP_NAME}`,
-        },
-        {
-          type: 'separator',
-        },
-        {
-          role: 'hide',
-          label: `Hide ${config.APP_NAME}`,
-        },
-        {
-          role: 'hideothers',
-        },
-        {
-          role: 'unhide',
-        },
-        {
-          type: 'separator',
-        },
-        {
-          role: 'quit',
-          label: `Quit ${config.APP_NAME}`,
-        },
+        { role: 'about' },
+        { type: 'separator' },
+        { role: 'hide' },
+        { role: 'hideothers' },
+        { role: 'unhide' },
+        { type: 'separator' },
+        { role: 'quit' },
       ],
     },
     {
       label: 'Edit',
       submenu: [
-        {
-          role: 'undo',
-        },
-        {
-          role: 'redo',
-        },
-        {
-          type: 'separator',
-        },
-        {
-          role: 'cut',
-        },
-        {
-          role: 'copy',
-        },
-        {
-          role: 'paste',
-        },
-        {
-          role: 'delete',
-        },
-        {
-          role: 'selectall',
-        },
+        { role: 'undo' },
+        { role: 'redo' },
+        { type: 'separator' },
+        { role: 'cut' },
+        { role: 'copy' },
+        { role: 'paste' },
+        { role: 'delete' },
+        { role: 'selectall' },
       ],
     },
     {
       label: 'View',
       submenu: [
-        {
-          label: 'Toggle Full Screen',
-          accelerator: process.platform === 'darwin'
-            ? 'Ctrl+Command+F'
-            : 'F11',
-          click: () => mainWindow.setFullScreen(true),
-        },
+        { role: 'togglefullscreen' },
+        { type: 'separator' },
+        { role: 'toggledevtools' },
       ],
     },
     {
       role: 'window',
       submenu: [
-        {
-          role: 'minimize',
-        },
-        {
-          role: 'zoom',
-        },
-        {
-          type: 'separator',
-        },
-        {
-          role: 'close',
-        },
-        {
-          type: 'separator',
-        },
-        {
-          role: 'front',
-        },
+        { role: 'minimize' },
+        { role: 'zoom' },
+        { type: 'separator' },
+        { role: 'close' },
+        { type: 'separator' },
+        { role: 'front' },
       ],
     },
     {
