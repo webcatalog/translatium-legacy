@@ -1,31 +1,25 @@
 import { UPDATE_STRINGS } from '../constants/actions';
 
-import fetchLocal from '../libs/fetchLocal';
+import enApp from '../strings/en-us.app.json';
+import enLanguages from '../strings/en-us.languages.json';
+import viApp from '../strings/vi-vn.app.json';
+import viLanguages from '../strings/vi-vn.languages.json';
 
 export const updateStrings = langId => (dispatch) => {
   let strings;
+  switch (langId) {
+    case 'vi-vn': {
+      strings = { ...viApp, ...viLanguages };
+      break;
+    }
+    default: {
+      strings = { ...enApp, ...enLanguages };
+      break;
+    }
+  }
 
-  const p = [];
-
-  p.push(
-    fetchLocal(`${process.env.PUBLIC_URL}/strings/${langId}.app.json`)
-      .then(res => res.json())
-      .then((res) => {
-        strings = Object.assign({}, strings, res);
-      }),
-  );
-
-  p.push(
-    fetchLocal(`${process.env.PUBLIC_URL}/strings/${langId}.languages.json`)
-      .then(res => res.json())
-      .then((res) => {
-        strings = Object.assign({}, strings, res);
-      }),
-  );
-
-  return Promise.all(p)
-    .then(() => dispatch({
-      type: UPDATE_STRINGS,
-      strings,
-    }));
+  dispatch({
+    type: UPDATE_STRINGS,
+    strings,
+  });
 };

@@ -24,9 +24,7 @@ const getDefaultLangId = () => {
       break;
     }
     default: {
-      /* eslint-disable no-console */
-      console.log('Undetected Platfom');
-      /* eslint-enable no-console */
+      userLanguages = ['en-us'];
     }
   }
 

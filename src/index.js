@@ -39,26 +39,25 @@ const runApp = () => {
     );
   }
 
-  store.dispatch(updateStrings(state.settings.displayLanguage))
-    .then(() => {
-      const theme = createMuiTheme({
-        palette: createPalette({
-          type: state.settings.darkMode ? 'dark' : 'light',
-          primary: colorPairs[state.settings.primaryColorId],
-          accent: pink,
-          error: red,
-        }),
-      });
+  store.dispatch(updateStrings(state.settings.displayLanguage));
 
-      render(
-        <Provider store={store}>
-          <MuiThemeProvider theme={theme}>
-            {renderRoutes()}
-          </MuiThemeProvider>
-        </Provider>,
-        document.getElementById('app'),
-      );
-    });
+  const theme = createMuiTheme({
+    palette: createPalette({
+      type: state.settings.darkMode ? 'dark' : 'light',
+      primary: colorPairs[state.settings.primaryColorId],
+      accent: pink,
+      error: red,
+    }),
+  });
+
+  render(
+    <Provider store={store}>
+      <MuiThemeProvider theme={theme}>
+        {renderRoutes()}
+      </MuiThemeProvider>
+    </Provider>,
+    document.getElementById('app'),
+  );
 };
 
 switch (getPlatform()) {
@@ -84,9 +83,11 @@ switch (getPlatform()) {
     runApp();
     break;
   }
+  case 'cordova': {
+    document.addEventListener('deviceready', runApp, false);
+    break;
+  }
   default: {
-    /* eslint-disable no-console */
-    console.log('Undetected Platfom');
-    /* eslint-enable no-console */
+    runApp();
   }
 }
