@@ -21,7 +21,6 @@ import getPlatform from './libs/getPlatform';
 
 import colorPairs from './constants/colorPairs';
 
-
 const runApp = () => {
   /* global document */
   const state = store.getState();

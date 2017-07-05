@@ -26,7 +26,10 @@ export default {
   lightBlue,
   cyan,
   teal,
-  green,
+  green: {
+    ...green,
+    500: green[600],
+  },
   lightGreen,
   orange,
   deepOrange,
