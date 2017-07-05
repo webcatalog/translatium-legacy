@@ -13,6 +13,10 @@ const copyToClipboard = (text) => {
       remote.clipboard.writeText(text);
       return;
     }
+    case 'cordova': {
+      window.cordova.plugins.clipboard.copy(text);
+      return;
+    }
     default: {
       /* eslint-disable no-console */
       console.log('Platform does not support copyToClipboard.');

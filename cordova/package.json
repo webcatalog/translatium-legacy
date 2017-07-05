@@ -3,6 +3,7 @@
     "displayName": "modern-translator",
     "version": "6.6.2",
     "dependencies": {
+        "cordova-clipboard": "git+https://github.com/ibnclaudius/CordovaClipboard.git",
         "cordova-ios": "^4.4.0",
         "cordova-plugin-statusbar": "^2.2.3",
         "cordova-plugin-whitelist": "^1.3.2",
@@ -13,7 +14,8 @@
         "plugins": {
             "cordova-plugin-whitelist": {},
             "cordova-plugin-statusbar": {},
-            "cordova-plugin-x-socialsharing": {}
+            "cordova-plugin-x-socialsharing": {},
+            "com.verso.cordova.clipboard": {}
         },
         "platforms": [
             "ios"
