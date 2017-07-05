@@ -12,6 +12,10 @@ const openUri = (uriStr) => {
       shell.openExternal(uriStr);
       break;
     }
+    case 'cordova': {
+      window.cordova.InAppBrowser.open(uriStr, '_system');
+      break;
+    }
     default: {
       /* eslint-disable no-console */
       console.log('Platform does not support openUri.');
