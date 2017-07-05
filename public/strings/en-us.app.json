@@ -45,7 +45,7 @@
 
 	"displayOriginalText": "Display original text",
 	"displayTranslatedText": "Display translated text",
-
+	"displayTextOnly": "Display text only",
 	"phrasebookIsEmpty": "Phrasebook is empty.",
 
 	"removeAds": "Remove ads",
@@ -110,5 +110,6 @@
 	"wouldYouMindGivingFeedback": "Would you mind giving us some feedback?",
 
 	"displayLanguage": "Display language",
-	"change": "Change"
+	"change": "Change",
+	"close": "Close"
 }

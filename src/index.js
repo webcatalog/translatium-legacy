@@ -1,8 +1,14 @@
-/* global window Windows */
+/* global Windows */
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import createPalette from 'material-ui/styles/palette';
+import { red, pink } from 'material-ui/styles/colors';
+
+import './main.css';
+import './fonts/roboto.css';
 
 import store from './store';
 import { updateSetting } from './actions/settings';
@@ -13,8 +19,8 @@ import renderRoutes from './renderRoutes';
 
 import getPlatform from './libs/getPlatform';
 
-import './fonts/roboto.css';
-import './main.css';
+import colorPairs from './constants/colorPairs';
+
 
 const runApp = () => {
   /* global document */
@@ -36,12 +42,20 @@ const runApp = () => {
 
   store.dispatch(updateStrings(state.settings.displayLanguage))
     .then(() => {
-      // onTouchTap for material-ui
-      injectTapEventPlugin();
+      const theme = createMuiTheme({
+        palette: createPalette({
+          type: state.settings.darkMode ? 'dark' : 'light',
+          primary: colorPairs[state.settings.primaryColorId],
+          accent: pink,
+          error: red,
+        }),
+      });
 
       render(
         <Provider store={store}>
-          {renderRoutes()}
+          <MuiThemeProvider theme={theme}>
+            {renderRoutes()}
+          </MuiThemeProvider>
         </Provider>,
         document.getElementById('app'),
       );

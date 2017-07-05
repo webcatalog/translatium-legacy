@@ -1,7 +1,7 @@
 /* global MicrosoftNSJS Windows */
 import React from 'react';
 
-import openUri from '../libs/openUri';
+import openUri from '../../libs/openUri';
 
 class Ad extends React.Component {
   componentDidMount() {
@@ -42,6 +42,8 @@ class Ad extends React.Component {
           }}
         />
         <div
+          role="link"
+          tabIndex="0"
           style={{
             width: adWidth,
             height: adHeight,
@@ -56,7 +58,7 @@ class Ad extends React.Component {
             cursor: 'pointer',
             zIndex: 1,
           }}
-          onTouchTap={() => openUri('https://getwebcatalog.com/?ref=moderntranslator')}
+          onClick={() => openUri('https://getwebcatalog.com/?ref=moderntranslator')}
         />
       </div>
     );

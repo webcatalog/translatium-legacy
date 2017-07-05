@@ -45,7 +45,7 @@
 
 	"displayOriginalText": "Hiển thị văn bản gốc",
 	"displayTranslatedText": "Hiển thị văn bản đã dịch",
-
+	"displayTextOnly": "Chỉ hiển thị chữ",
 	"phrasebookIsEmpty": "Sổ từ ngữ còn trống.",
 
 	"removeAds": "Xoá quảng cáo",
@@ -110,5 +110,6 @@
 	"wouldYouMindGivingFeedback": "Bạn có thể cho chúng tôi một vài góp ý không?",
 
 	"displayLanguage": "Ngôn ngữ hiển thị",
-	"change": "Thay đổi"
+	"change": "Thay đổi",
+	"close": "Đóng"
 }

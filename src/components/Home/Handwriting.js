@@ -3,16 +3,43 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
 
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Chip from 'material-ui/Chip';
-import FlatButton from 'material-ui/FlatButton';
+import Button from 'material-ui/Button';
 
-import { updateInputText, updateImeMode } from '../actions/home';
-import { loadSuggestions, resetSuggestions } from '../actions/handwriting';
+import { updateInputText, updateImeMode } from '../../actions/home';
+import { loadSuggestions, resetSuggestions } from '../../actions/handwriting';
 
-import getPlatform from '../libs/getPlatform';
-import insertAtCursor from '../libs/insertAtCursor';
-import deleteAtCursor from '../libs/deleteAtCursor';
+import getPlatform from '../../libs/getPlatform';
+import insertAtCursor from '../../libs/insertAtCursor';
+import deleteAtCursor from '../../libs/deleteAtCursor';
+
+const styleSheet = createStyleSheet('Handwriting', {
+  container: {
+    position: 'absolute',
+    width: '100vw',
+    height: 240,
+    zIndex: 1499,
+    bottom: 0,
+    left: 0,
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  wrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: 4,
+    boxSizing: 'border-box',
+    overflowY: 'auto',
+  },
+  suggestionItem: {
+    marginLeft: 4,
+  },
+  canvas: {
+    flex: 1,
+  },
+});
 
 class Handwriting extends React.Component {
   constructor(props) {
@@ -28,21 +55,20 @@ class Handwriting extends React.Component {
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
-    this.onDeleteButtonTouchTap = this.onDeleteButtonTouchTap.bind(this);
-    this.onSpaceBarButtonTouchTap = this.onSpaceBarButtonTouchTap.bind(this);
-    this.onDoneButtonTouchTap = this.onDoneButtonTouchTap.bind(this);
-    this.onSuggestionsItemTouchTap = this.onSuggestionsItemTouchTap.bind(this);
+    this.onDeleteButtonClick = this.onDeleteButtonClick.bind(this);
+    this.onSpaceBarButtonClick = this.onSpaceBarButtonClick.bind(this);
+    this.onDoneButtonClick = this.onDoneButtonClick.bind(this);
+    this.onSuggestionsItemClick = this.onSuggestionsItemClick.bind(this);
   }
 
 
   componentDidMount() {
     const canvas = this.canvas;
-    const { onResetSuggestions } = this.props;
-    const { textColor } = this.context.muiTheme.palette;
+    const { darkMode, onResetSuggestions } = this.props;
     this.canvasContext = canvas.getContext('2d');
     this.canvasContext.canvas.height = canvas.clientHeight;
     this.canvasContext.canvas.width = canvas.clientWidth;
-    this.canvasContext.strokeStyle = textColor;
+    this.canvasContext.strokeStyle = darkMode ? '#fff' : '#000';
     this.canvasContext.lineJoin = 'round';
     this.canvasContext.lineWidth = 5;
     this.offsetTop = canvas.offsetParent.offsetTop + canvas.offsetTop;
@@ -72,7 +98,7 @@ class Handwriting extends React.Component {
       pageY = e.pageY;
     }
     const titleBarHeight = (getPlatform() === 'mac') ? 22 : 0;
-    this.addTouchTap(pageX - this.offsetLeft, pageY - this.offsetTop - titleBarHeight);
+    this.addClick(pageX - this.offsetLeft, pageY - this.offsetTop - titleBarHeight);
   }
 
   onMouseMove(e) {
@@ -90,7 +116,7 @@ class Handwriting extends React.Component {
 
       const titleBarHeight = (getPlatform() === 'mac') ? 22 : 0;
 
-      this.addTouchTap(pageX - this.offsetLeft, pageY - this.offsetTop - titleBarHeight, true);
+      this.addClick(pageX - this.offsetLeft, pageY - this.offsetTop - titleBarHeight, true);
     }
   }
 
@@ -114,7 +140,7 @@ class Handwriting extends React.Component {
     this.paint = false;
   }
 
-  onDeleteButtonTouchTap() {
+  onDeleteButtonClick() {
     const {
       suggestions,
       selectionStart,
@@ -139,7 +165,7 @@ class Handwriting extends React.Component {
     this.clearCanvas();
   }
 
-  onSpaceBarButtonTouchTap() {
+  onSpaceBarButtonClick() {
     const { inputText, selectionStart, selectionEnd, onUpdateInputText } = this.props;
 
     const insertedText = insertAtCursor(
@@ -158,11 +184,11 @@ class Handwriting extends React.Component {
     this.clearCanvas();
   }
 
-  onDoneButtonTouchTap() {
+  onDoneButtonClick() {
     this.clearCanvas();
   }
 
-  onSuggestionsItemTouchTap(rText) {
+  onSuggestionsItemClick(rText) {
     const { suggestions, inputText, selectionStart, selectionEnd, onUpdateInputText } = this.props;
     const deletedText = deleteAtCursor(
       inputText,
@@ -187,35 +213,7 @@ class Handwriting extends React.Component {
     this.clearCanvas();
   }
 
-  getStyles() {
-    return {
-      container: {
-        position: 'absolute',
-        width: '100vw',
-        height: 240,
-        zIndex: 1499,
-        bottom: 0,
-        left: 0,
-        display: 'flex',
-        flexDirection: 'column',
-      },
-      wrapper: {
-        display: 'flex',
-        justifyContent: 'center',
-        padding: 4,
-        boxSizing: 'border-box',
-        overflowY: 'auto',
-      },
-      suggestionItem: {
-        marginLeft: 4,
-      },
-      canvas: {
-        flex: 1,
-      },
-    };
-  }
-
-  addTouchTap(x, y, dragging) {
+  addClick(x, y, dragging) {
     this.clickX.push(Math.round(x));
     this.clickY.push(Math.round(y));
     this.clickDrag.push(dragging);
@@ -254,39 +252,36 @@ class Handwriting extends React.Component {
   }
 
   render() {
-    const styles = this.getStyles();
-
     const suggestions = this.props.suggestions
                         || [',', '.', '?', '!', ':', '\'', '"', ';', '@'];
 
     const {
-      onDeleteButtonTouchTap,
-      onSpaceBarButtonTouchTap,
-      onDoneButtonTouchTap,
-      onSuggestionsItemTouchTap,
+      onDeleteButtonClick,
+      onSpaceBarButtonClick,
+      onDoneButtonClick,
+      onSuggestionsItemClick,
       onMouseUp,
       onMouseDown,
       onMouseLeave,
       onMouseMove,
     } = this;
 
-    const { strings } = this.props;
+    const { classes, strings } = this.props;
 
     return (
-      <Paper zDepth={2} style={styles.container}>
-        <div style={styles.wrapper}>
+      <Paper elevation={2} className={classes.container}>
+        <div className={classes.wrapper}>
           {suggestions.map(suggestion => (
             <Chip
               key={shortid.generate()}
-              style={styles.suggestionItem}
-              onTouchTap={() => onSuggestionsItemTouchTap(suggestion)}
-            >
-              {suggestion}
-            </Chip>
+              label={suggestion}
+              className={classes.suggestionItem}
+              onClick={() => onSuggestionsItemClick(suggestion)}
+            />
           ))}
         </div>
         <canvas
-          style={styles.canvas}
+          className={classes.canvas}
           ref={(c) => { this.canvas = c; }}
           onMouseUp={onMouseUp}
           onMouseDown={onMouseDown}
@@ -296,10 +291,16 @@ class Handwriting extends React.Component {
           onTouchStart={onMouseDown}
           onTouchMove={onMouseMove}
         />
-        <div style={styles.wrapper}>
-          <FlatButton label={strings.delete} secondary onTouchTap={onDeleteButtonTouchTap} />
-          <FlatButton label={strings.spaceBar} onTouchTap={onSpaceBarButtonTouchTap} />
-          <FlatButton label={strings.done} primary onTouchTap={onDoneButtonTouchTap} />
+        <div className={classes.wrapper}>
+          <Button color="secondary" onClick={onDeleteButtonClick}>
+            {strings.delete}
+          </Button>
+          <Button onClick={onSpaceBarButtonClick}>
+            {strings.spaceBar}
+          </Button>
+          <Button color="primary" onClick={onDoneButtonClick}>
+            {strings.done}
+          </Button>
         </div>
       </Paper>
     );
@@ -307,20 +308,18 @@ class Handwriting extends React.Component {
 }
 
 Handwriting.propTypes = {
-  screenWidth: PropTypes.number,
+  classes: PropTypes.object.isRequired,
+  darkMode: PropTypes.bool.isRequired,
   inputText: PropTypes.string,
-  selectionStart: PropTypes.number,
-  selectionEnd: PropTypes.number,
-  strings: PropTypes.objectOf(PropTypes.string).isRequired,
-  suggestions: PropTypes.arrayOf(PropTypes.string),
-  onUpdateInputText: PropTypes.func.isRequired,
   onLoadSuggestions: PropTypes.func.isRequired,
   onResetSuggestions: PropTypes.func.isRequired,
   onTurnOffHandwriting: PropTypes.func.isRequired,
-};
-
-Handwriting.contextTypes = {
-  muiTheme: PropTypes.object,
+  onUpdateInputText: PropTypes.func.isRequired,
+  screenWidth: PropTypes.number,
+  selectionEnd: PropTypes.number,
+  selectionStart: PropTypes.number,
+  strings: PropTypes.objectOf(PropTypes.string).isRequired,
+  suggestions: PropTypes.arrayOf(PropTypes.string),
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -333,13 +332,14 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
+  darkMode: state.settings.darkMode,
   inputText: state.home.inputText,
-  selectionStart: state.home.selectionStart,
   selectionEnd: state.home.selectionEnd,
-  suggestions: state.handwriting.suggestions,
+  selectionStart: state.home.selectionStart,
   strings: state.strings,
+  suggestions: state.handwriting.suggestions,
 });
 
 export default connect(
   mapStateToProps, mapDispatchToProps,
-)(Handwriting);
+)(withStyles(styleSheet)(Handwriting));
