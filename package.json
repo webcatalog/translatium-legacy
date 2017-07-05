@@ -14,7 +14,7 @@
     "node": "8"
   },
   "scripts": {
-    "install": "yarn install:cordova",
+    "install": "npm run install:cordova",
     "install:cordova": "cd cordova && npm install",
     "prepare:cordova": "cd cordova && cordova prepare",
     "start": "cross-env REACT_APP_VERSION=dev REACT_APP_GOOGLE_ENDPOINT=http://localhost:3000 BROWSER=none react-scripts start",
