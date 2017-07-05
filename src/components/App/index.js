@@ -66,9 +66,9 @@ const styleSheet = createStyleSheet('App', theme => ({
 
 class App extends React.Component {
   componentDidMount() {
-    if (getPlatform() === 'windows') {
-      this.setAppTitleBar(this.props.primaryColorId);
+    this.setAppTitleBar(this.props.primaryColorId);
 
+    if (getPlatform() === 'windows') {
       const { onBackClick } = this.props;
 
       const systemNavigationManager = Windows.UI.Core.SystemNavigationManager.getForCurrentView();
@@ -90,9 +90,7 @@ class App extends React.Component {
     const { primaryColorId } = this.props;
 
     if (primaryColorId !== nextProps.primaryColorId) {
-      if (getPlatform() === 'windows') {
-        this.setAppTitleBar(nextProps.primaryColorId);
-      }
+      this.setAppTitleBar(nextProps.primaryColorId);
     }
   }
 
@@ -101,33 +99,40 @@ class App extends React.Component {
   }
 
   setAppTitleBar(primaryColorId) {
-    /* global Windows */
+    const color = colorPairs[primaryColorId][700];
 
-    const color = colorPairs[primaryColorId];
-    const regCode = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color.primary2Color);
-    const backgroundColor = {
-      r: parseInt(regCode[1], 16),
-      g: parseInt(regCode[2], 16),
-      b: parseInt(regCode[3], 16),
-      a: 1,
-    };
-    const foregroundColor = { r: 255, g: 255, b: 255, a: 1 };
+    if (getPlatform() === 'windows') {
+      /* global Windows */
+      const regCode = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
+      const backgroundColor = {
+        r: parseInt(regCode[1], 16),
+        g: parseInt(regCode[2], 16),
+        b: parseInt(regCode[3], 16),
+        a: 1,
+      };
+      const foregroundColor = { r: 255, g: 255, b: 255, a: 1 };
 
-    // PC
-    if (Windows.UI.ViewManagement.ApplicationView) {
-      const v = Windows.UI.ViewManagement.ApplicationView.getForCurrentView();
-      v.titleBar.backgroundColor = backgroundColor;
-      v.titleBar.foregroundColor = foregroundColor;
-      v.titleBar.buttonBackgroundColor = backgroundColor;
-      v.titleBar.buttonForegroundColor = foregroundColor;
+      // PC
+      if (Windows.UI.ViewManagement.ApplicationView) {
+        const v = Windows.UI.ViewManagement.ApplicationView.getForCurrentView();
+        v.titleBar.backgroundColor = backgroundColor;
+        v.titleBar.foregroundColor = foregroundColor;
+        v.titleBar.buttonBackgroundColor = backgroundColor;
+        v.titleBar.buttonForegroundColor = foregroundColor;
+      }
+
+      if (Windows.UI.ViewManagement.StatusBar) {
+        const statusBar = Windows.UI.ViewManagement.StatusBar.getForCurrentView();
+        statusBar.backgroundColor = backgroundColor;
+        statusBar.foregroundColor = foregroundColor;
+        statusBar.backgroundOpacity = 1;
+        statusBar.showAsync();
+      }
     }
 
-    if (Windows.UI.ViewManagement.StatusBar) {
-      const statusBar = Windows.UI.ViewManagement.StatusBar.getForCurrentView();
-      statusBar.backgroundColor = backgroundColor;
-      statusBar.foregroundColor = foregroundColor;
-      statusBar.backgroundOpacity = 1;
-      statusBar.showAsync();
+    if (getPlatform() === 'cordova') {
+      /* global StatusBar */
+      StatusBar.backgroundColorByHexString(color);
     }
   }
 
