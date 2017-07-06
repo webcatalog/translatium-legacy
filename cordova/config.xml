@@ -8,6 +8,7 @@
       Quang Lam
     </author>
     <content src="index.html" />
+    <hook src="scripts/after_prepare.js" type="after_prepare" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
