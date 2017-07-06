@@ -253,7 +253,7 @@ class Home extends React.Component {
           });
         }
 
-        if (getPlatform() !== 'mac') {
+        if (getPlatform() !== 'electron') {
           controllers.push({
             icon: <SocialShare />,
             tooltip: strings.share,

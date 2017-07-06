@@ -31,7 +31,7 @@ const createDialog = ({
 
       return;
     }
-    case 'mac': {
+    case 'electron': {
       remote.dialog.showMessageBox({
         type: 'info',
         buttons: [defaultButtonText, cancelButtonText],
@@ -63,7 +63,7 @@ const askToReview = () => {
     defaultButtonText: strings.okSure,
     cancelButtonText: strings.noThanks,
     defaultFunc: () => {
-      if (getPlatform() === 'mac') {
+      if (getPlatform() === 'electron') {
         openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12');
       } else if (getPlatform() === 'windows') {
         openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k');

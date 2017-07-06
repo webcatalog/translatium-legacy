@@ -13,7 +13,7 @@ const getLanguageCode = (langId) => {
 const getDefaultLangId = () => {
   let userLanguages;
   switch (getPlatform()) {
-    case 'mac': {
+    case 'electron': {
       /* global remote */
       userLanguages = [remote.app.getLocale()];
       break;

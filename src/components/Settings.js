@@ -213,7 +213,7 @@ const Settings = (props) => {
               <ListItemText primary={strings.rateWindowsStore} />
             </ListItem>
           )}
-          {getPlatform() === 'mac' && (
+          {getPlatform() === 'electron' && (
             <ListItem onClick={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')} role="link">
               <ListItemText primary={strings.rateMacAppStore} />
             </ListItem>

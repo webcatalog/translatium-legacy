@@ -43,7 +43,7 @@ const openFileToBlob = () =>
         break;
       }
       default:
-      case 'mac': {
+      case 'electron': {
         /* global remote fs Blob */
         remote.dialog.showOpenDialog({
           properties: ['openFile'],

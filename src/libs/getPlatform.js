@@ -10,7 +10,7 @@ const getPlatform = () => {
   }
 
   if (typeof window !== 'undefined' && window.process && window.process.type === 'renderer') {
-    return 'mac';
+    return 'electron';
   }
 
   return 'browser';

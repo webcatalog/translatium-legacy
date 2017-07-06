@@ -42,7 +42,7 @@ export const releaseDevice = () => ((dispatch, getState) => {
       }
       break;
     }
-    case 'mac': {
+    case 'electron': {
       if (!recorder) return;
 
       recorder.stopRecording(() => {
@@ -155,7 +155,7 @@ export const stopRecording = () => ((dispatch, getState) => {
       }
       break;
     }
-    case 'mac': {
+    case 'electron': {
       recorder.stopRecording(() => {
         dispatch({
           type: UPDATE_SPEECH_STATUS,
@@ -243,7 +243,7 @@ export const startRecording = () => ((dispatch) => {
         .then(null, () => {});
       break;
     }
-    case 'mac': {
+    case 'electron': {
       navigator.getUserMedia({ audio: true, video: false }, (stream) => {
         recorder = new RecordRTC(stream, {
           type: 'audio',

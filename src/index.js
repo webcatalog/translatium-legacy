@@ -29,7 +29,7 @@ const runApp = () => {
   store.dispatch(updateSetting('launchCount', launchCount + 1));
 
 
-  if (getPlatform() === 'mac') {
+  if (getPlatform() === 'electron') {
     // Mock user agent
     Object.defineProperty(
       window.navigator,
@@ -86,7 +86,7 @@ switch (getPlatform()) {
     };
     break;
   }
-  case 'mac': {
+  case 'electron': {
     runApp();
     break;
   }

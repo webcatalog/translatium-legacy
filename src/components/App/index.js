@@ -153,7 +153,7 @@ class App extends React.Component {
 
     return (
       <div className={classes.container}>
-        {getPlatform() === 'mac' && (
+        {getPlatform() === 'electron' && (
           <div className={classes.fakeTitleBar}>
             Modern Translator
           </div>

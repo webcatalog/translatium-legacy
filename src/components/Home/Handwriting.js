@@ -97,7 +97,7 @@ class Handwriting extends React.Component {
       pageX = e.pageX;
       pageY = e.pageY;
     }
-    const titleBarHeight = (getPlatform() === 'mac') ? 22 : 0;
+    const titleBarHeight = (getPlatform() === 'electron') ? 22 : 0;
     this.addClick(pageX - this.offsetLeft, pageY - this.offsetTop - titleBarHeight);
   }
 
@@ -114,7 +114,7 @@ class Handwriting extends React.Component {
         pageY = e.pageY;
       }
 
-      const titleBarHeight = (getPlatform() === 'mac') ? 22 : 0;
+      const titleBarHeight = (getPlatform() === 'electron') ? 22 : 0;
 
       this.addClick(pageX - this.offsetLeft, pageY - this.offsetTop - titleBarHeight, true);
     }
