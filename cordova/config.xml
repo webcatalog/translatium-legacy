@@ -22,6 +22,7 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <preference name="StatusBarOverlaysWebView" value="false" />
+        <preference name="DisallowOverscroll" value="true" />
     </platform>
     <engine name="ios" spec="^4.4.0" />
     <plugin name="com.verso.cordova.clipboard" spec="https://github.com/ibnclaudius/CordovaClipboard" />
