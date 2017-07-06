@@ -2,6 +2,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import initReactFastclick from 'react-fastclick';
 
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import createPalette from 'material-ui/styles/palette';
@@ -40,6 +41,12 @@ const runApp = () => {
   }
 
   store.dispatch(updateStrings(state.settings.displayLanguage));
+
+  if (getPlatform() === 'cordova' && window.cordova.platformId === 'ios') {
+    // https://github.com/ftlabs/fastclick/issues/450
+    // Fix 300ms delay
+    initReactFastclick();
+  }
 
   const theme = createMuiTheme({
     palette: createPalette({

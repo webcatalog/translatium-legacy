@@ -50,6 +50,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-fastclick": "^3.0.2",
     "react-redux": "^5.0.5",
     "react-router": "^3.0.5",
     "react-router-redux": "^4.0.8",
