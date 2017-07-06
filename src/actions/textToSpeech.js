@@ -1,11 +1,8 @@
-/* global fetch */
+/* global */
 
 import { PLAY_TEXT_TO_SPEECH, STOP_TEXT_TO_SPEECH } from '../constants/actions';
 
-import getPlatform from '../libs/getPlatform';
 import generateGoogleTranslateToken from '../libs/generateGoogleTranslateToken';
-import winXhr from '../libs/winXhr';
-
 import { openAlert } from './alert';
 
 let player = null;
@@ -22,34 +19,15 @@ const textToSpeechShortText = (lang, text, idx, total, chinaMode) =>
         + `&client=t&prev=input&tk=${token}`,
       );
 
-      switch (getPlatform()) {
-        case 'windows': {
-          return winXhr({
-            type: 'get',
-            uri,
-            responseType: 'blob',
-          });
-        }
-        default: {
-          return fetch(uri)
-            .then(response => response.blob());
-        }
-      }
-    })
-    .then((blob) => {
-      if (blob) {
-        /* global URL Audio */
-        const uri = URL.createObjectURL(blob, { oneTimeOnly: true });
-        player = new Audio(uri);
-        return new Promise(
-          (resolve, reject) => {
-            player.play();
-            player.onended = () => resolve();
-            player.onerror = e => reject(e);
-          },
-        );
-      }
-      return Promise.reject(new Error('Fail to get blob'));
+      /* global Audio */
+      player = new Audio(uri);
+      return new Promise(
+        (resolve, reject) => {
+          player.play();
+          player.onended = () => resolve();
+          player.onerror = e => reject(e);
+        },
+      );
     });
 
 export const playTextToSpeech = (textToSpeechLang, textToSpeechText, chinaMode) => ((dispatch) => {
