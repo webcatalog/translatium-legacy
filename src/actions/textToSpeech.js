@@ -45,7 +45,7 @@ const textToSpeechShortText = (lang, text, idx, total, chinaMode) =>
           (resolve, reject) => {
             player.play();
             player.onended = () => resolve();
-            player.onerror = () => reject();
+            player.onerror = e => reject(e);
           },
         );
       }
@@ -103,7 +103,9 @@ export const playTextToSpeech = (textToSpeechLang, textToSpeechText, chinaMode) 
     .then(() => {
       dispatch({ type: STOP_TEXT_TO_SPEECH });
     })
-    .catch(() => {
+    .catch((e) => {
+      // eslint-disable-next-line
+      console.log(e);
       dispatch({ type: STOP_TEXT_TO_SPEECH });
       dispatch(openAlert('cannotConnectToServer'));
     });

@@ -184,8 +184,6 @@ export const loadImage = fromCamera => (dispatch, getState) => {
 export const setZoomLevel = zoomLevel => (dispatch, getState) => {
   const ocr = getState().ocr;
 
-  console.log(zoomLevel);
-
   dispatch({
     type: UPDATE_OCR,
     ocr: Object.assign({}, ocr, { zoomLevel }),
