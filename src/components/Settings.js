@@ -28,6 +28,8 @@ import displayLanguages from '../constants/displayLanguages';
 import getPlatform from '../libs/getPlatform';
 import openUri from '../libs/openUri';
 
+import { runApp } from '..';
+
 const styleSheet = createStyleSheet('Settings', {
   container: {
     flex: 1,
@@ -92,7 +94,7 @@ const Settings = (props) => {
                     value={colorId}
                     onClick={() => {
                       onSettingChange('primaryColorId', colorId);
-                      window.location.reload();
+                      runApp(true);
                     }}
                   >
                     {strings[colorId]}
@@ -139,7 +141,7 @@ const Settings = (props) => {
                 checked={darkMode}
                 onChange={() => {
                   onToggle('darkMode');
-                  window.location.reload();
+                  runApp(true);
                 }}
               />
             </ListItemSecondaryAction>

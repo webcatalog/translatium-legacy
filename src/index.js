@@ -22,14 +22,14 @@ import getPlatform from './libs/getPlatform';
 
 import colorPairs from './constants/colorPairs';
 
-const runApp = () => {
+export const runApp = (isRestart) => {
   /* global document */
   const state = store.getState();
   const launchCount = state.settings.launchCount;
   store.dispatch(updateSetting('launchCount', launchCount + 1));
 
 
-  if (getPlatform() === 'electron') {
+  if (getPlatform() === 'electron' && !isRestart) {
     // Mock user agent
     Object.defineProperty(
       window.navigator,
