@@ -3,7 +3,12 @@
   "description": "Translator app for Mac & PC.",
   "version": "6.6.2",
   "main": "public/electron.js",
-  "author": "Quang Lam",
+  "repository": "https://github.com/modern-translator/modern-translator",
+  "author": {
+    "name": "Quang Lam",
+    "email": "quang.lam2807@gmail.com",
+    "url": "https://quanglam.me"
+  },
   "licenses": [
     {
       "type": "Apache-2.0",
