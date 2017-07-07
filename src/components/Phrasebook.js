@@ -16,7 +16,7 @@ import Divider from 'material-ui/Divider';
 import { deletePhrasebookItem, loadPhrasebook } from '../actions/phrasebook';
 import { loadOutput } from '../actions/home';
 
-const styleSheet = createStyleSheet('Phrasebook', {
+const styleSheet = createStyleSheet('Phrasebook', theme => ({
   emptyContainer: {
     flex: 1,
     display: 'flex',
@@ -25,11 +25,11 @@ const styleSheet = createStyleSheet('Phrasebook', {
   },
   emptyInnerContainer: {
     textAlign: 'center',
-    // color: textColor,
   },
   bigIcon: {
     height: 96,
     width: 96,
+    color: theme.palette.text.primary,
   },
   container: {
     flex: 1,
@@ -48,7 +48,7 @@ const styleSheet = createStyleSheet('Phrasebook', {
   progress: {
     marginTop: 12,
   },
-});
+}));
 
 class Phrasebook extends React.Component {
   componentDidMount() {
