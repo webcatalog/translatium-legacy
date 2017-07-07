@@ -1,6 +1,7 @@
 <img src="build-resources/icon.png" height="128" width="128" alt="Modern Translator" />
 
 ## Modern Translator
+
 [![Apache 2.0 License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/modern-translator/modern-translator/blob/master/LICENSE)
 
 | Platform    | Build Status                                                                                                                                                                                                                    |
