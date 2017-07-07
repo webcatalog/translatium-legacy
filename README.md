@@ -1,4 +1,4 @@
-<img src="build-resources/icon.png" height="128" width="128" alt="Modern Translator" />
+<img src="build-resources/icons/1024x1024.png" height="128" width="128" alt="Modern Translator" />
 
 ## Modern Translator
 
