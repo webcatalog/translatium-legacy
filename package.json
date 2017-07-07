@@ -22,8 +22,8 @@
     "build": "cross-env REACT_APP_VERSION=6.6.2 react-scripts build && node add-bom.js",
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "pack": "electron-builder --dir --mac mas",
-    "dist": "yarn build && electron-builder --mac mas",
+    "pack": "electron-builder --dir",
+    "dist": "yarn build && electron-builder",
     "lint": "eslint src public --ext js"
   },
   "dependencies": {
@@ -87,6 +87,18 @@
     "productName": "Modern Translator",
     "directories": {
       "buildResources": "build-resources"
+    },
+    "linux": {
+      "category": "Education",
+      "packageCategory": "education",
+      "target": [
+        "deb",
+        "rpm",
+        "pacman"
+      ]
+    },
+    "mac": {
+      "target": ["mas", "zip"]
     }
   }
 }
