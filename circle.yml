@@ -6,6 +6,8 @@ machine:
 
 dependencies:
   override:
+    - nvm install 8
+    - nvm use 8
     - yarn
   cache_directories:
     - ~/.cache/yarn
