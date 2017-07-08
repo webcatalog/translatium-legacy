@@ -9,8 +9,12 @@ const copyToClipboard = (text) => {
       Windows.ApplicationModel.DataTransfer.Clipboard.setContent(dataPackage);
       return;
     }
-    case 'mac': {
+    case 'electron': {
       remote.clipboard.writeText(text);
+      return;
+    }
+    case 'cordova': {
+      window.cordova.plugins.clipboard.copy(text);
       return;
     }
     default: {

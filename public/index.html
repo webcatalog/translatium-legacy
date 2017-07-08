@@ -2,18 +2,25 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data: gap: https://ssl.gstatic.com https://www.google.com https://translate.google.com https://translate.google.cn https://api.ocr.space 'unsafe-eval' ws: ms-appx: filesystem; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<title>Modern Translator</title>
 	</head>
 	<body>
 		<div id="app"></div>
 		<script>
-			var { remote, webFrame, shell } = require('electron');
-			var fs = require('fs');
+			// Electron
+    	if (typeof window !== 'undefined' && window.process && window.process.type === "renderer") {
+				var { remote, webFrame, shell } = require('electron');
+				var fs = require('fs');
 
-			webFrame.setVisualZoomLevelLimits(1, 1);
-			webFrame.setLayoutZoomLevelLimits(1, 1);
+				webFrame.setVisualZoomLevelLimits(1, 1);
+				webFrame.setLayoutZoomLevelLimits(1, 1);
+			}
 		</script>
-		<script src="//Microsoft.Advertising.JavaScript/ad.js"></script>
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="//Microsoft.Advertising.JavaScript/ad.js"></script>
 	</body>
 </html>

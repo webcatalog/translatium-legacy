@@ -1,0 +1,20 @@
+machine:
+  node:
+    version: 8
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+
+dependencies:
+  pre:
+    - sudo apt-get update; sudo apt-get install rpm bsdtar
+  override:
+    - nvm install 8
+    - nvm use 8
+    - yarn
+  cache_directories:
+    - ~/.cache/yarn
+
+test:
+  override:
+    - yarn lint
+    - yarn dist

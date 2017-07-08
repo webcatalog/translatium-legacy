@@ -31,7 +31,7 @@ const captureToBlob = () =>
           break;
         }
         default:
-        case 'mac': {
+        case 'electron': {
           /* eslint-disable no-console */
           console.log('Platform does not support camera capture');
           /* eslint-enable no-console */

@@ -5,7 +5,7 @@ import winXhr from './winXhr';
 
 const getGoogleTkk = (chinaMode) => {
   if (sessionStorage.getItem('googleTkk') == null) {
-    const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || (chinaMode ? 'https://translate.google.com' : 'http://translate.google.cn');
+    const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || (chinaMode ? 'https://translate.google.cn' : 'https://translate.google.com');
 
     const uri = `${endpoint}/m/translate`;
 

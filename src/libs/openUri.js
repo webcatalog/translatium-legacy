@@ -8,8 +8,12 @@ const openUri = (uriStr) => {
       Windows.System.Launcher.launchUriAsync(uri);
       break;
     }
-    case 'mac': {
+    case 'electron': {
       shell.openExternal(uriStr);
+      break;
+    }
+    case 'cordova': {
+      window.cordova.InAppBrowser.open(uriStr, '_system');
       break;
     }
     default: {

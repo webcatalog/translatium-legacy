@@ -1,8 +1,15 @@
-/* global window Windows */
+/* global Windows */
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import initReactFastclick from 'react-fastclick';
+
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import createPalette from 'material-ui/styles/palette';
+import { red, pink } from 'material-ui/styles/colors';
+
+import './main.css';
+import './fonts/roboto.css';
 
 import store from './store';
 import { updateSetting } from './actions/settings';
@@ -13,17 +20,16 @@ import renderRoutes from './renderRoutes';
 
 import getPlatform from './libs/getPlatform';
 
-import './main.css';
-import './fonts/roboto.css';
+import colorPairs from './constants/colorPairs';
 
-const runApp = () => {
+export const runApp = (isRestart) => {
   /* global document */
   const state = store.getState();
   const launchCount = state.settings.launchCount;
   store.dispatch(updateSetting('launchCount', launchCount + 1));
 
 
-  if (getPlatform() === 'mac') {
+  if (getPlatform() === 'electron' && !isRestart) {
     // Mock user agent
     Object.defineProperty(
       window.navigator,
@@ -34,18 +40,31 @@ const runApp = () => {
     );
   }
 
-  store.dispatch(updateStrings(state.settings.displayLanguage))
-    .then(() => {
-      // onTouchTap for material-ui
-      injectTapEventPlugin();
+  store.dispatch(updateStrings(state.settings.displayLanguage));
 
-      render(
-        <Provider store={store}>
-          {renderRoutes()}
-        </Provider>,
-        document.getElementById('app'),
-      );
-    });
+  if (getPlatform() === 'cordova' && window.cordova.platformId === 'ios') {
+    // https://github.com/ftlabs/fastclick/issues/450
+    // Fix 300ms delay
+    initReactFastclick();
+  }
+
+  const theme = createMuiTheme({
+    palette: createPalette({
+      type: state.settings.darkMode ? 'dark' : 'light',
+      primary: colorPairs[state.settings.primaryColorId],
+      accent: pink,
+      error: red,
+    }),
+  });
+
+  render(
+    <Provider store={store}>
+      <MuiThemeProvider theme={theme}>
+        {renderRoutes()}
+      </MuiThemeProvider>
+    </Provider>,
+    document.getElementById('app'),
+  );
 };
 
 switch (getPlatform()) {
@@ -67,13 +86,15 @@ switch (getPlatform()) {
     };
     break;
   }
-  case 'mac': {
+  case 'electron': {
     runApp();
     break;
   }
+  case 'cordova': {
+    document.addEventListener('deviceready', runApp, false);
+    break;
+  }
   default: {
-    /* eslint-disable no-console */
-    console.log('Undetected Platfom');
-    /* eslint-enable no-console */
+    runApp();
   }
 }

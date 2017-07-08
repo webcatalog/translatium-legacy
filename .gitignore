@@ -270,7 +270,4 @@ paket-files/
 __pycache__/
 *.pyc
 
-
-www
-
 /*.appx

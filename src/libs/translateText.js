@@ -8,7 +8,7 @@ import winXhr from './winXhr';
 const translateShortText = (inputLang, outputLang, inputText, chinaMode) =>
   generateGoogleTranslateToken(inputText, chinaMode)
     .then((token) => {
-      const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || (chinaMode ? 'https://translate.google.com' : 'http://translate.google.cn');
+      const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || (chinaMode ? 'https://translate.google.cn' : 'https://translate.google.com');
 
       const uri = `${endpoint}/translate_a/single?client=t`
               + `&sl=${languageUtils.toGoogleStandardlizedLanguage(inputLang)}`
