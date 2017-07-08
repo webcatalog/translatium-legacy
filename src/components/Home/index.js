@@ -6,15 +6,15 @@ import { push } from 'react-router-redux';
 import shortid from 'shortid';
 import classNames from 'classnames';
 
+import { CircularProgress } from 'material-ui/Progress';
+import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
+import Button from 'material-ui/Button';
+import Card, { CardActions, CardContent } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
-import Card, { CardActions, CardContent } from 'material-ui/Card';
-import { MenuItem } from 'material-ui/Menu';
-import Button from 'material-ui/Button';
-import { CircularProgress } from 'material-ui/Progress';
+import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 
 import ActionSwapHoriz from 'material-ui-icons/SwapHoriz';
@@ -361,13 +361,10 @@ class Home extends React.Component {
                       controllers
                         .slice(maxVisibleIcon, controllers.length)
                         .map(({ icon, tooltip, onClick }) => (
-                          <MenuItem
-                            leftIcon={icon}
-                            key={shortid.generate()}
-                            onClick={onClick}
-                          >
-                            {tooltip}
-                          </MenuItem>
+                          <ListItem button onClick={onClick} key={`outputTool_${tooltip}`}>
+                            <ListItemIcon>{icon}</ListItemIcon>
+                            <ListItemText primary={tooltip} />
+                          </ListItem>
                         ))
                     }
                   </EnhancedMenu>
@@ -557,13 +554,10 @@ class Home extends React.Component {
                       controllers
                         .slice(maxVisibleIcon, controllers.length)
                         .map(({ icon, tooltip, onClick }) => (
-                          <MenuItem
-                            leftIcon={icon}
-                            key={shortid.generate()}
-                            onClick={onClick}
-                          >
-                            {tooltip}
-                          </MenuItem>
+                          <ListItem button onClick={onClick} key={`inputTool_${tooltip}`}>
+                            <ListItemIcon>{icon}</ListItemIcon>
+                            <ListItemText primary={tooltip} />
+                          </ListItem>
                         ))
                     }
                   </EnhancedMenu>
