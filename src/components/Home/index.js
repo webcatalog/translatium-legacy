@@ -387,10 +387,11 @@ class Home extends React.Component {
 
   render() {
     const {
+      chinaMode,
       classes,
       fullscreenInputBox,
       imeMode,
-      inputLang, outputLang,
+      inputLang,
       inputText,
       onAnotherContainerClick,
       onCameraButtonClick,
@@ -404,6 +405,7 @@ class Home extends React.Component {
       onSwapButtonClick,
       onTranslateButtonClick,
       onWriteButtonClick,
+      outputLang,
       screenWidth,
       strings,
       textToSpeechPlaying,
@@ -434,7 +436,7 @@ class Home extends React.Component {
       });
     }
 
-    if (isHandwritingSupported(inputLang)) {
+    if (isHandwritingSupported(inputLang) && !chinaMode) {
       controllers.push({
         icon: <ContentGesture />,
         tooltip: strings.draw,
