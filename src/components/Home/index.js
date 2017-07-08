@@ -492,7 +492,7 @@ class Home extends React.Component {
                 {strings[inputLang]}
               </Typography>
               <IconButton
-                color="contrast"
+                color={isOutput(inputLang) ? 'contrast' : 'default'}
                 disabled={!isOutput(inputLang)}
                 onClick={onSwapButtonClick}
               >
