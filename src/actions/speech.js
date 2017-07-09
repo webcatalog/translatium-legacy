@@ -13,6 +13,7 @@ import winXhr from '../libs/winXhr';
 import { openAlert } from './alert';
 
 const DURATION = 5 * 1000;
+const CORDOVA_FILEPATH = 'cdvfile://localhost/temporary/myrecording.wav';
 
 // global for electron/common
 let recorder;
@@ -22,6 +23,29 @@ let mediaCaptureMgr;
 let soundStream;
 let checkTime;
 
+// global for cordova
+let mediaRec;
+
+const readFileToBlobAsync = (filePath) => {
+  if (getPlatform() !== 'cordova') {
+    return Promise.reject(new Error('Platform is not supported.'));
+  }
+
+  return new Promise((resolve, reject) => {
+    window.resolveLocalFileSystemURL(filePath, (fileEntry) => {
+      fileEntry.file((file) => {
+        /* global FileReader Blob */
+        const reader = new FileReader();
+        reader.onloadend = function onloadend() {
+          const blob = new Blob([new Uint8Array(this.result)]);
+          resolve(blob);
+        };
+
+        reader.readAsArrayBuffer(file);
+      }, e => reject(e));
+    }, e => reject(e));
+  });
+};
 
 export const releaseDevice = () => ((dispatch, getState) => {
   switch (getPlatform()) {
@@ -55,6 +79,17 @@ export const releaseDevice = () => ((dispatch, getState) => {
         recorder = null;
       });
 
+      break;
+    }
+    case 'cordova': {
+      if (mediaRec) {
+        mediaRec.stopRecord();
+        mediaRec = null;
+      }
+      dispatch({
+        type: UPDATE_SPEECH_STATUS,
+        status: 'none',
+      });
       break;
     }
     default: {
@@ -142,14 +177,18 @@ export const stopRecording = () => ((dispatch, getState) => {
               .then(() => {
                 soundStream = null;
               })
-              .catch(() => {
-                dispatch(openAlert('cannotConnectToServer'));
-              })
               .then(() => {
                 dispatch({
                   type: UPDATE_SPEECH_STATUS,
                   status: 'none',
                 });
+              })
+              .catch(() => {
+                dispatch({
+                  type: UPDATE_SPEECH_STATUS,
+                  status: 'none',
+                });
+                dispatch(openAlert('cannotConnectToServer'));
               });
           });
       }
@@ -192,6 +231,50 @@ export const stopRecording = () => ((dispatch, getState) => {
           recorder = null;
         });
       });
+      break;
+    }
+    case 'cordova': {
+      if (mediaRec) {
+        mediaRec.stopRecord();
+      }
+
+      dispatch({
+        type: UPDATE_SPEECH_STATUS,
+        status: 'recognizing',
+      });
+
+      readFileToBlobAsync(CORDOVA_FILEPATH)
+        .then(blob =>
+          fetch(uri, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'audio/l16; rate=44100',
+            },
+            body: blob,
+          }),
+        )
+        .then(response => response.text())
+        .then((text) => {
+          if (text.length > 14) {
+            const xmlStr = text.substring(14, text.length);
+            const outputText = JSON.parse(xmlStr).result[0].alternative[0].transcript;
+            return outputText;
+          }
+          return '';
+        })
+        .then(insertText)
+        .catch(() => {
+          dispatch(openAlert('cannotConnectToServer'));
+        })
+        .then(() => {
+          dispatch({
+            type: UPDATE_SPEECH_STATUS,
+            status: 'none',
+          });
+
+          mediaRec = null;
+        });
+
       break;
     }
     default: {
@@ -260,6 +343,29 @@ export const startRecording = () => ((dispatch) => {
       }, () => {
         dispatch(openAlert('cannotActivateMicrophone'));
       });
+      break;
+    }
+    case 'cordova': {
+      /* global Media */
+      const src = CORDOVA_FILEPATH;
+      mediaRec = new Media(src,
+        // success callback
+        () => {
+          // eslint-disable-next-line
+          console.log('recordAudio():Audio Success');
+
+          dispatch(stopRecording());
+        },
+        // error callback
+        (e) => {
+          // eslint-disable-next-line
+          console.log(e);
+          dispatch(releaseDevice());
+        },
+      );
+
+      // Record audio
+      mediaRec.startRecord();
       break;
     }
     default: {
