@@ -460,7 +460,7 @@ class Home extends React.Component {
       onClick: onFullscreenButtonClick,
     });
 
-    if (getPlatform() === 'windows') {
+    if (getPlatform() !== 'electron') {
       if (isOcrSupported(inputLang)) {
         controllers.splice(controllers.length - 2, 0, {
           icon: <ImageCameraAlt />,

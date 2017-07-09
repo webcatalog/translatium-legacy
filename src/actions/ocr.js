@@ -5,8 +5,8 @@ import { UPDATE_OCR } from '../constants/actions';
 
 import getPlatform from '../libs/getPlatform';
 import translateArray from '../libs/translateArray';
-import openFileToBlob from '../libs/openFileToBlob';
-import captureToBlob from '../libs/captureToBlob';
+import openFileToBlobAsync from '../libs/openFileToBlobAsync';
+import captureToBlobAsync from '../libs/captureToBlobAsync';
 import { toOcrSpaceLanguage } from '../libs/languageUtils';
 import { openAlert } from './alert';
 
@@ -15,8 +15,8 @@ export const loadImage = fromCamera => (dispatch, getState) => {
 
   Promise.resolve()
     .then(() => {
-      if (fromCamera === true) return captureToBlob();
-      return openFileToBlob();
+      if (fromCamera === true) return captureToBlobAsync();
+      return openFileToBlobAsync();
     })
     .then((result) => {
       if (!result) return null;
@@ -27,7 +27,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
       });
 
       // if < 0.9 mb no compress
-      if (result.blob.length < 900000) return result;
+      if (getPlatform() !== 'cordova' && result.blob.size < 900000) return result;
 
       // compress
       return new Promise((resolve, reject) => {
@@ -115,7 +115,8 @@ export const loadImage = fromCamera => (dispatch, getState) => {
       .then((t) => {
         const { ParsedResults } = t;
 
-        if (ParsedResults[0].FileParseExitCode !== 1) {
+        if (ParsedResults[0].FileParseExitCode !== 1
+          || ParsedResults[0].TextOverlay.Lines.length < 1) {
           dispatch({
             type: UPDATE_OCR,
             ocr: null,
@@ -167,7 +168,10 @@ export const loadImage = fromCamera => (dispatch, getState) => {
             dispatch(push('/ocr'));
           });
       })
-      .catch(() => {
+      .catch((e) => {
+        // eslint-disable-next-line
+        console.log(e);
+
         dispatch({
           type: UPDATE_OCR,
           ocr: null,
@@ -176,7 +180,9 @@ export const loadImage = fromCamera => (dispatch, getState) => {
         dispatch(openAlert('cannotConnectToServer'));
       });
     })
-    .catch(() => {
+    .catch((e) => {
+      // eslint-disable-next-line
+      console.log(e);
       dispatch(openAlert('cannotOpenTheFile'));
     });
 };

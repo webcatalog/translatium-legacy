@@ -1,6 +1,7 @@
 import getPlatform from './getPlatform';
+import b64ToBlob from './b64ToBlob';
 
-const captureToBlob = () =>
+const captureToBlobAsync = () =>
   new Promise((resolve, reject) => {
     try {
       switch (getPlatform()) {
@@ -30,11 +31,32 @@ const captureToBlob = () =>
             });
           break;
         }
-        default:
-        case 'electron': {
-          /* eslint-disable no-console */
-          console.log('Platform does not support camera capture');
-          /* eslint-enable no-console */
+        case 'cordova': {
+          const cameraSuccess = (b64Data) => {
+            const blob = b64ToBlob(b64Data, 'image/jpeg');
+            resolve({
+              fileName: 'image.jpg',
+              blob,
+            });
+          };
+
+          // capture error callback
+          const cameraError = e => reject(e);
+
+          const cameraOptions = {
+            destinationType: 0, // Camera.DestinationType.DATA_URL
+            encodingType: 0, // Camera.EncodingType.JPEG
+            sourceType: 1, // Camera.PictureSourceType.CAMERA
+            targetWidth: 1280,
+            targetHeight: 720,
+          };
+
+          window.navigator.camera.getPicture(cameraSuccess, cameraError, cameraOptions);
+
+          break;
+        }
+        default: {
+          reject(new Error('Platform is not supported.'));
         }
       }
     } catch (err) {
@@ -42,4 +64,4 @@ const captureToBlob = () =>
     }
   });
 
-export default captureToBlob;
+export default captureToBlobAsync;

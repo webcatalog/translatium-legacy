@@ -1,4 +1,5 @@
 import getPlatform from './getPlatform';
+import b64ToBlob from './b64ToBlob';
 
 const getFileType = (ext) => {
   switch (ext) {
@@ -9,7 +10,7 @@ const getFileType = (ext) => {
   }
 };
 
-const openFileToBlob = () =>
+const openFileToBlobAsync = () =>
   new Promise((resolve, reject) => {
     switch (getPlatform()) {
       case 'windows': {
@@ -42,7 +43,6 @@ const openFileToBlob = () =>
           });
         break;
       }
-      default:
       case 'electron': {
         /* global remote fs Blob */
         remote.dialog.showOpenDialog({
@@ -72,8 +72,36 @@ const openFileToBlob = () =>
             resolve(null);
           }
         });
+        break;
+      }
+      case 'cordova': {
+        const cameraSuccess = (b64Data) => {
+          const blob = b64ToBlob(b64Data, 'image/jpeg');
+          resolve({
+            fileName: 'image.jpg',
+            blob,
+          });
+        };
+
+        // capture error callback
+        const cameraError = e => reject(e);
+
+        const cameraOptions = {
+          destinationType: 0, // Camera.DestinationType.DATA_URL
+          encodingType: 0, // Camera.EncodingType.JPEG
+          sourceType: 0, // Camera.PictureSourceType.PHOTOLIBRARY
+          targetWidth: 1280,
+          targetHeight: 720,
+        };
+
+        window.navigator.camera.getPicture(cameraSuccess, cameraError, cameraOptions);
+
+        break;
+      }
+      default: {
+        reject(new Error('Platform is not supported.'));
       }
     }
   });
 
-export default openFileToBlob;
+export default openFileToBlobAsync;
