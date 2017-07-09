@@ -183,7 +183,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
     .catch((e) => {
       // eslint-disable-next-line
       console.log(e);
-      dispatch(openAlert('cannotOpenTheFile'));
+      // dispatch(openAlert('cannotOpenTheFile'));
     });
 };
 
