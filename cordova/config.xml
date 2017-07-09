@@ -42,7 +42,9 @@
         <icon height="167" src="res/icon/ios/icon-83.5@2x.png" width="167" />
         <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
     </platform>
+    <engine name="android" spec="^6.2.3" />
     <engine name="ios" spec="^4.4.0" />
+    <plugin name="com.verso.cordova.clipboard" />
     <plugin name="cordova-clipboard" spec="git+https://github.com/ibnclaudius/CordovaClipboard.git" />
     <plugin name="cordova-plugin-camera" spec="^2.4.1">
         <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />

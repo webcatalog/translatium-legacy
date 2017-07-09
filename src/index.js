@@ -42,7 +42,7 @@ export const runApp = (isRestart) => {
 
   store.dispatch(updateStrings(state.settings.displayLanguage));
 
-  if (getPlatform() === 'cordova' && window.cordova.platformId === 'ios') {
+  if (getPlatform() === 'cordova') {
     // https://github.com/ftlabs/fastclick/issues/450
     // Fix 300ms delay
     initReactFastclick();

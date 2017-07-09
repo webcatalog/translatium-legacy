@@ -538,7 +538,7 @@ class Home extends React.Component {
                 {controllers.slice(0, maxVisibleIcon).map(({ icon, tooltip, onClick }) => (
                   <IconButton
                     aria-label={tooltip}
-                    key={shortid.generate()}
+                    key={`inputTool_${tooltip}`}
                     onClick={onClick}
                   >
                     {icon}
