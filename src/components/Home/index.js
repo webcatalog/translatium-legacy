@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import shortid from 'shortid';
 import classNames from 'classnames';
 
 import { CircularProgress } from 'material-ui/Progress';
@@ -342,7 +341,7 @@ class Home extends React.Component {
                 {controllers.slice(0, maxVisibleIcon).map(({ icon, tooltip, onClick }) => (
                   <IconButton
                     aria-label={tooltip}
-                    key={shortid.generate()}
+                    key={`outputTool_${tooltip}`}
                     onClick={onClick}
                   >
                     {icon}

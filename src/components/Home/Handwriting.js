@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import shortid from 'shortid';
 
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
@@ -273,7 +272,7 @@ class Handwriting extends React.Component {
         <div className={classes.wrapper}>
           {suggestions.map(suggestion => (
             <Chip
-              key={shortid.generate()}
+              key={`suggestion_${suggestion}`}
               label={suggestion}
               className={classes.suggestionItem}
               onClick={() => onSuggestionsItemClick(suggestion)}

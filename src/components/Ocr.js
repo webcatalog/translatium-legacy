@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
-import shortid from 'shortid';
 
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Button from 'material-ui/Button';
@@ -99,7 +98,7 @@ class Ocr extends React.Component {
           >
             {ocr[lineVarName].map(line => (
               <div
-                key={shortid.generate()}
+                key={`ocrText_${line.text}`}
                 style={{
                   backgroundColor: 'rgba(0, 0, 0, 0.75)',
                   color: '#fff',
