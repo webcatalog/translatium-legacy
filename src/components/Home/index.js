@@ -257,7 +257,9 @@ class Home extends React.Component {
           controllers.push({
             icon: <SocialShare />,
             tooltip: strings.share,
-            onClick: () => shareText(output.outputText),
+            onClick: () => {
+              shareText(output.outputText);
+            },
           });
         }
 

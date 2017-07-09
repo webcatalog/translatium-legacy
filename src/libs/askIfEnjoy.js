@@ -32,6 +32,8 @@ const createDialog = ({
       return;
     }
     case 'electron': {
+      if (window.electron !== 'darwin') return;
+
       remote.dialog.showMessageBox({
         type: 'info',
         buttons: [defaultButtonText, cancelButtonText],
@@ -45,6 +47,24 @@ const createDialog = ({
         cancelFunc();
       });
 
+      return;
+    }
+    case 'cordova': {
+      const promptCallback = ({ buttonIndex }) => {
+        if (buttonIndex === 1) {
+          defaultFunc();
+          return;
+        }
+
+        cancelFunc();
+      };
+
+      window.navigator.notification.confirm(
+        message,
+        promptCallback,
+        '',
+        [defaultButtonText, cancelButtonText],
+      );
       return;
     }
     default: {
@@ -63,10 +83,26 @@ const askToReview = () => {
     defaultButtonText: strings.okSure,
     cancelButtonText: strings.noThanks,
     defaultFunc: () => {
-      if (getPlatform() === 'electron') {
-        openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12');
-      } else if (getPlatform() === 'windows') {
-        openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k');
+      switch (getPlatform()) {
+        case 'windows': {
+          openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k');
+          break;
+        }
+        case 'electron': {
+          openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12');
+          break;
+        }
+        case 'cordova': {
+          if (window.cordova.platformId === 'ios') {
+            openUri('itms-apps://itunes.apple.com/app/id...');
+          }
+          break;
+        }
+        default: {
+          /* eslint-disable no-console */
+          console.log('Platform does not support review.');
+          /* eslint-enable no-console */
+        }
       }
     },
   });
