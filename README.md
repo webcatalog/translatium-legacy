@@ -7,8 +7,8 @@
 | Platform    | Build Status                                                                                                                                                                                                                    |
 |-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | macOS & iOS | [![Travis Build Status](https://travis-ci.org/modern-translator/modern-translator.svg?branch=master)](https://travis-ci.org/modern-translator/modern-translator)                                                                |
-| Windows     | [![VSO Build Status](https://img.shields.io/vso/build/quanglam2807/2f76e0e3-6c4c-4c04-a98e-f7c1460efa1c/2.svg)](https://quanglam2807.visualstudio.com/Modern%20Translator/_build/index?definitionId=2) |
-| Linux       | [![CircleCI](https://img.shields.io/circleci/project/github/modern-translator/modern-translator.svg)](https://circleci.com/gh/modern-translator/modern-translator)
+| Windows | [![VSO Build Status](https://img.shields.io/vso/build/quanglam2807/2f76e0e3-6c4c-4c04-a98e-f7c1460efa1c/2.svg)](https://quanglam2807.visualstudio.com/Modern%20Translator/_build/index?definitionId=2) |
+| Linux & Android | [![CircleCI](https://img.shields.io/circleci/project/github/modern-translator/modern-translator.svg)](https://circleci.com/gh/modern-translator/modern-translator)
 
 #### Homepage: https://moderntranslator.com
 
