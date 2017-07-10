@@ -13,11 +13,15 @@
 		<script>
 			// Electron
     	if (typeof window !== 'undefined' && window.process && window.process.type === "renderer") {
-				var { remote, webFrame, shell } = require('electron');
+				var { remote, webFrame, shell, ipcRenderer } = require('electron');
 				var fs = require('fs');
 
 				webFrame.setVisualZoomLevelLimits(1, 1);
 				webFrame.setLayoutZoomLevelLimits(1, 1);
+
+				ipcRenderer.on('message', function(event, text) {
+				  console.log(text);
+				});
 			}
 		</script>
 		<script type="text/javascript" src="cordova.js"></script>

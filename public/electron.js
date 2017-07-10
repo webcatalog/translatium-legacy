@@ -4,20 +4,74 @@
 const electron = require('electron');
 const menubar = require('menubar');
 const path = require('path');
+const { autoUpdater } = require('electron-updater');
 
 const isDev = require('electron-is-dev');
 
-const config = require('./config');
+const { dialog, Menu, app, BrowserWindow } = electron;
 
-// Module to control application life.
-const app = electron.app;
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow;
+const config = require('./config');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 let menu;
+
+autoUpdater.autoDownload = false;
+
+function sendStatusToWindow(text) {
+  if (mainWindow) {
+    mainWindow.webContents.send('message', text);
+  }
+}
+
+autoUpdater.on('checking-for-update', () => {
+  sendStatusToWindow('Checking for update...');
+});
+
+autoUpdater.on('update-available', () => {
+  dialog.showMessageBox({
+    type: 'info',
+    title: 'Found Updates',
+    message: 'An update has been found. Do you want to update now?',
+    buttons: ['Sure', 'No'],
+  }, (buttonIndex) => {
+    if (buttonIndex === 0) {
+      autoUpdater.downloadUpdate();
+
+      dialog.showMessageBox({
+        title: 'Downloading...',
+        message: 'The update is downloading in background. We\'ll let you know when it\'s finished.',
+      });
+    }
+  });
+});
+
+autoUpdater.on('update-downloaded', () => {
+  dialog.showMessageBox({
+    title: 'Install Updates',
+    message: 'Updates downloaded, application will be restarted for updating...',
+  }, () => {
+    autoUpdater.quitAndInstall();
+  });
+});
+
+autoUpdater.on('update-not-available', (info) => {
+  sendStatusToWindow('Update not available.');
+  sendStatusToWindow(info);
+});
+
+autoUpdater.on('error', (err) => {
+  sendStatusToWindow('Error in auto-updater.');
+  sendStatusToWindow(err);
+});
+
+autoUpdater.on('download-progress', (progressObj) => {
+  let logMessage = `Download speed: ${progressObj.bytesPerSecond}`;
+  logMessage += ` - Downloaded ${progressObj.percent}%`;
+  logMessage += ` (${progressObj.transferred}/${progressObj.total})`;
+  sendStatusToWindow(logMessage);
+});
 
 function getMenuTemplate() {
   const template = [
@@ -90,8 +144,8 @@ function getMenuTemplate() {
 }
 
 function initMenu() {
-  menu = electron.Menu.buildFromTemplate(getMenuTemplate());
-  electron.Menu.setApplicationMenu(menu);
+  menu = Menu.buildFromTemplate(getMenuTemplate());
+  Menu.setApplicationMenu(menu);
 }
 
 function createWindow() {
@@ -124,7 +178,11 @@ function createWindow() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on('ready', () => {
+  createWindow();
+
+  autoUpdater.checkForUpdates();
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {

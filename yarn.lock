@@ -2235,6 +2235,14 @@ electron-builder-http@19.7.2, electron-builder-http@~19.7.2:
     debug "^2.6.8"
     fs-extra-p "^4.3.0"
 
+electron-builder-http@~19.15.0:
+  version "19.15.0"
+  resolved "https://registry.yarnpkg.com/electron-builder-http/-/electron-builder-http-19.15.0.tgz#d34cc28cf9db9ad28494283be8116e83a2e78f4c"
+  dependencies:
+    bluebird-lst "^1.0.2"
+    debug "^2.6.8"
+    fs-extra-p "^4.3.0"
+
 electron-builder-util@19.11.0, electron-builder-util@~19.11.0:
   version "19.11.0"
   resolved "https://registry.yarnpkg.com/electron-builder-util/-/electron-builder-util-19.11.0.tgz#41944a8b377cff2ca05d1e7207cc2796c4cbae82"
@@ -2349,6 +2357,21 @@ electron-publish@19.11.0:
 electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.14:
   version "1.3.14"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.14.tgz#64af0f9efd3c3c6acd57d71f83b49ca7ee9c4b43"
+
+electron-updater@^2.4.5:
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-2.4.5.tgz#74730990a572d26299e3691db57f891584f790db"
+  dependencies:
+    bluebird-lst "^1.0.2"
+    debug "^2.6.8"
+    electron-builder-http "~19.15.0"
+    electron-is-dev "^0.2.0"
+    fs-extra-p "^4.3.0"
+    js-yaml "^3.9.0"
+    semver "^5.3.0"
+    source-map-support "^0.4.15"
+    uuid-1345 "^0.99.6"
+    xelement "^1.0.16"
 
 electron@^1.6.11:
   version "1.6.11"
@@ -2687,6 +2710,10 @@ esprima@^2.6.0, esprima@^2.7.1:
 esprima@^3.1.1:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-3.1.3.tgz#fdca51cee6133895e3c88d535ce49dbff62a4633"
+
+esprima@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.0.tgz#4499eddcd1110e0b218bacf2fa7f7f59f55ca804"
 
 esquery@^1.0.0:
   version "1.0.0"
@@ -4198,6 +4225,13 @@ js-yaml@^3.4.3, js-yaml@^3.5.1, js-yaml@^3.7.0, js-yaml@^3.8.4:
   dependencies:
     argparse "^1.0.7"
     esprima "^3.1.1"
+
+js-yaml@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.9.0.tgz#4ffbbf25c2ac963b8299dc74da7e3740de1c18ce"
+  dependencies:
+    argparse "^1.0.7"
+    esprima "^4.0.0"
 
 js-yaml@~3.7.0:
   version "3.7.0"
@@ -7512,6 +7546,12 @@ xdg-basedir@^2.0.0:
 xdg-basedir@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/xdg-basedir/-/xdg-basedir-3.0.0.tgz#496b2cc109eca8dbacfe2dc72b603c17c5870ad4"
+
+xelement@^1.0.16:
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/xelement/-/xelement-1.0.16.tgz#900bb46c20fc2dffadff778a9d2dc36699d0ff7e"
+  dependencies:
+    sax "^1.2.1"
 
 xml-char-classes@^1.0.0:
   version "1.0.0"
