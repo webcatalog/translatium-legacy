@@ -6,7 +6,8 @@ import initReactFastclick from 'react-fastclick';
 
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import createPalette from 'material-ui/styles/palette';
-import { red, pink } from 'material-ui/styles/colors';
+import red from 'material-ui/colors/red';
+import pink from 'material-ui/colors/pink';
 
 import './main.css';
 import './fonts/roboto.css';
