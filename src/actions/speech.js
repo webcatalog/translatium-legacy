@@ -69,12 +69,12 @@ export const releaseDevice = () => ((dispatch, getState) => {
     case 'electron': {
       if (!recorder) return;
 
-      recorder.stopRecording(() => {
-        dispatch({
-          type: UPDATE_SPEECH_STATUS,
-          status: 'none',
-        });
+      dispatch({
+        type: UPDATE_SPEECH_STATUS,
+        status: 'none',
+      });
 
+      recorder.stopRecording(() => {
         recorder.clearRecordedData();
         recorder = null;
       });
