@@ -27,7 +27,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
       });
 
       // if < 0.9 mb no compress
-      if (getPlatform() !== 'cordova' && result.blob.size < 900000) return result;
+      if (getPlatform() === 'cordova' || result.blob.size < 900000) return result;
 
       // compress
       return new Promise((resolve, reject) => {
