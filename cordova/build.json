@@ -1,10 +1,12 @@
 {
   "ios": {
     "debug": {
-      "developmentTeam": "FVFM95DDPG"
+      "developmentTeam": "FVFM95DDPG",
+      "packageType": "development"
     },
     "release": {
-      "developmentTeam": "FVFM95DDPG"
+      "developmentTeam": "FVFM95DDPG",
+      "packageType": "app-store"
     }
   }
 }

@@ -94,7 +94,9 @@ const askToReview = () => {
         }
         case 'cordova': {
           if (window.cordova.platformId === 'ios') {
-            openUri('itms-apps://itunes.apple.com/app/id...');
+            openUri('itms-apps://itunes.apple.com/app/id1257601501');
+          } else if (window.cordova.platformId === 'android') {
+            openUri('https://play.google.com');
           }
           break;
         }
