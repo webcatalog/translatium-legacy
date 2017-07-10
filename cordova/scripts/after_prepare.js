@@ -13,5 +13,7 @@ module.exports = () => {
   obj.CFBundleDisplayName = 'Translator';
 
   const updatedXml = plist.build(obj);
-  fs.writeFileSync(filePath, updatedXml, { encoding: 'utf8' });
+  if (fs.existsSync(filePath)) {
+    fs.writeFileSync(filePath, updatedXml, { encoding: 'utf8' });
+  }
 };
