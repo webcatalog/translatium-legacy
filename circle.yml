@@ -18,5 +18,4 @@ test:
   override:
     - yarn lint
     - yarn dist
-    - yarn prepare:cordova
     - yarn build-android
