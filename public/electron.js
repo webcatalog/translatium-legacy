@@ -5,10 +5,12 @@ const electron = require('electron');
 const menubar = require('menubar');
 const path = require('path');
 const { autoUpdater } = require('electron-updater');
+const semver = require('semver');
+const fetch = require('electron-fetch');
 
 const isDev = require('electron-is-dev');
 
-const { dialog, Menu, app, BrowserWindow } = electron;
+const { dialog, Menu, app, BrowserWindow, shell } = electron;
 
 const config = require('./config');
 
@@ -76,18 +78,6 @@ autoUpdater.on('download-progress', (progressObj) => {
 function getMenuTemplate() {
   const template = [
     {
-      label: config.APP_NAME,
-      submenu: [
-        { role: 'about' },
-        { type: 'separator' },
-        { role: 'hide' },
-        { role: 'hideothers' },
-        { role: 'unhide' },
-        { type: 'separator' },
-        { role: 'quit' },
-      ],
-    },
-    {
       label: 'Edit',
       submenu: [
         { role: 'undo' },
@@ -112,11 +102,7 @@ function getMenuTemplate() {
       role: 'window',
       submenu: [
         { role: 'minimize' },
-        { role: 'zoom' },
-        { type: 'separator' },
         { role: 'close' },
-        { type: 'separator' },
-        { role: 'front' },
       ],
     },
     {
@@ -138,6 +124,42 @@ function getMenuTemplate() {
     template[3].submenu.push({
       type: 'separator',
     });
+  }
+
+  if (process.platform === 'darwin') {
+    template.unshift({
+      label: config.APP_NAME,
+      submenu: [
+        { role: 'about' },
+        { type: 'separator' },
+        { role: 'hide' },
+        { role: 'hideothers' },
+        { role: 'unhide' },
+        { type: 'separator' },
+        { role: 'quit' },
+      ],
+    });
+
+    // Edit menu
+    template[1].submenu.push(
+      { type: 'separator' },
+      {
+        label: 'Speech',
+        submenu: [
+          { role: 'startspeaking' },
+          { role: 'stopspeaking' },
+        ],
+      });
+
+    // Window menu
+    template[3].submenu = [
+      { role: 'minimize' },
+      { role: 'zoom' },
+      { type: 'separator' },
+      { role: 'close' },
+      { type: 'separator' },
+      { role: 'front' },
+    ];
   }
 
   return template;
@@ -181,7 +203,35 @@ function createWindow() {
 app.on('ready', () => {
   createWindow();
 
-  autoUpdater.checkForUpdates();
+  if (process.platform !== 'linux') {
+    fetch('https://api.github.com/repos/modern-translator/modern-translator/releases/latest')
+        .then(response => response.json())
+        .then(({ tag_name }) => {
+          const latestVersion = tag_name.substring(1);
+
+          /* eslint-disable no-console */
+          console.log(`Latest version: ${latestVersion}`);
+          /* eslint-enable no-console */
+
+          if (semver.gte(app.getVersion(), latestVersion)) return;
+
+          dialog.showMessageBox({
+            type: 'info',
+            title: 'Found Updates',
+            message: 'An update has been found. Do you want to download now?',
+            buttons: ['Sure', 'No'],
+          }, (buttonIndex) => {
+            if (buttonIndex === 0) {
+              shell.openExternal('https://moderntranslator.com');
+            }
+          });
+        })
+        /* eslint-disable no-console */
+        .catch(console.log);
+        /* eslint-enable no-console */
+  } else {
+    autoUpdater.checkForUpdates();
+  }
 });
 
 // Quit when all windows are closed.
