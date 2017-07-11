@@ -1,7 +1,7 @@
 {
     "name": "com.moderntranslator.application",
     "displayName": "modern-translator",
-    "version": "6.6.2",
+    "version": "7.0.0",
     "dependencies": {
         "cordova-android": "^6.2.3",
         "cordova-clipboard": "git+https://github.com/ibnclaudius/CordovaClipboard.git",

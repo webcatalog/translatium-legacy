@@ -1,4 +1,16 @@
+# 7.x
+
+### 7.0.0 (10th July 2017)
+- Improves design, performance & stability.
+
+
 # 6.x
+
+### 6.6.2 (3rd July 2017)
+- Fixes bugs.
+
+---
+
 ### 6.6.1 (3rd July 2017)
 - Fixes bugs.
 
