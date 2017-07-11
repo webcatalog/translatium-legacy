@@ -29,8 +29,7 @@
     "build": "cross-env REACT_APP_VERSION=7.0.0-alpha react-scripts build && node add-bom.js",
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "pack": "electron-builder --dir",
-    "dist": "yarn build && electron-builder",
+    "dist": "babel-node packager.js",
     "lint": "eslint src public --ext js"
   },
   "dependencies": {
@@ -41,12 +40,14 @@
     "semver": "^5.3.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "classnames": "^2.2.5",
     "concurrently": "^3.5.0",
     "cordova": "^7.0.1",
     "cross-env": "^5.0.1",
+    "del": "^3.0.0",
     "electron": "^1.6.11",
     "electron-builder": "^19.13.0",
     "eslint": "^3.19.0",
@@ -54,6 +55,7 @@
     "eslint-plugin-import": "^2.6.1",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
+    "glob": "^7.1.2",
     "history": "^4.6.3",
     "material-ui": "^1.0.0-alpha.21",
     "material-ui-icons": "^1.0.0-alpha.19",
@@ -90,28 +92,6 @@
     "/speech-api": {
       "target": "https://www.google.com",
       "changeOrigin": true
-    }
-  },
-  "build": {
-    "appId": "com.moderntranslator.app",
-    "productName": "Modern Translator",
-    "directories": {
-      "buildResources": "build-resources"
-    },
-    "linux": {
-      "category": "Education",
-      "packageCategory": "education",
-      "target": [
-        "deb",
-        "rpm",
-        "pacman"
-      ]
-    },
-    "mac": {
-      "target": [
-        "mas",
-        "zip"
-      ]
     }
   }
 }

@@ -7,7 +7,7 @@ const defaultState = {
   bigTextFontSize: 50,
   chinaMode: false,
   darkMode: false,
-  displayLanguage: getDefaultLangId(),
+  langId: getDefaultLangId(),
   inputLang: 'en',
   launchCount: 0,
   outputLang: 'zh',

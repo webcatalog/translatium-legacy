@@ -51,7 +51,7 @@ const Settings = (props) => {
     chinaMode,
     classes,
     darkMode,
-    displayLanguage,
+    langId,
     onRemoveAdClick,
     onRestorePurchaseClick,
     onSettingChange,
@@ -106,7 +106,7 @@ const Settings = (props) => {
           <ListItem>
             <ListItemText
               primary={strings.displayLanguage}
-              secondary={displayLanguages[displayLanguage].displayName}
+              secondary={displayLanguages[langId].displayName}
             />
             <ListItemSecondaryAction>
               <EnhancedMenu
@@ -117,18 +117,18 @@ const Settings = (props) => {
                   </Button>
                 )}
               >
-                {Object.keys(displayLanguages).map(langId => (
+                {Object.keys(displayLanguages).map(lId => (
                   <MenuItem
                     key={`lang_${langId}`}
                     value={langId}
                     onClick={() => {
-                      if (langId !== displayLanguage) {
-                        onSettingChange('displayLanguage', langId);
-                        onUpdateStrings(langId);
+                      if (lId !== langId) {
+                        onSettingChange('langId', lId);
+                        onUpdateStrings(lId);
                       }
                     }}
                   >
-                    {displayLanguages[langId].displayName}
+                    {displayLanguages[lId].displayName}
                   </MenuItem>
                 ))}
               </EnhancedMenu>
@@ -240,7 +240,7 @@ Settings.propTypes = {
   chinaMode: PropTypes.bool,
   classes: PropTypes.object.isRequired,
   darkMode: PropTypes.bool,
-  displayLanguage: PropTypes.string,
+  langId: PropTypes.string,
   onRemoveAdClick: PropTypes.func.isRequired,
   onRestorePurchaseClick: PropTypes.func.isRequired,
   onSettingChange: PropTypes.func.isRequired,
@@ -261,7 +261,7 @@ const mapStateToProps = state => ({
   translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
   realtime: state.settings.realtime,
   chinaMode: state.settings.chinaMode,
-  displayLanguage: state.settings.displayLanguage,
+  langId: state.settings.langId,
   shouldShowAd: state.ad.shouldShowAd,
   strings: state.strings,
 });

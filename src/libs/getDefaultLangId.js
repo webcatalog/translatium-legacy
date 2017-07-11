@@ -24,11 +24,11 @@ const getDefaultLangId = () => {
       break;
     }
     default: {
-      userLanguages = ['en-us'];
+      userLanguages = ['en'];
     }
   }
 
-  let defaultLangId = 'en-us';
+  let defaultLangId = 'en';
 
   userLanguages.some((userLang) => {
     let isMatch = false;
