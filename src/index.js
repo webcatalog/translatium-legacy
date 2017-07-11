@@ -41,7 +41,7 @@ export const runApp = (isRestart) => {
     );
   }
 
-  store.dispatch(updateStrings(state.settings.displayLanguage));
+  store.dispatch(updateStrings(state.settings.langId));
 
   if (getPlatform() === 'cordova') {
     // https://github.com/ftlabs/fastclick/issues/450

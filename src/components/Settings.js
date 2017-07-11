@@ -119,8 +119,8 @@ const Settings = (props) => {
               >
                 {Object.keys(displayLanguages).map(lId => (
                   <MenuItem
-                    key={`lang_${langId}`}
-                    value={langId}
+                    key={`lang_${lId}`}
+                    value={lId}
                     onClick={() => {
                       if (lId !== langId) {
                         onSettingChange('langId', lId);

@@ -14,7 +14,7 @@ console.log(`Packaging for ${process.platform}`);
 let targets;
 switch (process.platform) {
   case 'darwin': {
-    targets = Platform.MAC.createTarget(['mas']);
+    targets = Platform.MAC.createTarget(['mas', 'zip']);
     break;
   }
   case 'linux': {
