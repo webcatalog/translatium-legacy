@@ -6,6 +6,6 @@
   "author": "Quang Lam <quang.lam2807@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "bulma": "^0.4.1"
+    "bulma": "^0.4.3"
   }
 }

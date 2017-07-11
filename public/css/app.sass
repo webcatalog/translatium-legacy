@@ -1,29 +1,69 @@
-@import "./bulma-material"
+@charset "utf-8"
 
-.nav-item img
-  margin-left: 12px
-  margin-right: 6px
+$blue: #1976D2
+$green: #43A047
+$orange: #E64A19
+$purple: #7B1FA2
+$red: #D32F2F
+$turquoise: #00796B
+$yellow: #FBC02D
+
+$primary: $green
+
+// Use the new serif family
+$family-primary: "Roboto", san-serif
+
+@import "../../node_modules/bulma/bulma"
+
+.footer
+  padding: 40px 20px 80px
+  ul.footer-items
+    list-style-type: none
+    +tablet
+      display: flex
+      justify-content: center
+    li
+      +tablet
+        float: left
+        margin-right: 16px
+        margin: 0 16px 0 0
+        padding: 0
+
+.intro
+  min-height: calc(100vh - 3.25em)
+  .hero-body
+    display: flex
+    align-items: stretch
+    .container
+      width: 100%
+      .columns
+        height: 100%
+        .title
+          font-weight: 500
+        .is-screenshot
+          user-select: none
+
 
 .image.is-screenshot img
-  width: 600px
+  max-width: 440px
   margin: 0 auto
-
-@media screen and (min-width: 769px)
-  .nav-right
-    padding-right: 12px
-
-img.is-download
-  height: 52px
-  width: auto
-  border-radius: 6px
-
-.press
-  img
-    height: 50px
-    margin-left: 15px
+  padding-top: 20px
 
 .is-transparent
   background: none !important
 
-.nav.is-thin
-  min-height: 2em
+.download-btn
+  background: hsla(0,0%,100%,.3)
+  color: #fff
+  margin-bottom: 1em
+  width: 10em
+  height: 2.5em
+  border: 0
+  &:hover, &:focus, &:active
+    background: hsla(0,0%,100%,.15)
+    color: #fff
+
+.is-vertical-centered
+  display: flex
+  flex-direction: column
+  justify-content: center
