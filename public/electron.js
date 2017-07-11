@@ -73,13 +73,19 @@ function getMenuTemplate() {
     template.unshift({
       label: config.APP_NAME,
       submenu: [
-        { role: 'about' },
+        { role: 'about', label: `About ${config.APP_NAME}` },
         { type: 'separator' },
-        { role: 'hide' },
+        {
+          role: 'hide',
+          label: `Hide ${config.APP_NAME}`,
+        },
         { role: 'hideothers' },
         { role: 'unhide' },
         { type: 'separator' },
-        { role: 'quit' },
+        {
+          role: 'quit',
+          label: `Quit ${config.APP_NAME}`,
+        },
       ],
     });
 
