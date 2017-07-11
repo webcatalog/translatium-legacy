@@ -4,7 +4,6 @@
 const electron = require('electron');
 const menubar = require('menubar');
 const path = require('path');
-const { autoUpdater } = require('electron-updater');
 const semver = require('semver');
 const fetch = require('electron-fetch');
 
@@ -18,62 +17,6 @@ const config = require('./config');
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 let menu;
-
-autoUpdater.autoDownload = false;
-
-function sendStatusToWindow(text) {
-  if (mainWindow) {
-    mainWindow.webContents.send('message', text);
-  }
-}
-
-autoUpdater.on('checking-for-update', () => {
-  sendStatusToWindow('Checking for update...');
-});
-
-autoUpdater.on('update-available', () => {
-  dialog.showMessageBox({
-    type: 'info',
-    title: 'Found Updates',
-    message: 'An update has been found. Do you want to update now?',
-    buttons: ['Sure', 'No'],
-  }, (buttonIndex) => {
-    if (buttonIndex === 0) {
-      autoUpdater.downloadUpdate();
-
-      dialog.showMessageBox({
-        title: 'Downloading...',
-        message: 'The update is downloading in background. We\'ll let you know when it\'s finished.',
-      });
-    }
-  });
-});
-
-autoUpdater.on('update-downloaded', () => {
-  dialog.showMessageBox({
-    title: 'Install Updates',
-    message: 'Updates downloaded, application will be restarted for updating...',
-  }, () => {
-    autoUpdater.quitAndInstall();
-  });
-});
-
-autoUpdater.on('update-not-available', (info) => {
-  sendStatusToWindow('Update not available.');
-  sendStatusToWindow(info);
-});
-
-autoUpdater.on('error', (err) => {
-  sendStatusToWindow('Error in auto-updater.');
-  sendStatusToWindow(err);
-});
-
-autoUpdater.on('download-progress', (progressObj) => {
-  let logMessage = `Download speed: ${progressObj.bytesPerSecond}`;
-  logMessage += ` - Downloaded ${progressObj.percent}%`;
-  logMessage += ` (${progressObj.transferred}/${progressObj.total})`;
-  sendStatusToWindow(logMessage);
-});
 
 function getMenuTemplate() {
   const template = [
@@ -203,7 +146,7 @@ function createWindow() {
 app.on('ready', () => {
   createWindow();
 
-  if (process.platform !== 'linux') {
+  if (process.platform === 'linux') {
     fetch('https://api.github.com/repos/modern-translator/modern-translator/releases/latest')
         .then(response => response.json())
         .then(({ tag_name }) => {
@@ -229,8 +172,6 @@ app.on('ready', () => {
         /* eslint-disable no-console */
         .catch(console.log);
         /* eslint-enable no-console */
-  } else {
-    autoUpdater.checkForUpdates();
   }
 });
 
