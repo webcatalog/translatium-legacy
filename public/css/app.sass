@@ -16,17 +16,16 @@ $family-primary: "Roboto", san-serif
 @import "../../node_modules/bulma/bulma"
 
 .footer
-  padding: 40px 20px 80px
   ul.footer-items
     list-style-type: none
+    margin-left: 0
     +tablet
       display: flex
       justify-content: center
     li
       +tablet
         float: left
-        margin-right: 16px
-        margin: 0 16px 0 0
+        margin: 0 28px 0 0
         padding: 0
 
 .intro
@@ -36,32 +35,25 @@ $family-primary: "Roboto", san-serif
     align-items: stretch
     .container
       width: 100%
-      .columns
-        height: 100%
-        .title
-          font-weight: 500
-        .is-screenshot
-          user-select: none
-
-
-.image.is-screenshot img
-  max-width: 440px
-  margin: 0 auto
-  padding-top: 20px
+      .title
+        font-weight: 500
+        margin-top: 1em
+      .subtitle
+        font-weight: 400
+        margin-bottom: 2em
+      .download-btn
+        img
+          height: 50px
+          width: auto
+      .is-screenshot
+        user-select: none
+        img
+          max-width: 600px
+          margin: 0 auto
+          padding-top: 20px
 
 .is-transparent
   background: none !important
-
-.download-btn
-  background: hsla(0,0%,100%,.3)
-  color: #fff
-  margin-bottom: 1em
-  width: 10em
-  height: 2.5em
-  border: 0
-  &:hover, &:focus, &:active
-    background: hsla(0,0%,100%,.15)
-    color: #fff
 
 .is-vertical-centered
   display: flex
