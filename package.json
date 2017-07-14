@@ -45,7 +45,7 @@
     "babel-preset-react": "^6.24.1",
     "classnames": "^2.2.5",
     "concurrently": "^3.5.0",
-    "cordova": "^7.0.2",
+    "cordova": "^7.0.1",
     "cross-env": "^5.0.1",
     "del": "^3.0.0",
     "electron": "^1.6.11",
