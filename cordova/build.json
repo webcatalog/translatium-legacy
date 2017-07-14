@@ -6,6 +6,7 @@
     },
     "release": {
       "developmentTeam": "FVFM95DDPG",
+      "provisioningProfile": "ee2a827d-c4a2-4682-ad74-5087b62592bb",
       "packageType": "app-store"
     }
   }

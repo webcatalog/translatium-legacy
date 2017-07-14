@@ -1,7 +1,7 @@
 {
   "name": "modern-translator",
   "description": "Translator app for Mac & PC.",
-  "version": "7.0.0",
+  "version": "7.0.3",
   "main": "public/electron.js",
   "repository": "https://github.com/modern-translator/modern-translator",
   "author": {
@@ -22,14 +22,15 @@
     "install": "npm run install:cordova",
     "install:cordova": "cd cordova && npm install",
     "prepare:cordova": "cd cordova && cordova prepare",
-    "build-ios": "cd cordova && cordova prepare ios && cordova build ios",
-    "build-android": "cd cordova && cordova prepare android && cordova build android",
+    "build-ios": "npm run build && cd cordova && cordova prepare ios && cordova build ios",
+    "dist-ios": "npm run build && cd cordova && cordova prepare ios && cordova build ios --device --release",
+    "build-android": "npm run build && cd cordova && cordova prepare android && cordova build android",
     "start": "cross-env REACT_APP_VERSION=dev REACT_APP_GOOGLE_ENDPOINT=http://localhost:3000 BROWSER=none react-scripts start",
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "build": "cross-env REACT_APP_VERSION=7.0.0 react-scripts build && node add-bom.js",
+    "build": "cross-env REACT_APP_VERSION=7.0 react-scripts build && node add-bom.js",
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "dist": "npm run build && babel-node packager.js",
+    "dist-electron": "npm run build && babel-node packager.js",
     "lint": "eslint src public --ext js"
   },
   "dependencies": {
@@ -44,7 +45,7 @@
     "babel-preset-react": "^6.24.1",
     "classnames": "^2.2.5",
     "concurrently": "^3.5.0",
-    "cordova": "^7.0.1",
+    "cordova": "^7.0.2",
     "cross-env": "^5.0.1",
     "del": "^3.0.0",
     "electron": "^1.6.11",

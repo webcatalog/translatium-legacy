@@ -50,7 +50,7 @@ const createDialog = ({
       return;
     }
     case 'cordova': {
-      const promptCallback = ({ buttonIndex }) => {
+      const promptCallback = (buttonIndex) => {
         if (buttonIndex === 1) {
           defaultFunc();
           return;
@@ -138,9 +138,9 @@ const askIfEnjoy = () => {
       askToReview();
     },
     cancelFunc: () => {
-      askToGiveFeedback();
-
       store.dispatch(updateSetting('launchCount', -100));
+
+      askToGiveFeedback();
     },
   });
 };

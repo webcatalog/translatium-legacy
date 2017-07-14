@@ -13,7 +13,11 @@ const openUri = (uriStr) => {
       break;
     }
     case 'cordova': {
-      window.cordova.InAppBrowser.open(uriStr, '_system');
+      if (uriStr.startsWith('http')) {
+        window.cordova.InAppBrowser.open(uriStr, '_system');
+      } else {
+        window.open(uriStr);
+      }
       break;
     }
     default: {

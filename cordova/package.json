@@ -1,7 +1,7 @@
 {
     "name": "com.moderntranslator.application",
     "displayName": "modern-translator",
-    "version": "7.0.0",
+    "version": "7.0.3",
     "dependencies": {
         "cordova-android": "^6.2.3",
         "cordova-clipboard": "git+https://github.com/ibnclaudius/CordovaClipboard.git",
@@ -27,11 +27,11 @@
             "cordova-plugin-dialogs": {},
             "cordova-plugin-file": {},
             "cordova-plugin-camera": {
-                "CAMERA_USAGE_DESCRIPTION": " ",
-                "PHOTOLIBRARY_USAGE_DESCRIPTION": " "
+                "CAMERA_USAGE_DESCRIPTION": "Optical character recognition",
+                "PHOTOLIBRARY_USAGE_DESCRIPTION": "Optical character recognition"
             },
             "cordova-plugin-media": {
-                "MICROPHONE_USAGE_DESCRIPTION": " "
+                "MICROPHONE_USAGE_DESCRIPTION": "Speech recognition"
             }
         },
         "platforms": [

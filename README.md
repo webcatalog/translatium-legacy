@@ -13,7 +13,7 @@
 #### Homepage: https://moderntranslator.com
 
 ## Development Guide
-### macOS
+### macOS & Linux
 **Requirements**
 1. Xcode (latest).
 2. Node.js 8.
@@ -22,7 +22,7 @@
 `yarn electron-dev`
 
 **Release**
-`yarn dist`
+`yarn dist-electron`
 
 ---
 
@@ -38,3 +38,21 @@
 **Release**
 1. `yarn build`
 2. Open `windows.sln` with Visual Studio and build the project.
+
+---
+
+### Android & iOS
+
+**Development**
+```bash
+yarn build
+cd cordova
+cordova run ios
+cordova run android
+```
+
+**Release**
+```bash
+yarn dist-ios
+yarn dist-android
+```
