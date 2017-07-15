@@ -1,4 +1,13 @@
 {
+  "android": {
+    "release": {
+      "keystore": "./android.jks",
+      "storePassword": "XMbpFFxTqoVrAJjAbiq9xqRV",
+      "alias": "Quang Lam",
+      "password" : "XMbpFFxTqoVrAJjAbiq9xqRV",
+      "keystoreType": "jks"
+    }
+  },
   "ios": {
     "debug": {
       "developmentTeam": "FVFM95DDPG",

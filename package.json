@@ -1,7 +1,7 @@
 {
   "name": "modern-translator",
   "description": "Translator app for Mac & PC.",
-  "version": "7.0.3",
+  "version": "7.0.4",
   "main": "public/electron.js",
   "repository": "https://github.com/modern-translator/modern-translator",
   "author": {
@@ -25,6 +25,7 @@
     "build-ios": "npm run build && cd cordova && cordova prepare ios && cordova build ios",
     "dist-ios": "npm run build && cd cordova && cordova prepare ios && cordova build ios --device --release",
     "build-android": "npm run build && cd cordova && cordova prepare android && cordova build android",
+    "dist-android": "npm run build && cd cordova && cordova prepare android && cordova build android --release",
     "start": "cross-env REACT_APP_VERSION=dev REACT_APP_GOOGLE_ENDPOINT=http://localhost:3000 BROWSER=none react-scripts start",
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "build": "cross-env REACT_APP_VERSION=7.0 react-scripts build && node add-bom.js",

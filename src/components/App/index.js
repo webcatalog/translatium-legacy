@@ -66,11 +66,14 @@ const styleSheet = createStyleSheet('App', theme => ({
 
 class App extends React.Component {
   componentDidMount() {
-    this.setAppTitleBar(this.props.primaryColorId);
+    const {
+      primaryColorId,
+      onBackClick,
+    } = this.props;
+
+    this.setAppTitleBar(primaryColorId);
 
     if (getPlatform() === 'windows') {
-      const { onBackClick } = this.props;
-
       const systemNavigationManager = Windows.UI.Core.SystemNavigationManager.getForCurrentView();
       systemNavigationManager.onbackrequested = (e) => {
         const { bottomNavigationSelectedIndex } = this.props;
@@ -81,6 +84,14 @@ class App extends React.Component {
           /* eslint-enable */
         }
       };
+    }
+
+    if (getPlatform() === 'cordova') {
+      window.document.addEventListener('backbutton', (e) => {
+        e.preventDefault();
+
+        onBackClick();
+      }, false);
     }
 
     window.addEventListener('resize', this.props.onResize);
