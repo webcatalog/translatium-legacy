@@ -1,4 +1,4 @@
-/* global Windows */
+/* global Windows remote */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -153,6 +153,36 @@ const Settings = (props) => {
               />
             </ListItemSecondaryAction>
           </ListItem>
+          {getPlatform() === 'electron' && window.process.platform === 'darwin' && (
+            <ListItem>
+              <ListItemText
+                primary={strings.dockAndMenubar}
+                secondary={strings[dockAndMenubar]}
+              />
+              <ListItemSecondaryAction>
+                <EnhancedMenu
+                  id="changeDockMenubar"
+                  buttonElement={(
+                    <Button raised>
+                      {strings.change}
+                    </Button>
+                  )}
+                >
+                  {dockAndMenubarOpts.map(opts => (
+                    <MenuItem
+                      key={`dockAndMenubarOpts_${opts}`}
+                      value={opts}
+                      onClick={() => {
+                        onSettingChange('dockAndMenubar', opts);
+                      }}
+                    >
+                      {strings[opts]}
+                    </MenuItem>
+                  ))}
+                </EnhancedMenu>
+              </ListItemSecondaryAction>
+            </ListItem>
+          )}
           <ListItem>
             <ListItemText primary={strings.realtime} />
             <ListItemSecondaryAction>
@@ -194,36 +224,6 @@ const Settings = (props) => {
               />
             </ListItemSecondaryAction>
           </ListItem>
-          {true && (
-            <ListItem>
-              <ListItemText
-                primary={strings.dockAndMenubar}
-                secondary={strings[dockAndMenubar]}
-              />
-              <ListItemSecondaryAction>
-                <EnhancedMenu
-                  id="changeDockMenubar"
-                  buttonElement={(
-                    <Button raised>
-                      {strings.change}
-                    </Button>
-                  )}
-                >
-                  {dockAndMenubarOpts.map(opts => (
-                    <MenuItem
-                      key={`dockAndMenubarOpts_${opts}`}
-                      value={opts}
-                      onClick={() => {
-                        onSettingChange('dockAndMenubar', opts);
-                      }}
-                    >
-                      {strings[opts]}
-                    </MenuItem>
-                  ))}
-                </EnhancedMenu>
-              </ListItemSecondaryAction>
-            </ListItem>
-          )}
           <Divider />
           {getPlatform() === 'windows' && shouldShowAd && (
             <ListItem onClick={() => onRemoveAdClick(strings)}>
@@ -268,9 +268,11 @@ const Settings = (props) => {
             <ListItemText primary={`Version ${process.env.REACT_APP_VERSION}`} />
           </ListItem>
           <Divider />
-          <ListItem>
-            <ListItemText primary={strings.quit} />
-          </ListItem>
+          {getPlatform() === 'electron' && (
+            <ListItem>
+              <ListItemText primary={strings.quit} onClick={() => remote.app.quit()} />
+            </ListItem>
+          )}
         </List>
       </div>
     </div>

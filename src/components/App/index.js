@@ -62,6 +62,10 @@ const styleSheet = createStyleSheet('App', theme => ({
     flexDirection: 'column',
     overflow: 'hidden',
   },
+  icon: {
+    display: 'block',
+    margin: 'auto',
+  },
 }));
 
 class App extends React.Component {
@@ -185,20 +189,20 @@ class App extends React.Component {
           {children}
           {bottomNavigationSelectedIndex > -1 && shouldShowBottomNav && (
             <Paper elevation={2} style={{ zIndex: 1000 }}>
-              <BottomNavigation index={bottomNavigationSelectedIndex} showLabels>
+              <BottomNavigation value={bottomNavigationSelectedIndex} showLabels>
                 <BottomNavigationButton
                   label={strings.home}
-                  icon={<ActionHome />}
+                  icon={<ActionHome className={classes.icon} />}
                   onClick={() => onBottomNavigationButtonClick('/')}
                 />
                 <BottomNavigationButton
                   label={strings.phrasebook}
-                  icon={<ToggleStar />}
+                  icon={<ToggleStar className={classes.icon} />}
                   onClick={() => onBottomNavigationButtonClick('/phrasebook')}
                 />
                 <BottomNavigationButton
                   label={strings.settings}
-                  icon={<ActionSettings />}
+                  icon={<ActionSettings className={classes.icon} />}
                   onClick={() => onBottomNavigationButtonClick('/settings')}
                 />
               </BottomNavigation>

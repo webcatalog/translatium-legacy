@@ -123,7 +123,7 @@ function initMenu() {
 }
 
 function createWindow() {
-  if (dockAndMenubar === 'onlyShowOnMenubar') {
+  if (dockAndMenubar === 'onlyShowOnMenubar' && !isDev) {
     return;
   }
 

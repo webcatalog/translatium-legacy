@@ -36,10 +36,10 @@
   },
   "dependencies": {
     "electron-fetch": "^1.0.0",
-    "electron-is-dev": "^0.2.0",
+    "electron-is-dev": "^0.3.0",
     "electron-settings": "^3.1.1",
     "menubar": "^5.2.3",
-    "semver": "^5.3.0"
+    "semver": "^5.4.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -59,9 +59,9 @@
     "eslint-plugin-react": "^7.1.0",
     "glob": "^7.1.2",
     "history": "^4.6.3",
-    "material-ui": "^1.0.0-alpha.21",
+    "material-ui": "^1.0.0-beta.2",
     "material-ui-icons": "^1.0.0-alpha.19",
-    "pouchdb-browser": "^6.2.0",
+    "pouchdb-browser": "^6.3.4",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -71,7 +71,7 @@
     "react-router-redux": "^4.0.8",
     "react-scripts": "^1.0.10",
     "recordrtc": "^5.4.2",
-    "redux": "^3.7.1",
+    "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "wait-on": "^2.0.2",
     "xml2js": "^0.4.17"
