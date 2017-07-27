@@ -37,6 +37,7 @@
   "dependencies": {
     "electron-fetch": "^1.0.0",
     "electron-is-dev": "^0.2.0",
+    "electron-settings": "^3.1.1",
     "menubar": "^5.2.3",
     "semver": "^5.3.0"
   },

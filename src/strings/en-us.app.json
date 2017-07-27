@@ -111,5 +111,11 @@
 
 	"displayLanguage": "Display language",
 	"change": "Change",
-	"close": "Close"
+	"close": "Close",
+
+	"dockAndMenubar": "Dock & Menubar (restart required)",
+	"showOnBothDockAndMenubar": "Show on both Dock and Menubar",
+	"onlyShowOnDock": "Only show on Dock",
+	"onlyShowOnMenubar": "Only show on Menubar",
+	"quit": "Quit"
 }

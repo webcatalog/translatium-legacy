@@ -6,6 +6,7 @@ const menubar = require('menubar');
 const path = require('path');
 const semver = require('semver');
 const fetch = require('electron-fetch');
+const settings = require('electron-settings');
 
 const isDev = require('electron-is-dev');
 
@@ -17,6 +18,8 @@ const config = require('./config');
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 let menu;
+
+const dockAndMenubar = settings.get('dockAndMenubar', 'showOnBothDockAndMenubar');
 
 function getMenuTemplate() {
   const template = [
@@ -120,6 +123,10 @@ function initMenu() {
 }
 
 function createWindow() {
+  if (dockAndMenubar === 'onlyShowOnMenubar') {
+    return;
+  }
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 500,
@@ -200,10 +207,12 @@ app.on('activate', () => {
 
 
 // Menubar
-menubar({
-  dir: path.resolve(__dirname),
-  icon: path.resolve(__dirname, 'images', 'iconTemplate.png'),
-  width: 400,
-  height: 500,
-  showDockIcon: true,
-});
+if (dockAndMenubar === 'showOnBothDockAndMenubar' || dockAndMenubar === 'onlyShowOnMenubar') {
+  menubar({
+    dir: path.resolve(__dirname),
+    icon: path.resolve(__dirname, 'images', 'iconTemplate.png'),
+    width: 400,
+    height: 500,
+    showDockIcon: dockAndMenubar === 'showOnBothDockAndMenubar',
+  });
+}

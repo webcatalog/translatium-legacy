@@ -1,14 +1,21 @@
+/* global electronSettings */
 import { UPDATE_SETTING } from '../constants/actions';
 
 import getDefaultLangId from '../libs/getDefaultLangId';
+
+const shouldUseElectronSettings = (name) => {
+  if (name === 'dockAndMenubar') return true;
+  return false;
+};
 
 const defaultState = {
   biggerTextFontSize: 50,
   bigTextFontSize: 50,
   chinaMode: false,
   darkMode: false,
-  langId: getDefaultLangId(),
+  dockAndMenubar: 'showOnBothDockAndMenubar',
   inputLang: 'en',
+  langId: getDefaultLangId(),
   launchCount: 0,
   outputLang: 'zh',
   preventScreenLock: false,
@@ -19,11 +26,16 @@ const defaultState = {
 };
 
 const getInitialValue = (name) => {
+  if (shouldUseElectronSettings(name)) {
+    return electronSettings.get(name, defaultState[name]);
+  }
+
   /* global localStorage */
   const localValue = localStorage.getItem(`mt-${name}`);
   if (localValue == null) {
     return defaultState[name];
   }
+
   return JSON.parse(localValue);
 };
 
@@ -38,7 +50,13 @@ const settings = (state = initialState, action) => {
       const { name, value } = action;
       const newState = {};
       newState[name] = action.value;
-      localStorage.setItem(`mt-${name}`, JSON.stringify(value));
+
+      if (shouldUseElectronSettings(name)) {
+        electronSettings.set(name, value);
+      } else {
+        localStorage.setItem(`mt-${name}`, JSON.stringify(value));
+      }
+
       return Object.assign({}, state, newState);
     }
     default:

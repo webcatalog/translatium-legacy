@@ -51,6 +51,7 @@ const Settings = (props) => {
     chinaMode,
     classes,
     darkMode,
+    dockAndMenubar,
     langId,
     onRemoveAdClick,
     onRestorePurchaseClick,
@@ -64,6 +65,12 @@ const Settings = (props) => {
     strings,
     translateWhenPressingEnter,
   } = props;
+
+  const dockAndMenubarOpts = [
+    'showOnBothDockAndMenubar',
+    'onlyShowOnDock',
+    'onlyShowOnMenubar',
+  ];
 
   return (
     <div className={classes.container}>
@@ -187,6 +194,36 @@ const Settings = (props) => {
               />
             </ListItemSecondaryAction>
           </ListItem>
+          {true && (
+            <ListItem>
+              <ListItemText
+                primary={strings.dockAndMenubar}
+                secondary={strings[dockAndMenubar]}
+              />
+              <ListItemSecondaryAction>
+                <EnhancedMenu
+                  id="changeDockMenubar"
+                  buttonElement={(
+                    <Button raised>
+                      {strings.change}
+                    </Button>
+                  )}
+                >
+                  {dockAndMenubarOpts.map(opts => (
+                    <MenuItem
+                      key={`dockAndMenubarOpts_${opts}`}
+                      value={opts}
+                      onClick={() => {
+                        onSettingChange('dockAndMenubar', opts);
+                      }}
+                    >
+                      {strings[opts]}
+                    </MenuItem>
+                  ))}
+                </EnhancedMenu>
+              </ListItemSecondaryAction>
+            </ListItem>
+          )}
           <Divider />
           {getPlatform() === 'windows' && shouldShowAd && (
             <ListItem onClick={() => onRemoveAdClick(strings)}>
@@ -230,6 +267,10 @@ const Settings = (props) => {
           <ListItem>
             <ListItemText primary={`Version ${process.env.REACT_APP_VERSION}`} />
           </ListItem>
+          <Divider />
+          <ListItem>
+            <ListItemText primary={strings.quit} />
+          </ListItem>
         </List>
       </div>
     </div>
@@ -237,33 +278,35 @@ const Settings = (props) => {
 };
 
 Settings.propTypes = {
-  chinaMode: PropTypes.bool,
+  chinaMode: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
-  darkMode: PropTypes.bool,
-  langId: PropTypes.string,
+  darkMode: PropTypes.bool.isRequired,
+  dockAndMenubar: PropTypes.bool.isRequired,
+  langId: PropTypes.string.isRequired,
   onRemoveAdClick: PropTypes.func.isRequired,
   onRestorePurchaseClick: PropTypes.func.isRequired,
   onSettingChange: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
   onUpdateStrings: PropTypes.func.isRequired,
-  preventScreenLock: PropTypes.bool,
-  primaryColorId: PropTypes.string,
-  realtime: PropTypes.bool,
-  shouldShowAd: PropTypes.bool,
+  preventScreenLock: PropTypes.bool.isRequired,
+  primaryColorId: PropTypes.string.isRequired,
+  realtime: PropTypes.bool.isRequired,
+  shouldShowAd: PropTypes.bool.isRequired,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
-  translateWhenPressingEnter: PropTypes.bool,
+  translateWhenPressingEnter: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-  darkMode: state.settings.darkMode,
-  primaryColorId: state.settings.primaryColorId,
-  preventScreenLock: state.settings.preventScreenLock,
-  translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
-  realtime: state.settings.realtime,
   chinaMode: state.settings.chinaMode,
+  darkMode: state.settings.darkMode,
+  dockAndMenubar: state.settings.dockAndMenubar,
   langId: state.settings.langId,
+  preventScreenLock: state.settings.preventScreenLock,
+  primaryColorId: state.settings.primaryColorId,
+  realtime: state.settings.realtime,
   shouldShowAd: state.ad.shouldShowAd,
   strings: state.strings,
+  translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -111,5 +111,11 @@
 
 	"displayLanguage": "Ngôn ngữ hiển thị",
 	"change": "Thay đổi",
-	"close": "Đóng"
+	"close": "Đóng",
+
+	"dockAndMenubar": "Dock và Menubar (cần khởi động lại)",
+	"showOnBothDockAndMenubar": "Hiển thị trên cả Dock và Menubar",
+	"onlyShowOnDock": "Chỉ hiển thị trên Dock",
+	"onlyShowOnMenubar": "Chỉ hiển thị trên Menubar",
+	"quit": "Quit"
 }
