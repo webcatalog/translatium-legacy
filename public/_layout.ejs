@@ -19,24 +19,21 @@
     <link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png">
     <link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/app.css">
   </head>
   <body>
-    <section class="hero is-success">
-      <div class="hero-head">
-        <div class="container">
-          <nav class="navbar">
-            <div class="navbar-brand">
-              <a class="navbar-item" href="/">
-                <img src="/images/b.png" alt="Modern Translator: Translate Any Languages. On Any Devices.">
-              </a>
+    <div class="container">
+      <nav class="navbar">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="/images/favicon.png" alt="Modern Translator: Translate Any Languages. On Any Devices.">
+          </a>
 
-              <a class="navbar-item" href="/support">Help</a>
-            </div>
-          </nav>
+          <a class="navbar-item" href="/support">Support</a>
         </div>
-      </div>
-    </section>
+      </nav>
+    </div>
     <%- yield %>
     <footer class="section footer">
       <div class="container">
@@ -45,11 +42,17 @@
             <li><a href="/">Download</a></li>
             <li><a href="https://github.com/modern-translator/modern-translator/blob/master/RELEASE_NOTES.md" target="_blank" rel="noopener noreferrer">Release Notes</a></li>
             <li><a href="/support">Help</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
-            <li><a href="https://github.com/modern-translator" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="/privacy">Privacy</a></li>
+            <li>
+              <a href="https://github.com/modern-translator" target="_blank" rel="noopener noreferrer">
+                <span class="icon">
+                  <i class="fa fa-github"></i>
+                </span>
+              </a>
+            </li>
           </ul>
           <p>
-            © 2014 - <%= (new Date()).getFullYear() %> <a href="https://quanglam.me/">Quang Lam</a>.
+            © 2014 - <%= (new Date()).getFullYear() %> <a href="https://www.linkedin.com/in/quanglam2807/">Quang Lam</a>.
           </p>
         </div>
       </div>

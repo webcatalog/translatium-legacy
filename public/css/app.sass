@@ -10,13 +10,28 @@ $yellow: #FBC02D
 
 $primary: $green
 
-$family-primary: "Roboto", san-serif
+$family-primary: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Helvetica, Arial, sans-serif
 
 $navbar-background: $green
 $navbar-item: #fff
 $navbar-item-hover-background: #2E7D32
 
 @import "../../node_modules/bulma/bulma"
+
+html
+  background-color: #388E3C
+
+body
+  background-color: #fff
+
+.navbar-item img
+  max-height: 2.2rem
+
+.title
+  font-weight: 400
+
+.subtitle
+  font-weight: 300
 
 .footer
   ul.footer-items
@@ -28,8 +43,10 @@ $navbar-item-hover-background: #2E7D32
     li
       +tablet
         float: left
-        margin: 0 20px 0 0
         padding: 0
+        margin: 0
+        &:not(:last-child)
+          margin-right: 36px
 
 .intro
   .hero-body
@@ -38,10 +55,8 @@ $navbar-item-hover-background: #2E7D32
     .container
       width: 100%
       .title
-        font-weight: 500
         margin-top: 1em
       .subtitle
-        font-weight: 400
         margin-bottom: 2em
       .download-btn
         img
