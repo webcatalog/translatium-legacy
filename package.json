@@ -1,7 +1,7 @@
 {
   "name": "modern-translator",
   "description": "Translator app for Mac & PC.",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "main": "public/electron.js",
   "repository": "https://github.com/modern-translator/modern-translator",
   "author": {

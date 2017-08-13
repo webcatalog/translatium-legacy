@@ -19,8 +19,6 @@ const config = require('./config');
 let mainWindow;
 let menu;
 
-const dockAndMenubar = settings.get('dockAndMenubar', 'showOnBothDockAndMenubar');
-
 function getMenuTemplate() {
   const template = [
     {
@@ -123,6 +121,7 @@ function initMenu() {
 }
 
 function createWindow() {
+  const dockAndMenubar = settings.get('dockAndMenubar', 'showOnBothDockAndMenubar');
   if (dockAndMenubar === 'onlyShowOnMenubar' && !isDev) {
     return;
   }
@@ -153,11 +152,28 @@ function createWindow() {
   initMenu(mainWindow);
 }
 
+function createMenubar() {
+  const dockAndMenubar = settings.get('dockAndMenubar', 'showOnBothDockAndMenubar');
+  if (dockAndMenubar === 'onlyShowOnDock') {
+    return;
+  }
+
+  // Menubar
+  menubar({
+    dir: path.resolve(__dirname),
+    icon: path.resolve(__dirname, 'images', 'iconTemplate.png'),
+    width: 400,
+    height: 500,
+    showDockIcon: dockAndMenubar === 'showOnBothDockAndMenubar',
+  });
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   createWindow();
+  createMenubar();
 
   if (process.platform === 'linux') {
     fetch('https://api.github.com/repos/modern-translator/modern-translator/releases/latest')
@@ -204,15 +220,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-
-// Menubar
-if (dockAndMenubar === 'showOnBothDockAndMenubar' || dockAndMenubar === 'onlyShowOnMenubar') {
-  menubar({
-    dir: path.resolve(__dirname),
-    icon: path.resolve(__dirname, 'images', 'iconTemplate.png'),
-    width: 400,
-    height: 500,
-    showDockIcon: dockAndMenubar === 'showOnBothDockAndMenubar',
-  });
-}
