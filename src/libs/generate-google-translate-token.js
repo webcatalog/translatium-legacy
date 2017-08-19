@@ -1,7 +1,7 @@
 /* global sessionStorage fetch */
 
-import getPlatform from './getPlatform';
-import winXhr from './winXhr';
+import getPlatform from './get-platform';
+import winXhr from './win-xhr';
 
 const getGoogleTkk = (chinaMode) => {
   if (sessionStorage.getItem('googleTkk') == null) {

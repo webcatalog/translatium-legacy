@@ -4,14 +4,14 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 import store from './store';
 
-import App from './components/App';
+import App from './components/app';
 
-import Home from './components/Home';
-import Phrasebook from './components/Phrasebook';
-import Settings from './components/Settings';
-import LanguageList from './components/LanguageList';
-import Ocr from './components/Ocr';
-import BiggerText from './components/BiggerText';
+import Home from './components/home';
+import Phrasebook from './components/phrasebook';
+import Settings from './components/settings';
+import LanguageList from './components/language-list';
+import Ocr from './components/ocr';
+import BiggerText from './components/bigger-text';
 
 const history = syncHistoryWithStore(hashHistory, store);
 

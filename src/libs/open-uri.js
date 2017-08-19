@@ -1,5 +1,5 @@
 /* global Windows shell */
-import getPlatform from './getPlatform';
+import getPlatform from './get-platform';
 
 const openUri = (uriStr) => {
   switch (getPlatform()) {

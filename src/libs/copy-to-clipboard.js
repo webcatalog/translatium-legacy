@@ -1,5 +1,5 @@
 /* global Windows remote */
-import getPlatform from './getPlatform';
+import getPlatform from './get-platform';
 
 const copyToClipboard = (text) => {
   switch (getPlatform()) {

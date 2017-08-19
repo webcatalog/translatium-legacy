@@ -1,5 +1,5 @@
 import { UPDATE_PHRASEBOOK, UPDATE_OUTPUT } from '../constants/actions';
-import phrasebookDb from '../libs/phrasebookDb';
+import phrasebookDb from '../libs/phrasebook-db';
 
 const defaultOptions = {
   include_docs: true,

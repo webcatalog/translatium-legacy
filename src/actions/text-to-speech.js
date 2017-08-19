@@ -2,7 +2,7 @@
 
 import { PLAY_TEXT_TO_SPEECH, STOP_TEXT_TO_SPEECH } from '../constants/actions';
 
-import generateGoogleTranslateToken from '../libs/generateGoogleTranslateToken';
+import generateGoogleTranslateToken from '../libs/generate-google-translate-token';
 import { openAlert } from './alert';
 
 let player = null;

@@ -1,6 +1,6 @@
-import getPlatform from './getPlatform';
+import getPlatform from './get-platform';
 
-import displayLanguages from '../constants/displayLanguages';
+import displayLanguages from '../constants/display-languages';
 
 // strip country code from langId
 // en-US => en / vi-vn => vi

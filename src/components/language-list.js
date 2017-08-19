@@ -1,10 +1,8 @@
 /* global document */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 
-import { withStyles, createStyleSheet } from 'material-ui/styles';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -13,15 +11,17 @@ import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui-icons/Close';
 
+import connectComponent from '../libs/connect-component';
+
 import {
   getInputLanguages,
   getOutputLanguages,
   getOcrSupportedLanguages,
-} from '../libs/languageUtils';
+} from '../libs/language-utils';
 
 import { updateInputLang, updateOutputLang } from '../actions/settings';
 
-const styleSheet = createStyleSheet('LanguageList', {
+const styles = {
   container: {
     flex: 1,
     display: 'flex',
@@ -33,7 +33,7 @@ const styleSheet = createStyleSheet('LanguageList', {
     overflowY: 'auto',
     WebkitOverflowScrolling: 'touch',
   },
-});
+};
 
 
 class LanguageList extends React.Component {
@@ -143,6 +143,9 @@ const mapStateToProps = (state, ownProps) => ({
   strings: state.strings,
 });
 
-export default connect(
-  mapStateToProps, mapDispatchToProps,
-)(withStyles(styleSheet)(LanguageList));
+export default connectComponent(
+  LanguageList,
+  mapStateToProps,
+  mapDispatchToProps,
+  styles,
+);

@@ -1,5 +1,5 @@
 /* global Windows */
-import getPlatform from './getPlatform';
+import getPlatform from './get-platform';
 
 const shareText = (text) => {
   switch (getPlatform()) {

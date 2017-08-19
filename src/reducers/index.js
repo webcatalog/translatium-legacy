@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 
 import { routerReducer } from 'react-router-redux';
 
-import ad from './ad';
 import alert from './alert';
 import handwriting from './handwriting';
 import history from './history';
@@ -14,10 +13,9 @@ import settings from './settings';
 import snackbar from './snackbar';
 import speech from './speech';
 import strings from './strings';
-import textToSpeech from './textToSpeech';
+import textToSpeech from './text-to-speech';
 
 const rootReducer = combineReducers({
-  ad,
   alert,
   handwriting,
   history,

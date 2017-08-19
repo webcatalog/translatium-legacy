@@ -1,6 +1,6 @@
 /* global Windows remote */
-import getPlatform from './getPlatform';
-import openUri from './openUri';
+import getPlatform from './get-platform';
+import openUri from './open-uri';
 
 import store from '../store';
 import { updateSetting } from '../actions/settings';

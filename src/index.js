@@ -17,11 +17,11 @@ import { updateSetting } from './actions/settings';
 import { updateInputText } from './actions/home';
 import { updateStrings } from './actions/strings';
 
-import renderRoutes from './renderRoutes';
+import renderRoutes from './render-routes';
 
-import getPlatform from './libs/getPlatform';
+import getPlatform from './libs/get-platform';
 
-import colorPairs from './constants/colorPairs';
+import colorPairs from './constants/colors';
 
 export const runApp = (isRestart) => {
   /* global document */

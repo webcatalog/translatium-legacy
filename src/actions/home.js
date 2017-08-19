@@ -2,8 +2,8 @@ import {
   UPDATE_INPUT_TEXT, UPDATE_OUTPUT, UPDATE_IME_MODE, TOGGLE_FULLSCREEN_INPUT_BOX,
 } from '../constants/actions';
 
-import translateText from '../libs/translateText';
-import phrasebookDb from '../libs/phrasebookDb';
+import translateText from '../libs/translate-text';
+import phrasebookDb from '../libs/phrasebook-db';
 
 import { openAlert } from './alert';
 import { updateSetting } from './settings';

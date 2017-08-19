@@ -4,8 +4,8 @@ import { UPDATE_HANDWRITING_SUGGESTION_LIST } from '../constants/actions';
 
 import { updateInputText } from './home';
 
-import insertAtCursor from '../libs/insertAtCursor';
-import deleteAtCursor from '../libs/deleteAtCursor';
+import insertAtCursor from '../libs/insert-at-cursor';
+import deleteAtCursor from '../libs/delete-at-cursor';
 
 import { openAlert } from './alert';
 

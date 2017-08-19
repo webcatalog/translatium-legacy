@@ -1,5 +1,5 @@
 import { UPDATE_HISTORY } from '../constants/actions';
-import historyDb from '../libs/historyDb';
+import historyDb from '../libs/history-db';
 
 const defaultOptions = {
   include_docs: true,

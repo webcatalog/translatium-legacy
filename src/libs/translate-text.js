@@ -1,8 +1,8 @@
 /* global fetch */
-import getPlatform from './getPlatform';
-import generateGoogleTranslateToken from './generateGoogleTranslateToken';
-import * as languageUtils from './languageUtils';
-import winXhr from './winXhr';
+import getPlatform from './get-platform';
+import generateGoogleTranslateToken from './generate-google-translate-token';
+import * as languageUtils from './language-utils';
+import winXhr from './win-xhr';
 
 // Maximum encoded inputText length: 2000
 const translateShortText = (inputLang, outputLang, inputText, chinaMode) =>

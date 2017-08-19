@@ -1,4 +1,4 @@
-import translateText from './translateText';
+import translateText from './translate-text';
 
 const translateArray = (inputLang, outputLang, inputArr, chinaMode) =>
   Promise.resolve()

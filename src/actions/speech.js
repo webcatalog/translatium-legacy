@@ -6,9 +6,9 @@ import { UPDATE_SPEECH_STATUS } from '../constants/actions';
 
 import { updateInputText } from './home';
 
-import getPlatform from '../libs/getPlatform';
-import insertAtCursor from '../libs/insertAtCursor';
-import winXhr from '../libs/winXhr';
+import getPlatform from '../libs/get-platform';
+import insertAtCursor from '../libs/insert-at-cursor';
+import winXhr from '../libs/win-xhr';
 
 import { openAlert } from './alert';
 

@@ -2,7 +2,7 @@ import {
   UPDATE_SETTING, UPDATE_OUTPUT,
 } from '../constants/actions';
 
-import { isOutput } from '../libs/languageUtils';
+import { isOutput } from '../libs/language-utils';
 import { translate } from './home';
 
 export const updateSetting = (name, value) => ({

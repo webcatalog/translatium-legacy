@@ -3,11 +3,11 @@ import { push } from 'react-router-redux';
 
 import { UPDATE_OCR } from '../constants/actions';
 
-import getPlatform from '../libs/getPlatform';
-import translateArray from '../libs/translateArray';
-import openFileToBlobAsync from '../libs/openFileToBlobAsync';
-import captureToBlobAsync from '../libs/captureToBlobAsync';
-import { toOcrSpaceLanguage } from '../libs/languageUtils';
+import getPlatform from '../libs/get-platform';
+import translateArray from '../libs/translate-array';
+import openFileToBlobAsync from '../libs/open-file-to-blob-async';
+import captureToBlobAsync from '../libs/capture-to-blob-async';
+import { toOcrSpaceLanguage } from '../libs/language-utils';
 import { openAlert } from './alert';
 
 export const loadImage = fromCamera => (dispatch, getState) => {

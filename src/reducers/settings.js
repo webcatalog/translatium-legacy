@@ -1,7 +1,7 @@
 /* global electronSettings */
 import { UPDATE_SETTING } from '../constants/actions';
 
-import getDefaultLangId from '../libs/getDefaultLangId';
+import getDefaultLangId from '../libs/get-default-lang-id';
 
 const shouldUseElectronSettings = (name) => {
   if (name === 'dockAndMenubar') return true;

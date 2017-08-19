@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 
-import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import CloseIcon from 'material-ui-icons/Close';
 import ZoomInIcon from 'material-ui-icons/ZoomIn';
 import ZoomOutIcon from 'material-ui-icons/ZoomOut';
 
+import connectComponent from '../libs/connect-component';
+
 import { updateSetting } from '../actions/settings';
 
-const styleSheet = createStyleSheet('Settings', {
+const styles = {
   container: {
     flex: 1,
     padding: '16px 16px 16px 16px',
@@ -41,7 +41,7 @@ const styleSheet = createStyleSheet('Settings', {
     marginTop: 80,
     lineHeight: 'normal',
   },
-});
+};
 
 const BiggerText = (props) => {
   const {
@@ -106,6 +106,9 @@ const mapDispatchToProps = dispatch => ({
   onUpdateBiggerTextFontSize: value => dispatch(updateSetting('biggerTextFontSize', value)),
 });
 
-export default connect(
-  mapStateToProps, mapDispatchToProps,
-)(withStyles(styleSheet)(BiggerText));
+export default connectComponent(
+  BiggerText,
+  mapStateToProps,
+  mapDispatchToProps,
+  styles,
+);

@@ -1,5 +1,5 @@
-import getPlatform from './getPlatform';
-import b64ToBlob from './b64ToBlob';
+import getPlatform from './get-platform';
+import b64ToBlob from './b64-to-blob';
 
 const captureToBlobAsync = () =>
   new Promise((resolve, reject) => {
