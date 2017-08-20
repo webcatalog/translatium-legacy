@@ -2,9 +2,10 @@
 import { UPDATE_SETTING } from '../constants/actions';
 
 import getDefaultLangId from '../libs/get-default-lang-id';
+import getPlaform from '../libs/get-platform';
 
 const shouldUseElectronSettings = (name) => {
-  if (name === 'dockAndMenubar') return true;
+  if (name === 'dockAndMenubar' && getPlaform() === 'darwin') return true;
   return false;
 };
 

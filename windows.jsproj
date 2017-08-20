@@ -64,10 +64,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Microsoft.Advertising.JavaScript, Version=10.0" />
-    <SDKReference Include="Microsoft.VCLibs, Version=14.0" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="build-resources\windows-images\Splash620x300.scale-100.png" />
     <Content Include="build-resources\windows-images\Splash620x300.scale-125.png" />
     <Content Include="build-resources\windows-images\Splash620x300.scale-150.png" />
