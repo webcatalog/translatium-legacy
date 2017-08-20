@@ -5,7 +5,7 @@ const glob = require('glob');
 const del = require('del');
 
 const electronVersion = require('./package.json').devDependencies.electron.substr(1);
-const displayLanguages = require('./src/constants/displayLanguages').default;
+const displayLanguages = require('./src/constants/display-languages').default;
 
 const { Platform, Arch } = builder;
 
