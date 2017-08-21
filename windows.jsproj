@@ -106,17 +106,9 @@
     <Content Include="build\**\**" />
     <None Include="windows_StoreKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
-    <Content Include="packages.config" />
     <None Include="windows_TemporaryKey.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
-  <Import Project="packages\Microsoft.Advertising.JS.10.1705.16001\build\Microsoft.Advertising.JS.targets" Condition="Exists('packages\Microsoft.Advertising.JS.10.1705.16001\build\Microsoft.Advertising.JS.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\Microsoft.Advertising.JS.10.1705.16001\build\Microsoft.Advertising.JS.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Advertising.JS.10.1705.16001\build\Microsoft.Advertising.JS.targets'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below then uncomment
        that target and the DisableFastUpToDateCheck PropertyGroup.
        Other similar extension points exist, see Microsoft.Common.targets.
