@@ -5,10 +5,6 @@ const getPlatform = () => {
     return 'windows';
   }
 
-  if (window.cordova) {
-    return 'cordova';
-  }
-
   if (typeof window !== 'undefined' && window.process && window.process.type === 'renderer') {
     return 'electron';
   }

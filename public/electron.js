@@ -4,13 +4,11 @@
 const electron = require('electron');
 const menubar = require('menubar');
 const path = require('path');
-const semver = require('semver');
-const fetch = require('electron-fetch');
 const settings = require('electron-settings');
 
 const isDev = require('electron-is-dev');
 
-const { dialog, Menu, app, BrowserWindow, shell } = electron;
+const { Menu, app, BrowserWindow } = electron;
 
 const config = require('./config');
 
@@ -174,34 +172,6 @@ function createMenubar() {
 app.on('ready', () => {
   createWindow();
   createMenubar();
-
-  if (process.platform === 'linux') {
-    fetch('https://api.github.com/repos/modern-translator/modern-translator/releases/latest')
-        .then(response => response.json())
-        .then(({ tag_name }) => {
-          const latestVersion = tag_name.substring(1);
-
-          /* eslint-disable no-console */
-          console.log(`Latest version: ${latestVersion}`);
-          /* eslint-enable no-console */
-
-          if (semver.gte(app.getVersion(), latestVersion)) return;
-
-          dialog.showMessageBox({
-            type: 'info',
-            title: 'Found Updates',
-            message: 'An update has been found. Do you want to download now?',
-            buttons: ['Sure', 'No'],
-          }, (buttonIndex) => {
-            if (buttonIndex === 0) {
-              shell.openExternal('https://moderntranslator.com');
-            }
-          });
-        })
-        /* eslint-disable no-console */
-        .catch(console.log);
-        /* eslint-enable no-console */
-  }
 });
 
 // Quit when all windows are closed.

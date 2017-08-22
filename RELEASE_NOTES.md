@@ -1,9 +1,9 @@
-### 7.2 (Only for Windows)
+### 7.2
 - Fixes bugs.
 
 ---
 
-### 7.1 (Only for macOS)
+### 7.1
 - Adds option to configure Dock & Menubar.
 
 ---

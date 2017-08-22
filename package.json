@@ -6,26 +6,14 @@
   "repository": "https://github.com/modern-translator/modern-translator",
   "author": {
     "name": "Quang Lam",
-    "email": "quang.lam2807@gmail.com",
+    "email": "quang@moderntranslator.com",
     "url": "https://quanglam.me"
   },
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    }
-  ],
+  "license": "MPL-2.0",
   "engines": {
     "node": "8"
   },
   "scripts": {
-    "install": "npm run install:cordova",
-    "install:cordova": "cd cordova && npm install",
-    "prepare:cordova": "cd cordova && cordova prepare",
-    "build-ios": "npm run build && cd cordova && cordova prepare ios && cordova build ios",
-    "dist-ios": "npm run build && cd cordova && cordova prepare ios && cordova build ios --device --release",
-    "build-android": "npm run build && cd cordova && cordova prepare android && cordova build android",
-    "dist-android": "npm run build && cd cordova && cordova prepare android && cordova build android --release",
     "start": "cross-env REACT_APP_VERSION=dev REACT_APP_GOOGLE_ENDPOINT=http://localhost:3000 BROWSER=none react-scripts start",
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "build": "cross-env REACT_APP_VERSION=7.1 react-scripts build && node add-bom.js",
@@ -35,11 +23,9 @@
     "lint": "eslint src public --ext js"
   },
   "dependencies": {
-    "electron-fetch": "^1.0.0",
     "electron-is-dev": "^0.3.0",
     "electron-settings": "^3.1.1",
-    "menubar": "^5.2.3",
-    "semver": "^5.4.1"
+    "menubar": "^5.2.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -47,7 +33,6 @@
     "babel-preset-react": "^6.24.1",
     "classnames": "^2.2.5",
     "concurrently": "^3.5.0",
-    "cordova": "^7.0.1",
     "cross-env": "^5.0.5",
     "del": "^3.0.0",
     "electron": "^1.6.11",
@@ -65,7 +50,6 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-fastclick": "^3.0.2",
     "react-redux": "^5.0.6",
     "react-router": "^3.0.5",
     "react-router-redux": "^4.0.8",
@@ -73,8 +57,7 @@
     "recordrtc": "^5.4.2",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "wait-on": "^2.0.2",
-    "xml2js": "^0.4.18"
+    "wait-on": "^2.0.2"
   },
   "homepage": "./",
   "proxy": {

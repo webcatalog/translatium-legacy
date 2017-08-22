@@ -2,13 +2,12 @@
 
 ## Modern Translator
 
-[![Apache 2.0 License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/modern-translator/modern-translator/blob/master/LICENSE)
+[![MPL-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/modern-translator/modern-translator/blob/master/LICENSE)
 
 | Platform    | Build Status                                                                                                                                                                                                                    |
 |-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| macOS & iOS | [![Travis Build Status](https://travis-ci.org/modern-translator/modern-translator.svg?branch=master)](https://travis-ci.org/modern-translator/modern-translator)                                                                |
+| macOS | [![Travis Build Status](https://travis-ci.org/modern-translator/modern-translator.svg?branch=master)](https://travis-ci.org/modern-translator/modern-translator)                                                                |
 | Windows | [![VSO Build Status](https://img.shields.io/vso/build/quanglam2807/2f76e0e3-6c4c-4c04-a98e-f7c1460efa1c/2.svg)](https://quanglam2807.visualstudio.com/Modern%20Translator/_build/index?definitionId=2) |
-| Linux & Android | [![CircleCI](https://img.shields.io/circleci/project/github/modern-translator/modern-translator.svg)](https://circleci.com/gh/modern-translator/modern-translator)
 
 #### Homepage: https://moderntranslator.com
 
@@ -38,21 +37,3 @@
 **Release**
 1. `yarn build`
 2. Open `windows.sln` with Visual Studio and build the project.
-
----
-
-### Android & iOS
-
-**Development**
-```bash
-yarn build
-cd cordova
-cordova run ios
-cordova run android
-```
-
-**Release**
-```bash
-yarn dist-ios
-yarn dist-android
-```

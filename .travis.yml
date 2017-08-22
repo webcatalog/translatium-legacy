@@ -8,4 +8,3 @@ cache:
 script:
 - yarn lint
 - yarn dist-electron
-- yarn build-ios

@@ -49,24 +49,6 @@ const createDialog = ({
 
       return;
     }
-    case 'cordova': {
-      const promptCallback = (buttonIndex) => {
-        if (buttonIndex === 1) {
-          defaultFunc();
-          return;
-        }
-
-        cancelFunc();
-      };
-
-      window.navigator.notification.confirm(
-        message,
-        promptCallback,
-        '',
-        [defaultButtonText, cancelButtonText],
-      );
-      return;
-    }
     default: {
       /* eslint-disable no-console */
       console.log('Platform does not support dialog.');
@@ -90,14 +72,6 @@ const askToReview = () => {
         }
         case 'electron': {
           openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12');
-          break;
-        }
-        case 'cordova': {
-          if (window.cordova.platformId === 'ios') {
-            openUri('itms-apps://itunes.apple.com/app/id1257601501');
-          } else if (window.cordova.platformId === 'android') {
-            openUri('https://play.google.com/store/apps/details?id=com.moderntranslator.application');
-          }
           break;
         }
         default: {

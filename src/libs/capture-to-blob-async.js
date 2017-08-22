@@ -1,5 +1,4 @@
 import getPlatform from './get-platform';
-import b64ToBlob from './b64-to-blob';
 
 const captureToBlobAsync = () =>
   new Promise((resolve, reject) => {
@@ -29,30 +28,6 @@ const captureToBlobAsync = () =>
             .then(null, (err) => {
               reject(err);
             });
-          break;
-        }
-        case 'cordova': {
-          const cameraSuccess = (b64Data) => {
-            const blob = b64ToBlob(b64Data, 'image/jpeg');
-            resolve({
-              fileName: 'image.jpg',
-              blob,
-            });
-          };
-
-          // capture error callback
-          const cameraError = e => reject(e);
-
-          const cameraOptions = {
-            destinationType: 0, // Camera.DestinationType.DATA_URL
-            encodingType: 0, // Camera.EncodingType.JPEG
-            sourceType: 1, // Camera.PictureSourceType.CAMERA
-            targetWidth: 1280,
-            targetHeight: 720,
-          };
-
-          window.navigator.camera.getPicture(cameraSuccess, cameraError, cameraOptions);
-
           break;
         }
         default: {

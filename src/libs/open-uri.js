@@ -12,14 +12,6 @@ const openUri = (uriStr) => {
       shell.openExternal(uriStr);
       break;
     }
-    case 'cordova': {
-      if (uriStr.startsWith('http')) {
-        window.cordova.InAppBrowser.open(uriStr, '_system');
-      } else {
-        window.open(uriStr);
-      }
-      break;
-    }
     default: {
       /* eslint-disable no-console */
       console.log('Platform does not support openUri.');

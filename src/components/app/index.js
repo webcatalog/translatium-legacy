@@ -89,14 +89,6 @@ class App extends React.Component {
       };
     }
 
-    if (getPlatform() === 'cordova') {
-      window.document.addEventListener('backbutton', (e) => {
-        e.preventDefault();
-
-        onBackClick();
-      }, false);
-    }
-
     window.addEventListener('resize', this.props.onResize);
   }
 
@@ -142,11 +134,6 @@ class App extends React.Component {
         statusBar.backgroundOpacity = 1;
         statusBar.showAsync();
       }
-    }
-
-    if (getPlatform() === 'cordova') {
-      /* global StatusBar */
-      StatusBar.backgroundColorByHexString(color);
     }
   }
 

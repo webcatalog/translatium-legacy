@@ -7,46 +7,26 @@ const del = require('del');
 const electronVersion = require('./package.json').devDependencies.electron.substr(1);
 const displayLanguages = require('./src/constants/display-languages').default;
 
-const { Platform, Arch } = builder;
+const { Platform } = builder;
+
+if (process.platform !== 'darwin') {
+  console.log(`${process.platform} is not supported.`);
+  process.exit(0);
+}
 
 console.log(`Packaging for ${process.platform}`);
-
-let targets;
-switch (process.platform) {
-  case 'darwin': {
-    targets = Platform.MAC.createTarget(['mas', 'zip']);
-    break;
-  }
-  case 'linux': {
-    targets = Platform.LINUX.createTarget(['deb', 'rpm', 'pacman'], Arch.x64);
-    break;
-  }
-  case 'win32':
-  default: {
-    targets = Platform.WINDOWS.createTarget(['squirrel', 'nsis'], Arch.x64);
-  }
-}
 
 const productName = 'Modern Translator';
 
 // Promise is returned
 builder.build({
-  targets,
+  targets: Platform.MAC.createTarget(['dir', 'mas']),
   config: {
     electronVersion,
     appId: 'com.moderntranslator.app',
     productName,
     directories: {
       buildResources: 'build-resources',
-    },
-    linux: {
-      category: 'Education',
-      packageCategory: 'education',
-      target: [
-        'deb',
-        'rpm',
-        'pacman',
-      ],
     },
     afterPack: ({ appOutDir }) =>
       new Promise((resolve, reject) => {
