@@ -5,7 +5,13 @@
   "repository": "https://github.com/modern-translator/modern-translator-website.git",
   "author": "Quang Lam <quang.lam2807@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "harp server"
+  },
   "dependencies": {
     "bulma": "^0.5.1"
+  },
+  "devDependencies": {
+    "harp": "0.24.0"
   }
 }
