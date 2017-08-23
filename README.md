@@ -2,7 +2,7 @@
 
 ## Modern Translator
 
-[![MPL-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/modern-translator/modern-translator/blob/master/LICENSE)
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 
 | Platform    | Build Status                                                                                                                                                                                                                    |
 |-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -12,7 +12,7 @@
 #### Homepage: https://moderntranslator.com
 
 ## Development Guide
-### macOS & Linux
+### macOS
 **Requirements**
 1. Xcode (latest).
 2. Node.js 8.
