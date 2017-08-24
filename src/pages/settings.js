@@ -73,6 +73,12 @@ const renderCombinator = combinator =>
     .replace('Shift', getPlatform() === 'windows' ? 'Shift' : '⇧')
     .replace('CtrlOrCmd', getPlatform() === 'windows' ? 'Ctrl' : '⌘');
 
+const dockAndMenubarOpts = [
+  'showOnBothDockAndMenubar',
+  'onlyShowOnDock',
+  'onlyShowOnMenubar',
+];
+
 const Settings = (props) => {
   const {
     chinaMode,
@@ -90,12 +96,6 @@ const Settings = (props) => {
     translateWhenPressingEnter,
   } = props;
 
-  const dockAndMenubarOpts = [
-    'showOnBothDockAndMenubar',
-    'onlyShowOnDock',
-    'onlyShowOnMenubar',
-  ];
-
   const shortcuts = [
     { identifier: 'openInputLangList', combinator: 'CtrlOrCmd+Shift+I' },
     { identifier: 'openOutputLangList', combinator: 'CtrlOrCmd+Shift+O' },
@@ -108,7 +108,8 @@ const Settings = (props) => {
     { identifier: 'openImageFile', combinator: 'CtrlOrCmd+O' },
     { identifier: 'saveToPhrasebook', combinator: 'CtrlOrCmd+S' },
   ];
-  if (getPlatform() === 'electron') {
+  if (getPlatform() === 'electron'
+    && ['showOnBothDockAndMenubar', 'onlyShowOnMenubar'].indexOf(dockAndMenubar) > -1) {
     shortcuts.unshift(
       { identifier: 'openOnMenubar', combinator: 'Alt+Shift+T' },
     );
@@ -363,7 +364,7 @@ Settings.propTypes = {
   chinaMode: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   darkMode: PropTypes.bool.isRequired,
-  dockAndMenubar: PropTypes.bool.isRequired,
+  dockAndMenubar: PropTypes.oneOf(dockAndMenubarOpts).isRequired,
   langId: PropTypes.string.isRequired,
   onSettingChange: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,

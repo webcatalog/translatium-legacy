@@ -291,7 +291,7 @@ class Handwriting extends React.Component {
           onTouchMove={onMouseMove}
         />
         <div className={classes.wrapper}>
-          <Button color="secondary" onClick={onDeleteButtonClick}>
+          <Button color="accent" onClick={onDeleteButtonClick}>
             {strings.delete}
           </Button>
           <Button onClick={onSpaceBarButtonClick}>
