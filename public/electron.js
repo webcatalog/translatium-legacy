@@ -8,7 +8,12 @@ const settings = require('electron-settings');
 
 const isDev = require('electron-is-dev');
 
-const { Menu, app, BrowserWindow } = electron;
+const {
+  app,
+  BrowserWindow,
+  globalShortcut,
+  Menu,
+} = electron;
 
 const config = require('./config');
 
@@ -157,12 +162,16 @@ function createMenubar() {
   }
 
   // Menubar
-  menubar({
+  const mb = menubar({
     dir: path.resolve(__dirname),
     icon: path.resolve(__dirname, 'images', 'iconTemplate.png'),
     width: 400,
     height: 500,
     showDockIcon: dockAndMenubar === 'showOnBothDockAndMenubar',
+  });
+
+  globalShortcut.register('Alt+Shift+T', () => {
+    mb.showWindow();
   });
 }
 
