@@ -106,6 +106,7 @@ class Phrasebook extends React.Component {
               <List>
                 {phrasebookItems.map(item => [(
                   <ListItem
+                    button
                     key={`phrasebookItem_${item.phrasebookId}`}
                     onClick={() => onItemClick(item)}
                   >

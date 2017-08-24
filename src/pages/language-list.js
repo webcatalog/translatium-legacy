@@ -94,6 +94,7 @@ class LanguageList extends React.Component {
         <List className={classes.listContainer}>
           {recentLanguages.map(langId => (
             <ListItem
+              button
               key={`lang_recent_${langId}`}
               onClick={() => onLanguageClick(type, langId)}
             >
@@ -103,6 +104,7 @@ class LanguageList extends React.Component {
           <Divider />
           {languages.map(langId => (
             <ListItem
+              button
               key={`lang_${langId}`}
               onClick={() => onLanguageClick(type, langId)}
             >
