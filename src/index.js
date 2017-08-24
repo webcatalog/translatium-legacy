@@ -11,14 +11,14 @@ import pink from 'material-ui/colors/pink';
 import './main.css';
 import './fonts/roboto.css';
 
-import store from './store';
-import { updateSetting } from './actions/settings';
-import { updateInputText } from './actions/home';
-import { updateStrings } from './actions/strings';
+import store from './state/reducers';
+import { updateSetting } from './state/root/settings/actions';
+import { updateInputText } from './state/pages/home/actions';
+import { updateStrings } from './state/root/strings/actions';
 
-import renderRoutes from './render-routes';
+import renderRoutes from './routes';
 
-import getPlatform from './libs/get-platform';
+import getPlatform from './helpers/get-platform';
 
 import colorPairs from './constants/colors';
 
@@ -54,7 +54,7 @@ export const runApp = (isRestart) => {
   render(
     <Provider store={store}>
       <MuiThemeProvider theme={theme}>
-        {renderRoutes()}
+        {renderRoutes(store)}
       </MuiThemeProvider>
     </Provider>,
     document.getElementById('app'),
