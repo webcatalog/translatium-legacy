@@ -14,7 +14,7 @@ import textToSpeech from './text-to-speech/reducers';
 
 const fullscreenInputBox = (state = false, action) => {
   switch (action.type) {
-    case TOGGLE_FULLSCREEN_INPUT_BOX: return !state.fullscreenInputBox;
+    case TOGGLE_FULLSCREEN_INPUT_BOX: return !state;
     default: return state;
   }
 };
@@ -42,14 +42,14 @@ const inputText = (state = '', action) => {
 
 const selectionStart = (state = 0, action) => {
   switch (action.type) {
-    case UPDATE_INPUT_TEXT: return action.selectionStart;
+    case UPDATE_INPUT_TEXT: return action.selectionStart || state;
     default: return state;
   }
 };
 
 const selectionEnd = (state = 0, action) => {
   switch (action.type) {
-    case UPDATE_INPUT_TEXT: return action.selectionEnd;
+    case UPDATE_INPUT_TEXT: return action.selectionEnd || state;
     default: return state;
   }
 };

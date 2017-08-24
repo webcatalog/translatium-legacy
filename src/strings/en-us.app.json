@@ -3,7 +3,8 @@
 	"phrasebook": "Phrasebook",
 	"settings": "Settings",
 
-	"help": "Help",
+	"help": "Support",
+	"sendFeedback": "Send feedback",
 	"website": "Website",
 
 	"typeSomethingHere": "Type something here...",
@@ -12,7 +13,7 @@
 	"stop": "Stop",
 	"listen": "Listen",
 	"speak": "Speak",
-	"draw": "Draw",
+	"draw": "Write",
 	"camera": "Camera",
 	"openImageFile": "Open image file",
 	"more": "More",
@@ -113,9 +114,22 @@
 	"change": "Change",
 	"close": "Close",
 
-	"dockAndMenubar": "Dock & Menubar (restart required)",
+	"dockAndMenubar": "Dock & Menubar",
 	"showOnBothDockAndMenubar": "Show on both Dock and Menubar",
 	"onlyShowOnDock": "Only show on Dock",
 	"onlyShowOnMenubar": "Only show on Menubar",
-	"quit": "Quit"
+	"quit": "Quit",
+
+	"appearance": "Appearance",
+	"restartRequired": "restart required",
+	"advanced": "Advanced",
+	"about": "About",
+
+	"shortcuts": "Keyboard Shortcuts (Beta)",
+	"openOnMenubar": "Open Modern Translator on Menubar",
+	"openInputLangList": "Select input language",
+	"openOutputLangList": "Select output language",
+	"swapLanguages": "Swap languages",
+	"clearInput": "Clear input text",
+	"saveToPhrasebook": "Save to Phrasebook"
 }

@@ -4,6 +4,7 @@
 	"settings": "Cài đặt",
 
 	"help": "Trợ giúp",
+	"sendFeedback": "Góp ý",
 	"website": "Trang web",
 
 	"typeSomethingHere": "Nhập ở đây ...",
@@ -113,9 +114,22 @@
 	"change": "Thay đổi",
 	"close": "Đóng",
 
-	"dockAndMenubar": "Dock và Menubar (cần khởi động lại)",
+	"dockAndMenubar": "Dock và Menubar",
 	"showOnBothDockAndMenubar": "Hiển thị trên cả Dock và Menubar",
 	"onlyShowOnDock": "Chỉ hiển thị trên Dock",
 	"onlyShowOnMenubar": "Chỉ hiển thị trên Menubar",
-	"quit": "Quit"
+	"quit": "Thoát",
+
+	"appearance": "Giao diện",
+	"restartRequired": "cần khởi động lại",
+	"advanced": "Nâng cao",
+	"about": "Thông tin",
+
+	"shortcuts": "Phím tắt (Beta)",
+	"openOnMenubar": "Mở Modern Translator trên Menubar",
+	"openInputLangList": "Chọn ngôn ngữ đầu vào",
+	"openOutputLangList": "Chọn ngôn ngữ đầu ra",
+	"swapLanguages": "Tráo ngôn ngữ",
+	"clearInput": "Xóa văn bản",
+	"saveToPhrasebook": "Lưu vào Sổ từ ngữ"
 }

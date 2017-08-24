@@ -57,7 +57,7 @@ export const loadHistory = (init, limit) => ((dispatch, getState) => {
 });
 
 export const deleteHistoryItem = (id, rev) => ((dispatch, getState) => {
-  const { history } = getState().pages;
+  const { history } = getState().pages.home;
   const { items, loading, canLoadMore } = history;
 
   historyDb.remove(id, rev)
@@ -87,7 +87,7 @@ export const deleteHistoryItem = (id, rev) => ((dispatch, getState) => {
 });
 
 export const addHistoryItem = data => (dispatch, getState) => {
-  const { history } = getState().pages;
+  const { history } = getState().pages.home;
   const { items, loading, canLoadMore } = history;
 
   const newHistoryId = new Date().toJSON();

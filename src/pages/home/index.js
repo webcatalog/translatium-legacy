@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { push } from 'react-router-redux';
 import classNames from 'classnames';
+import Mousetrap from 'mousetrap';
 
 import { CircularProgress } from 'material-ui/Progress';
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
@@ -146,6 +147,9 @@ const styles = theme => ({
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
+    fontSize: 21,
+    textTransform: 'none',
+    fontWeight: 500,
   },
   googleCopyright: {
     color: theme.palette.text.disabled,
@@ -170,11 +174,127 @@ class Home extends React.Component {
 
     const {
       launchCount,
+      onAnotherContainerClick,
       onAskIfEnjoy,
+      onCameraButtonClick,
+      onClearButtonClick,
+      onLanguageClick,
+      onListenButtonClick,
+      onOpenImageButtonClick,
+      onSpeakButtonClick,
+      onSwapOutputButtonClick,
+      onTogglePhrasebookClick,
+      onWriteButtonClick,
     } = this.props;
-    if (launchCount === 5) {
+
+    if (launchCount >= 5) {
       onAskIfEnjoy();
     }
+
+    /*
+    { identifier: 'openInputLangList', combinator: 'CtrlOrCmd+Shift+I' },
+    { identifier: 'openOutputLangList', combinator: 'CtrlOrCmd+Shift+O' },
+    { identifier: 'swapLanguages', combinator: 'CtrlOrCmd+Shift+S' },
+    { identifier: 'clearInput', combinator: 'CtrlOrCmd+Shift+D' },
+    { identifier: 'speak', combinator: 'CtrlOrCmd+Shift+M' },
+    { identifier: 'listen', combinator: 'CtrlOrCmd+Shift+L' },
+    { identifier: 'draw', combinator: 'CtrlOrCmd+Shift+W' },
+    { identifier: 'camera', combinator: 'CtrlOrCmd+Shift+C' },
+    { identifier: 'openImageFile', combinator: 'CtrlOrCmd+O' },
+    { identifier: 'saveToPhrasebook', combinator: 'CtrlOrCmd+S' },
+    */
+
+    Mousetrap.bind(['mod+shift+i'], (e) => {
+      e.preventDefault();
+
+      onLanguageClick('inputLang');
+    });
+
+    Mousetrap.bind(['mod+shift+o'], (e) => {
+      e.preventDefault();
+
+      onLanguageClick('outputLang');
+    });
+
+    Mousetrap.bind(['mod+shift+s'], (e) => {
+      e.preventDefault();
+
+      onSwapOutputButtonClick();
+    });
+
+    Mousetrap.bind(['mod+shift+d'], (e) => {
+      e.preventDefault();
+
+      onClearButtonClick();
+    });
+
+    Mousetrap.bind(['mod+shift+m'], (e) => {
+      e.preventDefault();
+
+      const { imeMode, inputLang } = this.props;
+      if (imeMode === 'speech') {
+        onAnotherContainerClick(imeMode);
+        return;
+      }
+
+      if (isVoiceRecognitionSupported(inputLang)) {
+        onSpeakButtonClick();
+      }
+    });
+
+    Mousetrap.bind(['mod+shift+l'], (e) => {
+      e.preventDefault();
+
+      const { inputLang } = this.props;
+      if (isTtsSupported(inputLang)) {
+        onListenButtonClick();
+      }
+    });
+
+    Mousetrap.bind(['mod+shift+d'], (e) => {
+      e.preventDefault();
+
+      const { imeMode, inputLang, chinaMode } = this.props;
+
+      if (imeMode === 'handwriting') {
+        onAnotherContainerClick(imeMode);
+        return;
+      }
+
+      if (isHandwritingSupported(inputLang) && !chinaMode) {
+        onWriteButtonClick();
+      }
+    });
+
+    Mousetrap.bind(['mod+shift+c'], (e) => {
+      e.preventDefault();
+
+      const { inputLang } = this.props;
+
+      if (isOcrSupported(inputLang)) {
+        onCameraButtonClick();
+      }
+    });
+
+    Mousetrap.bind(['mod+o'], (e) => {
+      e.preventDefault();
+
+      const { inputLang } = this.props;
+
+      if (isOcrSupported(inputLang)) {
+        onOpenImageButtonClick();
+      }
+    });
+
+    Mousetrap.bind(['mod+s'], (e) => {
+      e.preventDefault();
+
+      const { output } = this.props;
+
+      if (output && !output.phrasebookId) {
+        onTogglePhrasebookClick();
+      }
+    });
   }
   componentWillUnmount() {
     if (getPlatform() === 'windows') {
@@ -182,6 +302,32 @@ class Home extends React.Component {
         this.dispRequest.requestRelease();
       }
     }
+
+
+    /*
+    { identifier: 'openInputLangList', combinator: 'CtrlOrCmd+Shift+I' },
+    { identifier: 'openOutputLangList', combinator: 'CtrlOrCmd+Shift+O' },
+    { identifier: 'swapLanguages', combinator: 'CtrlOrCmd+Shift+S' },
+    { identifier: 'clearInput', combinator: 'CtrlOrCmd+Shift+D' },
+    { identifier: 'speak', combinator: 'CtrlOrCmd+Shift+M' },
+    { identifier: 'listen', combinator: 'CtrlOrCmd+Shift+L' },
+    { identifier: 'draw', combinator: 'CtrlOrCmd+Shift+W' },
+    { identifier: 'camera', combinator: 'CtrlOrCmd+Shift+C' },
+    { identifier: 'openImageFile', combinator: 'CtrlOrCmd+O' },
+    { identifier: 'saveToPhrasebook', combinator: 'CtrlOrCmd+S' },
+    */
+    Mousetrap.unbind([
+      'mod+shift+i',
+      'mod+shift+o',
+      'mod+shift+s',
+      'mod+shift+d',
+      'mod+shift+m',
+      'mod+shift+l',
+      'mod+shift+w',
+      'mod+shift+c',
+      'mod+o',
+      'mod+s',
+    ]);
   }
 
   renderOutput() {
@@ -485,16 +631,13 @@ class Home extends React.Component {
         >
           <AppBar position="static">
             <Toolbar>
-              <Typography
-                type="title"
+              <Button
                 color="inherit"
-                align="center"
-                role="button"
                 className={classes.languageTitle}
                 onClick={() => onLanguageClick('inputLang')}
               >
                 {strings[inputLang]}
-              </Typography>
+              </Button>
               <IconButton
                 color={isOutput(inputLang) ? 'contrast' : 'default'}
                 disabled={!isOutput(inputLang)}
@@ -502,16 +645,13 @@ class Home extends React.Component {
               >
                 <ActionSwapHoriz />
               </IconButton>
-              <Typography
-                type="title"
+              <Button
                 color="inherit"
-                align="center"
-                role="button"
                 className={classes.languageTitle}
                 onClick={() => onLanguageClick('outputLang')}
               >
                 {strings[outputLang]}
-              </Typography>
+              </Button>
             </Toolbar>
           </AppBar>
           <Paper
