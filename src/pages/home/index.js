@@ -59,12 +59,12 @@ import {
   updateImeMode,
   togglePhrasebook,
   toggleFullscreenInputBox,
+  askIfEnjoy,
 } from '../../state/pages/home/actions';
 
 import getPlatform from '../../helpers/get-platform';
 import copyToClipboard from '../../helpers/copy-to-clipboard';
 import shareText from '../../helpers/share-text';
-import askIfEnjoy from '../../helpers/ask-if-enjoy';
 
 import Dictionary from './dictionary';
 import Handwriting from './handwriting';
@@ -168,9 +168,12 @@ class Home extends React.Component {
       }
     }
 
-    const { launchCount } = this.props;
+    const {
+      launchCount,
+      onAskIfEnjoy,
+    } = this.props;
     if (launchCount === 5) {
-      askIfEnjoy();
+      onAskIfEnjoy();
     }
   }
   componentWillUnmount() {
@@ -583,7 +586,6 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  // eslint-disable-next-line
   chinaMode: PropTypes.bool,
   classes: PropTypes.object.isRequired,
   fullscreenInputBox: PropTypes.bool,
@@ -592,6 +594,7 @@ Home.propTypes = {
   inputText: PropTypes.string,
   launchCount: PropTypes.number,
   onAnotherContainerClick: PropTypes.func.isRequired,
+  onAskIfEnjoy: PropTypes.func.isRequired,
   onBiggerTextButtonClick: PropTypes.func.isRequired,
   onCameraButtonClick: PropTypes.func.isRequired,
   onClearButtonClick: PropTypes.func.isRequired,
@@ -691,6 +694,7 @@ const mapDispatchToProps = dispatch => ({
     copyToClipboard(text);
     dispatch(openSnackbar(strings.copied));
   },
+  onAskIfEnjoy: askIfEnjoy,
 });
 
 export default connectComponent(

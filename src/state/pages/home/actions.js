@@ -1,9 +1,15 @@
+/* global Windows remote */
 import {
-  UPDATE_INPUT_TEXT, UPDATE_OUTPUT, UPDATE_IME_MODE, TOGGLE_FULLSCREEN_INPUT_BOX,
+  TOGGLE_FULLSCREEN_INPUT_BOX,
+  UPDATE_IME_MODE,
+  UPDATE_INPUT_TEXT,
+  UPDATE_OUTPUT,
 } from '../../../constants/actions';
 
 import translateText from '../../../helpers/translate-text';
 import phrasebookDb from '../../../helpers/phrasebook-db';
+import getPlatform from '../../../helpers/get-platform';
+import openUri from '../../../helpers/open-uri';
 
 import { openAlert } from '../../root/alert/actions';
 import { updateSetting } from '../../root/settings/actions';
@@ -151,3 +157,119 @@ export const updateImeMode = imeMode => ({
   type: UPDATE_IME_MODE,
   imeMode,
 });
+
+const createDialog = ({
+  message,
+  defaultButtonText,
+  cancelButtonText,
+  defaultFunc,
+  cancelFunc = () => {},
+}) => {
+  switch (getPlatform()) {
+    case 'windows': {
+      const msg = new Windows.UI.Popups.MessageDialog(message);
+
+      // Add commands and set their command handlers
+      msg.commands.append(new Windows.UI.Popups.UICommand(defaultButtonText, defaultFunc));
+      msg.commands.append(new Windows.UI.Popups.UICommand(cancelButtonText, cancelFunc));
+
+      // Set the command that will be invoked by default
+      msg.defaultCommandIndex = 0;
+
+      // Set the command to be invoked when escape is pressed
+      msg.cancelCommandIndex = 1;
+
+
+      msg.showAsync();
+
+      return;
+    }
+    case 'electron': {
+      if (window.electron !== 'darwin') return;
+
+      remote.dialog.showMessageBox({
+        type: 'info',
+        buttons: [defaultButtonText, cancelButtonText],
+        defaultId: 1,
+        message,
+      }, (response) => {
+        if (response === 0) {
+          defaultFunc();
+          return;
+        }
+        cancelFunc();
+      });
+
+      return;
+    }
+    default: {
+      /* eslint-disable no-console */
+      console.log('Platform does not support dialog.');
+      /* eslint-enable no-console */
+    }
+  }
+};
+
+const askToReview = () =>
+  (dispatch, getState) => {
+    const strings = getState().strings;
+
+    createDialog({
+      message: strings.howAboutRating,
+      defaultButtonText: strings.okSure,
+      cancelButtonText: strings.noThanks,
+      defaultFunc: () => {
+        switch (getPlatform()) {
+          case 'windows': {
+            openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k');
+            break;
+          }
+          case 'electron': {
+            openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12');
+            break;
+          }
+          default: {
+            /* eslint-disable no-console */
+            console.log('Platform does not support review.');
+            /* eslint-enable no-console */
+          }
+        }
+      },
+    });
+  };
+
+const askToGiveFeedback = () =>
+  (dispatch, getState) => {
+    const strings = getState().strings;
+
+    createDialog({
+      message: strings.wouldYouMindGivingFeedback,
+      defaultButtonText: strings.okSure,
+      cancelButtonText: strings.noThanks,
+      defaultFunc: () => {
+        openUri('mailto:support@moderntranslator.com?subject=Feedback');
+      },
+    });
+  };
+
+
+export const askIfEnjoy = () =>
+  (dispatch, getState) => {
+    const strings = getState().strings;
+
+    createDialog({
+      message: strings.enjoy,
+      defaultButtonText: strings.yes,
+      cancelButtonText: strings.notReally,
+      defaultFunc: () => {
+        // if already say yes, don't show again for a longer time
+        dispatch(updateSetting('launchCount', -300));
+
+        dispatch(askToReview());
+      },
+      cancelFunc: () => {
+        dispatch(updateSetting('launchCount', -100));
+        dispatch(askToGiveFeedback());
+      },
+    });
+  };
