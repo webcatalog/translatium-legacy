@@ -82,7 +82,7 @@
 	"translateWhenPressingEnter": "Translate when pressing Enter",
 	"realtime": "Real-time translation",
 	"chinaMode": "China Mode",
-	"chinaModeDesc": "If this mode is turned on, Modern Translator will transmit data to and from Google Translate through domain google.cn instead of google.com.",
+	"chinaModeDesc": "If this mode is turned on, Translatium will transmit data to and from Google Translate through domain google.cn instead of google.com.",
 
 	"translations" : "Translations",
 	"definitions" : "Definitions",
@@ -99,10 +99,10 @@
 	"interjection" :	"Interjection",
 	"preposition": "Preposition",
 
-	"rateMacAppStore": "Rate Modern Translator on Mac App Store",
-	"rateWindowsStore": "Rate Modern Translator on Windows Store",
+	"rateMacAppStore": "Rate Translatium on Mac App Store",
+	"rateWindowsStore": "Rate Translatium on Windows Store",
 
-	"enjoy": "Enjoy Modern Translator?",
+	"enjoy": "Enjoy Translatium?",
 	"notReally": "Not really",
 	"yes": "Yes!",
 	"howAboutRating": "How about a 5-star rating, then?",
@@ -126,7 +126,7 @@
 	"about": "About",
 
 	"shortcuts": "Keyboard Shortcuts",
-	"openOnMenubar": "Open Modern Translator on Menubar",
+	"openOnMenubar": "Open Translatium on Menubar",
 	"openInputLangList": "Select input language",
 	"openOutputLangList": "Select output language",
 	"swapLanguages": "Swap languages",

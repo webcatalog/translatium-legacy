@@ -139,13 +139,13 @@ Please apologize me for too many updates in such a short time. :(
 ---
 
 ### 4.5.2 (29th January 2016)
-1. Because of the declining of Windows, the lack of supports from Microsoft and the unstable IAP system of Windows 10, the app is no longer free (without free trial at the moment). If you have already downloaded the app before 29/01/2016, you can continue to use Modern Translator and receive new updates. Still, we are considering to release a Lite version and Free trial in the future. We are really sorry for this change.
+1. Because of the declining of Windows, the lack of supports from Microsoft and the unstable IAP system of Windows 10, the app is no longer free (without free trial at the moment). If you have already downloaded the app before 29/01/2016, you can continue to use Translatium and receive new updates. Still, we are considering to release a Lite version and Free trial in the future. We are really sorry for this change.
 2. Removed Pinyin from Cantonese translation (Jyutping will take time for us to implement). (Thanks to a few Hong Kong users for the suggestion).
 
 ---
 
 ### 4.5.2 (29th January 2016)
-1. Because of the declining of Windows, the lack of supports from Microsoft and the unstable IAP system of Windows 10, the app is no longer free (without free trial at the moment). If you have already downloaded the app before 29/01/2016, you can continue to use Modern Translator and receive new updates. Still, we are considering to release a Lite version and Free trial in the future. We are really sorry for this change.
+1. Because of the declining of Windows, the lack of supports from Microsoft and the unstable IAP system of Windows 10, the app is no longer free (without free trial at the moment). If you have already downloaded the app before 29/01/2016, you can continue to use Translatium and receive new updates. Still, we are considering to release a Lite version and Free trial in the future. We are really sorry for this change.
 2. Removed Pinyin from Cantonese translation (Jyutping will take time for us to implement). (Thanks to a few Hong Kong users for the suggestion).
 
 ---
@@ -219,7 +219,7 @@ We're really sorry for releasing too many bad updates in one single day. If you 
 ---
 
 ### 4.2.6 (22nd November 2015)
-1. Rebranding "Modern Translate" => "Modern Translator"
+1. Rebranding "Modern Translate" => "Translatium"
 2. Rebranding "Modern Translate Team" => "Modern Lab"
 (Hint: new app is coming!)
 
@@ -368,7 +368,7 @@ BROKEN CHANGES:
 ---
 
 ### 3.9.3 (22nd November 2015)
-1. Rebranding "Modern Translate" => "Modern Translator"
+1. Rebranding "Modern Translate" => "Translatium"
 2. Rebranding "Modern Translate Team" => "Modern Lab"
 3. Fixed: Missing icons in language tiles
 

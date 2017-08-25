@@ -1,8 +1,8 @@
 const path = require('path');
 
-const APP_NAME = 'Modern Translator';
+const APP_NAME = 'Translatium';
 const APP_TEAM = 'Quang Lam';
-const APP_URL = 'https://moderntranslator.com';
+const APP_URL = 'https://translatiumapp.com';
 
 const IMAGE_PATH = path.join(__dirname, '..', 'images');
 
@@ -13,6 +13,6 @@ module.exports = {
   IMAGE_PATH,
   MACOS_APP_ICON: path.join(IMAGE_PATH, 'icon.icns'),
 
-  SUPPORT_EMAIL: 'support@moderntranslator.com',
+  SUPPORT_EMAIL: 'support@translatiumapp.com',
   APP_URL,
 };

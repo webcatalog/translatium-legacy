@@ -3,7 +3,7 @@
   <Identity Name="55974nhutquang97.5translate" Version="2017.825.115.0" Publisher="CN=C635F506-DEEB-41A4-8CAA-16689F486ED2" />
   <mp:PhoneIdentity PhoneProductId="4cc6ac49-5fbd-4618-8742-9bd3255091b0" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Modern Translator</DisplayName>
+    <DisplayName>Translatium</DisplayName>
     <PublisherDisplayName>Quang Lam</PublisherDisplayName>
     <Logo>build-resources\windows-images\Store.png</Logo>
   </Properties>
@@ -16,7 +16,7 @@
   </Resources>
   <Applications>
     <Application Id="App" StartPage="build\index.html">
-      <uap:VisualElements DisplayName="Modern Translator" Description="Modern Translator" BackgroundColor="transparent" Square150x150Logo="build-resources\windows-images\Square150x150.png" Square44x44Logo="build-resources\windows-images\Square44x44.png">
+      <uap:VisualElements DisplayName="Translatium" Description="Translatium" BackgroundColor="transparent" Square150x150Logo="build-resources\windows-images\Square150x150.png" Square44x44Logo="build-resources\windows-images\Square44x44.png">
         <uap:DefaultTile Wide310x150Logo="build-resources\windows-images\Wide310x150.png" ShortName="Translator" Square310x310Logo="build-resources\windows-images\Square310x310.png" Square71x71Logo="build-resources\windows-images\Square71x71.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
@@ -28,13 +28,13 @@
       </uap:VisualElements>
       <Extensions>
         <uap:Extension Category="windows.shareTarget">
-          <uap:ShareTarget Description="Translate text with Modern Translator">
+          <uap:ShareTarget Description="Translate text with Translatium">
             <uap:DataFormat>Text</uap:DataFormat>
           </uap:ShareTarget>
         </uap:Extension>
         <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="modern-translator">
-            <uap:DisplayName>Modern Translator</uap:DisplayName>
+            <uap:DisplayName>Translatium</uap:DisplayName>
           </uap:Protocol>
         </uap:Extension>
       </Extensions>

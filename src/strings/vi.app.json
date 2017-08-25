@@ -82,7 +82,7 @@
 	"translateWhenPressingEnter": "Dịch khi nhấn Enter",
 	"realtime": "Dịch thời gian thực",
 	"chinaMode": "Chế độ Trung Quốc",
-	"chinaModeDesc": "Nếu chế độ này được bật, Modern Translator sẽ chuyển dữ liệu đến và đi từ Google Dịch thông qua tên miền google.cn thay vì google.com.",
+	"chinaModeDesc": "Nếu chế độ này được bật, Translatium sẽ chuyển dữ liệu đến và đi từ Google Dịch thông qua tên miền google.cn thay vì google.com.",
 
 	"translations" : "Bản dịch",
 	"definitions" : "Định nghĩa",
@@ -99,10 +99,10 @@
 	"interjection" :	"Thán từ",
 	"preposition": "Giới từ",
 
-	"rateMacAppStore": "Đánh giá Modern Translator trên Mac App Store",
-	"rateWindowsStore": "Đánh giá Modern Translator trên Windows Store",
+	"rateMacAppStore": "Đánh giá Translatium trên Mac App Store",
+	"rateWindowsStore": "Đánh giá Translatium trên Windows Store",
 
-	"enjoy": "Thích Modern Translator?",
+	"enjoy": "Thích Translatium?",
 	"notReally": "Không hẳn",
 	"yes": "Đúng vậy!",
 	"howAboutRating": "Vậy bạn có thể cho chúng tôi một đánh giá 5 sao, được chứ?",
@@ -126,7 +126,7 @@
 	"about": "Thông tin",
 
 	"shortcuts": "Phím tắt",
-	"openOnMenubar": "Mở Modern Translator trên Menubar",
+	"openOnMenubar": "Mở Translatium trên Menubar",
 	"openInputLangList": "Chọn ngôn ngữ đầu vào",
 	"openOutputLangList": "Chọn ngôn ngữ đầu ra",
 	"swapLanguages": "Tráo ngôn ngữ",

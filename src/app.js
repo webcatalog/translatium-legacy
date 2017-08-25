@@ -156,7 +156,7 @@ class App extends React.Component {
       <div className={classes.container}>
         {getPlatform() === 'electron' && (
           <div className={classes.fakeTitleBar}>
-            Modern Translator
+            Translatium
           </div>
         )}
         <div className={classes.contentContainer}>

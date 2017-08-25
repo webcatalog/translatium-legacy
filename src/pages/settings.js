@@ -325,13 +325,13 @@ const Settings = (props) => {
                 <ListItemText primary={strings.rateMacAppStore} />
               </ListItem>
             )}
-            <ListItem button onClick={() => openUri('https://moderntranslator.com/support')} role="link">
+            <ListItem button onClick={() => openUri('https://translatiumapp.com/support')} role="link">
               <ListItemText primary={strings.help} />
             </ListItem>
-            <ListItem button onClick={() => openUri('mailto:support@moderntranslator.com')} role="link">
+            <ListItem button onClick={() => openUri('mailto:support@translatiumapp.com')} role="link">
               <ListItemText primary={strings.sendFeedback} />
             </ListItem>
-            <ListItem button onClick={() => openUri('https://moderntranslator.com')} role="link">
+            <ListItem button onClick={() => openUri('https://translatiumapp.com')} role="link">
               <ListItemText primary={strings.website} />
             </ListItem>
             <ListItem>

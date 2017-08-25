@@ -16,7 +16,7 @@ if (process.platform !== 'darwin') {
 
 console.log(`Packaging for ${process.platform}`);
 
-const productName = 'Modern Translator';
+const productName = 'Translatium';
 
 // Promise is returned
 builder.build({

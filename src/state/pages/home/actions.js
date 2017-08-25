@@ -247,7 +247,7 @@ const askToGiveFeedback = () =>
       defaultButtonText: strings.okSure,
       cancelButtonText: strings.noThanks,
       defaultFunc: () => {
-        openUri('mailto:support@moderntranslator.com?subject=Feedback');
+        openUri('mailto:support@translatiumapp.com?subject=Feedback');
       },
     });
   };
