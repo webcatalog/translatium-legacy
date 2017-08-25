@@ -24,7 +24,7 @@ let checkTime;
 export const releaseDevice = () => ((dispatch, getState) => {
   switch (getPlatform()) {
     case 'windows': {
-      const { status } = getState().home.speech;
+      const { status } = getState().pages.home.speech;
       if (status === 'recording' || mediaCaptureMgr) {
         clearInterval(checkTime);
         dispatch({

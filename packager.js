@@ -4,7 +4,7 @@ const builder = require('electron-builder');
 const glob = require('glob');
 const del = require('del');
 
-const electronVersion = require('./package.json').devDependencies.electron.substr(1);
+const electronVersion = require('./package.json').devDependencies.electron;
 const displayLanguages = require('./src/constants/display-languages').default;
 
 const { Platform } = builder;
@@ -20,7 +20,7 @@ const productName = 'Modern Translator';
 
 // Promise is returned
 builder.build({
-  targets: Platform.MAC.createTarget(['dir', 'mas']),
+  targets: Platform.MAC.createTarget(['mas']),
   config: {
     electronVersion,
     appId: 'com.moderntranslator.app',
@@ -46,10 +46,10 @@ builder.build({
       }),
   },
 })
-.then(() => {
-  console.log('build successful');
-})
-.catch((err) => {
-  console.log(err);
-  process.exit(1);
-});
+  .then(() => {
+    console.log('build successful');
+  })
+  .catch((err) => {
+    console.log(err);
+    process.exit(1);
+  });
