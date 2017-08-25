@@ -1,3 +1,10 @@
+### 7.3
+- Adds keyboard shortcuts.
+- Improves keyboard navigation.
+- Improves design.
+
+---
+
 ### 7.2
 - Fixes bugs.
 
