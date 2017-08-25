@@ -5,12 +5,12 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <url>
-  <loc>https://moderntranslator.com/</loc>
+  <loc>https://translatiumapp.com/</loc>
 </url>
 <url>
-  <loc>https://moderntranslator.com/support</loc>
+  <loc>https://translatiumapp.com/support</loc>
 </url>
 <url>
-  <loc>https://moderntranslator.com/languages</loc>
+  <loc>https://translatiumapp.com/languages</loc>
 </url>
 </urlset>
