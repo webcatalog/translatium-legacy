@@ -10,7 +10,6 @@ import Paper from 'material-ui/Paper';
 import Switch from 'material-ui/Switch';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import common from 'material-ui/colors/common';
 
 import connectComponent from '../helpers/connect-component';
 
@@ -62,7 +61,7 @@ const styles = theme => ({
     lineHeight: '48px',
     padding: '0 16px',
     fontSize: 15,
-    color: common.lightBlack,
+    color: theme.palette.text.secondary,
   },
 });
 
@@ -336,7 +335,7 @@ const Settings = (props) => {
               <ListItemText primary={strings.website} />
             </ListItem>
             <ListItem>
-              <ListItemText primary={`Version ${process.env.REACT_APP_VERSION}`} />
+              <ListItemText primary="Version" secondary={process.env.REACT_APP_VERSION} />
             </ListItem>
           </List>
         </Paper>

@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { replace, goBack } from 'react-router-redux';
 
-import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
 import { CircularProgress } from 'material-ui/Progress';
 import ActionHome from 'material-ui-icons/Home';
 import ActionSettings from 'material-ui-icons/Settings';
+import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
+import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import Snackbar from 'material-ui/Snackbar';
 import ToggleStar from 'material-ui-icons/Star';
@@ -169,7 +170,12 @@ class App extends React.Component {
             open={snackbarOpen}
             message={snackbarMessage || ''}
             autoHideDuration={4000}
-            onRequestClose={() => onRequestCloseSnackbar()}
+            onRequestClose={onRequestCloseSnackbar}
+            action={(
+              <Button color="accent" dense onClick={onRequestCloseSnackbar}>
+                {strings.close}
+              </Button>
+            )}
           />
           {children}
           {bottomNavigationSelectedIndex > -1 && shouldShowBottomNav && (
