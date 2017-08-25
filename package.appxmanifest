@@ -33,7 +33,7 @@
           </uap:ShareTarget>
         </uap:Extension>
         <uap:Extension Category="windows.protocol">
-          <uap:Protocol Name="modern-translator">
+          <uap:Protocol Name="translatium">
             <uap:DisplayName>Translatium</uap:DisplayName>
           </uap:Protocol>
         </uap:Extension>
