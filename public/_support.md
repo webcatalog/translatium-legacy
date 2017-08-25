@@ -1,7 +1,7 @@
 
 
 # Frequently Asked Questions
-### What languages does Modern Translate support?
+### What languages does Translatium support?
 Please check out [our supported languages page](/languages) for a full list of all supported languages, dialects and technologies.
 
 ### Does Translatium require an Internet connection?

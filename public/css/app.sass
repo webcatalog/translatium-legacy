@@ -27,15 +27,18 @@ body
   font-weight: 300
 
 .footer
-  background-color: #fff
+  background-color: #FAFAFA
+  padding-top: 2em
+  padding-bottom: 2em
   ul.footer-items
     list-style-type: none
     margin-left: 0
-    +tablet
+    +desktop
       display: flex
-      justify-content: center
     li
-      +tablet
+      margin-top: 12px
+      line-height: 2em
+      +desktop
         float: left
         padding: 0
         margin: 0
@@ -68,6 +71,11 @@ body
   flex-direction: column
   justify-content: center
 
-.hero-logo
-  figure
-    margin: 0 auto
+
+.logo
+  text-align: center
+  img
+    height: 64px
+
+.main
+  min-height: calc(100vh - 300px)
