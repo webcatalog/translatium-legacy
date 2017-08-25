@@ -1,4 +1,4 @@
-This privacy policy governs your use of the software application Modern Translator (“Application”) that was created by Quang Lam. The Application is a cross-platform translation app.
+This privacy policy governs your use of the software application Translatium (“Application”) that was created by Quang Lam. The Application is a cross-platform translation app.
 
 ## What information does the Application obtain and how is it used?
 ### User Provided Information

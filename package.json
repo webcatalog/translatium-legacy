@@ -1,8 +1,8 @@
 {
-  "name": "modern-translator-website",
+  "name": "translatium-landing",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/modern-translator/modern-translator-website.git",
+  "repository": "https://github.com/translatium/translatium-landing.git",
   "author": "Quang Lam <quang.lam2807@gmail.com>",
   "license": "MIT",
   "scripts": {
