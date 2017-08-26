@@ -1,3 +1,9 @@
+### 7.4
+- Rebrands to Translatium.
+- Fixes bugs.
+
+---
+
 ### 7.3
 - Adds keyboard shortcuts.
 - Improves keyboard navigation.
