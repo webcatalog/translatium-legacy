@@ -42,14 +42,14 @@ const inputText = (state = '', action) => {
 
 const selectionStart = (state = 0, action) => {
   switch (action.type) {
-    case UPDATE_INPUT_TEXT: return action.selectionStart || state;
+    case UPDATE_INPUT_TEXT: return action.selectionStart || null;
     default: return state;
   }
 };
 
 const selectionEnd = (state = 0, action) => {
   switch (action.type) {
-    case UPDATE_INPUT_TEXT: return action.selectionEnd || state;
+    case UPDATE_INPUT_TEXT: return action.selectionEnd || null;
     default: return state;
   }
 };
