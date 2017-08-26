@@ -5,7 +5,7 @@ import getDefaultLangId from '../../../helpers/get-default-lang-id';
 import getPlaform from '../../../helpers/get-platform';
 
 const shouldUseElectronSettings = (name) => {
-  if (name === 'dockAndMenubar' && getPlaform() === 'darwin') return true;
+  if (name === 'dockAndMenubar' && getPlaform() === 'electron') return true;
   return false;
 };
 
