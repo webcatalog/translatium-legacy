@@ -36,12 +36,13 @@ body
     +desktop
       display: flex
     li
-      margin-top: 12px
       line-height: 2em
+      &:not(:first-child)
+        margin-top: 12px
       +desktop
         float: left
         padding: 0
-        margin: 0
+        margin-top: 0 !important
         &:not(:last-child)
           margin-right: 36px
 
