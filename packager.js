@@ -20,7 +20,7 @@ const productName = 'Translatium';
 
 // Promise is returned
 builder.build({
-  targets: Platform.MAC.createTarget(['mas']),
+  targets: Platform.MAC.createTarget(['zip', 'mas']),
   config: {
     electronVersion,
     appId: 'com.moderntranslator.app',
