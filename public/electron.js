@@ -166,7 +166,7 @@ function createMenubar() {
     dir: path.resolve(__dirname),
     icon: path.resolve(__dirname, 'images', 'iconTemplate.png'),
     width: 400,
-    height: 500,
+    height: 600,
     showDockIcon: dockAndMenubar === 'showOnBothDockAndMenubar',
   });
 
