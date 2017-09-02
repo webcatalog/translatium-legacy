@@ -1,3 +1,10 @@
+### 7.5
+- Adds language search box.
+- Keeps and restores window size (macOS only).
+- Fixes bugs.
+
+---
+
 ### 7.4
 - Rebrands to Translatium.
 - Fixes bugs.
