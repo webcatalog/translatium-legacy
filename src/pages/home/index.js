@@ -245,9 +245,16 @@ class Home extends React.Component {
     Mousetrap.bind(['mod+shift+l'], (e) => {
       e.preventDefault();
 
-      const { inputLang } = this.props;
+      const {
+        inputLang,
+        textToSpeechPlaying,
+        output,
+        chinaMode,
+      } = this.props;
       if (isTtsSupported(inputLang)) {
-        onListenButtonClick();
+        onListenButtonClick(
+          textToSpeechPlaying, output.outputLang, output.outputText, chinaMode,
+        );
       }
     });
 
@@ -662,7 +669,7 @@ class Home extends React.Component {
             )}
           >
             <textarea
-              className={classNames('text-selectable', classes.textarea)}
+              className={classNames('mousetrap', 'text-selectable', classes.textarea)}
               lang={toCountryRemovedLanguage(inputLang)}
               placeholder={strings.typeSomethingHere}
               autoComplete="off"
