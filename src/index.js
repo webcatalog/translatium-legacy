@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import createPalette from 'material-ui/styles/palette';
+import createPalette from 'material-ui/styles/createPalette';
 import red from 'material-ui/colors/red';
 import pink from 'material-ui/colors/pink';
 
@@ -46,7 +46,7 @@ export const runApp = (isRestart) => {
     palette: createPalette({
       type: state.settings.darkMode ? 'dark' : 'light',
       primary: colorPairs[state.settings.primaryColorId],
-      accent: pink,
+      secondary: pink,
       error: red,
     }),
   });
