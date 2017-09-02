@@ -131,5 +131,11 @@
 	"openOutputLangList": "Select output language",
 	"swapLanguages": "Swap languages",
 	"clearInput": "Clear input text",
-	"saveToPhrasebook": "Save to Phrasebook"
+	"saveToPhrasebook": "Save to Phrasebook",
+
+	"searchLanguages": "Search Languages",
+	"noLanguageFound": "No Language Found",
+	"searchResults": "Search Results",
+	"recentlyUsed": "Recently Used",
+	"allLanguagesAndDialects": "All Languages & Dialects"
 }

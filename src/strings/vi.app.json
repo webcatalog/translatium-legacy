@@ -131,5 +131,11 @@
 	"openOutputLangList": "Chọn ngôn ngữ đầu ra",
 	"swapLanguages": "Tráo ngôn ngữ",
 	"clearInput": "Xóa văn bản",
-	"saveToPhrasebook": "Lưu vào Sổ từ ngữ"
+	"saveToPhrasebook": "Lưu vào Sổ từ ngữ",
+
+	"searchLanguages": "Tìm kiếm Ngôn ngữ",
+	"noLanguageFound": "Không tìm thấy ngôn ngữ",
+	"searchResults": "Kết quả Tìm kiếm",
+	"recentlyUsed": "Được dùng gần đây",
+	"allLanguagesAndDialects": "Tất cả ngôn ngữ"
 }
