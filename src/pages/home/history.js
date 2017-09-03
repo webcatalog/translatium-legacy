@@ -77,6 +77,7 @@ class History extends React.Component {
               <List>
                 {historyItems.map(item => [(
                   <ListItem
+                    button
                     key={`historyItem_${item.historyId}`}
                     onClick={() => onItemClick(item)}
                   >
