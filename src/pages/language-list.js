@@ -33,7 +33,7 @@ const styles = theme => ({
     overflow: 'hidden',
   },
   inputContainer: {
-    background: '#fff',
+    background: theme.palette.background.paper,
     display: 'flex',
     paddingTop: theme.spacing.unit * 2,
     paddingLeft: theme.spacing.unit * 2,
