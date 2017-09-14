@@ -6,6 +6,7 @@ import IconButton from 'material-ui/IconButton';
 import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
 import ActionDelete from 'material-ui-icons/Delete';
 import Divider from 'material-ui/Divider';
+import Tooltip from 'material-ui/Tooltip';
 
 import connectComponent from '../../helpers/connect-component';
 
@@ -86,17 +87,19 @@ class History extends React.Component {
                       secondary={item.inputText}
                     />
                     <ListItemSecondaryAction>
-                      <IconButton
-                        aria-label={strings.removeFromHistory}
-                        onClick={() => {
-                          onDeleteButtonClick(
-                            item.historyId,
-                            item.rev,
-                          );
-                        }}
-                      >
-                        <ActionDelete />
-                      </IconButton>
+                      <Tooltip label={strings.remove} placement="left">
+                        <IconButton
+                          aria-label={strings.remove}
+                          onClick={() => {
+                            onDeleteButtonClick(
+                              item.historyId,
+                              item.rev,
+                            );
+                          }}
+                        >
+                          <ActionDelete />
+                        </IconButton>
+                      </Tooltip>
                     </ListItemSecondaryAction>
                   </ListItem>
                 ), <Divider inset={false} />])}

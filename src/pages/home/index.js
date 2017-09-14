@@ -32,6 +32,7 @@ import ToggleStarBorder from 'material-ui-icons/StarBorder';
 import ToggleStar from 'material-ui-icons/Star';
 import NavigationFullscreen from 'material-ui-icons/Fullscreen';
 import NavigationFullscreenExit from 'material-ui-icons/FullscreenExit';
+import Tooltip from 'material-ui/Tooltip';
 
 import connectComponent from '../../helpers/connect-component';
 
@@ -495,13 +496,15 @@ class Home extends React.Component {
               </CardContent>
               <CardActions>
                 {controllers.slice(0, maxVisibleIcon).map(({ icon, tooltip, onClick }) => (
-                  <IconButton
-                    aria-label={tooltip}
-                    key={`outputTool_${tooltip}`}
-                    onClick={onClick}
-                  >
-                    {icon}
-                  </IconButton>
+                  <Tooltip label={tooltip} placement="bottom">
+                    <IconButton
+                      aria-label={tooltip}
+                      key={`outputTool_${tooltip}`}
+                      onClick={onClick}
+                    >
+                      {icon}
+                    </IconButton>
+                  </Tooltip>
                 ))}
                 {showMoreButton && (
                   <EnhancedMenu
@@ -645,13 +648,15 @@ class Home extends React.Component {
               >
                 {strings[inputLang]}
               </Button>
-              <IconButton
-                color={isOutput(inputLang) ? 'contrast' : 'default'}
-                disabled={!isOutput(inputLang)}
-                onClick={onSwapButtonClick}
-              >
-                <ActionSwapHoriz />
-              </IconButton>
+              <Tooltip label={strings.swap} placement="bottom">
+                <IconButton
+                  color={isOutput(inputLang) ? 'contrast' : 'default'}
+                  disabled={!isOutput(inputLang)}
+                  onClick={onSwapButtonClick}
+                >
+                  <ActionSwapHoriz />
+                </IconButton>
+              </Tooltip>
               <Button
                 color="inherit"
                 className={classes.languageTitle}
@@ -686,21 +691,25 @@ class Home extends React.Component {
             <div className={classes.controllerContainer}>
               <div className={classes.controllerContainerLeft}>
                 {controllers.slice(0, maxVisibleIcon).map(({ icon, tooltip, onClick }) => (
-                  <IconButton
-                    aria-label={tooltip}
-                    key={`inputTool_${tooltip}`}
-                    onClick={onClick}
-                  >
-                    {icon}
-                  </IconButton>
+                  <Tooltip label={tooltip} placement={fullscreenInputBox ? 'top' : 'bottom'}>
+                    <IconButton
+                      aria-label={tooltip}
+                      key={`inputTool_${tooltip}`}
+                      onClick={onClick}
+                    >
+                      {icon}
+                    </IconButton>
+                  </Tooltip>
                 ))}
                 {showMoreButton && (
                   <EnhancedMenu
                     id="homeMore"
                     buttonElement={(
-                      <IconButton aria-label={strings.more}>
-                        <NavigationMoreVert />
-                      </IconButton>
+                      <Tooltip label={strings.more} placement={fullscreenInputBox ? 'top' : 'bottom'}>
+                        <IconButton aria-label={strings.more}>
+                          <NavigationMoreVert />
+                        </IconButton>
+                      </Tooltip>
                     )}
                   >
                     {
@@ -717,9 +726,11 @@ class Home extends React.Component {
                 )}
               </div>
               <div className={classes.controllerContainerRight}>
-                <Button raised color="primary" onClick={onTranslateButtonClick}>
-                  {strings.translate}
-                </Button>
+                <Tooltip label={strings.andSaveToHistory} placement="bottom">
+                  <Button raised color="primary" onClick={onTranslateButtonClick}>
+                    {strings.translate}
+                  </Button>
+                </Tooltip>
               </div>
             </div>
           </Paper>

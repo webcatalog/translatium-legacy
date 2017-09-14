@@ -137,5 +137,8 @@
 	"noLanguageFound": "No Language Found",
 	"searchResults": "Search Results",
 	"recentlyUsed": "Recently Used",
-	"allLanguagesAndDialects": "All Languages & Dialects"
+	"allLanguagesAndDialects": "All Languages & Dialects",
+
+	"remove": "Remove",
+	"andSaveToHistory": "& save to History"
 }

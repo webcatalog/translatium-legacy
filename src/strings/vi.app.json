@@ -137,5 +137,8 @@
 	"noLanguageFound": "Không tìm thấy ngôn ngữ",
 	"searchResults": "Kết quả Tìm kiếm",
 	"recentlyUsed": "Được dùng gần đây",
-	"allLanguagesAndDialects": "Tất cả ngôn ngữ"
+	"allLanguagesAndDialects": "Tất cả ngôn ngữ",
+
+	"removeFromHistory": "Xoá",
+	"andSaveToHistory": "& lưu vào Lịch sử"
 }

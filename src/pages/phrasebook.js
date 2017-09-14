@@ -10,6 +10,7 @@ import IconButton from 'material-ui/IconButton';
 import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
 import ToggleStar from 'material-ui-icons/Star';
 import Divider from 'material-ui/Divider';
+import Tooltip from 'material-ui/Tooltip';
 
 import connectComponent from '../helpers/connect-component';
 
@@ -115,17 +116,19 @@ class Phrasebook extends React.Component {
                       secondary={item.inputText}
                     />
                     <ListItemSecondaryAction>
-                      <IconButton
-                        aria-label={strings.removeFromPhrasebook}
-                        onClick={() => {
-                          onDeleteButtonClick(
-                            item.phrasebookId,
-                            item.rev,
-                          );
-                        }}
-                      >
-                        <ToggleStar />
-                      </IconButton>
+                      <Tooltip label={strings.remove} placement="left">
+                        <IconButton
+                          aria-label={strings.removeFromPhrasebook}
+                          onClick={() => {
+                            onDeleteButtonClick(
+                              item.phrasebookId,
+                              item.rev,
+                            );
+                          }}
+                        >
+                          <ToggleStar />
+                        </IconButton>
+                      </Tooltip>
                     </ListItemSecondaryAction>
                   </ListItem>
                 ), <Divider inset={false} />])}
