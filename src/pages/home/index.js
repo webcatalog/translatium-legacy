@@ -717,7 +717,7 @@ class Home extends React.Component {
                 )}
               </div>
               <div className={classes.controllerContainerRight}>
-                <Button color="primary" onClick={onTranslateButtonClick}>
+                <Button raised color="primary" onClick={onTranslateButtonClick}>
                   {strings.translate}
                 </Button>
               </div>
