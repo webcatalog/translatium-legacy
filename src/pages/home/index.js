@@ -726,7 +726,7 @@ class Home extends React.Component {
                 )}
               </div>
               <div className={classes.controllerContainerRight}>
-                <Tooltip label={strings.andSaveToHistory} placement="bottom">
+                <Tooltip label={strings.andSaveToHistory} placement={fullscreenInputBox ? 'top' : 'bottom'}>
                   <Button raised color="primary" onClick={onTranslateButtonClick}>
                     {strings.translate}
                   </Button>
