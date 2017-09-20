@@ -151,8 +151,6 @@ function createWindow() {
   });
 
   // mainWindow.webContents.openDevTools();
-
-  initMenu(mainWindow);
 }
 
 function createMenubar() {
@@ -181,6 +179,7 @@ function createMenubar() {
 app.on('ready', () => {
   createWindow();
   createMenubar();
+  initMenu();
 });
 
 // Quit when all windows are closed.
