@@ -496,7 +496,7 @@ class Home extends React.Component {
               </CardContent>
               <CardActions>
                 {controllers.slice(0, maxVisibleIcon).map(({ icon, tooltip, onClick }) => (
-                  <Tooltip label={tooltip} placement="bottom">
+                  <Tooltip title={tooltip} placement="bottom">
                     <IconButton
                       aria-label={tooltip}
                       key={`outputTool_${tooltip}`}
@@ -648,7 +648,7 @@ class Home extends React.Component {
               >
                 {strings[inputLang]}
               </Button>
-              <Tooltip label={strings.swap} placement="bottom">
+              <Tooltip title={strings.swap} placement="bottom">
                 <IconButton
                   color={isOutput(inputLang) ? 'contrast' : 'default'}
                   disabled={!isOutput(inputLang)}
@@ -691,7 +691,7 @@ class Home extends React.Component {
             <div className={classes.controllerContainer}>
               <div className={classes.controllerContainerLeft}>
                 {controllers.slice(0, maxVisibleIcon).map(({ icon, tooltip, onClick }) => (
-                  <Tooltip label={tooltip} placement={fullscreenInputBox ? 'top' : 'bottom'}>
+                  <Tooltip title={tooltip} placement={fullscreenInputBox ? 'top' : 'bottom'}>
                     <IconButton
                       aria-label={tooltip}
                       key={`inputTool_${tooltip}`}
@@ -705,7 +705,7 @@ class Home extends React.Component {
                   <EnhancedMenu
                     id="homeMore"
                     buttonElement={(
-                      <Tooltip label={strings.more} placement={fullscreenInputBox ? 'top' : 'bottom'}>
+                      <Tooltip title={strings.more} placement={fullscreenInputBox ? 'top' : 'bottom'}>
                         <IconButton aria-label={strings.more}>
                           <NavigationMoreVert />
                         </IconButton>
@@ -726,7 +726,7 @@ class Home extends React.Component {
                 )}
               </div>
               <div className={classes.controllerContainerRight}>
-                <Tooltip label={strings.andSaveToHistory} placement={fullscreenInputBox ? 'top' : 'bottom'}>
+                <Tooltip title={strings.andSaveToHistory} placement={fullscreenInputBox ? 'top' : 'bottom'}>
                   <Button raised color="primary" onClick={onTranslateButtonClick}>
                     {strings.translate}
                   </Button>
