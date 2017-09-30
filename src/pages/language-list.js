@@ -144,7 +144,7 @@ class LanguageList extends React.Component {
         {(search && search.length > 0) ? (
           <div className={classes.listContainer}>
             <List
-              subheader={<ListSubheader>{strings.searchResults}</ListSubheader>}
+              subheader={<ListSubheader disableSticky>{strings.searchResults}</ListSubheader>}
             >
               {searchResults.length < 1 ? (
                 <ListItem
@@ -168,7 +168,7 @@ class LanguageList extends React.Component {
         ) : (
           <div className={classes.listContainer}>
             <List
-              subheader={<ListSubheader>{strings.recentlyUsed}</ListSubheader>}
+              subheader={<ListSubheader disableSticky>{strings.recentlyUsed}</ListSubheader>}
             >
               {recentLanguages.map(langId => (
                 <ListItem
@@ -182,7 +182,8 @@ class LanguageList extends React.Component {
             </List>
             <Divider />
             <List
-              subheader={<ListSubheader>{strings.allLanguagesAndDialects}</ListSubheader>}
+              subheader={
+                <ListSubheader disableSticky>{strings.allLanguagesAndDialects}</ListSubheader>}
             >
               {languages.map(langId => (
                 <ListItem
