@@ -169,6 +169,10 @@ function createMenubar() {
     showDockIcon: dockAndMenubar === 'showOnBothDockAndMenubar',
   });
 
+  ipcMain.on('unset-show-menubar-shortcut', (e, combinator) => {
+    globalShortcut.unregister(combinator);
+  });
+
   ipcMain.on('set-show-menubar-shortcut', (e, combinator) => {
     globalShortcut.register(combinator, () => {
       mb.showWindow();

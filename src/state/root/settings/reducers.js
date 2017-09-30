@@ -1,13 +1,7 @@
-/* global electronSettings ipcRenderer */
+/* global ipcRenderer */
 import { UPDATE_SETTING } from '../../../constants/actions';
 
 import getDefaultLangId from '../../../helpers/get-default-lang-id';
-import getPlaform from '../../../helpers/get-platform';
-
-const shouldUseElectronSettings = (name) => {
-  if (name === 'dockAndMenubar' && getPlaform() === 'electron') return true;
-  return false;
-};
 
 export const defaultState = {
   biggerTextFontSize: 50,
@@ -39,12 +33,8 @@ export const defaultState = {
 };
 
 const getInitialValue = (name) => {
-  if (shouldUseElectronSettings(name)) {
-    return electronSettings.get(`mt3-${name}`, defaultState[name]);
-  }
-
   /* global localStorage */
-  const localValue = localStorage.getItem(`mt3-${name}`);
+  const localValue = localStorage.getItem(`mt4-${name}`);
   if (localValue == null) {
     return defaultState[name];
   }
@@ -65,14 +55,12 @@ const settings = (state = initialState, action) => {
 
       newState[name] = action.value;
 
-      if (shouldUseElectronSettings(name)) {
-        electronSettings.set(`mt3-${name}`, value);
-        if (name === 'dockAndMenubar') {
-          ipcRenderer.send('set-show-menubar-shortcut', value);
-        }
-      } else {
-        localStorage.setItem(`mt3-${name}`, JSON.stringify(value));
+      if (name === 'openOnMenubarShortcut') {
+        ipcRenderer.send('unset-show-menubar-shortcut', state.openOnMenubarShortcut);
+        ipcRenderer.send('set-show-menubar-shortcut', value);
       }
+
+      localStorage.setItem(`mt4-${name}`, JSON.stringify(value));
 
       return Object.assign({}, state, newState);
     }

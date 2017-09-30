@@ -51,10 +51,12 @@ class DialogShortcut extends React.Component {
     window.onkeydown = (e) => {
       const pressed = [];
 
+      if (e.keyCode === 16) return;
+
       if (e.ctrlKey) pressed.push('ctrl');
       if (e.metaKey) pressed.push('meta');
-      if (e.shiftKey) pressed.push('shift');
       if (e.altKey) pressed.push('alt');
+      if (e.shiftKey) pressed.push('shift');
 
       pressed.push(String.fromCharCode(e.keyCode).toLowerCase());
 
