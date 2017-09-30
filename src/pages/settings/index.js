@@ -328,7 +328,7 @@ const Settings = (props) => {
               >
                 <ListItemText
                   primary={strings[identifier]}
-                  secondary={combinator !== '+' ? renderCombinator(combinator) : strings.notSet}
+                  secondary={renderCombinator(combinator)}
                 />
                 <ListItemSecondaryAction>
                   <IconButton
