@@ -59,9 +59,6 @@ export const runApp = (isRestart) => {
     </Provider>,
     document.getElementById('app'),
   );
-
-  const openOnMenubarShortcut = state.settings.openOnMenubarShortcut;
-  ipcRenderer.send('set-show-menubar-shortcut', openOnMenubarShortcut);
 };
 
 switch (getPlatform()) {
@@ -85,6 +82,11 @@ switch (getPlatform()) {
   }
   case 'electron': {
     runApp();
+
+    const state = store.getState();
+    const openOnMenubarShortcut = state.settings.openOnMenubarShortcut;
+    ipcRenderer.send('set-show-menubar-shortcut', openOnMenubarShortcut);
+
     break;
   }
   default: {
