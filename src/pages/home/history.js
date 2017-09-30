@@ -102,7 +102,7 @@ class History extends React.Component {
                       </Tooltip>
                     </ListItemSecondaryAction>
                   </ListItem>
-                ), <Divider inset={false} />])}
+                ), <Divider inset={false} key="divider" />])}
               </List>
               {historyLoading && (
                 <LinearProgress mode="indeterminate" className={classes.progress} />

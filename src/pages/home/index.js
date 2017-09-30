@@ -494,10 +494,9 @@ class Home extends React.Component {
               </CardContent>
               <CardActions>
                 {controllers.slice(0, maxVisibleIcon).map(({ icon, tooltip, onClick }) => (
-                  <Tooltip title={tooltip} placement="bottom">
+                  <Tooltip title={tooltip} placement="bottom" key={`outputTool_${tooltip}`}>
                     <IconButton
                       aria-label={tooltip}
-                      key={`outputTool_${tooltip}`}
                       onClick={onClick}
                     >
                       {icon}
@@ -689,10 +688,9 @@ class Home extends React.Component {
             <div className={classes.controllerContainer}>
               <div className={classes.controllerContainerLeft}>
                 {controllers.slice(0, maxVisibleIcon).map(({ icon, tooltip, onClick }) => (
-                  <Tooltip title={tooltip} placement={fullscreenInputBox ? 'top' : 'bottom'}>
+                  <Tooltip title={tooltip} placement={fullscreenInputBox ? 'top' : 'bottom'} key={`inputTool_${tooltip}`}>
                     <IconButton
                       aria-label={tooltip}
-                      key={`inputTool_${tooltip}`}
                       onClick={onClick}
                     >
                       {icon}
