@@ -1,4 +1,4 @@
-/* global Windows */
+/* global Windows ipcRenderer */
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -59,6 +59,9 @@ export const runApp = (isRestart) => {
     </Provider>,
     document.getElementById('app'),
   );
+
+  const openOnMenubarShortcut = state.settings.openOnMenubarShortcut;
+  ipcRenderer.send('set-show-menubar-shortcut', openOnMenubarShortcut);
 };
 
 switch (getPlatform()) {

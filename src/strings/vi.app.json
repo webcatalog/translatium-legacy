@@ -140,5 +140,10 @@
 	"allLanguagesAndDialects": "Tất cả ngôn ngữ",
 
 	"removeFromHistory": "Xoá",
-	"andSaveToHistory": "& lưu vào Lịch sử"
+	"andSaveToHistory": "& lưu vào Lịch sử",
+
+	"notSet": "Chưa đặt",
+	"save": "Lưu",
+	"resetToDefault": "Phục hồi về Mặc định",
+	"cancel": "Huỷ"
 }

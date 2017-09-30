@@ -5,26 +5,31 @@ import PropTypes from 'prop-types';
 import { MenuItem } from 'material-ui/Menu';
 import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
+import KeyboardArrowRightIcon from 'material-ui-icons/KeyboardArrowRight';
 import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import Switch from 'material-ui/Switch';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 
-import connectComponent from '../helpers/connect-component';
+import connectComponent from '../../helpers/connect-component';
 
-import EnhancedMenu from './enhanced-menu';
+import EnhancedMenu from '../enhanced-menu';
 
-import { toggleSetting, updateSetting } from '../state/root/settings/actions';
-import { updateStrings } from '../state/root/strings/actions';
+import { toggleSetting, updateSetting } from '../../state/root/settings/actions';
+import { updateStrings } from '../../state/root/strings/actions';
+import { openShortcutDialog } from '../../state/pages/settings/shortcut-dialog/actions';
 
-import colorPairs from '../constants/colors';
-import displayLanguages from '../constants/display-languages';
+import colorPairs from '../../constants/colors';
+import displayLanguages from '../../constants/display-languages';
 
-import getPlatform from '../helpers/get-platform';
-import openUri from '../helpers/open-uri';
+import getPlatform from '../../helpers/get-platform';
+import openUri from '../../helpers/open-uri';
 
-import { runApp } from '..';
+import { runApp } from '../..';
+
+import DialogShortcut from './dialog-shortcut';
 
 const styles = theme => ({
   container: {
@@ -68,9 +73,11 @@ const styles = theme => ({
 const renderCombinator = combinator =>
   combinator
     .replace(/\+/g, ' + ')
-    .replace('Alt', getPlatform() === 'windows' ? 'Alt' : '⌥')
-    .replace('Shift', getPlatform() === 'windows' ? 'Shift' : '⇧')
-    .replace('CtrlOrCmd', getPlatform() === 'windows' ? 'Ctrl' : '⌘');
+    .replace('alt', getPlatform() === 'windows' ? 'alt' : '⌥')
+    .replace('shift', getPlatform() === 'windows' ? 'shift' : '⇧')
+    .replace('mod', getPlatform() === 'windows' ? 'ctrl' : '⌘')
+    .replace('meta', '⌘')
+    .toUpperCase();
 
 const dockAndMenubarOpts = [
   'showOnBothDockAndMenubar',
@@ -85,6 +92,7 @@ const Settings = (props) => {
     darkMode,
     dockAndMenubar,
     langId,
+    onOpenShortcutDialog,
     onSettingChange,
     onToggle,
     onUpdateStrings,
@@ -93,29 +101,44 @@ const Settings = (props) => {
     realtime,
     strings,
     translateWhenPressingEnter,
+
+    cameraShortcut,
+    clearInputShortcut,
+    drawShortcut,
+    listenShortcut,
+    openImageFileShortcut,
+    openInputLangListShortcut,
+    openOnMenubarShortcut,
+    openOutputLangListShortcut,
+    saveToPhrasebookShortcut,
+    speakShorcut,
+    swapLanguagesShortcut,
   } = props;
 
   const shortcuts = [
-    { identifier: 'openInputLangList', combinator: 'CtrlOrCmd+Shift+I' },
-    { identifier: 'openOutputLangList', combinator: 'CtrlOrCmd+Shift+O' },
-    { identifier: 'swapLanguages', combinator: 'CtrlOrCmd+Shift+S' },
-    { identifier: 'clearInput', combinator: 'CtrlOrCmd+Shift+D' },
-    { identifier: 'speak', combinator: 'CtrlOrCmd+Shift+M' },
-    { identifier: 'listen', combinator: 'CtrlOrCmd+Shift+L' },
-    { identifier: 'draw', combinator: 'CtrlOrCmd+Shift+W' },
-    { identifier: 'camera', combinator: 'CtrlOrCmd+Shift+C' },
-    { identifier: 'openImageFile', combinator: 'CtrlOrCmd+O' },
-    { identifier: 'saveToPhrasebook', combinator: 'CtrlOrCmd+S' },
+    { identifier: 'openInputLangList', combinator: openInputLangListShortcut },
+    { identifier: 'openOutputLangList', combinator: openOutputLangListShortcut },
+    { identifier: 'swapLanguages', combinator: swapLanguagesShortcut },
+    { identifier: 'clearInput', combinator: clearInputShortcut },
+    { identifier: 'openImageFile', combinator: openImageFileShortcut },
+    { identifier: 'saveToPhrasebook', combinator: saveToPhrasebookShortcut },
+    { identifier: 'speak', combinator: speakShorcut },
+    { identifier: 'listen', combinator: listenShortcut },
+    { identifier: 'draw', combinator: drawShortcut },
   ];
+  if (getPlatform() !== 'electron') {
+    shortcuts.push({ identifier: 'camera', combinator: cameraShortcut });
+  }
   if (getPlatform() === 'electron'
     && ['showOnBothDockAndMenubar', 'onlyShowOnMenubar'].indexOf(dockAndMenubar) > -1) {
     shortcuts.unshift(
-      { identifier: 'openOnMenubar', combinator: 'Alt+Shift+T' },
+      { identifier: 'openOnMenubar', combinator: openOnMenubarShortcut },
     );
   }
 
   return (
     <div className={classes.container}>
+      <DialogShortcut />
       <AppBar position="static">
         <Toolbar>
           <Typography type="title" color="inherit">{strings.settings}</Typography>
@@ -298,12 +321,23 @@ const Settings = (props) => {
         <Paper className={classes.paper}>
           <List>
             {shortcuts.map(({ identifier, combinator }) => (
-              <ListItem key={identifier}>
-                <ListItemText primary={strings[identifier]} />
+              <ListItem
+                button
+                key={identifier}
+                onClick={() => onOpenShortcutDialog(identifier, combinator)}
+              >
+                <ListItemText
+                  primary={strings[identifier]}
+                  secondary={combinator !== '+' ? renderCombinator(combinator) : strings.notSet}
+                />
                 <ListItemSecondaryAction>
-                  <Typography type="body1" className={classes.shortcutKey}>
-                    {renderCombinator(combinator)}
-                  </Typography>
+                  <IconButton
+                    className={classes.button}
+                    aria-label={strings.change}
+                    onClick={() => onOpenShortcutDialog(identifier, combinator)}
+                  >
+                    <KeyboardArrowRightIcon />
+                  </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
             ))}
@@ -365,6 +399,7 @@ Settings.propTypes = {
   darkMode: PropTypes.bool.isRequired,
   dockAndMenubar: PropTypes.oneOf(dockAndMenubarOpts).isRequired,
   langId: PropTypes.string.isRequired,
+  onOpenShortcutDialog: PropTypes.func.isRequired,
   onSettingChange: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
   onUpdateStrings: PropTypes.func.isRequired,
@@ -373,6 +408,18 @@ Settings.propTypes = {
   realtime: PropTypes.bool.isRequired,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
+
+  cameraShortcut: PropTypes.string.isRequired,
+  clearInputShortcut: PropTypes.string.isRequired,
+  drawShortcut: PropTypes.string.isRequired,
+  listenShortcut: PropTypes.string.isRequired,
+  openImageFileShortcut: PropTypes.string.isRequired,
+  openInputLangListShortcut: PropTypes.string.isRequired,
+  openOnMenubarShortcut: PropTypes.string.isRequired,
+  openOutputLangListShortcut: PropTypes.string.isRequired,
+  saveToPhrasebookShortcut: PropTypes.string.isRequired,
+  speakShorcut: PropTypes.string.isRequired,
+  swapLanguagesShortcut: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -385,12 +432,26 @@ const mapStateToProps = state => ({
   realtime: state.settings.realtime,
   strings: state.strings,
   translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
+
+  cameraShortcut: state.settings.cameraShortcut,
+  clearInputShortcut: state.settings.clearInputShortcut,
+  drawShortcut: state.settings.drawShortcut,
+  listenShortcut: state.settings.listenShortcut,
+  openImageFileShortcut: state.settings.openImageFileShortcut,
+  openInputLangListShortcut: state.settings.openInputLangListShortcut,
+  openOnMenubarShortcut: state.settings.openOnMenubarShortcut,
+  openOutputLangListShortcut: state.settings.openOutputLangListShortcut,
+  saveToPhrasebookShortcut: state.settings.saveToPhrasebookShortcut,
+  speakShorcut: state.settings.speakShorcut,
+  swapLanguagesShortcut: state.settings.swapLanguagesShortcut,
 });
 
 const mapDispatchToProps = dispatch => ({
   onToggle: name => dispatch(toggleSetting(name)),
   onSettingChange: (name, value) => dispatch(updateSetting(name, value)),
   onUpdateStrings: langId => dispatch(updateStrings(langId)),
+  onOpenShortcutDialog: (identifier, combinator) =>
+    dispatch(openShortcutDialog(identifier, combinator)),
 });
 
 export default connectComponent(

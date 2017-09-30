@@ -186,50 +186,48 @@ class Home extends React.Component {
       onSwapOutputButtonClick,
       onTogglePhrasebookClick,
       onWriteButtonClick,
+
+      cameraShortcut,
+      clearInputShortcut,
+      drawShortcut,
+      listenShortcut,
+      openImageFileShortcut,
+      openInputLangListShortcut,
+      openOutputLangListShortcut,
+      saveToPhrasebookShortcut,
+      speakShorcut,
+      swapLanguagesShortcut,
     } = this.props;
 
     if (launchCount >= 5) {
       onAskIfEnjoy();
     }
 
-    /*
-    { identifier: 'openInputLangList', combinator: 'CtrlOrCmd+Shift+I' },
-    { identifier: 'openOutputLangList', combinator: 'CtrlOrCmd+Shift+O' },
-    { identifier: 'swapLanguages', combinator: 'CtrlOrCmd+Shift+S' },
-    { identifier: 'clearInput', combinator: 'CtrlOrCmd+Shift+D' },
-    { identifier: 'speak', combinator: 'CtrlOrCmd+Shift+M' },
-    { identifier: 'listen', combinator: 'CtrlOrCmd+Shift+L' },
-    { identifier: 'draw', combinator: 'CtrlOrCmd+Shift+W' },
-    { identifier: 'camera', combinator: 'CtrlOrCmd+Shift+C' },
-    { identifier: 'openImageFile', combinator: 'CtrlOrCmd+O' },
-    { identifier: 'saveToPhrasebook', combinator: 'CtrlOrCmd+S' },
-    */
-
-    Mousetrap.bind(['mod+shift+i'], (e) => {
+    Mousetrap.bind(openInputLangListShortcut, (e) => {
       e.preventDefault();
 
       onLanguageClick('inputLang');
     });
 
-    Mousetrap.bind(['mod+shift+o'], (e) => {
+    Mousetrap.bind(openOutputLangListShortcut, (e) => {
       e.preventDefault();
 
       onLanguageClick('outputLang');
     });
 
-    Mousetrap.bind(['mod+shift+s'], (e) => {
+    Mousetrap.bind(swapLanguagesShortcut, (e) => {
       e.preventDefault();
 
       onSwapOutputButtonClick();
     });
 
-    Mousetrap.bind(['mod+shift+d'], (e) => {
+    Mousetrap.bind(clearInputShortcut, (e) => {
       e.preventDefault();
 
       onClearButtonClick();
     });
 
-    Mousetrap.bind(['mod+shift+m'], (e) => {
+    Mousetrap.bind(speakShorcut, (e) => {
       e.preventDefault();
 
       const { imeMode, inputLang } = this.props;
@@ -243,7 +241,7 @@ class Home extends React.Component {
       }
     });
 
-    Mousetrap.bind(['mod+shift+l'], (e) => {
+    Mousetrap.bind(listenShortcut, (e) => {
       e.preventDefault();
 
       const {
@@ -259,7 +257,7 @@ class Home extends React.Component {
       }
     });
 
-    Mousetrap.bind(['mod+shift+d'], (e) => {
+    Mousetrap.bind(drawShortcut, (e) => {
       e.preventDefault();
 
       const { imeMode, inputLang, chinaMode } = this.props;
@@ -274,7 +272,7 @@ class Home extends React.Component {
       }
     });
 
-    Mousetrap.bind(['mod+shift+c'], (e) => {
+    Mousetrap.bind(cameraShortcut, (e) => {
       e.preventDefault();
 
       const { inputLang } = this.props;
@@ -284,7 +282,7 @@ class Home extends React.Component {
       }
     });
 
-    Mousetrap.bind(['mod+o'], (e) => {
+    Mousetrap.bind(openImageFileShortcut, (e) => {
       e.preventDefault();
 
       const { inputLang } = this.props;
@@ -294,7 +292,7 @@ class Home extends React.Component {
       }
     });
 
-    Mousetrap.bind(['mod+s'], (e) => {
+    Mousetrap.bind(saveToPhrasebookShortcut, (e) => {
       e.preventDefault();
 
       const { output } = this.props;
@@ -305,36 +303,36 @@ class Home extends React.Component {
     });
   }
   componentWillUnmount() {
+    const {
+      cameraShortcut,
+      clearInputShortcut,
+      drawShortcut,
+      listenShortcut,
+      openImageFileShortcut,
+      openInputLangListShortcut,
+      openOutputLangListShortcut,
+      saveToPhrasebookShortcut,
+      speakShorcut,
+      swapLanguagesShortcut,
+    } = this.props;
+
     if (getPlatform() === 'windows') {
       if (this.dispRequest) {
         this.dispRequest.requestRelease();
       }
     }
 
-
-    /*
-    { identifier: 'openInputLangList', combinator: 'CtrlOrCmd+Shift+I' },
-    { identifier: 'openOutputLangList', combinator: 'CtrlOrCmd+Shift+O' },
-    { identifier: 'swapLanguages', combinator: 'CtrlOrCmd+Shift+S' },
-    { identifier: 'clearInput', combinator: 'CtrlOrCmd+Shift+D' },
-    { identifier: 'speak', combinator: 'CtrlOrCmd+Shift+M' },
-    { identifier: 'listen', combinator: 'CtrlOrCmd+Shift+L' },
-    { identifier: 'draw', combinator: 'CtrlOrCmd+Shift+W' },
-    { identifier: 'camera', combinator: 'CtrlOrCmd+Shift+C' },
-    { identifier: 'openImageFile', combinator: 'CtrlOrCmd+O' },
-    { identifier: 'saveToPhrasebook', combinator: 'CtrlOrCmd+S' },
-    */
     Mousetrap.unbind([
-      'mod+shift+i',
-      'mod+shift+o',
-      'mod+shift+s',
-      'mod+shift+d',
-      'mod+shift+m',
-      'mod+shift+l',
-      'mod+shift+w',
-      'mod+shift+c',
-      'mod+o',
-      'mod+s',
+      cameraShortcut,
+      clearInputShortcut,
+      drawShortcut,
+      listenShortcut,
+      openImageFileShortcut,
+      openInputLangListShortcut,
+      openOutputLangListShortcut,
+      saveToPhrasebookShortcut,
+      speakShorcut,
+      swapLanguagesShortcut,
     ]);
   }
 
@@ -778,6 +776,17 @@ Home.propTypes = {
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
   textToSpeechPlaying: PropTypes.bool,
   translateWhenPressingEnter: PropTypes.bool,
+
+  cameraShortcut: PropTypes.string.isRequired,
+  clearInputShortcut: PropTypes.string.isRequired,
+  drawShortcut: PropTypes.string.isRequired,
+  listenShortcut: PropTypes.string.isRequired,
+  openImageFileShortcut: PropTypes.string.isRequired,
+  openInputLangListShortcut: PropTypes.string.isRequired,
+  openOutputLangListShortcut: PropTypes.string.isRequired,
+  saveToPhrasebookShortcut: PropTypes.string.isRequired,
+  speakShorcut: PropTypes.string.isRequired,
+  swapLanguagesShortcut: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -794,6 +803,18 @@ const mapStateToProps = state => ({
   launchCount: state.settings.launchCount,
   chinaMode: state.settings.chinaMode,
   strings: state.strings,
+
+  cameraShortcut: state.settings.cameraShortcut,
+  clearInputShortcut: state.settings.clearInputShortcut,
+  drawShortcut: state.settings.drawShortcut,
+  listenShortcut: state.settings.listenShortcut,
+  openImageFileShortcut: state.settings.openImageFileShortcut,
+  openInputLangListShortcut: state.settings.openInputLangListShortcut,
+  openOnMenubarShortcut: state.settings.openOnMenubarShortcut,
+  openOutputLangListShortcut: state.settings.openOutputLangListShortcut,
+  saveToPhrasebookShortcut: state.settings.saveToPhrasebookShortcut,
+  speakShorcut: state.settings.speakShorcut,
+  swapLanguagesShortcut: state.settings.swapLanguagesShortcut,
 });
 
 const mapDispatchToProps = dispatch => ({

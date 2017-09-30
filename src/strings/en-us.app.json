@@ -140,5 +140,10 @@
 	"allLanguagesAndDialects": "All Languages & Dialects",
 
 	"remove": "Remove",
-	"andSaveToHistory": "& save to History"
+	"andSaveToHistory": "& save to History",
+
+	"notSet": "Not set",
+	"save": "Save",
+	"resetToDefault": "Reset to Default",
+	"cancel": "Cancel"
 }

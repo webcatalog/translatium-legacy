@@ -12,6 +12,7 @@ const {
   app,
   BrowserWindow,
   globalShortcut,
+  ipcMain,
   Menu,
 } = electron;
 
@@ -168,8 +169,10 @@ function createMenubar() {
     showDockIcon: dockAndMenubar === 'showOnBothDockAndMenubar',
   });
 
-  globalShortcut.register('Alt+Shift+T', () => {
-    mb.showWindow();
+  ipcMain.on('set-show-menubar-shortcut', (e, combinator) => {
+    globalShortcut.register(combinator, () => {
+      mb.showWindow();
+    });
   });
 }
 
