@@ -9,7 +9,7 @@ import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import ListSubheader from 'material-ui/List/ListSubheader';
-import Input from 'material-ui/Input/Input';
+import TextField from 'material-ui/TextField';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import grey from 'material-ui/colors/grey';
@@ -128,13 +128,10 @@ class LanguageList extends React.Component {
           </Toolbar>
         </AppBar>
         <div className={classes.inputContainer}>
-          <Input
+          <TextField
             value={search}
-            placeholder={strings.searchLanguages}
+            label={strings.searchLanguages}
             className={classes.input}
-            inputProps={{
-              'aria-label': strings.searchLanguages,
-            }}
             onChange={event => onUpdateLanguageListSearch(event.target.value)}
           />
           {search && search.length > 0 && (
