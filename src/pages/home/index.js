@@ -25,6 +25,7 @@ import AVVolumeUp from 'material-ui-icons/VolumeUp';
 import AVStop from 'material-ui-icons/Stop';
 import AVMic from 'material-ui-icons/Mic';
 import ContentCopy from 'material-ui-icons/ContentCopy';
+import ContentPaste from 'material-ui-icons/ContentPaste';
 import SocialShare from 'material-ui-icons/Share';
 import EditorFormatSize from 'material-ui-icons/FormatSize';
 import ActionSwapVert from 'material-ui-icons/SwapVert';
@@ -56,16 +57,18 @@ import {
   updateOutputLang,
 } from '../../state/root/settings/actions';
 import {
-  updateInputText,
+  askIfEnjoy,
+  insertInputText,
+  toggleFullscreenInputBox,
+  togglePhrasebook,
   translate,
   updateImeMode,
-  togglePhrasebook,
-  toggleFullscreenInputBox,
-  askIfEnjoy,
+  updateInputText,
 } from '../../state/pages/home/actions';
 
 import getPlatform from '../../helpers/get-platform';
 import copyToClipboard from '../../helpers/copy-to-clipboard';
+import pasteFromClipboardAsync from '../../helpers/paste-from-clipboard-async';
 import shareText from '../../helpers/share-text';
 
 import Dictionary from './dictionary';
@@ -554,6 +557,7 @@ class Home extends React.Component {
       onCameraButtonClick,
       onClearButtonClick,
       onFullscreenButtonClick,
+      onInsertText,
       onKeyDown, onInputText,
       onLanguageClick,
       onListenButtonClick,
@@ -570,6 +574,19 @@ class Home extends React.Component {
     } = this.props;
 
     const controllers = [
+      {
+        icon: <ContentPaste />,
+        tooltip: strings.pasteFromClipboard,
+        onClick: () => {
+          pasteFromClipboardAsync()
+            .then((text) => {
+              onInsertText(text);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        },
+      },
       {
         icon: <ContentClear />,
         tooltip: strings.clear,
@@ -754,6 +771,7 @@ Home.propTypes = {
   onClearButtonClick: PropTypes.func.isRequired,
   onFullscreenButtonClick: PropTypes.func.isRequired,
   onInputText: PropTypes.func.isRequired,
+  onInsertText: PropTypes.func.isRequired,
   onKeyDown: PropTypes.func.isRequired,
   onLanguageClick: PropTypes.func.isRequired,
   onListenButtonClick: PropTypes.func.isRequired,
@@ -838,6 +856,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateInputText(inputText, e.target.selectionStart, e.target.selectionEnd));
   },
   onClearButtonClick: () => dispatch(updateInputText('')),
+  onInsertText: text => dispatch(insertInputText(text)),
   onListenButtonClick: (toStop, lang, text, chinaMode) => {
     if (toStop) {
       dispatch(stopTextToSpeech());

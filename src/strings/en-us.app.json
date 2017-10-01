@@ -144,5 +144,7 @@
 
 	"save": "Save",
 	"resetToDefault": "Reset to Default",
-	"cancel": "Cancel"
+	"cancel": "Cancel",
+
+	"pasteFromClipboard": "Paste from Clipboard"
 }

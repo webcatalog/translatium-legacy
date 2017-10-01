@@ -144,5 +144,7 @@
 
 	"save": "Lưu",
 	"resetToDefault": "Phục hồi về Mặc định",
-	"cancel": "Huỷ"
+	"cancel": "Huỷ",
+
+	"pasteFromClipboard": "Dán từ Clipboard"
 }

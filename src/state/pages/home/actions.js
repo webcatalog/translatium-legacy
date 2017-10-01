@@ -103,6 +103,16 @@ export const updateInputText = (inputText, selectionStart, selectionEnd) =>
     }
   });
 
+export const insertInputText = text =>
+  (dispatch, getState) => {
+    const { pages: { home } } = getState();
+    const { inputText, selectionStart } = home;
+
+    const newText = inputText.length < 1 ? text : `${inputText} ${text}`;
+
+    dispatch(updateInputText(newText, selectionStart, newText.length));
+  };
+
 export const togglePhrasebook = () => ((dispatch, getState) => {
   const { output } = getState().pages.home;
 
