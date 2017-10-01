@@ -16,6 +16,8 @@ import grey from 'material-ui/colors/grey';
 
 import connectComponent from '../helpers/connect-component';
 
+import getPlatform from '../helpers/get-platform';
+
 import {
   getInputLanguages,
   getOutputLanguages,
@@ -127,20 +129,22 @@ class LanguageList extends React.Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        <div className={classes.inputContainer}>
-          <Input
-            value={search}
-            placeholder={strings.searchLanguages}
-            className={classes.input}
-            inputProps={{
-              'aria-label': strings.searchLanguages,
-            }}
-            onChange={event => onUpdateLanguageListSearch(event.target.value)}
-          />
-          {search && search.length > 0 && (
-            <CloseIcon className={classes.clearButton} onClick={() => onUpdateLanguageListSearch('')} />
-          )}
-        </div>
+        {getPlatform() === 'electron' && (
+          <div className={classes.inputContainer}>
+            <Input
+              value={search}
+              placeholder={strings.searchLanguages}
+              className={classes.input}
+              inputProps={{
+                'aria-label': strings.searchLanguages,
+              }}
+              onChange={event => onUpdateLanguageListSearch(event.target.value)}
+            />
+            {search && search.length > 0 && (
+              <CloseIcon className={classes.clearButton} onClick={() => onUpdateLanguageListSearch('')} />
+            )}
+          </div>
+        )}
         {(search && search.length > 0) ? (
           <div className={classes.listContainer}>
             <List
