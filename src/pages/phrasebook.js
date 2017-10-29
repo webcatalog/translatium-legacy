@@ -116,7 +116,7 @@ class Phrasebook extends React.Component {
                       secondary={item.inputText}
                     />
                     <ListItemSecondaryAction>
-                      <Tooltip title={strings.remove} placement="left">
+                      <Tooltip label={strings.remove} placement="left">
                         <IconButton
                           aria-label={strings.removeFromPhrasebook}
                           onClick={() => {
