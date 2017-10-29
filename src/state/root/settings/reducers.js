@@ -1,7 +1,8 @@
-/* global ipcRenderer */
+/* global electronSettings ipcRenderer */
 import { UPDATE_SETTING } from '../../../constants/actions';
 
 import getDefaultLangId from '../../../helpers/get-default-lang-id';
+import getPlaform from '../../../helpers/get-platform';
 
 export const defaultState = {
   biggerTextFontSize: 50,
@@ -32,7 +33,15 @@ export const defaultState = {
   openOnMenubarShortcut: 'alt+shift+t',
 };
 
+const shouldUseElectronSettings = (name) => {
+  if (name === 'dockAndMenubar' && getPlaform() === 'electron') return true;
+  return false;
+};
+
 const getInitialValue = (name) => {
+  if (shouldUseElectronSettings(name)) {
+    return electronSettings.get(`mt4-${name}`, defaultState[name]);
+  }
   /* global localStorage */
   const localValue = localStorage.getItem(`mt4-${name}`);
   if (localValue == null) {
@@ -60,7 +69,11 @@ const settings = (state = initialState, action) => {
         ipcRenderer.send('set-show-menubar-shortcut', value);
       }
 
-      localStorage.setItem(`mt4-${name}`, JSON.stringify(value));
+      if (shouldUseElectronSettings(name)) {
+        electronSettings.set(`mt4-${name}`, value);
+      } else {
+        localStorage.setItem(`mt4-${name}`, JSON.stringify(value));
+      }
 
       return Object.assign({}, state, newState);
     }

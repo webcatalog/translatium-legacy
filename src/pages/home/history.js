@@ -87,7 +87,7 @@ class History extends React.Component {
                       secondary={item.inputText}
                     />
                     <ListItemSecondaryAction>
-                      <Tooltip label={strings.remove} placement="left">
+                      <Tooltip title={strings.remove} placement="left">
                         <IconButton
                           aria-label={strings.remove}
                           onClick={() => {
