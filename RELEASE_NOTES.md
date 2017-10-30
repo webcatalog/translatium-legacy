@@ -1,3 +1,8 @@
+### 7.7
+- Fixes bugs.
+
+---
+
 ### 7.6
 - Adds ability to customize keyboard shortcuts.
 - Adds "Paste from Clipboard" button.
