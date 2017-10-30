@@ -40,7 +40,7 @@ const shouldUseElectronSettings = (name) => {
 
 const getInitialValue = (name) => {
   if (shouldUseElectronSettings(name)) {
-    return electronSettings.get(`mt4-${name}`, defaultState[name]);
+    return electronSettings.get(name, defaultState[name]);
   }
   /* global localStorage */
   const localValue = localStorage.getItem(`mt4-${name}`);
@@ -70,7 +70,7 @@ const settings = (state = initialState, action) => {
       }
 
       if (shouldUseElectronSettings(name)) {
-        electronSettings.set(`mt4-${name}`, value);
+        electronSettings.set(name, value);
       } else {
         localStorage.setItem(`mt4-${name}`, JSON.stringify(value));
       }
