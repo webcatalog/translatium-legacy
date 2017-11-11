@@ -42,13 +42,14 @@ const getInitialValue = (name) => {
   if (shouldUseElectronSettings(name)) {
     return electronSettings.get(name, defaultState[name]);
   }
+
   /* global localStorage */
   const localValue = localStorage.getItem(`mt4-${name}`);
   if (localValue == null) {
     return defaultState[name];
   }
 
-  return JSON.parse(localValue) || defaultState[name];
+  return JSON.parse(localValue);
 };
 
 const initialState = {};
