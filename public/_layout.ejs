@@ -4,9 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= locals.title ? title + ' - ' : '' %>Translatium</title>
-    <meta name="description" content="Translate like a Pro with Translatium - the most powerful translation app for Windows 10 & macOS.">
-    <meta name="keywords" content="windows 10 mac app store productivity education material design type draw handwriting recognition speak tts ocr camera beautiful dialects dictionary examples instantly language languages listen meanings personalization personalize speech synonyms texttospeech themes translate translation translations translator">
+    <title><%= locals.title ? title + ' - ' : '' %>Translatium - the most powerful translation app for Mac & PC</title>
+    <meta name="description" content="Translate like a Pro with Translatium - the most powerful translation app for Mac & PC.">
     <meta name="theme-color" content="#43A047">
     <link rel="shortcut icon" href="/images/favicon.png" type="image/png">
     <link rel="icon" sizes="192x192" href="/images/icon-chrome.png">
@@ -22,26 +21,61 @@
     <link rel="stylesheet" href="/css/app.css">
   </head>
   <body>
-    <%- yield %>
+    <nav class="navbar is-primary">
+      <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item logo" href="/">
+          <img src="/images/logo_white.png" alt="WebCatalog" />
+        </a>
+        <a class="navbar-item is-hidden-desktop" href="https://github.com/translatium" target="_blank" rel="noopener noreferrer" alt="GitHub">
+          <span class="icon">
+            <i class="fa fa-lg fa-github"></i>
+          </span>
+        </a>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item is-hidden-touch" href="https://github.com/translatium" target="_blank" rel="noopener noreferrer" alt="GitHub">
+            <span class="icon">
+              <i class="fa fa-lg fa-github"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+      </div>
+    </nav>
+    <div class="main-content">
+      <%- yield %>
+    </div>
     <footer class="section footer">
       <div class="container">
         <div class="columns">
           <div class="column has-text-centered has-text-left-tablet">
             <ul class="footer-items">
-              <li><a href="/">Get Translatium</a></li>
+              <li><a href="/">Download</a></li>
               <li><a href="/support">Support</a></li>
-              <li><a href="mailto:quang@translatiumapp.com">Contact</a></li>
-              <li><a href="/privacy">Privacy</a></li>
+              <li><a href="mailto:support@translatiumapp.com">Contact</a></li>
               <li>
-                <a href="https://github.com/translatium" target="_blank" rel="noopener noreferrer">
-                  GitHub
+                <a href="https://github.com/webcatalog" target="_blank" rel="noopener noreferrer" alt="GitHub">
+                  <span class="icon">
+                    <i class="fa fa-github"></i>
+                  </span>
+                  <span>GitHub</span>
                 </a>
               </li>
             </ul>
-            </ul>
           </div>
           <div class="column has-text-centered has-text-right-tablet">
-            © <a href="https://madebyquang.com/" target="_blank" rel="noopener noreferrer">Quang Lam</a>.
+            <ul class="footer-items right">
+              <li><a href="/privacy">Privacy</a></li>
+              <li>
+                <span>Made with </span>
+                <span class="icon" style="color: #F44336">
+                  <i class="fa fa-lg fa-heart"></i>
+                </span>
+                <span> by </span>
+                <a href="https://madebyquang.com" target="_blank" rel="noopener noreferrer">Quang Lam</a>.</li>
+            </ul>
           </div>
         </div>
       </div>
