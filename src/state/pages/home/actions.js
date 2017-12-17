@@ -78,12 +78,18 @@ export const translate = saveToHistory => ((dispatch, getState) => {
 
 export const updateInputText = (inputText, selectionStart, selectionEnd) =>
   ((dispatch, getState) => {
-    const { settings, pages: { home } } = getState();
-    const realtime = settings.realtime;
+    const { settings, pages } = getState();
+    const { home } = pages;
+    const { realtime } = settings;
     const currentInputText = home.inputText;
-    const fullscreenInputBox = home.fullscreenInputBox;
+    const { fullscreenInputBox } = home;
 
-    dispatch({ type: UPDATE_INPUT_TEXT, inputText, selectionStart, selectionEnd });
+    dispatch({
+      type: UPDATE_INPUT_TEXT,
+      inputText,
+      selectionStart,
+      selectionEnd,
+    });
 
     // No change in inputText, no need to re-run task
     if (currentInputText === inputText) return;
@@ -116,7 +122,7 @@ export const insertInputText = text =>
 export const togglePhrasebook = () => ((dispatch, getState) => {
   const { output } = getState().pages.home;
 
-  const phrasebookId = output.phrasebookId;
+  const { phrasebookId } = output;
 
   if (phrasebookId) {
     phrasebookDb.get(phrasebookId)
@@ -222,7 +228,7 @@ const createDialog = ({
 
 const askToReview = () =>
   (dispatch, getState) => {
-    const strings = getState().strings;
+    const { strings } = getState();
 
     createDialog({
       message: strings.howAboutRating,
@@ -250,7 +256,7 @@ const askToReview = () =>
 
 const askToGiveFeedback = () =>
   (dispatch, getState) => {
-    const strings = getState().strings;
+    const { strings } = getState();
 
     createDialog({
       message: strings.wouldYouMindGivingFeedback,
@@ -265,7 +271,7 @@ const askToGiveFeedback = () =>
 
 export const askIfEnjoy = () =>
   (dispatch, getState) => {
-    const strings = getState().strings;
+    const { strings } = getState();
 
     createDialog({
       message: strings.enjoy,

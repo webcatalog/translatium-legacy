@@ -254,9 +254,7 @@ class Home extends React.Component {
         chinaMode,
       } = this.props;
       if (isTtsSupported(inputLang)) {
-        onListenButtonClick(
-          textToSpeechPlaying, output.outputLang, output.outputText, chinaMode,
-        );
+        onListenButtonClick(textToSpeechPlaying, output.outputLang, output.outputText, chinaMode);
       }
     });
 
@@ -405,7 +403,10 @@ class Home extends React.Component {
             tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
             onClick: () =>
               onListenButtonClick(
-                textToSpeechPlaying, output.outputLang, output.outputText, chinaMode,
+                textToSpeechPlaying,
+                output.outputLang,
+                output.outputText,
+                chinaMode,
               ),
           });
         }
@@ -583,6 +584,7 @@ class Home extends React.Component {
               onInsertText(text);
             })
             .catch((err) => {
+              // eslint-disable-next-line
               console.log(err);
             });
         },

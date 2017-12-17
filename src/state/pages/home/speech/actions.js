@@ -65,8 +65,8 @@ export const releaseDevice = () => ((dispatch, getState) => {
 
 export const stopRecording = () => ((dispatch, getState) => {
   const { settings, pages } = getState();
-  const home = pages.home;
-  const speech = home.speech;
+  const { home } = pages;
+  const { speech } = home;
   const { inputText, selectionStart, selectionEnd } = home;
   const { inputLang, chinaMode } = settings;
   const { status } = speech;
@@ -236,9 +236,8 @@ export const startRecording = () => ((dispatch) => {
           checkTime = setInterval(() => {
             dispatch(stopRecording());
           }, 10000);
-          const encodingProfile = Windows.Media.MediaProperties.MediaEncodingProfile.createWav(
-            Windows.Media.MediaProperties.AudioEncodingQuality.auto,
-          );
+          const encodingProfile = Windows.Media.MediaProperties.MediaEncodingProfile
+            .createWav(Windows.Media.MediaProperties.AudioEncodingQuality.auto);
           encodingProfile.audio.sampleRate = 16000;
           encodingProfile.audio.channelCount = 1;
           soundStream = new Windows.Storage.Streams.InMemoryRandomAccessStream();

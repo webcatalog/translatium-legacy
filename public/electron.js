@@ -103,7 +103,8 @@ function getMenuTemplate() {
           { role: 'startspeaking' },
           { role: 'stopspeaking' },
         ],
-      });
+      },
+    );
 
     // Window menu
     template[3].submenu = [

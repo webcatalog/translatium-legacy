@@ -131,9 +131,7 @@ const Settings = (props) => {
   }
   if (getPlatform() === 'electron'
     && ['showOnBothDockAndMenubar', 'onlyShowOnMenubar'].indexOf(dockAndMenubar) > -1) {
-    shortcuts.unshift(
-      { identifier: 'openOnMenubar', combinator: openOnMenubarShortcut },
-    );
+    shortcuts.unshift({ identifier: 'openOnMenubar', combinator: openOnMenubarShortcut });
   }
 
   return (

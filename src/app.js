@@ -117,7 +117,12 @@ class App extends React.Component {
         b: parseInt(regCode[3], 16),
         a: 1,
       };
-      const foregroundColor = { r: 255, g: 255, b: 255, a: 1 };
+      const foregroundColor = {
+        r: 255,
+        g: 255,
+        b: 255,
+        a: 1,
+      };
 
       // PC
       if (Windows.UI.ViewManagement.ApplicationView) {

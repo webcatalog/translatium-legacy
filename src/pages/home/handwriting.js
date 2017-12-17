@@ -62,7 +62,7 @@ class Handwriting extends React.Component {
 
 
   componentDidMount() {
-    const canvas = this.canvas;
+    const { canvas } = this;
     const { darkMode, onResetSuggestions } = this.props;
     this.canvasContext = canvas.getContext('2d');
     this.canvasContext.canvas.height = canvas.clientHeight;
@@ -165,7 +165,12 @@ class Handwriting extends React.Component {
   }
 
   onSpaceBarButtonClick() {
-    const { inputText, selectionStart, selectionEnd, onUpdateInputText } = this.props;
+    const {
+      inputText,
+      selectionStart,
+      selectionEnd,
+      onUpdateInputText,
+    } = this.props;
 
     const insertedText = insertAtCursor(
       inputText,
@@ -188,7 +193,13 @@ class Handwriting extends React.Component {
   }
 
   onSuggestionsItemClick(rText) {
-    const { suggestions, inputText, selectionStart, selectionEnd, onUpdateInputText } = this.props;
+    const {
+      suggestions,
+      inputText,
+      selectionStart,
+      selectionEnd,
+      onUpdateInputText,
+    } = this.props;
     const deletedText = deleteAtCursor(
       inputText,
       suggestions ? suggestions[0].length : 0,

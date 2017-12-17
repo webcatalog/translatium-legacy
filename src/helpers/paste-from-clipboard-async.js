@@ -8,9 +8,8 @@ const pasteFromClipboardAsync = () =>
         case 'windows': {
           return new Promise((resolve, reject) => {
             const dataPackageView = Windows.ApplicationModel.DataTransfer.Clipboard.getContent();
-            if (dataPackageView.contains(
-              Windows.ApplicationModel.DataTransfer.StandardDataFormats.text,
-            )) {
+            if (dataPackageView
+              .contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.text)) {
               // UWP Promise type
               dataPackageView.getTextAsync()
                 .then((text) => {

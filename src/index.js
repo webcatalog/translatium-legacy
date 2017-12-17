@@ -66,9 +66,8 @@ switch (getPlatform()) {
     Windows.UI.WebUI.WebUIApplication.onactivated = (args) => {
       if (
         (args.kind === Windows.ApplicationModel.Activation.ActivationKind.shareTarget)
-        && (args.shareOperation.data.contains(
-          Windows.ApplicationModel.DataTransfer.StandardDataFormats.text,
-        ))
+        && (args.shareOperation.data
+          .contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.text))
       ) {
         args.shareOperation.data.getTextAsync().done((text) => {
           store.dispatch(updateInputText(text));

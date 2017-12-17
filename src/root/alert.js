@@ -46,6 +46,4 @@ const mapDispatchToProps = dispatch => ({
   onClose: () => dispatch(closeAlert()),
 });
 
-export default connect(
-  mapStateToProps, mapDispatchToProps,
-)(Alert);
+export default connect(mapStateToProps, mapDispatchToProps)(Alert);

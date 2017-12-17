@@ -149,9 +149,8 @@ class Ocr extends React.Component {
               : `${strings.displayOriginalText} (${strings[inputLang]})`}
           </MenuItem>
           <MenuItem
-            onClick={() => onTextOnlyMenuItemClick(
-              inputLang, outputLang, ocr.inputText, ocr.outputText,
-            )}
+            onClick={() =>
+              onTextOnlyMenuItemClick(inputLang, outputLang, ocr.inputText, ocr.outputText)}
           >
             {strings.displayTextOnly}
           </MenuItem>

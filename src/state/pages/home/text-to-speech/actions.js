@@ -13,21 +13,17 @@ const textToSpeechShortText = (lang, text, idx, total, chinaMode) =>
     .then((token) => {
       const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || (chinaMode ? 'https://translate.google.cn' : 'https://translate.google.com');
 
-      const uri = encodeURI(
-        `${endpoint}/translate_tts?ie=UTF-8&tl=${lang}`
+      const uri = encodeURI(`${endpoint}/translate_tts?ie=UTF-8&tl=${lang}`
         + `&q=${text}&textlen=${text.length}&idx=${idx}&total=${total}`
-        + `&client=t&prev=input&tk=${token}`,
-      );
+        + `&client=t&prev=input&tk=${token}`);
 
       /* global Audio */
       player = new Audio(uri);
-      return new Promise(
-        (resolve, reject) => {
-          player.play();
-          player.onended = () => resolve();
-          player.onerror = e => reject(e);
-        },
-      );
+      return new Promise((resolve, reject) => {
+        player.play();
+        player.onended = () => resolve();
+        player.onerror = e => reject(e);
+      });
     });
 
 export const playTextToSpeech = (textToSpeechLang, textToSpeechText, chinaMode) => ((dispatch) => {

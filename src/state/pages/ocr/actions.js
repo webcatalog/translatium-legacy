@@ -61,16 +61,16 @@ export const loadImage = fromCamera => (dispatch, getState) => {
                     canvas.height,
                     96,
                     96,
-                    new Uint8Array(
-                      context.getImageData(0, 0, canvas.width, canvas.height).data,
-                    ));
+                    new Uint8Array(context.getImageData(0, 0, canvas.width, canvas.height).data),
+                  );
 
                   // Go do the encoding
                   return encoder.flushAsync();
                 })
                 .then(() => {
                   const blob = MSApp.createBlobFromRandomAccessStream(
-                    'image/jpeg', inMemoryRandomAccessStream,
+                    'image/jpeg',
+                    inMemoryRandomAccessStream,
                   );
                   resolve({
                     blob,
@@ -186,7 +186,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
 };
 
 export const setZoomLevel = zoomLevel => (dispatch, getState) => {
-  const ocr = getState().pages.ocr;
+  const { ocr } = getState().pages;
 
   dispatch({
     type: UPDATE_OCR,
@@ -195,7 +195,7 @@ export const setZoomLevel = zoomLevel => (dispatch, getState) => {
 };
 
 export const setMode = mode => (dispatch, getState) => {
-  const ocr = getState().pages.ocr;
+  const { ocr } = getState().pages;
   dispatch({
     type: UPDATE_OCR,
     ocr: Object.assign({}, ocr, { mode }),

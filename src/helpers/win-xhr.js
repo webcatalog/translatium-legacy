@@ -1,6 +1,12 @@
 /* global Windows Blob */
 
-const winXhr = ({ type, uri, responseType, data, headers }) => {
+const winXhr = ({
+  type,
+  uri,
+  responseType,
+  data,
+  headers,
+}) => {
   const httpClient = new Windows.Web.Http.HttpClient();
 
   // Add a user-agent header
@@ -13,9 +19,7 @@ const winXhr = ({ type, uri, responseType, data, headers }) => {
 
   const httpUri = new Windows.Foundation.Uri(uri);
 
-  const httpMethod = new Windows.Web.Http.HttpMethod(
-    Windows.Web.Http.HttpMethod[type],
-  );
+  const httpMethod = new Windows.Web.Http.HttpMethod(Windows.Web.Http.HttpMethod[type]);
 
   const request = new Windows.Web.Http.HttpRequestMessage(httpMethod, httpUri);
 
