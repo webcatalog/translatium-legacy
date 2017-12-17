@@ -46,6 +46,8 @@
 
 	"displayOriginalText": "Hiển thị văn bản gốc",
 	"displayTranslatedText": "Hiển thị văn bản đã dịch",
+	"copyOriginalText": "Sao chép văn bản gốc",
+	"copyTranslatedText": "Sao chép văn bản đã dịch",
 	"displayTextOnly": "Chỉ hiển thị chữ",
 	"phrasebookIsEmpty": "Sổ từ ngữ còn trống.",
 

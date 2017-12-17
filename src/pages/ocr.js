@@ -16,6 +16,9 @@ import EnhancedMenu from './enhanced-menu';
 
 import { setZoomLevel, setMode } from '../state/pages/ocr/actions';
 import { loadOutput } from '../state/pages/home/actions';
+import { openSnackbar } from '../state/root/snackbar/actions';
+
+import copyToClipboard from '../helpers/copy-to-clipboard';
 
 const styles = {
   container: {
@@ -69,13 +72,14 @@ class Ocr extends React.Component {
     const {
       classes,
       inputLang,
-      outputLang,
       ocr,
-      strings,
       onCloseClick,
-      onUpdateZoomLevel,
       onModeMenuItemClick,
+      onRequestCopyToClipboard,
       onTextOnlyMenuItemClick,
+      onUpdateZoomLevel,
+      outputLang,
+      strings,
     } = this.props;
 
     if (!ocr) return null;
@@ -150,6 +154,18 @@ class Ocr extends React.Component {
           </MenuItem>
           <MenuItem
             onClick={() =>
+              onRequestCopyToClipboard(ocr.inputText, strings)}
+          >
+            {strings.copyOriginalText} ({strings[inputLang]})
+          </MenuItem>
+          <MenuItem
+            onClick={() =>
+              onRequestCopyToClipboard(ocr.outputText, strings)}
+          >
+            {strings.copyTranslatedText} ({strings[outputLang]})
+          </MenuItem>
+          <MenuItem
+            onClick={() =>
               onTextOnlyMenuItemClick(inputLang, outputLang, ocr.inputText, ocr.outputText)}
           >
             {strings.displayTextOnly}
@@ -163,13 +179,14 @@ class Ocr extends React.Component {
 Ocr.propTypes = {
   classes: PropTypes.object.isRequired,
   inputLang: PropTypes.string,
-  outputLang: PropTypes.string,
   ocr: PropTypes.object.isRequired,
-  strings: PropTypes.objectOf(PropTypes.string).isRequired,
   onCloseClick: PropTypes.func.isRequired,
-  onUpdateZoomLevel: PropTypes.func.isRequired,
   onModeMenuItemClick: PropTypes.func.isRequired,
+  onRequestCopyToClipboard: PropTypes.func.isRequired,
   onTextOnlyMenuItemClick: PropTypes.func.isRequired,
+  onUpdateZoomLevel: PropTypes.func.isRequired,
+  outputLang: PropTypes.string,
+  strings: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -194,6 +211,10 @@ const mapDispatchToProps = dispatch => ({
       inputLang, outputLang, inputText, outputText,
     }));
     dispatch(goBack());
+  },
+  onRequestCopyToClipboard: (text, strings) => {
+    copyToClipboard(text);
+    dispatch(openSnackbar(strings.copied));
   },
 });
 

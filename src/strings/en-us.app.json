@@ -46,6 +46,8 @@
 
 	"displayOriginalText": "Display original text",
 	"displayTranslatedText": "Display translated text",
+	"copyOriginalText": "Copy original text",
+	"copyTranslatedText": "Copy translated text",
 	"displayTextOnly": "Display text only",
 	"phrasebookIsEmpty": "Phrasebook is empty.",
 
