@@ -174,9 +174,23 @@ function createMenubar() {
     globalShortcut.unregister(combinator);
   });
 
+  let isHidden = true;
+
+  mb.on('show', () => {
+    isHidden = false;
+  });
+
+  mb.on('hide', () => {
+    isHidden = true;
+  });
+
   ipcMain.on('set-show-menubar-shortcut', (e, combinator) => {
     globalShortcut.register(combinator, () => {
-      mb.showWindow();
+      if (isHidden) {
+        mb.showWindow();
+      } else {
+        mb.hideWindow();
+      }
     });
   });
 }
