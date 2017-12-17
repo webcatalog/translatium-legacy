@@ -94,6 +94,9 @@ const styles = theme => ({
     height: 96,
     width: 96,
   },
+  title: {
+    marginTop: theme.spacing.unit,
+  },
   version: {
     marginBottom: theme.spacing.unit * 2,
   },
@@ -371,23 +374,6 @@ const Settings = (props) => {
           </List>
         </Paper>
 
-        <Typography type="body2" className={classes.paperTitle}>
-          {strings.about}
-        </Typography>
-        <Paper className={classes.paper}>
-          <List>
-            {getPlatform() === 'windows' && (
-              <ListItem button onClick={() => openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k')} role="link">
-                <ListItemText primary={strings.rateWindowsStore} />
-              </ListItem>
-            )}
-            {getPlatform() === 'electron' && (
-              <ListItem button onClick={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')} role="link">
-                <ListItemText primary={strings.rateMacAppStore} />
-              </ListItem>
-            )}
-            <ListItem button onClick={() => openUri('https://translatiumapp.com/support')} role="link">
-              <ListItemText primary={strings.help} />
         {getPlatform() === 'electron' && (
           <Typography type="body2" className={classes.paperTitle}>
             {strings.quit}
