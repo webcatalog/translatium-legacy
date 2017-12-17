@@ -24,6 +24,8 @@ import { openShortcutDialog } from '../../state/pages/settings/shortcut-dialog/a
 import colorPairs from '../../constants/colors';
 import displayLanguages from '../../constants/display-languages';
 
+import logoPng from '../../assets/logo.png';
+
 import getPlatform from '../../helpers/get-platform';
 import openUri from '../../helpers/open-uri';
 
@@ -62,11 +64,38 @@ const styles = theme => ({
     maxWidth: 720,
     margin: '0 auto',
   },
+  paperAbout: {
+    maxWidth: 720,
+    margin: '0 auto',
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    paddingLeft: theme.spacing.unit,
+    paddingRight: theme.spacing.unit,
+    boxSizing: 'border-box',
+    textAlign: 'center',
+  },
   shortcutKey: {
     lineHeight: '48px',
     padding: '0 16px',
     fontSize: 15,
     color: theme.palette.text.secondary,
+  },
+  madeBy: {
+    marginTop: theme.spacing.unit * 2,
+  },
+  link: {
+    fontWeight: 600,
+    cursor: 'pointer',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+  icon: {
+    height: 96,
+    width: 96,
+  },
+  version: {
+    marginBottom: theme.spacing.unit * 2,
   },
 });
 
@@ -359,19 +388,6 @@ const Settings = (props) => {
             )}
             <ListItem button onClick={() => openUri('https://translatiumapp.com/support')} role="link">
               <ListItemText primary={strings.help} />
-            </ListItem>
-            <ListItem button onClick={() => openUri('mailto:support@translatiumapp.com')} role="link">
-              <ListItemText primary={strings.sendFeedback} />
-            </ListItem>
-            <ListItem button onClick={() => openUri('https://translatiumapp.com')} role="link">
-              <ListItemText primary={strings.website} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Version" secondary={process.env.REACT_APP_VERSION} />
-            </ListItem>
-          </List>
-        </Paper>
-
         {getPlatform() === 'electron' && (
           <Typography type="body2" className={classes.paperTitle}>
             {strings.quit}
@@ -386,6 +402,59 @@ const Settings = (props) => {
             </List>
           </Paper>
         )}
+
+        <Typography type="body2" className={classes.paperTitle}>
+          {strings.about}
+        </Typography>
+        <Paper className={classes.paperAbout}>
+          <img src={logoPng} alt="Translatium" className={classes.icon} />
+          <Typography type="title" className={classes.title}>Translatium</Typography>
+          <Typography type="body1" className={classes.version}>
+            Version {process.env.REACT_APP_VERSION}
+          </Typography>
+
+          {getPlatform() === 'windows' && (
+            <React.Fragment>
+              <Button onClick={() => openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}>
+                {strings.rateWindowsStore}
+              </Button>
+              <br />
+            </React.Fragment>
+          )}
+          {getPlatform() === 'electron' && (
+            <React.Fragment>
+              <Button onClick={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')}>
+                {strings.rateMacAppStore}
+              </Button>
+              <br />
+            </React.Fragment>
+          )}
+          <Button onClick={() => openUri('https://translatiumapp.com/support')}>
+            {strings.help}
+          </Button>
+          <br />
+          <Button onClick={() => openUri('https://translatiumapp.com')}>
+            {strings.website}
+          </Button>
+          <br />
+          <Button onClick={() => openUri('https://github.com/translatium')}>
+            GitHub
+          </Button>
+
+          <Typography type="body1" className={classes.madeBy}>
+            <span>Made with </span>
+            <span role="img" aria-label="love">❤️</span>
+            <span> by </span>
+            <a
+              onClick={() => openUri('https://quang.im')}
+              role="link"
+              tabIndex="0"
+              className={classes.link}
+            >
+              Quang Lam
+            </a>
+          </Typography>
+        </Paper>
       </div>
     </div>
   );
