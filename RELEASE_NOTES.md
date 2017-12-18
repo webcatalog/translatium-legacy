@@ -1,6 +1,7 @@
 ### 7.8
 - Adds ability to copy text quickly in camera translation mode (OCR). ([#7](https://github.com/translatium/translatium/issues/7))
-- macOS: Fixes menu bar keyboard shortcut doesn't hide the app. ([#8](https://github.com/translatium/translatium/issues/8))
+- macOS: Fixes: menu bar keyboard shortcut doesn't hide the app. ([#8](https://github.com/translatium/translatium/issues/8))
+- macOS: Fixes: microphone doesn't work properly.
 
 ---
 
