@@ -249,8 +249,10 @@ export const startRecording = () => ((dispatch) => {
     case 'electron': {
       navigator.getUserMedia({ audio: true, video: false }, (stream) => {
         recorder = new RecordRTC(stream, {
+          recorderType: RecordRTC.StereoAudioRecorder,
           type: 'audio',
           audioType: 'audio/wav',
+          mimeType: 'audio/wav',
           sampleRate: 44100,
           numberOfAudioChannels: 1,
         });
