@@ -1,7 +1,7 @@
 {
   "name": "translatium",
   "description": "Translator app for Mac & PC.",
-  "version": "7.7.1",
+  "version": "7.8.0",
   "main": "public/electron.js",
   "repository": "https://github.com/translatium/translatium",
   "author": {
@@ -16,7 +16,7 @@
   "scripts": {
     "start": "cross-env REACT_APP_VERSION=dev REACT_APP_GOOGLE_ENDPOINT=http://localhost:3000 BROWSER=none react-scripts start",
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "build": "cross-env REACT_APP_VERSION=7.7.1 react-scripts build && node add-bom.js",
+    "build": "cross-env REACT_APP_VERSION=7.8.0 react-scripts build && node add-bom.js",
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "dist-electron": "npm run build && babel-node packager.js",
