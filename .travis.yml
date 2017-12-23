@@ -8,3 +8,5 @@ cache:
 script:
 - yarn lint
 - yarn dist-electron
+after_success:
+- ./publish-website.sh
