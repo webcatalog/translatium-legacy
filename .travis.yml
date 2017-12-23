@@ -6,7 +6,6 @@ cache:
   directories:
   - node_modules
 script:
+- ./publish-website.sh
 - yarn lint
 - yarn dist-electron
-after_success:
-- ./publish-website.sh

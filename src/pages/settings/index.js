@@ -423,7 +423,7 @@ const Settings = (props) => {
             {strings.website}
           </Button>
           <br />
-          <Button onClick={() => openUri('https://github.com/translatium')}>
+          <Button onClick={() => openUri('https://github.com/quanglam2807/translatium')}>
             GitHub
           </Button>
 
