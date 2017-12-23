@@ -1,0 +1,11 @@
+language: node_js
+node_js: 6
+os: linux
+env:
+  global:
+    secure: MRYkxnPSEF/W6ES4fnUh3DV0XMdxQ9SOYEYYEdW+4vYxFtwfzdjwT3plAjEhQuBlc/WkRuRCCvQdFt3NnTvIqA4PVAu9+JVZ3+MIj4C51WtMsO2PEtTs2ta5Ws9o0vJ9bTtVEmpk8wk02hXJDtPoztocaQBdnU797Nf3Gl95GGC/BSVgLhCGWHDjZOJ2Gyi6XdEfInb/xyjsOaCwSV6htlJI+om8kZn58uIJxvCEr7ux9jj3tOYYErg72EqDqryrpJESGx9646vForxKERe2kC/V/KQi2B3g5xnmWXqpXCTLy6t2Bet4abztsziANf/45J83hkoFxFQu3/NkymNIF5vxDaFu9WH570dJ1TeTWPD073zP2sUuw7JpdYaR6hrW9HFh2Pi9ZwwQJG9a2Q85/SZA2pMMbhv5ZWxkN9s4QjF3YUMSXSA4dyl8oqN3m4iuep5Or+ags5ujgOaTZI/RgcSrnBMyt1/U2S3plAgr3YJp9UYsYB8MIe1WvmAzdafbmQ4Zs9365XRFmWdKlMvvqQlO4CBbxwh1XeaIL0BT/s2pHCvnUW0n9VCQ7mZimK1jSiDNqAY5Kl9D8YQ81XSQwHzxnMDqiIkmq+1klSbUI+uoT8fSWv3Mo6Heq7aPMC42UOXb9KrSb9/tJ3aPh/15zNSXPXqJt2YSPi6Zf6Xt1SM=
+cache:
+  directories:
+  - node_modules
+script:
+- "./publish.sh"

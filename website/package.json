@@ -1,0 +1,17 @@
+{
+  "name": "translatium-landing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/translatium/translatium-landing.git",
+  "author": "Quang Lam <quang.lam2807@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "harp server"
+  },
+  "dependencies": {
+    "bulma": "^0.6.0"
+  },
+  "devDependencies": {
+    "harp": "0.24.0"
+  }
+}
