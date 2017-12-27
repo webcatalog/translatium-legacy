@@ -19,6 +19,7 @@ export const defaultState = {
   realtime: true,
   recentLanguages: ['en', 'zh'],
   translateWhenPressingEnter: true,
+  translateClipboardOnShortcut: false,
 
   openInputLangListShortcut: 'mod+shift+i',
   openOutputLangListShortcut: 'mod+shift+o',
@@ -34,7 +35,11 @@ export const defaultState = {
 };
 
 const shouldUseElectronSettings = (name) => {
-  if (name === 'dockAndMenubar' && getPlaform() === 'electron') return true;
+  if (getPlaform() === 'electron') {
+    if (name === 'dockAndMenubar' || name === 'translateClipboardOnShortcut') {
+      return true;
+    }
+  }
   return false;
 };
 

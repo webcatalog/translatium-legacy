@@ -133,6 +133,7 @@ const Settings = (props) => {
     realtime,
     strings,
     translateWhenPressingEnter,
+    translateClipboardOnShortcut,
 
     cameraShortcut,
     clearInputShortcut,
@@ -310,6 +311,20 @@ const Settings = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
+            {getPlatform() === 'electron' && (
+              <ListItem>
+                <ListItemText
+                  primary={strings.translateClipboardOnShortcut}
+                  secondary={strings.translateClipboardOnShortcutDesc}
+                />
+                <ListItemSecondaryAction>
+                  <Switch
+                    checked={translateClipboardOnShortcut}
+                    onChange={() => onToggle('translateClipboardOnShortcut')}
+                  />
+                </ListItemSecondaryAction>
+              </ListItem>
+            )}
             {getPlatform() === 'windows' && (
               <ListItem>
                 <ListItemText primary={strings.preventScreenLock} />
@@ -461,6 +476,7 @@ Settings.propTypes = {
   realtime: PropTypes.bool.isRequired,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
+  translateClipboardOnShortcut: PropTypes.bool.isRequired,
 
   cameraShortcut: PropTypes.string.isRequired,
   clearInputShortcut: PropTypes.string.isRequired,
@@ -485,6 +501,7 @@ const mapStateToProps = state => ({
   realtime: state.settings.realtime,
   strings: state.strings,
   translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
+  translateClipboardOnShortcut: state.settings.translateClipboardOnShortcut,
 
   cameraShortcut: state.settings.cameraShortcut,
   clearInputShortcut: state.settings.clearInputShortcut,

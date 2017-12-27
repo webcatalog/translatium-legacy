@@ -147,5 +147,8 @@
 	"resetToDefault": "Reset to Default",
 	"cancel": "Cancel",
 
-	"pasteFromClipboard": "Paste from Clipboard"
+	"pasteFromClipboard": "Paste from Clipboard",
+
+	"translateClipboardOnShortcut": "Translate clipboard on shortcut",
+	"translateClipboardOnShortcutDesc": "When you open Translatium with a shortcut, it will automatically translate your clipboard contents."
 }

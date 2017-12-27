@@ -1,4 +1,4 @@
-/* global Windows */
+/* global Windows ipcRenderer */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { push } from 'react-router-redux';
@@ -189,6 +189,7 @@ class Home extends React.Component {
       onSwapOutputButtonClick,
       onTogglePhrasebookClick,
       onWriteButtonClick,
+      onUpdateInputText,
 
       cameraShortcut,
       clearInputShortcut,
@@ -201,6 +202,10 @@ class Home extends React.Component {
       speakShorcut,
       swapLanguagesShortcut,
     } = this.props;
+
+    ipcRenderer.on('set-input-text', (e, text) => {
+      onUpdateInputText(text);
+    });
 
     if (launchCount >= 5) {
       onAskIfEnjoy();
@@ -787,6 +792,7 @@ Home.propTypes = {
   onTogglePhrasebookClick: PropTypes.func.isRequired,
   onTranslateButtonClick: PropTypes.func.isRequired,
   onWriteButtonClick: PropTypes.func.isRequired,
+  onUpdateInputText: PropTypes.func.isRequired,
   output: PropTypes.object,
   outputLang: PropTypes.string,
   preventScreenLock: PropTypes.bool,
@@ -856,6 +862,9 @@ const mapDispatchToProps = dispatch => ({
     const inputText = e.target.value;
 
     dispatch(updateInputText(inputText, e.target.selectionStart, e.target.selectionEnd));
+  },
+  onUpdateInputText: (inputText) => {
+    dispatch(updateInputText(inputText, 0, 0));
   },
   onClearButtonClick: () => dispatch(updateInputText('')),
   onInsertText: text => dispatch(insertInputText(text)),

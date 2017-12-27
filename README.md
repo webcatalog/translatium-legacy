@@ -2,7 +2,7 @@
 
 | Platform | Build Status |
 | -------- | ------------ |
-| macOS | [![Travis Build Status](https://travis-ci.org/translatium/translatium.svg?branch=master)](https://travis-ci.org/translatium/translatium)                                                                |
+| macOS | [![Travis Build Status](https://travis-ci.org/quanglam2807/translatium.svg?branch=master)](https://travis-ci.org/quanglam2807/translatium)                                                                |
 | Windows | [![VSO Build Status](https://img.shields.io/vso/build/quanglam2807/2f76e0e3-6c4c-4c04-a98e-f7c1460efa1c/2.svg)](https://quanglam2807.visualstudio.com/Modern%20Translator/_build/index?definitionId=2) |
 
 #### Homepage: https://translatiumapp.com

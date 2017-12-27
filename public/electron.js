@@ -11,6 +11,7 @@ const isDev = require('electron-is-dev');
 const {
   app,
   BrowserWindow,
+  clipboard,
   globalShortcut,
   ipcMain,
   Menu,
@@ -188,6 +189,14 @@ function createMenubar() {
     globalShortcut.register(combinator, () => {
       if (isHidden) {
         mb.showWindow();
+
+        const translateClipboardOnShortcut = settings.get('translateClipboardOnShortcut', false);
+        if (translateClipboardOnShortcut) {
+          const text = clipboard.readText();
+          if (text.length > 0) {
+            mb.window.send('set-input-text', text);
+          }
+        }
       } else {
         mb.hideWindow();
       }
