@@ -1,3 +1,8 @@
+### 7.9
+- macOS: Adds ability to translate clipboard on shortcut. ([#9](https://github.com/quanglam2807/translatium/issues/9))
+
+---
+
 ### 7.8
 - Adds ability to copy text quickly in camera translation mode (OCR). ([#7](https://github.com/quanglam2807/translatium/issues/7))
 - macOS: Fixes: menu bar keyboard shortcut doesn't hide the app. ([#8](https://github.com/quanglam2807/translatium/issues/8))

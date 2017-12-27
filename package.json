@@ -1,7 +1,7 @@
 {
   "name": "translatium",
   "description": "Translator app for Mac & PC.",
-  "version": "7.8.1",
+  "version": "7.9.0",
   "main": "public/electron.js",
   "repository": "https://github.com/quanglam2807/translatium",
   "author": {
