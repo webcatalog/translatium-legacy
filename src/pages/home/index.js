@@ -203,9 +203,11 @@ class Home extends React.Component {
       swapLanguagesShortcut,
     } = this.props;
 
-    ipcRenderer.on('set-input-text', (e, text) => {
-      onUpdateInputText(text);
-    });
+    if (getPlatform() === 'electron') {
+      ipcRenderer.on('set-input-text', (e, text) => {
+        onUpdateInputText(text);
+      });
+    }
 
     if (launchCount >= 5) {
       onAskIfEnjoy();
