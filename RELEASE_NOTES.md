@@ -1,3 +1,9 @@
+### 7.10
+- Adds German display languages. ([#10](https://github.com/quanglam2807/translatium/pull/10)) Thanks to [@Armin2208](https://github.com/Armin2208).
+- Fixes: app crashes when pressing swap languages shortcut. ([#12](https://github.com/quanglam2807/translatium/issues/12))
+
+---
+
 ### 7.9
 - macOS: Adds ability to translate clipboard on shortcut. ([#9](https://github.com/quanglam2807/translatium/issues/9))
 
