@@ -186,7 +186,7 @@ class Home extends React.Component {
       onListenButtonClick,
       onOpenImageButtonClick,
       onSpeakButtonClick,
-      onSwapOutputButtonClick,
+      onSwapButtonClick,
       onTogglePhrasebookClick,
       onWriteButtonClick,
       onUpdateInputText,
@@ -228,7 +228,7 @@ class Home extends React.Component {
     Mousetrap.bind(swapLanguagesShortcut, (e) => {
       e.preventDefault();
 
-      onSwapOutputButtonClick();
+      onSwapButtonClick();
     });
 
     Mousetrap.bind(clearInputShortcut, (e) => {
