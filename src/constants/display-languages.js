@@ -1,4 +1,7 @@
 export default {
+  de: {
+    displayName: 'Deutsch',
+  },
   en: {
     displayName: 'English',
   },
