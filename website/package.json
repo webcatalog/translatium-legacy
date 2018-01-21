@@ -2,7 +2,7 @@
   "name": "translatium-landing",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Quang Lam <me@quang.im>",
+  "author": "Quang Lam <quang.lam2807@gmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "harp server"
