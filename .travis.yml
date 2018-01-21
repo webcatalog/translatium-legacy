@@ -1,5 +1,5 @@
 language: node_js
-os: osx
+os: linux
 node_js: 8
 cache:
   yarn: true
@@ -8,4 +8,3 @@ cache:
 script:
 - ./publish-website.sh
 - yarn lint
-- yarn dist-electron
