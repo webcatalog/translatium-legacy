@@ -263,7 +263,7 @@ const askToGiveFeedback = () =>
       defaultButtonText: strings.okSure,
       cancelButtonText: strings.noThanks,
       defaultFunc: () => {
-        openUri('mailto:support@translatiumapp.com?subject=Feedback');
+        openUri('https://github.com/quanglam2807/translatium/issues');
       },
     });
   };

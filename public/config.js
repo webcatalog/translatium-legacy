@@ -2,7 +2,7 @@ const path = require('path');
 
 const APP_NAME = 'Translatium';
 const APP_TEAM = 'Quang Lam';
-const APP_URL = 'https://translatiumapp.com';
+const APP_URL = 'https://quang.im/translatium';
 
 const IMAGE_PATH = path.join(__dirname, '..', 'images');
 
@@ -12,7 +12,5 @@ module.exports = {
   APP_COPYRIGHT: `Copyright © 2014 - ${new Date().getFullYear()} ${APP_TEAM}`,
   IMAGE_PATH,
   MACOS_APP_ICON: path.join(IMAGE_PATH, 'icon.icns'),
-
-  SUPPORT_EMAIL: 'support@translatiumapp.com',
   APP_URL,
 };
