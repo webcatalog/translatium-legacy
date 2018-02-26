@@ -82,8 +82,6 @@
 	"preventScreenLock": "Sperrbildschirm verhindern",
 	"translateWhenPressingEnter": "Mit Enter übersetzen",
 	"realtime": "Echtzeit Übersetzung",
-	"chinaMode": "China Modus",
-	"chinaModeDesc": "Wenn dieser Modus aktiviert ist, wird Translatium die Daten von und zum Google Übersetzer über die Domain google.cn verwalten, anstatt google.com.",
 
 	"translations" : "Übersetzungen",
 	"definitions" : "Definitionen",

@@ -258,24 +258,23 @@ class Home extends React.Component {
         inputLang,
         textToSpeechPlaying,
         output,
-        chinaMode,
       } = this.props;
       if (isTtsSupported(inputLang)) {
-        onListenButtonClick(textToSpeechPlaying, output.outputLang, output.outputText, chinaMode);
+        onListenButtonClick(textToSpeechPlaying, output.outputLang, output.outputText);
       }
     });
 
     Mousetrap.bind(drawShortcut, (e) => {
       e.preventDefault();
 
-      const { imeMode, inputLang, chinaMode } = this.props;
+      const { imeMode, inputLang } = this.props;
 
       if (imeMode === 'handwriting') {
         onAnotherContainerClick(imeMode);
         return;
       }
 
-      if (isHandwritingSupported(inputLang) && !chinaMode) {
+      if (isHandwritingSupported(inputLang)) {
         onWriteButtonClick();
       }
     });
@@ -346,7 +345,6 @@ class Home extends React.Component {
 
   renderOutput() {
     const {
-      chinaMode,
       classes,
       fullscreenInputBox,
       onBiggerTextButtonClick,
@@ -413,7 +411,6 @@ class Home extends React.Component {
                 textToSpeechPlaying,
                 output.outputLang,
                 output.outputText,
-                chinaMode,
               ),
           });
         }
@@ -555,7 +552,6 @@ class Home extends React.Component {
 
   render() {
     const {
-      chinaMode,
       classes,
       fullscreenInputBox,
       imeMode,
@@ -619,7 +615,7 @@ class Home extends React.Component {
       });
     }
 
-    if (isHandwritingSupported(inputLang) && !chinaMode) {
+    if (isHandwritingSupported(inputLang)) {
       controllers.push({
         icon: <ContentGesture />,
         tooltip: strings.draw,
@@ -766,7 +762,6 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  chinaMode: PropTypes.bool,
   classes: PropTypes.object.isRequired,
   fullscreenInputBox: PropTypes.bool,
   imeMode: PropTypes.string,
@@ -827,7 +822,6 @@ const mapStateToProps = state => ({
   textToSpeechPlaying: state.pages.home.textToSpeech.textToSpeechPlaying,
   fullscreenInputBox: state.pages.home.fullscreenInputBox,
   launchCount: state.settings.launchCount,
-  chinaMode: state.settings.chinaMode,
   strings: state.strings,
 
   cameraShortcut: state.settings.cameraShortcut,
@@ -870,12 +864,12 @@ const mapDispatchToProps = dispatch => ({
   },
   onClearButtonClick: () => dispatch(updateInputText('')),
   onInsertText: text => dispatch(insertInputText(text)),
-  onListenButtonClick: (toStop, lang, text, chinaMode) => {
+  onListenButtonClick: (toStop, lang, text) => {
     if (toStop) {
       dispatch(stopTextToSpeech());
       return;
     }
-    dispatch(playTextToSpeech(lang, text, chinaMode));
+    dispatch(playTextToSpeech(lang, text));
   },
   onTranslateButtonClick: () => dispatch(translate(true)),
   onWriteButtonClick: () => dispatch(updateImeMode('handwriting')),

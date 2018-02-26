@@ -5,10 +5,10 @@ import * as languageUtils from './language-utils';
 import winXhr from './win-xhr';
 
 // Maximum encoded inputText length: 2000
-const translateShortText = (inputLang, outputLang, inputText, chinaMode) =>
-  generateGoogleTranslateToken(inputText, chinaMode)
+const translateShortText = (inputLang, outputLang, inputText) =>
+  generateGoogleTranslateToken(inputText)
     .then((token) => {
-      const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || (chinaMode ? 'https://translate.google.cn' : 'https://translate.google.com');
+      const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || 'https://translate.google.com';
 
       const uri = `${endpoint}/translate_a/single?client=t`
               + `&sl=${languageUtils.toGoogleStandardlizedLanguage(inputLang)}`
@@ -102,11 +102,11 @@ const translateShortText = (inputLang, outputLang, inputText, chinaMode) =>
     });
 
 // Split text to chucks of short-length strings, translate with Google and then merge them together
-const translateText = (inputLang, outputLang, inputText, chinaMode) =>
+const translateText = (inputLang, outputLang, inputText) =>
   Promise.resolve()
     .then(() => {
       if (encodeURIComponent(inputText).length < 1000) {
-        return translateShortText(inputLang, outputLang, inputText, chinaMode);
+        return translateShortText(inputLang, outputLang, inputText);
       }
 
       let tmp = inputText.substr(0, 100);
@@ -124,12 +124,12 @@ const translateText = (inputLang, outputLang, inputText, chinaMode) =>
       let leftRes;
       let rightRes;
       const promises = [];
-      promises.push(translateShortText(inputLang, outputLang, leftInputText, chinaMode)
+      promises.push(translateShortText(inputLang, outputLang, leftInputText)
         .then((result) => {
           leftRes = result;
         }));
 
-      promises.push(translateText(inputLang, outputLang, rightInputText, chinaMode)
+      promises.push(translateText(inputLang, outputLang, rightInputText)
         .then((result) => {
           rightRes = result;
         }));

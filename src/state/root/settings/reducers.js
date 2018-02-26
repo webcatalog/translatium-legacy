@@ -7,7 +7,6 @@ import getPlaform from '../../../helpers/get-platform';
 export const defaultState = {
   biggerTextFontSize: 50,
   bigTextFontSize: 50,
-  chinaMode: false,
   darkMode: false,
   dockAndMenubar: 'showOnBothDockAndMenubar',
   inputLang: 'en',

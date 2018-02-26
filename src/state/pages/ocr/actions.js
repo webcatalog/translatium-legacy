@@ -12,7 +12,7 @@ import { toOcrSpaceLanguage } from '../../../helpers/language-utils';
 import { openAlert } from '../../root/alert/actions';
 
 export const loadImage = fromCamera => (dispatch, getState) => {
-  const { inputLang, outputLang, chinaMode } = getState().settings;
+  const { inputLang, outputLang } = getState().settings;
 
   Promise.resolve()
     .then(() => {
@@ -141,7 +141,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
 
           const inputArr = inputLines.map(line => line.text);
 
-          return translateArray(inputLang, outputLang, inputArr, chinaMode)
+          return translateArray(inputLang, outputLang, inputArr)
             .then(({ outputArr, outputText }) => {
               const outputLines = outputArr.map((text, i) => ({
                 height: inputLines[i].height,

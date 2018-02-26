@@ -82,8 +82,6 @@
 	"preventScreenLock": "Chặn khoá màn hình",
 	"translateWhenPressingEnter": "Dịch khi nhấn Enter",
 	"realtime": "Dịch thời gian thực",
-	"chinaMode": "Chế độ Trung Quốc",
-	"chinaModeDesc": "Nếu chế độ này được bật, Translatium sẽ chuyển dữ liệu đến và đi từ Google Dịch thông qua tên miền google.cn thay vì google.com.",
 
 	"translations" : "Bản dịch",
 	"definitions" : "Định nghĩa",
