@@ -1,6 +1,6 @@
 {
   "name": "translatium",
-  "description": "Translator app for Mac & PC.",
+  "description": "Google Translate client for macOS & Windows",
   "version": "7.10.0",
   "main": "public/electron.js",
   "repository": "https://github.com/quanglam2807/translatium",
