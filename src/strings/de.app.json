@@ -49,13 +49,6 @@
 	"displayTextOnly": "Zeige nur Text",
 	"phrasebookIsEmpty": "Phrasebook ist leer.",
 
-	"removeAds": "Werbung entfernen",
-	"restorePurchase": "Kauf wiederherstellen",
-	"restorePurchaseDesc": "Falls du die App vor dem 15. Mai 2017 gekauft hast, kannst du die Werbung gratis entfernen.",
-	"notQualified": "Du erfüllst nicht die Voraussetzungen, um die Werbung gratis zu entfernen.",
-	"somethingWentWrong": "Etwas ist schief gelaufen. Bitte versuche es erneut.",
-	"activated": "Aktiviert. Vielen Dank für deine Unterstützung!",
-
 	"delete": "Entfernen",
 	"spaceBar": "Leertaste",
 	"done": "Fertig",
@@ -99,14 +92,6 @@
 
 	"rateMacAppStore": "Translatium im Mac App Store bewerten",
 	"rateWindowsStore": "Translatium im Microsoft Store bewerten",
-
-	"enjoy": "Magst du Translatium?",
-	"notReally": "Nicht wirklich",
-	"yes": "Ja!",
-	"howAboutRating": "Wie wäre es dann mit einer 5 Sterne Bewertung?",
-	"noThanks": "Nein, danke",
-	"okSure": "Ja, klar",
-	"wouldYouMindGivingFeedback": "Würde es dir etwas ausmachen, uns etwas Feedback zu geben?",
 
 	"displayLanguage": "Zeige Sprachen",
 	"change": "Ändern",

@@ -49,13 +49,6 @@
 	"displayTextOnly": "Display text only",
 	"phrasebookIsEmpty": "Phrasebook is empty.",
 
-	"removeAds": "Remove ads",
-	"restorePurchase": "Restore purchase",
-	"restorePurchaseDesc": "If you bought the app before May 15th 2017, you can remove ads for free.",
-	"notQualified": "You are not qualified to remove ads for free.",
-	"somethingWentWrong": "Something went wrong. Please try again.",
-	"activated": "Activated. Thank you for supporting the app!",
-
 	"delete": "Delete",
 	"spaceBar": "Space bar",
 	"done": "Done",
@@ -99,14 +92,6 @@
 
 	"rateMacAppStore": "Rate Translatium on Mac App Store",
 	"rateWindowsStore": "Rate Translatium on Windows Store",
-
-	"enjoy": "Enjoy Translatium?",
-	"notReally": "Not really",
-	"yes": "Yes!",
-	"howAboutRating": "How about a 5-star rating, then?",
-	"noThanks": "No, thanks",
-	"okSure": "OK, sure",
-	"wouldYouMindGivingFeedback": "Would you mind giving us some feedback?",
 
 	"displayLanguage": "Display language",
 	"change": "Change",

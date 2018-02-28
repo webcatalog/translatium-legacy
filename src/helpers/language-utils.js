@@ -135,8 +135,11 @@ export const isInput = lang => !(data.all.indexOf(lang) > -1);
 export const isOutput = lang => !(data.outputNotSupported.indexOf(lang) > -1);
 
 // Check if language supports Voice recognition
-export const isVoiceRecognitionSupported = lang =>
-  (data.voiceRecognitionSupported.indexOf(toCountryRemovedLanguage(lang)) > -1);
+export const isVoiceRecognitionSupported = (lang) => {
+  if (lang === 'zh-YUE') return false;
+
+  return (data.voiceRecognitionSupported.indexOf(toCountryRemovedLanguage(lang)) > -1);
+};
 
 // Check if language supports Text-to-speech
 export const isTtsSupported = lang =>

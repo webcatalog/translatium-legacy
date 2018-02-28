@@ -49,13 +49,6 @@
 	"displayTextOnly": "Chỉ hiển thị chữ",
 	"phrasebookIsEmpty": "Sổ từ ngữ còn trống.",
 
-	"removeAds": "Xoá quảng cáo",
-	"restorePurchase": "Phục hồi bản quyền",
-	"restorePurchaseDesc": "Nếu bạn đã mua ứng dụng trước ngày 15 tháng 5 2017, bạn có thể xoá quảng cáo miễn phí.",
-	"notQualified": "Bạn không đủ điều kiện để xoá quảng cáo miễn phí.",
-	"somethingWentWrong": "Đã xảy ra sự cố. Vui lòng thử lại.",
-	"activated": "Đã kích hoạt. Cảm ơn bạn đã hỗ trợ ứng dụng!",
-
 	"delete": "Xoá",
 	"spaceBar": "",
 	"done": "Xong",
@@ -99,14 +92,6 @@
 
 	"rateMacAppStore": "Đánh giá Translatium trên Mac App Store",
 	"rateWindowsStore": "Đánh giá Translatium trên Windows Store",
-
-	"enjoy": "Thích Translatium?",
-	"notReally": "Không hẳn",
-	"yes": "Đúng vậy!",
-	"howAboutRating": "Vậy bạn có thể cho chúng tôi một đánh giá 5 sao, được chứ?",
-	"noThanks": "Không, cảm ơn",
-	"okSure": "OK, tất nhiên",
-	"wouldYouMindGivingFeedback": "Bạn có thể cho chúng tôi một vài góp ý không?",
 
 	"displayLanguage": "Ngôn ngữ hiển thị",
 	"change": "Thay đổi",
