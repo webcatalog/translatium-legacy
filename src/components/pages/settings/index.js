@@ -1,4 +1,4 @@
-/* global remote */
+/* global remote Windows */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -114,6 +114,16 @@ const dockAndMenubarOpts = [
   'onlyShowOnDock',
   'onlyShowOnMenubar',
 ];
+
+const getVersion = () => {
+  if (getPlatform() === 'windows') {
+    // https://stackoverflow.com/a/28635481
+    const version = Windows.ApplicationModel.Package.current.id.version;
+    return `${version.major}.${version.minor}.${version.build}.${version.revision})`;
+  }
+
+  return remote.app.getVersion();
+};
 
 const Settings = (props) => {
   const {
@@ -395,7 +405,7 @@ const Settings = (props) => {
         <Paper className={classes.paperAbout}>
           <Typography type="title" className={classes.title}>Translatium</Typography>
           <Typography type="body1" className={classes.version}>
-            Version {process.env.REACT_APP_VERSION}
+            Version {getVersion()}
           </Typography>
 
           {getPlatform() === 'windows' && (
