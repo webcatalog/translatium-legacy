@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="55974nhutquang97.5translate" Version="2018.113.0.0" Publisher="CN=C635F506-DEEB-41A4-8CAA-16689F486ED2" />
+  <Identity Name="55974nhutquang97.5translate" Version="2018.228.0.0" Publisher="CN=quanglam2807" />
   <mp:PhoneIdentity PhoneProductId="4cc6ac49-5fbd-4618-8742-9bd3255091b0" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Translatium Translator</DisplayName>

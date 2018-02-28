@@ -119,7 +119,7 @@ const getVersion = () => {
   if (getPlatform() === 'windows') {
     // https://stackoverflow.com/a/28635481
     const version = Windows.ApplicationModel.Package.current.id.version;
-    return `${version.major}.${version.minor}.${version.build}.${version.revision})`;
+    return `${version.major}.${version.minor}.${version.build}.${version.revision}`;
   }
 
   return remote.app.getVersion();

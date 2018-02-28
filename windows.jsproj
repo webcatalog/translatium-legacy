@@ -52,8 +52,8 @@
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en</DefaultLanguage>
-    <PackageCertificateKeyFile>windows_StoreKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>7F15C190BEE5EF2C5F8CD114229F9A509BBF8659</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>windows_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>2AA77F6CDFB57A94C55FE75C5CE4795F694DC744</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
@@ -104,9 +104,8 @@
     <Content Include="build-resources\windows-images\Wide310x150.scale-200.png" />
     <Content Include="build-resources\windows-images\Wide310x150.scale-400.png" />
     <Content Include="build\**\**" />
-    <None Include="windows_StoreKey.pfx" />
-    <None Include="Package.StoreAssociation.xml" />
     <None Include="windows_TemporaryKey.pfx" />
+    <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <!-- To modify your build process, add your task inside one of the targets below then uncomment
