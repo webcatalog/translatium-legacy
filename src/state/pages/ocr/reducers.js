@@ -1,6 +1,4 @@
-import {
-  UPDATE_OCR,
-} from '../../../constants/actions';
+import { UPDATE_OCR } from '../../../constants/actions';
 
 const initialState = null;
 

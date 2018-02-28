@@ -13,23 +13,21 @@ import Switch from 'material-ui/Switch';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 
-import connectComponent from '../../helpers/connect-component';
+import connectComponent from '../../../helpers/connect-component';
 
 import EnhancedMenu from '../enhanced-menu';
 
-import { toggleSetting, updateSetting } from '../../state/root/settings/actions';
-import { updateStrings } from '../../state/root/strings/actions';
-import { openShortcutDialog } from '../../state/pages/settings/shortcut-dialog/actions';
+import { toggleSetting, updateSetting } from '../../../state/root/settings/actions';
+import { updateStrings } from '../../../state/root/strings/actions';
+import { openShortcutDialog } from '../../../state/pages/settings/shortcut-dialog/actions';
 
-import colorPairs from '../../constants/colors';
-import displayLanguages from '../../constants/display-languages';
+import colorPairs from '../../../constants/colors';
+import displayLanguages from '../../../constants/display-languages';
 
-import logoPng from '../../assets/logo.png';
+import getPlatform from '../../../helpers/get-platform';
+import openUri from '../../../helpers/open-uri';
 
-import getPlatform from '../../helpers/get-platform';
-import openUri from '../../helpers/open-uri';
-
-import { runApp } from '../..';
+import { runApp } from '../../..';
 
 import DialogShortcut from './dialog-shortcut';
 
@@ -395,7 +393,6 @@ const Settings = (props) => {
           {strings.about}
         </Typography>
         <Paper className={classes.paperAbout}>
-          <img src={logoPng} alt="Translatium" className={classes.icon} />
           <Typography type="title" className={classes.title}>Translatium</Typography>
           <Typography type="body1" className={classes.version}>
             Version {process.env.REACT_APP_VERSION}
@@ -417,17 +414,10 @@ const Settings = (props) => {
               <br />
             </React.Fragment>
           )}
-          <Button onClick={() => openUri('https://quang.im/translatium/support')}>
-            {strings.help}
-          </Button>
-          <br />
           <Button onClick={() => openUri('https://quang.im/translatium')}>
             {strings.website}
           </Button>
           <br />
-          <Button onClick={() => openUri('https://github.com/quanglam2807/translatium')}>
-            GitHub
-          </Button>
 
           <Typography type="body1" className={classes.madeBy}>
             <span>Made with </span>

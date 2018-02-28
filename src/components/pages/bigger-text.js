@@ -8,9 +8,9 @@ import CloseIcon from 'material-ui-icons/Close';
 import ZoomInIcon from 'material-ui-icons/ZoomIn';
 import ZoomOutIcon from 'material-ui-icons/ZoomOut';
 
-import connectComponent from '../helpers/connect-component';
+import connectComponent from '../../helpers/connect-component';
 
-import { updateSetting } from '../state/root/settings/actions';
+import { updateSetting } from '../../state/root/settings/actions';
 
 const styles = {
   container: {

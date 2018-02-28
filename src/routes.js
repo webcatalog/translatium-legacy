@@ -2,14 +2,14 @@ import React from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import App from './app';
+import App from './components/app';
 
-import Home from './pages/home';
-import Phrasebook from './pages/phrasebook';
-import Settings from './pages/settings';
-import LanguageList from './pages/language-list';
-import Ocr from './pages/ocr';
-import BiggerText from './pages/bigger-text';
+import Home from './components/pages/home';
+import Phrasebook from './components/pages/phrasebook';
+import Settings from './components/pages/settings';
+import LanguageList from './components/pages/language-list';
+import Ocr from './components/pages/ocr';
+import BiggerText from './components/pages/bigger-text';
 
 
 const renderRoutes = (store) => {

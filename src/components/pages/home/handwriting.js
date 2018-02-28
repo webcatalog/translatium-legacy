@@ -5,14 +5,14 @@ import Paper from 'material-ui/Paper';
 import Chip from 'material-ui/Chip';
 import Button from 'material-ui/Button';
 
-import connectComponent from '../../helpers/connect-component';
+import connectComponent from '../../../helpers/connect-component';
 
-import { updateInputText, updateImeMode } from '../../state/pages/home/actions';
-import { loadSuggestions, resetSuggestions } from '../../state/pages/home/handwriting/actions';
+import { updateInputText, updateImeMode } from '../../../state/pages/home/actions';
+import { loadSuggestions, resetSuggestions } from '../../../state/pages/home/handwriting/actions';
 
-import getPlatform from '../../helpers/get-platform';
-import insertAtCursor from '../../helpers/insert-at-cursor';
-import deleteAtCursor from '../../helpers/delete-at-cursor';
+import getPlatform from '../../../helpers/get-platform';
+import insertAtCursor from '../../../helpers/insert-at-cursor';
+import deleteAtCursor from '../../../helpers/delete-at-cursor';
 
 const styles = {
   container: {

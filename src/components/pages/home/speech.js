@@ -10,12 +10,12 @@ import { CircularProgress } from 'material-ui/Progress';
 import AVMic from 'material-ui-icons/Mic';
 import AVStop from 'material-ui-icons/Stop';
 
-import connectComponent from '../../helpers/connect-component';
+import connectComponent from '../../../helpers/connect-component';
 
-import { updateImeMode } from '../../state/pages/home/actions';
-import { releaseDevice, startRecording, stopRecording } from '../../state/pages/home/speech/actions';
+import { updateImeMode } from '../../../state/pages/home/actions';
+import { releaseDevice, startRecording, stopRecording } from '../../../state/pages/home/speech/actions';
 
-import getPlatform from '../../helpers/get-platform';
+import getPlatform from '../../../helpers/get-platform';
 
 const styles = theme => ({
   container: {

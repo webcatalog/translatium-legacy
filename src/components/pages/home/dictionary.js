@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import Divider from 'material-ui/Divider';
 import Typography from 'material-ui/Typography';
 
-import connectComponent from '../../helpers/connect-component';
+import connectComponent from '../../../helpers/connect-component';
 
-import { updateInputLang, updateOutputLang } from '../../state/root/settings/actions';
-import { updateInputText } from '../../state/pages/home/actions';
+import { updateInputLang, updateOutputLang } from '../../../state/root/settings/actions';
+import { updateInputText } from '../../../state/pages/home/actions';
 
 const styles = {
   container: {

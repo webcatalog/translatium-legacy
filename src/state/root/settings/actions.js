@@ -1,6 +1,4 @@
-import {
-  UPDATE_SETTING, UPDATE_OUTPUT,
-} from '../../../constants/actions';
+import { UPDATE_SETTING, UPDATE_OUTPUT } from '../../../constants/actions';
 
 import { isOutput } from '../../../helpers/language-utils';
 

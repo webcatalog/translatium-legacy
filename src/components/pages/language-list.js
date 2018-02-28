@@ -14,18 +14,18 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import grey from 'material-ui/colors/grey';
 
-import connectComponent from '../helpers/connect-component';
+import connectComponent from '../../helpers/connect-component';
 
-import getPlatform from '../helpers/get-platform';
+import getPlatform from '../../helpers/get-platform';
 
 import {
   getInputLanguages,
   getOutputLanguages,
   getOcrSupportedLanguages,
-} from '../helpers/language-utils';
+} from '../../helpers/language-utils';
 
-import { updateInputLang, updateOutputLang } from '../state/root/settings/actions';
-import { updateLanguageListSearch } from '../state/pages/language-list/actions';
+import { updateInputLang, updateOutputLang } from '../../state/root/settings/actions';
+import { updateLanguageListSearch } from '../../state/pages/language-list/actions';
 
 const styles = theme => ({
   container: {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Menu from 'material-ui/Menu';
 
-import connectComponent from '../helpers/connect-component';
+import connectComponent from '../../helpers/connect-component';
 
 const styles = {
   container: {

@@ -11,15 +11,15 @@ import Paper from 'material-ui/Paper';
 import Snackbar from 'material-ui/Snackbar';
 import ToggleStar from 'material-ui-icons/Star';
 
-import connectComponent from './helpers/connect-component';
+import connectComponent from '../helpers/connect-component';
 
-import { screenResize } from './state/root/screen/actions';
-import { updateImeMode } from './state/pages/home/actions';
-import { closeSnackbar } from './state/root/snackbar/actions';
+import { screenResize } from '../state/root/screen/actions';
+import { updateImeMode } from '../state/pages/home/actions';
+import { closeSnackbar } from '../state/root/snackbar/actions';
 
-import colorPairs from './constants/colors';
+import colorPairs from '../constants/colors';
 
-import getPlatform from './helpers/get-platform';
+import getPlatform from '../helpers/get-platform';
 
 import Alert from './root/alert';
 

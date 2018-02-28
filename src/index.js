@@ -8,11 +8,11 @@ import createPalette from 'material-ui/styles/createPalette';
 import red from 'material-ui/colors/red';
 import pink from 'material-ui/colors/pink';
 
+import 'typeface-roboto/index.css';
+
 import './main.css';
-import './fonts/roboto.css';
 
 import store from './state/reducers';
-import { updateSetting } from './state/root/settings/actions';
 import { updateInputText } from './state/pages/home/actions';
 import { updateStrings } from './state/root/strings/actions';
 
@@ -25,9 +25,6 @@ import colorPairs from './constants/colors';
 export const runApp = (isRestart) => {
   /* global document */
   const state = store.getState();
-  const launchCount = state.settings.launchCount;
-  store.dispatch(updateSetting('launchCount', launchCount + 1));
-
 
   if (getPlatform() === 'electron' && !isRestart) {
     // Mock user agent

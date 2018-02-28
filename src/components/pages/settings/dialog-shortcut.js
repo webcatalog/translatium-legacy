@@ -9,20 +9,16 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog';
 
-import connectComponent from '../../helpers/connect-component';
+import connectComponent from '../../../helpers/connect-component';
 
-import getPlatform from '../../helpers/get-platform';
+import getPlatform from '../../../helpers/get-platform';
 
 import {
   closeShortcutDialog,
   setCombinator,
-} from '../../state/pages/settings/shortcut-dialog/actions';
-import {
-  updateSetting,
-} from '../../state/root/settings/actions';
-import {
-  defaultState as defaultSettings,
-} from '../../state/root/settings/reducers';
+} from '../../../state/pages/settings/shortcut-dialog/actions';
+import { updateSetting } from '../../../state/root/settings/actions';
+import { defaultState as defaultSettings } from '../../../state/root/settings/reducers';
 
 const styles = {
   combinatorContainer: {

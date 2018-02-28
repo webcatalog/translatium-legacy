@@ -10,15 +10,15 @@ import IconButton from 'material-ui/IconButton';
 import ZoomInIcon from 'material-ui-icons/ZoomIn';
 import ZoomOutIcon from 'material-ui-icons/ZoomOut';
 
-import connectComponent from '../helpers/connect-component';
+import connectComponent from '../../helpers/connect-component';
 
 import EnhancedMenu from './enhanced-menu';
 
-import { setZoomLevel, setMode } from '../state/pages/ocr/actions';
-import { loadOutput } from '../state/pages/home/actions';
-import { openSnackbar } from '../state/root/snackbar/actions';
+import { setZoomLevel, setMode } from '../../state/pages/ocr/actions';
+import { loadOutput } from '../../state/pages/home/actions';
+import { openSnackbar } from '../../state/root/snackbar/actions';
 
-import copyToClipboard from '../helpers/copy-to-clipboard';
+import copyToClipboard from '../../helpers/copy-to-clipboard';
 
 const styles = {
   container: {

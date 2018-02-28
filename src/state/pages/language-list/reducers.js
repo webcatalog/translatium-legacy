@@ -1,6 +1,4 @@
-import {
-  UPDATE_LANGUAGE_LIST_SEARCH,
-} from '../../../constants/actions';
+import { UPDATE_LANGUAGE_LIST_SEARCH } from '../../../constants/actions';
 
 const initialState = {
   search: '',

@@ -1,19 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { replace } from 'react-router-redux';
 
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
 import { LinearProgress } from 'material-ui/Progress';
 import IconButton from 'material-ui/IconButton';
 import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
-import ActionDelete from 'material-ui-icons/Delete';
+import ToggleStar from 'material-ui-icons/Star';
 import Divider from 'material-ui/Divider';
 import Tooltip from 'material-ui/Tooltip';
 
 import connectComponent from '../../helpers/connect-component';
 
-import { deleteHistoryItem, loadHistory } from '../../state/pages/home/history/actions';
+import { deletePhrasebookItem, loadPhrasebook } from '../../state/pages/phrasebook/actions';
 import { loadOutput } from '../../state/pages/home/actions';
 
-const styles = {
+const styles = theme => ({
+  emptyContainer: {
+    flex: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  emptyInnerContainer: {
+    textAlign: 'center',
+  },
+  bigIcon: {
+    height: 96,
+    width: 96,
+    color: theme.palette.text.primary,
+  },
   container: {
     flex: 1,
     display: 'flex',
@@ -31,20 +49,19 @@ const styles = {
   progress: {
     marginTop: 12,
   },
-};
+});
 
-class History extends React.Component {
+class Phrasebook extends React.Component {
   componentDidMount() {
-    const { onEnterHistory, onLoadMore } = this.props;
+    const { onEnterPhrasebook, onLoadMore } = this.props;
 
-    onEnterHistory();
+    onEnterPhrasebook();
 
     if (this.listView) {
       this.listView.onscroll = () => {
         const { scrollTop, clientHeight, scrollHeight } = this.listView;
-
         if (scrollTop + clientHeight > scrollHeight - 200) {
-          if (this.props.canLoadMore === true && this.props.historyLoading === false) {
+          if (this.props.canLoadMore === true && this.props.phrasebookLoading === false) {
             onLoadMore();
           }
         }
@@ -59,27 +76,39 @@ class History extends React.Component {
   render() {
     const {
       classes,
-      historyItems,
-      historyLoading,
+      phrasebookItems,
+      phrasebookLoading,
+      strings,
       onDeleteButtonClick,
       onItemClick,
-      strings,
     } = this.props;
 
     return (
       <div className={classes.container}>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography type="title" color="inherit">{strings.phrasebook}</Typography>
+          </Toolbar>
+        </AppBar>
         {(() => {
-          if (historyItems.length < 1 && historyLoading === false) {
-            return null;
+          if (phrasebookItems.length < 1 && phrasebookLoading === false) {
+            return (
+              <div className={classes.emptyContainer}>
+                <div className={classes.emptyInnerContainer}>
+                  <ToggleStar className={classes.bigIcon} />
+                  <Typography type="headline">{strings.phrasebookIsEmpty}</Typography>
+                </div>
+              </div>
+            );
           }
 
           return (
             <div className={classes.listContainer} ref={(c) => { this.listView = c; }}>
               <List>
-                {historyItems.map(item => [(
+                {phrasebookItems.map(item => [(
                   <ListItem
                     button
-                    key={`historyItem_${item.historyId}`}
+                    key={`phrasebookItem_${item.phrasebookId}`}
                     onClick={() => onItemClick(item)}
                   >
                     <ListItemText
@@ -89,22 +118,22 @@ class History extends React.Component {
                     <ListItemSecondaryAction>
                       <Tooltip title={strings.remove} placement="left">
                         <IconButton
-                          aria-label={strings.remove}
+                          aria-label={strings.removeFromPhrasebook}
                           onClick={() => {
                             onDeleteButtonClick(
-                              item.historyId,
+                              item.phrasebookId,
                               item.rev,
                             );
                           }}
                         >
-                          <ActionDelete />
+                          <ToggleStar />
                         </IconButton>
                       </Tooltip>
                     </ListItemSecondaryAction>
                   </ListItem>
-                ), <Divider inset={false} key="divider" />])}
+                ), <Divider inset={false} />])}
               </List>
-              {historyLoading && (
+              {phrasebookLoading && (
                 <LinearProgress mode="indeterminate" className={classes.progress} />
               )}
             </div>
@@ -115,34 +144,37 @@ class History extends React.Component {
   }
 }
 
-History.propTypes = {
+Phrasebook.propTypes = {
   canLoadMore: PropTypes.bool,
   classes: PropTypes.object.isRequired,
-  historyItems: PropTypes.arrayOf(PropTypes.object),
-  historyLoading: PropTypes.bool,
   onDeleteButtonClick: PropTypes.func.isRequired,
-  onEnterHistory: PropTypes.func.isRequired,
+  onEnterPhrasebook: PropTypes.func.isRequired,
   onItemClick: PropTypes.func.isRequired,
   onLoadMore: PropTypes.func.isRequired,
+  phrasebookItems: PropTypes.arrayOf(PropTypes.object),
+  phrasebookLoading: PropTypes.bool,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 const mapStateToProps = state => ({
-  historyItems: state.pages.home.history.items,
-  canLoadMore: state.pages.home.history.canLoadMore,
-  historyLoading: state.pages.home.history.loading,
+  phrasebookItems: state.pages.phrasebook.items,
+  canLoadMore: state.pages.phrasebook.canLoadMore,
+  phrasebookLoading: state.pages.phrasebook.loading,
   strings: state.strings,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onItemClick: output => dispatch(loadOutput(output)),
-  onDeleteButtonClick: (id, rev) => dispatch(deleteHistoryItem(id, rev)),
-  onEnterHistory: () => dispatch(loadHistory(true)),
-  onLoadMore: () => dispatch(loadHistory()),
+  onItemClick: (output) => {
+    dispatch(loadOutput(output));
+    dispatch(replace('/'));
+  },
+  onDeleteButtonClick: (id, rev) => dispatch(deletePhrasebookItem(id, rev)),
+  onEnterPhrasebook: () => dispatch(loadPhrasebook(true)),
+  onLoadMore: () => dispatch(loadPhrasebook()),
 });
 
 export default connectComponent(
-  History,
+  Phrasebook,
   mapStateToProps,
   mapDispatchToProps,
   styles,

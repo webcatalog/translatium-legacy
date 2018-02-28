@@ -11,7 +11,7 @@ const addBom = (filePath) => {
     || buff[0].toString(16).toLowerCase() !== 'ef'
     || buff[1].toString(16).toLowerCase() !== 'bb'
     || buff[2].toString(16).toLowerCase() !== 'bf') {
-    const bom = new Buffer([0xEF, 0xBB, 0xBF]);
+    const bom = Buffer.from([0xEF, 0xBB, 0xBF]);
     buff = bom + buff;
     fs.writeFile(filePath, buff.toString(), 'utf8', (err) => {
       if (err) throw err;

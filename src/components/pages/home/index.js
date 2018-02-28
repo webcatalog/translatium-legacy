@@ -35,7 +35,7 @@ import NavigationFullscreen from 'material-ui-icons/Fullscreen';
 import NavigationFullscreenExit from 'material-ui-icons/FullscreenExit';
 import Tooltip from 'material-ui/Tooltip';
 
-import connectComponent from '../../helpers/connect-component';
+import connectComponent from '../../../helpers/connect-component';
 
 import EnhancedMenu from '../enhanced-menu';
 
@@ -46,30 +46,29 @@ import {
   isHandwritingSupported,
   isOcrSupported,
   toCountryRemovedLanguage,
-} from '../../helpers/language-utils';
+} from '../../../helpers/language-utils';
 
-import { loadImage } from '../../state/pages/ocr/actions';
-import { playTextToSpeech, stopTextToSpeech } from '../../state/pages/home/text-to-speech/actions';
-import { openSnackbar } from '../../state/root/snackbar/actions';
+import { loadImage } from '../../../state/pages/ocr/actions';
+import { playTextToSpeech, stopTextToSpeech } from '../../../state/pages/home/text-to-speech/actions';
+import { openSnackbar } from '../../../state/root/snackbar/actions';
 import {
   swapLanguages,
   updateInputLang,
   updateOutputLang,
-} from '../../state/root/settings/actions';
+} from '../../../state/root/settings/actions';
 import {
-  askIfEnjoy,
   insertInputText,
   toggleFullscreenInputBox,
   togglePhrasebook,
   translate,
   updateImeMode,
   updateInputText,
-} from '../../state/pages/home/actions';
+} from '../../../state/pages/home/actions';
 
-import getPlatform from '../../helpers/get-platform';
-import copyToClipboard from '../../helpers/copy-to-clipboard';
-import pasteFromClipboardAsync from '../../helpers/paste-from-clipboard-async';
-import shareText from '../../helpers/share-text';
+import getPlatform from '../../../helpers/get-platform';
+import copyToClipboard from '../../../helpers/copy-to-clipboard';
+import pasteFromClipboardAsync from '../../../helpers/paste-from-clipboard-async';
+import shareText from '../../../helpers/share-text';
 
 import Dictionary from './dictionary';
 import Handwriting from './handwriting';
@@ -177,9 +176,7 @@ class Home extends React.Component {
     }
 
     const {
-      launchCount,
       onAnotherContainerClick,
-      onAskIfEnjoy,
       onCameraButtonClick,
       onClearButtonClick,
       onLanguageClick,
@@ -207,10 +204,6 @@ class Home extends React.Component {
       ipcRenderer.on('set-input-text', (e, text) => {
         onUpdateInputText(text);
       });
-    }
-
-    if (launchCount >= 5) {
-      onAskIfEnjoy();
     }
 
     Mousetrap.bind(openInputLangListShortcut, (e) => {
@@ -767,9 +760,7 @@ Home.propTypes = {
   imeMode: PropTypes.string,
   inputLang: PropTypes.string,
   inputText: PropTypes.string,
-  launchCount: PropTypes.number,
   onAnotherContainerClick: PropTypes.func.isRequired,
-  onAskIfEnjoy: PropTypes.func.isRequired,
   onBiggerTextButtonClick: PropTypes.func.isRequired,
   onCameraButtonClick: PropTypes.func.isRequired,
   onClearButtonClick: PropTypes.func.isRequired,
@@ -821,7 +812,6 @@ const mapStateToProps = state => ({
   imeMode: state.pages.home.imeMode,
   textToSpeechPlaying: state.pages.home.textToSpeech.textToSpeechPlaying,
   fullscreenInputBox: state.pages.home.fullscreenInputBox,
-  launchCount: state.settings.launchCount,
   strings: state.strings,
 
   cameraShortcut: state.settings.cameraShortcut,
@@ -897,7 +887,6 @@ const mapDispatchToProps = dispatch => ({
     copyToClipboard(text);
     dispatch(openSnackbar(strings.copied));
   },
-  onAskIfEnjoy: askIfEnjoy,
 });
 
 export default connectComponent(

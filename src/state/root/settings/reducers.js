@@ -11,7 +11,6 @@ export const defaultState = {
   dockAndMenubar: 'showOnBothDockAndMenubar',
   inputLang: 'en',
   langId: getDefaultLangId(),
-  launchCount: 0,
   outputLang: 'zh',
   preventScreenLock: false,
   primaryColorId: 'green',
