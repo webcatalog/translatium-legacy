@@ -74,6 +74,9 @@
 	"preventScreenLock": "Prevent screen lock",
 	"translateWhenPressingEnter": "Translate when pressing Enter",
 	"realtime": "Real-time translation",
+	"chinaMode": "China Mode",
+	"chinaModeDesc": "If this mode is turned on, Translatium will transmit data to and from Google Translate through domain google.cn instead of google.com.",
+
 
 	"translations" : "Translations",
 	"definitions" : "Definitions",

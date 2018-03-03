@@ -3,9 +3,9 @@
 import getPlatform from './get-platform';
 import winXhr from './win-xhr';
 
-const getGoogleTkk = () => {
+const getGoogleTkk = (chinaMode) => {
   if (sessionStorage.getItem('googleTkk') == null) {
-    const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || 'https://translate.google.com';
+    const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || (chinaMode ? 'https://translate.google.cn' : 'https://translate.google.com');
 
     const uri = `${endpoint}/m/translate`;
 
@@ -55,8 +55,8 @@ const generateB = (a, b) => {
 };
 /* eslint-enable */
 
-const generateGoogleTranslateToken = a =>
-  getGoogleTkk()
+const generateGoogleTranslateToken = (a, chinaMode) =>
+  getGoogleTkk(chinaMode)
     .then((tkk) => {
       /* eslint-disable */
       for (var e = tkk.split("."), h = Number(e[0]) || 0, g = [], d = 0, f = 0; f < a.length; f++) {
