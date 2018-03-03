@@ -1,10 +1,10 @@
 import translateText from './translate-text';
 
-const translateArray = (inputLang, outputLang, inputArr) =>
+const translateArray = (inputLang, outputLang, inputArr, chinaMode) =>
   Promise.resolve()
     .then(() => {
       const inputText = inputArr.join('\n');
-      return translateText(inputLang, outputLang, inputText);
+      return translateText(inputLang, outputLang, inputText, chinaMode);
     })
     .then(({ outputText }) => ({
       outputText,

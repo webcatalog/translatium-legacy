@@ -260,14 +260,14 @@ class Home extends React.Component {
     Mousetrap.bind(drawShortcut, (e) => {
       e.preventDefault();
 
-      const { imeMode, inputLang } = this.props;
+      const { chinaMode, imeMode, inputLang } = this.props;
 
       if (imeMode === 'handwriting') {
         onAnotherContainerClick(imeMode);
         return;
       }
 
-      if (isHandwritingSupported(inputLang)) {
+      if (isHandwritingSupported(inputLang) && !chinaMode) {
         onWriteButtonClick();
       }
     });
@@ -545,6 +545,7 @@ class Home extends React.Component {
 
   render() {
     const {
+      chinaMode,
       classes,
       fullscreenInputBox,
       imeMode,
@@ -608,7 +609,7 @@ class Home extends React.Component {
       });
     }
 
-    if (isHandwritingSupported(inputLang)) {
+    if (isHandwritingSupported(inputLang) && !chinaMode) {
       controllers.push({
         icon: <ContentGesture />,
         tooltip: strings.draw,
@@ -755,6 +756,7 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
+  chinaMode: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   fullscreenInputBox: PropTypes.bool,
   imeMode: PropTypes.string,
@@ -812,6 +814,7 @@ const mapStateToProps = state => ({
   imeMode: state.pages.home.imeMode,
   textToSpeechPlaying: state.pages.home.textToSpeech.textToSpeechPlaying,
   fullscreenInputBox: state.pages.home.fullscreenInputBox,
+  chinaMode: state.settings.chinaMode,
   strings: state.strings,
 
   cameraShortcut: state.settings.cameraShortcut,

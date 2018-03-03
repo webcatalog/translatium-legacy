@@ -127,6 +127,7 @@ const getVersion = () => {
 
 const Settings = (props) => {
   const {
+    chinaMode,
     classes,
     darkMode,
     dockAndMenubar,
@@ -352,6 +353,18 @@ const Settings = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
+            <ListItem>
+              <ListItemText
+                primary={strings.chinaMode}
+                secondary={strings.chinaModeDesc}
+              />
+              <ListItemSecondaryAction>
+                <Switch
+                  checked={chinaMode}
+                  onChange={() => onToggle('chinaMode')}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
           </List>
         </Paper>
 
@@ -449,6 +462,7 @@ const Settings = (props) => {
 };
 
 Settings.propTypes = {
+  chinaMode: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   darkMode: PropTypes.bool.isRequired,
   dockAndMenubar: PropTypes.oneOf(dockAndMenubarOpts).isRequired,
@@ -478,6 +492,7 @@ Settings.propTypes = {
 };
 
 const mapStateToProps = state => ({
+  chinaMode: state.settings.chinaMode,
   darkMode: state.settings.darkMode,
   dockAndMenubar: state.settings.dockAndMenubar,
   langId: state.settings.langId,
