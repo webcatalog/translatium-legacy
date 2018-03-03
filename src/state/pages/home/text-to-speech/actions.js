@@ -8,10 +8,10 @@ import { openAlert } from '../../../root/alert/actions';
 let player = null;
 let currentTimestamp;
 
-const textToSpeechShortText = (lang, text, idx, total) =>
+const textToSpeechShortText = (lang, text, idx, total, chinaMode) =>
   generateGoogleTranslateToken(text)
     .then((token) => {
-      const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || 'https://translate.google.com';
+      const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || (chinaMode ? 'https://translate.google.cn' : 'https://translate.google.com');
 
       const uri = encodeURI(`${endpoint}/translate_tts?ie=UTF-8&tl=${lang}`
         + `&q=${text}&textlen=${text.length}&idx=${idx}&total=${total}`
@@ -26,7 +26,7 @@ const textToSpeechShortText = (lang, text, idx, total) =>
       });
     });
 
-export const playTextToSpeech = (textToSpeechLang, textToSpeechText) => ((dispatch) => {
+export const playTextToSpeech = (textToSpeechLang, textToSpeechText) => ((dispatch, getState) => {
   if (textToSpeechText.length < 1) return;
 
   dispatch({ type: PLAY_TEXT_TO_SPEECH, textToSpeechLang, textToSpeechText });
@@ -62,7 +62,8 @@ export const playTextToSpeech = (textToSpeechLang, textToSpeechText) => ((dispat
           return null;
         }
 
-        return textToSpeechShortText(textToSpeechLang, strArr[i], i, strArr.length)
+        const { chinaMode } = getState().settings;
+        return textToSpeechShortText(textToSpeechLang, strArr[i], i, strArr.length, chinaMode)
           .then(() => {
             if (i < strArr.length - 1) {
               i += 1;
