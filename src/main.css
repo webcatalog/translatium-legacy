@@ -1,0 +1,204 @@
+* {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.text-selectable {
+  user-select: text;
+  -webkit-user-select: text;
+  -webkit-touch-callout: default;
+  cursor: text;
+}
+
+a {
+  color: #ff4081;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+html, body, #app {
+  height: 100vh;
+  width: 100vw;
+}
+
+* {
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 400;
+}
+
+a {
+  cursor: pointer;
+}
+
+body {
+  font-size: 15px;
+  line-height: 24px;
+}
+
+@-moz-keyframes change-size-2 {
+	0% {
+		height: 64px;
+		width: 64px;
+	}
+
+	50% {
+		height: 128px;
+		width: 128px;
+	}
+
+	100% {
+		height: 64px;
+		width: 64px;
+	}
+}
+
+@-webkit-keyframes change-size-2 {
+	0% {
+		height: 64px;
+		width: 64px;
+	}
+
+	50% {
+		height: 128px;
+		width: 128px;
+	}
+
+	100% {
+		height: 64px;
+		width: 64px;
+	}
+}
+
+@-o-keyframes change-size-2 {
+	0% {
+		height: 64px;
+		width: 64px;
+	}
+
+	50% {
+		height: 128px;
+		width: 128px;
+	}
+
+	100% {
+		height: 64px;
+		width: 64px;
+	}
+}
+
+@keyframes change-size-2 {
+	0% {
+		height: 64px;
+		width: 64px;
+	}
+
+	50% {
+		height: 128px;
+		width: 128px;
+	}
+
+	100% {
+		height: 64px;
+		width: 64px;
+	}
+}
+
+@-moz-keyframes change-size {
+	0% {
+		height: 64px;
+		width: 64px;
+		opacity: 1;
+	}
+
+	100% {
+		height: 192px;
+		width: 192px;
+		opacity: 0;
+	}
+}
+
+@-webkit-keyframes change-size {
+	0% {
+		height: 64px;
+		width: 64px;
+		opacity: 1;
+	}
+
+	100% {
+		height: 192px;
+		width: 192px;
+		opacity: 0;
+	}
+}
+
+@-o-keyframes change-size {
+	0% {
+		height: 64px;
+		width: 64px;
+		opacity: 1;
+	}
+
+	100% {
+		height: 192px;
+		width: 192px;
+		opacity: 0;
+	}
+}
+
+@keyframes change-size {
+	0% {
+		height: 64px;
+		width: 64px;
+		opacity: 1;
+	}
+
+	100% {
+		height: 192px;
+		width: 192px;
+		opacity: 0;
+	}
+}
+
+*:lang(ar),
+*:lang(dv),
+*:lang(fa),
+*:lang(he),
+*:lang(prs),
+*:lang(ps),
+*:lang(sd),
+*:lang(syr),
+*:lang(ug),
+*:lang(ur),
+*:lang(am),
+*:lang(sd),
+*:lang(ps) {
+  direction: rtl;
+}
+.background-enter {
+  transform: translate(100%);
+}
+.background-enter.background-enter-active {
+  transform: translate(0%);
+  transition: transform 1000ms ease-in-out;
+}
+.background-leave {
+  transform: translate(0%);
+}
+.background-leave.background-leave-active {
+  transform: translate(-100%);
+  transition: transform 1000ms ease-in-out;
+}
+
+[role=button], [role=link] {
+  cursor: pointer;
+}

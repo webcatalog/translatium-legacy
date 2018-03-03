@@ -1,0 +1,136 @@
+{
+	"home": "Trang chủ",
+	"phrasebook": "Sổ từ ngữ",
+	"settings": "Cài đặt",
+
+	"website": "Trang web",
+
+	"typeSomethingHere": "Nhập ở đây ...",
+
+	"clear": "Xoá",
+	"stop": "Dừng",
+	"listen": "Nghe",
+	"speak": "Nói",
+	"draw": "Vẽ",
+	"camera": "Camera",
+	"openImageFile": "Mở file ảnh",
+	"more": "Thêm",
+	"fullscreen": "Toàn màn hình",
+	"exitFullscreen": "Thoát toàn màn hình",
+	"translate": "Dịch",
+	"translateFrom": "Dịch từ",
+	"didYouMean": "Có phải ý bạn là",
+
+	"errorOccured": "Đã có lỗi xảy ra.",
+	"cannotConnectToServer": "Ứng dụng không thể kết nối với máy chủ. Vui lòng kiểm tra kết nối Internet hoặc kích hoạt Chế độ Trung Quốc nếu bạn đang ở Trung Quốc.",
+	"cannotActivateMicrophone": "Ứng dụng không thể kích hoạt micrô của bạn.",
+	"cannotOpenTheFile": "Ứng dụng không thể mở tệp bạn đã chọn.",
+	"cannotRecognizeImage": "Ứng dụng không thể nhận diện được bất kỳ văn bản nào trên ảnh bạn chọn.",
+
+	"swap": "Tráo đổi",
+	"biggerText": "Chữ lớn hơn",
+	"copy": "Sao chép",
+	"copied": "Đã chép vào Clipboard",
+	"share": "Chia sẻ",
+	"addToPhrasebook": "Thêm vào Sổ từ ngữ",
+	"removeFromPhrasebook": "Xoá khỏi Sổ từ ngữ",
+
+	"translatedByGoogle": "Dịch bởi Google.",
+
+	"fromLanguage": "từ {1}",
+
+	"chooseAnInputLanguage": "Dịch từ",
+	"chooseAnOutputLanguage": "Dịch sang",
+
+	"displayOriginalText": "Hiển thị văn bản gốc",
+	"displayTranslatedText": "Hiển thị văn bản đã dịch",
+	"copyOriginalText": "Sao chép văn bản gốc",
+	"copyTranslatedText": "Sao chép văn bản đã dịch",
+	"displayTextOnly": "Chỉ hiển thị chữ",
+	"phrasebookIsEmpty": "Sổ từ ngữ còn trống.",
+
+	"delete": "Xoá",
+	"spaceBar": "",
+	"done": "Xong",
+
+	"red": "Đỏ",
+	"pink": "Hồng",
+	"purple": "Tím",
+	"deepPurple": "Tím Đậm",
+	"indigo": "Chàm",
+	"blue": "Xanh",
+	"lightBlue": "Xanh Nhạt",
+	"cyan": "Lục Lam",
+	"teal": "Teal",
+	"green": "Xanh Lá",
+	"lightGreen": "Xanh Lá Nhạt",
+	"orange": "Cam",
+	"deepOrange": "Cam Đậm",
+	"brown": "Nâu",
+	"blueGrey": "Xám Xanh",
+
+	"darkMode": "Chế độ tối",
+	"primaryColor": "Màu chủ đạo",
+	"preventScreenLock": "Chặn khoá màn hình",
+	"translateWhenPressingEnter": "Dịch khi nhấn Enter",
+	"realtime": "Dịch thời gian thực",
+
+	"translations" : "Bản dịch",
+	"definitions" : "Định nghĩa",
+	"synonyms" : "Đồng nghĩa",
+	"examples" : "Ví dụ",
+	"seeAlso" : "Xem thêm",
+	"verb" : "Động từ",
+	"noun" : "Danh từ",
+	"pronoun" : "Đại từ",
+	"exclamation" : "Cảm thán từ",
+	"adjective" : "Tính từ",
+	"adverb" : "Trạng từ",
+	"abbreviation" : "Từ viết tắt",
+	"interjection" :	"Thán từ",
+	"preposition": "Giới từ",
+
+	"rateMacAppStore": "Đánh giá Translatium trên Mac App Store",
+	"rateWindowsStore": "Đánh giá Translatium trên Windows Store",
+
+	"displayLanguage": "Ngôn ngữ hiển thị",
+	"change": "Thay đổi",
+	"close": "Đóng",
+
+	"dockAndMenubar": "Dock và Menubar",
+	"showOnBothDockAndMenubar": "Hiển thị trên cả Dock và Menubar",
+	"onlyShowOnDock": "Chỉ hiển thị trên Dock",
+	"onlyShowOnMenubar": "Chỉ hiển thị trên Menubar",
+	"quit": "Thoát",
+
+	"appearance": "Giao diện",
+	"restartRequired": "cần khởi động lại",
+	"advanced": "Nâng cao",
+	"about": "Thông tin",
+
+	"shortcuts": "Phím tắt",
+	"openOnMenubar": "Mở Translatium trên Menubar",
+	"openInputLangList": "Chọn ngôn ngữ đầu vào",
+	"openOutputLangList": "Chọn ngôn ngữ đầu ra",
+	"swapLanguages": "Tráo ngôn ngữ",
+	"clearInput": "Xóa văn bản",
+	"saveToPhrasebook": "Lưu vào Sổ từ ngữ",
+
+	"searchLanguages": "Tìm kiếm Ngôn ngữ",
+	"noLanguageFound": "Không tìm thấy ngôn ngữ",
+	"searchResults": "Kết quả Tìm kiếm",
+	"recentlyUsed": "Được dùng gần đây",
+	"allLanguagesAndDialects": "Tất cả ngôn ngữ",
+
+	"removeFromHistory": "Xoá",
+	"andSaveToHistory": "& lưu vào Lịch sử",
+
+	"save": "Lưu",
+	"resetToDefault": "Phục hồi về Mặc định",
+	"cancel": "Huỷ",
+
+	"pasteFromClipboard": "Dán từ Clipboard",
+
+	"translateClipboardOnShortcut": "Dịch clipboard khi dùng phím tắt",
+	"translateClipboardOnShortcutDesc": "Khi bạn mở Translatium bằng phím tắt, phần mềm sẽ tự động dịch nội dung trong clipboard của bạn."
+}

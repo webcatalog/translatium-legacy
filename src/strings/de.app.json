@@ -1,0 +1,136 @@
+{
+	"home": "Start",
+	"phrasebook": "Sprachführer",
+	"settings": "Einstellungen",
+
+	"website": "Webseite",
+
+	"typeSomethingHere": "Schreibe etwas hier hin...",
+
+	"clear": "Leeren",
+	"stop": "Stoppen",
+	"listen": "Vorlesen",
+	"speak": "Sprechen",
+	"draw": "Schreiben",
+	"camera": "Kamera",
+	"openImageFile": "Bild-Datei öffnen",
+	"more": "Mehr",
+	"fullscreen": "Vollbild",
+	"exitFullscreen": "Vollbildmodus verlassen",
+	"translate": "Übersetzen",
+	"translateFrom": "Übersetzen von",
+	"didYouMean": "Meintest du",
+
+	"errorOccured": "Ein Fehler ist aufgetreten.",
+	"cannotConnectToServer": "Keine Verbindung zu den Servern. Bitte überprüfe deine Internetverbindung. Falls du in China wohnst, aktiviere den China-Modus in den Einstellungen.",
+	"cannotActivateMicrophone": "Die App hat keinen Zugriff auf dein Mikrofon.",
+	"cannotOpenTheFile": "Die ausgewählte Datei kann nicht geöffnet werden.",
+	"cannotRecognizeImage": "Die App kann keinen Text auf diesem Bild erkennen.",
+
+	"swap": "tauschen",
+	"biggerText": "Text vergrößern",
+	"copy": "kopieren",
+	"copied": "In Zwischenablage kopiert",
+	"share": "Teilen",
+	"addToPhrasebook": "Zum Sprachführer hinzufügen",
+	"removeFromPhrasebook": "Vom Sprachführer entfernen",
+
+	"translatedByGoogle": "Übersetzungen von Google.",
+
+	"fromLanguage": "von {1}",
+
+	"chooseAnInputLanguage": "übersetzen von",
+	"chooseAnOutputLanguage": "übersetzen zu",
+
+	"displayOriginalText": "Zeige ursprünglichen Text",
+	"displayTranslatedText": "Zeige übersetzten Text",
+	"copyOriginalText": "Kopiere ursprünglichen Text",
+	"copyTranslatedText": "Kopiere übersetzten Text",
+	"displayTextOnly": "Zeige nur Text",
+	"phrasebookIsEmpty": "Phrasebook ist leer.",
+
+	"delete": "Entfernen",
+	"spaceBar": "Leertaste",
+	"done": "Fertig",
+
+	"red": "Rot",
+	"pink": "Pink",
+	"purple": "Lila",
+	"deepPurple": "Dunkles Lila",
+	"indigo": "Indigo",
+	"blue": "Blau",
+	"lightBlue": "Helles Blau",
+	"cyan": "Cyan",
+	"teal": "Blaugrün",
+	"green": "Grün",
+	"lightGreen": "Helles Grün",
+	"orange": "Orange",
+	"deepOrange": "Dunkles Orange",
+	"brown": "Braun",
+	"blueGrey": "Blau-Grau",
+
+	"darkMode": "Dunkles Theme",
+	"primaryColor": "Primäre Farbe",
+	"preventScreenLock": "Sperrbildschirm verhindern",
+	"translateWhenPressingEnter": "Mit Enter übersetzen",
+	"realtime": "Echtzeit Übersetzung",
+
+	"translations" : "Übersetzungen",
+	"definitions" : "Definitionen",
+	"synonyms" : "Synonyme",
+	"examples" : "Beispiele",
+	"seeAlso" : "Siehe auch",
+	"verb" : "Verben",
+	"noun" : "Substantive",
+	"pronoun" : "Pronomen",
+	"exclamation" : "Exclamation",
+	"adjective" : "Adjektive",
+	"adverb" : "Adverben",
+	"abbreviation" : "Abkürzungen",
+	"interjection" :	"Interjection",
+	"preposition": "Präposition",
+
+	"rateMacAppStore": "Translatium im Mac App Store bewerten",
+	"rateWindowsStore": "Translatium im Microsoft Store bewerten",
+
+	"displayLanguage": "Zeige Sprachen",
+	"change": "Ändern",
+	"close": "Schließen",
+
+	"dockAndMenubar": "Dock & Menübar",
+	"showOnBothDockAndMenubar": "Zeige sowohl auf dem Dock, als auch in der Menübar an.",
+	"onlyShowOnDock": "Nur im Dock",
+	"onlyShowOnMenubar": "Nur in der Menübar",
+	"quit": "Verlassen",
+
+	"appearance": "Aussehen",
+	"restartRequired": "Neustart erforderlich",
+	"advanced": "Erweitert",
+	"about": "Über",
+
+	"shortcuts": "Tastenkürzel",
+	"openOnMenubar": "Öffne Translatium von der Menübar",
+	"openInputLangList": "Wähle Eingabe-Sprache",
+	"openOutputLangList": "Wähle Ausgabe-Sprache",
+	"swapLanguages": "Wechsle Sprachen",
+	"clearInput": "Leere den eingegeben Text",
+	"saveToPhrasebook": "Speiche zum Phrasebook",
+
+	"searchLanguages": "Sprache suchen",
+	"noLanguageFound": "Keine Sprache gefunden",
+	"searchResults": "Suchergebnisse",
+	"recentlyUsed": "Kürzlich genutzt",
+	"allLanguagesAndDialects": "Alle Sprachen & Dialekte",
+
+	"remove": "Entfernen",
+	"andSaveToHistory": "& speichere in Verlauf",
+
+	"save": "Speichern",
+	"resetToDefault": "Zurücksetzen",
+	"cancel": "Abbrechen",
+
+	"pasteFromClipboard": "Von Zwischenablage einfügen",
+
+	"translateClipboardOnShortcut": "Übersetze Zwischenablage mit Tastaturkürzel",
+	"translateClipboardOnShortcutDesc": "WEnn du Translatium mit einem Tastenkürzel öffnest, wird es automatisch den Inhalt deiner Zwischenablage übersetzen."
+}

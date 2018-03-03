@@ -1,0 +1,136 @@
+{
+	"home": "Home",
+	"phrasebook": "Phrasebook",
+	"settings": "Settings",
+
+	"website": "Website",
+
+	"typeSomethingHere": "Type something here...",
+
+	"clear": "Clear",
+	"stop": "Stop",
+	"listen": "Listen",
+	"speak": "Speak",
+	"draw": "Write",
+	"camera": "Camera",
+	"openImageFile": "Open image file",
+	"more": "More",
+	"fullscreen": "Fullscreen",
+	"exitFullscreen": "Exit fullscreen",
+	"translate": "Translate",
+	"translateFrom": "Translate from",
+	"didYouMean": "Did you mean",
+
+	"errorOccured": "An error has occured.",
+	"cannotConnectToServer": "The app cannot to server. Please check your Internet connection or turn on China Mode if you are in China.",
+	"cannotActivateMicrophone": "The app cannot activate your microphone.",
+	"cannotOpenTheFile": "The app cannot open the file you selected.",
+	"cannotRecognizeImage": "The app cannot recognize any text on your image.",
+
+	"swap": "Swap",
+	"biggerText": "Bigger text",
+	"copy": "Copy",
+	"copied": "Copied to Clipboard",
+	"share": "Share",
+	"addToPhrasebook": "Add to Phrasebook",
+	"removeFromPhrasebook": "Remove from Phrasebook",
+
+	"translatedByGoogle": "Translated by Google.",
+
+	"fromLanguage": "from {1}",
+
+	"chooseAnInputLanguage": "Translate from",
+	"chooseAnOutputLanguage": "Translate to",
+
+	"displayOriginalText": "Display original text",
+	"displayTranslatedText": "Display translated text",
+	"copyOriginalText": "Copy original text",
+	"copyTranslatedText": "Copy translated text",
+	"displayTextOnly": "Display text only",
+	"phrasebookIsEmpty": "Phrasebook is empty.",
+
+	"delete": "Delete",
+	"spaceBar": "Space bar",
+	"done": "Done",
+
+	"red": "Red",
+	"pink": "Pink",
+	"purple": "Purple",
+	"deepPurple": "Deep Purple",
+	"indigo": "Indigo",
+	"blue": "Blue",
+	"lightBlue": "Light Blue",
+	"cyan": "Cyan",
+	"teal": "Teal",
+	"green": "Green",
+	"lightGreen": "Light Green",
+	"orange": "Orange",
+	"deepOrange": "Deep Orange",
+	"brown": "Brown",
+	"blueGrey": "Blue Grey",
+
+	"darkMode": "Dark mode",
+	"primaryColor": "Primary color",
+	"preventScreenLock": "Prevent screen lock",
+	"translateWhenPressingEnter": "Translate when pressing Enter",
+	"realtime": "Real-time translation",
+
+	"translations" : "Translations",
+	"definitions" : "Definitions",
+	"synonyms" : "Synonyms",
+	"examples" : "Examples",
+	"seeAlso" : "See also",
+	"verb" : "Verb",
+	"noun" : "Noun",
+	"pronoun" : "Pronoun",
+	"exclamation" : "Exclamation",
+	"adjective" : "Adjective",
+	"adverb" : "Adverb",
+	"abbreviation" : "Abbreviation",
+	"interjection" :	"Interjection",
+	"preposition": "Preposition",
+
+	"rateMacAppStore": "Rate Translatium on Mac App Store",
+	"rateWindowsStore": "Rate Translatium on Windows Store",
+
+	"displayLanguage": "Display language",
+	"change": "Change",
+	"close": "Close",
+
+	"dockAndMenubar": "Dock & Menubar",
+	"showOnBothDockAndMenubar": "Show on both Dock and Menubar",
+	"onlyShowOnDock": "Only show on Dock",
+	"onlyShowOnMenubar": "Only show on Menubar",
+	"quit": "Quit",
+
+	"appearance": "Appearance",
+	"restartRequired": "restart required",
+	"advanced": "Advanced",
+	"about": "About",
+
+	"shortcuts": "Keyboard Shortcuts",
+	"openOnMenubar": "Open Translatium on Menubar",
+	"openInputLangList": "Select input language",
+	"openOutputLangList": "Select output language",
+	"swapLanguages": "Swap languages",
+	"clearInput": "Clear input text",
+	"saveToPhrasebook": "Save to Phrasebook",
+
+	"searchLanguages": "Search Languages",
+	"noLanguageFound": "No Language Found",
+	"searchResults": "Search Results",
+	"recentlyUsed": "Recently Used",
+	"allLanguagesAndDialects": "All Languages & Dialects",
+
+	"remove": "Remove",
+	"andSaveToHistory": "& save to History",
+
+	"save": "Save",
+	"resetToDefault": "Reset to Default",
+	"cancel": "Cancel",
+
+	"pasteFromClipboard": "Paste from Clipboard",
+
+	"translateClipboardOnShortcut": "Translate clipboard on shortcut",
+	"translateClipboardOnShortcutDesc": "When you open Translatium with a shortcut, it will automatically translate your clipboard contents."
+}
