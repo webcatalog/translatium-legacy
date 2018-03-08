@@ -25,6 +25,9 @@ builder.build({
     electronVersion,
     appId: 'com.moderntranslator.app',
     productName,
+    files: [
+      '!docs/**/*',
+    ],
     directories: {
       buildResources: 'build-resources',
     },
