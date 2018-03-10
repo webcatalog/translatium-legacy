@@ -55,16 +55,16 @@ const BiggerText = (props) => {
   return (
     <div className={classes.container}>
       <Button
-        fab
-        dense
+        variant="fab"
+        size="small"
         className={classes.closeButton}
         onClick={onCloseClick}
       >
         <CloseIcon />
       </Button>
       <Button
-        fab
-        dense
+        variant="fab"
+        size="small"
         className={classes.minusButton}
         onClick={() => {
           if (biggerTextFontSize < 10) return;
@@ -74,8 +74,8 @@ const BiggerText = (props) => {
         <ZoomOutIcon />
       </Button>
       <Button
-        fab
-        dense
+        variant="fab"
+        size="small"
         className={classes.plusButton}
         onClick={() => onUpdateBiggerTextFontSize(biggerTextFontSize + 5)}
       >

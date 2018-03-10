@@ -5,7 +5,7 @@ import { replace, goBack } from 'react-router-redux';
 import { CircularProgress } from 'material-ui/Progress';
 import ActionHome from 'material-ui-icons/Home';
 import ActionSettings from 'material-ui-icons/Settings';
-import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
+import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import Snackbar from 'material-ui/Snackbar';
@@ -28,7 +28,7 @@ const styles = theme => ({
     height: '100vh',
     width: '100vw',
     overflow: 'hidden',
-    backgroundColor: theme.palette.background.contentFrame,
+    backgroundColor: theme.palette.background.default,
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
@@ -48,7 +48,7 @@ const styles = theme => ({
   fakeTitleBar: {
     flexBasis: 22,
     height: 22,
-    backgroundColor: theme.palette.primary[700],
+    backgroundColor: theme.palette.primary.dark,
     color: '#fff',
     textAlign: 'center',
     fontSize: 13,
@@ -106,7 +106,7 @@ class App extends React.Component {
   }
 
   setAppTitleBar(primaryColorId) {
-    const color = colorPairs[primaryColorId][700];
+    const color = colorPairs[primaryColorId].dark;
 
     if (getPlatform() === 'windows') {
       /* global Windows */
@@ -149,7 +149,7 @@ class App extends React.Component {
       children,
       classes,
       fullPageLoading,
-      onBottomNavigationButtonClick,
+      onBottomNavigationActionClick,
       onRequestCloseSnackbar,
       shouldShowBottomNav,
       snackbarMessage,
@@ -177,7 +177,7 @@ class App extends React.Component {
             autoHideDuration={4000}
             onRequestClose={onRequestCloseSnackbar}
             action={(
-              <Button color="accent" dense onClick={onRequestCloseSnackbar}>
+              <Button color="secondary" size="small" onClick={onRequestCloseSnackbar}>
                 {strings.close}
               </Button>
             )}
@@ -186,20 +186,20 @@ class App extends React.Component {
           {bottomNavigationSelectedIndex > -1 && shouldShowBottomNav && (
             <Paper elevation={2} style={{ zIndex: 1000 }}>
               <BottomNavigation value={bottomNavigationSelectedIndex} showLabels>
-                <BottomNavigationButton
+                <BottomNavigationAction
                   label={strings.home}
                   icon={<ActionHome className={classes.icon} />}
-                  onClick={() => onBottomNavigationButtonClick('/')}
+                  onClick={() => onBottomNavigationActionClick('/')}
                 />
-                <BottomNavigationButton
+                <BottomNavigationAction
                   label={strings.phrasebook}
                   icon={<ToggleStar className={classes.icon} />}
-                  onClick={() => onBottomNavigationButtonClick('/phrasebook')}
+                  onClick={() => onBottomNavigationActionClick('/phrasebook')}
                 />
-                <BottomNavigationButton
+                <BottomNavigationAction
                   label={strings.settings}
                   icon={<ActionSettings className={classes.icon} />}
-                  onClick={() => onBottomNavigationButtonClick('/settings')}
+                  onClick={() => onBottomNavigationActionClick('/settings')}
                 />
               </BottomNavigation>
             </Paper>
@@ -216,7 +216,7 @@ App.propTypes = {
   classes: PropTypes.object.isRequired,
   fullPageLoading: PropTypes.bool,
   onBackClick: PropTypes.func.isRequired,
-  onBottomNavigationButtonClick: PropTypes.func.isRequired,
+  onBottomNavigationActionClick: PropTypes.func.isRequired,
   onRequestCloseSnackbar: PropTypes.func.isRequired,
   onResize: PropTypes.func.isRequired,
   primaryColorId: PropTypes.string,
@@ -263,7 +263,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(screenResize(window.innerWidth));
     dispatch(updateImeMode(null));
   },
-  onBottomNavigationButtonClick: pathname => dispatch(replace(pathname)),
+  onBottomNavigationActionClick: pathname => dispatch(replace(pathname)),
   onBackClick: () => dispatch(goBack()),
   onRequestCloseSnackbar: () => dispatch(closeSnackbar()),
 });

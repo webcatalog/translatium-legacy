@@ -432,7 +432,7 @@ class Home extends React.Component {
           >
             {output.inputRoman && (
               <Typography
-                type="body1"
+                variant="body1"
                 className={classNames('text-selectable', classes.inputRoman)}
               >
                 {output.inputRoman}
@@ -441,7 +441,7 @@ class Home extends React.Component {
 
             {output.suggestedInputLang && (
               <Typography
-                type="body1"
+                variant="body1"
                 align="left"
                 className={classes.suggestion}
               >
@@ -460,7 +460,7 @@ class Home extends React.Component {
 
             {output.suggestedInputText && (
               <Typography
-                type="body1"
+                variant="body1"
                 align="left"
                 className={classes.suggestion}
               >
@@ -480,7 +480,7 @@ class Home extends React.Component {
             <Card className={classes.outputCard}>
               <CardContent className="text-selectable">
                 <Typography
-                  type="headline"
+                  variant="headline"
                   lang={toCountryRemovedLanguage(output.outputLang)}
                   className="text-selectable"
                 >
@@ -488,7 +488,7 @@ class Home extends React.Component {
                 </Typography>
 
                 {output.outputRoman && (
-                  <Typography type="body1" className={classNames('text-selectable', classes.pos)}>
+                  <Typography variant="body1" className={classNames('text-selectable', classes.pos)}>
                     {output.outputRoman}
                   </Typography>
                 )}
@@ -531,7 +531,7 @@ class Home extends React.Component {
             </Card>
             {hasDict && <Dictionary output={output} />}
             <Typography
-              type="body2"
+              variant="body2"
               align="right"
               className={classes.googleCopyright}
             >
@@ -662,13 +662,15 @@ class Home extends React.Component {
                 {strings[inputLang]}
               </Button>
               <Tooltip title={strings.swap} placement="bottom">
-                <IconButton
-                  color={isOutput(inputLang) ? 'contrast' : 'default'}
-                  disabled={!isOutput(inputLang)}
-                  onClick={onSwapButtonClick}
-                >
-                  <ActionSwapHoriz />
-                </IconButton>
+                <div>
+                  <IconButton
+                    color={isOutput(inputLang) ? 'contrast' : 'default'}
+                    disabled={!isOutput(inputLang)}
+                    onClick={onSwapButtonClick}
+                  >
+                    <ActionSwapHoriz />
+                  </IconButton>
+                </div>
               </Tooltip>
               <Button
                 color="inherit"
@@ -739,7 +741,7 @@ class Home extends React.Component {
               </div>
               <div className={classes.controllerContainerRight}>
                 <Tooltip title={strings.andSaveToHistory} placement={fullscreenInputBox ? 'top' : 'bottom'}>
-                  <Button raised color="primary" onClick={onTranslateButtonClick}>
+                  <Button variant="raised" color="primary" onClick={onTranslateButtonClick}>
                     {strings.translate}
                   </Button>
                 </Tooltip>
