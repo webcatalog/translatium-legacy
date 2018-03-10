@@ -68,6 +68,9 @@
 	"deepOrange": "Deep Orange",
 	"brown": "Brown",
 	"blueGrey": "Blue Grey",
+	"grey": "Grey",
+	"darkGrey": "Dark Grey",
+	"black": "Black",
 
 	"darkMode": "Dark mode",
 	"primaryColor": "Primary color",
