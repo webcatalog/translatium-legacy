@@ -106,7 +106,7 @@ class App extends React.Component {
   }
 
   setAppTitleBar(primaryColorId) {
-    const color = colorPairs[primaryColorId][700];
+    const color = colorPairs[primaryColorId].dark;
 
     if (getPlatform() === 'windows') {
       /* global Windows */
