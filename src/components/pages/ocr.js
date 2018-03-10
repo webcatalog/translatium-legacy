@@ -89,8 +89,8 @@ class Ocr extends React.Component {
     return (
       <div className={classes.container}>
         <Button
-          fab
-          dense
+          variant="fab"
+          size="small"
           className={classes.closeButton}
           onClick={onCloseClick}
         >
@@ -121,8 +121,8 @@ class Ocr extends React.Component {
           </div>
         </div>
         <Button
-          fab
-          dense
+          variant="fab"
+          size="small"
           className={classes.minusButton}
           onClick={() => {
             if (ocr.zoomLevel < 0.1) return;
@@ -132,8 +132,8 @@ class Ocr extends React.Component {
           <ZoomOutIcon />
         </Button>
         <Button
-          fab
-          dense
+          variant="fab"
+          size="small"
           className={classes.plusButton}
           onClick={() => onUpdateZoomLevel(ocr.zoomLevel + 0.1 || 1)}
         >

@@ -89,7 +89,7 @@ class DialogShortcut extends React.Component {
             {combinator && combinator !== '+' && combinator.split('+').map((key, i) => (
               <span key={key}>
                 {i > 0 && <span className={classes.plusText}>+</span>}
-                <Button raised>
+                <Button variant="raised">
                   {renderCombinator(key)}
                 </Button>
               </span>
@@ -101,7 +101,7 @@ class DialogShortcut extends React.Component {
             {strings.cancel}
           </Button>
           <Button
-            color="accent"
+            color="secondary"
             onClick={() => {
               onUpdateSettings(`${identifier}Shortcut`, defaultSettings[`${identifier}Shortcut`]);
               onSetCombinator(defaultSettings[`${identifier}Shortcut`]);

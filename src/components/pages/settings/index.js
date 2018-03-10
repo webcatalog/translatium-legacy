@@ -180,11 +180,11 @@ const Settings = (props) => {
       <DialogShortcut />
       <AppBar position="static">
         <Toolbar>
-          <Typography type="title" color="inherit">{strings.settings}</Typography>
+          <Typography variant="title" color="inherit">{strings.settings}</Typography>
         </Toolbar>
       </AppBar>
       <div className={classes.innerContainer}>
-        <Typography type="body2" className={classes.paperTitle}>
+        <Typography variant="body2" className={classes.paperTitle}>
           {strings.appearance}
         </Typography>
         <Paper className={classes.paper}>
@@ -198,7 +198,7 @@ const Settings = (props) => {
                 <EnhancedMenu
                   id="changeColor"
                   buttonElement={(
-                    <Button raised color="primary">
+                    <Button variant="raised" color="primary">
                       {strings.change}
                     </Button>
                   )}
@@ -266,7 +266,7 @@ const Settings = (props) => {
 
 
         {getPlatform() === 'electron' && (
-          <Typography type="body2" className={classes.paperTitle}>
+          <Typography variant="body2" className={classes.paperTitle}>
             {strings.dockAndMenubar}
           </Typography>
         )}
@@ -305,7 +305,7 @@ const Settings = (props) => {
           </Paper>
         )}
 
-        <Typography type="body2" className={classes.paperTitle}>
+        <Typography variant="body2" className={classes.paperTitle}>
           {strings.advanced}
         </Typography>
         <Paper className={classes.paper}>
@@ -368,7 +368,7 @@ const Settings = (props) => {
           </List>
         </Paper>
 
-        <Typography type="body2" className={classes.paperTitle}>
+        <Typography variant="body2" className={classes.paperTitle}>
           {strings.shortcuts}
         </Typography>
         <Paper className={classes.paper}>
@@ -398,7 +398,7 @@ const Settings = (props) => {
         </Paper>
 
         {getPlatform() === 'electron' && (
-          <Typography type="body2" className={classes.paperTitle}>
+          <Typography variant="body2" className={classes.paperTitle}>
             {strings.quit}
           </Typography>
         )}
@@ -412,12 +412,12 @@ const Settings = (props) => {
           </Paper>
         )}
 
-        <Typography type="body2" className={classes.paperTitle}>
+        <Typography variant="body2" className={classes.paperTitle}>
           {strings.about}
         </Typography>
         <Paper className={classes.paperAbout}>
-          <Typography type="title" className={classes.title}>Translatium</Typography>
-          <Typography type="body1" className={classes.version}>
+          <Typography variant="title" className={classes.title}>Translatium</Typography>
+          <Typography variant="body1" className={classes.version}>
             Version {getVersion()}
           </Typography>
 
@@ -442,7 +442,7 @@ const Settings = (props) => {
           </Button>
           <br />
 
-          <Typography type="body1" className={classes.madeBy}>
+          <Typography variant="body1" className={classes.madeBy}>
             <span>Made with </span>
             <span role="img" aria-label="love">❤️</span>
             <span> by </span>

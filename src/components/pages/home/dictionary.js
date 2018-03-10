@@ -44,17 +44,17 @@ const Dictionary = ({
         <div>
           {output.inputDict[1] && (
             <div key="definitions">
-              <Typography type="title" align="left" className={classes.title}>
+              <Typography variant="title" align="left" className={classes.title}>
                 {strings.definitions}
               </Typography>
               {output.inputDict[1].map(x => (
                 <div key={`definition_section_${x[0]}`}>
-                  <Typography type="subheading" align="left" className={classes.subheading}>
+                  <Typography variant="subheading" align="left" className={classes.subheading}>
                     {strings[x[0]]}
                   </Typography>
                   {x[1].map((y, v) => (
                     <div key={`definition_${y[0]}`}>
-                      <Typography type="body1" align="left">
+                      <Typography variant="body1" align="left">
                         <span>{v + 1}. </span>
                         <a
                           role="button"
@@ -86,19 +86,19 @@ const Dictionary = ({
           )}
           {output.inputDict[0] && (
             <div key="synonyms">
-              <Typography type="title" align="left" className={classes.title}>
+              <Typography variant="title" align="left" className={classes.title}>
                 {strings.synonyms}
               </Typography>
               {output.inputDict[0].map(x => (
                 <div key={`synonyms_section_${x[0]}`}>
-                  <Typography type="subheading" align="left" className={classes.subheading}>
+                  <Typography variant="subheading" align="left" className={classes.subheading}>
                     {strings[x[0]]}
                   </Typography>
                   <ul>
                     {x[1].map(wl => (
                       <li key={`synonyms_line_${wl.join('-')}`}>
                         {wl[0].map((word, k) => (
-                          <Typography type="body1" align="left" key={`synonyms_word_${word}`} className={classes.inline}>
+                          <Typography variant="body1" align="left" key={`synonyms_word_${word}`} className={classes.inline}>
                             {(k > 0) && (<span>, </span>)}
                             <a
                               role="button"
@@ -119,7 +119,7 @@ const Dictionary = ({
           )}
           {output.inputDict[2] && (
             <div key="examples">
-              <Typography type="title" align="left" className={classes.title}>
+              <Typography variant="title" align="left" className={classes.title}>
                 {strings.examples}
               </Typography>
               <div>
@@ -127,7 +127,7 @@ const Dictionary = ({
                   const text = x[0].replace(/(<([^>]+)>)/ig, '');
                   return (
                     <div key={`example_${text}`}>
-                      <Typography type="body1" align="left">
+                      <Typography variant="body1" align="left">
                         <span>{i + 1}. </span>
                         <a
                           role="button"
@@ -146,13 +146,13 @@ const Dictionary = ({
           )}
           {output.inputDict[3] && (
             <div key="seeAlso">
-              <Typography type="title" align="left" className={classes.title}>
+              <Typography variant="title" align="left" className={classes.title}>
                 {strings.seeAlso}
               </Typography>
               <div>
                 {output.inputDict[3].map(x => (
                   <div key={x.join('')}>
-                    <Typography type="body1" align="left">
+                    <Typography variant="body1" align="left">
                       {x.map((y, j) => {
                         const text = y.replace(/(<([^>]+)>)/ig, '');
                         return (
@@ -180,17 +180,17 @@ const Dictionary = ({
       {output.outputDict && (
         <div>
           <Divider className={classes.divider} />
-          <Typography type="title" align="left" className={classes.title}>
+          <Typography variant="title" align="left" className={classes.title}>
             {strings.translations}
           </Typography>
           {output.outputDict.map(x => (
             <div key={x[0]}>
-              <Typography type="subheading" align="left" className={classes.subheading}>
+              <Typography variant="subheading" align="left" className={classes.subheading}>
                 {strings[x[0]]}
               </Typography>
               {x[2].map((y, j) => (
                 <div key={y[0]}>
-                  <Typography type="body1" align="left">
+                  <Typography variant="body1" align="left">
                     <span>{j + 1}. </span>
                     {y[4] && (<span>{y[4]} </span>)}
                     <a
@@ -202,7 +202,7 @@ const Dictionary = ({
                     </a>
                   </Typography>
                   {y[1] && (
-                    <Typography type="body2" align="left" className={classes.inline}>
+                    <Typography variant="body2" align="left" className={classes.inline}>
                       {y[1].map((meaning, k) => (
                         <span key={meaning}>
                           {(k > 0) && (<span>, </span>)}

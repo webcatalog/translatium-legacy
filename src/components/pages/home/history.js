@@ -105,7 +105,7 @@ class History extends React.Component {
                 ), <Divider inset={false} key="divider" />])}
               </List>
               {historyLoading && (
-                <LinearProgress mode="indeterminate" className={classes.progress} />
+                <LinearProgress variant="indeterminate" className={classes.progress} />
               )}
             </div>
           );
