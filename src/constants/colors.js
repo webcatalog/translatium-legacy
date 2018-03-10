@@ -12,6 +12,7 @@ import lightGreen from 'material-ui/colors/lightGreen';
 import orange from 'material-ui/colors/orange';
 import deepOrange from 'material-ui/colors/deepOrange';
 import brown from 'material-ui/colors/brown';
+import grey from 'material-ui/colors/grey';
 import blueGrey from 'material-ui/colors/blueGrey';
 
 export default {
@@ -85,9 +86,24 @@ export default {
     main: brown[500],
     dark: brown[700],
   },
+  grey: {
+    light: grey[300],
+    main: grey[500],
+    dark: grey[700],
+  },
   blueGrey: {
     light: blueGrey[300],
     main: blueGrey[500],
     dark: blueGrey[700],
+  },
+  darkGrey: {
+    light: '#424242',
+    main: '#303030',
+    dark: '#212121',
+  },
+  black: {
+    light: '#000',
+    main: '#000',
+    dark: '#000',
   },
 };

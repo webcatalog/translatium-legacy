@@ -664,7 +664,7 @@ class Home extends React.Component {
               <Tooltip title={strings.swap} placement="bottom">
                 <div>
                   <IconButton
-                    color={isOutput(inputLang) ? 'contrast' : 'default'}
+                    color="inherit"
                     disabled={!isOutput(inputLang)}
                     onClick={onSwapButtonClick}
                   >
