@@ -87,7 +87,7 @@ class Phrasebook extends React.Component {
       <div className={classes.container}>
         <AppBar position="static">
           <Toolbar>
-            <Typography type="title" color="inherit">{strings.phrasebook}</Typography>
+            <Typography variant="title" color="inherit">{strings.phrasebook}</Typography>
           </Toolbar>
         </AppBar>
         {(() => {
@@ -96,7 +96,7 @@ class Phrasebook extends React.Component {
               <div className={classes.emptyContainer}>
                 <div className={classes.emptyInnerContainer}>
                   <ToggleStar className={classes.bigIcon} />
-                  <Typography type="headline">{strings.phrasebookIsEmpty}</Typography>
+                  <Typography variant="headline">{strings.phrasebookIsEmpty}</Typography>
                 </div>
               </div>
             );
@@ -134,7 +134,7 @@ class Phrasebook extends React.Component {
                 ), <Divider inset={false} />])}
               </List>
               {phrasebookLoading && (
-                <LinearProgress mode="indeterminate" className={classes.progress} />
+                <LinearProgress variant="indeterminate" className={classes.progress} />
               )}
             </div>
           );

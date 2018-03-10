@@ -43,8 +43,16 @@ export const runApp = (isRestart) => {
     palette: createPalette({
       type: state.settings.darkMode ? 'dark' : 'light',
       primary: colorPairs[state.settings.primaryColorId],
-      secondary: pink,
-      error: red,
+      secondary: {
+        light: pink[300],
+        main: pink[500],
+        dark: pink[700],
+      },
+      error: {
+        light: red[300],
+        main: red[500],
+        dark: red[700],
+      },
     }),
   });
 

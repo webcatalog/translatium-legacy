@@ -99,7 +99,7 @@ class Speech extends React.Component {
           (
             <div>
               <Button
-                fab
+                variant="fab"
                 color="primary"
                 onClick={() => onControlButtonClick(speechStatus)}
               >

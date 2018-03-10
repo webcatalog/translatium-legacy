@@ -121,10 +121,10 @@ class LanguageList extends React.Component {
       <div className={classes.container}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton color="contrast" onClick={onCloseClick}>
+            <IconButton color="inherit" onClick={onCloseClick}>
               <CloseIcon />
             </IconButton>
-            <Typography type="title" color="inherit">
+            <Typography variant="title" color="inherit">
               {type === 'inputLang' ? strings.chooseAnInputLanguage : strings.chooseAnOutputLanguage}
             </Typography>
           </Toolbar>
