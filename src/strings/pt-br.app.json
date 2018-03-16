@@ -1,0 +1,142 @@
+{
+	"home": "Início",
+	"phrasebook": "Favoritos",
+	"settings": "Configrações",
+
+	"website": "Site",
+
+	"typeSomethingHere": "Digite alguma coisa aqui...",
+
+	"clear": "Limpar",
+	"stop": "Parar",
+	"listen": "Ouvir",
+	"speak": "Falar",
+	"draw": "Desenhar",
+	"camera": "Câmera",
+	"openImageFile": "Abrir uma imagem",
+	"more": "Mais",
+	"fullscreen": "Tela Cheia",
+	"exitFullscreen": "Sair da Tela Cheia",
+	"translate": "Traduzir",
+	"translateFrom": "Traduzir do",
+	"didYouMean": "Você quer dizer",
+
+	"errorOccured": "Ocorreu um erro.",
+	"cannotConnectToServer": "O aplicativo não pode se conectar ao servidor. Verifique sua conexão com a Internet ou ligue o Modo China se você estiver na China.",
+	"cannotActivateMicrophone": "O aplicativo não pode ativar seu microfone.",
+	"cannotOpenTheFile": "O aplicativo não pode abrir o arquivo selecionado.",
+	"cannotRecognizeImage": "O aplicativo não reconheceu nenhum texto na sua imagem.",
+
+	"swap": "Inverter",
+	"biggerText": "Testo maior",
+	"copy": "Copiar",
+	"copied": "Copiar para a área de transferência",
+	"share": "Compartilhar",
+	"addToPhrasebook": "Adicionar aos favoritos",
+	"removeFromPhrasebook": "Remover dos favoritos",
+
+	"translatedByGoogle": "Traduzido pelo Google.",
+
+	"fromLanguage": "Do {1}",
+
+	"chooseAnInputLanguage": "Traduzir do",
+	"chooseAnOutputLanguage": "Traduzir para",
+
+	"displayOriginalText": "Exibir texto original",
+	"displayTranslatedText": "Exibir texto traduzido",
+	"copyOriginalText": "Copiar texto original",
+	"copyTranslatedText": "Copiar texto traduzido",
+	"displayTextOnly": "Exibir apenas texto",
+	"phrasebookIsEmpty": "O Favoritos está vazio.",
+
+	"delete": "Apagar",
+	"spaceBar": "Barra de espaço",
+	"done": "Terminado",
+
+	"red": "Vermelho",
+	"pink": "Rosa",
+	"purple": "Roxo",
+	"deepPurple": "Roxo Escuro",
+	"indigo": "Indigo",
+	"blue": "Azul",
+	"lightBlue": "Azul Claro",
+	"cyan": "Cyan",
+	"teal": "Teal",
+	"green": "Verde",
+	"lightGreen": "Verde Claro",
+	"orange": "Laranja",
+	"deepOrange": "Laranja Escuro",
+	"brown": "Marrom",
+	"blueGrey": "Azul Acinzentado",
+	"grey": "Cinza",
+	"darkGrey": "Cinza Escuro",
+	"black": "Preto",
+
+	"darkMode": "Modo Escuro",
+	"primaryColor": "Cor Primária",
+	"preventScreenLock": "Impedir o bloqueio da tela",
+	"translateWhenPressingEnter": "Traduzir ao pressionar Enter",
+	"realtime": "Tradução em Tempo Real",
+	"chinaMode": "Modo China",
+	"chinaModeDesc": "Se este modo estiver ativado, o Translatium transmitirá dados do/para o Google Tradutor através do domínio google.cn em vez de google.com.",
+
+
+	"translations" : "Traduções",
+	"definitions" : "Definições",
+	"synonyms" : "Sinônimos",
+	"examples" : "Exemplos",
+	"seeAlso" : "Veja também",
+	"verb" : "Verbo",
+	"noun" : "Substantivo",
+	"pronoun" : "Pronome",
+	"exclamation" : "Exclamação",
+	"adjective" : "Adjetivo",
+	"adverb" : "Advérbio",
+	"abbreviation" : "Abreviação",
+	"interjection" :	"Interjeição",
+	"preposition": "Preposição",
+
+	"rateMacAppStore": "Classifique o app Translatium na Mac App Store",
+	"rateWindowsStore": "Classifique o app Translatium na Windows Store",
+
+	"displayLanguage": "Idioma",
+	"change": "Mudar",
+	"close": "Fechar",
+
+	"dockAndMenubar": "Dock e Barra de Menus",
+	"showOnBothDockAndMenubar": "Mostrar em ambos: Dock e Barra de Menus",
+	"onlyShowOnDock": "Mostrar apenas na Dock",
+	"onlyShowOnMenubar": "Mostrar apenas na Barra de Menus",
+	"quit": "Sair",
+
+	"appearance": "Aparência",
+	"restartRequired": "é necessário reiniciar o app",
+	"advanced": "Avançado",
+	"about": "Sobre",
+
+	"shortcuts": "Atalhos do Teclado",
+	"openOnMenubar": "Abrir o app Translatium na Barra de Menus",
+	"openInputLangList": "Selecione o idioma de entrada",
+	"openOutputLangList": "Selecione o idioma de saída",
+	"swapLanguages": "Trocar os idiomas",
+	"clearInput": "Limpar o texto inserido",
+	"saveToPhrasebook": "Salvar nos Favoritos",
+
+	"searchLanguages": "Pesquisar idiomas",
+	"noLanguageFound": "Nenhuma idioma encontrado",
+	"searchResults": "Procurar Resultados",
+	"recentlyUsed": "Usado recentemente",
+	"allLanguagesAndDialects": "Todos os idiomas e dialetos",
+
+	"remove": "Remover",
+	"andSaveToHistory": "e salvar na História",
+
+	"save": "Salvar",
+	"resetToDefault": "Restaurar ao padrão",
+	"cancel": "Cancelar",
+
+	"pasteFromClipboard": "Colar da Área de Transferência",
+
+	"translateClipboardOnShortcut": "Traduzir a área de transferência no atalho",
+	"translateClipboardOnShortcutDesc": "Quando você abre o Translatium com um atalho, ele irá traduzir automaticamente o conteúdo da área de transferência."
+}
