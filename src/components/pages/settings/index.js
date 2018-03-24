@@ -437,7 +437,7 @@ const Settings = (props) => {
               <br />
             </React.Fragment>
           )}
-          <Button onClick={() => openUri('https://quang.im/translatium')}>
+          <Button onClick={() => openUri('https://quanglam2807.github.io/translatium')}>
             {strings.website}
           </Button>
           <br />
@@ -447,7 +447,7 @@ const Settings = (props) => {
             <span role="img" aria-label="love">❤️</span>
             <span> by </span>
             <a
-              onClick={() => openUri('https://quang.im')}
+              onClick={() => openUri('https://quanglam2807.github.io')}
               role="link"
               tabIndex="0"
               className={classes.link}
