@@ -2,7 +2,7 @@ const path = require('path');
 
 const APP_NAME = 'Translatium';
 const APP_TEAM = 'Quang Lam';
-const APP_URL = 'https://quang.im/translatium';
+const APP_URL = 'https://quanglam2807.github.io/translatium';
 
 const IMAGE_PATH = path.join(__dirname, '..', 'images');
 

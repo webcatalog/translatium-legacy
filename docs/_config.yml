@@ -18,7 +18,7 @@ email: quang.lam2807@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Translatium is a Google Translate client for macOS and Windows.
 baseurl: "/translatium" # the subpath of your site, e.g. /blog
-url: "https://quang.im" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://quanglam2807.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
 markdown: kramdown

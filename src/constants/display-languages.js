@@ -5,6 +5,9 @@ export default {
   en: {
     displayName: 'English',
   },
+  pt_BR: {
+    displayName: 'Português do Brasil',
+  },
   vi: {
     displayName: 'Tiếng Việt',
   },
