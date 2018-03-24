@@ -437,7 +437,7 @@ const Settings = (props) => {
               <br />
             </React.Fragment>
           )}
-          <Button onClick={() => openUri('https://translatiumapp.com')}>
+          <Button onClick={() => openUri('https://quang.im/translatium')}>
             {strings.website}
           </Button>
           <br />
