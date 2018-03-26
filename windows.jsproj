@@ -52,8 +52,8 @@
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en</DefaultLanguage>
-    <PackageCertificateKeyFile>windows_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>80D3E61B09CE5296FDE63F95CE64480FE6AF319A</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>windows_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>86C4A500B9FCEEF78F44B7C381139FAE23E1B94F</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
@@ -104,8 +104,9 @@
     <Content Include="build-resources\windows-images\Wide310x150.scale-200.png" />
     <Content Include="build-resources\windows-images\Wide310x150.scale-400.png" />
     <Content Include="build\**\**" />
-    <None Include="windows_TemporaryKey.pfx" />
     <None Include="windows_StoreKey.pfx" />
+    <None Include="Package.xml" />
+    <None Include="windows_TemporaryKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
