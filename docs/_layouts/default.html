@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {% include head.html %}
+
+  <body>
+  <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item logo" href="/">
+            TRANSLATIUM
+          </a>
+          <div class="navbar-burger burger" data-target="navbarMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <div id="navbarMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item" href="/">
+              About
+            </a>
+            <a class="navbar-item" href="/languages">
+              Languages
+            </a>
+            <a class="navbar-item" href="/privacy">
+              Privacy
+            </a>
+            <a class="navbar-item" href="mailto:quang.lam2807+translatium@gmail.com">
+              Contact
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main>
+      {{ content }}
+    </main>
+    <footer class="footer">
+      <div class="container has-text-centered">
+        <p>
+          <span>Made with </span>
+          <span style="color: #F44336">❤</span>
+          <span> by </span>
+          <a href="https://quang.im">Quang Lam</a>.
+        </p>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Get all "navbar-burger" elements
+        var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
+          // Add a click event on each of them
+          $navbarBurgers.forEach(function ($el) {
+            $el.addEventListener('click', function () {
+              // Get the target from the "data-target" attribute
+              var target = $el.dataset.target;
+              var $target = document.getElementById(target);
+              // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+              $el.classList.toggle('is-active');
+              $target.classList.toggle('is-active');
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
