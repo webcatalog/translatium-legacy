@@ -1,0 +1,52 @@
+@import "./bulma/sass/utilities/initial-variables"
+@import "./bulma/sass/utilities/functions"
+
+$green: #43A047
+
+@import "./bulma/bulma"
+
+html, body
+  height: 100%
+
+body
+  display: flex
+  flex-direction: column
+
+main
+  flex: 1
+
+.container
+  max-width: 980px
+
+.footer
+  background-color: transparent
+  padding: 0
+  .container
+    padding: 1.5em 1em
+  @media screen and (min-width: 960px)
+    ul
+      display: inline-table
+      li
+        float: left
+
+.app-icon
+  height: 96px
+  width: 96px
+
+.screenshot
+  width: 100%
+  max-width: 760px
+  &.is-small
+    max-width: 560px
+
+.download-btn
+  img
+    height: 50px
+
+.navbar-item.logo
+  color: $green
+  font-weight: 600
+  font-size: 1.5em
+
+.navbar
+  z-index: 1

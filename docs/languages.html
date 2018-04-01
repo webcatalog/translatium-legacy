@@ -1,0 +1,69 @@
+---
+title: Supported Languages
+layout: default
+---
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">
+        Supported Languages
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <table class="table is-striped" style="margin: 0 auto">
+      <thead>
+        <tr>
+          <th>Languages</th>
+          <th><abbr title="Type"><i class="fa fa-keyboard"></i></abbr></th>
+          <th><abbr title="Listen (Text-to-speech)"><i class="fa fa-headphones"></i></abbr></th>
+          <th><abbr title="Speak (Speech recognition)"><i class="fa fa-microphone"></i></abbr></th>
+          <th><abbr title="Snap (OCR)"><i class="fa fa-camera"></i></abbr></th>
+          <th><abbr title="Write (Handwriting recognition)"><i class="fa fa-pencil-alt"></i></abbr></th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <th>Languages</th>
+          <th><abbr title="Type"><i class="fa fa-keyboard"></i></abbr></th>
+          <th><abbr title="Listen (Text-to-speech)"><i class="fa fa-headphones"></i></abbr></th>
+          <th><abbr title="Speak (Speech recognition)"><i class="fa fa-microphone"></i></abbr></th>
+          <th><abbr title="Snap (OCR)"><i class="fa fa-camera"></i></abbr></th>
+          <th><abbr title="Write (Handwriting recognition)"><i class="fa fa-pencil-alt"></i></abbr></th>
+        </tr>
+      </tfoot>
+      <tbody>
+        {% for language in site.data.languages %}
+        <tr>
+          <th>{{ language.string }}</th>
+          <td><i class="fa fa-check"></i></td>
+          <td>
+            {% if language.listen %}
+            <i class="fa fa-check"></i>
+            {% endif %}
+          </td>
+          <td>
+            {% if language.speak %}
+            <i class="fa fa-check"></i>
+            {% endif %}
+          </td>
+          <td>
+            {% if language.snap %}
+            <i class="fa fa-check"></i>
+            {% endif %}
+          </td>
+          <td>
+            {% if language.write %}
+            <i class="fa fa-check"></i>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>

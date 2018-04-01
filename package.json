@@ -7,7 +7,7 @@
   "author": {
     "name": "Quang Lam",
     "email": "quang.lam2807@gmail.com",
-    "url": "https://quanglam2807.github.io"
+    "url": "https://quang.im"
   },
   "license": "MPL-2.0",
   "engines": {
@@ -41,6 +41,8 @@
     "eslint-plugin-import": "2.9.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.7.0",
+    "esm": "3.0.14",
+    "fs-extra": "5.0.0",
     "glob": "7.1.2",
     "history": "4.7.2",
     "material-ui": "1.0.0-beta.36",
