@@ -7,7 +7,7 @@
   "author": {
     "name": "Quang Lam",
     "email": "quang.lam2807@gmail.com",
-    "url": "https://quang.im"
+    "url": "https://twitter.com/quanglam2807"
   },
   "license": "MPL-2.0",
   "engines": {
@@ -34,14 +34,14 @@
     "concurrently": "3.5.1",
     "cross-env": "5.1.4",
     "del": "3.0.0",
-    "electron": "1.8.3",
+    "electron": "1.8.4",
     "electron-builder": "20.4.1",
-    "eslint": "4.18.2",
+    "eslint": "4.19.1",
     "eslint-config-airbnb": "16.1.0",
     "eslint-plugin-import": "2.9.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.7.0",
-    "esm": "3.0.14",
+    "esm": "3.0.18",
     "fs-extra": "5.0.0",
     "glob": "7.1.2",
     "history": "4.7.2",
@@ -50,8 +50,8 @@
     "mousetrap": "1.6.1",
     "pouchdb-browser": "6.4.3",
     "prop-types": "15.6.1",
-    "react": "16.2.0",
-    "react-dom": "16.2.0",
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
     "react-redux": "5.0.7",
     "react-router": "3.0.5",
     "react-router-redux": "4.0.8",
