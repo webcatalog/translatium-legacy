@@ -447,7 +447,7 @@ const Settings = (props) => {
             <span role="img" aria-label="love">❤️</span>
             <span> by </span>
             <a
-              onClick={() => openUri('https://quang.im')}
+              onClick={() => openUri('https://twitter.com/quanglam2807')}
               role="link"
               tabIndex="0"
               className={classes.link}

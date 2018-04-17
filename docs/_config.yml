@@ -20,6 +20,3 @@ url: "https://translatiumapp.com" # the base hostname & protocol for your site, 
 
 # Build settings
 markdown: kramdown
-
-# Google Analytics
-google_analytics: UA-85519087-1
