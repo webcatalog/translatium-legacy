@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="55974nhutquang97.5translate" Version="2018.326.0.0" Publisher="CN=C635F506-DEEB-41A4-8CAA-16689F486ED2" />
+  <Identity Name="55974nhutquang97.5translate" Version="2018.426.0.0" Publisher="CN=quanglam2807" />
   <mp:PhoneIdentity PhoneProductId="542ac88d-3de3-42a5-b93e-4ff8110b203e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Translatium Translator</DisplayName>
@@ -27,15 +27,15 @@
         <uap:SplashScreen Image="build-resources\windows-images\Splash620x300.png" BackgroundColor="#43A047" />
       </uap:VisualElements>
       <Extensions>
-        <uap:Extension Category="windows.protocol">
-          <uap:Protocol Name="translatium">
-            <uap:DisplayName>Translatium</uap:DisplayName>
-          </uap:Protocol>
-        </uap:Extension>
         <uap:Extension Category="windows.shareTarget">
           <uap:ShareTarget Description="Translate text with Translatium">
             <uap:DataFormat>Text</uap:DataFormat>
           </uap:ShareTarget>
+        </uap:Extension>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="translatium">
+            <uap:DisplayName>Translatium</uap:DisplayName>
+          </uap:Protocol>
         </uap:Extension>
       </Extensions>
     </Application>
