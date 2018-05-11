@@ -1,0 +1,142 @@
+{
+	"home": "Strona Główna",
+	"phrasebook": "Rozmówki",
+	"settings": "Ustawienia",
+
+	"website": "Strona internetowa",
+
+	"typeSomethingHere": "Wpisz coś tutaj ...",
+
+	"clear": "Wyczyść",
+	"stop": "Zatrzymaj",
+	"listen": "Słuchaj",
+	"speak": "Mów",
+	"draw": "Pisz odręcznie",
+	"camera": "Aparat",
+	"openImageFile": "Otwórz plik obrazu",
+	"more": "Więcej",
+	"fullscreen": "Tryb pełnoekranowy",
+	"exitFullscreen": "Zamknij tryb pełnoekranowy",
+	"translate": "Przetłumacz",
+	"translateFrom": "Przetłumacz z",
+	"didYouMean": "Czy chodziło ci o",
+
+	"errorOccured": "Wystąpił błąd.",
+	"cannotConnectToServer": "Aplikacja nie może odnaleźć serwera. Sprawdź połączenie internetowe lub włącz tryb chiński, jeśli jesteś w Chinach.",
+	"cannotActivateMicrophone": "Aplikacja nie może aktywować mikrofonu.",
+	"cannotOpenTheFile": "Aplikacja nie może otworzyć wybranego pliku.",
+	"cannotRecognizeImage": "Aplikacja nie rozpoznaje żadnego tekstu na wybranym obrazie.",
+
+	"swap": "Zamień",
+	"biggerText": "Większy tekst",
+	"copy": "Kopiuj",
+	"copied": "Skopiowano do schowka",
+	"share": "Udostepnij",
+	"addToPhrasebook": "Dodaj do rozmówek",
+	"removeFromPhrasebook": "Usuń z rozmówek",
+
+	"translatedByGoogle": "Przetłumaczone przez Google.",
+
+	"fromLanguage": "z {1}",
+
+	"chooseAnInputLanguage": "Przetłumacz z",
+	"chooseAnOutputLanguage": "Przetłumacz na",
+
+	"displayOriginalText": "Wyświetlaj tekst źródłowy",
+	"displayTranslatedText": "Wyświetlaj tłumaczenie",
+	"copyOriginalText": "Kopiuj tekst źródłowy",
+	"copyTranslatedText": "Kopiuj tłumaczenie",
+	"displayTextOnly": "Wyświetlaj tylko tekst",
+	"phrasebookIsEmpty": "Rozmówki są puste.",
+
+	"delete": "Usuń",
+	"spaceBar": "Spacja",
+	"done": "Gotowe",
+
+	"red": "czerwony",
+	"pink": "róźowy",
+	"purple": "fioletowy",
+	"deepPurple": "głęboki fiolet",
+	"indigo": "indygo",
+	"blue": "niebieski",
+	"lightBlue": "jasny niebieski",
+	"cyan": "cyjan",
+	"teal": "morski",
+	"green": "zielony",
+	"lightGreen": "jasny zielony",
+	"orange": "pomarańczowy",
+	"deepOrange": "głęboka pomarańcz",
+	"brown": "brązowy",
+	"blueGrey": "niebiesko szary",
+	"grey": "szary",
+	"darkGrey": "ciemno szary",
+	"black": "czarny",
+
+	"darkMode": "Ciemny motyw",
+	"primaryColor": "Kolor podstawowy",
+	"preventScreenLock": "Zapobiegaj blokadzie ekranu",
+	"translateWhenPressingEnter": "Tłumacz po naciśnięciu klawisza Enter",
+	"realtime": "Tłumaczenie w czasie rzeczywistym",
+	"chinaMode": "Tryb chiński",
+	"chinaModeDesc": "Jeśli ten tryb jest włączony, Translatium będzie przesyłać dane do / z Tłumacza Google przez domenę google.cn zamiast google.com.",
+
+
+	"translations" : "Tłumaczenia",
+	"definitions" : "Definicje",
+	"synonyms" : "Synonimy",
+	"examples" : "Przykłady",
+	"seeAlso" : "Zobacz również",
+	"verb" : "Czasownik",
+	"noun" : "Rzeczownik",
+	"pronoun" : "Zaimek",
+	"exclamation" : "Wykrzyknienie",
+	"adjective" : "Przymiotnik",
+	"adverb" : "Przysłówek",
+	"abbreviation" : "Abrewiacja",
+	"interjection" :	"Wykrzyknienie",
+	"preposition": "Przyimek",
+
+	"rateMacAppStore": "Oceń Translatium w Mac App Store",
+	"rateWindowsStore": "Oceń Translatium w Sklepie Microsoft",
+
+	"displayLanguage": "Język aplikacji",
+	"change": "Zmień",
+	"close": "Zamknij",
+
+	"dockAndMenubar": "Dock & Pasek menu",
+	"showOnBothDockAndMenubar": "Pokaż na Docku i Pasku menu",
+	"onlyShowOnDock": "Pokaż tylko na Docku",
+	"onlyShowOnMenubar": "Pokaż tylko na Pasku Menu",
+	"quit": "Zamknij",
+
+	"appearance": "Wygląd",
+	"restartRequired": "wymagane ponowne uruchomienie",
+	"advanced": "Zaawansowane",
+	"about": "O",
+
+	"shortcuts": "Skróty klawiszowe",
+	"openOnMenubar": "Otwórz Translatium na Pasku menu",
+	"openInputLangList": "Wybierz język wprowadzania",
+	"openOutputLangList": "Wybierz język wyjściowy",
+	"swapLanguages": "Zamień języki",
+	"clearInput": "Wyczyść wprowadzany tekst",
+	"saveToPhrasebook": "Zapisz do rozmówek",
+
+	"searchLanguages": "Szukaj w językach",
+	"noLanguageFound": "Nie znaleziono języka",
+	"searchResults": "Wyniki wyszukiwania",
+	"recentlyUsed": "Ostatnio używane",
+	"allLanguagesAndDialects": "Wszystkie języki & dialekty",
+
+	"remove": "Usuń",
+	"andSaveToHistory": "& zapisz do historii",
+
+	"save": "Zapisz",
+	"resetToDefault": "Przywróć domyślne",
+	"cancel": "Anuluj",
+
+	"pasteFromClipboard": "Wklej ze schowka",
+
+	"translateClipboardOnShortcut": "Przetłumacz schowek skrótem",
+	"translateClipboardOnShortcutDesc": "Gdy otworzysz Translatium za pomocą skrótu, zawartość schowka zostanie automatycznie przetłumaczona."
+}
