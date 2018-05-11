@@ -11,4 +11,7 @@ export default {
   vi: {
     displayName: 'Tiếng Việt',
   },
+  pl: {
+    displayName: 'język polski',
+  },
 };
