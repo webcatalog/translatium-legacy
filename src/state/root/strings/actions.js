@@ -8,6 +8,8 @@ import ptApp from '../../../strings/pt_BR.app.json';
 import ptLanguages from '../../../strings/pt_BR.languages.json';
 import viApp from '../../../strings/vi.app.json';
 import viLanguages from '../../../strings/vi.languages.json';
+import plApp from '../../../strings/pl.app.json';
+import plLanguages from '../../../strings/pl.languages.json';
 
 export const updateStrings = langId => (dispatch) => {
   let strings;
@@ -22,6 +24,10 @@ export const updateStrings = langId => (dispatch) => {
     }
     case 'vi': {
       strings = { ...viApp, ...viLanguages };
+      break;
+    }
+    case 'pl': {
+      strings = { ...plApp, ...plLanguages };
       break;
     }
     default: {
