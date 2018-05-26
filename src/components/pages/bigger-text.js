@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { goBack } from 'react-router-redux';
 
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
-import CloseIcon from 'material-ui-icons/Close';
-import ZoomInIcon from 'material-ui-icons/ZoomIn';
-import ZoomOutIcon from 'material-ui-icons/ZoomOut';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import CloseIcon from '@material-ui/icons/Close';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 
 import connectComponent from '../../helpers/connect-component';
 
@@ -56,7 +56,6 @@ const BiggerText = (props) => {
     <div className={classes.container}>
       <Button
         variant="fab"
-        size="small"
         className={classes.closeButton}
         onClick={onCloseClick}
       >
@@ -64,7 +63,6 @@ const BiggerText = (props) => {
       </Button>
       <Button
         variant="fab"
-        size="small"
         className={classes.minusButton}
         onClick={() => {
           if (biggerTextFontSize < 10) return;
@@ -75,7 +73,6 @@ const BiggerText = (props) => {
       </Button>
       <Button
         variant="fab"
-        size="small"
         className={classes.plusButton}
         onClick={() => onUpdateBiggerTextFontSize(biggerTextFontSize + 5)}
       >

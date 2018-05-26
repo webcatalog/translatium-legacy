@@ -2,15 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'react-router-redux';
 
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import { LinearProgress } from 'material-ui/Progress';
-import IconButton from 'material-ui/IconButton';
-import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
-import ToggleStar from 'material-ui-icons/Star';
-import Divider from 'material-ui/Divider';
-import Tooltip from 'material-ui/Tooltip';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ToggleStar from '@material-ui/icons/Star';
+import Divider from '@material-ui/core/Divider';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import connectComponent from '../../helpers/connect-component';
 

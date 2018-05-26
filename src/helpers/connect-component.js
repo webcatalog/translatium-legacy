@@ -1,6 +1,6 @@
 // External Dependencies
 import { connect } from 'react-redux';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const connectComponent = (component, mapStateToProps, mapDispatchToProps, styles) => {
   const styledComponent = styles ?

@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { goBack } from 'react-router-redux';
 
-import Button from 'material-ui/Button';
-import CloseIcon from 'material-ui-icons/Close';
-import NavigationMoreVert from 'material-ui-icons/MoreVert';
-import { MenuItem } from 'material-ui/Menu';
-import IconButton from 'material-ui/IconButton';
-import ZoomInIcon from 'material-ui-icons/ZoomIn';
-import ZoomOutIcon from 'material-ui-icons/ZoomOut';
+import Button from '@material-ui/core/Button';
+import CloseIcon from '@material-ui/icons/Close';
+import NavigationMoreVert from '@material-ui/icons/MoreVert';
+import MenuItem from '@material-ui/core/MenuItem';
+import IconButton from '@material-ui/core/IconButton';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 
 import connectComponent from '../../helpers/connect-component';
 

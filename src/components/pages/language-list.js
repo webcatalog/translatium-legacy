@@ -3,16 +3,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { goBack } from 'react-router-redux';
 
-import AppBar from 'material-ui/AppBar';
-import CloseIcon from 'material-ui-icons/Close';
-import Divider from 'material-ui/Divider';
-import IconButton from 'material-ui/IconButton';
-import List, { ListItem, ListItemText } from 'material-ui/List';
-import ListSubheader from 'material-ui/List/ListSubheader';
-import Input from 'material-ui/Input/Input';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import grey from 'material-ui/colors/grey';
+import AppBar from '@material-ui/core/AppBar';
+import CloseIcon from '@material-ui/icons/Close';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import Input from '@material-ui/core/Input/Input';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import grey from '@material-ui/core/colors/grey';
 
 import connectComponent from '../../helpers/connect-component';
 

@@ -2,16 +2,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { MenuItem } from 'material-ui/Menu';
-import AppBar from 'material-ui/AppBar';
-import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import KeyboardArrowRightIcon from 'material-ui-icons/KeyboardArrowRight';
-import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
-import Paper from 'material-ui/Paper';
-import Switch from 'material-ui/Switch';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
+import MenuItem from '@material-ui/core/MenuItem';
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Paper from '@material-ui/core/Paper';
+import Switch from '@material-ui/core/Switch';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
 import connectComponent from '../../../helpers/connect-component';
 
