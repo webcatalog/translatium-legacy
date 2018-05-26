@@ -3,10 +3,10 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import createPalette from 'material-ui/styles/createPalette';
-import red from 'material-ui/colors/red';
-import pink from 'material-ui/colors/pink';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import createPalette from '@material-ui/core/styles/createPalette';
+import red from '@material-ui/core/colors/red';
+import pink from '@material-ui/core/colors/pink';
 
 import 'typeface-roboto/index.css';
 

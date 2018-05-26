@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Paper from 'material-ui/Paper';
-import Chip from 'material-ui/Chip';
-import Button from 'material-ui/Button';
+import Paper from '@material-ui/core/Paper';
+import Chip from '@material-ui/core/Chip';
+import Button from '@material-ui/core/Button';
 
 import connectComponent from '../../../helpers/connect-component';
 

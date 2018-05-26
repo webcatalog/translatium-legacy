@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { LinearProgress } from 'material-ui/Progress';
-import IconButton from 'material-ui/IconButton';
-import List, { ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
-import ActionDelete from 'material-ui-icons/Delete';
-import Divider from 'material-ui/Divider';
-import Tooltip from 'material-ui/Tooltip';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ActionDelete from '@material-ui/icons/Delete';
+import Divider from '@material-ui/core/Divider';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import connectComponent from '../../../helpers/connect-component';
 

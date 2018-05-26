@@ -4,11 +4,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
-import { CircularProgress } from 'material-ui/Progress';
-import AVMic from 'material-ui-icons/Mic';
-import AVStop from 'material-ui-icons/Stop';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import AVMic from '@material-ui/icons/Mic';
+import AVStop from '@material-ui/icons/Stop';
 
 import connectComponent from '../../../helpers/connect-component';
 

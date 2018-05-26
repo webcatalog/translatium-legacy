@@ -5,35 +5,39 @@ import { push } from 'react-router-redux';
 import classNames from 'classnames';
 import Mousetrap from 'mousetrap';
 
-import { CircularProgress } from 'material-ui/Progress';
-import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import AppBar from 'material-ui/AppBar';
-import Button from 'material-ui/Button';
-import Card, { CardActions, CardContent } from 'material-ui/Card';
-import IconButton from 'material-ui/IconButton';
-import Paper from 'material-ui/Paper';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import IconButton from '@material-ui/core/IconButton';
+import Paper from '@material-ui/core/Paper';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
-import ActionSwapHoriz from 'material-ui-icons/SwapHoriz';
-import ContentClear from 'material-ui-icons/Clear';
-import NavigationMoreVert from 'material-ui-icons/MoreVert';
-import ImageCameraAlt from 'material-ui-icons/CameraAlt';
-import ImageImage from 'material-ui-icons/Image';
-import ContentGesture from 'material-ui-icons/Gesture';
-import AVVolumeUp from 'material-ui-icons/VolumeUp';
-import AVStop from 'material-ui-icons/Stop';
-import AVMic from 'material-ui-icons/Mic';
-import ContentCopy from 'material-ui-icons/ContentCopy';
-import ContentPaste from 'material-ui-icons/ContentPaste';
-import SocialShare from 'material-ui-icons/Share';
-import EditorFormatSize from 'material-ui-icons/FormatSize';
-import ActionSwapVert from 'material-ui-icons/SwapVert';
-import ToggleStarBorder from 'material-ui-icons/StarBorder';
-import ToggleStar from 'material-ui-icons/Star';
-import NavigationFullscreen from 'material-ui-icons/Fullscreen';
-import NavigationFullscreenExit from 'material-ui-icons/FullscreenExit';
-import Tooltip from 'material-ui/Tooltip';
+import ActionSwapHoriz from '@material-ui/icons/SwapHoriz';
+import ContentClear from '@material-ui/icons/Clear';
+import NavigationMoreVert from '@material-ui/icons/MoreVert';
+import ImageCameraAlt from '@material-ui/icons/CameraAlt';
+import ImageImage from '@material-ui/icons/Image';
+import ContentGesture from '@material-ui/icons/Gesture';
+import AVVolumeUp from '@material-ui/icons/VolumeUp';
+import AVStop from '@material-ui/icons/Stop';
+import AVMic from '@material-ui/icons/Mic';
+import ContentCopy from '@material-ui/icons/ContentCopy';
+import ContentPaste from '@material-ui/icons/ContentPaste';
+import SocialShare from '@material-ui/icons/Share';
+import EditorFormatSize from '@material-ui/icons/FormatSize';
+import ActionSwapVert from '@material-ui/icons/SwapVert';
+import ToggleStarBorder from '@material-ui/icons/StarBorder';
+import ToggleStar from '@material-ui/icons/Star';
+import NavigationFullscreen from '@material-ui/icons/Fullscreen';
+import NavigationFullscreenExit from '@material-ui/icons/FullscreenExit';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import connectComponent from '../../../helpers/connect-component';
 
@@ -719,11 +723,9 @@ class Home extends React.Component {
                   <EnhancedMenu
                     id="homeMore"
                     buttonElement={(
-                      <Tooltip title={strings.more} placement={fullscreenInputBox ? 'top' : 'bottom'}>
-                        <IconButton aria-label={strings.more}>
-                          <NavigationMoreVert />
-                        </IconButton>
-                      </Tooltip>
+                      <IconButton aria-label={strings.more}>
+                        <NavigationMoreVert />
+                      </IconButton>
                     )}
                   >
                     {

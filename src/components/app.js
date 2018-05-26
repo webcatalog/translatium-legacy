@@ -2,14 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { replace, goBack } from 'react-router-redux';
 
-import { CircularProgress } from 'material-ui/Progress';
-import ActionHome from 'material-ui-icons/Home';
-import ActionSettings from 'material-ui-icons/Settings';
-import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
-import Button from 'material-ui/Button';
-import Paper from 'material-ui/Paper';
-import Snackbar from 'material-ui/Snackbar';
-import ToggleStar from 'material-ui-icons/Star';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import ActionHome from '@material-ui/icons/Home';
+import ActionSettings from '@material-ui/icons/Settings';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Snackbar from '@material-ui/core/Snackbar';
+import ToggleStar from '@material-ui/icons/Star';
 
 import connectComponent from '../helpers/connect-component';
 
