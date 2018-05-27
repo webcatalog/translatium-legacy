@@ -52,8 +52,8 @@
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en</DefaultLanguage>
-    <PackageCertificateKeyFile>windows_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>8384C2B61D752CBD1C9B32BA3AFCC7F2D9B167BB</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>windows_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>C0964D78C8263E3D1E677C2782205C7376FA2CEF</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
@@ -104,8 +104,8 @@
     <Content Include="build-resources\windows-images\Wide310x150.scale-200.png" />
     <Content Include="build-resources\windows-images\Wide310x150.scale-400.png" />
     <Content Include="build\**\**" />
-    <None Include="windows_TemporaryKey.pfx" />
     <None Include="windows_StoreKey.pfx" />
+    <None Include="windows_TemporaryKey.pfx" />
     <None Include="Package.xml" />
     <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
