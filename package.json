@@ -28,7 +28,7 @@
     "menubar": "5.2.3"
   },
   "devDependencies": {
-    "@material-ui/core": "1.1.0",
+    "@material-ui/core": "1.2.0",
     "@material-ui/icons": "1.1.0",
     "babel-cli": "6.26.0",
     "babel-preset-env": "1.7.0",
@@ -43,11 +43,11 @@
     "eslint-plugin-import": "2.12.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.8.2",
-    "esm": "3.0.38",
+    "esm": "3.0.46",
     "fs-extra": "6.0.1",
     "glob": "7.1.2",
     "history": "4.7.2",
-    "mousetrap": "1.6.1",
+    "mousetrap": "1.6.2",
     "pouchdb-browser": "6.4.3",
     "prop-types": "15.6.1",
     "react": "16.4.0",
@@ -58,7 +58,7 @@
     "react-scripts": "1.1.4",
     "recordrtc": "5.4.6",
     "redux": "3.7.2",
-    "redux-thunk": "2.2.0",
+    "redux-thunk": "2.3.0",
     "typeface-roboto": "0.0.54",
     "wait-on": "2.1.0"
   },
