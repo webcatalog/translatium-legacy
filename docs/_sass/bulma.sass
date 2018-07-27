@@ -1,13 +1,53 @@
 @import "./bulma/sass/utilities/initial-variables"
 @import "./bulma/sass/utilities/functions"
 
-$green: #43A047
+$blue: #43A047
 
-@import "./bulma/bulma"
+@import "./bulma/sass/utilities/_all.sass"
+@import "./bulma/sass/base/_all.sass"
+@import "./bulma/sass/layout/section.sass"
+@import "./bulma/sass/elements/button.sass"
+@import "./bulma/sass/elements/container.sass"
+@import "./bulma/sass/elements/content.sass"
+@import "./bulma/sass/grid/columns.sass"
+
 
 html, body
   height: 100%
 
+.main-page-head
+  background-color: #363636
+  color: #fff
+  padding: 0.5rem
+  text-align: center
+  font-size: 1.5rem
+  a
+    color: #fff
+    &:hover
+      text-decoration: underline
+
+.head
+  margin-bottom: 2rem
+  h1
+    font-family: "Futura"
+    font-weight: normal
+    font-style: italic
+    font-size: 5.5em
+    color: $blue
+
+  h2
+    font-family: "Futura"
+    font-weight: normal
+    font-style: italic
+    font-size: 1.4em
+    margin-top: -1.3em !important
+  @media screen and (max-width: 639px)
+    h1
+      font-size: 3.2em
+    h2
+      margin-top: -2.3em !important
+      font-size: 0.8em
+  
 body
   display: flex
   flex-direction: column
@@ -15,23 +55,19 @@ body
 main
   flex: 1
 
+.profile
+  transition: all 0.2s ease-in-out
+  border: 1px solid #f2f3f3
+  padding: 5px
+  max-width: 100px
+  border-radius: 50%
+
 .container
-  max-width: 980px
+  max-width: 640px
 
 .footer
-  background-color: transparent
-  padding: 0
   .container
     padding: 1.5em 1em
-  @media screen and (min-width: 960px)
-    ul
-      display: inline-table
-      li
-        float: left
-
-.app-icon
-  height: 96px
-  width: 96px
 
 .screenshot
   width: 100%
@@ -39,14 +75,18 @@ main
   &.is-small
     max-width: 560px
 
-.download-btn
-  img
-    height: 50px
+.section.extra-top
+  padding-top: 5em
 
-.navbar-item.logo
-  color: $green
-  font-weight: 600
-  font-size: 1.5em
+.browser-icon
+  height: 5em
+  width: 5em
 
-.navbar
-  z-index: 1
+.section
+  a:not(.button)
+    font-weight: 600
+    &:hover
+      text-decoration: underline !important
+
+.download-btn img
+  height: 50px
