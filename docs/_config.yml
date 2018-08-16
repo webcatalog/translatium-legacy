@@ -22,3 +22,5 @@ url: "https://translatiumapp.com" # the base hostname & protocol for your site, 
 markdown: kramdown
 plugins:
   - jekyll-redirect-from
+
+google_analytics: UA-124034530-2
