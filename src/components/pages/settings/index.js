@@ -450,7 +450,7 @@ const Settings = (props) => {
             <span role="img" aria-label="love">❤️</span>
             <span> by </span>
             <a
-              onClick={() => openUri('https://quanglam.me')}
+              onClick={() => openUri('https://quanglam2807.github.io')}
               role="link"
               tabIndex="0"
               className={classes.link}
