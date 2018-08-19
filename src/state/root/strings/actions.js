@@ -4,12 +4,14 @@ import deApp from '../../../strings/de.app.json';
 import deLanguages from '../../../strings/de.languages.json';
 import enApp from '../../../strings/en.app.json';
 import enLanguages from '../../../strings/en.languages.json';
+import plApp from '../../../strings/pl.app.json';
+import plLanguages from '../../../strings/pl.languages.json';
 import ptApp from '../../../strings/pt_BR.app.json';
 import ptLanguages from '../../../strings/pt_BR.languages.json';
 import viApp from '../../../strings/vi.app.json';
 import viLanguages from '../../../strings/vi.languages.json';
-import plApp from '../../../strings/pl.app.json';
-import plLanguages from '../../../strings/pl.languages.json';
+import zhLanguages from '../../../strings/zh-CN.languages.json';
+import zhApp from '../../../strings/zh-CN.app.json';
 
 export const updateStrings = langId => (dispatch) => {
   let strings;
@@ -22,12 +24,16 @@ export const updateStrings = langId => (dispatch) => {
       strings = { ...ptApp, ...ptLanguages };
       break;
     }
+    case 'pl': {
+      strings = { ...plApp, ...plLanguages };
+      break;
+    }
     case 'vi': {
       strings = { ...viApp, ...viLanguages };
       break;
     }
-    case 'pl': {
-      strings = { ...plApp, ...plLanguages };
+    case 'zh': {
+      strings = { ...zhApp, ...zhLanguages };
       break;
     }
     default: {

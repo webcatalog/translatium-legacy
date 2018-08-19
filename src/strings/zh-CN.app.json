@@ -1,0 +1,142 @@
+{
+	"home": "主页",
+	"phrasebook": "收藏夹",
+	"settings": "设置",
+
+	"website": "Translatium 官网",
+
+	"typeSomethingHere": "请输入翻译内容...",
+
+	"clear": "清空",
+	"stop": "停止",
+	"listen": "朗读",
+	"speak": "录音",
+	"draw": "手写",
+	"camera": "Camera",
+	"openImageFile": "打开图片文件",
+	"more": "更多",
+	"fullscreen": "全屏",
+	"exitFullscreen": "退出全屏",
+	"translate": "翻译",
+	"translateFrom": "翻译自",
+	"didYouMean": "你是想找",
+
+    "errorOccured": "发生错误",
+    "cannotConnectToServer":"应用程序无法连接服务器。请检查您的互联网连接。如果您在中国，请在「设置」中打开「中国模式」。",
+	"cannotActivateMicrophone": "应用程序无法激活您的麦克风。",
+	"cannotOpenTheFile": "应用程序无法打开您选择的文件。",
+	"cannotRecognizeImage": "应用程序无法识别您图像上的任何文字。",
+
+	"swap": "交换",
+	"biggerText": "大文字",
+	"copy": "拷贝",
+	"copied": "拷贝到剪贴板",
+	"share": "分享",
+	"addToPhrasebook": "添加到收藏夹",
+	"removeFromPhrasebook": "从收藏夹移除",
+
+	"translatedByGoogle": "Translated by Google.",
+
+	"fromLanguage": "从 {1}",
+
+	"chooseAnInputLanguage": "翻译自",
+	"chooseAnOutputLanguage": "翻译为",
+
+	"displayOriginalText": "显示原文字",
+	"displayTranslatedText": "显示翻译文字",
+	"copyOriginalText": "拷贝原文字",
+	"copyTranslatedText": "拷贝翻译文字",
+	"displayTextOnly": "仅显示文字",
+	"phrasebookIsEmpty": "收藏夹空空如也",
+
+	"delete": "删除",
+	"spaceBar": "空格键",
+	"done": "完成",
+
+	"red": "红色",
+	"pink": "粉色",
+	"purple": "紫色",
+	"deepPurple": "深紫色",
+	"indigo": "靛青色",
+	"blue": "蓝色",
+	"lightBlue": "浅蓝色",
+	"cyan": "青色",
+	"teal": "蓝绿色",
+	"green": "绿色",
+	"lightGreen": "浅绿色",
+	"orange": "橙色",
+	"deepOrange": "深橙色",
+	"brown": "棕色",
+	"blueGrey": "蓝灰色",
+	"grey": "灰色",
+	"darkGrey": "深灰色",
+	"black": "黑色",
+
+	"darkMode": "黑暗模式",
+	"primaryColor": "主色调",
+	"preventScreenLock": "防止屏幕锁定",
+	"translateWhenPressingEnter": "按下「Enter」翻译",
+	"realtime": "实时翻译",
+	"chinaMode": "中国模式",
+	"chinaModeDesc": "如果启用此模式，Translatium 将通过域名 google.cn 而非 google.com 与 Google Translate 之间传输数据。",
+
+
+	"translations" : "翻译",
+	"definitions" : "定义",
+	"synonyms" : "近义词",
+	"examples" : "范例",
+	"seeAlso" : "参看",
+	"verb" : "动词",
+	"noun" : "名词",
+	"pronoun" : "代词",
+	"exclamation" : "感叹词",
+	"adjective" : "形容词",
+	"adverb" : "副词",
+	"abbreviation" : "缩写",
+	"interjection" : "感叹语",
+	"preposition": "介词",
+
+	"rateMacAppStore": "在 Mac App Store 上评价 Translatium",
+	"rateWindowsStore": "在 Windows Store 上评价 Translatium",
+
+	"displayLanguage": "显示语言",
+	"change": "更改",
+	"close": "关闭",
+
+	"dockAndMenubar": "程序坞和菜单栏",
+	"showOnBothDockAndMenubar": "在程序坞和菜单栏上显示",
+	"onlyShowOnDock": "仅在程序坞上显示",
+	"onlyShowOnMenubar": "仅在菜单栏上显示",
+	"quit": "退出",
+
+	"appearance": "外观",
+	"restartRequired": "需要重启",
+	"advanced": "高级",
+	"about": "关于",
+
+	"shortcuts": "键盘快捷键",
+	"openOnMenubar": "在菜单栏上打开 Translatium",
+	"openInputLangList": "选择输入语言",
+	"openOutputLangList": "选择输出语言",
+	"swapLanguages": "交换翻译语言",
+	"clearInput": "清空输入文字",
+	"saveToPhrasebook": "保存到收藏夹",
+
+	"searchLanguages": "搜索语言",
+	"noLanguageFound": "没有找到对应语言",
+	"searchResults": "搜索结果",
+	"recentlyUsed": "最近使用",
+	"allLanguagesAndDialects": "所有语言和方言",
+
+	"remove": "移除",
+	"andSaveToHistory": "翻译并保存到历史记录",
+
+	"save": "保存",
+	"resetToDefault": "重置为默认",
+	"cancel": "取消",
+
+	"pasteFromClipboard": "从剪贴板粘贴",
+
+	"translateClipboardOnShortcut": "快捷翻译",
+	"translateClipboardOnShortcutDesc": "当您使用快捷方式打开 Translatium 时，它将自动翻译您剪贴板的内容。"
+}

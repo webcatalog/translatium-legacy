@@ -10,6 +10,8 @@
 1. Xcode (latest).
 2. Node.js 8+.
 
+Run `yarn` to install dependencies.
+
 **Development**
 `yarn electron-dev`
 
@@ -22,6 +24,8 @@
 **Requirements**
 1. Visual Studio 2017.
 2. Node.js 8+.
+
+Run `yarn` to install dependencies.
 
 **Development**
 1. `yarn build`
