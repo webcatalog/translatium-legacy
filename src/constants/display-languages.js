@@ -8,10 +8,13 @@ export default {
   pt_BR: {
     displayName: 'Português do Brasil',
   },
+  pl: {
+    displayName: 'język polski',
+  },
   vi: {
     displayName: 'Tiếng Việt',
   },
-  pl: {
-    displayName: 'język polski',
+  zh: {
+    displayName: '中文',
   },
 };
