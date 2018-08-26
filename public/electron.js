@@ -19,8 +19,12 @@ const {
 
 const config = require('./config');
 
+// Register protocol
+app.setAsDefaultProtocolClient('translatium');
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
+let mb;
 let mainWindow;
 let menu;
 
@@ -163,7 +167,7 @@ function createMenubar() {
   }
 
   // Menubar
-  const mb = menubar({
+  mb = menubar({
     dir: path.resolve(__dirname),
     icon: path.resolve(__dirname, 'images', 'iconTemplate.png'),
     width: 400,
@@ -223,5 +227,23 @@ app.on('activate', () => {
   // dock icon is clicked and there are no other windows open.
   if (mainWindow == null) {
     createWindow();
+  }
+});
+
+app.on('open-url', (e, url) => {
+  e.preventDefault();
+
+  if (url.startsWith('translatium://')) {
+    const text = decodeURIComponent(url.replace(/\+/g, ' ').substring(14));
+
+    if (mainWindow) {
+      mainWindow.send('set-input-lang', 'auto');
+      mainWindow.send('set-input-text', text);
+    }
+
+    if (mb && mb.window) {
+      mb.window.send('set-input-lang', 'auto');
+      mb.window.send('set-input-text', text);
+    }
   }
 });

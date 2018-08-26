@@ -31,6 +31,10 @@ builder.build({
     directories: {
       buildResources: 'build-resources',
     },
+    protocols: {
+      name: 'Translatium',
+      schemes: ['translatium'],
+    },
     afterPack: ({ appOutDir }) =>
       new Promise((resolve, reject) => {
         console.log('afterPack', appOutDir, process.platform);
