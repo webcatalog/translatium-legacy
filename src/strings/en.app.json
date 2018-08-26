@@ -138,5 +138,7 @@
 	"pasteFromClipboard": "Paste from Clipboard",
 
 	"translateClipboardOnShortcut": "Translate clipboard on shortcut",
-	"translateClipboardOnShortcutDesc": "When you open Translatium with a shortcut, it will automatically translate your clipboard contents."
+	"translateClipboardOnShortcutDesc": "When you open Translatium with a shortcut, it will automatically translate your clipboard contents.",
+
+	"popclipExtension": "PopClip Extension"
 }

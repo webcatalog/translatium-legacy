@@ -5,6 +5,7 @@ const electron = require('electron');
 const menubar = require('menubar');
 const path = require('path');
 const settings = require('electron-settings');
+const url = require('url');
 
 const isDev = require('electron-is-dev');
 
@@ -230,11 +231,12 @@ app.on('activate', () => {
   }
 });
 
-app.on('open-url', (e, url) => {
+app.on('open-url', (e, urlStr) => {
   e.preventDefault();
 
-  if (url.startsWith('translatium://')) {
-    const text = decodeURIComponent(url.replace(/\+/g, ' ').substring(14));
+  if (urlStr.startsWith('translatium://')) {
+    const urlObj = url.parse(urlStr, true);
+    const text = decodeURIComponent(urlObj.query.text || '');
 
     if (mainWindow) {
       mainWindow.send('set-input-lang', 'auto');

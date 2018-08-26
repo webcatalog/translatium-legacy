@@ -368,6 +368,14 @@ const Settings = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
+            {getPlatform() === 'electron' && (
+              <ListItem
+                button
+                onClick={() => openUri('https://pilotmoon.com/popclip/extensions/page/Translatium')}
+              >
+                <ListItemText primary={strings.popclipExtension} />
+              </ListItem>
+            )}
           </List>
         </Paper>
 
