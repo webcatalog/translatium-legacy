@@ -5,6 +5,7 @@ const electron = require('electron');
 const menubar = require('menubar');
 const path = require('path');
 const settings = require('electron-settings');
+const url = require('url');
 
 const isDev = require('electron-is-dev');
 
@@ -19,8 +20,12 @@ const {
 
 const config = require('./config');
 
+// Register protocol
+app.setAsDefaultProtocolClient('translatium');
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
+let mb;
 let mainWindow;
 let menu;
 
@@ -163,7 +168,7 @@ function createMenubar() {
   }
 
   // Menubar
-  const mb = menubar({
+  mb = menubar({
     dir: path.resolve(__dirname),
     icon: path.resolve(__dirname, 'images', 'iconTemplate.png'),
     width: 400,
@@ -223,5 +228,24 @@ app.on('activate', () => {
   // dock icon is clicked and there are no other windows open.
   if (mainWindow == null) {
     createWindow();
+  }
+});
+
+app.on('open-url', (e, urlStr) => {
+  e.preventDefault();
+
+  if (urlStr.startsWith('translatium://')) {
+    const urlObj = url.parse(urlStr, true);
+    const text = decodeURIComponent(urlObj.query.text || '');
+
+    if (mainWindow) {
+      mainWindow.send('set-input-lang', 'auto');
+      mainWindow.send('set-input-text', text);
+    }
+
+    if (mb && mb.window) {
+      mb.window.send('set-input-lang', 'auto');
+      mb.window.send('set-input-text', text);
+    }
   }
 });

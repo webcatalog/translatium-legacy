@@ -368,6 +368,14 @@ const Settings = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
+            {getPlatform() === 'electron' && (
+              <ListItem
+                button
+                onClick={() => openUri('https://translatiumapp.com/popclip')}
+              >
+                <ListItemText primary={strings.popclipExtension} />
+              </ListItem>
+            )}
           </List>
         </Paper>
 

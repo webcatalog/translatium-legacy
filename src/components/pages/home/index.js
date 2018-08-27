@@ -1,4 +1,4 @@
-/* global Windows ipcRenderer */
+/* global Windows */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { push } from 'react-router-redux';
@@ -190,7 +190,6 @@ class Home extends React.Component {
       onSwapButtonClick,
       onTogglePhrasebookClick,
       onWriteButtonClick,
-      onUpdateInputText,
 
       cameraShortcut,
       clearInputShortcut,
@@ -204,11 +203,6 @@ class Home extends React.Component {
       swapLanguagesShortcut,
     } = this.props;
 
-    if (getPlatform() === 'electron') {
-      ipcRenderer.on('set-input-text', (e, text) => {
-        onUpdateInputText(text);
-      });
-    }
 
     Mousetrap.bind(openInputLangListShortcut, (e) => {
       e.preventDefault();
@@ -793,7 +787,6 @@ Home.propTypes = {
   onTogglePhrasebookClick: PropTypes.func.isRequired,
   onTranslateButtonClick: PropTypes.func.isRequired,
   onWriteButtonClick: PropTypes.func.isRequired,
-  onUpdateInputText: PropTypes.func.isRequired,
   output: PropTypes.object,
   outputLang: PropTypes.string,
   preventScreenLock: PropTypes.bool,
@@ -862,9 +855,6 @@ const mapDispatchToProps = dispatch => ({
     const inputText = e.target.value;
 
     dispatch(updateInputText(inputText, e.target.selectionStart, e.target.selectionEnd));
-  },
-  onUpdateInputText: (inputText) => {
-    dispatch(updateInputText(inputText, 0, 0));
   },
   onClearButtonClick: () => dispatch(updateInputText('')),
   onInsertText: text => dispatch(insertInputText(text)),

@@ -27,9 +27,14 @@ builder.build({
     productName,
     files: [
       '!docs/**/*',
+      '!popclip/**/*',
     ],
     directories: {
       buildResources: 'build-resources',
+    },
+    protocols: {
+      name: 'Translatium',
+      schemes: ['translatium'],
     },
     afterPack: ({ appOutDir }) =>
       new Promise((resolve, reject) => {

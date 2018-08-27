@@ -1,3 +1,4 @@
+/* global ipcRenderer */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { replace, goBack } from 'react-router-redux';
@@ -15,8 +16,9 @@ import ToggleStar from '@material-ui/icons/Star';
 import connectComponent from '../helpers/connect-component';
 
 import { screenResize } from '../state/root/screen/actions';
-import { updateImeMode } from '../state/pages/home/actions';
+import { updateImeMode, updateInputText } from '../state/pages/home/actions';
 import { closeSnackbar } from '../state/root/snackbar/actions';
+import { updateInputLang } from '../state/root/settings/actions';
 
 import colorPairs from '../constants/colors';
 
@@ -74,6 +76,8 @@ class App extends React.Component {
     const {
       primaryColorId,
       onBackClick,
+      onUpdateInputText,
+      onUpdateInputLang,
     } = this.props;
 
     this.setAppTitleBar(primaryColorId);
@@ -92,6 +96,16 @@ class App extends React.Component {
     }
 
     window.addEventListener('resize', this.props.onResize);
+
+    if (getPlatform() === 'electron') {
+      ipcRenderer.on('set-input-text', (e, text) => {
+        onUpdateInputText(text);
+      });
+
+      ipcRenderer.on('set-input-lang', (e, value) => {
+        onUpdateInputLang(value);
+      });
+    }
   }
 
   componentWillUpdate(nextProps) {
@@ -220,6 +234,8 @@ App.propTypes = {
   onBottomNavigationActionClick: PropTypes.func.isRequired,
   onRequestCloseSnackbar: PropTypes.func.isRequired,
   onResize: PropTypes.func.isRequired,
+  onUpdateInputLang: PropTypes.func.isRequired,
+  onUpdateInputText: PropTypes.func.isRequired,
   primaryColorId: PropTypes.string,
   shouldShowBottomNav: PropTypes.bool.isRequired,
   snackbarMessage: PropTypes.string,
@@ -267,6 +283,12 @@ const mapDispatchToProps = dispatch => ({
   onBottomNavigationActionClick: pathname => dispatch(replace(pathname)),
   onBackClick: () => dispatch(goBack()),
   onRequestCloseSnackbar: () => dispatch(closeSnackbar()),
+  onUpdateInputText: (inputText) => {
+    dispatch(updateInputText(inputText, 0, 0));
+  },
+  onUpdateInputLang: (value) => {
+    dispatch(updateInputLang(value));
+  },
 });
 
 export default connectComponent(
