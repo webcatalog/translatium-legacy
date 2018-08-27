@@ -27,6 +27,7 @@ builder.build({
     productName,
     files: [
       '!docs/**/*',
+      '!popclip/**/*',
     ],
     directories: {
       buildResources: 'build-resources',
