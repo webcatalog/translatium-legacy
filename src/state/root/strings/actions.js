@@ -10,8 +10,8 @@ import ptApp from '../../../strings/pt_BR.app.json';
 import ptLanguages from '../../../strings/pt_BR.languages.json';
 import viApp from '../../../strings/vi.app.json';
 import viLanguages from '../../../strings/vi.languages.json';
-import zhLanguages from '../../../strings/zh-CN.languages.json';
-import zhApp from '../../../strings/zh-CN.app.json';
+import zhLanguages from '../../../strings/zh_CN.languages.json';
+import zhApp from '../../../strings/zh_CN.app.json';
 
 export const updateStrings = langId => (dispatch) => {
   let strings;
