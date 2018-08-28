@@ -5,7 +5,7 @@ import displayLanguages from '../constants/display-languages';
 // strip country code from langId
 // en-US => en / vi-vn => vi
 const getLanguageCode = (langId) => {
-  const parts = langId.toLowerCase().split('-');
+  const parts = langId.toLowerCase().replace('_', '-').split('-');
 
   return parts[0];
 };

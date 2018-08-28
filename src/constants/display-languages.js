@@ -14,7 +14,7 @@ export default {
   vi: {
     displayName: 'Tiếng Việt',
   },
-  zh: {
+  zh_CN: {
     displayName: '中文',
   },
 };
