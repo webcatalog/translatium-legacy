@@ -140,5 +140,7 @@
 	"translateClipboardOnShortcut": "Traduzir a área de transferência no atalho",
 	"translateClipboardOnShortcutDesc": "Quando você abre o Translatium com um atalho, ele irá traduzir automaticamente o conteúdo da área de transferência.",
 
-	"popclipExtension": "PopClip Extension"
+	"popclipExtension": "PopClip Extension",
+
+	"support": "Suporte"
 }

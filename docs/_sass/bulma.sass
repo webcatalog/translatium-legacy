@@ -1,85 +1,28 @@
 @import "./bulma/sass/utilities/initial-variables"
 @import "./bulma/sass/utilities/functions"
 
-$blue: #43A047
+$blue: #388E3C
+$green: #388E3C
+$footer-background-color: #fff
+$weight-semibold: 500
+$navbar-burger-color: #fff
 
-@import "./bulma/sass/utilities/_all.sass"
-@import "./bulma/sass/base/_all.sass"
-@import "./bulma/sass/layout/section.sass"
-@import "./bulma/sass/elements/button.sass"
-@import "./bulma/sass/elements/container.sass"
-@import "./bulma/sass/elements/content.sass"
-@import "./bulma/sass/grid/columns.sass"
+@import "./bulma/bulma.sass"
 
-
-html, body
-  height: 100%
-
-.main-page-head
-  padding: 0.5rem
-  text-align: center
-  font-size: 1.5rem
-  a
-    color: #000
-    &:hover
-      text-decoration: underline
-
-.head
-  margin-bottom: 2rem
-  h1
-    font-size: 4em
-    color: $blue
-    line-height: 1.2
-    font-weight: 400
-
-  h2
-    font-size: 1.4em
-    line-height: 1
-  @media screen and (max-width: 639px)
-    h1
-      font-size: 3.2em
-    h2
-      font-size: 0.8em
-  
 body
+  min-height: 100vh
   display: flex
   flex-direction: column
 
 main
   flex: 1
 
-.profile
-  transition: all 0.2s ease-in-out
-  border: 1px solid #f2f3f3
-  padding: 5px
-  max-width: 100px
-  border-radius: 50%
-
-.container
-  max-width: 640px
-
 .footer
-  .container
-    padding: 1.5em 1em
-
-.screenshot
-  width: 100%
-  max-width: 760px
-  &.is-small
-    max-width: 560px
-
-.section.extra-top
-  padding-top: 5em
-
-.browser-icon
-  height: 5em
-  width: 5em
-
-.section
-  a:not(.button)
-    font-weight: 600
-    &:hover
-      text-decoration: underline !important
+  padding: 1.5em
 
 .download-btn img
   height: 50px
+
+.screenshot
+  max-width: 512px
+  width: 100%

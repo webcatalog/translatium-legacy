@@ -4,41 +4,82 @@
   {% include head.html %}
 
   <body>
-    <div class="main-page-head">
-      <a href="https://quanglam2807.github.io">Quang Lam</a>
-    </div>
+    <section class="hero is-link">
+      <div class="hero-head">
+        <nav class="navbar is-spaced">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="/">
+                <img src="{{ '/images/logo-white.png' | relative_url }}" alt="Translatium">
+              </a>
+              <span class="navbar-burger burger" data-target="navbarMenu" aria-label="menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+              <div class="navbar-end">
+                <a class="navbar-item" href="/privacy">
+                  Privacy
+                </a>
+                <a class="navbar-item" href="/support">
+                  Support
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    
+      {% if page.id == 'index' %}
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title is-2">
+            Translatium
+          </h1>
+          <h2 class="subtitle">
+            The Most Powerful Translation App for Desktop.
+          </h2>
+    
+          <p style="margin-bottom: 1em">
+            <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing" class="download-btn">
+              <img src="{{ '/images/microsoft-store.png' | relative_url }}" alt="Microsoft Store" />
+            </a>
+            <a href="https://itunes.apple.com/us/app/translatium/id1176624652" class="download-btn">
+              <img src="{{ '/images/mac-app-store.png' | relative_url }}" alt="Mac App Store" />
+            </a>
+          </p>
+          
+          <img src="{{ '/images/translatium-screenshot.png' | relative_url }}" alt="Translatium on macOS" class="screenshot" />
+        </div>
+      </div>
+      {% else %}
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title">
+            {{ page.title }}
+          </h1>
+        </div>
+      </div>
+      {% endif %}
+    </section>        
     <main>
       {{ content }}
     </main>
     <footer class="footer">
       <div class="container has-text-centered">
-        <p>
-          <span>Made with </span>
-          <span style="color: #F44336">❤</span>
-          <span> by </span>
-          <a href="https://quanglam2807.github.io">Quang Lam</a>.
-        </p>
+        <p><small>
+          <span>Made with ❤ by </span>
+          <a href="https://github.com/quanglam2807">Quang Lam</a>.
+        </small></p>
+        <p><small>
+            <span>Translatium is </span>
+            <a href="https://github.com/translatium">open source</a>.
+          </small></p>
       </div>
     </footer>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        // Get all "navbar-burger" elements
-        var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-        // Check if there are any navbar burgers
-        if ($navbarBurgers.length > 0) {
-          // Add a click event on each of them
-          $navbarBurgers.forEach(function ($el) {
-            $el.addEventListener('click', function () {
-              // Get the target from the "data-target" attribute
-              var target = $el.dataset.target;
-              var $target = document.getElementById(target);
-              // Toggle the class on both the "navbar-burger" and the "navbar-menu"
-              $el.classList.toggle('is-active');
-              $target.classList.toggle('is-active');
-            });
-          });
-        }
-      });
-    </script>
+
+    <script src="{{ '/assets/app.min.js' | relative_url }}"></script>
   </body>
 </html>

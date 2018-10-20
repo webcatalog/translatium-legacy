@@ -140,5 +140,7 @@
 	"translateClipboardOnShortcut": "Übersetze Zwischenablage mit Tastaturkürzel",
 	"translateClipboardOnShortcutDesc": "WEnn du Translatium mit einem Tastenkürzel öffnest, wird es automatisch den Inhalt deiner Zwischenablage übersetzen.",
 
-	"popclipExtension": "PopClip Extension"
+	"popclipExtension": "PopClip Extension",
+
+	"support": "Unterstützung"
 }

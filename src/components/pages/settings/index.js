@@ -453,6 +453,11 @@ const Settings = (props) => {
           </Button>
           <br />
 
+          <Button onClick={() => openUri('https://translatiumapp.com/support')}>
+            {strings.support}
+          </Button>
+          <br />
+
           <Typography variant="body1" className={classes.madeBy}>
             <span>Made with </span>
             <span role="img" aria-label="love">❤️</span>
