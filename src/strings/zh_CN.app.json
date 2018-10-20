@@ -140,5 +140,7 @@
 	"translateClipboardOnShortcut": "快捷翻译",
 	"translateClipboardOnShortcutDesc": "当您使用快捷方式打开 Translatium 时，它将自动翻译您剪贴板的内容。",
 
-	"popclipExtension": "PopClip Extension"
+	"popclipExtension": "PopClip Extension",
+
+	"support": "支持"
 }

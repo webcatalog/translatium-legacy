@@ -68,7 +68,7 @@ function getMenuTemplate() {
         },
         {
           label: 'Report an Issue...',
-          click: () => electron.shell.openExternal('https://github.com/quanglam2807/translatium/issues'),
+          click: () => electron.shell.openExternal('https://github.com/translatium/translatium/issues'),
         },
       ],
     },

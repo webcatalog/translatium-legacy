@@ -140,5 +140,7 @@
 	"translateClipboardOnShortcut": "Przetłumacz schowek skrótem",
 	"translateClipboardOnShortcutDesc": "Gdy otworzysz Translatium za pomocą skrótu, zawartość schowka zostanie automatycznie przetłumaczona.",
 
-	"popclipExtension": "PopClip Extension"
+	"popclipExtension": "PopClip Extension",
+
+	"support": "Wsparcie"
 }

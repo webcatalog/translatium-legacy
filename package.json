@@ -3,11 +3,10 @@
   "description": "Google Translate client for macOS & Windows",
   "version": "8.6.1",
   "main": "public/electron.js",
-  "repository": "https://github.com/quanglam2807/translatium",
+  "repository": "https://github.com/translatium/translatium",
   "author": {
     "name": "Quang Lam",
-    "email": "quang.lam2807@gmail.com",
-    "url": "https://quanglam2807.github.io"
+    "email": "quang.lam2807@gmail.com"
   },
   "license": "MPL-2.0",
   "engines": {
