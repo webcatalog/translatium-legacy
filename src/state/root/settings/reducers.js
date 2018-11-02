@@ -13,7 +13,6 @@ export const defaultState = {
   inputLang: 'en',
   langId: getDefaultLangId(),
   outputLang: 'zh',
-  preventScreenLock: false,
   primaryColorId: 'green',
   realtime: true,
   recentLanguages: ['en', 'zh'],

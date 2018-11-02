@@ -1,4 +1,4 @@
-/* global Windows ipcRenderer */
+/* global ipcRenderer */
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -66,34 +66,8 @@ export const runApp = (isRestart) => {
   );
 };
 
-switch (getPlatform()) {
-  case 'windows': {
-    Windows.UI.WebUI.WebUIApplication.onactivated = (args) => {
-      if (
-        (args.kind === Windows.ApplicationModel.Activation.ActivationKind.shareTarget)
-        && (args.shareOperation.data
-          .contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.text))
-      ) {
-        args.shareOperation.data.getTextAsync().done((text) => {
-          store.dispatch(updateInputText(text));
-          runApp();
-        });
-      } else {
-        runApp();
-      }
-    };
-    break;
-  }
-  case 'electron': {
-    runApp();
+runApp();
 
-    const state = store.getState();
-    const openOnMenubarShortcut = state.settings.openOnMenubarShortcut;
-    ipcRenderer.send('set-show-menubar-shortcut', openOnMenubarShortcut);
-
-    break;
-  }
-  default: {
-    runApp();
-  }
-}
+const state = store.getState();
+const openOnMenubarShortcut = state.settings.openOnMenubarShortcut;
+ipcRenderer.send('set-show-menubar-shortcut', openOnMenubarShortcut);

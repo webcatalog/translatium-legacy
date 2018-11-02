@@ -28,7 +28,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
       });
 
       // compress
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         const imageObj = new Image();
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
@@ -44,51 +44,12 @@ export const loadImage = fromCamera => (dispatch, getState) => {
           context.clearRect(0, 0, maxWidth, maxHeight);
           context.drawImage(imageObj, 0, 0, this.width, this.height, 0, 0, maxWidth, maxHeight);
 
-          switch (getPlatform()) {
-            case 'windows': {
-              const inMemoryRandomAccessStream =
-                new Windows.Storage.Streams.InMemoryRandomAccessStream();
-              Windows.Graphics.Imaging.BitmapEncoder.createAsync(
-                Windows.Graphics.Imaging.BitmapEncoder.jpegEncoderId,
-                inMemoryRandomAccessStream,
-              )
-                .then((encoder) => {
-                // Set the pixel data in the encoder
-                  encoder.setPixelData(
-                    Windows.Graphics.Imaging.BitmapPixelFormat.rgba8,
-                    Windows.Graphics.Imaging.BitmapAlphaMode.straight,
-                    canvas.width,
-                    canvas.height,
-                    96,
-                    96,
-                    new Uint8Array(context.getImageData(0, 0, canvas.width, canvas.height).data),
-                  );
-
-                  // Go do the encoding
-                  return encoder.flushAsync();
-                })
-                .then(() => {
-                  const blob = MSApp.createBlobFromRandomAccessStream(
-                    'image/jpeg',
-                    inMemoryRandomAccessStream,
-                  );
-                  resolve({
-                    blob,
-                    fileName: result.fileName,
-                  });
-                })
-                .then(null, err => reject(err));
-              break;
-            }
-            default: {
-              canvas.toBlob((blob) => {
-                resolve({
-                  blob,
-                  fileName: result.fileName,
-                });
-              }, 'image/jpeg', 50);
-            }
-          }
+          canvas.toBlob((blob) => {
+            resolve({
+              blob,
+              fileName: result.fileName,
+            });
+          }, 'image/jpeg', 50);
         };
 
         imageObj.src = URL.createObjectURL(result.blob, { oneTimeOnly: true });

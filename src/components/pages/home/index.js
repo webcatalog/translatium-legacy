@@ -1,4 +1,3 @@
-/* global Windows */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { push } from 'react-router-redux';
@@ -171,14 +170,6 @@ const styles = theme => ({
 
 class Home extends React.Component {
   componentDidMount() {
-    if (getPlatform() === 'windows') {
-      const { preventScreenLock } = this.props;
-      if (preventScreenLock === true) {
-        this.dispRequest = new Windows.System.Display.DisplayRequest();
-        this.dispRequest.requestActive();
-      }
-    }
-
     const {
       onAnotherContainerClick,
       onCameraButtonClick,
@@ -789,7 +780,6 @@ Home.propTypes = {
   onWriteButtonClick: PropTypes.func.isRequired,
   output: PropTypes.object,
   outputLang: PropTypes.string,
-  preventScreenLock: PropTypes.bool,
   screenWidth: PropTypes.number,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
   textToSpeechPlaying: PropTypes.bool,
@@ -810,7 +800,6 @@ Home.propTypes = {
 const mapStateToProps = state => ({
   screenWidth: state.screen.screenWidth,
   translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
-  preventScreenLock: state.settings.preventingScreenLock,
   inputLang: state.settings.inputLang,
   outputLang: state.settings.outputLang,
   inputText: state.pages.home.inputText,

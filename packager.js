@@ -7,20 +7,33 @@ const del = require('del');
 const electronVersion = require('./package.json').devDependencies.electron;
 const displayLanguages = require('./src/constants/display-languages').default;
 
-const { Platform } = builder;
-
-if (process.platform !== 'darwin') {
-  console.log(`${process.platform} is not supported.`);
-  process.exit(0);
-}
+const { Platform, Arch } = builder;
 
 console.log(`Packaging for ${process.platform}`);
 
 const productName = 'Translatium';
 
+let targets;
+
+switch (process.platform) {
+  case 'darwin': {
+    targets = Platform.MAC.createTarget(['mas']);
+    break;
+  }
+  case 'win32': {
+    targets = Platform.WINDOWS.createTarget(['appx']);
+    break;
+  }
+  default:
+  case 'linux': {
+    targets = Platform.LINUX.createTarget(['snap'], Arch.x64);
+    break;
+  }
+}
+
 // Promise is returned
 builder.build({
-  targets: Platform.MAC.createTarget(['zip', 'mas']),
+  targets,
   config: {
     electronVersion,
     appId: 'com.moderntranslator.app',

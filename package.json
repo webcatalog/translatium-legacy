@@ -10,7 +10,7 @@
   },
   "license": "MPL-2.0",
   "engines": {
-    "node": "8"
+    "node": "10"
   },
   "scripts": {
     "start": "cross-env REACT_APP_GOOGLE_ENDPOINT=http://localhost:3000 BROWSER=none react-scripts start",
@@ -27,12 +27,12 @@
     "menubar": "5.2.3"
   },
   "devDependencies": {
-    "@material-ui/core": "1.5.0",
-    "@material-ui/icons": "2.0.2",
+    "@material-ui/core": "3.3.2",
+    "@material-ui/icons": "3.0.1",
     "babel-cli": "6.26.0",
     "babel-preset-env": "1.7.0",
     "classnames": "2.2.6",
-    "concurrently": "3.5.1",
+    "concurrently": "4.0.1",
     "cross-env": "5.1.6",
     "del": "3.0.0",
     "electron": "2.0.8",

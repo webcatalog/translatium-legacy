@@ -139,7 +139,6 @@ const Settings = (props) => {
     onSettingChange,
     onToggle,
     onUpdateStrings,
-    preventScreenLock,
     primaryColorId,
     realtime,
     strings,
@@ -336,17 +335,6 @@ const Settings = (props) => {
                 </ListItemSecondaryAction>
               </ListItem>
             )}
-            {getPlatform() === 'windows' && (
-              <ListItem>
-                <ListItemText primary={strings.preventScreenLock} />
-                <ListItemSecondaryAction>
-                  <Switch
-                    checked={preventScreenLock}
-                    onChange={() => onToggle('preventScreenLock')}
-                  />
-                </ListItemSecondaryAction>
-              </ListItem>
-            )}
             <ListItem>
               <ListItemText primary={strings.translateWhenPressingEnter} />
               <ListItemSecondaryAction>
@@ -487,7 +475,6 @@ Settings.propTypes = {
   onSettingChange: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
   onUpdateStrings: PropTypes.func.isRequired,
-  preventScreenLock: PropTypes.bool.isRequired,
   primaryColorId: PropTypes.string.isRequired,
   realtime: PropTypes.bool.isRequired,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
@@ -512,7 +499,6 @@ const mapStateToProps = state => ({
   darkMode: state.settings.darkMode,
   dockAndMenubar: state.settings.dockAndMenubar,
   langId: state.settings.langId,
-  preventScreenLock: state.settings.preventScreenLock,
   primaryColorId: state.settings.primaryColorId,
   realtime: state.settings.realtime,
   strings: state.strings,

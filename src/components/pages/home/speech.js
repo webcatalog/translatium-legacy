@@ -1,5 +1,3 @@
-/* global Windows */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -67,21 +65,10 @@ const styles = theme => ({
 });
 
 class Speech extends React.Component {
-  componentWillMount() {
-    if (getPlatform() === 'windows') {
-      const { onReleaseDevice } = this.props;
-      Windows.UI.WebUI.WebUIApplication.addEventListener('suspending', onReleaseDevice);
-    }
-  }
-
   componentWillUnmount() {
     const { onReleaseDevice } = this.props;
 
     onReleaseDevice();
-
-    if (getPlatform() === 'windows') {
-      Windows.UI.WebUI.WebUIApplication.removeEventListener('suspending', onReleaseDevice);
-    }
   }
 
   render() {
