@@ -1,24 +1,18 @@
-/* global fetch FormData URL document Image Windows MSApp */
-import { push } from 'react-router-redux';
-
+/* global fetch FormData URL document Image */
 import { UPDATE_OCR } from '../../../constants/actions';
+import { ROUTE_OCR } from '../../../constants/routes';
 
-import getPlatform from '../../../helpers/get-platform';
 import translateArray from '../../../helpers/translate-array';
 import openFileToBlobAsync from '../../../helpers/open-file-to-blob-async';
-import captureToBlobAsync from '../../../helpers/capture-to-blob-async';
 import { toOcrSpaceLanguage } from '../../../helpers/language-utils';
 
 import { openAlert } from '../../root/alert/actions';
+import { changeRoute } from '../../root/router/actions';
 
-export const loadImage = fromCamera => (dispatch, getState) => {
+export const loadImage = () => (dispatch, getState) => {
   const { inputLang, outputLang, chinaMode } = getState().settings;
 
-  Promise.resolve()
-    .then(() => {
-      if (fromCamera === true) return captureToBlobAsync();
-      return openFileToBlobAsync();
-    })
+  openFileToBlobAsync()
     .then((result) => {
       if (!result) return null;
 
@@ -124,7 +118,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
               });
 
 
-              dispatch(push('/ocr'));
+              dispatch(changeRoute(ROUTE_OCR));
             });
         })
         .catch((e) => {

@@ -10,7 +10,6 @@ import connectComponent from '../../../helpers/connect-component';
 import { updateInputText, updateImeMode } from '../../../state/pages/home/actions';
 import { loadSuggestions, resetSuggestions } from '../../../state/pages/home/handwriting/actions';
 
-import getPlatform from '../../../helpers/get-platform';
 import insertAtCursor from '../../../helpers/insert-at-cursor';
 import deleteAtCursor from '../../../helpers/delete-at-cursor';
 
@@ -96,7 +95,7 @@ class Handwriting extends React.Component {
       pageX = e.pageX;
       pageY = e.pageY;
     }
-    const titleBarHeight = (getPlatform() === 'electron') ? 22 : 0;
+    const titleBarHeight = (window.platform === 'darwin') ? 22 : 0;
     this.addClick(pageX - this.offsetLeft, pageY - this.offsetTop - titleBarHeight);
   }
 
@@ -113,7 +112,7 @@ class Handwriting extends React.Component {
         pageY = e.pageY;
       }
 
-      const titleBarHeight = (getPlatform() === 'electron') ? 22 : 0;
+      const titleBarHeight = (window.platform === 'darwin') ? 22 : 0;
 
       this.addClick(pageX - this.offsetLeft, pageY - this.offsetTop - titleBarHeight, true);
     }
@@ -262,8 +261,9 @@ class Handwriting extends React.Component {
   }
 
   render() {
-    const suggestions = this.props.suggestions
-                        || [',', '.', '?', '!', ':', '\'', '"', ';', '@'];
+    let { suggestions } = this.props;
+
+    suggestions = suggestions || [',', '.', '?', '!', ':', '\'', '"', ';', '@'];
 
     const {
       onDeleteButtonClick,
@@ -333,10 +333,12 @@ Handwriting.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onUpdateInputText: (inputText, selectionStart, selectionEnd) =>
-    dispatch(updateInputText(inputText, selectionStart, selectionEnd)),
-  onLoadSuggestions: (inputInk, canvasHeight, canvasWidth) =>
-    dispatch(loadSuggestions(inputInk, canvasWidth, canvasHeight)),
+  onUpdateInputText: (inputText, selectionStart, selectionEnd) => dispatch(
+    updateInputText(inputText, selectionStart, selectionEnd),
+  ),
+  onLoadSuggestions: (inputInk, canvasHeight, canvasWidth) => dispatch(
+    loadSuggestions(inputInk, canvasWidth, canvasHeight),
+  ),
   onResetSuggestions: () => dispatch(resetSuggestions()),
   onTurnOffHandwriting: () => dispatch(updateImeMode(null)),
 });

@@ -1,6 +1,6 @@
+/* global remote */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { goBack } from 'react-router-redux';
 
 import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
@@ -17,8 +17,7 @@ import EnhancedMenu from './enhanced-menu';
 import { setZoomLevel, setMode } from '../../state/pages/ocr/actions';
 import { loadOutput } from '../../state/pages/home/actions';
 import { openSnackbar } from '../../state/root/snackbar/actions';
-
-import copyToClipboard from '../../helpers/copy-to-clipboard';
+import { goBack } from '../../state/root/router/actions';
 
 const styles = {
   container: {
@@ -63,8 +62,9 @@ const styles = {
 
 class Ocr extends React.Component {
   componentDidMount() {
-    if (!this.props.ocr) {
-      this.props.onCloseClick();
+    const { ocr, onCloseClick } = this.props;
+    if (!ocr) {
+      onCloseClick();
     }
   }
 
@@ -153,20 +153,27 @@ class Ocr extends React.Component {
               : `${strings.displayOriginalText} (${strings[inputLang]})`}
           </MenuItem>
           <MenuItem
-            onClick={() =>
-              onRequestCopyToClipboard(ocr.inputText, strings)}
+            onClick={() => onRequestCopyToClipboard(ocr.inputText, strings)}
           >
-            {strings.copyOriginalText} ({strings[inputLang]})
+            {strings.copyOriginalText}
+            {' '}
+(
+            {strings[inputLang]}
+)
           </MenuItem>
           <MenuItem
-            onClick={() =>
-              onRequestCopyToClipboard(ocr.outputText, strings)}
+            onClick={() => onRequestCopyToClipboard(ocr.outputText, strings)}
           >
-            {strings.copyTranslatedText} ({strings[outputLang]})
+            {strings.copyTranslatedText}
+            {' '}
+(
+            {strings[outputLang]}
+)
           </MenuItem>
           <MenuItem
-            onClick={() =>
-              onTextOnlyMenuItemClick(inputLang, outputLang, ocr.inputText, ocr.outputText)}
+            onClick={() => onTextOnlyMenuItemClick(
+              inputLang, outputLang, ocr.inputText, ocr.outputText,
+            )}
           >
             {strings.displayTextOnly}
           </MenuItem>
@@ -213,7 +220,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(goBack());
   },
   onRequestCopyToClipboard: (text, strings) => {
-    copyToClipboard(text);
+    remote.clipboard.writeText(text);
     dispatch(openSnackbar(strings.copied));
   },
 });

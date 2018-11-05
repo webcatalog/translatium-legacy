@@ -1,30 +1,13 @@
 /* global sessionStorage fetch */
 
-import getPlatform from './get-platform';
-import winXhr from './win-xhr';
-
 const getGoogleTkk = (chinaMode) => {
   if (sessionStorage.getItem('googleTkk') == null) {
     const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || (chinaMode ? 'https://translate.google.cn' : 'https://translate.google.com');
 
     const uri = `${endpoint}/m/translate`;
 
-    return Promise.resolve()
-      .then(() => {
-        switch (getPlatform()) {
-          case 'windows': {
-            return winXhr({
-              type: 'get',
-              uri,
-              responseType: 'text',
-            });
-          }
-          default: {
-            return fetch(uri)
-              .then(response => response.text());
-          }
-        }
-      })
+    return fetch(uri)
+      .then(response => response.text())
       .then((body) => {
         const startStr = 'campaign_tracker_id:\'1h\',tkk:';
         const endStr = ',experiment_ids:';
@@ -55,10 +38,9 @@ const generateB = (a, b) => {
 };
 /* eslint-enable */
 
-const generateGoogleTranslateToken = (a, chinaMode) =>
-  getGoogleTkk(chinaMode)
-    .then((tkk) => {
-      /* eslint-disable */
+const generateGoogleTranslateToken = (a, chinaMode) => getGoogleTkk(chinaMode)
+  .then((tkk) => {
+    /* eslint-disable */
       for (var e = tkk.split("."), h = Number(e[0]) || 0, g = [], d = 0, f = 0; f < a.length; f++) {
           var c = a.charCodeAt(f);
           128 > c ? g[d++] = c : (2048 > c ? g[d++] = c >> 6 | 192 : (55296 == (c & 64512) && f + 1 < a.length && 56320 == (a.charCodeAt(f + 1) & 64512) ? (c = 65536 + ((c & 1023) << 10) + (a.charCodeAt(++f) & 1023), g[d++] = c >> 18 | 240, g[d++] = c >> 12 & 63 | 128) : g[d++] = c >> 12 | 224, g[d++] = c >> 6 & 63 | 128), g[d++] = c & 63 | 128)
@@ -71,6 +53,6 @@ const generateGoogleTranslateToken = (a, chinaMode) =>
       a %= 1E6;
       return a.toString() + "." + (a ^ h);
       /* eslint-enable */
-    });
+  });
 
 export default generateGoogleTranslateToken;

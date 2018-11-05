@@ -55,7 +55,11 @@ const Dictionary = ({
                   {x[1].map((y, v) => (
                     <div key={`definition_${y[0]}`}>
                       <Typography variant="body1" align="left">
-                        <span>{v + 1}. </span>
+                        <span>
+                          {v + 1}
+.
+                          {' '}
+                        </span>
                         <a
                           role="button"
                           tabIndex="0"
@@ -128,7 +132,11 @@ const Dictionary = ({
                   return (
                     <div key={`example_${text}`}>
                       <Typography variant="body1" align="left">
-                        <span>{i + 1}. </span>
+                        <span>
+                          {i + 1}
+.
+                          {' '}
+                        </span>
                         <a
                           role="button"
                           tabIndex="0"
@@ -191,8 +199,17 @@ const Dictionary = ({
               {x[2].map((y, j) => (
                 <div key={y[0]}>
                   <Typography variant="body1" align="left">
-                    <span>{j + 1}. </span>
-                    {y[4] && (<span>{y[4]} </span>)}
+                    <span>
+                      {j + 1}
+.
+                      {' '}
+                    </span>
+                    {y[4] && (
+                    <span>
+                      {y[4]}
+                      {' '}
+                    </span>
+                    )}
                     <a
                       role="button"
                       tabIndex="0"

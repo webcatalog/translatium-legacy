@@ -73,8 +73,8 @@ export const translate = saveToHistory => ((dispatch, getState) => {
     });
 });
 
-export const updateInputText = (inputText, selectionStart, selectionEnd) =>
-  ((dispatch, getState) => {
+export const updateInputText = (inputText, selectionStart, selectionEnd) => (
+  (dispatch, getState) => {
     const { settings, pages } = getState();
     const { home } = pages;
     const { realtime } = settings;
@@ -106,15 +106,14 @@ export const updateInputText = (inputText, selectionStart, selectionEnd) =>
     }
   });
 
-export const insertInputText = text =>
-  (dispatch, getState) => {
-    const { pages: { home } } = getState();
-    const { inputText, selectionStart } = home;
+export const insertInputText = text => (dispatch, getState) => {
+  const { pages: { home } } = getState();
+  const { inputText, selectionStart } = home;
 
-    const newText = inputText.length < 1 ? text : `${inputText} ${text}`;
+  const newText = inputText.length < 1 ? text : `${inputText} ${text}`;
 
-    dispatch(updateInputText(newText, selectionStart, newText.length));
-  };
+  dispatch(updateInputText(newText, selectionStart, newText.length));
+};
 
 export const togglePhrasebook = () => ((dispatch, getState) => {
   const { output } = getState().pages.home;

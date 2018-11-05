@@ -125,8 +125,7 @@ export const toOcrSpaceLanguage = (lang) => {
 };
 
 // Check if language supports OCR
-export const isOcrSupported = lang =>
-  (toOcrSpaceLanguage(lang) !== null);
+export const isOcrSupported = lang => (toOcrSpaceLanguage(lang) !== null);
 
 // Check if language is supported as input
 export const isInput = lang => !(data.all.indexOf(lang) > -1);
@@ -142,8 +141,8 @@ export const isVoiceRecognitionSupported = (lang) => {
 };
 
 // Check if language supports Text-to-speech
-export const isTtsSupported = lang =>
-  (data.ttsSupported.indexOf(toCountryRemovedLanguage(lang)) > -1);
+export const isTtsSupported = lang => (data.ttsSupported
+  .indexOf(toCountryRemovedLanguage(lang)) > -1);
 
 // Check if language supports Handwriting recognition
 export const isHandwritingSupported = lang => !(data.handwritingNotSupported.indexOf(lang) > -1);
@@ -152,8 +151,8 @@ export const isHandwritingSupported = lang => !(data.handwritingNotSupported.ind
 export const getLanguages = () => data.all;
 
 // Get list of all output languages
-export const getOutputLanguages = () =>
-  data.all.filter(x => data.outputNotSupported.indexOf(x) < 0);
+export const getOutputLanguages = () => data.all
+  .filter(x => data.outputNotSupported.indexOf(x) < 0);
 
 // Get list of all input languages
 export const getInputLanguages = () => data.all;
@@ -162,13 +161,12 @@ export const getInputLanguages = () => data.all;
 export const getOcrSupportedLanguages = () => data.all.filter(lang => isOcrSupported(lang));
 
 // Get list of all languages support handwriting recognition
-export const getHandwritingSupportedLanguages = () =>
-  data.all.filter(lang => isHandwritingSupported(lang));
+export const getHandwritingSupportedLanguages = () => data.all
+  .filter(lang => isHandwritingSupported(lang));
 
 // Get list of all languages support voice recognition
-export const getVoiceRecognitionSupportedLanguages = () =>
-  data.all.filter(lang => isVoiceRecognitionSupported(lang));
+export const getVoiceRecognitionSupportedLanguages = () => data.all
+  .filter(lang => isVoiceRecognitionSupported(lang));
 
 // Get list of all languages support TTS
-export const getTTSSupportedLanguages = () =>
-  data.all.filter(lang => isTtsSupported(lang));
+export const getTTSSupportedLanguages = () => data.all.filter(lang => isTtsSupported(lang));

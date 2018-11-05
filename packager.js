@@ -49,22 +49,21 @@ builder.build({
       name: 'Translatium',
       schemes: ['translatium'],
     },
-    afterPack: ({ appOutDir }) =>
-      new Promise((resolve, reject) => {
-        console.log('afterPack', appOutDir, process.platform);
+    afterPack: ({ appOutDir }) => new Promise((resolve, reject) => {
+      console.log('afterPack', appOutDir, process.platform);
 
-        const languages = Object.keys(displayLanguages);
+      const languages = Object.keys(displayLanguages);
 
-        if (process.platform === 'darwin') {
-          glob(`${appOutDir}/${productName}.app/Contents/Resources/!(${languages.join('|')}).lproj`, (err, files) => {
-            console.log(files);
-            if (err) return reject(err);
-            return del(files).then(resolve, reject);
-          });
-        } else {
-          resolve();
-        }
-      }),
+      if (process.platform === 'darwin') {
+        glob(`${appOutDir}/${productName}.app/Contents/Resources/!(${languages.join('|')}).lproj`, (err, files) => {
+          console.log(files);
+          if (err) return reject(err);
+          return del(files).then(resolve, reject);
+        });
+      } else {
+        resolve();
+      }
+    }),
   },
 })
   .then(() => {

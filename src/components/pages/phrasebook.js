@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { replace } from 'react-router-redux';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -19,6 +18,9 @@ import connectComponent from '../../helpers/connect-component';
 
 import { deletePhrasebookItem, loadPhrasebook } from '../../state/pages/phrasebook/actions';
 import { loadOutput } from '../../state/pages/home/actions';
+import { changeRoute } from '../../state/root/router/actions';
+
+import { ROUTE_HOME } from '../../constants/routes';
 
 const styles = theme => ({
   emptyContainer: {
@@ -63,8 +65,10 @@ class Phrasebook extends React.Component {
     if (this.listView) {
       this.listView.onscroll = () => {
         const { scrollTop, clientHeight, scrollHeight } = this.listView;
+        const { canLoadMore, phrasebookLoading } = this.props;
+
         if (scrollTop + clientHeight > scrollHeight - 200) {
-          if (this.props.canLoadMore === true && this.props.phrasebookLoading === false) {
+          if (canLoadMore === true && phrasebookLoading === false) {
             onLoadMore();
           }
         }
@@ -169,7 +173,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onItemClick: (output) => {
     dispatch(loadOutput(output));
-    dispatch(replace('/'));
+    dispatch(changeRoute(ROUTE_HOME));
   },
   onDeleteButtonClick: (id, rev) => dispatch(deletePhrasebookItem(id, rev)),
   onEnterPhrasebook: () => dispatch(loadPhrasebook(true)),

@@ -1,6 +1,6 @@
+/* global remote */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { push } from 'react-router-redux';
 import classNames from 'classnames';
 import Mousetrap from 'mousetrap';
 
@@ -22,13 +22,11 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import ActionSwapHoriz from '@material-ui/icons/SwapHoriz';
 import ContentClear from '@material-ui/icons/Clear';
 import NavigationMoreVert from '@material-ui/icons/MoreVert';
-import ImageCameraAlt from '@material-ui/icons/CameraAlt';
 import ImageImage from '@material-ui/icons/Image';
 import ContentGesture from '@material-ui/icons/Gesture';
 import AVVolumeUp from '@material-ui/icons/VolumeUp';
 import AVStop from '@material-ui/icons/Stop';
 import AVMic from '@material-ui/icons/Mic';
-import SocialShare from '@material-ui/icons/Share';
 import EditorFormatSize from '@material-ui/icons/FormatSize';
 import ActionSwapVert from '@material-ui/icons/SwapVert';
 import ToggleStarBorder from '@material-ui/icons/StarBorder';
@@ -66,17 +64,14 @@ import {
   updateImeMode,
   updateInputText,
 } from '../../../state/pages/home/actions';
-
-import getPlatform from '../../../helpers/get-platform';
-import copyToClipboard from '../../../helpers/copy-to-clipboard';
-import pasteFromClipboardAsync from '../../../helpers/paste-from-clipboard-async';
-import shareText from '../../../helpers/share-text';
-
+import { changeRoute } from '../../../state/root/router/actions';
 
 import Dictionary from './dictionary';
 import Handwriting from './handwriting';
 import Speech from './speech';
 import History from './history';
+
+import { ROUTE_LANGUAGE_LIST, ROUTE_BIGGER_TEXT } from '../../../constants/routes';
 
 const styles = theme => ({
   container: {
@@ -172,7 +167,6 @@ class Home extends React.Component {
   componentDidMount() {
     const {
       onAnotherContainerClick,
-      onCameraButtonClick,
       onClearButtonClick,
       onLanguageClick,
       onListenButtonClick,
@@ -182,7 +176,6 @@ class Home extends React.Component {
       onTogglePhrasebookClick,
       onWriteButtonClick,
 
-      cameraShortcut,
       clearInputShortcut,
       drawShortcut,
       listenShortcut,
@@ -260,16 +253,6 @@ class Home extends React.Component {
       }
     });
 
-    Mousetrap.bind(cameraShortcut, (e) => {
-      e.preventDefault();
-
-      const { inputLang } = this.props;
-
-      if (isOcrSupported(inputLang)) {
-        onCameraButtonClick();
-      }
-    });
-
     Mousetrap.bind(openImageFileShortcut, (e) => {
       e.preventDefault();
 
@@ -290,9 +273,9 @@ class Home extends React.Component {
       }
     });
   }
+
   componentWillUnmount() {
     const {
-      cameraShortcut,
       clearInputShortcut,
       drawShortcut,
       listenShortcut,
@@ -304,14 +287,7 @@ class Home extends React.Component {
       swapLanguagesShortcut,
     } = this.props;
 
-    if (getPlatform() === 'windows') {
-      if (this.dispRequest) {
-        this.dispRequest.requestRelease();
-      }
-    }
-
     Mousetrap.unbind([
-      cameraShortcut,
       clearInputShortcut,
       drawShortcut,
       listenShortcut,
@@ -350,7 +326,7 @@ class Home extends React.Component {
     switch (output.status) {
       case 'loading': {
         return (
-          <div className={classes.progressContainer} >
+          <div className={classes.progressContainer}>
             <CircularProgress size={80} />
           </div>
         );
@@ -391,22 +367,11 @@ class Home extends React.Component {
           controllers.unshift({
             icon: textToSpeechPlaying ? <AVStop /> : <AVVolumeUp />,
             tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
-            onClick: () =>
-              onListenButtonClick(
-                textToSpeechPlaying,
-                output.outputLang,
-                output.outputText,
-              ),
-          });
-        }
-
-        if (getPlatform() !== 'electron') {
-          controllers.push({
-            icon: <SocialShare />,
-            tooltip: strings.share,
-            onClick: () => {
-              shareText(output.outputText);
-            },
+            onClick: () => onListenButtonClick(
+              textToSpeechPlaying,
+              output.outputLang,
+              output.outputText,
+            ),
           });
         }
 
@@ -438,7 +403,10 @@ class Home extends React.Component {
                 className={classes.suggestion}
               >
                 <span role="img" aria-label="">💡</span>
-                <span>{strings.translateFrom}:&#32;</span>
+                <span>
+                  {strings.translateFrom}
+:&#32;
+                </span>
                 <a
                   role="button"
                   tabIndex={0}
@@ -457,7 +425,10 @@ class Home extends React.Component {
                 className={classes.suggestion}
               >
                 <span role="img" aria-label="">💡</span>
-                <span>{strings.didYouMean}:&#32;</span>
+                <span>
+                  {strings.didYouMean}
+:&#32;
+                </span>
                 <a
                   role="button"
                   tabIndex={0}
@@ -544,7 +515,6 @@ class Home extends React.Component {
       inputLang,
       inputText,
       onAnotherContainerClick,
-      onCameraButtonClick,
       onClearButtonClick,
       onFullscreenButtonClick,
       onInsertText,
@@ -572,14 +542,8 @@ class Home extends React.Component {
         ),
         tooltip: strings.pasteFromClipboard,
         onClick: () => {
-          pasteFromClipboardAsync()
-            .then((text) => {
-              onInsertText(text);
-            })
-            .catch((err) => {
-              // eslint-disable-next-line
-              console.log(err);
-            });
+          const text = remote.clipboard.readText();
+          onInsertText(text);
         },
       },
       {
@@ -626,16 +590,6 @@ class Home extends React.Component {
       tooltip: fullscreenInputBox ? strings.exitFullscreen : strings.fullscreen,
       onClick: onFullscreenButtonClick,
     });
-
-    if (getPlatform() !== 'electron') {
-      if (isOcrSupported(inputLang)) {
-        controllers.splice(controllers.length - 2, 0, {
-          icon: <ImageCameraAlt />,
-          tooltip: strings.camera,
-          onClick: onCameraButtonClick,
-        });
-      }
-    }
 
     const maxVisibleIcon = Math.min(Math.round((screenWidth - 200) / 56), controllers.length);
 
@@ -760,7 +714,6 @@ Home.propTypes = {
   inputText: PropTypes.string,
   onAnotherContainerClick: PropTypes.func.isRequired,
   onBiggerTextButtonClick: PropTypes.func.isRequired,
-  onCameraButtonClick: PropTypes.func.isRequired,
   onClearButtonClick: PropTypes.func.isRequired,
   onFullscreenButtonClick: PropTypes.func.isRequired,
   onInputText: PropTypes.func.isRequired,
@@ -785,7 +738,6 @@ Home.propTypes = {
   textToSpeechPlaying: PropTypes.bool,
   translateWhenPressingEnter: PropTypes.bool,
 
-  cameraShortcut: PropTypes.string.isRequired,
   clearInputShortcut: PropTypes.string.isRequired,
   drawShortcut: PropTypes.string.isRequired,
   listenShortcut: PropTypes.string.isRequired,
@@ -810,7 +762,6 @@ const mapStateToProps = state => ({
   chinaMode: state.settings.chinaMode,
   strings: state.strings,
 
-  cameraShortcut: state.settings.cameraShortcut,
   clearInputShortcut: state.settings.clearInputShortcut,
   drawShortcut: state.settings.drawShortcut,
   listenShortcut: state.settings.listenShortcut,
@@ -824,11 +775,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLanguageClick: type =>
-    dispatch(push({
-      pathname: '/language-list',
-      query: { type },
-    })),
+  onLanguageClick: type => dispatch(changeRoute(ROUTE_LANGUAGE_LIST)),
   onSwapButtonClick: () => dispatch(swapLanguages()),
   onKeyDown: (e) => {
     if (e.key === 'Enter') {
@@ -858,18 +805,13 @@ const mapDispatchToProps = dispatch => ({
   onWriteButtonClick: () => dispatch(updateImeMode('handwriting')),
   onSpeakButtonClick: () => dispatch(updateImeMode('speech')),
   onTogglePhrasebookClick: () => dispatch(togglePhrasebook()),
-  onOpenImageButtonClick: () => dispatch(loadImage(false)),
-  onCameraButtonClick: () => dispatch(loadImage(true)),
+  onOpenImageButtonClick: () => dispatch(loadImage()),
   onSwapOutputButtonClick: (inputLang, outputLang, inputText) => {
     dispatch(updateInputLang(inputLang));
     dispatch(updateOutputLang(outputLang));
     dispatch(updateInputText(inputText));
   },
-  onBiggerTextButtonClick: text =>
-    dispatch(push({
-      pathname: '/bigger-text',
-      query: { text },
-    })),
+  onBiggerTextButtonClick: text => dispatch(changeRoute(ROUTE_BIGGER_TEXT)),
   onFullscreenButtonClick: () => dispatch(toggleFullscreenInputBox()),
   onSuggestedInputLangClick: value => dispatch(updateInputLang(value)),
   onSuggestedInputTextClick: text => dispatch(updateInputText(text)),
@@ -877,7 +819,7 @@ const mapDispatchToProps = dispatch => ({
     if (imeMode) dispatch(updateImeMode(null));
   },
   onRequestCopyToClipboard: (text, strings) => {
-    copyToClipboard(text);
+    remote.clipboard.writeText(text);
     dispatch(openSnackbar(strings.copied));
   },
 });

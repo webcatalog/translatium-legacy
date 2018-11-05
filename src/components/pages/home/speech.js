@@ -13,8 +13,6 @@ import connectComponent from '../../../helpers/connect-component';
 import { updateImeMode } from '../../../state/pages/home/actions';
 import { releaseDevice, startRecording, stopRecording } from '../../../state/pages/home/speech/actions';
 
-import getPlatform from '../../../helpers/get-platform';
-
 const styles = theme => ({
   container: {
     position: 'absolute',
@@ -82,8 +80,7 @@ class Speech extends React.Component {
       <Paper elevation={2} className={classes.container}>
         {(speechStatus === 'recognizing')
           ? <CircularProgress size={80} />
-          :
-          (
+          : (
             <div>
               <Button
                 variant="fab"

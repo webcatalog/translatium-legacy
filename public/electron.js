@@ -144,6 +144,9 @@ function createWindow() {
     minWidth: 320,
     minHeight: 500,
     titleBarStyle: 'hidden',
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+    },
   });
 
   // and load the index.html of the app.
@@ -174,6 +177,9 @@ function createMenubar() {
     width: 400,
     height: 600,
     showDockIcon: dockAndMenubar === 'showOnBothDockAndMenubar',
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+    },
   });
 
   ipcMain.on('unset-show-menubar-shortcut', (e, combinator) => {

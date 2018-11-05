@@ -10,8 +10,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import connectComponent from '../../../helpers/connect-component';
 
-import getPlatform from '../../../helpers/get-platform';
-
 import {
   closeShortcutDialog,
   setCombinator,
@@ -29,14 +27,13 @@ const styles = {
   },
 };
 
-const renderCombinator = combinator =>
-  combinator
-    .replace(/\+/g, ' + ')
-    .replace('alt', getPlatform() === 'windows' ? 'Alt' : '⌥')
-    .replace('shift', getPlatform() === 'windows' ? 'Shift' : '⇧')
-    .replace('mod', getPlatform() === 'windows' ? 'Ctrl' : '⌘')
-    .replace('meta', '⌘')
-    .toUpperCase();
+const renderCombinator = combinator => combinator
+  .replace(/\+/g, ' + ')
+  .replace('alt', window.platform === 'win32' ? 'Alt' : '⌥')
+  .replace('shift', window.platform === 'win32' ? 'Shift' : '⇧')
+  .replace('mod', window.platform === 'win32' ? 'Ctrl' : '⌘')
+  .replace('meta', '⌘')
+  .toUpperCase();
 
 
 class DialogShortcut extends React.Component {
@@ -79,7 +76,12 @@ class DialogShortcut extends React.Component {
 
     return (
       <Dialog open={open} onRequestClose={onCloseShortcutDialog}>
-        <DialogTitle>{strings.shortcuts}: {strings[identifier]}</DialogTitle>
+        <DialogTitle>
+          {strings.shortcuts}
+:
+          {' '}
+          {strings[identifier]}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>
             Type the new keyboard combinator.
