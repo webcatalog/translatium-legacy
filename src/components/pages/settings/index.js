@@ -431,14 +431,14 @@ const Settings = (props) => {
             <span>Made with </span>
             <span role="img" aria-label="love">❤️</span>
             <span> by </span>
-            <a
+            <span
               onClick={() => shell.openExternal('https://quanglam2807.github.io')}
               role="link"
               tabIndex="0"
               className={classes.link}
             >
               Quang Lam
-            </a>
+            </span>
           </Typography>
         </Paper>
       </div>

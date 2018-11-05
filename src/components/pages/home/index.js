@@ -160,6 +160,11 @@ const styles = theme => ({
   suggestion: {
     marginTop: 8,
   },
+  link: {
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
 });
 
 class Home extends React.Component {
@@ -400,13 +405,14 @@ class Home extends React.Component {
                   {strings.translateFrom}
 :&#32;
                 </span>
-                <a
+                <span
+                  className={classes.link}
                   role="button"
                   tabIndex={0}
                   onClick={() => onSuggestedInputLangClick(output.suggestedInputLang)}
                 >
                   {strings[output.suggestedInputLang]}
-                </a>
+                </span>
                 <span>&#32;?&#32;</span>
               </Typography>
             )}
@@ -422,13 +428,14 @@ class Home extends React.Component {
                   {strings.didYouMean}
 :&#32;
                 </span>
-                <a
+                <span
+                  className={classes.link}
                   role="button"
                   tabIndex={0}
                   onClick={() => onSuggestedInputTextClick(output.suggestedInputText)}
                 >
                   {output.suggestedInputText}
-                </a>
+                </span>
                 <span>&#32;?&#32;</span>
               </Typography>
             )}
