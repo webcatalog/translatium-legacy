@@ -25,7 +25,6 @@ import Phrasebook from './pages/phrasebook';
 import Settings from './pages/settings';
 import LanguageList from './pages/language-list';
 import Ocr from './pages/ocr';
-import BiggerText from './pages/bigger-text';
 
 // import colorPairs from '../constants/colors';
 
@@ -34,9 +33,9 @@ import {
   ROUTE_HOME,
   ROUTE_PHRASEBOOK,
   ROUTE_SETTINGS,
-  ROUTE_LANGUAGE_LIST,
+  ROUTE_LANGUAGE_LIST_INPUT,
+  ROUTE_LANGUAGE_LIST_OUTPUT,
   ROUTE_OCR,
-  ROUTE_BIGGER_TEXT,
 } from '../constants/routes';
 
 const styles = theme => ({
@@ -87,7 +86,6 @@ const styles = theme => ({
 class App extends React.Component {
   componentDidMount() {
     const {
-      primaryColorId,
       onUpdateInputText,
       onUpdateInputLang,
       onResize,
@@ -104,14 +102,6 @@ class App extends React.Component {
     ipcRenderer.on('set-input-lang', (e, value) => {
       onUpdateInputLang(value);
     });
-  }
-
-  componentWillUpdate(nextProps) {
-    const { primaryColorId } = this.props;
-
-    if (primaryColorId !== nextProps.primaryColorId) {
-      this.setAppTitleBar(nextProps.primaryColorId);
-    }
   }
 
   componentWillUnmount() {
@@ -146,20 +136,18 @@ class App extends React.Component {
       case ROUTE_SETTINGS:
         routeContent = <Settings />;
         break;
-      case ROUTE_LANGUAGE_LIST:
-        routeContent = <LanguageList />;
+      case ROUTE_LANGUAGE_LIST_INPUT:
+        routeContent = <LanguageList type="inputLang" />;
+        break;
+      case ROUTE_LANGUAGE_LIST_OUTPUT:
+        routeContent = <LanguageList type="outputLang" />;
         break;
       case ROUTE_OCR:
         routeContent = <Ocr />;
         break;
-      case ROUTE_BIGGER_TEXT:
-        routeContent = <BiggerText />;
-        break;
       default:
         routeContent = <Home />;
     }
-
-    console.log(window.platform);
 
     return (
       <div className={classes.container}>
@@ -223,7 +211,7 @@ App.propTypes = {
   onResize: PropTypes.func.isRequired,
   onUpdateInputLang: PropTypes.func.isRequired,
   onUpdateInputText: PropTypes.func.isRequired,
-  primaryColorId: PropTypes.string,
+  // primaryColorId: PropTypes.string,
   route: PropTypes.string.isRequired,
   shouldShowBottomNav: PropTypes.bool.isRequired,
   snackbarMessage: PropTypes.string,
@@ -231,7 +219,7 @@ App.propTypes = {
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   let bottomNavigationSelectedIndex = -1;
   switch (state.router.route) {
     case ROUTE_SETTINGS:

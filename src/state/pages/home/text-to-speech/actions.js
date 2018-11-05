@@ -8,7 +8,9 @@ import { openAlert } from '../../../root/alert/actions';
 let player = null;
 let currentTimestamp;
 
-const textToSpeechShortText = (lang, text, idx, total, chinaMode) => generateGoogleTranslateToken(text)
+const textToSpeechShortText = (
+  lang, text, idx, total, chinaMode,
+) => generateGoogleTranslateToken(text)
   .then((token) => {
     const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || (chinaMode ? 'https://translate.google.cn' : 'https://translate.google.com');
 

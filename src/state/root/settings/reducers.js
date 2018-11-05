@@ -4,7 +4,6 @@ import { UPDATE_SETTING } from '../../../constants/actions';
 import getDefaultLangId from '../../../helpers/get-default-lang-id';
 
 export const defaultState = {
-  biggerTextFontSize: 50,
   bigTextFontSize: 50,
   chinaMode: false,
   darkMode: false,

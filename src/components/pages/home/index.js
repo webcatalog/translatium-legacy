@@ -27,7 +27,6 @@ import ContentGesture from '@material-ui/icons/Gesture';
 import AVVolumeUp from '@material-ui/icons/VolumeUp';
 import AVStop from '@material-ui/icons/Stop';
 import AVMic from '@material-ui/icons/Mic';
-import EditorFormatSize from '@material-ui/icons/FormatSize';
 import ActionSwapVert from '@material-ui/icons/SwapVert';
 import ToggleStarBorder from '@material-ui/icons/StarBorder';
 import ToggleStar from '@material-ui/icons/Star';
@@ -71,7 +70,7 @@ import Handwriting from './handwriting';
 import Speech from './speech';
 import History from './history';
 
-import { ROUTE_LANGUAGE_LIST, ROUTE_BIGGER_TEXT } from '../../../constants/routes';
+import { ROUTE_LANGUAGE_LIST_INPUT, ROUTE_LANGUAGE_LIST_OUTPUT } from '../../../constants/routes';
 
 const styles = theme => ({
   container: {
@@ -304,7 +303,6 @@ class Home extends React.Component {
     const {
       classes,
       fullscreenInputBox,
-      onBiggerTextButtonClick,
       onListenButtonClick,
       onRequestCopyToClipboard,
       onSuggestedInputLangClick,
@@ -346,11 +344,6 @@ class Home extends React.Component {
               output.inputLang,
               output.outputText,
             ),
-          },
-          {
-            icon: <EditorFormatSize />,
-            tooltip: strings.biggerText,
-            onClick: () => onBiggerTextButtonClick(output.outputText),
           },
           {
             icon: (
@@ -713,7 +706,6 @@ Home.propTypes = {
   inputLang: PropTypes.string,
   inputText: PropTypes.string,
   onAnotherContainerClick: PropTypes.func.isRequired,
-  onBiggerTextButtonClick: PropTypes.func.isRequired,
   onClearButtonClick: PropTypes.func.isRequired,
   onFullscreenButtonClick: PropTypes.func.isRequired,
   onInputText: PropTypes.func.isRequired,
@@ -775,7 +767,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLanguageClick: type => dispatch(changeRoute(ROUTE_LANGUAGE_LIST)),
+  onLanguageClick: type => dispatch(changeRoute(type === 'inputLang' ? ROUTE_LANGUAGE_LIST_INPUT : ROUTE_LANGUAGE_LIST_OUTPUT)),
   onSwapButtonClick: () => dispatch(swapLanguages()),
   onKeyDown: (e) => {
     if (e.key === 'Enter') {
@@ -811,7 +803,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateOutputLang(outputLang));
     dispatch(updateInputText(inputText));
   },
-  onBiggerTextButtonClick: text => dispatch(changeRoute(ROUTE_BIGGER_TEXT)),
   onFullscreenButtonClick: () => dispatch(toggleFullscreenInputBox()),
   onSuggestedInputLangClick: value => dispatch(updateInputLang(value)),
   onSuggestedInputTextClick: text => dispatch(updateInputText(text)),

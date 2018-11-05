@@ -27,8 +27,6 @@ import { openShortcutDialog } from '../../../state/pages/settings/shortcut-dialo
 import colorPairs from '../../../constants/colors';
 import displayLanguages from '../../../constants/display-languages';
 
-import { runApp } from '../../..';
-
 import DialogShortcut from './dialog-shortcut';
 
 const styles = theme => ({
@@ -194,7 +192,8 @@ const Settings = (props) => {
                       value={colorId}
                       onClick={() => {
                         onSettingChange('primaryColorId', colorId);
-                        runApp(true);
+                        remote.app.relaunch();
+                        remote.app.quit();
                       }}
                     >
                       {strings[colorId]}
@@ -241,7 +240,8 @@ const Settings = (props) => {
                   checked={darkMode}
                   onChange={() => {
                     onToggle('darkMode');
-                    runApp(true);
+                    remote.app.relaunch();
+                    remote.app.quit();
                   }}
                 />
               </ListItemSecondaryAction>

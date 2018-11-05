@@ -1,6 +1,6 @@
 {
   "name": "translatium",
-  "description": "Google Translate client for macOS & Windows",
+  "description": "The Most Powerful Translation App for Desktop.",
   "version": "8.6.1",
   "main": "public/electron.js",
   "repository": "https://github.com/translatium/translatium",
@@ -18,7 +18,7 @@
     "build": "react-scripts build && node add-bom.js",
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "dist-electron": "npm run build && babel-node packager.js",
+    "dist": "npm run build && babel-node packager.js",
     "lint": "eslint ./src ./public ./packager.js --ext js",
     "lint-fix": "eslint ./src ./public ./packager.js --ext js --fix"
   },
