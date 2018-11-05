@@ -23,6 +23,7 @@
     "lint-fix": "eslint ./src ./public ./packager.js --ext js --fix"
   },
   "dependencies": {
+    "babel-preset-react": "^6.24.1",
     "electron-is-dev": "1.0.1",
     "electron-settings": "3.2.0",
     "http-proxy-middleware": "0.19.0",
