@@ -20,14 +20,19 @@
     "eject": "react-scripts eject",
     "dist": "npm run build && babel-node packager.js",
     "lint": "eslint ./src ./public ./packager.js --ext js",
-    "lint-fix": "eslint ./src ./public ./packager.js --ext js --fix"
+    "lint-fix": "eslint ./src ./public ./packager.js --ext js --fix",
+    "test": "mocha ./tests"
   },
   "dependencies": {
     "babel-preset-react": "^6.24.1",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "electron-is-dev": "1.0.1",
     "electron-settings": "3.2.0",
     "http-proxy-middleware": "0.19.0",
-    "menubar": "5.2.3"
+    "menubar": "5.2.3",
+    "mocha": "^5.2.0",
+    "spectron": "^5.0.0"
   },
   "devDependencies": {
     "@material-ui/core": "3.3.2",

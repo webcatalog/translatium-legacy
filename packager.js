@@ -17,16 +17,16 @@ let targets;
 
 switch (process.platform) {
   case 'darwin': {
-    targets = Platform.MAC.createTarget(['mas']);
+    targets = Platform.MAC.createTarget(['mas-dev', 'mas']);
     break;
   }
   case 'win32': {
-    targets = Platform.WINDOWS.createTarget(['appx']);
+    targets = Platform.WINDOWS.createTarget(['dir', 'appx']);
     break;
   }
   default:
   case 'linux': {
-    targets = Platform.LINUX.createTarget(['snap'], Arch.x64);
+    targets = Platform.LINUX.createTarget(['dir', 'snap'], Arch.x64);
     break;
   }
 }
