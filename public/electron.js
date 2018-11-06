@@ -144,6 +144,7 @@ function createWindow() {
     minWidth: 320,
     minHeight: 500,
     titleBarStyle: 'hidden',
+    frame: process.platform !== 'win32',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
@@ -165,6 +166,8 @@ function createWindow() {
 }
 
 function createMenubar() {
+  if (process.platform !== 'darwin') return;
+
   const dockAndMenubar = settings.get('dockAndMenubar', 'showOnBothDockAndMenubar');
   if (dockAndMenubar === 'onlyShowOnDock') {
     return;

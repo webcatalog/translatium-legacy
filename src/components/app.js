@@ -26,9 +26,9 @@ import Settings from './pages/settings';
 import LanguageList from './pages/language-list';
 import Ocr from './pages/ocr';
 
-// import colorPairs from '../constants/colors';
-
 import Alert from './root/alert';
+import WindowsTitlebar from './root/windows-titlebar';
+
 import {
   ROUTE_HOME,
   ROUTE_PHRASEBOOK,
@@ -109,11 +109,6 @@ class App extends React.Component {
     window.removeEventListener('resize', onResize);
   }
 
-  // setAppTitleBar(primaryColorId) {
-  //   const color = colorPairs[primaryColorId].dark;
-  //   do something
-  // }
-
   render() {
     const {
       bottomNavigationSelectedIndex,
@@ -156,6 +151,7 @@ class App extends React.Component {
             Translatium
           </div>
         )}
+        {window.platform === 'win32' && <WindowsTitlebar />}
         <div className={classes.contentContainer}>
           {fullPageLoading && (
             <div className={classes.fullPageProgress}>
@@ -211,7 +207,6 @@ App.propTypes = {
   onResize: PropTypes.func.isRequired,
   onUpdateInputLang: PropTypes.func.isRequired,
   onUpdateInputText: PropTypes.func.isRequired,
-  // primaryColorId: PropTypes.string,
   route: PropTypes.string.isRequired,
   shouldShowBottomNav: PropTypes.bool.isRequired,
   snackbarMessage: PropTypes.string,
