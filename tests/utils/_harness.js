@@ -17,7 +17,7 @@ const getElectronPath = () => {
     return path.resolve(__dirname, '../../dist/win-unpacked/Translatium.exe');
   }
 
-  return path.resolve(__dirname, '../../dist/linux-unpacked/webcatalog');
+  return path.resolve(__dirname, '../../dist/linux-unpacked/translatium');
 };
 
 const harness = (name, fn, args) => {
