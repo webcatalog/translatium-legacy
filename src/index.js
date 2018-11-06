@@ -1,4 +1,4 @@
-/* global Windows ipcRenderer */
+/* global ipcRenderer */
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -13,20 +13,17 @@ import 'typeface-roboto/index.css';
 import './main.css';
 
 import store from './state/reducers';
-import { updateInputText } from './state/pages/home/actions';
 import { updateStrings } from './state/root/strings/actions';
 
-import renderRoutes from './routes';
-
-import getPlatform from './helpers/get-platform';
-
 import colorPairs from './constants/colors';
+
+import App from './components/app';
 
 export const runApp = (isRestart) => {
   /* global document */
   const state = store.getState();
 
-  if (getPlatform() === 'electron' && !isRestart) {
+  if (!isRestart) {
     // Mock user agent
     Object.defineProperty(
       window.navigator,
@@ -59,41 +56,15 @@ export const runApp = (isRestart) => {
   render(
     <Provider store={store}>
       <MuiThemeProvider theme={theme}>
-        {renderRoutes(store)}
+        <App />
       </MuiThemeProvider>
     </Provider>,
     document.getElementById('app'),
   );
 };
 
-switch (getPlatform()) {
-  case 'windows': {
-    Windows.UI.WebUI.WebUIApplication.onactivated = (args) => {
-      if (
-        (args.kind === Windows.ApplicationModel.Activation.ActivationKind.shareTarget)
-        && (args.shareOperation.data
-          .contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.text))
-      ) {
-        args.shareOperation.data.getTextAsync().done((text) => {
-          store.dispatch(updateInputText(text));
-          runApp();
-        });
-      } else {
-        runApp();
-      }
-    };
-    break;
-  }
-  case 'electron': {
-    runApp();
+runApp();
 
-    const state = store.getState();
-    const openOnMenubarShortcut = state.settings.openOnMenubarShortcut;
-    ipcRenderer.send('set-show-menubar-shortcut', openOnMenubarShortcut);
-
-    break;
-  }
-  default: {
-    runApp();
-  }
-}
+const state = store.getState();
+const openOnMenubarShortcut = state.settings.openOnMenubarShortcut;
+ipcRenderer.send('set-show-menubar-shortcut', openOnMenubarShortcut);

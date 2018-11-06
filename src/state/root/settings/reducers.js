@@ -2,10 +2,8 @@
 import { UPDATE_SETTING } from '../../../constants/actions';
 
 import getDefaultLangId from '../../../helpers/get-default-lang-id';
-import getPlaform from '../../../helpers/get-platform';
 
 export const defaultState = {
-  biggerTextFontSize: 50,
   bigTextFontSize: 50,
   chinaMode: false,
   darkMode: false,
@@ -13,7 +11,6 @@ export const defaultState = {
   inputLang: 'en',
   langId: getDefaultLangId(),
   outputLang: 'zh',
-  preventScreenLock: false,
   primaryColorId: 'green',
   realtime: true,
   recentLanguages: ['en', 'zh'],
@@ -27,14 +24,13 @@ export const defaultState = {
   speakShorcut: 'mod+shift+m',
   listenShortcut: 'mod+shift+l',
   drawShortcut: 'mod+shift+w',
-  cameraShortcut: 'mod+shift+c',
   openImageFileShortcut: 'mod+o',
   saveToPhrasebookShortcut: 'mod+s',
   openOnMenubarShortcut: 'alt+shift+t',
 };
 
 const shouldUseElectronSettings = (name) => {
-  if (getPlaform() === 'electron') {
+  if (window.platform === 'darwin') {
     if (name === 'dockAndMenubar' || name === 'translateClipboardOnShortcut') {
       return true;
     }

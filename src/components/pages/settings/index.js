@@ -1,4 +1,4 @@
-/* global remote Windows */
+/* global remote shell */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -26,11 +26,6 @@ import { openShortcutDialog } from '../../../state/pages/settings/shortcut-dialo
 
 import colorPairs from '../../../constants/colors';
 import displayLanguages from '../../../constants/display-languages';
-
-import getPlatform from '../../../helpers/get-platform';
-import openUri from '../../../helpers/open-uri';
-
-import { runApp } from '../../..';
 
 import DialogShortcut from './dialog-shortcut';
 
@@ -103,30 +98,19 @@ const styles = theme => ({
   },
 });
 
-const renderCombinator = combinator =>
-  combinator
-    .replace(/\+/g, ' + ')
-    .replace('alt', getPlatform() === 'windows' ? 'alt' : '⌥')
-    .replace('shift', getPlatform() === 'windows' ? 'shift' : '⇧')
-    .replace('mod', getPlatform() === 'windows' ? 'ctrl' : '⌘')
-    .replace('meta', '⌘')
-    .toUpperCase();
+const renderCombinator = combinator => combinator
+  .replace(/\+/g, ' + ')
+  .replace('alt', window.platform === 'win32' ? 'alt' : '⌥')
+  .replace('shift', window.platform === 'win32' ? 'shift' : '⇧')
+  .replace('mod', window.platform === 'win32' ? 'ctrl' : '⌘')
+  .replace('meta', '⌘')
+  .toUpperCase();
 
 const dockAndMenubarOpts = [
   'showOnBothDockAndMenubar',
   'onlyShowOnDock',
   'onlyShowOnMenubar',
 ];
-
-const getVersion = () => {
-  if (getPlatform() === 'windows') {
-    // https://stackoverflow.com/a/28635481
-    const version = Windows.ApplicationModel.Package.current.id.version;
-    return `${version.major}.${version.minor}.${version.build}.${version.revision}`;
-  }
-
-  return remote.app.getVersion();
-};
 
 const Settings = (props) => {
   const {
@@ -139,14 +123,12 @@ const Settings = (props) => {
     onSettingChange,
     onToggle,
     onUpdateStrings,
-    preventScreenLock,
     primaryColorId,
     realtime,
     strings,
     translateWhenPressingEnter,
     translateClipboardOnShortcut,
 
-    cameraShortcut,
     clearInputShortcut,
     drawShortcut,
     listenShortcut,
@@ -170,10 +152,8 @@ const Settings = (props) => {
     { identifier: 'listen', combinator: listenShortcut },
     { identifier: 'draw', combinator: drawShortcut },
   ];
-  if (getPlatform() !== 'electron') {
-    shortcuts.push({ identifier: 'camera', combinator: cameraShortcut });
-  }
-  if (getPlatform() === 'electron'
+
+  if (window.platform === 'darwin'
     && ['showOnBothDockAndMenubar', 'onlyShowOnMenubar'].indexOf(dockAndMenubar) > -1) {
     shortcuts.unshift({ identifier: 'openOnMenubar', combinator: openOnMenubarShortcut });
   }
@@ -212,7 +192,8 @@ const Settings = (props) => {
                       value={colorId}
                       onClick={() => {
                         onSettingChange('primaryColorId', colorId);
-                        runApp(true);
+                        remote.app.relaunch();
+                        remote.app.quit();
                       }}
                     >
                       {strings[colorId]}
@@ -259,7 +240,8 @@ const Settings = (props) => {
                   checked={darkMode}
                   onChange={() => {
                     onToggle('darkMode');
-                    runApp(true);
+                    remote.app.relaunch();
+                    remote.app.quit();
                   }}
                 />
               </ListItemSecondaryAction>
@@ -268,12 +250,12 @@ const Settings = (props) => {
         </Paper>
 
 
-        {getPlatform() === 'electron' && (
+        {window.platform === 'darwin' && (
           <Typography variant="body2" className={classes.paperTitle}>
             {strings.dockAndMenubar}
           </Typography>
         )}
-        {getPlatform() === 'electron' && (
+        {window.platform === 'darwin' && (
           <Paper className={classes.paper}>
             <List>
               <ListItem>
@@ -322,7 +304,7 @@ const Settings = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
-            {getPlatform() === 'electron' && (
+            {window.platform === 'darwin' && (
               <ListItem>
                 <ListItemText
                   primary={strings.translateClipboardOnShortcut}
@@ -332,17 +314,6 @@ const Settings = (props) => {
                   <Switch
                     checked={translateClipboardOnShortcut}
                     onChange={() => onToggle('translateClipboardOnShortcut')}
-                  />
-                </ListItemSecondaryAction>
-              </ListItem>
-            )}
-            {getPlatform() === 'windows' && (
-              <ListItem>
-                <ListItemText primary={strings.preventScreenLock} />
-                <ListItemSecondaryAction>
-                  <Switch
-                    checked={preventScreenLock}
-                    onChange={() => onToggle('preventScreenLock')}
                   />
                 </ListItemSecondaryAction>
               </ListItem>
@@ -368,10 +339,10 @@ const Settings = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
-            {getPlatform() === 'electron' && (
+            {window.platform === 'darwin' && (
               <ListItem
                 button
-                onClick={() => openUri('https://translatiumapp.com/popclip')}
+                onClick={() => shell.openExternal('https://translatiumapp.com/popclip')}
               >
                 <ListItemText primary={strings.popclipExtension} />
               </ListItem>
@@ -408,20 +379,16 @@ const Settings = (props) => {
           </List>
         </Paper>
 
-        {getPlatform() === 'electron' && (
-          <Typography variant="body2" className={classes.paperTitle}>
-            {strings.quit}
-          </Typography>
-        )}
-        {getPlatform() === 'electron' && (
-          <Paper className={classes.paper}>
-            <List>
-              <ListItem button>
-                <ListItemText primary={strings.quit} onClick={() => remote.app.quit()} />
-              </ListItem>
-            </List>
-          </Paper>
-        )}
+        <Typography variant="body2" className={classes.paperTitle}>
+          {strings.quit}
+        </Typography>
+        <Paper className={classes.paper}>
+          <List>
+            <ListItem button>
+              <ListItemText primary={strings.quit} onClick={() => remote.app.quit()} />
+            </ListItem>
+          </List>
+        </Paper>
 
         <Typography variant="body2" className={classes.paperTitle}>
           {strings.about}
@@ -429,31 +396,33 @@ const Settings = (props) => {
         <Paper className={classes.paperAbout}>
           <Typography variant="title" className={classes.title}>Translatium</Typography>
           <Typography variant="body1" className={classes.version}>
-            Version {getVersion()}
+            Version
+            {' '}
+            {remote.app.getVersion()}
           </Typography>
 
-          {getPlatform() === 'windows' && (
+          {window.platform === 'win32' && (
             <React.Fragment>
-              <Button onClick={() => openUri('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}>
+              <Button onClick={() => shell.openExternal('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}>
                 {strings.rateWindowsStore}
               </Button>
               <br />
             </React.Fragment>
           )}
-          {getPlatform() === 'electron' && (
+          {window.platform === 'darwin' && (
             <React.Fragment>
-              <Button onClick={() => openUri('macappstore://itunes.apple.com/app/id1176624652?mt=12')}>
+              <Button onClick={() => shell.openExternal('macappstore://itunes.apple.com/app/id1176624652?mt=12')}>
                 {strings.rateMacAppStore}
               </Button>
               <br />
             </React.Fragment>
           )}
-          <Button onClick={() => openUri('https://translatiumapp.com')}>
+          <Button onClick={() => shell.openExternal('https://translatiumapp.com')}>
             {strings.website}
           </Button>
           <br />
 
-          <Button onClick={() => openUri('https://translatiumapp.com/support')}>
+          <Button onClick={() => shell.openExternal('https://translatiumapp.com/support')}>
             {strings.support}
           </Button>
           <br />
@@ -462,14 +431,14 @@ const Settings = (props) => {
             <span>Made with </span>
             <span role="img" aria-label="love">❤️</span>
             <span> by </span>
-            <a
-              onClick={() => openUri('https://quanglam2807.github.io')}
+            <span
+              onClick={() => shell.openExternal('https://quanglam2807.github.io')}
               role="link"
               tabIndex="0"
               className={classes.link}
             >
               Quang Lam
-            </a>
+            </span>
           </Typography>
         </Paper>
       </div>
@@ -487,14 +456,12 @@ Settings.propTypes = {
   onSettingChange: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
   onUpdateStrings: PropTypes.func.isRequired,
-  preventScreenLock: PropTypes.bool.isRequired,
   primaryColorId: PropTypes.string.isRequired,
   realtime: PropTypes.bool.isRequired,
   strings: PropTypes.objectOf(PropTypes.string).isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
   translateClipboardOnShortcut: PropTypes.bool.isRequired,
 
-  cameraShortcut: PropTypes.string.isRequired,
   clearInputShortcut: PropTypes.string.isRequired,
   drawShortcut: PropTypes.string.isRequired,
   listenShortcut: PropTypes.string.isRequired,
@@ -512,14 +479,12 @@ const mapStateToProps = state => ({
   darkMode: state.settings.darkMode,
   dockAndMenubar: state.settings.dockAndMenubar,
   langId: state.settings.langId,
-  preventScreenLock: state.settings.preventScreenLock,
   primaryColorId: state.settings.primaryColorId,
   realtime: state.settings.realtime,
   strings: state.strings,
   translateWhenPressingEnter: state.settings.translateWhenPressingEnter,
   translateClipboardOnShortcut: state.settings.translateClipboardOnShortcut,
 
-  cameraShortcut: state.settings.cameraShortcut,
   clearInputShortcut: state.settings.clearInputShortcut,
   drawShortcut: state.settings.drawShortcut,
   listenShortcut: state.settings.listenShortcut,
@@ -536,8 +501,9 @@ const mapDispatchToProps = dispatch => ({
   onToggle: name => dispatch(toggleSetting(name)),
   onSettingChange: (name, value) => dispatch(updateSetting(name, value)),
   onUpdateStrings: langId => dispatch(updateStrings(langId)),
-  onOpenShortcutDialog: (identifier, combinator) =>
-    dispatch(openShortcutDialog(identifier, combinator)),
+  onOpenShortcutDialog: (identifier, combinator) => dispatch(
+    openShortcutDialog(identifier, combinator),
+  ),
 });
 
 export default connectComponent(

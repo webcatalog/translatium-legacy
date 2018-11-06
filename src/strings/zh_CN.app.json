@@ -28,7 +28,6 @@
 	"cannotRecognizeImage": "应用程序无法识别您图像上的任何文字。",
 
 	"swap": "交换",
-	"biggerText": "大文字",
 	"copy": "拷贝",
 	"copied": "拷贝到剪贴板",
 	"share": "分享",
@@ -74,7 +73,6 @@
 
 	"darkMode": "黑暗模式",
 	"primaryColor": "主色调",
-	"preventScreenLock": "防止屏幕锁定",
 	"translateWhenPressingEnter": "按下「Enter」翻译",
 	"realtime": "实时翻译",
 	"chinaMode": "中国模式",

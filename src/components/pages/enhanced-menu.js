@@ -39,17 +39,21 @@ class EnhancedMenu extends React.Component {
       id,
     } = this.props;
 
+    const {
+      anchorEl,
+    } = this.state;
+
     return (
       <div className={classes.container}>
         {React.cloneElement(buttonElement, {
-          'aria-owns': this.state.anchorEl ? id : null,
+          'aria-owns': anchorEl ? id : null,
           'aria-haspopup': true,
           onClick: this.handleClick,
         })}
         <Menu
           id={id}
-          anchorEl={this.state.anchorEl}
-          open={Boolean(this.state.anchorEl)}
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
           {React.Children.map(children, child => React.cloneElement(child, {

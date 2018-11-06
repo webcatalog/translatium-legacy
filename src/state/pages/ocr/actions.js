@@ -1,24 +1,18 @@
-/* global fetch FormData URL document Image Windows MSApp */
-import { push } from 'react-router-redux';
-
+/* global fetch FormData URL document Image */
 import { UPDATE_OCR } from '../../../constants/actions';
+import { ROUTE_OCR } from '../../../constants/routes';
 
-import getPlatform from '../../../helpers/get-platform';
 import translateArray from '../../../helpers/translate-array';
 import openFileToBlobAsync from '../../../helpers/open-file-to-blob-async';
-import captureToBlobAsync from '../../../helpers/capture-to-blob-async';
 import { toOcrSpaceLanguage } from '../../../helpers/language-utils';
 
 import { openAlert } from '../../root/alert/actions';
+import { changeRoute } from '../../root/router/actions';
 
-export const loadImage = fromCamera => (dispatch, getState) => {
+export const loadImage = () => (dispatch, getState) => {
   const { inputLang, outputLang, chinaMode } = getState().settings;
 
-  Promise.resolve()
-    .then(() => {
-      if (fromCamera === true) return captureToBlobAsync();
-      return openFileToBlobAsync();
-    })
+  openFileToBlobAsync()
     .then((result) => {
       if (!result) return null;
 
@@ -28,7 +22,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
       });
 
       // compress
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         const imageObj = new Image();
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
@@ -44,51 +38,12 @@ export const loadImage = fromCamera => (dispatch, getState) => {
           context.clearRect(0, 0, maxWidth, maxHeight);
           context.drawImage(imageObj, 0, 0, this.width, this.height, 0, 0, maxWidth, maxHeight);
 
-          switch (getPlatform()) {
-            case 'windows': {
-              const inMemoryRandomAccessStream =
-                new Windows.Storage.Streams.InMemoryRandomAccessStream();
-              Windows.Graphics.Imaging.BitmapEncoder.createAsync(
-                Windows.Graphics.Imaging.BitmapEncoder.jpegEncoderId,
-                inMemoryRandomAccessStream,
-              )
-                .then((encoder) => {
-                // Set the pixel data in the encoder
-                  encoder.setPixelData(
-                    Windows.Graphics.Imaging.BitmapPixelFormat.rgba8,
-                    Windows.Graphics.Imaging.BitmapAlphaMode.straight,
-                    canvas.width,
-                    canvas.height,
-                    96,
-                    96,
-                    new Uint8Array(context.getImageData(0, 0, canvas.width, canvas.height).data),
-                  );
-
-                  // Go do the encoding
-                  return encoder.flushAsync();
-                })
-                .then(() => {
-                  const blob = MSApp.createBlobFromRandomAccessStream(
-                    'image/jpeg',
-                    inMemoryRandomAccessStream,
-                  );
-                  resolve({
-                    blob,
-                    fileName: result.fileName,
-                  });
-                })
-                .then(null, err => reject(err));
-              break;
-            }
-            default: {
-              canvas.toBlob((blob) => {
-                resolve({
-                  blob,
-                  fileName: result.fileName,
-                });
-              }, 'image/jpeg', 50);
-            }
-          }
+          canvas.toBlob((blob) => {
+            resolve({
+              blob,
+              fileName: result.fileName,
+            });
+          }, 'image/jpeg', 50);
         };
 
         imageObj.src = URL.createObjectURL(result.blob, { oneTimeOnly: true });
@@ -163,7 +118,7 @@ export const loadImage = fromCamera => (dispatch, getState) => {
               });
 
 
-              dispatch(push('/ocr'));
+              dispatch(changeRoute(ROUTE_OCR));
             });
         })
         .catch((e) => {

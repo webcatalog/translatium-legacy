@@ -28,7 +28,6 @@
 	"cannotRecognizeImage": "The app cannot recognize any text on your image.",
 
 	"swap": "Swap",
-	"biggerText": "Bigger text",
 	"copy": "Copy",
 	"copied": "Copied to Clipboard",
 	"share": "Share",
@@ -74,7 +73,6 @@
 
 	"darkMode": "Dark mode",
 	"primaryColor": "Primary color",
-	"preventScreenLock": "Prevent screen lock",
 	"translateWhenPressingEnter": "Translate when pressing Enter",
 	"realtime": "Real-time translation",
 	"chinaMode": "China Mode",

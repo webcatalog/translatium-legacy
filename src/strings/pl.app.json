@@ -28,7 +28,6 @@
 	"cannotRecognizeImage": "Aplikacja nie rozpoznaje żadnego tekstu na wybranym obrazie.",
 
 	"swap": "Zamień",
-	"biggerText": "Większy tekst",
 	"copy": "Kopiuj",
 	"copied": "Skopiowano do schowka",
 	"share": "Udostepnij",
@@ -74,7 +73,6 @@
 
 	"darkMode": "Ciemny motyw",
 	"primaryColor": "Kolor podstawowy",
-	"preventScreenLock": "Zapobiegaj blokadzie ekranu",
 	"translateWhenPressingEnter": "Tłumacz po naciśnięciu klawisza Enter",
 	"realtime": "Tłumaczenie w czasie rzeczywistym",
 	"chinaMode": "Tryb chiński",

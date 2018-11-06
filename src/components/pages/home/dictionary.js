@@ -27,6 +27,14 @@ const styles = {
   subheading: {
     marginTop: 8,
   },
+  link: {
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+  ul: {
+    margin: 0,
+  },
 };
 
 const Dictionary = ({
@@ -55,25 +63,31 @@ const Dictionary = ({
                   {x[1].map((y, v) => (
                     <div key={`definition_${y[0]}`}>
                       <Typography variant="body1" align="left">
-                        <span>{v + 1}. </span>
-                        <a
+                        <span>
+                          {v + 1}
+.
+                          {' '}
+                        </span>
+                        <span
+                          className={classes.link}
                           role="button"
                           tabIndex="0"
                           onClick={() => onLinkClick(inputLang, outputLang, y[0])}
                         >
                           {y[0]}
-                        </a>
+                        </span>
                       </Typography>
                       {(y[2]) && (
                         <h4>
                           {'"'}
-                          <a
+                          <span
+                            className={classes.link}
                             role="button"
                             tabIndex="0"
                             onClick={() => onLinkClick(inputLang, outputLang, y[2])}
                           >
                             {y[2]}
-                          </a>
+                          </span>
                           {'"'}
                         </h4>
                       )}
@@ -94,19 +108,20 @@ const Dictionary = ({
                   <Typography variant="subheading" align="left" className={classes.subheading}>
                     {strings[x[0]]}
                   </Typography>
-                  <ul>
+                  <ul className={classes.ul}>
                     {x[1].map(wl => (
                       <li key={`synonyms_line_${wl.join('-')}`}>
                         {wl[0].map((word, k) => (
                           <Typography variant="body1" align="left" key={`synonyms_word_${word}`} className={classes.inline}>
                             {(k > 0) && (<span>, </span>)}
-                            <a
+                            <span
+                              className={classes.link}
                               role="button"
                               tabIndex="0"
                               onClick={() => onLinkClick(inputLang, outputLang, word)}
                             >
                               {word}
-                            </a>
+                            </span>
                           </Typography>
                         ))}
                       </li>
@@ -128,14 +143,19 @@ const Dictionary = ({
                   return (
                     <div key={`example_${text}`}>
                       <Typography variant="body1" align="left">
-                        <span>{i + 1}. </span>
-                        <a
+                        <span>
+                          {i + 1}
+.
+                          {' '}
+                        </span>
+                        <span
+                          className={classes.link}
                           role="button"
                           tabIndex="0"
                           onClick={() => onLinkClick(inputLang, outputLang, text)}
                         >
                           {text}
-                        </a>
+                        </span>
                       </Typography>
                     </div>
                   );
@@ -158,13 +178,14 @@ const Dictionary = ({
                         return (
                           <span key={`seeAlso_${text}`} style={{ display: 'inline' }}>
                             {(j > 0) && (<span>, </span>)}
-                            <a
+                            <span
+                              className={classes.link}
                               role="button"
                               tabIndex="0"
                               onClick={() => onLinkClick(inputLang, outputLang, text)}
                             >
                               {text}
-                            </a>
+                            </span>
                           </span>
                         );
                       })}
@@ -191,28 +212,39 @@ const Dictionary = ({
               {x[2].map((y, j) => (
                 <div key={y[0]}>
                   <Typography variant="body1" align="left">
-                    <span>{j + 1}. </span>
-                    {y[4] && (<span>{y[4]} </span>)}
-                    <a
+                    <span>
+                      {j + 1}
+.
+                      {' '}
+                    </span>
+                    {y[4] && (
+                    <span>
+                      {y[4]}
+                      {' '}
+                    </span>
+                    )}
+                    <span
+                      className={classes.link}
                       role="button"
                       tabIndex="0"
                       onClick={() => onLinkClick(inputLang, outputLang, y[0])}
                     >
                       {y[0]}
-                    </a>
+                    </span>
                   </Typography>
                   {y[1] && (
                     <Typography variant="body2" align="left" className={classes.inline}>
                       {y[1].map((meaning, k) => (
                         <span key={meaning}>
                           {(k > 0) && (<span>, </span>)}
-                          <a
+                          <span
+                            className={classes.link}
                             role="button"
                             tabIndex="0"
                             onClick={() => onLinkClick(outputLang, inputLang, meaning)}
                           >
                             {meaning}
-                          </a>
+                          </span>
                         </span>
                       ))}
                     </Typography>

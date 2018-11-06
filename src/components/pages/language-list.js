@@ -1,7 +1,6 @@
 /* global document */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { goBack } from 'react-router-redux';
 
 import AppBar from '@material-ui/core/AppBar';
 import CloseIcon from '@material-ui/icons/Close';
@@ -18,8 +17,6 @@ import grey from '@material-ui/core/colors/grey';
 
 import connectComponent from '../../helpers/connect-component';
 
-import getPlatform from '../../helpers/get-platform';
-
 import {
   getInputLanguages,
   getOutputLanguages,
@@ -28,6 +25,7 @@ import {
 
 import { updateInputLang, updateOutputLang } from '../../state/root/settings/actions';
 import { updateLanguageListSearch } from '../../state/pages/language-list/actions';
+import { goBack } from '../../state/root/router/actions';
 
 const styles = theme => ({
   container: {
@@ -131,22 +129,20 @@ class LanguageList extends React.Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        {getPlatform() === 'electron' && (
-          <div className={classes.inputContainer}>
-            <Input
-              value={search}
-              placeholder={strings.searchLanguages}
-              className={classes.input}
-              inputProps={{
-                'aria-label': strings.searchLanguages,
-              }}
-              onChange={event => onUpdateLanguageListSearch(event.target.value)}
-            />
-            {search && search.length > 0 && (
-              <CloseIcon className={classes.clearButton} onClick={() => onUpdateLanguageListSearch('')} />
-            )}
-          </div>
-        )}
+        <div className={classes.inputContainer}>
+          <Input
+            value={search}
+            placeholder={strings.searchLanguages}
+            className={classes.input}
+            inputProps={{
+              'aria-label': strings.searchLanguages,
+            }}
+            onChange={event => onUpdateLanguageListSearch(event.target.value)}
+          />
+          {search && search.length > 0 && (
+            <CloseIcon className={classes.clearButton} onClick={() => onUpdateLanguageListSearch('')} />
+          )}
+        </div>
         {(search && search.length > 0) ? (
           <div className={classes.listContainer}>
             <List
@@ -233,11 +229,10 @@ const mapDispatchToProps = dispatch => ({
   onUpdateLanguageListSearch: search => dispatch(updateLanguageListSearch(search)),
 });
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   recentLanguages: state.settings.recentLanguages,
   search: state.pages.languageList.search,
   strings: state.strings,
-  type: ownProps.location.query.type,
 });
 
 export default connectComponent(

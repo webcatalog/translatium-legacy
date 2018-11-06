@@ -1,5 +1,3 @@
-import getPlatform from './get-platform';
-
 import displayLanguages from '../constants/display-languages';
 
 // strip country code from langId
@@ -11,22 +9,8 @@ const getLanguageCode = (langId) => {
 };
 
 const getDefaultLangId = () => {
-  let userLanguages;
-  switch (getPlatform()) {
-    case 'electron': {
-      /* global remote */
-      userLanguages = [remote.app.getLocale()];
-      break;
-    }
-    case 'windows': {
-      /* global Windows */
-      userLanguages = Windows.Globalization.ApplicationLanguages.languages;
-      break;
-    }
-    default: {
-      userLanguages = ['en'];
-    }
-  }
+  /* global remote */
+  const userLanguages = [remote.app.getLocale()];
 
   let defaultLangId = 'en';
 

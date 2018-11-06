@@ -1,5 +1,3 @@
-/* global Windows */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -14,8 +12,6 @@ import connectComponent from '../../../helpers/connect-component';
 
 import { updateImeMode } from '../../../state/pages/home/actions';
 import { releaseDevice, startRecording, stopRecording } from '../../../state/pages/home/speech/actions';
-
-import getPlatform from '../../../helpers/get-platform';
 
 const styles = theme => ({
   container: {
@@ -67,21 +63,10 @@ const styles = theme => ({
 });
 
 class Speech extends React.Component {
-  componentWillMount() {
-    if (getPlatform() === 'windows') {
-      const { onReleaseDevice } = this.props;
-      Windows.UI.WebUI.WebUIApplication.addEventListener('suspending', onReleaseDevice);
-    }
-  }
-
   componentWillUnmount() {
     const { onReleaseDevice } = this.props;
 
     onReleaseDevice();
-
-    if (getPlatform() === 'windows') {
-      Windows.UI.WebUI.WebUIApplication.removeEventListener('suspending', onReleaseDevice);
-    }
   }
 
   render() {
@@ -95,8 +80,7 @@ class Speech extends React.Component {
       <Paper elevation={2} className={classes.container}>
         {(speechStatus === 'recognizing')
           ? <CircularProgress size={80} />
-          :
-          (
+          : (
             <div>
               <Button
                 variant="fab"

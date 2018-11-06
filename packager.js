@@ -7,20 +7,33 @@ const del = require('del');
 const electronVersion = require('./package.json').devDependencies.electron;
 const displayLanguages = require('./src/constants/display-languages').default;
 
-const { Platform } = builder;
-
-if (process.platform !== 'darwin') {
-  console.log(`${process.platform} is not supported.`);
-  process.exit(0);
-}
+const { Platform, Arch } = builder;
 
 console.log(`Packaging for ${process.platform}`);
 
 const productName = 'Translatium';
 
+let targets;
+
+switch (process.platform) {
+  case 'darwin': {
+    targets = Platform.MAC.createTarget(['mas-dev', 'mas']);
+    break;
+  }
+  case 'win32': {
+    targets = Platform.WINDOWS.createTarget(['dir', 'appx']);
+    break;
+  }
+  default:
+  case 'linux': {
+    targets = Platform.LINUX.createTarget(['dir', 'snap'], Arch.x64);
+    break;
+  }
+}
+
 // Promise is returned
 builder.build({
-  targets: Platform.MAC.createTarget(['zip', 'mas']),
+  targets,
   config: {
     electronVersion,
     appId: 'com.moderntranslator.app',
@@ -36,22 +49,21 @@ builder.build({
       name: 'Translatium',
       schemes: ['translatium'],
     },
-    afterPack: ({ appOutDir }) =>
-      new Promise((resolve, reject) => {
-        console.log('afterPack', appOutDir, process.platform);
+    afterPack: ({ appOutDir }) => new Promise((resolve, reject) => {
+      console.log('afterPack', appOutDir, process.platform);
 
-        const languages = Object.keys(displayLanguages);
+      const languages = Object.keys(displayLanguages);
 
-        if (process.platform === 'darwin') {
-          glob(`${appOutDir}/${productName}.app/Contents/Resources/!(${languages.join('|')}).lproj`, (err, files) => {
-            console.log(files);
-            if (err) return reject(err);
-            return del(files).then(resolve, reject);
-          });
-        } else {
-          resolve();
-        }
-      }),
+      if (process.platform === 'darwin') {
+        glob(`${appOutDir}/${productName}.app/Contents/Resources/!(${languages.join('|')}).lproj`, (err, files) => {
+          console.log(files);
+          if (err) return reject(err);
+          return del(files).then(resolve, reject);
+        });
+      } else {
+        resolve();
+      }
+    }),
   },
 })
   .then(() => {

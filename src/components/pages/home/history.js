@@ -38,7 +38,10 @@ const styles = {
 
 class History extends React.Component {
   componentDidMount() {
-    const { onEnterHistory, onLoadMore } = this.props;
+    const {
+      onEnterHistory,
+      onLoadMore,
+    } = this.props;
 
     onEnterHistory();
 
@@ -46,8 +49,13 @@ class History extends React.Component {
       this.listView.onscroll = () => {
         const { scrollTop, clientHeight, scrollHeight } = this.listView;
 
+        const {
+          canLoadMore,
+          historyLoading,
+        } = this.props;
+
         if (scrollTop + clientHeight > scrollHeight - 200) {
-          if (this.props.canLoadMore === true && this.props.historyLoading === false) {
+          if (canLoadMore === true && historyLoading === false) {
             onLoadMore();
           }
         }
