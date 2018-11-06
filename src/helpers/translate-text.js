@@ -8,7 +8,8 @@ const translateShortText = (inputLang, outputLang,
   .then((token) => {
     const endpoint = process.env.REACT_APP_GOOGLE_ENDPOINT || (chinaMode ? 'https://translate.google.cn' : 'https://translate.google.com');
 
-    const uri = `${endpoint}/translate_a/single?client=t`
+    // https://github.com/matheuss/google-translate-api/issues/79
+    const uri = `${endpoint}/translate_a/single?client=gtx`
               + `&sl=${languageUtils.toGoogleStandardlizedLanguage(inputLang)}`
               + `&tl=${languageUtils.toGoogleStandardlizedLanguage(outputLang)}&hl=en&dt=`
               + 'bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&ie=UTF-8&oe=UTF-8'

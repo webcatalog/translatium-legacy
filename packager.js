@@ -7,7 +7,7 @@ const del = require('del');
 const electronVersion = require('./package.json').devDependencies.electron;
 const displayLanguages = require('./src/constants/display-languages').default;
 
-const { Platform, Arch } = builder;
+const { Platform } = builder;
 
 console.log(`Packaging for ${process.platform}`);
 
@@ -16,17 +16,13 @@ const productName = 'Translatium';
 let targets;
 
 switch (process.platform) {
-  case 'darwin': {
-    targets = Platform.MAC.createTarget(['mas-dev', 'mas']);
-    break;
-  }
   case 'win32': {
     targets = Platform.WINDOWS.createTarget(['dir', 'appx']);
     break;
   }
   default:
-  case 'linux': {
-    targets = Platform.LINUX.createTarget(['dir', 'snap'], Arch.x64);
+  case 'darwin': {
+    targets = Platform.MAC.createTarget(['mas-dev', 'mas']);
     break;
   }
 }
