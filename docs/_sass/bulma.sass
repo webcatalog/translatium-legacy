@@ -3,26 +3,15 @@
 
 $blue: #388E3C
 $green: #388E3C
-$footer-background-color: #fff
 $weight-semibold: 500
-$navbar-burger-color: #fff
 
 @import "./bulma/bulma.sass"
 
-body
-  min-height: 100vh
-  display: flex
-  flex-direction: column
-
-main
-  flex: 1
+a
+  text-decoration: underline !important
+  &:hover
+    font-weight: 500
 
 .footer
+  background: none
   padding: 1.5em
-
-.download-btn img
-  height: 50px
-
-.screenshot
-  max-width: 512px
-  width: 100%
