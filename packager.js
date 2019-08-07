@@ -19,6 +19,8 @@ const { Arch, Platform } = builder;
 
 console.log(`Machine: ${process.platform}`);
 
+const appVersion = fs.readJSONSync(path.join(__dirname, 'package.json')).version;
+
 let targets;
 switch (process.platform) {
   case 'darwin': {
@@ -40,6 +42,8 @@ const opts = {
   targets,
   config: {
     appId: 'com.moderntranslator.app', // Backward compatibility
+    // https://github.com/electron-userland/electron-builder/issues/3730
+    buildVersion: process.platform === 'darwin' ? appVersion : undefined,
     productName: 'Translatium',
     files: [
       '!docs/**/*',
@@ -75,7 +79,6 @@ const opts = {
       // http://www.jonathanantoine.com/2016/04/12/windows-app-bundles-and-the-subsequent-submissions-must-continue-to-contain-a-windows-phone-8-1-appxbundle-error-message/
       // https://docs.microsoft.com/en-us/windows/msix/package/create-app-package-with-makeappx-tool
       // https://github.com/electron-userland/electron-builder/blob/master/packages/app-builder-lib/src/targets/AppxTarget.ts
-      const appVersion = fs.readJSONSync(path.join(__dirname, 'package.json')).version;
       const appxBundlePath = path.join('dist', `Translatium ${appVersion}.appxbundle`);
       const appxPath = path.join(__dirname, 'dist', `Translatium ${appVersion}.appx`);
       const bundleDirPath = path.join(__dirname, 'dist', 'appx_bundle');

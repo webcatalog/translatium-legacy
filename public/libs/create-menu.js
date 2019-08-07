@@ -101,6 +101,20 @@ const createMenu = () => {
       { type: 'separator' },
       { role: 'front' },
     ];
+  } else {
+    // File menu for Windows & Linux
+    template.unshift({
+      label: 'File',
+      submenu: [
+        {
+          label: 'Preferences...',
+          accelerator: 'Ctrl+,',
+          click: () => sendToAllWindows('go-to-preferences'),
+        },
+        { type: 'separator' },
+        { role: 'quit', label: 'Exit' },
+      ],
+    });
   }
 
   const menu = Menu.buildFromTemplate(template);

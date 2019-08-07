@@ -29,14 +29,14 @@ const styles = {
   },
 };
 
-const renderCombinator = combinator => combinator
-  .replace(/\+/g, ' + ')
-  .replace('alt', '⌥')
-  .replace('shift', '⇧')
-  .replace('mod', '⌘')
-  .replace('meta', '⌘')
-  .toUpperCase();
-
+const renderCombinator = combinator =>
+  combinator
+    .replace(/\+/g, ' + ')
+    .replace('alt', window.process.platform !== 'darwin' ? 'alt' : '⌥')
+    .replace('shift', window.process.platform !== 'darwin' ? 'shift' : '⇧')
+    .replace('mod', window.process.platform !== 'darwin' ? 'ctrl' : '⌘')
+    .replace('meta', '⌘')
+    .toUpperCase();
 
 class DialogShortcut extends React.Component {
   componentDidMount() {
