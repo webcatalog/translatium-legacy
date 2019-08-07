@@ -102,13 +102,14 @@ const styles = theme => ({
   },
 });
 
-const renderCombinator = combinator => combinator
-  .replace(/\+/g, ' + ')
-  .replace('alt', '⌥')
-  .replace('shift', '⇧')
-  .replace('mod', '⌘')
-  .replace('meta', '⌘')
-  .toUpperCase();
+const renderCombinator = combinator =>
+  combinator
+    .replace(/\+/g, ' + ')
+    .replace('alt', window.process.platform !== 'darwin' ? 'alt' : '⌥')
+    .replace('shift', window.process.platform !== 'darwin' ? 'shift' : '⇧')
+    .replace('mod', window.process.platform !== 'darwin' ? 'ctrl' : '⌘')
+    .replace('meta', '⌘')
+    .toUpperCase();
 
 const getVersion = () => remote.app.getVersion();
 
@@ -237,13 +238,16 @@ const Preferences = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
-            <Divider />
-            <ListItem
-              button
-              onClick={() => remote.shell.openExternal('https://translatiumapp.com/popclip')}
-            >
-              <ListItemText primary={strings.popclipExtension} />
-            </ListItem>
+            {window.process.platform === 'darwin' && (
+              <React.Fragment>
+                <ListItem
+                  button
+                  onClick={() => remote.shell.openExternal('https://translatiumapp.com/popclip')}
+                >
+                  <ListItemText primary={strings.popclipExtension} />
+                </ListItem>
+              </React.Fragment>
+            )}
           </List>
         </Paper>
 

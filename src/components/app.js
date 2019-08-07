@@ -89,7 +89,7 @@ class App extends React.Component {
 
     return (
       <div className={classes.container}>
-        {!attachToMenubar && (
+        {window.process.platform === 'darwin' && !attachToMenubar && (
           <div className={classes.fakeTitleBar}>
             Translatium
           </div>

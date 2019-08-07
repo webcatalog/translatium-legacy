@@ -95,6 +95,7 @@ if (!gotTheLock) {
         minWidth: 320,
         minHeight: 500,
         titleBarStyle: 'hidden',
+        autoHideMenuBar: true,
         webPreferences: {
           nodeIntegration: true,
           webSecurity: false,
