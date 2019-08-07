@@ -12,7 +12,7 @@ Translatium respects your privacy and **does not track or log anything from you*
 
 Still, the app does use third party services that may collect information used to identify you.
 
-* [GitHub](https://help.github.com/articles/github-privacy-statement/), [Mac App Store](https://www.apple.com/sg/legal/privacy/en-ww/) and [Microsoft Store](https://privacy.microsoft.com/en-ca/privacystatement) to distribute the software.
+* [GitHub](https://help.github.com/articles/github-privacy-statement/), [Mac App Store](https://www.apple.com/sg/legal/privacy/en-ww/), [Microsoft Store](https://privacy.microsoft.com/en-ca/privacystatement) and [Snap Store](https://ubuntu.com/legal/data-privacy/snap-store) to distribute the software.
 * [Yandex.Translate](https://yandex.com/legal/translate_termsofuse/18092015/) to translate words & pharses.
 * [Yandex.Dictionary](https://yandex.com/legal/dictionary_api/) to provide dictionary functionality.
 * [OCR.Space](https://ocr.space/privacypolicy) to provide optical character recognition.
