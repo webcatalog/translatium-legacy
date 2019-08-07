@@ -42,6 +42,8 @@ const opts = {
   targets,
   config: {
     appId: 'com.moderntranslator.app', // Backward compatibility
+    // https://github.com/electron-userland/electron-builder/issues/3730
+    buildVersion: process.platform === 'darwin' ? appVersion : undefined,
     productName: 'Translatium',
     files: [
       '!docs/**/*',
@@ -60,8 +62,6 @@ const opts = {
       publisher: 'CN=C635F506-DEEB-41A4-8CAA-16689F486ED2',
     },
     mas: {
-      // https://github.com/electron-userland/electron-builder/issues/3730
-      buildVersion: appVersion,
       category: 'public.app-category.productivity',
       entitlements: 'build-resources/entitlements.mas.plist',
       entitlementsInherit: 'build-resources/entitlements.mas.inherit.plist',
