@@ -1,0 +1,1 @@
+A pull request has also been created at https://github.com/pilotmoon/PopClip-Extensions/pull/1063. 

@@ -1,0 +1,21 @@
+language: node_js
+node_js: 12
+matrix:
+  fast_finish: true
+  include:
+  - os: osx
+    osx_image: xcode10.2
+  - os: linux
+cache: yarn
+before_script:
+- yarn lint
+script:
+- yarn dist
+notifications:
+  email: false
+branches:
+  only:
+    - master
+    # Ruby regex to match tags. Required, or travis won't trigger deploys when
+    # a new tag is pushed. Version tags should be of the form: v0.1.0
+    - /^v\d+\.\d+\.\d+.*$/

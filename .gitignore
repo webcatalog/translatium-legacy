@@ -1,0 +1,11 @@
+node_modules
+.DS_Store
+._.DS_Store
+npm-debug.log
+app0
+.eslintcache
+_app
+dist
+build
+.env
+_docs
