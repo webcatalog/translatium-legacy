@@ -301,11 +301,23 @@ const Preferences = (props) => {
             Version
             {` ${getVersion()}`}
           </Typography>
-
-          <Button onClick={() => remote.shell.openExternal('macappstore://itunes.apple.com/app/id1176624652?mt=12')}>
-            {strings.rateMacAppStore}
-          </Button>
-          <br />
+          
+          {window.process.platform === 'win32' && (
+            <React.Fragment>
+              <Button onClick={() => remote.shell.openExternal('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}>
+                {strings.rateMicrosoftStore}
+              </Button>
+              <br />
+            </React.Fragment>
+          )}
+          {window.process.platform === 'darwin' && (
+            <React.Fragment>
+              <Button onClick={() => remote.shell.openExternal('macappstore://itunes.apple.com/app/id1176624652?mt=12')}>
+                {strings.rateMacAppStore}
+              </Button>
+              <br />
+            </React.Fragment>
+          )}
           <Button onClick={() => remote.shell.openExternal('https://translatiumapp.com')}>
             {strings.website}
           </Button>
