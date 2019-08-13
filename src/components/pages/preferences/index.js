@@ -240,6 +240,7 @@ const Preferences = (props) => {
             </ListItem>
             {window.process.platform === 'darwin' && (
               <React.Fragment>
+                <Divider />
                 <ListItem
                   button
                   onClick={() => remote.shell.openExternal('https://translatiumapp.com/popclip')}

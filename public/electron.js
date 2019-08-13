@@ -29,143 +29,124 @@ app.setAsDefaultProtocolClient('translatium');
 let mb;
 let mainWindow;
 
-const gotTheLock = app.requestSingleInstanceLock();
+// Load listeners
+loadListeners();
 
-app.on('second-instance', () => {
+const REACT_PATH = isDev ? 'http://localhost:3000' : `file://${path.resolve(__dirname, 'index.html')}`;
+
+const createWindow = () => {
   const attachToMenubar = getPreference('attachToMenubar');
   if (attachToMenubar) {
-    if (mb && mb.window) {
-      if (mb.window.isMinimized()) mb.window.restore();
-      mb.window.focus();
+    mb = menubar({
+      index: REACT_PATH,
+      icon: path.resolve(__dirname, 'images', 'menubar-icon.png'),
+      preloadWindow: true,
+      browserWindow: {
+        webPreferences: {
+          nodeIntegration: true,
+        },
+      },
+    });
+
+    const contextMenu = Menu.buildFromTemplate([
+      { role: 'about' },
+      { type: 'separator' },
+      {
+        label: 'Preferences...',
+        click: () => ipcMain.emit('go-to-preferences'),
+      },
+      { type: 'separator' },
+      {
+        label: 'Quit',
+        click: () => {
+          mb.app.quit();
+        },
+      },
+    ]);
+
+    mb.on('ready', () => {
+      mb.tray.on('right-click', () => {
+        mb.tray.popUpContextMenu(contextMenu);
+      });
+    });
+  } else {
+    // Create the browser window.
+    mainWindow = new BrowserWindow({
+      width: 500,
+      height: 600,
+      minWidth: 320,
+      minHeight: 500,
+      titleBarStyle: 'hidden',
+      autoHideMenuBar: true,
+      webPreferences: {
+        nodeIntegration: true,
+        webSecurity: false,
+      },
+    });
+
+    // and load the index.html of the app.
+    mainWindow.loadURL(REACT_PATH);
+
+    // Emitted when the window is closed.
+    mainWindow.on('closed', () => {
+      // Dereference the window object, usually you would store windows
+      // in an array if your app supports multi windows, this is the time
+      // when you should delete the corresponding element.
+      mainWindow = null;
+      createMenu();
+    });
+  }
+};
+
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.on('ready', () => {
+  createWindow();
+  createMenu();
+});
+
+// Quit when all windows are closed.
+app.on('window-all-closed', () => {
+  app.quit();
+});
+
+app.on('activate', () => {
+  // On OS X it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  const attachToMenubar = getPreference('attachToMenubar');
+
+  if (attachToMenubar) {
+    if (mb == null) {
+      createWindow();
+    } else {
+      mb.on('ready', () => {
+        mb.showWindow();
+      });
     }
-  } else if (mainWindow) {
-    if (mainWindow.isMinimized()) mainWindow.restore();
-    mainWindow.focus();
+  } else if (mainWindow == null) {
+    createWindow();
+  } else {
+    mainWindow.show();
   }
 });
 
-if (!gotTheLock) {
-  app.quit();
-} else {
-  // Load listeners
-  loadListeners();
+app.on('open-url', (e, urlStr) => {
+  e.preventDefault();
 
-  const REACT_PATH = isDev ? 'http://localhost:3000' : `file://${path.resolve(__dirname, 'index.html')}`;
+  if (urlStr.startsWith('translatium://')) {
+    const urlObj = url.parse(urlStr, true);
+    const text = decodeURIComponent(urlObj.query.text || '');
 
-  const createWindow = () => {
     const attachToMenubar = getPreference('attachToMenubar');
     if (attachToMenubar) {
-      mb = menubar({
-        index: REACT_PATH,
-        icon: path.resolve(__dirname, 'images', 'menubar-icon.png'),
-        preloadWindow: true,
-        browserWindow: {
-          webPreferences: {
-            nodeIntegration: true,
-          },
-        },
-      });
-
-      const contextMenu = Menu.buildFromTemplate([
-        { role: 'about' },
-        { type: 'separator' },
-        {
-          label: 'Preferences...',
-          click: () => ipcMain.emit('go-to-preferences'),
-        },
-        { type: 'separator' },
-        {
-          label: 'Quit',
-          click: () => {
-            mb.app.quit();
-          },
-        },
-      ]);
-
-      mb.on('ready', () => {
-        mb.tray.on('right-click', () => {
-          mb.tray.popUpContextMenu(contextMenu);
-        });
-      });
-    } else {
-      // Create the browser window.
-      mainWindow = new BrowserWindow({
-        width: 500,
-        height: 600,
-        minWidth: 320,
-        minHeight: 500,
-        titleBarStyle: 'hidden',
-        autoHideMenuBar: true,
-        webPreferences: {
-          nodeIntegration: true,
-          webSecurity: false,
-        },
-      });
-
-      // and load the index.html of the app.
-      mainWindow.loadURL(REACT_PATH);
-
-      // Emitted when the window is closed.
-      mainWindow.on('closed', () => {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        mainWindow = null;
-        createMenu();
-      });
-    }
-  };
-
-  // This method will be called when Electron has finished
-  // initialization and is ready to create browser windows.
-  // Some APIs can only be used after this event occurs.
-  app.on('ready', () => {
-    createWindow();
-    createMenu();
-  });
-
-  // Quit when all windows are closed.
-  app.on('window-all-closed', () => {
-    app.quit();
-  });
-
-  app.on('activate', () => {
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    const attachToMenubar = getPreference('attachToMenubar');
-
-    if (attachToMenubar) {
-      if (mb == null) {
-        createWindow();
-      } else {
-        mb.on('ready', () => {
-          mb.showWindow();
-        });
+      if (mb && mb.window) {
+        mb.window.send('set-input-lang', 'auto');
+        mb.window.send('set-input-text', text);
       }
-    } else if (mainWindow == null) {
-      createWindow();
-    } else {
-      mainWindow.show();
+    } else if (mainWindow) {
+      mainWindow.send('set-input-lang', 'auto');
+      mainWindow.send('set-input-text', text);
     }
-  });
-
-  app.on('open-url', (e, urlStr) => {
-    e.preventDefault();
-
-    if (urlStr.startsWith('translatium://')) {
-      const urlObj = url.parse(urlStr, true);
-      const text = decodeURIComponent(urlObj.query.text || '');
-
-      const attachToMenubar = getPreference('attachToMenubar');
-      if (attachToMenubar) {
-        if (mb && mb.window) {
-          mb.window.send('set-input-lang', 'auto');
-          mb.window.send('set-input-text', text);
-        }
-      } else if (mainWindow) {
-        mainWindow.send('set-input-lang', 'auto');
-        mainWindow.send('set-input-text', text);
-      }
-    }
-  });
-}
+  }
+});
