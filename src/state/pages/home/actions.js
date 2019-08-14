@@ -45,9 +45,8 @@ export const translate = saveToHistory => ((dispatch, getState) => {
       if (currentOutput && currentOutput.identifier === identifier) {
         const r = result;
         r.status = 'done';
-        r.inputLang = inputLang;
-        r.outputLang = outputLang;
-        r.inputText = inputText;
+        r.inputLang = result.inputLang || inputLang;
+        r.outputLang = result.outputLang || outputLang;
 
         if (saveToHistory === true) {
           dispatch(addHistoryItem(r));

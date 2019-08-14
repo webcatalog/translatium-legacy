@@ -146,7 +146,7 @@ const styles = theme => ({
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    fontSize: 21,
+    fontSize: 16,
     textTransform: 'none',
     fontWeight: 500,
   },
@@ -418,6 +418,7 @@ class Home extends React.Component {
       onStartTextToSpeech,
       onSwapButtonClick,
       onTranslateButtonClick,
+      output,
       outputLang,
       screenWidth,
       textToSpeechPlaying,
@@ -457,6 +458,20 @@ class Home extends React.Component {
           return onStartTextToSpeech(inputLang, inputText);
         },
       });
+    } else if (output && output.inputLang
+      && isTtsSupported(output.inputLang) && inputText === output.inputText) {
+      controllers.push({
+        Icon: textToSpeechPlaying ? AVStop : AVVolumeUp,
+        tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
+        onClick: () => {
+          if (textToSpeechPlaying) {
+            window.speechSynthesis.cancel();
+            return onEndTextToSpeech();
+          }
+
+          return onStartTextToSpeech(output.inputLang, output.inputText);
+        },
+      });
     }
 
     if (isOcrSupported(inputLang)) {
@@ -490,7 +505,7 @@ class Home extends React.Component {
                 className={classes.languageTitle}
                 onClick={() => onLanguageClick('inputLang')}
               >
-                {strings[inputLang]}
+                {inputLang === 'auto' && output && output.inputLang ? `${strings[output.inputLang]} (${strings.auto})` : strings[inputLang]}
               </Button>
               <Tooltip title={strings.swap} placement="bottom">
                 <div>
