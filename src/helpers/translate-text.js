@@ -38,6 +38,11 @@ const translateText = (inputLang, outputLang, inputText) => {
     fetch(transUrl)
       .then(response => response.json())
       .then((response) => {
+        const langs = response.lang.split('-');
+
+        output.inputLang = langs[0];
+        output.outputLang = langs[1];
+        output.inputText = inputText;
         output.outputText = response.text[0];
         output.outputRoman = outputLang === 'zh' ? tr(response.text[0]) : undefined;
         output.inputRoman = inputLang === 'zh' ? tr(inputText) : undefined;
