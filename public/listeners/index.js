@@ -32,11 +32,13 @@ const loadListeners = () => {
     dialog.showMessageBox(BrowserWindow.getAllWindows()[0], {
       type: 'question',
       buttons: ['Reset Now', 'Cancel'],
-      message: 'Are you sure? All preferences will be restored to their original defaults. Browsing data won\'t be affected. This action cannot be undone.',
+      message: 'Are you sure? All preferences will be restored to their original defaults. This action cannot be undone.',
       cancelId: 1,
     }, (response) => {
       if (response === 0) {
         resetPreferences();
+
+        ipcMain.emit('request-show-require-restart-dialog');
       }
     });
   });
@@ -44,12 +46,11 @@ const loadListeners = () => {
   ipcMain.on('request-show-require-restart-dialog', () => {
     dialog.showMessageBox({
       type: 'question',
-      buttons: ['Restart Now', 'Later'],
-      message: 'You need to restart the app for this change to take affect.',
+      buttons: ['Quit Now', 'Later'],
+      message: 'You need to quit and then manually restart the app for this change to take affect.',
       cancelId: 1,
     }, (response) => {
       if (response === 0) {
-        app.relaunch();
         app.quit();
       }
     });
