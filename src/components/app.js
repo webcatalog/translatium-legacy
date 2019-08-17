@@ -21,7 +21,7 @@ import Alert from './root/alert';
 
 import strings from '../strings/en.json';
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     height: '100vh',
     width: '100vw',
@@ -185,11 +185,11 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onResize: () => {
     dispatch(screenResize(window.innerWidth));
   },
-  onBottomNavigationActionClick: pathname => dispatch(replace(pathname)),
+  onBottomNavigationActionClick: (pathname) => dispatch(replace(pathname)),
   onRequestCloseSnackbar: () => dispatch(closeSnackbar()),
 });
 

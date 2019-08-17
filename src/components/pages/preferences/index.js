@@ -33,7 +33,7 @@ import { requestSetPreference, requestShowRequireRestartDialog } from '../../../
 
 const { remote } = window.require('electron');
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     flex: 1,
     display: 'flex',
@@ -102,14 +102,13 @@ const styles = theme => ({
   },
 });
 
-const renderCombinator = combinator =>
-  combinator
-    .replace(/\+/g, ' + ')
-    .replace('alt', window.process.platform !== 'darwin' ? 'alt' : '⌥')
-    .replace('shift', window.process.platform !== 'darwin' ? 'shift' : '⇧')
-    .replace('mod', window.process.platform !== 'darwin' ? 'ctrl' : '⌘')
-    .replace('meta', '⌘')
-    .toUpperCase();
+const renderCombinator = (combinator) => combinator
+  .replace(/\+/g, ' + ')
+  .replace('alt', window.process.platform !== 'darwin' ? 'alt' : '⌥')
+  .replace('shift', window.process.platform !== 'darwin' ? 'shift' : '⇧')
+  .replace('mod', window.process.platform !== 'darwin' ? 'ctrl' : '⌘')
+  .replace('meta', '⌘')
+  .toUpperCase();
 
 const getVersion = () => remote.app.getVersion();
 
@@ -182,7 +181,7 @@ const Preferences = (props) => {
                 </ListItem>
               )}
             >
-              {Object.keys(colorPairs).map(colorId => (
+              {Object.keys(colorPairs).map((colorId) => (
                 <MenuItem
                   key={`color_${colorId}`}
                   value={colorId}
@@ -194,23 +193,19 @@ const Preferences = (props) => {
                 </MenuItem>
               ))}
             </EnhancedMenu>
-            {window.process.platform === 'darwin' && (
-              <React.Fragment>
-                <Divider />
-                <ListItem>
-                  <ListItemText primary={strings.attachToMenubar} />
-                  <ListItemSecondaryAction>
-                    <Switch
-                      checked={attachToMenubar}
-                      onChange={(e) => {
-                        requestSetPreference('attachToMenubar', e.target.checked);
-                        requestShowRequireRestartDialog();
-                      }}
-                    />
-                  </ListItemSecondaryAction>
-                </ListItem>
-              </React.Fragment>
-            )}
+            <Divider />
+            <ListItem>
+              <ListItemText primary={window.process.platform === 'win32' ? strings.attachToTaskbar : strings.attachToMenubar} />
+              <ListItemSecondaryAction>
+                <Switch
+                  checked={attachToMenubar}
+                  onChange={(e) => {
+                    requestSetPreference('attachToMenubar', e.target.checked);
+                    requestShowRequireRestartDialog();
+                  }}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
           </List>
         </Paper>
 
@@ -239,7 +234,7 @@ const Preferences = (props) => {
               </ListItemSecondaryAction>
             </ListItem>
             {window.process.platform === 'darwin' && (
-              <React.Fragment>
+              <>
                 <Divider />
                 <ListItem
                   button
@@ -247,7 +242,7 @@ const Preferences = (props) => {
                 >
                   <ListItemText primary={strings.popclipExtension} />
                 </ListItem>
-              </React.Fragment>
+              </>
             )}
           </List>
         </Paper>
@@ -302,22 +297,22 @@ const Preferences = (props) => {
             Version
             {` ${getVersion()}`}
           </Typography>
-          
+
           {window.process.platform === 'win32' && (
-            <React.Fragment>
+            <>
               <Button onClick={() => remote.shell.openExternal('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}>
                 {strings.rateMicrosoftStore}
               </Button>
               <br />
-            </React.Fragment>
+            </>
           )}
           {window.process.platform === 'darwin' && (
-            <React.Fragment>
+            <>
               <Button onClick={() => remote.shell.openExternal('macappstore://itunes.apple.com/app/id1176624652?mt=12')}>
                 {strings.rateMacAppStore}
               </Button>
               <br />
-            </React.Fragment>
+            </>
           )}
           <Button onClick={() => remote.shell.openExternal('https://translatiumapp.com')}>
             {strings.website}
@@ -364,7 +359,7 @@ Preferences.propTypes = {
   translateWhenPressingEnter: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   attachToMenubar: state.preferences.attachToMenubar,
   clearInputShortcut: state.preferences.clearInputShortcut,
   langId: state.preferences.langId,
@@ -379,8 +374,8 @@ const mapStateToProps = state => ({
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onToggle: name => dispatch(toggleSetting(name)),
+const mapDispatchToProps = (dispatch) => ({
+  onToggle: (name) => dispatch(toggleSetting(name)),
   onOpenShortcutDialog: (identifier, combinator) => dispatch(
     openShortcutDialog(identifier, combinator),
   ),

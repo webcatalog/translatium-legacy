@@ -101,7 +101,7 @@ class Ocr extends React.Component {
           <div
             style={{ zoom: ocr.zoomLevel || 1, position: 'relative' }}
           >
-            {ocr[lineVarName].map(line => (
+            {ocr[lineVarName].map((line) => (
               <div
                 key={`ocrText_${line.text}`}
                 style={{
@@ -192,15 +192,15 @@ Ocr.propTypes = {
   outputLang: PropTypes.string,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   inputLang: state.preferences.inputLang,
   outputLang: state.preferences.outputLang,
   ocr: state.pages.ocr,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onCloseClick: () => dispatch(goBack()),
-  onUpdateZoomLevel: value => dispatch(setZoomLevel(value)),
+  onUpdateZoomLevel: (value) => dispatch(setZoomLevel(value)),
   onModeMenuItemClick: (currentMode) => {
     let newMode;
     if (currentMode === 'input') newMode = 'output';

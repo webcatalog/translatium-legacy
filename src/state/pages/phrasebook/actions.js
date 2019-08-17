@@ -20,7 +20,7 @@ export const loadPhrasebook = (init, limit) => ((dispatch, getState) => {
     loading: true,
   });
 
-  const options = Object.assign({}, defaultOptions);
+  const options = { ...defaultOptions };
   const l = items.length;
   if (l > 0) {
     options.startkey = items[l - 1].phrasebookId;
@@ -118,7 +118,7 @@ export const deletePhrasebookItem = (id, rev) => ((dispatch, getState) => {
 
       // Update toggle star status of output
       if (output && id === output.phrasebookId) {
-        const newOutput = Object.assign({}, output, { phrasebookId: null });
+        const newOutput = { ...output, phrasebookId: null };
 
         dispatch({
           type: UPDATE_OUTPUT,

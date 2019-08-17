@@ -7,9 +7,7 @@ const initialState = {
 const screen = (state = initialState, action) => {
   switch (action.type) {
     case SCREEN_RESIZE:
-      return Object.assign({}, state, {
-        screenWidth: action.screenWidth,
-      });
+      return { ...state, screenWidth: action.screenWidth };
     default:
       return state;
   }

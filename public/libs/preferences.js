@@ -22,9 +22,9 @@ const defaultPreferences = {
   saveToPhrasebookShortcut: 'mod+s',
 };
 
-const getPreferences = () => Object.assign({}, defaultPreferences, settings.get(`preferences.${v}`));
+const getPreferences = () => ({ ...defaultPreferences, ...settings.get(`preferences.${v}`) });
 
-const getPreference = name => settings.get(`preferences.${v}.${name}`) || defaultPreferences[name];
+const getPreference = (name) => settings.get(`preferences.${v}.${name}`) || defaultPreferences[name];
 
 const setPreference = (name, value) => {
   settings.set(`preferences.${v}.${name}`, value);

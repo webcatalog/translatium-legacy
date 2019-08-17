@@ -75,6 +75,7 @@
 	"dark": "Dark",
 
 	"attachToMenubar": "Attach to menubar",
+	"attachToTaskbar": "Attach to taskbar",
 
 	"primaryColor": "Primary color",
 	"translateWhenPressingEnter": "Translate when pressing Enter",

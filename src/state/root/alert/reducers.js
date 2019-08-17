@@ -7,9 +7,7 @@ const initialState = {
 const alert = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_ALERT_MESSAGE:
-      return Object.assign({}, state, {
-        message: action.message,
-      });
+      return { ...state, message: action.message };
     default:
       return state;
   }

@@ -5,7 +5,7 @@ export const closeAlert = () => ({
   message: null,
 });
 
-export const openAlert = message => ({
+export const openAlert = (message) => ({
   type: UPDATE_ALERT_MESSAGE,
   message,
 });

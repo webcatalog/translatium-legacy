@@ -21,7 +21,7 @@ export const loadHistory = (init, limit) => ((dispatch, getState) => {
   });
 
 
-  const options = Object.assign({}, defaultOptions);
+  const options = { ...defaultOptions };
   const l = items.length;
   if (l > 0) {
     options.startkey = items[l - 1].historyId;
@@ -86,7 +86,7 @@ export const deleteHistoryItem = (id, rev) => ((dispatch, getState) => {
     });
 });
 
-export const addHistoryItem = data => (dispatch, getState) => {
+export const addHistoryItem = (data) => (dispatch, getState) => {
   const { history } = getState().pages.home;
   const { items, loading, canLoadMore } = history;
 

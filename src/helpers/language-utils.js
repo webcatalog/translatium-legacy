@@ -45,29 +45,29 @@ const data = {
 };
 
 
-export const toOcrSpaceLanguage = lang => data.ocrSpaceSupported[lang] || null;
+export const toOcrSpaceLanguage = (lang) => data.ocrSpaceSupported[lang] || null;
 
 // Check if language supports OCR
-export const isOcrSupported = lang => (toOcrSpaceLanguage(lang) !== null);
+export const isOcrSupported = (lang) => (toOcrSpaceLanguage(lang) !== null);
 
 // Check if language is supported as input
-export const isInput = lang => !(data.all.indexOf(lang) > -1);
+export const isInput = (lang) => !(data.all.indexOf(lang) > -1);
 
 // Check if language is supported as output
-export const isOutput = lang => !(data.outputNotSupported.indexOf(lang) > -1);
+export const isOutput = (lang) => !(data.outputNotSupported.indexOf(lang) > -1);
 
 // Get list of all languages
 export const getLanguages = () => data.all;
 
 // Get list of all output languages
 export const getOutputLanguages = () => data
-  .all.filter(x => data.outputNotSupported.indexOf(x) < 0);
+  .all.filter((x) => data.outputNotSupported.indexOf(x) < 0);
 
 // Get list of all input languages
 export const getInputLanguages = () => data.all;
 
 // Get list of all languages support OCR
-export const getOcrSupportedLanguages = () => data.all.filter(lang => isOcrSupported(lang));
+export const getOcrSupportedLanguages = () => data.all.filter((lang) => isOcrSupported(lang));
 
 // Check if language supports Text-to-speech
 export const isTtsSupported = (lang) => {
