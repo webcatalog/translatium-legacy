@@ -1,4 +1,4 @@
-/* global fetch FormData URL document Image */
+/* global fetch FormData document Image */
 import { push } from 'react-router-redux';
 
 import { UPDATE_OCR } from '../../../constants/actions';
@@ -69,7 +69,7 @@ export const loadImage = () => (dispatch, getState) => {
         method: 'POST',
         body: formData,
       })
-        .then(response => response.json())
+        .then((response) => response.json())
         .then((t) => {
           const { ParsedResults } = t;
 
@@ -99,7 +99,7 @@ export const loadImage = () => (dispatch, getState) => {
             };
           });
 
-          const inputArr = inputLines.map(line => line.text);
+          const inputArr = inputLines.map((line) => line.text);
 
           return translateArray(inputLang, outputLang, inputArr)
             .then(({ outputArr, outputText }) => {
@@ -145,19 +145,19 @@ export const loadImage = () => (dispatch, getState) => {
     });
 };
 
-export const setZoomLevel = zoomLevel => (dispatch, getState) => {
+export const setZoomLevel = (zoomLevel) => (dispatch, getState) => {
   const { ocr } = getState().pages;
 
   dispatch({
     type: UPDATE_OCR,
-    ocr: Object.assign({}, ocr, { zoomLevel }),
+    ocr: { ...ocr, zoomLevel },
   });
 };
 
-export const setMode = mode => (dispatch, getState) => {
+export const setMode = (mode) => (dispatch, getState) => {
   const { ocr } = getState().pages;
   dispatch({
     type: UPDATE_OCR,
-    ocr: Object.assign({}, ocr, { mode }),
+    ocr: { ...ocr, mode },
   });
 };

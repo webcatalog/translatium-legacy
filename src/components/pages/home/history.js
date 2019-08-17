@@ -82,7 +82,7 @@ class History extends React.Component {
           return (
             <div className={classes.listContainer} ref={(c) => { this.listView = c; }}>
               <List>
-                {historyItems.map(item => [(
+                {historyItems.map((item) => [(
                   <ListItem
                     button
                     key={`historyItem_${item.historyId}`}
@@ -132,14 +132,14 @@ History.propTypes = {
   onLoadMore: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   historyItems: state.pages.home.history.items,
   canLoadMore: state.pages.home.history.canLoadMore,
   historyLoading: state.pages.home.history.loading,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onItemClick: output => dispatch(loadOutput(output)),
+const mapDispatchToProps = (dispatch) => ({
+  onItemClick: (output) => dispatch(loadOutput(output)),
   onDeleteButtonClick: (id, rev) => dispatch(deleteHistoryItem(id, rev)),
   onEnterHistory: () => dispatch(loadHistory(true)),
   onLoadMore: () => dispatch(loadHistory()),

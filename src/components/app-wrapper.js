@@ -118,12 +118,12 @@ AppWrapper.propTypes = {
   shouldUseDarkMode: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   shouldUseDarkMode: getShouldUseDarkMode(state),
   primaryColorId: state.preferences.primaryColorId,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onUpdateIsDarkMode: (...args) => dispatch(updateIsDarkMode(...args)),
   onUpdateIsFullScreen: (...args) => dispatch(updateIsFullScreen(...args)),
 });

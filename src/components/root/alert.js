@@ -37,11 +37,11 @@ Alert.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   alertMessage: state.alert.message,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onClose: () => dispatch(closeAlert()),
 });
 

@@ -14,7 +14,7 @@ export const openShortcutDialog = (identifier, combinator) => ({
   combinator,
 });
 
-export const setCombinator = combinator => ({
+export const setCombinator = (combinator) => ({
   type: DIALOG_SHORTCUT_SET_COMBINATOR,
   combinator,
 });

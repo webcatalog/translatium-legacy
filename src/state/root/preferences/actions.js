@@ -10,13 +10,13 @@ export const setPreference = (name, value) => ({
   value,
 });
 
-export const toggleSetting = name => ((dispatch, getState) => {
+export const toggleSetting = (name) => ((dispatch, getState) => {
   const value = !getState().preferences[name];
   requestSetPreference(name, value);
 });
 
 
-const runAfterLanguageChange = language => ((dispatch, getState) => {
+const runAfterLanguageChange = (language) => ((dispatch, getState) => {
   const { preferences } = getState();
   const { recentLanguages } = preferences;
 
@@ -45,7 +45,7 @@ export const swapLanguages = () => ((dispatch, getState) => {
   dispatch(runAfterLanguageChange());
 });
 
-export const updateInputLang = value => ((dispatch, getState) => {
+export const updateInputLang = (value) => ((dispatch, getState) => {
   if (getState().preferences.outputLang === value) { // newInputLang === outputLang
     dispatch(swapLanguages());
     return;
@@ -55,7 +55,7 @@ export const updateInputLang = value => ((dispatch, getState) => {
   dispatch(runAfterLanguageChange(value));
 });
 
-export const updateOutputLang = value => ((dispatch, getState) => {
+export const updateOutputLang = (value) => ((dispatch, getState) => {
   if (getState().preferences.inputLang === value) { // newOutputLang === inputLang
     dispatch(swapLanguages());
     return;

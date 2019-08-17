@@ -36,7 +36,7 @@ const translateText = (inputLang, outputLang, inputText) => {
                  + '&format=plain';
   p.push(
     fetch(transUrl)
-      .then(response => response.json())
+      .then((response) => response.json())
       .then((response) => {
         const langs = response.lang.split('-');
 
@@ -62,7 +62,7 @@ const translateText = (inputLang, outputLang, inputText) => {
                    + `&lang=${dictLang}`;
     p.push(
       fetch(dictUrl)
-        .then(response => response.json())
+        .then((response) => response.json())
         .then((response) => {
           output.outputDict = {
             lang: dictLang,

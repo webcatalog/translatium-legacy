@@ -1,6 +1,6 @@
 const { OPEN_SNACKBAR, CLOSE_SNACKBAR } = require('../../../constants/actions');
 
-export const openSnackbar = message => ({
+export const openSnackbar = (message) => ({
   type: OPEN_SNACKBAR,
   message,
 });

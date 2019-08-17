@@ -22,7 +22,7 @@ import { loadOutput } from '../../state/pages/home/actions';
 
 import strings from '../../strings/en.json';
 
-const styles = theme => ({
+const styles = (theme) => ({
   emptyContainer: {
     flex: 1,
     display: 'flex',
@@ -110,7 +110,7 @@ class Phrasebook extends React.Component {
           return (
             <div className={classes.listContainer} ref={(c) => { this.listView = c; }}>
               <List>
-                {phrasebookItems.map(item => [(
+                {phrasebookItems.map((item) => [(
                   <ListItem
                     button
                     key={`phrasebookItem_${item.phrasebookId}`}
@@ -160,13 +160,13 @@ Phrasebook.propTypes = {
   phrasebookLoading: PropTypes.bool,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   phrasebookItems: state.pages.phrasebook.items,
   canLoadMore: state.pages.phrasebook.canLoadMore,
   phrasebookLoading: state.pages.phrasebook.loading,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onItemClick: (output) => {
     dispatch(loadOutput(output));
     dispatch(replace('/'));

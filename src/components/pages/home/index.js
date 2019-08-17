@@ -70,7 +70,7 @@ import strings from '../../../strings/en.json';
 
 const { remote } = window.require('electron');
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     flex: 1,
     display: 'flex',
@@ -544,7 +544,7 @@ class Home extends React.Component {
               onChange={onInputText}
               onClick={onInputText}
               onInput={onInputText}
-              onKeyDown={translateWhenPressingEnter ? e => onKeyDown(e) : null}
+              onKeyDown={translateWhenPressingEnter ? (e) => onKeyDown(e) : null}
               onKeyUp={onInputText}
               placeholder={strings.typeSomethingHere}
               spellCheck="false"
@@ -632,7 +632,7 @@ Home.propTypes = {
   translateWhenPressingEnter: PropTypes.bool,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   clearInputShortcut: state.preferences.clearInputShortcut,
   fullscreenInputBox: state.pages.home.fullscreenInputBox,
   inputLang: state.preferences.inputLang,
@@ -649,8 +649,8 @@ const mapStateToProps = state => ({
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onLanguageClick: type => dispatch(push({
+const mapDispatchToProps = (dispatch) => ({
+  onLanguageClick: (type) => dispatch(push({
     pathname: '/language-list',
     query: { type },
   })),
@@ -671,7 +671,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateInputText(inputText, e.target.selectionStart, e.target.selectionEnd));
   },
   onClearButtonClick: () => dispatch(updateInputText('')),
-  onInsertText: text => dispatch(insertInputText(text)),
+  onInsertText: (text) => dispatch(insertInputText(text)),
   onTranslateButtonClick: () => dispatch(translate(true)),
   onTogglePhrasebookClick: () => dispatch(togglePhrasebook()),
   onOpenImageButtonClick: () => dispatch(loadImage(false)),
@@ -681,8 +681,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateInputText(inputText));
   },
   onFullscreenButtonClick: () => dispatch(toggleFullscreenInputBox()),
-  onSuggestedInputLangClick: value => dispatch(updateInputLang(value)),
-  onSuggestedInputTextClick: text => dispatch(updateInputText(text)),
+  onSuggestedInputLangClick: (value) => dispatch(updateInputLang(value)),
+  onSuggestedInputTextClick: (text) => dispatch(updateInputText(text)),
   onRequestCopyToClipboard: (text) => {
     remote.clipboard.writeText(text);
     dispatch(openSnackbar(strings.copied));

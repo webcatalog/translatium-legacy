@@ -29,7 +29,7 @@ import { updateLanguageListSearch } from '../../state/pages/language-list/action
 
 import strings from '../../strings/en.json';
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     flex: 1,
     display: 'flex',
@@ -138,7 +138,7 @@ class LanguageList extends React.Component {
             inputProps={{
               'aria-label': strings.searchLanguages,
             }}
-            onChange={event => onUpdateLanguageListSearch(event.target.value)}
+            onChange={(event) => onUpdateLanguageListSearch(event.target.value)}
           />
           {search && search.length > 0 && (
             <CloseIcon className={classes.clearButton} onClick={() => onUpdateLanguageListSearch('')} />
@@ -157,7 +157,7 @@ class LanguageList extends React.Component {
                   <ListItemText primary={strings.noLanguageFound} />
                 </ListItem>
               )
-                : searchResults.map(langId => (
+                : searchResults.map((langId) => (
                   <ListItem
                     button
                     key={`lang_${langId}`}
@@ -173,7 +173,7 @@ class LanguageList extends React.Component {
             <List
               subheader={<ListSubheader disableSticky>{strings.recentlyUsed}</ListSubheader>}
             >
-              {recentLanguages.map(langId => (
+              {recentLanguages.map((langId) => (
                 <ListItem
                   button
                   key={`lang_recent_${langId}`}
@@ -186,9 +186,10 @@ class LanguageList extends React.Component {
             <Divider />
             <List
               subheader={
-                <ListSubheader disableSticky>{strings.allLanguages}</ListSubheader>}
+                <ListSubheader disableSticky>{strings.allLanguages}</ListSubheader>
+}
             >
-              {languages.map(langId => (
+              {languages.map((langId) => (
                 <ListItem
                   button
                   key={`lang_${langId}`}
@@ -215,7 +216,7 @@ LanguageList.propTypes = {
   type: PropTypes.string,
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onCloseClick: () => dispatch(goBack()),
   onLanguageClick: (type, value) => {
     dispatch(goBack());
@@ -226,7 +227,7 @@ const mapDispatchToProps = dispatch => ({
       dispatch(updateOutputLang(value));
     }
   },
-  onUpdateLanguageListSearch: search => dispatch(updateLanguageListSearch(search)),
+  onUpdateLanguageListSearch: (search) => dispatch(updateLanguageListSearch(search)),
 });
 
 const mapStateToProps = (state, ownProps) => ({

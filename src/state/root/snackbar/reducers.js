@@ -8,14 +8,13 @@ const initialState = {
 const snackbar = (state = initialState, action) => {
   switch (action.type) {
     case OPEN_SNACKBAR:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         open: true,
         message: action.message,
-      });
+      };
     case CLOSE_SNACKBAR:
-      return Object.assign({}, state, {
-        open: false,
-      });
+      return { ...state, open: false };
     default:
       return state;
   }

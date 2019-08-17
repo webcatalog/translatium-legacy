@@ -24,8 +24,8 @@ const appVersion = fs.readJSONSync(path.join(__dirname, 'package.json')).version
 let targets;
 switch (process.platform) {
   case 'darwin': {
-    // targets = Platform.MAC.createTarget(['mas-dev']);
-    targets = Platform.MAC.createTarget(['mas']);
+    targets = Platform.MAC.createTarget(['mas-dev']);
+    // targets = Platform.MAC.createTarget(['mas']);
     break;
   }
   case 'win32': {
@@ -65,10 +65,8 @@ const opts = {
     mas: {
       category: 'public.app-category.productivity',
       entitlements: 'build-resources/entitlements.mas.plist',
-      entitlementsInherit: 'build-resources/entitlements.mas.inherit.plist',
-      // provisioningProfile: 'build-resources/embedded-development.provisionprofile',
-      provisioningProfile: 'build-resources/embedded.provisionprofile',
-      extendInfo: 'build-resources/Info.plist',
+      provisioningProfile: 'build-resources/embedded-development.provisionprofile',
+      // provisioningProfile: 'build-resources/embedded.provisionprofile',
     },
     linux: {
       category: 'Utility',

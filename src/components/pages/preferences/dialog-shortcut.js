@@ -29,14 +29,13 @@ const styles = {
   },
 };
 
-const renderCombinator = combinator =>
-  combinator
-    .replace(/\+/g, ' + ')
-    .replace('alt', window.process.platform !== 'darwin' ? 'alt' : '⌥')
-    .replace('shift', window.process.platform !== 'darwin' ? 'shift' : '⇧')
-    .replace('mod', window.process.platform !== 'darwin' ? 'ctrl' : '⌘')
-    .replace('meta', '⌘')
-    .toUpperCase();
+const renderCombinator = (combinator) => combinator
+  .replace(/\+/g, ' + ')
+  .replace('alt', window.process.platform !== 'darwin' ? 'alt' : '⌥')
+  .replace('shift', window.process.platform !== 'darwin' ? 'shift' : '⇧')
+  .replace('mod', window.process.platform !== 'darwin' ? 'ctrl' : '⌘')
+  .replace('meta', '⌘')
+  .toUpperCase();
 
 class DialogShortcut extends React.Component {
   componentDidMount() {
@@ -129,15 +128,15 @@ DialogShortcut.propTypes = {
   open: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   combinator: state.pages.preferences.shortcutDialog.combinator,
   identifier: state.pages.preferences.shortcutDialog.identifier,
   open: state.pages.preferences.shortcutDialog.open,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onCloseShortcutDialog: () => dispatch(closeShortcutDialog()),
-  onSetCombinator: combinator => dispatch(setCombinator(combinator)),
+  onSetCombinator: (combinator) => dispatch(setCombinator(combinator)),
 });
 
 export default connectComponent(

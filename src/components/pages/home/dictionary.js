@@ -9,7 +9,7 @@ import connectComponent from '../../../helpers/connect-component';
 import { updateInputLang, updateOutputLang } from '../../../state/root/preferences/actions';
 import { updateInputText } from '../../../state/pages/home/actions';
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     marginTop: 0,
   },
@@ -48,7 +48,7 @@ const Dictionary = ({
   const outputLang = output.outputLang;
   const isSingleLangDict = output.outputDict.lang === `${output.inputLang}-${output.inputLang}`;
 
-  const translateForward = text => onLinkClick(inputLang, outputLang, text);
+  const translateForward = (text) => onLinkClick(inputLang, outputLang, text);
   const translateBackward = (text) => {
     // Cannot translate forward if the dict is single lang (en-en)
     if (isSingleLangDict) {
@@ -59,7 +59,7 @@ const Dictionary = ({
 
   return (
     <div className={classes.container}>
-      {output.outputDict.def.map(section => (
+      {output.outputDict.def.map((section) => (
         <React.Fragment key={`dict_section${section.text}${section.pos}}`}>
           <Typography variant="subheading" align="left" className={classes.subheading}>
             <span
@@ -85,7 +85,7 @@ const Dictionary = ({
             )}
           </Typography>
           {section.tr.map((sSection, i) => (
-            <React.Fragment>
+            <>
               <Typography variant="body1" align="left">
                 <span className={classes.light}>
                   {i + 1}
@@ -105,8 +105,8 @@ const Dictionary = ({
                     {sSection.gen}
                   </span>
                 )}
-                {sSection.syn && sSection.syn.map(syn => (
-                  <React.Fragment>
+                {sSection.syn && sSection.syn.map((syn) => (
+                  <>
                     ,&nbsp;
                     <span
                       className={classNames(classes.link, classes.primary)}
@@ -122,13 +122,13 @@ const Dictionary = ({
                         {syn.gen}
                       </span>
                     )}
-                  </React.Fragment>
+                  </>
                 ))}
                 {sSection.mean && (
-                  <React.Fragment>
+                  <>
                     &nbsp;(
                     {sSection.mean.map((mean, j) => (
-                      <React.Fragment>
+                      <>
                         {j > 0 && <span>,&nbsp;</span>}
                         <span
                           className={classNames(classes.link, classes.light)}
@@ -144,10 +144,10 @@ const Dictionary = ({
                             {mean.gen}
                           </span>
                         )}
-                      </React.Fragment>
+                      </>
                     ))}
                     )
-                  </React.Fragment>
+                  </>
                 )}
                 .
               </Typography>
@@ -167,9 +167,9 @@ const Dictionary = ({
                     {ex.text}
                   </span>
                   {ex.tr && (
-                    <React.Fragment>
+                    <>
                       &nbsp;(
-                      {ex.tr.map(tr => (
+                      {ex.tr.map((tr) => (
                         <span
                           className={classNames(classes.link, classes.light)}
                           role="button"
@@ -180,11 +180,11 @@ const Dictionary = ({
                         </span>
                       ))}
                       )
-                    </React.Fragment>
+                    </>
                   )}
                 </Typography>
               ))}
-            </React.Fragment>
+            </>
           ))}
         </React.Fragment>
       ))}
@@ -198,7 +198,7 @@ Dictionary.propTypes = {
   onLinkClick: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onLinkClick: (inputLang, outputLang, inputText) => {
     dispatch(updateInputLang(inputLang));
     dispatch(updateOutputLang(outputLang));

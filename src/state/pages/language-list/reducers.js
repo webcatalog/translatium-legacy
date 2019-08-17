@@ -7,9 +7,7 @@ const initialState = {
 const languageList = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_LANGUAGE_LIST_SEARCH:
-      return Object.assign({}, state, {
-        search: action.search,
-      });
+      return { ...state, search: action.search };
     default:
       return state;
   }

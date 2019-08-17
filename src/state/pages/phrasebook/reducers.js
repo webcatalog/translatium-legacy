@@ -9,11 +9,12 @@ const initialState = {
 const phrasebook = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_PHRASEBOOK:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         items: action.items,
         canLoadMore: action.canLoadMore,
         loading: action.loading,
-      });
+      };
     default:
       return state;
   }

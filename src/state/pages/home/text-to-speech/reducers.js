@@ -9,17 +9,19 @@ const initialState = {
 const textToSpeech = (state = initialState, action) => {
   switch (action.type) {
     case START_TEXT_TO_SPEECH:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         textToSpeechLang: action.textToSpeechLang,
         textToSpeechText: action.textToSpeechText,
         textToSpeechPlaying: true,
-      });
+      };
     case END_TEXT_TO_SPEECH:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         textToSpeechLang: null,
         textToSpeechText: null,
         textToSpeechPlaying: false,
-      });
+      };
     default:
       return state;
   }

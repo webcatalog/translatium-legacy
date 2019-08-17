@@ -16,7 +16,7 @@ export const toggleFullscreenInputBox = () => ({
   type: TOGGLE_FULLSCREEN_INPUT_BOX,
 });
 
-export const translate = saveToHistory => ((dispatch, getState) => {
+export const translate = (saveToHistory) => ((dispatch, getState) => {
   const { preferences, pages: { home } } = getState();
   const { inputLang, outputLang } = preferences;
   const { inputText, fullscreenInputBox } = home;
@@ -106,7 +106,7 @@ export const updateInputText = (
   }
 });
 
-export const insertInputText = text => (dispatch, getState) => {
+export const insertInputText = (text) => (dispatch, getState) => {
   const { pages: { home } } = getState();
   const { inputText, selectionStart } = home;
 
@@ -122,9 +122,9 @@ export const togglePhrasebook = () => ((dispatch, getState) => {
 
   if (phrasebookId) {
     phrasebookDb.get(phrasebookId)
-      .then(doc => phrasebookDb.remove(doc))
+      .then((doc) => phrasebookDb.remove(doc))
       .then(() => {
-        const newOutput = Object.assign({}, output, { phrasebookId: null });
+        const newOutput = { ...output, phrasebookId: null };
 
         dispatch({
           type: UPDATE_OUTPUT,
@@ -141,13 +141,13 @@ export const togglePhrasebook = () => ((dispatch, getState) => {
       .then(() => {
         dispatch({
           type: UPDATE_OUTPUT,
-          output: Object.assign({}, output, { phrasebookId: newPhrasebookId }),
+          output: { ...output, phrasebookId: newPhrasebookId },
         });
       });
   }
 });
 
-export const loadOutput = output => ((dispatch) => {
+export const loadOutput = (output) => ((dispatch) => {
   // First load output
   dispatch({
     type: UPDATE_OUTPUT,
