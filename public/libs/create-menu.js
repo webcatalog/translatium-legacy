@@ -1,5 +1,6 @@
 
 const electron = require('electron');
+const { autoUpdater } = require('electron-updater');
 
 const config = require('../config');
 
@@ -10,6 +11,8 @@ const {
 } = electron;
 
 const createMenu = () => {
+  const updaterEnabled = process.env.SNAP == null && !process.mas && !process.windowsStore;
+
   const template = [
     {
       label: 'Edit',
@@ -59,6 +62,18 @@ const createMenu = () => {
       label: config.APP_NAME,
       submenu: [
         { role: 'about', label: `About ${config.APP_NAME}` },
+        {
+          type: 'separator',
+          visible: updaterEnabled,
+        },
+        {
+          label: 'Check for Updates...',
+          click: () => {
+            global.updateSilent = false;
+            autoUpdater.checkForUpdates();
+          },
+          visible: updaterEnabled,
+        },
         { type: 'separator' },
         {
           label: 'Preferences...',
@@ -106,6 +121,18 @@ const createMenu = () => {
     template.unshift({
       label: 'File',
       submenu: [
+        {
+          label: 'Check for Updates...',
+          click: () => {
+            global.updateSilent = false;
+            autoUpdater.checkForUpdates();
+          },
+          visible: updaterEnabled,
+        },
+        {
+          type: 'separator',
+          visible: updaterEnabled,
+        },
         {
           label: 'Preferences...',
           accelerator: 'Ctrl+,',

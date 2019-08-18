@@ -25,11 +25,11 @@ let targets;
 switch (process.platform) {
   case 'darwin': {
     // targets = Platform.MAC.createTarget(['mas-dev']);
-    targets = Platform.MAC.createTarget(['mas']);
+    targets = Platform.MAC.createTarget(['mas', 'zip', 'dmg']);
     break;
   }
   case 'win32': {
-    targets = Platform.WINDOWS.createTarget(['appx'], Arch.x64);
+    targets = Platform.WINDOWS.createTarget(['appx', 'nsis'], Arch.x64);
     break;
   }
   default:
