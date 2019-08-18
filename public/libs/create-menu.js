@@ -1,5 +1,6 @@
 
 const electron = require('electron');
+const { autoUpdater } = require('electron-updater');
 
 const config = require('../config');
 
@@ -59,6 +60,18 @@ const createMenu = () => {
       label: config.APP_NAME,
       submenu: [
         { role: 'about', label: `About ${config.APP_NAME}` },
+        {
+          type: 'separator',
+          visible: process.env.SNAP != null,
+        },
+        {
+          label: 'Check for Updates...',
+          click: () => {
+            global.updateSilent = false;
+            autoUpdater.checkForUpdates();
+          },
+          visible: process.env.SNAP != null,
+        },
         { type: 'separator' },
         {
           label: 'Preferences...',
