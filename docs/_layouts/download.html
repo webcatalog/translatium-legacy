@@ -13,6 +13,10 @@ layout: default
 
       {% if page.platform == "mac" %}
       <div class="buttons is-centered">
+        <a class="button is-medium is-black" href="https://github.com/quanglam2807/translatium/releases/download/v{{ site.translatium_version }}/translatium-{{ site.translatium_version }}.dmg">
+          <i class="fab fa-apple"></i>
+          <span>&nbsp; Download for macOS</span>
+        </a>
         <a href="https://itunes.apple.com/us/app/translatium/id1176624652" class="download-btn">
           <img src="{{ '/images/mac-app-store.png' | relative_url }}" alt="Mac App Store" />
         </a>
@@ -22,6 +26,10 @@ layout: default
       <p>Also available on <a href="/download/windows"><i class="fab fa-windows"></i> Windows</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
       {% elsif page.platform == "linux" %}
       <div class="buttons is-centered">
+        <a class="button is-medium is-black" href="https://github.com/quanglam2807/translatium/releases/download/v{{ site.translatium_version }}/translatium-{{ site.translatium_version }}-x86_64.AppImage">
+          <i class="fab fa-linux"></i>
+          <span>&nbsp; Download .AppImage</span>
+        </a>
         <a href="https://snapcraft.io/translatium" class="download-btn">
           <img src="{{ '/images/snap-store.png' | relative_url }}" alt="Snap Store" />
         </a>
@@ -31,16 +39,24 @@ layout: default
       <p>Also available on <a href="/download/mac"><i class="fab fa-apple"></i> macOS</a> | <a href="/download/windows"><i class="fab fa-windows"></i> Windows</a>.</p>
       {% elsif page.platform == "windows" %}
       <div class="buttons is-centered">
+        <a class="button is-medium is-black" href="https://github.com/quanglam2807/translatium/releases/download/v{{ site.translatium_version }}/translatium-setup-{{ site.translatium_version }}.exe">
+          <i class="fab fa-windows"></i>
+          <span>&nbsp; Download for Windows</span>
+        </a>
         <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing" class="download-btn">
           <img src="{{ '/images/microsoft-store.png' | relative_url }}" alt="Microsoft Store" />
         </a>
       </div>
-      <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/quanglam2807/translatium/releases">Release Notes</a>). Windows 10 v1607 and later, 64-bit.</small></p>
+      <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/quanglam2807/translatium/releases">Release Notes</a>). Windows 7 and later, 64-bit.</small></p>
       <br />
       <p>Also available on <a href="/download/mac"><i class="fab fa-apple"></i> macOS</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
       {% else %}
       <div id="mac">
         <div class="buttons is-centered">
+          <a class="button is-medium is-black" href="https://github.com/quanglam2807/translatium/releases/download/v{{ site.translatium_version }}/translatium-{{ site.translatium_version }}.dmg">
+            <i class="fab fa-apple"></i>
+            <span>&nbsp; Download for macOS</span>
+          </a>
           <a href="https://itunes.apple.com/us/app/translatium/id1176624652" class="download-btn">
             <img src="{{ '/images/mac-app-store.png' | relative_url }}" alt="Mac App Store" />
           </a>
@@ -51,6 +67,10 @@ layout: default
       </div>
       <div style="display:none" id="linux" style="display:none">
         <div class="buttons is-centered">
+          <a class="button is-medium is-black" href="https://github.com/quanglam2807/translatium/releases/download/v{{ site.translatium_version }}/translatium-{{ site.translatium_version }}-x86_64.AppImage">
+            <i class="fab fa-linux"></i>
+            <span>&nbsp; Download .AppImage</span>
+          </a>
           <a href="https://snapcraft.io/translatium" class="download-btn">
             <img src="{{ '/images/snap-store.png' | relative_url }}" alt="Snap Store" />
           </a>
@@ -61,11 +81,15 @@ layout: default
       </div>
       <div style="display:none" id="windows" style="display:none">
         <div class="buttons is-centered">
+          <a class="button is-medium is-black" href="https://github.com/quanglam2807/translatium/releases/download/v{{ site.translatium_version }}/translatium-setup-{{ site.translatium_version }}.exe">
+            <i class="fab fa-windows"></i>
+            <span>&nbsp; Download for Windows</span>
+          </a>
           <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing" class="download-btn">
             <img src="{{ '/images/microsoft-store.png' | relative_url }}" alt="Microsoft Store" />
           </a>
         </div>
-        <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/quanglam2807/translatium/releases">Release Notes</a>). Windows 10 v1607 and later, 64-bit.</small></p>
+        <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/quanglam2807/translatium/releases">Release Notes</a>). Windows 7 and later, 64-bit.</small></p>
         <br />
         <p>Also available on <a href="/download/mac"><i class="fab fa-apple"></i> macOS</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
       </div>

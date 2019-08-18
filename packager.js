@@ -25,16 +25,16 @@ let targets;
 switch (process.platform) {
   case 'darwin': {
     // targets = Platform.MAC.createTarget(['mas-dev']);
-    targets = Platform.MAC.createTarget(['mas']);
+    targets = Platform.MAC.createTarget(['mas', 'zip', 'dmg']);
     break;
   }
   case 'win32': {
-    targets = Platform.WINDOWS.createTarget(['appx'], Arch.x64);
+    targets = Platform.WINDOWS.createTarget(['appx', 'nsis'], Arch.x64);
     break;
   }
   default:
   case 'linux': {
-    targets = Platform.LINUX.createTarget(['snap'], Arch.x64);
+    targets = Platform.LINUX.createTarget(['snap', 'AppImage'], Arch.x64);
     break;
   }
 }
@@ -65,8 +65,8 @@ const opts = {
     mas: {
       category: 'public.app-category.productivity',
       entitlements: 'build-resources/entitlements.mas.plist',
-      // provisioningProfile: 'build-resources/embedded-development.provisionprofile',
-      provisioningProfile: 'build-resources/embedded.provisionprofile',
+      provisioningProfile: 'build-resources/embedded-development.provisionprofile',
+      // provisioningProfile: 'build-resources/embedded.provisionprofile',
     },
     linux: {
       category: 'Utility',
