@@ -65,8 +65,8 @@ const opts = {
     mas: {
       category: 'public.app-category.productivity',
       entitlements: 'build-resources/entitlements.mas.plist',
-      // provisioningProfile: 'build-resources/embedded-development.provisionprofile',
-      provisioningProfile: 'build-resources/embedded.provisionprofile',
+      provisioningProfile: 'build-resources/embedded-development.provisionprofile',
+      // provisioningProfile: 'build-resources/embedded.provisionprofile',
     },
     linux: {
       category: 'Utility',
