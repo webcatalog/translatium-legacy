@@ -42,7 +42,7 @@ const createWindow = () => {
   if (attachToMenubar) {
     mb = menubar({
       index: REACT_PATH,
-      icon: path.resolve(__dirname, 'images', 'menubar-icon.png'),
+      icon: path.resolve(__dirname, 'images', 'menubarTemplate.png'),
       preloadWindow: true,
       browserWindow: {
         webPreferences: {

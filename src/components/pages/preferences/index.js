@@ -328,7 +328,7 @@ const Preferences = (props) => {
             <span role="img" aria-label="love">❤</span>
             <span> by </span>
             <span
-              onClick={() => remote.shell.openExternal('https://quanglam2807.github.io')}
+              onClick={() => remote.shell.openExternal('https://quanglam2807.com')}
               role="link"
               tabIndex="0"
               className={classes.link}
