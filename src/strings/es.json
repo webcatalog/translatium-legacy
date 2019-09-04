@@ -1,6 +1,6 @@
  
 {
-	"home": "Home",
+	"home": "Inicio",
 	"phrasebook": "Guía de conversación",
 	"preferences": "Preferencias",
 
@@ -18,12 +18,12 @@
 	"didYouMean": "Quisiste decir",
 
 	"errorOccured": "A ocurrido un error.",
-	"cannotConnectToServer": "The app cannot to server. Please check your Internet connection.",
-	"cannotOpenTheFile": "The app cannot open the file you selected.",
-	"cannotRecognizeImage": "The app cannot recognize any text on your image.",
+	"cannotConnectToServer": "La app no puede conectarse al servidor. Revise su coneccion a Internet.",
+	"cannotOpenTheFile": "La app no puede abrir el archivo seleccionado.",
+	"cannotRecognizeImage": "La app no puede reconocer el texto en su imagen.",
 
-	"listen": "Listen",
-	"stop": "Stop",
+	"listen": "Escuchar",
+	"stop": "Parar",
 
 	"swap": "Intercambiar",
 	"copy": "Copiar",
@@ -35,7 +35,7 @@
 	"translatedByYandexTranslate": "Powered by Yandex.Translate.",
 	"translatedByYandexDictionary": "Powered by Yandex.Dictionary.",
 
-	"fromLanguage": "from {1}",
+	"fromLanguage": "desde {1}",
 
 	"chooseAnInputLanguage": "Traducir de",
 	"chooseAnOutputLanguage": "Traducir a",
@@ -48,7 +48,7 @@
 	"phrasebookIsEmpty": "Guía de conversación vacía.",
 
 	"delete": "Borrar",
-	"spaceBar": "Space bar",
+	"spaceBar": "Barra espaciadora",
 	"done": "Hecho",
 
 	"red": "Rojo",
@@ -75,8 +75,8 @@
 	"light": "Claro",
 	"dark": "Oscuro",
 
-	"attachToMenubar": "Attach to menubar",
-	"attachToTaskbar": "Attach to taskbar",
+	"attachToMenubar": "Unir a la barra de menu",
+	"attachToTaskbar": "Unir a la barra de tares",
 
 	"primaryColor": "Color Primario",
 	"translateWhenPressingEnter": "Traducir cuando presionas Enter",
