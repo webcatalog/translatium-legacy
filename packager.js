@@ -4,7 +4,11 @@ const path = require('path');
 const fs = require('fs-extra');
 const builder = require('electron-builder');
 const { spawn } = require('child_process');
+const glob = require('glob');
+const del = require('del');
 const { getSignVendorPath } = require('app-builder-lib/out/codeSign/windowsCodeSign');
+
+const displayLanguages = require('./src/constants/display-languages').default;
 
 // https://stackoverflow.com/a/17466459
 const runCmd = (cmd, args, callBack) => {
@@ -72,6 +76,21 @@ const opts = {
       category: 'Utility',
       packageCategory: 'utils',
     },
+    afterPack: ({ appOutDir }) => new Promise((resolve, reject) => {
+      console.log('afterPack', appOutDir, process.platform);
+
+      const languages = Object.keys(displayLanguages);
+
+      if (process.platform === 'darwin') {
+        glob(`${appOutDir}/Translatium.app/Contents/Resources/!(${languages.join('|')}).lproj`, (err, files) => {
+          console.log(files);
+          if (err) return reject(err);
+          return del(files).then(resolve, reject);
+        });
+      } else {
+        resolve();
+      }
+    }),
     afterAllArtifactBuild: () => {
       if (process.platform !== 'win32') {
         return [];

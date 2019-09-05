@@ -16,8 +16,6 @@ import connectComponent from '../../../helpers/connect-component';
 import { deleteHistoryItem, loadHistory } from '../../../state/pages/home/history/actions';
 import { loadOutput } from '../../../state/pages/home/actions';
 
-import strings from '../../../strings/en.json';
-
 const styles = {
   container: {
     flex: 1,
@@ -70,6 +68,7 @@ class History extends React.Component {
       historyLoading,
       onDeleteButtonClick,
       onItemClick,
+      locale,
     } = this.props;
 
     return (
@@ -93,9 +92,9 @@ class History extends React.Component {
                       secondary={item.inputText}
                     />
                     <ListItemSecondaryAction>
-                      <Tooltip title={strings.remove} placement="left">
+                      <Tooltip title={locale.remove} placement="left">
                         <IconButton
-                          aria-label={strings.remove}
+                          aria-label={locale.remove}
                           onClick={() => {
                             onDeleteButtonClick(
                               item.historyId,
@@ -130,12 +129,14 @@ History.propTypes = {
   onEnterHistory: PropTypes.func.isRequired,
   onItemClick: PropTypes.func.isRequired,
   onLoadMore: PropTypes.func.isRequired,
+  locale: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   historyItems: state.pages.home.history.items,
   canLoadMore: state.pages.home.history.canLoadMore,
   historyLoading: state.pages.home.history.loading,
+  locale: state.locale,
 });
 
 const mapDispatchToProps = (dispatch) => ({

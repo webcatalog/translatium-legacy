@@ -1,6 +1,42 @@
+const { app } = require('electron');
 const settings = require('electron-settings');
 
 const sendToAllWindows = require('./send-to-all-windows');
+const displayLanguages = require('./display-languages');
+
+// Legacy code
+// https://github.com/quanglam2807/translatium/blob/v8.6.1/src/helpers/get-default-lang-id.js
+// strip country code from langId
+// en-US => en / vi-vn => vi
+const getLanguageCode = (langId) => {
+  const parts = langId.toLowerCase().replace('_', '-').split('-');
+
+  return parts[0];
+};
+
+const getDefaultLangId = () => {
+  const userLanguages = [app.getLocale()];
+
+  let defaultLangId = 'en';
+
+  userLanguages.some((userLang) => {
+    let isMatch = false;
+
+    Object.keys(displayLanguages).some((appLang) => {
+      isMatch = getLanguageCode(appLang) === getLanguageCode(userLang);
+
+      if (isMatch) {
+        defaultLangId = appLang;
+      }
+
+      return isMatch;
+    });
+
+    return isMatch;
+  });
+
+  return defaultLangId;
+};
 
 // scope
 const v = '2019';
@@ -20,6 +56,7 @@ const defaultPreferences = {
   clearInputShortcut: 'mod+shift+d',
   openImageFileShortcut: 'mod+o',
   saveToPhrasebookShortcut: 'mod+s',
+  langId: getDefaultLangId(),
 };
 
 const getPreferences = () => ({ ...defaultPreferences, ...settings.get(`preferences.${v}`) });

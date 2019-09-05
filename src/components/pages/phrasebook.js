@@ -20,8 +20,6 @@ import connectComponent from '../../helpers/connect-component';
 import { deletePhrasebookItem, loadPhrasebook } from '../../state/pages/phrasebook/actions';
 import { loadOutput } from '../../state/pages/home/actions';
 
-import strings from '../../strings/en.json';
-
 const styles = (theme) => ({
   emptyContainer: {
     flex: 1,
@@ -86,13 +84,14 @@ class Phrasebook extends React.Component {
       phrasebookLoading,
       onDeleteButtonClick,
       onItemClick,
+      locale,
     } = this.props;
 
     return (
       <div className={classes.container}>
         <AppBar position="static">
           <Toolbar variant="dense">
-            <Typography variant="title" color="inherit">{strings.phrasebook}</Typography>
+            <Typography variant="title" color="inherit">{locale.phrasebook}</Typography>
           </Toolbar>
         </AppBar>
         {(() => {
@@ -101,7 +100,7 @@ class Phrasebook extends React.Component {
               <div className={classes.emptyContainer}>
                 <div className={classes.emptyInnerContainer}>
                   <ToggleStar className={classes.bigIcon} />
-                  <Typography variant="headline">{strings.phrasebookIsEmpty}</Typography>
+                  <Typography variant="headline">{locale.phrasebookIsEmpty}</Typography>
                 </div>
               </div>
             );
@@ -121,9 +120,9 @@ class Phrasebook extends React.Component {
                       secondary={item.inputText}
                     />
                     <ListItemSecondaryAction>
-                      <Tooltip title={strings.remove} placement="left">
+                      <Tooltip title={locale.remove} placement="left">
                         <IconButton
-                          aria-label={strings.removeFromPhrasebook}
+                          aria-label={locale.removeFromPhrasebook}
                           onClick={() => {
                             onDeleteButtonClick(
                               item.phrasebookId,
@@ -158,12 +157,14 @@ Phrasebook.propTypes = {
   onLoadMore: PropTypes.func.isRequired,
   phrasebookItems: PropTypes.arrayOf(PropTypes.object),
   phrasebookLoading: PropTypes.bool,
+  locale: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   phrasebookItems: state.pages.phrasebook.items,
   canLoadMore: state.pages.phrasebook.canLoadMore,
   phrasebookLoading: state.pages.phrasebook.loading,
+  locale: state.locale,
 });
 
 const mapDispatchToProps = (dispatch) => ({

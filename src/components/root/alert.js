@@ -11,22 +11,20 @@ import Button from '@material-ui/core/Button';
 
 import { closeAlert } from '../../state/root/alert/actions';
 
-import strings from '../../strings/en.json';
-
-const Alert = ({ alertMessage, onClose }) => (
+const Alert = ({ alertMessage, onClose, locale }) => (
   <Dialog
     open={alertMessage != null}
     onClose={onClose}
   >
-    <DialogTitle>{strings.errorOccured}</DialogTitle>
+    <DialogTitle>{locale.errorOccured}</DialogTitle>
     <DialogContent>
       <DialogContentText>
-        {strings[alertMessage]}
+        {locale[alertMessage]}
       </DialogContentText>
     </DialogContent>
     <DialogActions>
       <Button color="primary" onClick={onClose}>
-        {strings.close}
+        {locale.close}
       </Button>
     </DialogActions>
   </Dialog>
@@ -35,10 +33,12 @@ const Alert = ({ alertMessage, onClose }) => (
 Alert.propTypes = {
   alertMessage: PropTypes.string,
   onClose: PropTypes.func.isRequired,
+  locale: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   alertMessage: state.alert.message,
+  locale: state.locale,
 });
 
 const mapDispatchToProps = (dispatch) => ({
