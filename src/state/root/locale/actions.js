@@ -3,6 +3,7 @@ import { UPDATE_LOCALE } from '../../../constants/actions';
 import enStrings from '../../../strings/en.json';
 import viStrings from '../../../strings/vi.json';
 import esStrings from '../../../strings/es.json';
+import itStrings from '../../../strings/it.json';
 
 export const updateLocale = (langId) => (dispatch) => {
   let strings;
@@ -13,6 +14,10 @@ export const updateLocale = (langId) => (dispatch) => {
     }
     case 'es': {
       strings = esStrings;
+      break;
+    }
+    case 'it': {
+      strings = itStrings;
       break;
     }
     default: {

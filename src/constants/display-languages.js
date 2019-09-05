@@ -8,6 +8,9 @@ const displayLanguages = {
   es: {
     displayName: 'Español',
   },
+  it: {
+    displayName: 'Italiano',
+  },
 };
 
 export default displayLanguages;
