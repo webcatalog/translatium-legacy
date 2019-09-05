@@ -11,6 +11,9 @@ const displayLanguages = {
   it: {
     displayName: 'Italiano',
   },
+  pl: {
+    displayName: 'język polski',
+  },
 };
 
 module.exports = displayLanguages;
