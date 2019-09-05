@@ -142,6 +142,14 @@ const Preferences = (props) => {
     { identifier: 'saveToPhrasebook', combinator: saveToPhrasebookShortcut },
   ];
 
+  const displayLanguageKeys = Object.keys(displayLanguages);
+  displayLanguageKeys.sort((xKey, yKey) => {
+    const x = displayLanguages[xKey].displayName;
+    const y = displayLanguages[yKey].displayName;
+    return x.localeCompare(y);
+  });
+
+
   return (
     <div className={classes.container}>
       <DialogShortcut />
@@ -168,7 +176,7 @@ const Preferences = (props) => {
                 </ListItem>
               )}
             >
-              {Object.keys(displayLanguages).map((lId) => (
+              {displayLanguageKeys.map((lId) => (
                 <MenuItem
                   key={`lang_${lId}`}
                   value={lId}
