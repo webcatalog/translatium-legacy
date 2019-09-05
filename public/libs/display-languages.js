@@ -5,6 +5,9 @@ const displayLanguages = {
   vi: {
     displayName: 'Tiếng Việt',
   },
+  es: {
+    displayName: 'Español',
+  },
 };
 
 module.exports = displayLanguages;
