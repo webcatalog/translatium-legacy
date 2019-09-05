@@ -5,10 +5,12 @@ import viStrings from '../../../strings/vi.json';
 import esStrings from '../../../strings/es.json';
 import itStrings from '../../../strings/it.json';
 import deStrings from '../../../strings/de.json';
+import plStrings from '../../../strings/pl.json';
 
 export const updateLocale = (langId) => (dispatch) => {
+  const processedLangId = langId.substring(0, 2) !== 'zh' ? langId.substring(0, 2) : langId;
   let strings;
-  switch (langId.substring(0, 2)) {
+  switch (processedLangId) {
     case 'vi': {
       strings = viStrings;
       break;
@@ -23,6 +25,10 @@ export const updateLocale = (langId) => (dispatch) => {
     }
     case 'de': {
       strings = deStrings;
+      break;
+    }
+    case 'pl': {
+      strings = plStrings;
       break;
     }
     default: {
