@@ -8,6 +8,9 @@ const displayLanguages = {
   es: {
     displayName: 'Español',
   },
+  it: {
+    displayName: 'Italiano',
+  },
 };
 
 module.exports = displayLanguages;
