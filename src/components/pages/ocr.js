@@ -18,8 +18,6 @@ import { setZoomLevel, setMode } from '../../state/pages/ocr/actions';
 import { loadOutput } from '../../state/pages/home/actions';
 import { openSnackbar } from '../../state/root/snackbar/actions';
 
-import strings from '../../strings/en.json';
-
 const { remote } = window.require('electron');
 
 const styles = {
@@ -83,6 +81,7 @@ class Ocr extends React.Component {
       onTextOnlyMenuItemClick,
       onUpdateZoomLevel,
       outputLang,
+      locale,
     } = this.props;
 
     if (!ocr) return null;
@@ -146,25 +145,25 @@ class Ocr extends React.Component {
         >
           <MenuItem onClick={() => onModeMenuItemClick(ocr.mode)}>
             {ocr.mode === 'input'
-              ? `${strings.displayTranslatedText} (${strings[outputLang]})`
-              : `${strings.displayOriginalText} (${strings[inputLang]})`}
+              ? `${locale.displayTranslatedText} (${locale[outputLang]})`
+              : `${locale.displayOriginalText} (${locale[inputLang]})`}
           </MenuItem>
           <MenuItem
-            onClick={() => onRequestCopyToClipboard(ocr.inputText)}
+            onClick={() => onRequestCopyToClipboard(ocr.inputText, locale.copied)}
           >
-            {strings.copyOriginalText}
+            {locale.copyOriginalText}
             {' '}
 (
-            {strings[inputLang]}
+            {locale[inputLang]}
 )
           </MenuItem>
           <MenuItem
-            onClick={() => onRequestCopyToClipboard(ocr.outputText)}
+            onClick={() => onRequestCopyToClipboard(ocr.outputText, locale.copied)}
           >
-            {strings.copyTranslatedText}
+            {locale.copyTranslatedText}
             {' '}
 (
-            {strings[outputLang]}
+            {locale[outputLang]}
 )
           </MenuItem>
           <MenuItem
@@ -172,7 +171,7 @@ class Ocr extends React.Component {
               inputLang, outputLang, ocr.inputText, ocr.outputText,
             )}
           >
-            {strings.displayTextOnly}
+            {locale.displayTextOnly}
           </MenuItem>
         </EnhancedMenu>
       </div>
@@ -190,12 +189,14 @@ Ocr.propTypes = {
   onTextOnlyMenuItemClick: PropTypes.func.isRequired,
   onUpdateZoomLevel: PropTypes.func.isRequired,
   outputLang: PropTypes.string,
+  locale: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   inputLang: state.preferences.inputLang,
   outputLang: state.preferences.outputLang,
   ocr: state.pages.ocr,
+  locale: state.locale,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -214,9 +215,9 @@ const mapDispatchToProps = (dispatch) => ({
     }));
     dispatch(goBack());
   },
-  onRequestCopyToClipboard: (text) => {
+  onRequestCopyToClipboard: (text, localeCopied) => {
     remote.clipboard.writeText(text);
-    dispatch(openSnackbar(strings.copied));
+    dispatch(openSnackbar(localeCopied));
   },
 });
 

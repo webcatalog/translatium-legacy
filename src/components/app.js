@@ -19,8 +19,6 @@ import { closeSnackbar } from '../state/root/snackbar/actions';
 
 import Alert from './root/alert';
 
-import strings from '../strings/en.json';
-
 const styles = (theme) => ({
   container: {
     height: '100vh',
@@ -85,6 +83,7 @@ class App extends React.Component {
       shouldShowBottomNav,
       snackbarMessage,
       snackbarOpen,
+      locale,
     } = this.props;
 
     return (
@@ -108,7 +107,7 @@ class App extends React.Component {
             onClose={onRequestCloseSnackbar}
             action={(
               <Button color="secondary" size="small" onClick={onRequestCloseSnackbar}>
-                {strings.close}
+                {locale.close}
               </Button>
             )}
           />
@@ -117,17 +116,17 @@ class App extends React.Component {
             <Paper elevation={2} style={{ zIndex: 1000 }}>
               <BottomNavigation value={bottomNavigationSelectedIndex} showLabels>
                 <BottomNavigationAction
-                  label={strings.home}
+                  label={locale.home}
                   icon={<ActionHome className={classes.icon} />}
                   onClick={() => onBottomNavigationActionClick('/')}
                 />
                 <BottomNavigationAction
-                  label={strings.phrasebook}
+                  label={locale.phrasebook}
                   icon={<ToggleStar className={classes.icon} />}
                   onClick={() => onBottomNavigationActionClick('/phrasebook')}
                 />
                 <BottomNavigationAction
-                  label={strings.preferences}
+                  label={locale.preferences}
                   icon={<ActionSettings className={classes.icon} />}
                   onClick={() => onBottomNavigationActionClick('/preferences')}
                 />
@@ -152,6 +151,7 @@ App.propTypes = {
   shouldShowBottomNav: PropTypes.bool.isRequired,
   snackbarMessage: PropTypes.string,
   snackbarOpen: PropTypes.bool.isRequired,
+  locale: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -182,6 +182,7 @@ const mapStateToProps = (state, ownProps) => {
     shouldShowBottomNav: true,
     snackbarMessage: state.snackbar.message,
     snackbarOpen: state.snackbar.open,
+    locale: state.locale,
   };
 };
 

@@ -15,6 +15,7 @@ import general from './root/general/reducers';
 import preferences from './root/preferences/reducers';
 import screen from './root/screen/reducers';
 import snackbar from './root/snackbar/reducers';
+import locale from './root/locale/reducers';
 
 import pages from './pages/reducers';
 
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   routing: routerReducer,
   screen,
   snackbar,
+  locale,
 });
 
 const configureStore = (initialState) => {
