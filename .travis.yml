@@ -8,8 +8,8 @@ matrix:
   - os: linux
 cache: yarn
 before_install:
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo snap install snapcraft --classic; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo "$SNAP_TOKEN" | snapcraft login --with -; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then sudo snap install snapcraft --classic; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then echo "$SNAP_TOKEN" | snapcraft login --with -; fi
 before_script:
 - yarn lint
 script:
