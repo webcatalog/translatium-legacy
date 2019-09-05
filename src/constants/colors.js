@@ -15,7 +15,7 @@ import brown from '@material-ui/core/colors/brown';
 import grey from '@material-ui/core/colors/grey';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 
-export default {
+const colors = {
   red: {
     light: red[300],
     main: red[500],
@@ -107,3 +107,5 @@ export default {
     dark: '#000',
   },
 };
+
+export default colors;

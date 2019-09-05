@@ -17,8 +17,6 @@ import {
 
 import { requestSetPreference } from '../../../senders';
 
-import strings from '../../../strings/en.json';
-
 const styles = {
   combinatorContainer: {
     marginTop: 12,
@@ -70,15 +68,16 @@ class DialogShortcut extends React.Component {
       identifier,
       onCloseShortcutDialog,
       open,
+      locale,
     } = this.props;
 
     return (
       <Dialog open={open} onClose={onCloseShortcutDialog}>
         <DialogTitle>
-          {strings.shortcuts}
+          {locale.shortcuts}
 :
           {' '}
-          {strings[identifier]}
+          {locale[identifier]}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -97,7 +96,7 @@ class DialogShortcut extends React.Component {
         </DialogContent>
         <DialogActions>
           <Button onClick={onCloseShortcutDialog}>
-            {strings.cancel}
+            {locale.cancel}
           </Button>
           <Button
             color="primary"
@@ -106,7 +105,7 @@ class DialogShortcut extends React.Component {
               onCloseShortcutDialog();
             }}
           >
-            {strings.save}
+            {locale.save}
           </Button>
         </DialogActions>
       </Dialog>
@@ -126,12 +125,14 @@ DialogShortcut.propTypes = {
   onCloseShortcutDialog: PropTypes.func.isRequired,
   onSetCombinator: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
+  locale: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   combinator: state.pages.preferences.shortcutDialog.combinator,
   identifier: state.pages.preferences.shortcutDialog.identifier,
   open: state.pages.preferences.shortcutDialog.open,
+  locale: state.locale,
 });
 
 const mapDispatchToProps = (dispatch) => ({

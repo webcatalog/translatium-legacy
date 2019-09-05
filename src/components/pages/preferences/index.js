@@ -21,13 +21,13 @@ import connectComponent from '../../../helpers/connect-component';
 import EnhancedMenu from '../enhanced-menu';
 
 import { toggleSetting } from '../../../state/root/preferences/actions';
+import { updateLocale } from '../../../state/root/locale/actions';
 import { openShortcutDialog } from '../../../state/pages/preferences/shortcut-dialog/actions';
 
 import colorPairs from '../../../constants/colors';
+import displayLanguages from '../../../constants/display-languages';
 
 import DialogShortcut from './dialog-shortcut';
-
-import strings from '../../../strings/en.json';
 
 import { requestSetPreference, requestShowRequireRestartDialog } from '../../../senders';
 
@@ -116,18 +116,21 @@ const Preferences = (props) => {
   const {
     attachToMenubar,
     classes,
-    theme,
+    clearInputShortcut,
+    langId,
+    locale,
     onOpenShortcutDialog,
     onToggle,
-    primaryColorId,
-    realtime,
-    translateWhenPressingEnter,
-    clearInputShortcut,
+    onUpdateLocale,
     openImageFileShortcut,
     openInputLangListShortcut,
     openOutputLangListShortcut,
+    primaryColorId,
+    realtime,
     saveToPhrasebookShortcut,
     swapLanguagesShortcut,
+    theme,
+    translateWhenPressingEnter,
   } = props;
 
   const shortcuts = [
@@ -139,34 +142,70 @@ const Preferences = (props) => {
     { identifier: 'saveToPhrasebook', combinator: saveToPhrasebookShortcut },
   ];
 
+  const displayLanguageKeys = Object.keys(displayLanguages);
+  displayLanguageKeys.sort((xKey, yKey) => {
+    const x = displayLanguages[xKey].displayName;
+    const y = displayLanguages[yKey].displayName;
+    return x.localeCompare(y);
+  });
+
+
   return (
     <div className={classes.container}>
       <DialogShortcut />
       <AppBar position="static">
         <Toolbar variant="dense">
-          <Typography variant="title" color="inherit">{strings.preferences}</Typography>
+          <Typography variant="title" color="inherit">{locale.preferences}</Typography>
         </Toolbar>
       </AppBar>
       <div className={classes.innerContainer}>
         <Typography variant="body2" className={classes.paperTitle}>
-          {strings.appearance}
+          {locale.appearance}
         </Typography>
         <Paper className={classes.paper}>
           <List dense>
             <EnhancedMenu
+              id="changeDisplayLanguage"
+              buttonElement={(
+                <ListItem button>
+                  <ListItemText
+                    primary={locale.displayLanguage}
+                    secondary={displayLanguages[langId].displayName}
+                  />
+                  <ChevronRightIcon color="action" />
+                </ListItem>
+              )}
+            >
+              {displayLanguageKeys.map((lId) => (
+                <MenuItem
+                  key={`lang_${lId}`}
+                  value={lId}
+                  onClick={() => {
+                    if (lId !== langId) {
+                      requestSetPreference('langId', lId);
+                      onUpdateLocale(lId);
+                    }
+                  }}
+                >
+                  {displayLanguages[lId].displayName}
+                </MenuItem>
+              ))}
+            </EnhancedMenu>
+            <Divider />
+            <EnhancedMenu
               id="theme"
               buttonElement={(
                 <ListItem button>
-                  <ListItemText primary="Theme" secondary={strings[theme]} />
+                  <ListItemText primary="Theme" secondary={locale[theme]} />
                   <ChevronRightIcon color="action" />
                 </ListItem>
               )}
             >
               {window.process.platform === 'darwin' && (
-                <MenuItem onClick={() => requestSetPreference('theme', 'automatic')}>{strings.automatic}</MenuItem>
+                <MenuItem onClick={() => requestSetPreference('theme', 'automatic')}>{locale.automatic}</MenuItem>
               )}
-              <MenuItem onClick={() => requestSetPreference('theme', 'light')}>{strings.light}</MenuItem>
-              <MenuItem onClick={() => requestSetPreference('theme', 'dark')}>{strings.dark}</MenuItem>
+              <MenuItem onClick={() => requestSetPreference('theme', 'light')}>{locale.light}</MenuItem>
+              <MenuItem onClick={() => requestSetPreference('theme', 'dark')}>{locale.dark}</MenuItem>
             </EnhancedMenu>
             <Divider />
             <EnhancedMenu
@@ -174,8 +213,8 @@ const Preferences = (props) => {
               buttonElement={(
                 <ListItem button>
                   <ListItemText
-                    primary={strings.primaryColor}
-                    secondary={strings[primaryColorId]}
+                    primary={locale.primaryColor}
+                    secondary={locale[primaryColorId]}
                   />
                   <ChevronRightIcon color="action" />
                 </ListItem>
@@ -189,13 +228,13 @@ const Preferences = (props) => {
                     requestSetPreference('primaryColorId', colorId);
                   }}
                 >
-                  {strings[colorId]}
+                  {locale[colorId]}
                 </MenuItem>
               ))}
             </EnhancedMenu>
             <Divider />
             <ListItem>
-              <ListItemText primary={window.process.platform === 'win32' ? strings.attachToTaskbar : strings.attachToMenubar} />
+              <ListItemText primary={window.process.platform === 'win32' ? locale.attachToTaskbar : locale.attachToMenubar} />
               <ListItemSecondaryAction>
                 <Switch
                   checked={attachToMenubar}
@@ -210,12 +249,12 @@ const Preferences = (props) => {
         </Paper>
 
         <Typography variant="body2" className={classes.paperTitle}>
-          {strings.advanced}
+          {locale.advanced}
         </Typography>
         <Paper className={classes.paper}>
           <List dense>
             <ListItem>
-              <ListItemText primary={strings.realtime} />
+              <ListItemText primary={locale.realtime} />
               <ListItemSecondaryAction>
                 <Switch
                   checked={realtime}
@@ -225,7 +264,7 @@ const Preferences = (props) => {
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText primary={strings.translateWhenPressingEnter} />
+              <ListItemText primary={locale.translateWhenPressingEnter} />
               <ListItemSecondaryAction>
                 <Switch
                   checked={translateWhenPressingEnter}
@@ -240,7 +279,7 @@ const Preferences = (props) => {
                   button
                   onClick={() => remote.shell.openExternal('https://translatiumapp.com/popclip')}
                 >
-                  <ListItemText primary={strings.popclipExtension} />
+                  <ListItemText primary={locale.popclipExtension} />
                 </ListItem>
               </>
             )}
@@ -248,7 +287,7 @@ const Preferences = (props) => {
         </Paper>
 
         <Typography variant="body2" className={classes.paperTitle}>
-          {strings.shortcuts}
+          {locale.shortcuts}
         </Typography>
         <Paper className={classes.paper}>
           <List dense>
@@ -261,13 +300,13 @@ const Preferences = (props) => {
                   onClick={() => onOpenShortcutDialog(identifier, combinator)}
                 >
                   <ListItemText
-                    primary={strings[identifier]}
+                    primary={locale[identifier]}
                     secondary={renderCombinator(combinator)}
                   />
                   <ListItemSecondaryAction>
                     <IconButton
                       className={classes.button}
-                      aria-label={strings.change}
+                      aria-label={locale.change}
                       onClick={() => onOpenShortcutDialog(identifier, combinator)}
                     >
                       <ChevronRightIcon />
@@ -283,13 +322,13 @@ const Preferences = (props) => {
         <Paper className={classes.paper}>
           <List dense>
             <ListItem button>
-              <ListItemText primary={strings.quit} onClick={() => remote.app.quit()} />
+              <ListItemText primary={locale.quit} onClick={() => remote.app.quit()} />
             </ListItem>
           </List>
         </Paper>
 
         <Typography variant="body2" className={classes.paperTitle}>
-          {strings.about}
+          {locale.about}
         </Typography>
         <Paper className={classes.paperAbout}>
           <Typography variant="title" className={classes.title}>Translatium</Typography>
@@ -301,7 +340,7 @@ const Preferences = (props) => {
           {window.process.platform === 'win32' && (
             <>
               <Button onClick={() => remote.shell.openExternal('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}>
-                {strings.rateMicrosoftStore}
+                {locale.rateMicrosoftStore}
               </Button>
               <br />
             </>
@@ -309,17 +348,17 @@ const Preferences = (props) => {
           {window.process.platform === 'darwin' && (
             <>
               <Button onClick={() => remote.shell.openExternal('macappstore://itunes.apple.com/app/id1176624652?mt=12')}>
-                {strings.rateMacAppStore}
+                {locale.rateMacAppStore}
               </Button>
               <br />
             </>
           )}
           <Button onClick={() => remote.shell.openExternal('https://translatiumapp.com')}>
-            {strings.website}
+            {locale.website}
           </Button>
           <br />
           <Button onClick={() => remote.shell.openExternal('https://translatiumapp.com/support')}>
-            {strings.support}
+            {locale.support}
           </Button>
           <br />
 
@@ -346,8 +385,11 @@ Preferences.propTypes = {
   attachToMenubar: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   clearInputShortcut: PropTypes.string.isRequired,
+  langId: PropTypes.string.isRequired,
+  locale: PropTypes.object.isRequired,
   onOpenShortcutDialog: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
+  onUpdateLocale: PropTypes.func.isRequired,
   openImageFileShortcut: PropTypes.string.isRequired,
   openInputLangListShortcut: PropTypes.string.isRequired,
   openOutputLangListShortcut: PropTypes.string.isRequired,
@@ -372,6 +414,7 @@ const mapStateToProps = (state) => ({
   swapLanguagesShortcut: state.preferences.swapLanguagesShortcut,
   theme: state.preferences.theme,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
+  locale: state.locale,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -379,6 +422,7 @@ const mapDispatchToProps = (dispatch) => ({
   onOpenShortcutDialog: (identifier, combinator) => dispatch(
     openShortcutDialog(identifier, combinator),
   ),
+  onUpdateLocale: (lId) => dispatch(updateLocale(lId)),
 });
 
 export default connectComponent(
