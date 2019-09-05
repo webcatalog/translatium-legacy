@@ -17,9 +17,9 @@
         "didYouMean": "Intendevi",
 
         "errorOccured": "C'è stato un errore.",
-        "cannotConnectToServer":"Impossibile connettersi il server.    	         	   Si prega di verificare la connessione Internet.",
+        "cannotConnectToServer":"Impossibile connettersi il server. Si prega di verificare la connessione Internet.",
         "cannotOpenTheFile": "La app non può aprire il file selezionato.",
-        "cannotRecognizeImage":"La app non è in grado di riconoscere alcun testo 	   sull'immagine.",
+        "cannotRecognizeImage":"La app non è in grado di riconoscere alcun testo sull'immagine.",
 
         "listen": "Ascolta",
         "stop": "Ferma",
