@@ -18,7 +18,7 @@
     "build": "react-scripts build",
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "dist": "npm run build && node packager.js",
+    "dist": "npm run build && babel-node packager.js",
     "lint": "eslint ./src ./public ./packager.js --ext js --fix"
   },
   "dependencies": {
