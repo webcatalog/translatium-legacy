@@ -66,8 +66,6 @@ import {
 import Dictionary from './dictionary';
 import History from './history';
 
-import strings from '../../../strings/en.json';
-
 const { remote } = window.require('electron');
 
 const styles = (theme) => ({
@@ -249,6 +247,7 @@ class Home extends React.Component {
       output,
       screenWidth,
       textToSpeechPlaying,
+      locale,
     } = this.props;
 
     if (fullscreenInputBox === true) {
@@ -269,12 +268,12 @@ class Home extends React.Component {
         const controllers = [
           {
             Icon: output.phrasebookId ? ToggleStar : ToggleStarBorder,
-            tooltip: output.phrasebookId ? strings.removeFromPhrasebook : strings.addToPhrasebook,
+            tooltip: output.phrasebookId ? locale.removeFromPhrasebook : locale.addToPhrasebook,
             onClick: onTogglePhrasebookClick,
           },
           {
             Icon: ActionSwapVert,
-            tooltip: strings.swap,
+            tooltip: locale.swap,
             onClick: () => onSwapOutputButtonClick(
               output.outputLang,
               output.inputLang,
@@ -283,15 +282,15 @@ class Home extends React.Component {
           },
           {
             Icon: FileCopy,
-            tooltip: strings.copy,
-            onClick: () => onRequestCopyToClipboard(output.outputText),
+            tooltip: locale.copy,
+            onClick: () => onRequestCopyToClipboard(output.outputText, locale.copied),
           },
         ];
 
         if (isTtsSupported(output.outputLang)) {
           controllers.unshift({
             Icon: textToSpeechPlaying ? AVStop : AVVolumeUp,
-            tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
+            tooltip: textToSpeechPlaying ? locale.stop : locale.listen,
             onClick: () => {
               if (textToSpeechPlaying) {
                 return onEndTextToSpeech();
@@ -355,7 +354,7 @@ class Home extends React.Component {
                   <EnhancedMenu
                     id="homeMore2"
                     buttonElement={(
-                      <IconButton aria-label={strings.more} tooltipPosition="bottom-center">
+                      <IconButton aria-label={locale.more} tooltipPosition="bottom-center">
                         <NavigationMoreVert />
                       </IconButton>
                     )}
@@ -382,7 +381,7 @@ class Home extends React.Component {
               className={classes.yandexCopyright}
               onClick={() => remote.shell.openExternal('http://translate.yandex.com/')}
             >
-              {strings.translatedByYandexTranslate}
+              {locale.translatedByYandexTranslate}
             </Typography>
 
             {output.outputDict && <Dictionary output={output} />}
@@ -393,7 +392,7 @@ class Home extends React.Component {
                 className={classes.yandexCopyright}
                 onClick={() => remote.shell.openExternal('https://tech.yandex.com/dictionary/')}
               >
-                {strings.translatedByYandexDictionary}
+                {locale.translatedByYandexDictionary}
               </Typography>
             )}
           </div>
@@ -408,6 +407,7 @@ class Home extends React.Component {
       fullscreenInputBox,
       inputLang,
       inputText,
+      locale,
       onClearButtonClick,
       onEndTextToSpeech,
       onFullscreenButtonClick,
@@ -428,7 +428,7 @@ class Home extends React.Component {
     const controllers = [
       {
         Icon: ContentClear,
-        tooltip: strings.clear,
+        tooltip: locale.clear,
         onClick: onClearButtonClick,
       },
       {
@@ -437,7 +437,7 @@ class Home extends React.Component {
             <path d="M19,20H5V4H7V7H17V4H19M12,2A1,1 0 0,1 13,3A1,1 0 0,1 12,4A1,1 0 0,1 11,3A1,1 0 0,1 12,2M19,2H14.82C14.4,0.84 13.3,0 12,0C10.7,0 9.6,0.84 9.18,2H5A2,2 0 0,0 3,4V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V4A2,2 0 0,0 19,2Z" />
           </SvgIcon>
         )),
-        tooltip: strings.pasteFromClipboard,
+        tooltip: locale.pasteFromClipboard,
         onClick: () => {
           const text = remote.clipboard.readText();
           onInsertText(text);
@@ -448,7 +448,7 @@ class Home extends React.Component {
     if (isTtsSupported(inputLang)) {
       controllers.push({
         Icon: textToSpeechPlaying ? AVStop : AVVolumeUp,
-        tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
+        tooltip: textToSpeechPlaying ? locale.stop : locale.listen,
         onClick: () => {
           if (textToSpeechPlaying) {
             window.speechSynthesis.cancel();
@@ -462,7 +462,7 @@ class Home extends React.Component {
       && isTtsSupported(output.inputLang) && inputText === output.inputText) {
       controllers.push({
         Icon: textToSpeechPlaying ? AVStop : AVVolumeUp,
-        tooltip: textToSpeechPlaying ? strings.stop : strings.listen,
+        tooltip: textToSpeechPlaying ? locale.stop : locale.listen,
         onClick: () => {
           if (textToSpeechPlaying) {
             window.speechSynthesis.cancel();
@@ -477,14 +477,14 @@ class Home extends React.Component {
     if (isOcrSupported(inputLang)) {
       controllers.push({
         Icon: ImageImage,
-        tooltip: strings.openImageFile,
+        tooltip: locale.openImageFile,
         onClick: onOpenImageButtonClick,
       });
     }
 
     controllers.push({
       Icon: fullscreenInputBox ? NavigationFullscreenExit : NavigationFullscreen,
-      tooltip: fullscreenInputBox ? strings.exitFullscreen : strings.fullscreen,
+      tooltip: fullscreenInputBox ? locale.exitFullscreen : locale.fullscreen,
       onClick: onFullscreenButtonClick,
     });
 
@@ -505,9 +505,9 @@ class Home extends React.Component {
                 className={classes.languageTitle}
                 onClick={() => onLanguageClick('inputLang')}
               >
-                {inputLang === 'auto' && output && output.inputLang ? `${strings[output.inputLang]} (${strings.auto})` : strings[inputLang]}
+                {inputLang === 'auto' && output && output.inputLang ? `${locale[output.inputLang]} (${locale.auto})` : locale[inputLang]}
               </Button>
-              <Tooltip title={strings.swap} placement="bottom">
+              <Tooltip title={locale.swap} placement="bottom">
                 <div>
                   <IconButton
                     color="inherit"
@@ -523,7 +523,7 @@ class Home extends React.Component {
                 className={classes.languageTitle}
                 onClick={() => onLanguageClick('outputLang')}
               >
-                {strings[outputLang]}
+                {locale[outputLang]}
               </Button>
             </Toolbar>
           </AppBar>
@@ -546,7 +546,7 @@ class Home extends React.Component {
               onInput={onInputText}
               onKeyDown={translateWhenPressingEnter ? (e) => onKeyDown(e) : null}
               onKeyUp={onInputText}
-              placeholder={strings.typeSomethingHere}
+              placeholder={locale.typeSomethingHere}
               spellCheck="false"
               value={inputText}
             />
@@ -566,7 +566,7 @@ class Home extends React.Component {
                   <EnhancedMenu
                     id="homeMore"
                     buttonElement={(
-                      <IconButton aria-label={strings.more}>
+                      <IconButton aria-label={locale.more}>
                         <NavigationMoreVert />
                       </IconButton>
                     )}
@@ -585,9 +585,9 @@ class Home extends React.Component {
                 )}
               </div>
               <div className={classes.controllerContainerRight}>
-                <Tooltip title={strings.andSaveToHistory} placement={fullscreenInputBox ? 'top' : 'bottom'}>
+                <Tooltip title={locale.andSaveToHistory} placement={fullscreenInputBox ? 'top' : 'bottom'}>
                   <Button variant="raised" color="primary" onClick={onTranslateButtonClick}>
-                    {strings.translate}
+                    {locale.translate}
                   </Button>
                 </Tooltip>
               </div>
@@ -630,6 +630,7 @@ Home.propTypes = {
   swapLanguagesShortcut: PropTypes.string.isRequired,
   textToSpeechPlaying: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool,
+  locale: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -637,6 +638,7 @@ const mapStateToProps = (state) => ({
   fullscreenInputBox: state.pages.home.fullscreenInputBox,
   inputLang: state.preferences.inputLang,
   inputText: state.pages.home.inputText,
+  locale: state.locale,
   openImageFileShortcut: state.preferences.openImageFileShortcut,
   openInputLangListShortcut: state.preferences.openInputLangListShortcut,
   openOutputLangListShortcut: state.preferences.openOutputLangListShortcut,
@@ -683,9 +685,9 @@ const mapDispatchToProps = (dispatch) => ({
   onFullscreenButtonClick: () => dispatch(toggleFullscreenInputBox()),
   onSuggestedInputLangClick: (value) => dispatch(updateInputLang(value)),
   onSuggestedInputTextClick: (text) => dispatch(updateInputText(text)),
-  onRequestCopyToClipboard: (text) => {
+  onRequestCopyToClipboard: (text, localeCopied) => {
     remote.clipboard.writeText(text);
-    dispatch(openSnackbar(strings.copied));
+    dispatch(openSnackbar(localeCopied));
   },
   onStartTextToSpeech: (lang, text) => {
     dispatch(startTextToSpeech(lang, text));
