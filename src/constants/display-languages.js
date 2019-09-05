@@ -1,4 +1,4 @@
-export default {
+const displayLanguages = {
   en: {
     displayName: 'English',
   },
@@ -6,3 +6,5 @@ export default {
     displayName: 'Tiếng Việt',
   },
 };
+
+export default displayLanguages;
