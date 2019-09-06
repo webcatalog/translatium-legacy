@@ -45,11 +45,7 @@
 	"copyOriginalText": "Kopiere ursprünglichen Text",
 	"copyTranslatedText": "Kopiere übersetzten Text",
 	"displayTextOnly": "Zeige nur Text",
-	"phrasebookIsEmpty": "Phrasebook ist leer.",
-
-	"delete": "Entfernen",
-	"spaceBar": "Leertaste",
-	"done": "Fertig",
+    "phrasebookIsEmpty": "Phrasebook ist leer.",
 
     "red": "Rot",
 	"pink": "Pink",
