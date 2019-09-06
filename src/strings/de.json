@@ -91,6 +91,9 @@
 	"advanced": "Erweitert",
 	"about": "Über",
 
+	"translateClipboardOnShortcut": "Übersetze Zwischenablage mit Tastaturkürzel",
+	"translateClipboardOnShortcutDesc": "WEnn du Translatium mit einem Tastenkürzel öffnest, wird es automatisch den Inhalt deiner Zwischenablage übersetzen.",
+
 	"shortcuts": "Tastenkürzel",
 	"openOnMenubar": "Öffne Translatium von der Menüleiste",
 	"openOnTaskbar": "Öffne Translatium von der Taskleiste",

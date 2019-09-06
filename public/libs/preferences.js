@@ -57,6 +57,7 @@ const defaultPreferences = {
   saveToPhrasebookShortcut: 'mod+s',
   swapLanguagesShortcut: 'mod+shift+s',
   theme: process.platform === 'darwin' ? 'automatic' : 'light',
+  translateClipboardOnShortcut: false,
   translateWhenPressingEnter: true,
 };
 

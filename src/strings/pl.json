@@ -91,6 +91,9 @@
 	"advanced": "Zaawansowane",
 	"about": "O",
 
+	"translateClipboardOnShortcut": "Przetłumacz schowek skrótem",
+	"translateClipboardOnShortcutDesc": "Gdy otworzysz Translatium za pomocą skrótu, zawartość schowka zostanie automatycznie przetłumaczona.",
+
 	"shortcuts": "Skróty klawiszowe",
 	"openOnMenubar": "Otwórz Translatium na Pasku menu",
 	"openOnTaskbar": "Otwórz Translatium na Pasku zadań",
