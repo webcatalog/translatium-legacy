@@ -11,11 +11,14 @@ const displayLanguages = {
   it: {
     displayName: 'Italiano',
   },
+  de: {
+    displayName: 'Deutsch',
+  },
   pl: {
     displayName: 'język polski',
   },
-  de: {
-    displayName: 'Deutsch',
+  pt: {
+    displayName: 'Português',
   },
 };
 

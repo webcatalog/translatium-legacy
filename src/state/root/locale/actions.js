@@ -6,6 +6,7 @@ import esStrings from '../../../strings/es.json';
 import itStrings from '../../../strings/it.json';
 import deStrings from '../../../strings/de.json';
 import plStrings from '../../../strings/pl.json';
+import ptStrings from '../../../strings/pt.json';
 
 export const updateLocale = (langId) => (dispatch) => {
   const processedLangId = langId.substring(0, 2) !== 'zh' ? langId.substring(0, 2) : langId;
@@ -29,6 +30,10 @@ export const updateLocale = (langId) => (dispatch) => {
     }
     case 'pl': {
       strings = plStrings;
+      break;
+    }
+    case 'pt': {
+      strings = ptStrings;
       break;
     }
     default: {
