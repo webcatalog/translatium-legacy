@@ -91,6 +91,9 @@
         "advanced": "Avanzato",
         "about": "Informazioni su",
 
+        "alwaysOnTop": "Mantenga la ventana siempre arriba",
+	"alwaysOnTopDesc": "La ventana no se ocultará en el desenfoque.",
+
         "translateClipboardOnShortcut": "Traduci appunti su collegamento",
 	"translateClipboardOnShortcutDesc": "Quando apri Translatium con un collegamento, tradurrà automaticamente il contenuto degli appunti.",
 

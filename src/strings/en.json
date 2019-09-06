@@ -91,6 +91,9 @@
 	"advanced": "Advanced",
 	"about": "About",
 
+	"alwaysOnTop": "Keep window always on top",
+	"alwaysOnTopDesc": "The window will not hide on blur.",
+
 	"translateClipboardOnShortcut": "Translate clipboard on shortcut",
 	"translateClipboardOnShortcutDesc": "When you open Translatium with a shortcut, it will automatically translate your clipboard contents.",
 

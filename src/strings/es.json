@@ -91,6 +91,9 @@
 	"advanced": "Avanzado",
 	"about": "Acerca de",
 
+	"alwaysOnTop": "Mantenga la ventana siempre arriba",
+	"alwaysOnTopDesc": "La ventana no se ocultará en el desenfoque.",
+
 	"translateClipboardOnShortcut": "Traducir portapapeles en acceso directo",
 	"translateClipboardOnShortcutDesc": "Cuando abre Translatium con un acceso directo, traducirá automáticamente el contenido del portapapeles.",
 
