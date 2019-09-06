@@ -93,6 +93,7 @@
 
         "shortcuts": "Tasti rapidi",
         "openOnMenubar": "Apri Translatium sulla barra dei menu",
+        "openOnTaskbar": "Apri Translatium sulla barra delle applicazioni",
         "openInputLangList": "Seleziona la lingua di input",
         "openOutputLangList": "Seleziona la lingua di output",
         "swapLanguages": "Scambia le lingue",

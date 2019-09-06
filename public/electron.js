@@ -13,6 +13,7 @@ const { menubar } = require('menubar');
 const {
   app,
   BrowserWindow,
+  globalShortcut,
   Menu,
   ipcMain,
 } = electron;
@@ -85,6 +86,43 @@ const createWindow = () => {
         mb.tray.popUpContextMenu(contextMenu);
       });
     });
+
+    ipcMain.on('unset-show-menubar-shortcut', (e, combinator) => {
+      globalShortcut.unregister(combinator);
+    });
+
+    let isHidden = true;
+
+    mb.on('show', () => {
+      isHidden = false;
+    });
+
+    mb.on('hide', () => {
+      isHidden = true;
+    });
+
+    ipcMain.on('set-show-menubar-shortcut', (e, combinator) => {
+      console.log(e, combinator);
+      globalShortcut.register(combinator, () => {
+        if (isHidden) {
+          mb.showWindow();
+          /*
+          const translateClipboardOnShortcut = getPreference('translateClipboardOnShortcut');
+          if (translateClipboardOnShortcut) {
+            const text = clipboard.readText();
+            if (text.length > 0) {
+              mb.window.send('set-input-text', text);
+            }
+          }
+          */
+        } else {
+          mb.hideWindow();
+        }
+      });
+    });
+
+    const openOnMenubarShortcut = getPreference('openOnMenubarShortcut');
+    ipcMain.emit('set-show-menubar-shortcut', null, openOnMenubarShortcut);
   } else {
     // Create the browser window.
     mainWindow = new BrowserWindow({

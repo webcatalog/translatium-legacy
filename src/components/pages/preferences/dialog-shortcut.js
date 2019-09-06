@@ -77,7 +77,7 @@ class DialogShortcut extends React.Component {
           {locale.shortcuts}
 :
           {' '}
-          {locale[identifier]}
+          {identifier === 'openOnMenubar' && window.process.platform === 'win32' ? locale.openOnTaskbar : locale[identifier]}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>

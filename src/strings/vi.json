@@ -93,6 +93,7 @@
 
 	"shortcuts": "Phím tắt",
 	"openOnMenubar": "Mở Translatium trên Menubar",
+	"openOnTaskbar": "Mở Translatium trên taskbar",
 	"openInputLangList": "Chọn ngôn ngữ đầu vào",
 	"openOutputLangList": "Chọn ngôn ngữ đầu ra",
 	"swapLanguages": "Tráo ngôn ngữ",

@@ -93,6 +93,7 @@
 
 	"shortcuts": "Keyboard Shortcuts",
 	"openOnMenubar": "Open Translatium on menubar",
+	"openOnTaskbar": "Open Translatium on taskbar",
 	"openInputLangList": "Select input language",
 	"openOutputLangList": "Select output language",
 	"swapLanguages": "Swap languages",

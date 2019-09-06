@@ -124,6 +124,7 @@ const Preferences = (props) => {
     onUpdateLocale,
     openImageFileShortcut,
     openInputLangListShortcut,
+    openOnMenubarShortcut,
     openOutputLangListShortcut,
     primaryColorId,
     realtime,
@@ -172,7 +173,7 @@ const Preferences = (props) => {
                     primary={locale.displayLanguage}
                     secondary={displayLanguages[langId].displayName}
                   />
-                  <ChevronRightIcon color="action" />
+                  <ChevronRightIcon color="action" aria-label={locale.change} />
                 </ListItem>
               )}
             >
@@ -197,7 +198,7 @@ const Preferences = (props) => {
               buttonElement={(
                 <ListItem button>
                   <ListItemText primary="Theme" secondary={locale[theme]} />
-                  <ChevronRightIcon color="action" />
+                  <ChevronRightIcon color="action" aria-label={locale.change} />
                 </ListItem>
               )}
             >
@@ -216,7 +217,7 @@ const Preferences = (props) => {
                     primary={locale.primaryColor}
                     secondary={locale[primaryColorId]}
                   />
-                  <ChevronRightIcon color="action" />
+                  <ChevronRightIcon color="action" aria-label={locale.change} />
                 </ListItem>
               )}
             >
@@ -291,9 +292,29 @@ const Preferences = (props) => {
         </Typography>
         <Paper className={classes.paper}>
           <List dense>
-            {shortcuts.map(({ identifier, combinator }, i) => (
+            <ListItem
+              button
+              disabled={!attachToMenubar}
+              key="openOnMenubar"
+              onClick={() => onOpenShortcutDialog('openOnMenubar', openOnMenubarShortcut)}
+            >
+              <ListItemText
+                primary={window.process.platform === 'win32' ? locale.openOnMenubar : locale.openOnTaskbar}
+                secondary={renderCombinator(openOnMenubarShortcut)}
+              />
+              <ListItemSecondaryAction>
+                <IconButton
+                  className={classes.button}
+                  aria-label={locale.change}
+                  onClick={() => onOpenShortcutDialog('openOnMenubar', openOnMenubarShortcut)}
+                >
+                  <ChevronRightIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+            {shortcuts.map(({ identifier, combinator }) => (
               <React.Fragment key={`listitem${identifier}${combinator}`}>
-                {i > 0 && <Divider />}
+                <Divider />
                 <ListItem
                   button
                   key={identifier}
@@ -392,6 +413,7 @@ Preferences.propTypes = {
   onUpdateLocale: PropTypes.func.isRequired,
   openImageFileShortcut: PropTypes.string.isRequired,
   openInputLangListShortcut: PropTypes.string.isRequired,
+  openOnMenubarShortcut: PropTypes.string.isRequired,
   openOutputLangListShortcut: PropTypes.string.isRequired,
   primaryColorId: PropTypes.string.isRequired,
   realtime: PropTypes.bool.isRequired,
@@ -405,8 +427,10 @@ const mapStateToProps = (state) => ({
   attachToMenubar: state.preferences.attachToMenubar,
   clearInputShortcut: state.preferences.clearInputShortcut,
   langId: state.preferences.langId,
+  locale: state.locale,
   openImageFileShortcut: state.preferences.openImageFileShortcut,
   openInputLangListShortcut: state.preferences.openInputLangListShortcut,
+  openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
   openOutputLangListShortcut: state.preferences.openOutputLangListShortcut,
   primaryColorId: state.preferences.primaryColorId,
   realtime: state.preferences.realtime,
@@ -414,7 +438,6 @@ const mapStateToProps = (state) => ({
   swapLanguagesShortcut: state.preferences.swapLanguagesShortcut,
   theme: state.preferences.theme,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
-  locale: state.locale,
 });
 
 const mapDispatchToProps = (dispatch) => ({
