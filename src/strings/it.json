@@ -91,6 +91,9 @@
         "advanced": "Avanzato",
         "about": "Informazioni su",
 
+        "translateClipboardOnShortcut": "Traduci appunti su collegamento",
+	"translateClipboardOnShortcutDesc": "Quando apri Translatium con un collegamento, tradurrà automaticamente il contenuto degli appunti.",
+
         "shortcuts": "Tasti rapidi",
         "openOnMenubar": "Apri Translatium sulla barra dei menu",
         "openOnTaskbar": "Apri Translatium sulla barra delle applicazioni",

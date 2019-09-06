@@ -91,6 +91,9 @@
 	"advanced": "Avanzado",
 	"about": "Acerca de",
 
+	"translateClipboardOnShortcut": "Traducir portapapeles en acceso directo",
+	"translateClipboardOnShortcutDesc": "Cuando abre Translatium con un acceso directo, traducirá automáticamente el contenido del portapapeles.",
+
 	"shortcuts": "Atajos de Teclado",
 	"openOnMenubar": "Abrir Translatium en la barra de menú",
 	"openOnTaskbar": "Abrir Translatium en la barra de tareas",

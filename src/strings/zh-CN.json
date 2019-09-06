@@ -91,6 +91,9 @@
 	"advanced": "高级",
 	"about": "关于",
 
+	"translateClipboardOnShortcut": "快捷翻译",
+	"translateClipboardOnShortcutDesc": "当您使用快捷方式打开 Translatium 时，它将自动翻译您剪贴板的内容。",
+
 	"shortcuts": "键盘快捷键",
 	"openOnMenubar": "在菜单栏上打开 Translatium",
 	"openOnTaskbar": "在任务栏上打开Translatium",

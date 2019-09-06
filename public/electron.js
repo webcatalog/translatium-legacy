@@ -13,6 +13,7 @@ const { menubar } = require('menubar');
 const {
   app,
   BrowserWindow,
+  clipboard,
   globalShortcut,
   Menu,
   ipcMain,
@@ -105,7 +106,6 @@ const createWindow = () => {
       globalShortcut.register(combinator, () => {
         if (isHidden) {
           mb.showWindow();
-          /*
           const translateClipboardOnShortcut = getPreference('translateClipboardOnShortcut');
           if (translateClipboardOnShortcut) {
             const text = clipboard.readText();
@@ -113,7 +113,6 @@ const createWindow = () => {
               mb.window.send('set-input-text', text);
             }
           }
-          */
         } else {
           mb.hideWindow();
         }

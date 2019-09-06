@@ -131,6 +131,7 @@ const Preferences = (props) => {
     saveToPhrasebookShortcut,
     swapLanguagesShortcut,
     theme,
+    translateClipboardOnShortcut,
     translateWhenPressingEnter,
   } = props;
 
@@ -270,6 +271,20 @@ const Preferences = (props) => {
                 <Switch
                   checked={translateWhenPressingEnter}
                   onChange={() => onToggle('translateWhenPressingEnter')}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary={locale.translateClipboardOnShortcut}
+                secondary={locale.translateClipboardOnShortcutDesc}
+              />
+              <ListItemSecondaryAction>
+                <Switch
+                  checked={translateClipboardOnShortcut}
+                  disabled={!attachToMenubar}
+                  onChange={() => onToggle('translateClipboardOnShortcut')}
                 />
               </ListItemSecondaryAction>
             </ListItem>
@@ -421,6 +436,7 @@ Preferences.propTypes = {
   swapLanguagesShortcut: PropTypes.string.isRequired,
   theme: PropTypes.string.isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
+  translateClipboardOnShortcut: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -438,6 +454,7 @@ const mapStateToProps = (state) => ({
   swapLanguagesShortcut: state.preferences.swapLanguagesShortcut,
   theme: state.preferences.theme,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
+  translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
 });
 
 const mapDispatchToProps = (dispatch) => ({

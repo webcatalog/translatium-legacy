@@ -91,6 +91,9 @@
 	"advanced": "Advanced",
 	"about": "About",
 
+	"translateClipboardOnShortcut": "Translate clipboard on shortcut",
+	"translateClipboardOnShortcutDesc": "When you open Translatium with a shortcut, it will automatically translate your clipboard contents.",
+
 	"shortcuts": "Keyboard Shortcuts",
 	"openOnMenubar": "Open Translatium on menubar",
 	"openOnTaskbar": "Open Translatium on taskbar",
