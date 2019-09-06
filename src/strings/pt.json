@@ -3,7 +3,7 @@
 	"phrasebook": "Favoritos",
 	"preferences": "Configrações",
 
-    "website": "Site",
+	"website": "Site",
 
 	"typeSomethingHere": "Digite alguma coisa aqui...",
 
@@ -18,10 +18,10 @@
 
 	"errorOccured": "Ocorreu um erro.",
 	"cannotConnectToServer": "O aplicativo não pode se conectar ao servidor. Verifique sua conexão com a Internet ou ligue o Modo China se você estiver na China.",
-	"cannotActivateMicrophone": "O aplicativo não pode ativar seu microfone.",
 	"cannotOpenTheFile": "O aplicativo não pode abrir o arquivo selecionado.",
+	"cannotRecognizeImage": "O aplicativo não reconheceu nenhum texto na sua imagem.",
 
-    "listen": "Ouvir",
+	"listen": "Ouvir",
 	"stop": "Parar",
 
 	"swap": "Inverter",
@@ -78,11 +78,11 @@
 	"realtime": "Tradução em Tempo Real",
 
 	"rateMacAppStore": "Classifique o app Translatium na Mac App Store",
-    "rateMicrosoftStore": "Classifique o app Translatium na Windows Store",
+	"rateMicrosoftStore": "Classifique o app Translatium na Microsoft Store",
 
 	"displayLanguage": "Idioma",
 	"change": "Mudar",
-    "close": "Fechar",
+	"close": "Fechar",
 
 	"quit": "Sair",
 
@@ -112,18 +112,19 @@
 	"resetToDefault": "Restaurar ao padrão",
 	"cancel": "Cancelar",
 
-    "pasteFromClipboard": "Colar da Área de Transferência",
+	"pasteFromClipboard": "Colar da Área de Transferência",
 
 	"popclipExtension": "PopClip Extension",
 
 	"support": "Suporte",
 
-    "auto": "Detectar Automaticamente",
+	"auto": "Detectar Automaticamente",
 
 	"af": "Africâner",
 	"am": "Amárica",
 	"ar": "Árabe",
 	"az": "Azerbaijano",
+	"ba": "Bashkir",
 	"be": "Bielo-Russo",
 	"bg": "Búlgaro",
 	"bn": "Bengali",
@@ -170,11 +171,13 @@
 	"lt": "Lituano",
 	"lv": "Latão",
 	"mg": "Malgaxe",
+	"mhr": "Mari",
 	"mi": "Maori",
 	"mk": "Macedônio",
 	"ml": "Malaiala",
 	"mn": "Mongol",
 	"mr": "Marata",
+	"mrj": "Colina Mari",
 	"ms": "Malaio",
 	"mt": "Maltês",
 	"my": "Birmanês (Burmese)",
@@ -182,6 +185,7 @@
 	"nl": "Holandês",
 	"no": "Norueguês",
 	"pa": "Punjabi",
+	"pap": "Papiamento",
 	"pl": "Polonês",
 	"pt": "Português",
 	"ro": "Romeno",
@@ -191,7 +195,6 @@
 	"sl": "Esloveno",
 	"sq": "Albanês",
 	"sr": "Sérvio",
-	"st": "Sessoto",
 	"su": "Sundanês",
 	"sv": "Sueco",
 	"sw": "Suaíle",
@@ -201,6 +204,7 @@
 	"th": "Tailandês",
 	"tl": "Filipino",
 	"tr": "Turco",
+	"tt": "Tártaro",
 	"udm": "Udmurt",
 	"uk": "Ucraniano",
 	"ur": "Urdu",
@@ -208,10 +212,5 @@
 	"vi": "Vietnamita",
 	"xh": "Xhosa",
 	"yi": "Iídiche",
-    "ba": "Bashkir",
-    "mhr": "Mari",
-    "mrj": "Colina Mari",
-    "pap": "Papiamento",
-    "tt": "Tártaro",
-    "zh": "Chinês"
+	"zh": "Chinês"
 }
