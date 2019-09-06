@@ -78,7 +78,7 @@
 	"realtime": "Dịch thời gian thực",
 
 	"rateMacAppStore": "Đánh giá Translatium trên Mac App Store",
-	"rateWindowsStore": "Đánh giá Translatium trên Windows Store",
+	"rateMicrosoftStore": "Đánh giá Translatium trên Windows Store",
 
 	"displayLanguage": "Ngôn ngữ hiển thị",
 	"close": "Đóng",
@@ -102,7 +102,7 @@
 	"noLanguageFound": "Không tìm thấy ngôn ngữ",
 	"searchResults": "Kết quả Tìm kiếm",
 	"recentlyUsed": "Được dùng gần đây",
-	"allLanguagesAndDialects": "Tất cả ngôn ngữ",
+	"allLanguages": "Tất cả ngôn ngữ",
 
     "removeFromHistory": "Xoá",
 	"andSaveToHistory": "& lưu vào Lịch sử",

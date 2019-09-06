@@ -92,6 +92,7 @@
 	"about": "Acerca de",
 
 	"shortcuts": "Atajos de Teclado",
+	"openOnMenubar": "Abrir Translatium en la barra de menú",
 	"openInputLangList": "Seleccionar idioma de entrada",
 	"openOutputLangList": "Seleccionar idioma de salida",
 	"swapLanguages": "Intercambiar Idiomas",

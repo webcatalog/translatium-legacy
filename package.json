@@ -19,7 +19,8 @@
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "dist": "npm run build && babel-node packager.js",
-    "lint": "eslint ./src ./public ./packager.js --ext js --fix"
+    "lint": "eslint ./src ./public ./packager.js --ext js --fix",
+    "test": "mocha"
   },
   "dependencies": {
     "electron-is-dev": "1.1.0",
@@ -33,6 +34,7 @@
     "babel-cli": "6.26.0",
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
+    "chai": "4.2.0",
     "classnames": "2.2.6",
     "concurrently": "4.1.2",
     "cross-env": "5.2.1",
@@ -47,6 +49,7 @@
     "fs-extra": "8.1.0",
     "glob": "7.1.4",
     "history": "4.7.2",
+    "mocha": "6.2.0",
     "mousetrap": "1.6.3",
     "pouchdb-browser": "7.1.1",
     "prop-types": "15.7.2",

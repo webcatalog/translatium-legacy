@@ -78,7 +78,7 @@
 	"realtime": "Tradução em Tempo Real",
 
 	"rateMacAppStore": "Classifique o app Translatium na Mac App Store",
-    "rateWindowsStore": "Classifique o app Translatium na Windows Store",
+    "rateMicrosoftStore": "Classifique o app Translatium na Windows Store",
 
 	"displayLanguage": "Idioma",
 	"change": "Mudar",
@@ -103,7 +103,7 @@
 	"noLanguageFound": "Nenhuma idioma encontrado",
 	"searchResults": "Procurar Resultados",
 	"recentlyUsed": "Usado recentemente",
-	"allLanguagesAndDialects": "Todos os idiomas e dialetos",
+	"allLanguages": "Todos os idiomas",
 
 	"remove": "Remover",
 	"andSaveToHistory": "e salvar na História",
