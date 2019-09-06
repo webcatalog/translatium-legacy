@@ -118,7 +118,7 @@
 
 	"support": "Suporte",
 
-	"auto": "Detectar Automaticamente",
+    "auto": "Detectar Automaticamente",
 
 	"af": "Africâner",
 	"am": "Amárica",
@@ -210,6 +210,7 @@
 	"yi": "Iídiche",
     "ba": "Bashkir",
     "mhr": "Mari",
+    "mrj": "Colina Mari",
     "pap": "Papiamento",
     "tt": "Tártaro",
     "zh": "Chinês"
