@@ -92,7 +92,8 @@
 	"about": "Über",
 
 	"shortcuts": "Tastenkürzel",
-	"openOnMenubar": "Öffne Translatium von der Menübar",
+	"openOnMenubar": "Öffne Translatium von der Menüleiste",
+	"openOnTaskbar": "Öffne Translatium von der Taskleiste",
 	"openInputLangList": "Wähle Eingabe-Sprache",
 	"openOutputLangList": "Wähle Ausgabe-Sprache",
 	"swapLanguages": "Wechsle Sprachen",

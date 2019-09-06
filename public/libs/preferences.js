@@ -1,4 +1,4 @@
-const { app } = require('electron');
+const { app, ipcMain } = require('electron');
 const settings = require('electron-settings');
 
 const sendToAllWindows = require('./send-to-all-windows');
@@ -43,27 +43,38 @@ const v = '2019';
 
 const defaultPreferences = {
   attachToMenubar: false,
-  theme: process.platform === 'darwin' ? 'automatic' : 'light',
+  clearInputShortcut: 'mod+shift+d',
   inputLang: 'en',
+  langId: getDefaultLangId(),
+  openImageFileShortcut: 'mod+o',
+  openInputLangListShortcut: 'mod+shift+i',
+  openOnMenubarShortcut: 'alt+shift+t',
+  openOutputLangListShortcut: 'mod+shift+o',
   outputLang: 'zh',
   primaryColorId: 'green',
   realtime: true,
   recentLanguages: ['en', 'zh'],
-  translateWhenPressingEnter: true,
-  openInputLangListShortcut: 'mod+shift+i',
-  openOutputLangListShortcut: 'mod+shift+o',
-  swapLanguagesShortcut: 'mod+shift+s',
-  clearInputShortcut: 'mod+shift+d',
-  openImageFileShortcut: 'mod+o',
   saveToPhrasebookShortcut: 'mod+s',
-  langId: getDefaultLangId(),
+  swapLanguagesShortcut: 'mod+shift+s',
+  theme: process.platform === 'darwin' ? 'automatic' : 'light',
+  translateWhenPressingEnter: true,
 };
 
 const getPreferences = () => ({ ...defaultPreferences, ...settings.get(`preferences.${v}`) });
 
-const getPreference = (name) => settings.get(`preferences.${v}.${name}`) || defaultPreferences[name];
+const getPreference = (name) => {
+  if (settings.has(`preferences.${v}.${name}`)) {
+    return settings.get(`preferences.${v}.${name}`);
+  }
+  return defaultPreferences[name];
+};
 
 const setPreference = (name, value) => {
+  if (name === 'openOnMenubarShortcut') {
+    ipcMain.emit('unset-show-menubar-shortcut', null, getPreference(name));
+    ipcMain.emit('set-show-menubar-shortcut', null, value);
+  }
+
   settings.set(`preferences.${v}.${name}`, value);
   sendToAllWindows('set-preference', name, value);
 };

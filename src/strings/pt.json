@@ -93,6 +93,7 @@
 
 	"shortcuts": "Atalhos do Teclado",
 	"openOnMenubar": "Abrir o app Translatium na Barra de Menus",
+	"openOnTaskbar": "Abra o app Translatium na Barra de Tarefas",
 	"openInputLangList": "Selecione o idioma de entrada",
 	"openOutputLangList": "Selecione o idioma de saída",
 	"swapLanguages": "Trocar os idiomas",
