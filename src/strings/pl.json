@@ -172,6 +172,7 @@
 	"ml": "malajalam",
 	"mn": "mongolski",
 	"mr": "marathi",
+	"mrj": "wzgórze mari",
 	"ms": "malajski",
 	"mt": "maltański",
 	"my": "birmański (Birma)",
@@ -205,11 +206,11 @@
 	"xh": "xhosa",
 	"yi": "jidysz",
 	"yo": "joruba",
+	"zh": "chiński",
     "az": "azerski",
     "ba": "baszkirski",
     "jv" : "jawajski",
     "mhr": "mari",
     "pap": "papiamento",
-    "tt": "tatarski",
-    "zh": "chiński"
+    "tt": "tatarski"
 }

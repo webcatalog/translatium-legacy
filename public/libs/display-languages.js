@@ -20,6 +20,9 @@ const displayLanguages = {
   pt: {
     displayName: 'Português',
   },
+  'zh-CN': {
+    displayName: '中文',
+  },
 };
 
 module.exports = displayLanguages;
