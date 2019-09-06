@@ -102,7 +102,6 @@ const createWindow = () => {
     });
 
     ipcMain.on('set-show-menubar-shortcut', (e, combinator) => {
-      console.log(e, combinator);
       globalShortcut.register(combinator, () => {
         if (isHidden) {
           mb.showWindow();
