@@ -91,6 +91,9 @@
 	"advanced": "Erweitert",
 	"about": "Über",
 
+	"alwaysOnTop": "Fenster immer oben halten",
+	"alwaysOnTopDesc": "Das Fenster wird bei Unschärfe nicht ausgeblendet.",
+
 	"translateClipboardOnShortcut": "Übersetze Zwischenablage mit Tastaturkürzel",
 	"translateClipboardOnShortcutDesc": "WEnn du Translatium mit einem Tastenkürzel öffnest, wird es automatisch den Inhalt deiner Zwischenablage übersetzen.",
 

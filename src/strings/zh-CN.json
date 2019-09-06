@@ -91,6 +91,9 @@
 	"advanced": "高级",
 	"about": "关于",
 
+	"alwaysOnTop": "保持窗口始终在顶部",
+	"alwaysOnTopDesc": "窗口不会隐藏在模糊上。",
+
 	"translateClipboardOnShortcut": "快捷翻译",
 	"translateClipboardOnShortcutDesc": "当您使用快捷方式打开 Translatium 时，它将自动翻译您剪贴板的内容。",
 

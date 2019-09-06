@@ -91,6 +91,9 @@
 	"advanced": "Avançado",
 	"about": "Sobre",
 
+	"alwaysOnTop": "Mantenha a janela sempre no topo",
+	"alwaysOnTopDesc": "A janela não se esconderá no borrão.",
+
 	"translateClipboardOnShortcut": "Traduzir a área de transferência no atalho",
 	"translateClipboardOnShortcutDesc": "Quando você abre o Translatium com um atalho, ele irá traduzir automaticamente o conteúdo da área de transferência.",
 

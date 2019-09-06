@@ -114,6 +114,7 @@ const getVersion = () => remote.app.getVersion();
 
 const Preferences = (props) => {
   const {
+    alwaysOnTop,
     attachToMenubar,
     classes,
     clearInputShortcut,
@@ -247,6 +248,23 @@ const Preferences = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary={locale.alwaysOnTop}
+                secondary={locale.alwaysOnTopDesc}
+              />
+              <ListItemSecondaryAction>
+                <Switch
+                  checked={attachToMenubar ? alwaysOnTop : false}
+                  disabled={!attachToMenubar}
+                  onChange={(e) => {
+                    requestSetPreference('alwaysOnTop', e.target.checked);
+                    requestShowRequireRestartDialog();
+                  }}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
           </List>
         </Paper>
 
@@ -282,7 +300,7 @@ const Preferences = (props) => {
               />
               <ListItemSecondaryAction>
                 <Switch
-                  checked={translateClipboardOnShortcut}
+                  checked={attachToMenubar ? translateClipboardOnShortcut : false}
                   disabled={!attachToMenubar}
                   onChange={() => onToggle('translateClipboardOnShortcut')}
                 />
@@ -437,6 +455,7 @@ Preferences.propTypes = {
   theme: PropTypes.string.isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
   translateClipboardOnShortcut: PropTypes.bool.isRequired,
+  alwaysOnTop: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -455,6 +474,7 @@ const mapStateToProps = (state) => ({
   theme: state.preferences.theme,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
   translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
+  alwaysOnTop: state.preferences.alwaysOnTop,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -91,6 +91,9 @@
 	"advanced": "Zaawansowane",
 	"about": "O",
 
+	"alwaysOnTop": "Utrzymuj okno zawsze na wierzchu",
+	"alwaysOnTopDesc": "Okno nie ukryje się podczas rozmycia.",
+
 	"translateClipboardOnShortcut": "Przetłumacz schowek skrótem",
 	"translateClipboardOnShortcutDesc": "Gdy otworzysz Translatium za pomocą skrótu, zawartość schowka zostanie automatycznie przetłumaczona.",
 

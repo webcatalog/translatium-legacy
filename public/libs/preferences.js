@@ -42,6 +42,7 @@ const getDefaultLangId = () => {
 const v = '2019';
 
 const defaultPreferences = {
+  alwaysOnTop: false,
   attachToMenubar: false,
   clearInputShortcut: 'mod+shift+d',
   inputLang: 'en',

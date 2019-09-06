@@ -47,6 +47,7 @@ const createWindow = () => {
       icon: path.resolve(__dirname, 'images', 'menubarTemplate.png'),
       preloadWindow: true,
       browserWindow: {
+        alwaysOnTop: getPreference('alwaysOnTop'),
         webPreferences: {
           nodeIntegration: true,
         },

@@ -91,6 +91,9 @@
 	"advanced": "Nâng cao",
 	"about": "Thông tin",
 
+	"alwaysOnTop": "Giữ cửa sổ luôn ở trên đầu",
+	"alwaysOnTopDesc": "Cửa sổ sẽ không ẩn khi bạn rời chuột đi.",
+
 	"translateClipboardOnShortcut": "Dịch clipboard khi dùng phím tắt",
 	"translateClipboardOnShortcutDesc": "Khi bạn mở Translatium bằng phím tắt, phần mềm sẽ tự động dịch nội dung trong clipboard của bạn.",
 
