@@ -24,6 +24,7 @@ install:
 
 before_build:
   - yarn lint
+  - yarn test
 
 build_script:
   - yarn dist

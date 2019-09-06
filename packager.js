@@ -53,6 +53,7 @@ const opts = {
     files: [
       '!docs/**/*',
       '!popclip/**/*',
+      '!test/**/*',
     ],
     directories: {
       buildResources: 'build-resources',
