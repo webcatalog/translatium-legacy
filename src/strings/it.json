@@ -219,5 +219,7 @@
         "vi": "Vietnamita",
         "xh": "Xhosa",
         "yi": "Yiddish",
-        "zh": "Cinese"
+        "zh": "Cinese",
+	"zh-CN": "Cinese (semplificato)",
+	"zh-TW": "Cinese (tradizionale)"
 }

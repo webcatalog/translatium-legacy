@@ -58,7 +58,8 @@ export const translate = (saveToHistory) => ((dispatch, getState) => {
         });
       }
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       // Prevent slow request to display outdated info
       const currentOutput = getState().pages.home.output;
       if (currentOutput && currentOutput.identifier === identifier) {

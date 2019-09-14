@@ -83,7 +83,7 @@ const opts = {
       const languages = Object.keys(displayLanguages);
 
       if (process.platform === 'darwin') {
-        glob(`${appOutDir}/Translatium.app/Contents/Resources/!(${languages.join('|')}).lproj`, (err, files) => {
+        glob(`${appOutDir}/Translatium.app/Contents/Resources/!(${languages.join('|').replace('-', '_')}).lproj`, (err, files) => {
           console.log(files);
           if (err) return reject(err);
           return del(files).then(resolve, reject);

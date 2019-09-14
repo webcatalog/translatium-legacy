@@ -1,5 +1,3 @@
-import { isOutput } from '../../../helpers/language-utils';
-
 import { SET_PREFERENCE, UPDATE_OUTPUT } from '../../../constants/actions';
 
 import { requestSetPreference } from '../../../senders';
@@ -37,10 +35,10 @@ const runAfterLanguageChange = (language) => ((dispatch, getState) => {
 export const swapLanguages = () => ((dispatch, getState) => {
   const { inputLang, outputLang } = getState().preferences;
 
-  if (isOutput(inputLang) === false) return;
+  if (inputLang === 'auto') return;
 
-  requestSetPreference('inputLang', outputLang);
-  requestSetPreference('outputLang', inputLang);
+  requestSetPreference('inputLang', outputLang.startsWith('zh') ? 'zh' : outputLang);
+  requestSetPreference('outputLang', inputLang === 'zh' ? 'zh-CN' : inputLang);
 
   dispatch(runAfterLanguageChange());
 });

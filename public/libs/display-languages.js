@@ -21,7 +21,7 @@ const displayLanguages = {
     displayName: 'Português',
   },
   'zh-CN': {
-    displayName: '中文',
+    displayName: '中文(简体)',
   },
 };
 

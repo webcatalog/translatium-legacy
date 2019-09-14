@@ -219,5 +219,7 @@
 	"vi": "Tiếng Việt",
 	"xh": "Tiếng Xhosa",
 	"yi": "Tiếng Yiddish",
-	"zh": "Tiếng Trung"
+	"zh": "Tiếng Trung",
+	"zh-CN": "Tiếng Trung (Giản thể)",
+	"zh-TW": "Tiếng Trung (Phồn thể)"
 }
