@@ -23,6 +23,9 @@ const displayLanguages = {
   'zh-CN': {
     displayName: '中文(简体)',
   },
+  'zh-TW': {
+    displayName: '中文(繁體)',
+  },
 };
 
 export default displayLanguages;
