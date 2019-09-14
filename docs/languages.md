@@ -97,4 +97,5 @@ title: Supported Languages
 - Vietnamese
 - Xhosa
 - Yiddish
-- Chinese
+- Chinese (Simplified)
+- Chinese (Traditional)

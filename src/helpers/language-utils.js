@@ -11,10 +11,14 @@ const data = {
     'no', 'pa', 'pap', 'pl', 'pt', 'ro', 'ru', 'si', 'sk',
     'sl', 'sq', 'sr', 'su', 'sv', 'sw', 'ta', 'te', 'tg',
     'th', 'tl', 'tr', 'tt', 'udm', 'uk', 'ur', 'uz', 'vi',
-    'xh', 'yi', 'zh',
+    'xh', 'yi', 'zh', 'zh-CN', 'zh-TW',
+  ],
+  inputNotSupported: [
+    'zh-CN', 'zh-TW',
   ],
   outputNotSupported: [
     'auto',
+    'zh',
   ],
   ocrSpaceSupported: {
     ar: 'ara',
@@ -51,7 +55,7 @@ export const toOcrSpaceLanguage = (lang) => data.ocrSpaceSupported[lang] || null
 export const isOcrSupported = (lang) => (toOcrSpaceLanguage(lang) !== null);
 
 // Check if language is supported as input
-export const isInput = (lang) => !(data.all.indexOf(lang) > -1);
+export const isInput = (lang) => !(data.inputNotSupported.indexOf(lang) > -1);
 
 // Check if language is supported as output
 export const isOutput = (lang) => !(data.outputNotSupported.indexOf(lang) > -1);
@@ -64,7 +68,8 @@ export const getOutputLanguages = () => data
   .all.filter((x) => data.outputNotSupported.indexOf(x) < 0);
 
 // Get list of all input languages
-export const getInputLanguages = () => data.all;
+export const getInputLanguages = () => data
+  .all.filter((x) => data.inputNotSupported.indexOf(x) < 0);
 
 // Get list of all languages support OCR
 export const getOcrSupportedLanguages = () => data.all.filter((lang) => isOcrSupported(lang));

@@ -12207,6 +12207,11 @@ toidentifier@1.0.0:
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
   integrity sha512-yaOH/Pk/VEhBWWTlhI+qXxDFXlejDGcQipMlyxda9nthulaxLZUNcUqFxokp0vcYnvteJln5FNQDRrxj3YcbVw==
 
+tongwen-core@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/tongwen-core/-/tongwen-core-3.2.1.tgz#5040de4f1974a62885179922326c4664fa288f9c"
+  integrity sha512-9yEv4c0uBZKXFcBs9u9rlCBv2DqEMPDB8N57s9M6pVBrRQWtZg7haLPMsj0AgQr+qzSLiZO1BZFRGO7KF2+Nqw==
+
 tough-cookie@^2.3.3, tough-cookie@^2.3.4, tough-cookie@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.5.0.tgz#cd9fb2a0aa1d5a12b473bd9fb96fa3dcff65ade2"

@@ -38,7 +38,6 @@ import connectComponent from '../../../helpers/connect-component';
 import EnhancedMenu from '../enhanced-menu';
 
 import {
-  isOutput,
   isOcrSupported,
   isTtsSupported,
 } from '../../../helpers/language-utils';
@@ -511,7 +510,7 @@ class Home extends React.Component {
                 <div>
                   <IconButton
                     color="inherit"
-                    disabled={!isOutput(inputLang)}
+                    disabled={inputLang === 'auto'}
                     onClick={onSwapButtonClick}
                   >
                     <ActionSwapHoriz />

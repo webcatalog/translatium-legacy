@@ -23,13 +23,13 @@ export const startTextToSpeech = (textToSpeechLang, textToSpeechText) => ((dispa
 
   const utterThis = new window.SpeechSynthesisUtterance(textToSpeechText);
   utterThis.voice = voice;
-  window.speechSynthesis.speak(utterThis);
-
-  dispatch({ type: START_TEXT_TO_SPEECH });
-
   utterThis.onend = () => {
     dispatch({ type: END_TEXT_TO_SPEECH });
   };
+
+  window.speechSynthesis.speak(utterThis);
+
+  dispatch({ type: START_TEXT_TO_SPEECH });
 });
 
 export const endTextToSpeech = () => ((dispatch) => {

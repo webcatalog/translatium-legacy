@@ -219,5 +219,7 @@
 	"vi": "wietnamski",
 	"xh": "xhosa",
 	"yi": "jidysz",
-	"zh": "chiński"
+	"zh": "chiński",
+	"zh-CN": "chiński (uproszczony)",
+	"zh-TW": "chiński (tradycyjny)"
 }

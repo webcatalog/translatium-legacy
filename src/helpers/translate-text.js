@@ -1,4 +1,8 @@
 /* global fetch */
+import { createConverterMap } from 'tongwen-core';
+import s2tChar from 'tongwen-core/dictionaries/s2t-char.json';
+import s2tPhrase from 'tongwen-core/dictionaries/s2t-phrase.json';
+
 // https://tech.yandex.com/translate/doc/dg/reference/translate-docpage/
 import { transliterate as tr } from 'transliteration';
 
@@ -20,8 +24,12 @@ const dictPairs = [
   'sk-en', 'sk-ru', 'sv-en', 'sv-ru', 'tr-de', 'tr-en', 'tr-ru',
   'tt-ru', 'uk-en', 'uk-ru', 'uk-uk'];
 
+const dics = { s2t: [s2tChar, s2tPhrase] };
+const mConv = createConverterMap(dics);
+
 const translateText = (inputLang, outputLang, inputText) => {
-  const lang = inputLang === 'auto' ? outputLang : `${inputLang}-${outputLang}`;
+  const processedOutputLang = outputLang.startsWith('zh') ? 'zh' : outputLang;
+  const lang = inputLang === 'auto' ? processedOutputLang : `${inputLang}-${processedOutputLang}`;
 
   const output = {
     inputLang, outputLang,
@@ -41,10 +49,10 @@ const translateText = (inputLang, outputLang, inputText) => {
         const langs = response.lang.split('-');
 
         output.inputLang = langs[0];
-        output.outputLang = langs[1];
+        output.outputLang = outputLang;
         output.inputText = inputText;
-        output.outputText = response.text[0];
-        output.outputRoman = outputLang === 'zh' ? tr(response.text[0]) : undefined;
+        output.outputText = outputLang === 'zh-TW' ? mConv.phrase('s2t', response.text[0]) : response.text[0];
+        output.outputRoman = outputLang.startsWith('zh') ? tr(response.text[0]) : undefined;
         output.inputRoman = inputLang === 'zh' ? tr(inputText) : undefined;
       }),
   );
