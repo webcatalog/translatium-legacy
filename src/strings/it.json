@@ -3,13 +3,13 @@
         "phrasebook": "Frasario",
         "preferences": "Preferenze",
 
-        "website": "Website",
+        "website": "Sito Web",
 
         "typeSomethingHere": "Digita qualcosa qui ...",
 
         "clear": "Pulisci",
         "openImageFile": "Apri file immagine",
-        "more": "More",
+        "more": "Di piu'",
         "fullscreen": "Schermo intero",
         "exitFullscreen": "Esci da schermo intero",
         "translate": "Traduci",
@@ -24,7 +24,7 @@
         "listen": "Ascolta",
         "stop": "Ferma",
 
-        "swap": "Swap",
+        "swap": "Scambia",
         "copy": "Copia",
         "copied": "Copiato negli Appunti",
         "share": "Condividi",
@@ -67,8 +67,8 @@
 
         "theme": "Tema",
         "automatic": "Automatico",
-        "light": "Light",
-        "dark": "Scuro",
+        "light": "chiaro",
+        "dark": "scuro",
 
         "attachToMenubar": "Allega alla barra del menu",
         "attachToTaskbar": "Allega alla barra delle applicazioni",
@@ -78,7 +78,7 @@
         "realtime": "Traduzione in tempo reale",
 
         "rateMacAppStore": "Valuta Translatium sul Mac App Store",
-        "rateMicrosoftStore": "Valuta la traduzione su Microsoft Store",
+        "rateMicrosoftStore": "Valuta Translatium su Microsoft Store",
 
         "displayLanguage": "Visualizza la lingua",
         "change": "Cambia",
@@ -91,8 +91,8 @@
         "advanced": "Avanzato",
         "about": "Informazioni su",
 
-        "alwaysOnTop": "Mantenga la ventana siempre arriba",
-	"alwaysOnTopDesc": "La ventana no se ocultará en el desenfoque.",
+        "alwaysOnTop": "Mantieni la finestra sempre in primo piano",
+	"alwaysOnTopDesc": "La finestra non sarà nascosta nella sfocatura.",
 
         "translateClipboardOnShortcut": "Traduci appunti su collegamento",
 	"translateClipboardOnShortcutDesc": "Quando apri Translatium con un collegamento, tradurrà automaticamente il contenuto degli appunti.",
@@ -116,7 +116,7 @@
         "andSaveToHistory": "& salva nella cronologia",
 
         "save": "Salva",
-        "resetToDefault": "Riportare alle condizioni prdefinite",
+        "resetToDefault": "Riportare alle condizioni predefinite",
         "cancel": "Cancella",
 
         "pasteFromClipboard": "Incolla dagli Appunti",
@@ -130,7 +130,7 @@
         "af": "Africano",
         "am": "Amarico",
         "ar": "Arabo",
-        "az": "AzerO",
+        "az": "Azero",
         "ba": "Aschiro",
         "be": "Biellorusso",
         "bg": "Bulgaro",
@@ -180,7 +180,7 @@
         "mg": "Malgascio",
         "mhr": "Mari",
         "mi": "Maori",
-        "mk": "MacedonE",
+        "mk": "Macedone",
         "ml": "Malayalam",
         "mn": "Mongolo",
         "mr": "Marathi",
