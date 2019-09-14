@@ -8,6 +8,7 @@ import deStrings from '../../../strings/de.json';
 import plStrings from '../../../strings/pl.json';
 import ptStrings from '../../../strings/pt.json';
 import zhCNStrings from '../../../strings/zh-CN.json';
+import zhTWStrings from '../../../strings/zh-TW.json';
 
 export const updateLocale = (langId) => (dispatch) => {
   const processedLangId = langId.substring(0, 2) !== 'zh' ? langId.substring(0, 2) : langId;
@@ -39,6 +40,10 @@ export const updateLocale = (langId) => (dispatch) => {
     }
     case 'zh-CN': {
       strings = zhCNStrings;
+      break;
+    }
+    case 'zh-TW': {
+      strings = zhTWStrings;
       break;
     }
 
