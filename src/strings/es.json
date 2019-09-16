@@ -3,15 +3,15 @@
 	"phrasebook": "Guía de conversación",
 	"preferences": "Preferencias",
 
-	"website": "Website",
+	"website": "Sitio Web",
 
 	"typeSomethingHere": "Escribe algo aquí...",
 
 	"clear": "Despejar",
 	"openImageFile": "Abrir archivo imagen",
 	"more": "Mas",
-	"fullscreen": "Fullscreen",
-	"exitFullscreen": "Exit fullscreen",
+	"fullscreen": "Pantalla Completa",
+	"exitFullscreen": "Salir de Pantalla Completa",
 	"translate": "Traducir",
 	"translateFrom": "Traducir desde",
 	"didYouMean": "Quisiste decir",
@@ -31,8 +31,8 @@
 	"addToPhrasebook": "Agregar al la Guía de conversación",
 	"removeFromPhrasebook": "Remover de la Guía de conversación",
 
-	"translatedByYandexTranslate": "Powered by Yandex.Translate.",
-	"translatedByYandexDictionary": "Powered by Yandex.Dictionary.",
+	"translatedByYandexTranslate": "Impulsado por Yandex.Translate.",
+	"translatedByYandexDictionary": "Impulsado por Yandex.Dictionary.",
 
 	"fromLanguage": "desde {1}",
 
@@ -48,8 +48,8 @@
 
 	"red": "Rojo",
 	"pink": "Rosa",
-	"purple": "Purple",
-	"deepPurple": "Deep Purple",
+	"purple": "Purpura",
+	"deepPurple": "Purpura Oscuro",
 	"indigo": "Indigo",
 	"blue": "Azul",
 	"lightBlue": "Celeste",
@@ -77,8 +77,8 @@
 	"translateWhenPressingEnter": "Traducir cuando presionas Enter",
 	"realtime": "Traducción en tiempo real",
 
-	"rateMacAppStore": "Rate Translatium on Mac App Store",
-	"rateMicrosoftStore": "Rate Translatium on Microsoft Store",
+	"rateMacAppStore": "Valorar Translatium en Mac App Store",
+	"rateMicrosoftStore": "Valorar Translatium en Microsoft Store",
 
 	"displayLanguage": "Mostrar idioma",
 	"change": "Cambiar",
