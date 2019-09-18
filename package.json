@@ -25,7 +25,6 @@
   "dependencies": {
     "electron-is-dev": "1.1.0",
     "electron-settings": "3.2.0",
-    "electron-updater": "4.1.2",
     "menubar": "6.0.7"
   },
   "devDependencies": {
