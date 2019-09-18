@@ -33,12 +33,13 @@ switch (process.platform) {
     break;
   }
   case 'win32': {
-    targets = Platform.WINDOWS.createTarget(['appx', 'nsis'], Arch.x64);
+    // targets = Platform.WINDOWS.createTarget(['nsis'], Arch.x64);
+    targets = Platform.WINDOWS.createTarget(['appx'], Arch.x64);
     break;
   }
   default:
   case 'linux': {
-    targets = Platform.LINUX.createTarget(['snap', 'AppImage'], Arch.x64);
+    targets = Platform.LINUX.createTarget(['snap'], Arch.x64);
     break;
   }
 }

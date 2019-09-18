@@ -2,7 +2,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 const electron = require('electron');
-const { autoUpdater } = require('electron-updater');
 const path = require('path');
 const url = require('url');
 
@@ -18,8 +17,6 @@ const {
   Menu,
   ipcMain,
 } = electron;
-
-require('./libs/updater');
 
 const loadListeners = require('./listeners');
 
@@ -54,21 +51,8 @@ const createWindow = () => {
       },
     });
 
-    const updaterEnabled = process.env.SNAP == null && !process.mas && !process.windowsStore;
     const contextMenu = Menu.buildFromTemplate([
       { role: 'about' },
-      {
-        type: 'separator',
-        visible: updaterEnabled,
-      },
-      {
-        label: 'Check for Updates...',
-        click: () => {
-          global.updateSilent = false;
-          autoUpdater.checkForUpdates();
-        },
-        visible: updaterEnabled,
-      },
       { type: 'separator' },
       {
         label: 'Preferences...',
