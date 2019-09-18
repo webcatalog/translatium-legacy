@@ -29,7 +29,7 @@ let targets;
 switch (process.platform) {
   case 'darwin': {
     // targets = Platform.MAC.createTarget(['mas-dev']);
-    targets = Platform.MAC.createTarget(['mas', 'zip', 'dmg']);
+    targets = Platform.MAC.createTarget(['mas']);
     break;
   }
   case 'win32': {
