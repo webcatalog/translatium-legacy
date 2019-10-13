@@ -2,7 +2,7 @@
 
 |macOS|Linux|Windows|
 |---|---|---|
-|[![Travis Build Status](https://travis-ci.com/quanglam2807/translatium.svg?branch=master)](https://travis-ci.com/quanglam2807/translatium)|[![Travis Build Status](https://travis-ci.com/quanglam2807/translatium.svg?branch=master)](https://travis-ci.com/quanglam2807/translatium)|[![Build status](https://ci.appveyor.com/api/projects/status/nwbv85xdiq1s69pj?svg=true)](https://ci.appveyor.com/project/quanglam2807/translatium)|
+|[![Travis Build Status](https://travis-ci.com/quanglam2807/translatium.svg?branch=master)](https://travis-ci.com/quanglam2807/translatium)|[![Travis Build Status](https://travis-ci.com/quanglam2807/translatium.svg?branch=master)](https://travis-ci.com/quanglam2807/translatium)|[![Build status](https://ci.appveyor.com/api/projects/status/gxgiqaiyo07d0lww?svg=true)](https://ci.appveyor.com/project/quanglam2807/translatium)|
 
 **[Translatium](https://translatiumapp.com)** - Translate Any Languages like a Pro.
 

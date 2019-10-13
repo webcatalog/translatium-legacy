@@ -73,6 +73,7 @@ const opts = {
       entitlements: 'build-resources/entitlements.mas.plist',
       // provisioningProfile: 'build-resources/embedded-development.provisionprofile',
       provisioningProfile: 'build-resources/embedded.provisionprofile',
+      hardenedRuntime: true,
     },
     linux: {
       category: 'Utility',
@@ -84,7 +85,7 @@ const opts = {
       const languages = Object.keys(displayLanguages);
 
       if (process.platform === 'darwin') {
-        glob(`${appOutDir}/Translatium.app/Contents/Resources/!(${languages.join('|').replace('-', '_')}).lproj`, (err, files) => {
+        glob(`${appOutDir}/Translatium.app/Contents/Resources/!(${languages.join('|').replace(/-/g, '_')}).lproj`, (err, files) => {
           console.log(files);
           if (err) return reject(err);
           return del(files).then(resolve, reject);
