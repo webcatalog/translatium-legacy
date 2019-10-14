@@ -27,6 +27,18 @@ const dictPairs = [
 const dics = { s2t: [s2tChar, s2tPhrase] };
 const mConv = createConverterMap(dics);
 
+const getYandexTranslateApiKey = () => {
+  if (window.process.platform === 'darwin' && process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_DARWIN) {
+    return process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_DARWIN;
+  }
+  if (window.process.platform === 'linux' && process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_LINUX) {
+    return process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_LINUX;
+  }
+  return process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY;
+};
+
+const yandexTranslateApiKey = getYandexTranslateApiKey();
+
 const translateText = (inputLang, outputLang, inputText) => {
   const processedOutputLang = outputLang.startsWith('zh') ? 'zh' : outputLang;
   const lang = inputLang === 'auto' ? processedOutputLang : `${inputLang}-${processedOutputLang}`;
@@ -38,7 +50,7 @@ const translateText = (inputLang, outputLang, inputText) => {
   const p = [];
 
   const transUrl = 'https://translate.yandex.net/api/v1.5/tr.json/translate'
-                 + `?key=${process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY}`
+                 + `?key=${yandexTranslateApiKey}`
                  + `&text=${encodeURIComponent(inputText)}`
                  + `&lang=${lang}`
                  + '&format=plain';
