@@ -18,7 +18,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://translatiumapp.com" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Custom
-translatium_version: 9.3.2
+translatium_version: 9.3.3
 
 # Build settings
 markdown: kramdown
