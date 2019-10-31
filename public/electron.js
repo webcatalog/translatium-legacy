@@ -2,12 +2,17 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 const electron = require('electron');
+const isDev = require('electron-is-dev');
 const path = require('path');
 const url = require('url');
-
-const isDev = require('electron-is-dev');
-
+const { autoUpdater } = require('electron-updater');
 const { menubar } = require('menubar');
+
+const createMenu = require('./libs/create-menu');
+const loadListeners = require('./listeners');
+const { getPreference } = require('./libs/preferences');
+
+require('./libs/updater');
 
 const {
   app,
@@ -17,11 +22,6 @@ const {
   Menu,
   ipcMain,
 } = electron;
-
-const loadListeners = require('./listeners');
-
-const { getPreference } = require('./libs/preferences');
-const createMenu = require('./libs/create-menu');
 
 // Register protocol
 app.setAsDefaultProtocolClient('translatium');
@@ -37,6 +37,7 @@ loadListeners();
 const REACT_PATH = isDev ? 'http://localhost:3000' : `file://${path.resolve(__dirname, 'index.html')}`;
 
 const createWindow = () => {
+  const updaterEnabled = process.env.SNAP == null && !process.mas && !process.windowsStore;
   const attachToMenubar = getPreference('attachToMenubar');
   if (attachToMenubar) {
     mb = menubar({
@@ -53,6 +54,18 @@ const createWindow = () => {
 
     const contextMenu = Menu.buildFromTemplate([
       { role: 'about' },
+      {
+        type: 'separator',
+        visible: updaterEnabled,
+      },
+      {
+        label: 'Check for Updates...',
+        click: () => {
+          global.updateSilent = false;
+          autoUpdater.checkForUpdates();
+        },
+        visible: updaterEnabled,
+      },
       { type: 'separator' },
       {
         label: 'Preferences...',
