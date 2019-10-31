@@ -25,6 +25,7 @@
   "dependencies": {
     "electron-is-dev": "1.1.0",
     "electron-settings": "3.2.0",
+    "electron-updater": "4.2.0",
     "menubar": "6.0.8"
   },
   "devDependencies": {
@@ -46,14 +47,14 @@
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-react": "7.14.3",
     "fs-extra": "8.1.0",
-    "glob": "7.1.4",
-    "mocha": "6.2.1",
+    "glob": "7.1.5",
+    "mocha": "6.2.2",
     "mousetrap": "1.6.3",
     "pouchdb-browser": "7.1.1",
     "prop-types": "15.7.2",
     "react": "16.10.2",
     "react-dom": "16.10.2",
-    "react-redux": "5.0.7",
+    "react-redux": "5.1.2",
     "react-router": "3.2.3",
     "react-router-redux": "4.0.8",
     "react-scripts": "3.2.0",

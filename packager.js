@@ -29,7 +29,7 @@ let targets;
 switch (process.platform) {
   case 'darwin': {
     // targets = Platform.MAC.createTarget(['mas-dev']);
-    targets = Platform.MAC.createTarget(['mas']);
+    targets = Platform.MAC.createTarget(['mas', 'zip', 'dmg']);
     break;
   }
   case 'win32': {
@@ -39,7 +39,7 @@ switch (process.platform) {
   }
   default:
   case 'linux': {
-    targets = Platform.LINUX.createTarget(['snap'], Arch.x64);
+    targets = Platform.LINUX.createTarget(['snap', 'AppImage'], Arch.x64);
     break;
   }
 }
