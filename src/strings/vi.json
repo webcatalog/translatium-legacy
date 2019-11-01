@@ -125,13 +125,13 @@
 
 	"support": "Hỗ trợ",
 
-	"licenseRegistration": "License Registration",
-	"licenseKey": "License key",
-	"licenseContentText": "To continue, please purchase a perpetual license key ($4.99) from our store.",
-	"licenseHelper": "If you have already purchased Translatium from our store, you should have received a license key via email to enter above.",
-	"licenseRegistered": "Registration Complete! Thank you for supporting the future development of Translatium.",
-	"visitStore": "Visit Store...",
-	"register": "Register",
+	"licenseRegistration": "Đăng ký Bản quyền",
+	"licenseKey": "Mã bản quyền",
+	"licenseContentText": "Để tiếp tục, vui lòng mua mã bản quyền vĩnh viễn ($4.99) từ cửa hàng của chúng tôi.",
+	"licenseHelper": "Nếu bạn đã mua Translatium từ cửa hàng của chúng tôi, bạn sẽ nhận được mã bản quyền qua email để nhập ở trên.",
+	"licenseRegistered": "Đăng ký hoàn tất! Cảm ơn bạn đã ủng hộ Translatium.",
+	"visitStore": "Vào Cửa hàng...",
+	"register": "Đăng ký",
 
 	"auto" : "Tự động nhận diện",
 

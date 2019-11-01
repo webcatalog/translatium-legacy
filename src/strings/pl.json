@@ -125,13 +125,13 @@
 
 	"support": "Support",
 
-	"licenseRegistration": "License Registration",
-	"licenseKey": "License key",
-	"licenseContentText": "To continue, please purchase a perpetual license key ($4.99) from our store.",
-	"licenseHelper": "If you have already purchased Translatium from our store, you should have received a license key via email to enter above.",
-	"licenseRegistered": "Registration Complete! Thank you for supporting the future development of Translatium.",
-	"visitStore": "Visit Store...",
-	"register": "Register",
+	"licenseRegistration": "Rejestracja licencji",
+	"licenseKey": "Klucz licencyjny",
+	"licenseContentText": "Aby kontynuować, zakup klucz licencyjny bezterminowy (4,99 USD) w naszym sklepie.",
+	"licenseHelper": "Jeśli kupiłeś już Translatium w naszym sklepie, powinieneś otrzymać klucz licencyjny przez e-mail, aby wpisać powyżej.",
+	"licenseRegistered": "Rejestracja zakończona! Dziękujemy za wsparcie przyszłego rozwoju Translatium.",
+	"visitStore": "Odwiedź sklep...",
+	"register": "Zarejestrować",
 
 	"auto": "Wykryj język",
 

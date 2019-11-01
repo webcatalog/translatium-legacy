@@ -125,13 +125,13 @@
 
     "support": "支持",
 
-    "licenseRegistration": "License Registration",
-	"licenseKey": "License key",
-	"licenseContentText": "To continue, please purchase a perpetual license key ($4.99) from our store.",
-	"licenseHelper": "If you have already purchased Translatium from our store, you should have received a license key via email to enter above.",
-	"licenseRegistered": "Registration Complete! Thank you for supporting the future development of Translatium.",
-	"visitStore": "Visit Store...",
-	"register": "Register",
+    "licenseRegistration": "許可證註冊",
+    "licenseKey": "許可證密鑰",
+    "licenseContentText": "要繼續，請從我們的商店購買永久許可證密鑰（$ 4.99）。",
+    "licenseHelper": "如果您已經從我們的商店購買了Translatium，您應該已經通過電子郵件收到了許可證密鑰，可以在上方輸入。",
+    "licenseRegistered": "註冊完成！感謝您支持Translatium的未來發展。",
+    "visitStore": "訪問商店...",
+    "register": "註冊",
 
     "auto": "自動檢測",
 
