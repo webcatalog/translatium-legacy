@@ -81,9 +81,13 @@ const opts = {
       packageCategory: 'utils',
     },
     publish: {
-      snapStore: {
-        channels: ['stable', 'edge'],
-      },
+      publish: [
+        {
+          provider: 'snapStore',
+          channels: ['stable', 'edge'],
+        },
+        'github',
+      ],
     },
     afterPack: ({ appOutDir }) => new Promise((resolve, reject) => {
       console.log('afterPack', appOutDir, process.platform);
