@@ -26,9 +26,6 @@ console.log(`Machine: ${process.platform}`);
 
 const appVersion = fs.readJSONSync(path.join(__dirname, 'package.json')).version;
 
-console.log(process.env.CSC_LINK);
-console.log(process.env.CSC_KEY_PASSWORD);
-
 let targets;
 switch (process.platform) {
   case 'darwin': {
@@ -83,6 +80,7 @@ const opts = {
       category: 'Utility',
       packageCategory: 'utils',
     },
+    /*
     publish: process.platform === 'linux' ? [
       {
         provider: 'snapStore',
@@ -90,6 +88,7 @@ const opts = {
       },
       'github',
     ] : undefined, // use default on non-linux platforms
+    */
     afterPack: ({ appOutDir }) => new Promise((resolve, reject) => {
       console.log('afterPack', appOutDir, process.platform);
 
