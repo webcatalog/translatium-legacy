@@ -125,6 +125,14 @@
 
 	"support": "Hỗ trợ",
 
+	"licenseRegistration": "Đăng ký Bản quyền",
+	"licenseKey": "Mã bản quyền",
+	"licenseContentText": "Để tiếp tục, vui lòng mua mã bản quyền vĩnh viễn ($4.99) từ cửa hàng của chúng tôi.",
+	"licenseHelper": "Nếu bạn đã mua Translatium từ cửa hàng của chúng tôi, bạn sẽ nhận được mã bản quyền qua email để nhập ở trên.",
+	"licenseRegistered": "Đăng ký hoàn tất! Cảm ơn bạn đã ủng hộ Translatium.",
+	"visitStore": "Vào Cửa hàng...",
+	"register": "Đăng ký",
+
 	"auto" : "Tự động nhận diện",
 
 	"af": "Tiếng Afrikaans",

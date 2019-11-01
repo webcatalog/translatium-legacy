@@ -125,6 +125,14 @@
 
 	"support": "支持",
 
+	"licenseRegistration": "许可证注册",
+	"licenseKey": "许可证密钥",
+	"licenseContentText": "要继续，请从我们的商店购买永久许可证密钥（$ 4.99）。",
+	"licenseHelper": "如果您已经从我们的商店购买了Translatium，您应该已经通过电子邮件收到了许可证密钥，可以在上方输入。",
+	"licenseRegistered": "注册完成！感谢您支持Translatium的未来发展。",
+	"visitStore": "访问商店。。。",
+	"register": "注册",
+
 	"auto": "自动检测",
 
 	"af": "南非荷兰语",

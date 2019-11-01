@@ -125,6 +125,14 @@
 
 	"support": "Support",
 
+	"licenseRegistration": "Rejestracja licencji",
+	"licenseKey": "Klucz licencyjny",
+	"licenseContentText": "Aby kontynuować, zakup klucz licencyjny bezterminowy (4,99 USD) w naszym sklepie.",
+	"licenseHelper": "Jeśli kupiłeś już Translatium w naszym sklepie, powinieneś otrzymać klucz licencyjny przez e-mail, aby wpisać powyżej.",
+	"licenseRegistered": "Rejestracja zakończona! Dziękujemy za wsparcie przyszłego rozwoju Translatium.",
+	"visitStore": "Odwiedź sklep...",
+	"register": "Zarejestrować",
+
 	"auto": "Wykryj język",
 
 	"af": "afrikaans",

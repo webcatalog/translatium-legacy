@@ -125,6 +125,14 @@
 
 	"support": "Unterstützung",
 
+	"licenseRegistration": "License Registration",
+	"licenseKey": "Lizenzschlüssel",
+	"licenseContentText": "Um fortzufahren, kaufen Sie bitte einen unbefristeten Lizenzschlüssel (4,99 USD) in unserem Shop.",
+	"licenseHelper": "Wenn Sie Translatium bereits in unserem Shop gekauft haben, sollten Sie einen Lizenzschlüssel per E-Mail erhalten haben, um diesen einzugeben.",
+	"licenseRegistered": "Registration Complete! Vielen Dank, dass Sie die zukünftige Entwicklung von Translatium unterstützen.",
+	"visitStore": "Store besuchen...",
+	"register": "Registrieren",
+
 	"auto": "Automatisch erkennen",
 
 	"af": "Afrikaans",

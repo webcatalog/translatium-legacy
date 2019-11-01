@@ -125,6 +125,14 @@
 
 	"support": "Suporte",
 
+	"licenseRegistration": "Registro de Licença",
+	"licenseKey": "Chave de licença",
+	"licenseContentText": "Para continuar, compre uma chave de licença permanente (US $ 4,99) em nossa loja.",
+	"licenseHelper": "Se você já comprou o Translatium em nossa loja, deveria receber uma chave de licença por e-mail para entrar acima.",
+	"licenseRegistered": "Registro concluído! Obrigado por apoiar o desenvolvimento futuro do Translatium.",
+	"visitStore": "Visitar loja...",
+	"register": "Registo",
+
 	"auto": "Detectar Automaticamente",
 
 	"af": "Africâner",

@@ -16,8 +16,10 @@ import connectComponent from '../helpers/connect-component';
 
 import { screenResize } from '../state/root/screen/actions';
 import { closeSnackbar } from '../state/root/snackbar/actions';
+import { open as openDialogLicenseRegistration } from '../state/root/dialog-license-registration/actions';
 
 import Alert from './root/alert';
+import DialogLicenseRegistration from './root/dialog-license-registration';
 
 const styles = (theme) => ({
   container: {
@@ -66,6 +68,13 @@ const styles = (theme) => ({
 });
 
 class App extends React.Component {
+  componentDidMount() {
+    const { registered, onOpenDialogLicenseRegistration } = this.props;
+    if (!registered) {
+      onOpenDialogLicenseRegistration();
+    }
+  }
+
   componentWillUnmount() {
     const { onResize } = this.props;
     window.removeEventListener('resize', onResize);
@@ -100,6 +109,7 @@ class App extends React.Component {
             </div>
           )}
           <Alert />
+          <DialogLicenseRegistration />
           <Snackbar
             open={snackbarOpen}
             message={snackbarMessage || ''}
@@ -140,18 +150,20 @@ class App extends React.Component {
 }
 
 App.propTypes = {
+  registered: PropTypes.bool.isRequired,
   attachToMenubar: PropTypes.bool.isRequired,
   bottomNavigationSelectedIndex: PropTypes.number.isRequired,
   children: PropTypes.element.isRequired, // matched child route component
   classes: PropTypes.object.isRequired.isRequired,
   fullPageLoading: PropTypes.bool.isRequired,
+  locale: PropTypes.object.isRequired,
   onBottomNavigationActionClick: PropTypes.func.isRequired,
+  onOpenDialogLicenseRegistration: PropTypes.func.isRequired,
   onRequestCloseSnackbar: PropTypes.func.isRequired,
   onResize: PropTypes.func.isRequired,
   shouldShowBottomNav: PropTypes.bool.isRequired,
   snackbarMessage: PropTypes.string,
   snackbarOpen: PropTypes.bool.isRequired,
-  locale: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -175,6 +187,7 @@ const mapStateToProps = (state, ownProps) => {
 
 
   return {
+    registered: state.preferences.registered,
     attachToMenubar: state.preferences.attachToMenubar,
     bottomNavigationSelectedIndex,
     fullPageLoading: Boolean(state.pages.ocr && state.pages.ocr.status === 'loading'),
@@ -192,6 +205,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onBottomNavigationActionClick: (pathname) => dispatch(replace(pathname)),
   onRequestCloseSnackbar: () => dispatch(closeSnackbar()),
+  onOpenDialogLicenseRegistration: () => dispatch(openDialogLicenseRegistration()),
 });
 
 export default connectComponent(
