@@ -17,7 +17,7 @@
 	"didYouMean": "你是想找",
 
 	"errorOccured": "发生错误",
-	"cannotConnectToServer":"应用程序无法连接服务器。请检查您的互联网连接。如果您在中国, 请在「设置」中打开「中国模式」。",
+	"cannotConnectToServer":"应用程序无法连接服务器。请检查您的互联网连接。如果您在中国，请在「设置」中打开「中国模式」。",
     "cannotOpenTheFile": "应用程序无法打开您选择的文件。",
     "cannotRecognizeImage": "应用程序无法识别您图像上的任何文字。",
 
@@ -95,7 +95,7 @@
 	"alwaysOnTopDesc": "窗口不会隐藏在模糊上。",
 
 	"translateClipboardOnShortcut": "快捷翻译",
-	"translateClipboardOnShortcutDesc": "当您使用快捷方式打开 Translatium 时, 它将自动翻译您剪贴板的内容。",
+	"translateClipboardOnShortcutDesc": "当您使用快捷方式打开 Translatium 时，它将自动翻译您剪贴板的内容。",
 
 	"shortcuts": "键盘快捷键",
 	"openOnMenubar": "在菜单栏上打开 Translatium",
@@ -127,10 +127,10 @@
 
 	"licenseRegistration": "许可证注册",
 	"licenseKey": "许可证密钥",
-	"licenseContentText": "要继续, 请从我们的商店购买永久许可证密钥（$ 4.99）。",
-	"licenseHelper": "如果您已经从我们的商店购买了Translatium, 您应该已经通过电子邮件收到了许可证密钥, 可以在上方输入。",
+	"licenseContentText": "要继续，请从我们的商店购买永久许可证密钥（$ 4.99）。",
+	"licenseHelper": "如果您已经从我们的商店购买了Translatium，您应该已经通过电子邮件收到了许可证密钥，可以在上方输入。",
 	"licenseRegistered": "注册完成！感谢您支持Translatium的未来发展。",
-	"visitStore": "访问商店...",
+	"visitStore": "访问商店。。。",
 	"register": "注册",
 
 	"auto": "自动检测",
