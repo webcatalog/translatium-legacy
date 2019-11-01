@@ -7,6 +7,7 @@ const { spawn } = require('child_process');
 const glob = require('glob');
 const del = require('del');
 const { getSignVendorPath } = require('app-builder-lib/out/codeSign/windowsCodeSign');
+const { notarize } = require('electron-notarize');
 
 const displayLanguages = require('./src/constants/display-languages').default;
 
@@ -79,6 +80,13 @@ const opts = {
       category: 'Utility',
       packageCategory: 'utils',
     },
+    publish: [
+      {
+        provider: 'snapStore',
+        channels: ['stable', 'edge'],
+      },
+      'github',
+    ],
     afterPack: ({ appOutDir }) => new Promise((resolve, reject) => {
       console.log('afterPack', appOutDir, process.platform);
 
@@ -94,6 +102,26 @@ const opts = {
         resolve();
       }
     }),
+    afterSign: (context) => {
+      // Only notarize app when forced in pull requests or when releasing using tag
+      const shouldNotarize = context.electronPlatformName === 'darwin'
+        && ((process.env.TRAVIS_PULL_REQUEST === 'true' && process.env.CSC_FOR_PULL_REQUEST === 'true')
+        || process.env.TRAVIS_TAG);
+      if (!shouldNotarize) return null;
+
+      console.log('Notarizing app...');
+      // https://kilianvalkhof.com/2019/electron/notarizing-your-electron-application/
+      const { appOutDir } = context;
+
+      const appName = context.packager.appInfo.productFilename;
+
+      return notarize({
+        appBundleId: 'com.moderntranslator.app',
+        appPath: `${appOutDir}/${appName}.app`,
+        appleId: process.env.APPLE_ID,
+        appleIdPassword: process.env.APPLE_ID_PASSWORD,
+      });
+    },
     afterAllArtifactBuild: () => {
       if (process.platform !== 'win32') {
         return [];
