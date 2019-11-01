@@ -81,7 +81,7 @@ const opts = {
       packageCategory: 'utils',
     },
     publish: {
-      snap: {
+      snapStore: {
         channels: ['stable', 'edge'],
       },
     },
