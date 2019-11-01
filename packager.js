@@ -80,13 +80,15 @@ const opts = {
       category: 'Utility',
       packageCategory: 'utils',
     },
-    publish: [
+    /*
+    publish: process.platform === 'linux' ? [
       {
         provider: 'snapStore',
         channels: ['stable', 'edge'],
       },
       'github',
-    ],
+    ] : undefined, // use default on non-linux platforms
+    */
     afterPack: ({ appOutDir }) => new Promise((resolve, reject) => {
       console.log('afterPack', appOutDir, process.platform);
 
@@ -94,7 +96,7 @@ const opts = {
 
       if (process.platform === 'darwin') {
         glob(`${appOutDir}/Translatium.app/Contents/Resources/!(${languages.join('|').replace(/-/g, '_')}).lproj`, (err, files) => {
-          console.log(files);
+          console.log('Deleting redundant *.lproj files...');
           if (err) return reject(err);
           return del(files).then(resolve, reject);
         });
@@ -111,6 +113,7 @@ const opts = {
 
       console.log('Notarizing app...');
       // https://kilianvalkhof.com/2019/electron/notarizing-your-electron-application/
+      console.log(context);
       const { appOutDir } = context;
 
       const appName = context.packager.appInfo.productFilename;
