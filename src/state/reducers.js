@@ -11,6 +11,7 @@ import {
 } from 'react-router-redux';
 
 import alert from './root/alert/reducers';
+import dialogLicenseRegistration from './root/dialog-license-registration/reducers';
 import general from './root/general/reducers';
 import preferences from './root/preferences/reducers';
 import screen from './root/screen/reducers';
@@ -23,6 +24,7 @@ import loadListeners from '../listeners';
 
 const rootReducer = combineReducers({
   alert,
+  dialogLicenseRegistration,
   general,
   pages,
   preferences,

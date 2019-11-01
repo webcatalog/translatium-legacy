@@ -38,10 +38,22 @@ const getDefaultLangId = () => {
   return defaultLangId;
 };
 
+const getRegistered = () => {
+  if (process.env.SNAP == null && !process.mas && !process.windowsStore) {
+    if (process.platform === 'linux') {
+      return true; // The app is free on Linux
+    }
+    return false;
+  }
+  // Always True for store distributions
+  return true;
+};
+
 // scope
 const v = '2019';
 
 const defaultPreferences = {
+  registered: getRegistered,
   alwaysOnTop: false,
   attachToMenubar: false,
   clearInputShortcut: 'mod+shift+d',

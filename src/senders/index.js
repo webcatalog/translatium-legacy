@@ -1,6 +1,8 @@
 
 const { ipcRenderer } = window.require('electron');
 
+export const requestShowMessageBox = (message, type) => ipcRenderer.send('request-show-message-box', message, type);
+
 // Preferences
 export const getPreference = (name) => ipcRenderer.sendSync('get-preference', name);
 export const getPreferences = () => ipcRenderer.sendSync('get-preferences');

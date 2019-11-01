@@ -55,6 +55,13 @@ const loadListeners = () => {
       }
     });
   });
+
+  ipcMain.on('request-show-message-box', (e, message, type) => {
+    dialog.showMessageBox(BrowserWindow.getAllWindows()[0], {
+      type: type || 'error',
+      message,
+    });
+  });
 };
 
 module.exports = loadListeners;
