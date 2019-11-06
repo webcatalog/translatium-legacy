@@ -75,6 +75,7 @@ const opts = {
       // provisioningProfile: 'build-resources/embedded-development.provisionprofile',
       provisioningProfile: 'build-resources/embedded.provisionprofile',
       hardenedRuntime: true,
+      darkModeSupport: true,
     },
     linux: {
       category: 'Utility',
