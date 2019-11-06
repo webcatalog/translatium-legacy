@@ -69,6 +69,9 @@ const opts = {
       identityName: '55974nhutquang97.5translate',
       publisher: 'CN=C635F506-DEEB-41A4-8CAA-16689F486ED2',
     },
+    mac: {
+      darkModeSupport: true,
+    },
     mas: {
       category: 'public.app-category.productivity',
       entitlements: 'build-resources/entitlements.mas.plist',
