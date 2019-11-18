@@ -1,22 +1,13 @@
 language: node_js
 node_js: 12
-matrix:
-  fast_finish: true
-  include:
-  - os: osx
-    osx_image: xcode10.2
-  - os: linux
+os: linux
 cache: yarn
 before_install:
-- echo 'CSC_LINK $CSC_LINK' | base64
-- echo 'CSC_KEY_PASSWORD $CSC_KEY_PASSWORD' | base64
-- echo 'REACT_APP_OCR_SPACE_API_KEY $REACT_APP_OCR_SPACE_API_KEY' | base64
-- if [ "$TRAVIS_OS_NAME" == "linux" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then sudo snap install snapcraft --classic; fi
-- if [ "$TRAVIS_OS_NAME" == "linux" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then echo "$SNAP_TOKEN" | snapcraft login --with -; fi
-before_script:
-- yarn lint
+- echo "CSC_LINK $CSC_LINK" | base64
+- echo "CSC_KEY_PASSWORD $CSC_KEY_PASSWORD" | base64
+- echo "REACT_APP_OCR_SPACE_API_KEY $REACT_APP_OCR_SPACE_API_KEY" | base64
 script:
-- yarn dist
+- echo "Hello world!"
 notifications:
   email: false
 branches:
