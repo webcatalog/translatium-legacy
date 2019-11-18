@@ -10,14 +10,7 @@ on:
 
 jobs:
   build:
-
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node-version: [12.x]
-
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
       with:
@@ -26,7 +19,7 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 12.x
     - name: Get yarn cache
       id: yarn-cache
       run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -48,7 +41,10 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         REACT_APP_LICENSE_SECRET: ${{ secrets.REACT_APP_LICENSE_SECRET }}
         REACT_APP_OCR_SPACE_API_KEY: ${{ secrets.REACT_APP_OCR_SPACE_API_KEY }}
-        REACT_APP_YANDEX_DICTIONARY_API_KEY: ${{ secrets.REACT_APP_YANDEX_DICTIONARY_API_KEY }}
-        REACT_APP_YANDEX_TRANSLATE_API_KEY_DARWIN: ${{ secrets.REACT_APP_YANDEX_TRANSLATE_API_KEY_DARWIN }}
+        REACT_APP_YANDEX_DICTIONARY_API_KEY_LINUX: ${{ secrets.REACT_APP_YANDEX_DICTIONARY_API_KEY_LINUX }}
+        REACT_APP_YANDEX_DICTIONARY_API_KEY_MAC: ${{ secrets.REACT_APP_YANDEX_DICTIONARY_API_KEY_MAC }}
+        REACT_APP_YANDEX_DICTIONARY_API_KEY_WINDOWS: ${{ secrets.REACT_APP_YANDEX_DICTIONARY_API_KEY_WINDOWS }}
         REACT_APP_YANDEX_TRANSLATE_API_KEY_LINUX: ${{ secrets.REACT_APP_YANDEX_TRANSLATE_API_KEY_LINUX }}
+        REACT_APP_YANDEX_TRANSLATE_API_KEY_MAC: ${{ secrets.REACT_APP_YANDEX_TRANSLATE_API_KEY_MAC }}
+        REACT_APP_YANDEX_TRANSLATE_API_KEY_WINDOWS: ${{ secrets.REACT_APP_YANDEX_TRANSLATE_API_KEY_WINDOWS }}
         SNAP_TOKEN: ${{ secrets.SNAP_TOKEN }}

@@ -28,16 +28,33 @@ const dics = { s2t: [s2tChar, s2tPhrase] };
 const mConv = createConverterMap(dics);
 
 const getYandexTranslateApiKey = () => {
-  if (window.process.platform === 'darwin' && process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_DARWIN) {
-    return process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_DARWIN;
+  if (window.process.platform === 'darwin' && process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_MAC) {
+    return process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_MAC;
   }
   if (window.process.platform === 'linux' && process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_LINUX) {
     return process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_LINUX;
   }
+  if (window.process.platform === 'win32' && process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_WINDOWS) {
+    return process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_WINDOWS;
+  }
   return process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY;
 };
 
+const getYandexDictionaryApiKey = () => {
+  if (window.process.platform === 'darwin' && process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY_MAC) {
+    return process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY_MAC;
+  }
+  if (window.process.platform === 'linux' && process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY_LINUX) {
+    return process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY_LINUX;
+  }
+  if (window.process.platform === 'win32' && process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY_WINDOWS) {
+    return process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY_WINDOWS;
+  }
+  return process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY;
+};
+
 const yandexTranslateApiKey = getYandexTranslateApiKey();
+const yandexDictionaryApiKey = getYandexDictionaryApiKey();
 
 const translateText = (inputLang, outputLang, inputText) => {
   const processedOutputLang = outputLang.startsWith('zh') ? 'zh' : outputLang;
@@ -77,7 +94,7 @@ const translateText = (inputLang, outputLang, inputText) => {
   if (shouldGetDict) {
     const dictLang = dictPairs.indexOf(lang) > -1 ? lang : singleLang;
     const dictUrl = 'https://dictionary.yandex.net/api/v1/dicservice.json/lookup'
-                   + `?key=${process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY}`
+                   + `?key=${yandexDictionaryApiKey}`
                    + `&text=${encodeURIComponent(inputText)}`
                    + `&lang=${dictLang}`;
     p.push(
