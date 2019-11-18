@@ -108,9 +108,7 @@ const opts = {
     }),
     afterSign: (context) => {
       // Only notarize app when forced in pull requests or when releasing using tag
-      const shouldNotarize = context.electronPlatformName === 'darwin'
-        && ((process.env.TRAVIS_PULL_REQUEST === 'true' && process.env.CSC_FOR_PULL_REQUEST === 'true')
-        || process.env.TRAVIS_TAG);
+      const shouldNotarize = process.platform === 'darwin' && process.env.GH_REF.startsWith('refs/tags/v');
       if (!shouldNotarize) return null;
 
       console.log('Notarizing app...');

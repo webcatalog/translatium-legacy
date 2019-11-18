@@ -3,10 +3,12 @@ name: Linux
 on:
   push:
     branches:
-      - master # Push events on master branch
+      - master
+    tags:
+      - "v*.*.*"
   pull_request:
     branches:
-      - master # Push events on master branch
+      - master
 
 jobs:
   build:

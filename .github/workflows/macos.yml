@@ -3,10 +3,12 @@ name: macOS
 on:
   push:
     branches:
-      - master # Push events on master branch
+      - master
+    tags:
+      - "v*.*.*"
   pull_request:
     branches:
-      - master # Push events on master branch
+      - master
 
 jobs:
   build:
@@ -38,6 +40,7 @@ jobs:
         APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
         CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
         CSC_LINK: ${{ secrets.CSC_LINK }}
+        GH_REF: ${{ github.ref }}
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         REACT_APP_LICENSE_SECRET: ${{ secrets.REACT_APP_LICENSE_SECRET }}
         REACT_APP_OCR_SPACE_API_KEY: ${{ secrets.REACT_APP_OCR_SPACE_API_KEY }}
