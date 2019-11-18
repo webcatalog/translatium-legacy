@@ -1,0 +1,48 @@
+name: macOS
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - "v*.*.*"
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+        submodules: false
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Get yarn cache
+      id: yarn-cache
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+    - uses: actions/cache@v1
+      with:
+        path: ${{ steps.yarn-cache.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+    - run: yarn
+    - run: yarn lint
+    - run: yarn dist
+      env:
+        CI: true
+        APPLE_ID: ${{ secrets.APPLE_ID }}
+        APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+        CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+        CSC_LINK: ${{ secrets.CSC_LINK }}
+        GH_REF: ${{ github.ref }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REACT_APP_LICENSE_SECRET: ${{ secrets.REACT_APP_LICENSE_SECRET }}
+        REACT_APP_OCR_SPACE_API_KEY: ${{ secrets.REACT_APP_OCR_SPACE_API_KEY }}
+        REACT_APP_YANDEX_DICTIONARY_API_KEY: ${{ secrets.REACT_APP_YANDEX_DICTIONARY_API_KEY_MAC }}
+        REACT_APP_YANDEX_TRANSLATE_API_KEY: ${{ secrets.REACT_APP_YANDEX_TRANSLATE_API_KEY_MAC }}

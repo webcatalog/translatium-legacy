@@ -13,6 +13,7 @@
     "node": "12"
   },
   "scripts": {
+    "postinstall": "npx patch-package",
     "start": "cross-env BROWSER=none react-scripts start",
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "build": "react-scripts build",
@@ -41,7 +42,7 @@
     "cross-env": "6.0.3",
     "del": "5.1.0",
     "electron": "5.0.12",
-    "electron-builder": "20.44.4",
+    "electron-builder": "21.2.0",
     "electron-notarize": "0.1.1",
     "eslint": "6.1.0",
     "eslint-config-airbnb": "18.0.1",
