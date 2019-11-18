@@ -84,15 +84,13 @@ const opts = {
       category: 'Utility',
       packageCategory: 'utils',
     },
-    /*
     publish: process.platform === 'linux' ? [
       {
         provider: 'snapStore',
-        channels: ['stable', 'edge'],
+        channels: ['stable'],
       },
       'github',
     ] : undefined, // use default on non-linux platforms
-    */
     afterPack: ({ appOutDir }) => new Promise((resolve, reject) => {
       console.log('afterPack', appOutDir, process.platform);
 
