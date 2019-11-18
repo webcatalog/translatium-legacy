@@ -13,7 +13,7 @@
     "node": "12"
   },
   "scripts": {
-    "postinstall": "patch-package",
+    "postinstall": "npx patch-package",
     "start": "cross-env BROWSER=none react-scripts start",
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "build": "react-scripts build",
