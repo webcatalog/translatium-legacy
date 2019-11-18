@@ -1,0 +1,13 @@
+diff --git a/node_modules/builder-util/out/util.js b/node_modules/builder-util/out/util.js
+index deeeec2..14d41d4 100644
+--- a/node_modules/builder-util/out/util.js
++++ b/node_modules/builder-util/out/util.js
+@@ -503,7 +503,7 @@ function isEmptyOrSpaces(s) {
+ }
+ 
+ function isTokenCharValid(token) {
+-  return /^[\w\/=+-]+$/.test(token);
++  return /^[.\w\/=+-]+$/.test(token);
+ }
+ 
+ function addValue(map, key, value) {
