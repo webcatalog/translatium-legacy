@@ -1,0 +1,44 @@
+name: Linux
+
+on:
+  push:
+    branches:
+      - master # Push events on master branch
+  pull_request:
+    branches:
+      - master # Push events on master branch
+
+jobs:
+  start_campaign:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+        submodules: false
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: yarn
+    - run: yarn lint
+    - run: yarn dist
+      env:
+        CI: true
+        APPLE_ID: ${{ secrets.APPLE_ID }}
+        APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+        CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+        CSC_LINK: ${{ secrets.CSC_LINK }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REACT_APP_LICENSE_SECRET: ${{ secrets.REACT_APP_LICENSE_SECRET }}
+        REACT_APP_OCR_SPACE_API_KEY: ${{ secrets.REACT_APP_OCR_SPACE_API_KEY }}
+        REACT_APP_YANDEX_DICTIONARY_API_KEY: ${{ secrets.REACT_APP_YANDEX_DICTIONARY_API_KEY }}
+        REACT_APP_YANDEX_TRANSLATE_API_KEY_DARWIN: ${{ secrets.REACT_APP_YANDEX_TRANSLATE_API_KEY_DARWIN }}
+        REACT_APP_YANDEX_TRANSLATE_API_KEY_LINUX: ${{ secrets.REACT_APP_YANDEX_TRANSLATE_API_KEY_LINUX }}
+        SNAP_TOKEN: ${{ secrets.SNAP_TOKEN }}
