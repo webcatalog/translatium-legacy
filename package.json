@@ -1,7 +1,7 @@
 {
   "name": "translatium",
   "description": "Translate Any Languages like a Pro",
-  "version": "9.4.1",
+  "version": "9.4.2",
   "main": "public/electron.js",
   "repository": "https://github.com/translatium/translatium",
   "author": {
@@ -19,7 +19,7 @@
     "build": "react-scripts build",
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "dist": "npm run build && babel-node packager.js",
+    "dist": "yarn run build && babel-node packager.js",
     "lint": "eslint ./src ./public ./packager.js --ext js --fix",
     "test": "mocha"
   },

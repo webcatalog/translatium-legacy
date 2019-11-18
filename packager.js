@@ -40,7 +40,7 @@ switch (process.platform) {
   }
   default:
   case 'linux': {
-    targets = Platform.LINUX.createTarget(['snap', 'AppImage']);
+    targets = Platform.LINUX.createTarget(['AppImage', 'snap']);
     break;
   }
 }
@@ -84,16 +84,16 @@ const opts = {
       category: 'Utility',
       packageCategory: 'utils',
     },
-    publish: process.platform === 'linux' ? [
-      {
-        provider: 'snapStore',
-        channels: ['stable'],
-      },
-      'github',
-    ] : undefined, // use default on non-linux platforms
+    snap: {
+      publish: [
+        {
+          provider: 'snapStore',
+          channels: ['edge'],
+        },
+        'github',
+      ],
+    },
     afterPack: ({ appOutDir }) => new Promise((resolve, reject) => {
-      console.log('afterPack', appOutDir, process.platform);
-
       const languages = Object.keys(displayLanguages);
 
       if (process.platform === 'darwin') {
@@ -108,12 +108,11 @@ const opts = {
     }),
     afterSign: (context) => {
       // Only notarize app when forced in pull requests or when releasing using tag
-      const shouldNotarize = process.platform === 'darwin' && process.env.GH_REF && process.env.GH_REF.startsWith('refs/tags/v');
+      const shouldNotarize = process.platform === 'darwin' && context.electronPlatformName === 'darwin' && process.env.CI_BUILD_TAG;
       if (!shouldNotarize) return null;
 
       console.log('Notarizing app...');
       // https://kilianvalkhof.com/2019/electron/notarizing-your-electron-application/
-      console.log(context);
       const { appOutDir } = context;
 
       const appName = context.packager.appInfo.productFilename;
