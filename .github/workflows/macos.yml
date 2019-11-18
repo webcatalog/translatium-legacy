@@ -1,4 +1,4 @@
-name: Linux
+name: macOS
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v1
       with:
@@ -34,9 +34,12 @@ jobs:
     - run: yarn dist
       env:
         CI: true
+        APPLE_ID: ${{ secrets.APPLE_ID }}
+        APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+        CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+        CSC_LINK: ${{ secrets.CSC_LINK }}
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         REACT_APP_LICENSE_SECRET: ${{ secrets.REACT_APP_LICENSE_SECRET }}
         REACT_APP_OCR_SPACE_API_KEY: ${{ secrets.REACT_APP_OCR_SPACE_API_KEY }}
-        REACT_APP_YANDEX_DICTIONARY_API_KEY: ${{ secrets.REACT_APP_YANDEX_DICTIONARY_API_KEY_LINUX }}
-        REACT_APP_YANDEX_TRANSLATE_API_KEY: ${{ secrets.REACT_APP_YANDEX_TRANSLATE_API_KEY_LINUX }}
-        SNAP_TOKEN: ${{ secrets.SNAP_TOKEN }}
+        REACT_APP_YANDEX_DICTIONARY_API_KEY: ${{ secrets.REACT_APP_YANDEX_DICTIONARY_API_KEY_MAC }}
+        REACT_APP_YANDEX_TRANSLATE_API_KEY: ${{ secrets.REACT_APP_YANDEX_TRANSLATE_API_KEY_MAC }}

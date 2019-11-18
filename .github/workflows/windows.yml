@@ -1,4 +1,4 @@
-name: Linux
+name: Windows
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
       with:
@@ -37,6 +37,5 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         REACT_APP_LICENSE_SECRET: ${{ secrets.REACT_APP_LICENSE_SECRET }}
         REACT_APP_OCR_SPACE_API_KEY: ${{ secrets.REACT_APP_OCR_SPACE_API_KEY }}
-        REACT_APP_YANDEX_DICTIONARY_API_KEY: ${{ secrets.REACT_APP_YANDEX_DICTIONARY_API_KEY_LINUX }}
-        REACT_APP_YANDEX_TRANSLATE_API_KEY: ${{ secrets.REACT_APP_YANDEX_TRANSLATE_API_KEY_LINUX }}
-        SNAP_TOKEN: ${{ secrets.SNAP_TOKEN }}
+        REACT_APP_YANDEX_DICTIONARY_API_KEY: ${{ secrets.REACT_APP_YANDEX_DICTIONARY_API_KEY_WINDOWS }}
+        REACT_APP_YANDEX_TRANSLATE_API_KEY: ${{ secrets.REACT_APP_YANDEX_TRANSLATE_API_KEY_WINDOWS }}
