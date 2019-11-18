@@ -2,7 +2,7 @@
 
 |macOS|Linux|Windows|
 |---|---|---|
-|[![GitHub Actions Build Status](https://github.com/quanglam2807/translatium/workflows/macOS/badge.svg)](https://github.com/quanglam2807/translatium/actions)|[![GitHub Actions Build Status](https://github.com/quanglam2807/translatium/workflows/Linux/badge.svg)](https://github.com/quanglam2807/translatium/actions)|[![Build status](https://github.com/quanglam2807/translatium/workflows/Windows/badge.svg)](https://ci.appveyor.com/project/quanglam2807/translatium)|
+|[![GitHub Actions Build Status](https://github.com/quanglam2807/translatium/workflows/macOS/badge.svg)](https://github.com/quanglam2807/translatium/actions)|[![GitHub Actions Build Status](https://github.com/quanglam2807/translatium/workflows/Linux/badge.svg)](https://github.com/quanglam2807/translatium/actions)|[![GitHub Actions Build Status](https://github.com/quanglam2807/translatium/workflows/Windows/badge.svg)](https://github.com/quanglam2807/translatium/actions)|
 
 **[Translatium](https://translatiumapp.com)** - Translate Any Languages like a Pro.
 
