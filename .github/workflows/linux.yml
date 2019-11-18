@@ -9,12 +9,13 @@ on:
       - master # Push events on master branch
 
 jobs:
-  start_campaign:
+  build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
+        os: [ubuntu-latest]
         node-version: [12.x]
 
     steps:
@@ -28,6 +29,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn
     - run: yarn lint
+    - name: Temporarily fix electron-builder
+      run: |
+        sed -i '' 's/\^\[\\w/\^\[.\\w/g' node_modules/builder-util/out/util.js
+      shell: bash
     - run: yarn dist
       env:
         CI: true
