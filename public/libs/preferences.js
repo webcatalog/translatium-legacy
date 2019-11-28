@@ -64,7 +64,6 @@ const defaultPreferences = {
   openOnMenubarShortcut: 'alt+shift+t',
   openOutputLangListShortcut: 'mod+shift+o',
   outputLang: 'zh',
-  primaryColorId: 'green',
   realtime: true,
   recentLanguages: ['en', 'zh'],
   saveToPhrasebookShortcut: 'mod+s',

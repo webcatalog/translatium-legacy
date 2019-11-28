@@ -24,7 +24,6 @@ import { toggleSetting } from '../../../state/root/preferences/actions';
 import { updateLocale } from '../../../state/root/locale/actions';
 import { openShortcutDialog } from '../../../state/pages/preferences/shortcut-dialog/actions';
 
-import colorPairs from '../../../constants/colors';
 import displayLanguages from '../../../constants/display-languages';
 
 import DialogShortcut from './dialog-shortcut';
@@ -134,7 +133,6 @@ const Preferences = (props) => {
     openInputLangListShortcut,
     openOnMenubarShortcut,
     openOutputLangListShortcut,
-    primaryColorId,
     realtime,
     saveToPhrasebookShortcut,
     swapLanguagesShortcut,
@@ -216,31 +214,6 @@ const Preferences = (props) => {
               )}
               <MenuItem onClick={() => requestSetPreference('theme', 'light')}>{locale.light}</MenuItem>
               <MenuItem onClick={() => requestSetPreference('theme', 'dark')}>{locale.dark}</MenuItem>
-            </EnhancedMenu>
-            <Divider />
-            <EnhancedMenu
-              id="changeColor"
-              buttonElement={(
-                <ListItem button>
-                  <ListItemText
-                    primary={locale.primaryColor}
-                    secondary={locale[primaryColorId]}
-                  />
-                  <ChevronRightIcon color="action" aria-label={locale.change} />
-                </ListItem>
-              )}
-            >
-              {Object.keys(colorPairs).map((colorId) => (
-                <MenuItem
-                  key={`color_${colorId}`}
-                  value={colorId}
-                  onClick={() => {
-                    requestSetPreference('primaryColorId', colorId);
-                  }}
-                >
-                  {locale[colorId]}
-                </MenuItem>
-              ))}
             </EnhancedMenu>
             <Divider />
             <ListItem>
@@ -452,7 +425,6 @@ Preferences.propTypes = {
   openInputLangListShortcut: PropTypes.string.isRequired,
   openOnMenubarShortcut: PropTypes.string.isRequired,
   openOutputLangListShortcut: PropTypes.string.isRequired,
-  primaryColorId: PropTypes.string.isRequired,
   realtime: PropTypes.bool.isRequired,
   saveToPhrasebookShortcut: PropTypes.string.isRequired,
   swapLanguagesShortcut: PropTypes.string.isRequired,
@@ -471,7 +443,6 @@ const mapStateToProps = (state) => ({
   openInputLangListShortcut: state.preferences.openInputLangListShortcut,
   openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
   openOutputLangListShortcut: state.preferences.openOutputLangListShortcut,
-  primaryColorId: state.preferences.primaryColorId,
   realtime: state.preferences.realtime,
   saveToPhrasebookShortcut: state.preferences.saveToPhrasebookShortcut,
   swapLanguagesShortcut: state.preferences.swapLanguagesShortcut,
