@@ -1,7 +1,6 @@
 /* global document */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { goBack } from 'react-router-redux';
 
 import AppBar from '@material-ui/core/AppBar';
 import CloseIcon from '@material-ui/icons/Close';
@@ -24,8 +23,10 @@ import {
   getOcrSupportedLanguages,
 } from '../../helpers/language-utils';
 
+import { changeRoute } from '../../state/root/router/actions';
 import { updateInputLang, updateOutputLang } from '../../state/root/preferences/actions';
 import { updateLanguageListSearch } from '../../state/pages/language-list/actions';
+import { ROUTE_HOME, ROUTE_OCR } from '../../constants/routes';
 
 const styles = (theme) => ({
   container: {
@@ -62,8 +63,8 @@ const styles = (theme) => ({
     flexGrow: 1,
   },
   appBarColorDefault: {
-    background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
-    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
+    background: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
+    color: theme.palette.mode === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
   },
 });
 
@@ -84,9 +85,9 @@ class LanguageList extends React.Component {
   }
 
   handleEscKey(evt) {
-    const { onCloseClick } = this.props;
+    const { onCloseClick, mode } = this.props;
     if (evt.key === 'Escape' || evt.key === 'Esc') {
-      onCloseClick();
+      onCloseClick(mode);
     }
   }
 
@@ -98,13 +99,13 @@ class LanguageList extends React.Component {
       onUpdateLanguageListSearch,
       recentLanguages,
       search,
-      type,
+      mode,
       locale,
     } = this.props;
 
     let languages;
-    if (type === 'inputLang') languages = getInputLanguages();
-    else if (type === 'ocrInputLang') languages = getOcrSupportedLanguages();
+    if (mode === 'inputLang') languages = getInputLanguages();
+    else if (mode === 'ocrInputLang') languages = getOcrSupportedLanguages();
     else languages = getOutputLanguages();
 
     languages.sort((x, y) => {
@@ -129,9 +130,9 @@ class LanguageList extends React.Component {
         <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
           <Toolbar variant="dense">
             <Typography variant="h6" color="inherit" className={classes.title}>
-              {type === 'inputLang' ? locale.chooseAnInputLanguage : locale.chooseAnOutputLanguage}
+              {mode === 'inputLang' ? locale.chooseAnInputLanguage : locale.chooseAnOutputLanguage}
             </Typography>
-            <IconButton color="inherit" onClick={onCloseClick}>
+            <IconButton color="inherit" onClick={() => onCloseClick(mode)}>
               <CloseIcon />
             </IconButton>
           </Toolbar>
@@ -167,7 +168,7 @@ class LanguageList extends React.Component {
                   <ListItem
                     button
                     key={`lang_${langId}`}
-                    onClick={() => onLanguageClick(type, langId)}
+                    onClick={() => onLanguageClick(mode, langId)}
                   >
                     <ListItemText primary={locale[langId]} />
                   </ListItem>
@@ -183,7 +184,7 @@ class LanguageList extends React.Component {
                 <ListItem
                   button
                   key={`lang_recent_${langId}`}
-                  onClick={() => onLanguageClick(type, langId)}
+                  onClick={() => onLanguageClick(mode, langId)}
                 >
                   <ListItemText primary={locale[langId]} />
                 </ListItem>
@@ -197,7 +198,7 @@ class LanguageList extends React.Component {
                 <ListItem
                   button
                   key={`lang_${langId}`}
-                  onClick={() => onLanguageClick(type, langId)}
+                  onClick={() => onLanguageClick(mode, langId)}
                 >
                   <ListItemText primary={locale[langId]} />
                 </ListItem>
@@ -218,27 +219,37 @@ LanguageList.propTypes = {
   onUpdateLanguageListSearch: PropTypes.func.isRequired,
   recentLanguages: PropTypes.arrayOf(PropTypes.string),
   search: PropTypes.string,
-  type: PropTypes.string,
+  mode: PropTypes.string,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onCloseClick: () => dispatch(goBack()),
-  onLanguageClick: (type, value) => {
-    dispatch(goBack());
-
-    if (type === 'inputLang') {
+  onCloseClick: (mode) => {
+    if (mode && mode.startsWith('ocr')) {
+      dispatch(changeRoute(ROUTE_OCR));
+    } else {
+      dispatch(changeRoute(ROUTE_HOME));
+    }
+  },
+  onLanguageClick: (mode, value) => {
+    if (mode === 'inputLang') {
       dispatch(updateInputLang(value));
-    } else if (type === 'outputLang') {
+    } else if (mode === 'outputLang') {
       dispatch(updateOutputLang(value));
+    }
+
+    if (mode && mode.startsWith('ocr')) {
+      dispatch(changeRoute(ROUTE_OCR));
+    } else {
+      dispatch(changeRoute(ROUTE_HOME));
     }
   },
   onUpdateLanguageListSearch: (search) => dispatch(updateLanguageListSearch(search)),
 });
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   recentLanguages: state.preferences.recentLanguages,
   search: state.pages.languageList.search,
-  type: ownProps.location.query.type,
+  mode: state.pages.languageList.mode,
   locale: state.locale,
 });
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { goBack } from 'react-router-redux';
 
 import Fab from '@material-ui/core/Fab';
 import CloseIcon from '@material-ui/icons/Close';
@@ -17,6 +16,9 @@ import EnhancedMenu from './enhanced-menu';
 import { setZoomLevel, setMode } from '../../state/pages/ocr/actions';
 import { loadOutput } from '../../state/pages/home/actions';
 import { openSnackbar } from '../../state/root/snackbar/actions';
+import { changeRoute } from '../../state/root/router/actions';
+
+import { ROUTE_HOME } from '../../constants/routes';
 
 const { remote } = window.require('electron');
 
@@ -200,7 +202,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCloseClick: () => dispatch(goBack()),
+  onCloseClick: () => dispatch(changeRoute(ROUTE_HOME)),
   onUpdateZoomLevel: (value) => dispatch(setZoomLevel(value)),
   onModeMenuItemClick: (currentMode) => {
     let newMode;
@@ -213,7 +215,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(loadOutput({
       inputLang, outputLang, inputText, outputText,
     }));
-    dispatch(goBack());
+    dispatch(changeRoute(ROUTE_HOME));
   },
   onRequestCopyToClipboard: (text, localeCopied) => {
     remote.clipboard.writeText(text);

@@ -111,8 +111,8 @@ const createWindow = () => {
     });
 
     ipcMain.on('set-show-menubar-shortcut', (e, combinator) => {
+      if (!combinator) return;
       globalShortcut.register(combinator, () => {
-        if (!combinator) return;
         if (isHidden) {
           mb.showWindow();
           const translateClipboardOnShortcut = getPreference('translateClipboardOnShortcut');

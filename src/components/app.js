@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { replace } from 'react-router-redux';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ActionHome from '@material-ui/icons/Home';
@@ -16,10 +15,25 @@ import connectComponent from '../helpers/connect-component';
 
 import { screenResize } from '../state/root/screen/actions';
 import { closeSnackbar } from '../state/root/snackbar/actions';
+import { changeRoute } from '../state/root/router/actions';
 import { open as openDialogLicenseRegistration } from '../state/root/dialog-license-registration/actions';
 
 import Alert from './root/alert';
 import DialogLicenseRegistration from './root/dialog-license-registration';
+
+import Home from './pages/home';
+import Phrasebook from './pages/phrasebook';
+import Preferences from './pages/preferences';
+import LanguageList from './pages/language-list';
+import Ocr from './pages/ocr';
+
+import {
+  ROUTE_HOME,
+  ROUTE_PHRASEBOOK,
+  ROUTE_PREFERENCES,
+  ROUTE_LANGUAGE_LIST,
+  ROUTE_OCR,
+} from '../constants/routes';
 
 const styles = (theme) => ({
   container: {
@@ -89,17 +103,44 @@ class App extends React.Component {
   render() {
     const {
       attachToMenubar,
-      bottomNavigationSelectedIndex,
-      children,
       classes,
       fullPageLoading,
+      locale,
       onBottomNavigationActionClick,
       onRequestCloseSnackbar,
+      route,
       shouldShowBottomNav,
       snackbarMessage,
       snackbarOpen,
-      locale,
     } = this.props;
+
+    const renderRoute = () => {
+      switch (route) {
+        case ROUTE_PREFERENCES:
+          return <Preferences key="preferences" />;
+        case ROUTE_PHRASEBOOK:
+          return <Phrasebook key="installed" />;
+        case ROUTE_LANGUAGE_LIST:
+          return <LanguageList key="language-list" />;
+        case ROUTE_OCR:
+          return <Ocr key="ocr" />;
+        default:
+          return <Home key="home" />;
+      }
+    };
+
+    const bottomNavigationSelectedIndex = (() => {
+      switch (route) {
+        case ROUTE_PREFERENCES:
+          return 2;
+        case ROUTE_PHRASEBOOK:
+          return 1;
+        case ROUTE_HOME:
+          return 0;
+        default:
+          return -1;
+      }
+    })();
 
     return (
       <div className={classes.container}>
@@ -127,7 +168,7 @@ class App extends React.Component {
               </Button>
             )}
           />
-          {children}
+          {renderRoute()}
           {bottomNavigationSelectedIndex > -1 && shouldShowBottomNav && (
             <Paper elevation={2} style={{ zIndex: 1000 }}>
               <BottomNavigation
@@ -138,7 +179,7 @@ class App extends React.Component {
                 <BottomNavigationAction
                   label={locale.home}
                   icon={<ActionHome className={classes.icon} />}
-                  onClick={() => onBottomNavigationActionClick('/')}
+                  onClick={() => onBottomNavigationActionClick(ROUTE_HOME)}
                   classes={{
                     wrapper: classes.bottomNavigationActionWrapper,
                     label: classes.bottomNavigationActionLabel,
@@ -147,7 +188,7 @@ class App extends React.Component {
                 <BottomNavigationAction
                   label={locale.phrasebook}
                   icon={<ToggleStar className={classes.icon} />}
-                  onClick={() => onBottomNavigationActionClick('/phrasebook')}
+                  onClick={() => onBottomNavigationActionClick(ROUTE_PHRASEBOOK)}
                   classes={{
                     wrapper: classes.bottomNavigationActionWrapper,
                     label: classes.bottomNavigationActionLabel,
@@ -156,7 +197,7 @@ class App extends React.Component {
                 <BottomNavigationAction
                   label={locale.preferences}
                   icon={<ActionSettings className={classes.icon} />}
-                  onClick={() => onBottomNavigationActionClick('/preferences')}
+                  onClick={() => onBottomNavigationActionClick(ROUTE_PREFERENCES)}
                   classes={{
                     wrapper: classes.bottomNavigationActionWrapper,
                     label: classes.bottomNavigationActionLabel,
@@ -172,10 +213,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  registered: PropTypes.bool.isRequired,
   attachToMenubar: PropTypes.bool.isRequired,
-  bottomNavigationSelectedIndex: PropTypes.number.isRequired,
-  children: PropTypes.element.isRequired, // matched child route component
   classes: PropTypes.object.isRequired.isRequired,
   fullPageLoading: PropTypes.bool.isRequired,
   locale: PropTypes.object.isRequired,
@@ -183,49 +221,29 @@ App.propTypes = {
   onOpenDialogLicenseRegistration: PropTypes.func.isRequired,
   onRequestCloseSnackbar: PropTypes.func.isRequired,
   onResize: PropTypes.func.isRequired,
+  registered: PropTypes.bool.isRequired,
+  route: PropTypes.string.isRequired,
   shouldShowBottomNav: PropTypes.bool.isRequired,
   snackbarMessage: PropTypes.string,
   snackbarOpen: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => {
-  let bottomNavigationSelectedIndex = -1;
-  switch (ownProps.location.pathname) {
-    case '/help':
-      bottomNavigationSelectedIndex = 3;
-      break;
-    case '/preferences':
-      bottomNavigationSelectedIndex = 2;
-      break;
-    case '/phrasebook':
-      bottomNavigationSelectedIndex = 1;
-      break;
-    case '/':
-      bottomNavigationSelectedIndex = 0;
-      break;
-    default:
-      bottomNavigationSelectedIndex = -1;
-  }
-
-
-  return {
-    registered: state.preferences.registered,
-    attachToMenubar: state.preferences.attachToMenubar,
-    bottomNavigationSelectedIndex,
-    fullPageLoading: Boolean(state.pages.ocr && state.pages.ocr.status === 'loading'),
-    pathname: ownProps.location.pathname,
-    shouldShowBottomNav: true,
-    snackbarMessage: state.snackbar.message,
-    snackbarOpen: state.snackbar.open,
-    locale: state.locale,
-  };
-};
+const mapStateToProps = (state) => ({
+  attachToMenubar: state.preferences.attachToMenubar,
+  fullPageLoading: Boolean(state.pages.ocr && state.pages.ocr.status === 'loading'),
+  locale: state.locale,
+  registered: state.preferences.registered,
+  route: state.router.route,
+  shouldShowBottomNav: true,
+  snackbarMessage: state.snackbar.message,
+  snackbarOpen: state.snackbar.open,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onResize: () => {
     dispatch(screenResize(window.innerWidth));
   },
-  onBottomNavigationActionClick: (pathname) => dispatch(replace(pathname)),
+  onBottomNavigationActionClick: (pathname) => dispatch(changeRoute(pathname)),
   onRequestCloseSnackbar: () => dispatch(closeSnackbar()),
   onOpenDialogLicenseRegistration: () => dispatch(openDialogLicenseRegistration()),
 });

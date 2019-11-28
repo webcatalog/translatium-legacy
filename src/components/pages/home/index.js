@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { push } from 'react-router-redux';
 import classNames from 'classnames';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -43,6 +42,7 @@ import {
 
 import { loadImage } from '../../../state/pages/ocr/actions';
 import { openSnackbar } from '../../../state/root/snackbar/actions';
+import { changeRoute } from '../../../state/root/router/actions';
 import {
   swapLanguages,
   updateInputLang,
@@ -60,6 +60,10 @@ import {
   startTextToSpeech,
   endTextToSpeech,
 } from '../../../state/pages/home/text-to-speech/actions';
+
+import { updateLanguageListMode } from '../../../state/pages/language-list/actions';
+
+import { ROUTE_LANGUAGE_LIST } from '../../../constants/routes';
 
 import Dictionary from './dictionary';
 import History from './history';
@@ -160,6 +164,9 @@ const styles = (theme) => ({
   },
   translateButtonLabel: {
     fontWeight: 500,
+  },
+  outputActions: {
+    padding: '0 4px 2px 4px',
   },
 });
 
@@ -268,7 +275,7 @@ class Home extends React.Component {
                   </Typography>
                 )}
               </CardContent>
-              <CardActions>
+              <CardActions className={classes.outputActions}>
                 {controllers.slice(0, maxVisibleIcon).map(({ Icon, tooltip, onClick }) => (
                   <Tooltip title={tooltip} placement="bottom" key={`outputTool_${tooltip}`}>
                     <IconButton
@@ -575,10 +582,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLanguageClick: (type) => dispatch(push({
-    pathname: '/language-list',
-    query: { type },
-  })),
+  onLanguageClick: (type) => {
+    dispatch(updateLanguageListMode(type));
+    dispatch(changeRoute(ROUTE_LANGUAGE_LIST));
+  },
   onSwapButtonClick: () => dispatch(swapLanguages()),
   onKeyDown: (e) => {
     if (e.key === 'Enter') {

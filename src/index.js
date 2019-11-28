@@ -10,7 +10,7 @@ import './main.css';
 import store from './state/reducers';
 import { updateLocale } from './state/root/locale/actions';
 
-import renderRoutes from './routes';
+import AppWrapper from './components/app-wrapper';
 
 const { webFrame } = window.require('electron');
 
@@ -21,7 +21,7 @@ store.dispatch(updateLocale(store.getState().preferences.langId));
 
 render(
   <Provider store={store}>
-    {renderRoutes(store)}
+    <AppWrapper />
   </Provider>,
   document.getElementById('app'),
 );
@@ -29,7 +29,7 @@ render(
 window.speechSynthesis.onvoiceschanged = () => {
   render(
     <Provider store={store}>
-      {renderRoutes(store)}
+      <AppWrapper />
     </Provider>,
     document.getElementById('app'),
   );

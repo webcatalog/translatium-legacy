@@ -1,7 +1,8 @@
-import { push } from 'react-router-redux';
-
 import { setPreference, updateInputLang } from '../state/root/preferences/actions';
 import { updateInputText } from '../state/pages/home/actions';
+import { changeRoute } from '../state/root/router/actions';
+
+import { ROUTE_PREFERENCES } from '../constants/routes';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -23,7 +24,7 @@ const loadListeners = (store) => {
     store.dispatch(updateInputLang(value));
   });
 
-  ipcRenderer.on('go-to-preferences', () => store.dispatch(push('/preferences')));
+  ipcRenderer.on('go-to-preferences', () => store.dispatch(changeRoute(ROUTE_PREFERENCES)));
 };
 
 export default loadListeners;
