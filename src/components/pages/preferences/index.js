@@ -375,7 +375,7 @@ Preferences.propTypes = {
   onOpenShortcutDialog: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
   onUpdateLocale: PropTypes.func.isRequired,
-  openOnMenubarShortcut: PropTypes.string.isRequired,
+  openOnMenubarShortcut: PropTypes.string,
   realtime: PropTypes.bool.isRequired,
   theme: PropTypes.string.isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
@@ -392,6 +392,7 @@ const mapStateToProps = (state) => ({
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
   alwaysOnTop: state.preferences.alwaysOnTop,
   openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
+  translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
 });
 
 const mapDispatchToProps = (dispatch) => ({
