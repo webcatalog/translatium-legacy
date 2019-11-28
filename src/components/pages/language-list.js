@@ -63,8 +63,10 @@ const styles = (theme) => ({
     flexGrow: 1,
   },
   appBarColorDefault: {
-    background: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
-    color: theme.palette.mode === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
+    background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
+    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
+    WebkitAppRegion: 'drag',
+    WebkitUserSelect: 'none',
   },
 });
 
