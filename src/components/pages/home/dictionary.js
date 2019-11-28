@@ -12,6 +12,7 @@ import { updateInputText } from '../../../state/pages/home/actions';
 const styles = (theme) => ({
   container: {
     marginTop: 0,
+    padding: 12,
   },
   inline: {
     display: 'inline',

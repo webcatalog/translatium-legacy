@@ -89,7 +89,6 @@
 	"appearance": "Appearance",
 	"restartRequired": "restart required",
 	"advanced": "Advanced",
-	"about": "About",
 
 	"alwaysOnTop": "Keep window always on top",
 	"alwaysOnTopDesc": "The window will not hide on blur.",

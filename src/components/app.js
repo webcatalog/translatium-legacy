@@ -44,15 +44,15 @@ const styles = (theme) => ({
     justifyContent: 'center',
   },
   fakeTitleBar: {
-    flexBasis: 22,
+    background: theme.palette.grey[900],
+    color: theme.palette.getContrastText(theme.palette.grey[900]),
     height: 22,
-    backgroundColor: theme.palette.primary.dark,
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 13,
-    WebkitUserSelect: 'none',
     WebkitAppRegion: 'drag',
+    WebkitUserSelect: 'none',
+    textAlign: 'center',
     lineHeight: '22px',
+    fontSize: '12px',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif',
   },
   contentContainer: {
     flex: 1,
@@ -61,9 +61,15 @@ const styles = (theme) => ({
     flexDirection: 'column',
     overflow: 'hidden',
   },
-  icon: {
-    display: 'block',
-    margin: 'auto',
+  bottomNavigation: {
+    height: 40,
+  },
+  bottomNavigationActionWrapper: {
+    flexDirection: 'row',
+  },
+  bottomNavigationActionLabel: {
+    fontSize: '0.8rem !important',
+    paddingLeft: 4,
   },
 });
 
@@ -124,21 +130,37 @@ class App extends React.Component {
           {children}
           {bottomNavigationSelectedIndex > -1 && shouldShowBottomNav && (
             <Paper elevation={2} style={{ zIndex: 1000 }}>
-              <BottomNavigation value={bottomNavigationSelectedIndex} showLabels>
+              <BottomNavigation
+                value={bottomNavigationSelectedIndex}
+                classes={{ root: classes.bottomNavigation }}
+                showLabels
+              >
                 <BottomNavigationAction
                   label={locale.home}
                   icon={<ActionHome className={classes.icon} />}
                   onClick={() => onBottomNavigationActionClick('/')}
+                  classes={{
+                    wrapper: classes.bottomNavigationActionWrapper,
+                    label: classes.bottomNavigationActionLabel,
+                  }}
                 />
                 <BottomNavigationAction
                   label={locale.phrasebook}
                   icon={<ToggleStar className={classes.icon} />}
                   onClick={() => onBottomNavigationActionClick('/phrasebook')}
+                  classes={{
+                    wrapper: classes.bottomNavigationActionWrapper,
+                    label: classes.bottomNavigationActionLabel,
+                  }}
                 />
                 <BottomNavigationAction
                   label={locale.preferences}
                   icon={<ActionSettings className={classes.icon} />}
                   onClick={() => onBottomNavigationActionClick('/preferences')}
+                  classes={{
+                    wrapper: classes.bottomNavigationActionWrapper,
+                    label: classes.bottomNavigationActionLabel,
+                  }}
                 />
               </BottomNavigation>
             </Paper>

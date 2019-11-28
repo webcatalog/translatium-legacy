@@ -1,5 +1,5 @@
 {
-  "name": "translatium",
+  "name": "Translatium",
   "description": "Translate Any Languages like a Pro",
   "version": "9.4.2",
   "main": "public/electron.js",

@@ -58,6 +58,13 @@ const styles = (theme) => ({
   clearButton: {
     color: grey[500],
   },
+  title: {
+    flexGrow: 1,
+  },
+  appBarColorDefault: {
+    background: theme.palette.grey[900],
+    color: theme.palette.getContrastText(theme.palette.grey[900]),
+  },
 });
 
 
@@ -119,14 +126,14 @@ class LanguageList extends React.Component {
 
     return (
       <div className={classes.container}>
-        <AppBar position="static">
+        <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
           <Toolbar variant="dense">
+            <Typography variant="title" color="inherit" className={classes.title}>
+              {type === 'inputLang' ? locale.chooseAnInputLanguage : locale.chooseAnOutputLanguage}
+            </Typography>
             <IconButton color="inherit" onClick={onCloseClick}>
               <CloseIcon />
             </IconButton>
-            <Typography variant="title" color="inherit">
-              {type === 'inputLang' ? locale.chooseAnInputLanguage : locale.chooseAnOutputLanguage}
-            </Typography>
           </Toolbar>
         </AppBar>
         <div className={classes.inputContainer}>
@@ -184,9 +191,7 @@ class LanguageList extends React.Component {
             </List>
             <Divider />
             <List
-              subheader={
-                <ListSubheader disableSticky>{locale.allLanguages}</ListSubheader>
-}
+              subheader={<ListSubheader disableSticky>{locale.allLanguages}</ListSubheader>}
             >
               {languages.map((langId) => (
                 <ListItem

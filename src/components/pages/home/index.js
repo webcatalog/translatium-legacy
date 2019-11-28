@@ -100,9 +100,10 @@ const styles = (theme) => ({
     outline: 0,
     margin: 0,
     padding: 12,
-    fontSize: 16,
+    fontSize: '1rem',
     boxSizing: 'border-box',
     flex: 1,
+    resize: 'none',
   },
   controllerContainer: {
     flexBasis: 48,
@@ -121,7 +122,7 @@ const styles = (theme) => ({
   },
   resultContainer: {
     flex: 1,
-    padding: '0 12px 12px 12px',
+    paddingBottom: 12,
     boxSizing: 'border-box',
     overflowY: 'auto',
     WebkitOverflowScrolling: 'touch',
@@ -135,9 +136,6 @@ const styles = (theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  outputCard: {
-    marginTop: 12,
-  },
   languageTitle: {
     flex: 1,
     textOverflow: 'ellipsis',
@@ -150,6 +148,20 @@ const styles = (theme) => ({
   yandexCopyright: {
     color: theme.palette.text.disabled,
     cursor: 'pointer',
+    fontWeight: 400,
+    fontSize: '0.8rem',
+    marginLeft: 12,
+  },
+  outputText: {
+    fontSize: '1rem',
+    fontWeight: 500,
+  },
+  appBarColorDefault: {
+    background: theme.palette.grey[900],
+    color: theme.palette.getContrastText(theme.palette.grey[900]),
+  },
+  translateButtonLabel: {
+    fontWeight: 500,
   },
 });
 
@@ -322,12 +334,12 @@ class Home extends React.Component {
               </Typography>
             )}
 
-            <Card className={classes.outputCard}>
+            <Card>
               <CardContent className="text-selectable">
                 <Typography
-                  variant="headline"
+                  variant="body1"
                   lang={output.outputLang}
-                  className="text-selectable"
+                  className={classNames('text-selectable', classes.outputText)}
                 >
                   {output.outputText}
                 </Typography>
@@ -376,7 +388,7 @@ class Home extends React.Component {
             </Card>
             <Typography
               variant="body2"
-              align="right"
+              align="left"
               className={classes.yandexCopyright}
               onClick={() => remote.shell.openExternal('http://translate.yandex.com/')}
             >
@@ -384,10 +396,10 @@ class Home extends React.Component {
             </Typography>
 
             {output.outputDict && <Dictionary output={output} />}
-            {output.outputDict && (
+            {output.outputDict && output.outputDict.def.length > 0 && (
               <Typography
                 variant="body2"
-                align="right"
+                align="left"
                 className={classes.yandexCopyright}
                 onClick={() => remote.shell.openExternal('https://tech.yandex.com/dictionary/')}
               >
@@ -497,7 +509,7 @@ class Home extends React.Component {
           className={classes.anotherContainer}
           role="presentation"
         >
-          <AppBar position="static">
+          <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
             <Toolbar variant="dense">
               <Button
                 color="inherit"
@@ -585,7 +597,13 @@ class Home extends React.Component {
               </div>
               <div className={classes.controllerContainerRight}>
                 <Tooltip title={locale.andSaveToHistory} placement={fullscreenInputBox ? 'top' : 'bottom'}>
-                  <Button variant="raised" color="primary" onClick={onTranslateButtonClick}>
+                  <Button
+                    variant="outlined"
+                    size="medium"
+                    color="default"
+                    onClick={onTranslateButtonClick}
+                    classes={{ label: classes.translateButtonLabel }}
+                  >
                     {locale.translate}
                   </Button>
                 </Tooltip>

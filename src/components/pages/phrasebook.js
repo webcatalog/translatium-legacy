@@ -52,6 +52,10 @@ const styles = (theme) => ({
   progress: {
     marginTop: 12,
   },
+  appBarColorDefault: {
+    background: theme.palette.grey[900],
+    color: theme.palette.getContrastText(theme.palette.grey[900]),
+  },
 });
 
 class Phrasebook extends React.Component {
@@ -89,7 +93,7 @@ class Phrasebook extends React.Component {
 
     return (
       <div className={classes.container}>
-        <AppBar position="static">
+        <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
           <Toolbar variant="dense">
             <Typography variant="title" color="inherit">{locale.phrasebook}</Typography>
           </Toolbar>

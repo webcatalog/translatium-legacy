@@ -49,7 +49,7 @@ const styles = (theme) => ({
   },
   paperTitle: {
     width: '100%',
-    maxWidth: 720,
+    maxWidth: 480,
     margin: '0 auto',
     fontWeight: 600,
     color: theme.palette.text.primary,
@@ -61,11 +61,11 @@ const styles = (theme) => ({
     },
   },
   paper: {
-    maxWidth: 720,
+    maxWidth: 480,
     margin: '0 auto',
   },
   paperAbout: {
-    maxWidth: 720,
+    maxWidth: 480,
     margin: '0 auto',
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
@@ -73,6 +73,9 @@ const styles = (theme) => ({
     paddingRight: theme.spacing.unit,
     boxSizing: 'border-box',
     textAlign: 'center',
+    '&:not(:first-child)': {
+      marginTop: 36,
+    },
   },
   shortcutKey: {
     lineHeight: '48px',
@@ -99,6 +102,10 @@ const styles = (theme) => ({
   },
   version: {
     marginBottom: theme.spacing.unit * 2,
+  },
+  appBarColorDefault: {
+    background: theme.palette.grey[900],
+    color: theme.palette.getContrastText(theme.palette.grey[900]),
   },
 });
 
@@ -156,7 +163,7 @@ const Preferences = (props) => {
   return (
     <div className={classes.container}>
       <DialogShortcut />
-      <AppBar position="static">
+      <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
         <Toolbar variant="dense">
           <Typography variant="title" color="inherit">{locale.preferences}</Typography>
         </Toolbar>
@@ -381,9 +388,6 @@ const Preferences = (props) => {
           </List>
         </Paper>
 
-        <Typography variant="body2" className={classes.paperTitle}>
-          {locale.about}
-        </Typography>
         <Paper className={classes.paperAbout}>
           <Typography variant="title" className={classes.title}>Translatium</Typography>
           <Typography variant="body1" className={classes.version}>

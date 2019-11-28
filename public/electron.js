@@ -46,6 +46,10 @@ const createWindow = () => {
       preloadWindow: true,
       browserWindow: {
         alwaysOnTop: getPreference('alwaysOnTop'),
+        width: 400,
+        height: 500,
+        minWidth: 400,
+        minHeight: 500,
         webPreferences: {
           nodeIntegration: true,
         },
@@ -124,7 +128,7 @@ const createWindow = () => {
     mainWindow = new BrowserWindow({
       width: 500,
       height: 600,
-      minWidth: 320,
+      minWidth: 400,
       minHeight: 500,
       titleBarStyle: 'hidden',
       autoHideMenuBar: true,
