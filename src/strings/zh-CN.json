@@ -98,11 +98,6 @@
 	"shortcuts": "键盘快捷键",
 	"openOnMenubar": "在菜单栏上打开 Translatium",
 	"openOnTaskbar": "在任务栏上打开Translatium",
-	"openInputLangList": "选择输入语言",
-	"openOutputLangList": "选择输出语言",
-	"swapLanguages": "交换翻译语言",
-	"clearInput": "清空输入文字",
-	"saveToPhrasebook": "保存到收藏夹",
 
 	"searchLanguages": "搜索语言",
 	"noLanguageFound": "没有找到对应语言",

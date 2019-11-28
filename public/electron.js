@@ -91,7 +91,13 @@ const createWindow = () => {
     });
 
     ipcMain.on('unset-show-menubar-shortcut', (e, combinator) => {
-      globalShortcut.unregister(combinator);
+      if (combinator) {
+        try {
+          globalShortcut.unregister(combinator);
+        } catch (err) {
+          console.log(err);
+        }
+      }
     });
 
     let isHidden = true;
@@ -106,6 +112,7 @@ const createWindow = () => {
 
     ipcMain.on('set-show-menubar-shortcut', (e, combinator) => {
       globalShortcut.register(combinator, () => {
+        if (!combinator) return;
         if (isHidden) {
           mb.showWindow();
           const translateClipboardOnShortcut = getPreference('translateClipboardOnShortcut');

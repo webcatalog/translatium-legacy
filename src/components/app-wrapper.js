@@ -91,6 +91,9 @@ class AppWrapper extends React.Component {
           dark: red[700],
         },
       },
+      typography: {
+        useNextVariants: true,
+      },
     };
 
     if (!shouldUseDarkMode) {

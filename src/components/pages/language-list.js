@@ -62,8 +62,8 @@ const styles = (theme) => ({
     flexGrow: 1,
   },
   appBarColorDefault: {
-    background: theme.palette.grey[900],
-    color: theme.palette.getContrastText(theme.palette.grey[900]),
+    background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
+    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
   },
 });
 
@@ -128,7 +128,7 @@ class LanguageList extends React.Component {
       <div className={classes.container}>
         <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
           <Toolbar variant="dense">
-            <Typography variant="title" color="inherit" className={classes.title}>
+            <Typography variant="h6" color="inherit" className={classes.title}>
               {type === 'inputLang' ? locale.chooseAnInputLanguage : locale.chooseAnOutputLanguage}
             </Typography>
             <IconButton color="inherit" onClick={onCloseClick}>

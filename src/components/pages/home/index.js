@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { push } from 'react-router-redux';
 import classNames from 'classnames';
-import Mousetrap from 'mousetrap';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ListItem from '@material-ui/core/ListItem';
@@ -154,11 +153,10 @@ const styles = (theme) => ({
   },
   outputText: {
     fontSize: '1rem',
-    fontWeight: 500,
   },
   appBarColorDefault: {
-    background: theme.palette.grey[900],
-    color: theme.palette.getContrastText(theme.palette.grey[900]),
+    background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
+    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
   },
   translateButtonLabel: {
     fontWeight: 500,
@@ -166,86 +164,6 @@ const styles = (theme) => ({
 });
 
 class Home extends React.Component {
-  componentDidMount() {
-    const {
-      clearInputShortcut,
-      onClearButtonClick,
-      onLanguageClick,
-      onOpenImageButtonClick,
-      onSwapButtonClick,
-      onTogglePhrasebookClick,
-      openImageFileShortcut,
-      openInputLangListShortcut,
-      openOutputLangListShortcut,
-      saveToPhrasebookShortcut,
-      swapLanguagesShortcut,
-    } = this.props;
-
-
-    Mousetrap.bind(openInputLangListShortcut, (e) => {
-      e.preventDefault();
-
-      onLanguageClick('inputLang');
-    });
-
-    Mousetrap.bind(openOutputLangListShortcut, (e) => {
-      e.preventDefault();
-
-      onLanguageClick('outputLang');
-    });
-
-    Mousetrap.bind(swapLanguagesShortcut, (e) => {
-      e.preventDefault();
-
-      onSwapButtonClick();
-    });
-
-    Mousetrap.bind(clearInputShortcut, (e) => {
-      e.preventDefault();
-      onClearButtonClick();
-    });
-
-    Mousetrap.bind(openImageFileShortcut, (e) => {
-      e.preventDefault();
-
-      const { inputLang } = this.props;
-
-      if (isOcrSupported(inputLang)) {
-        onOpenImageButtonClick();
-      }
-    });
-
-    Mousetrap.bind(saveToPhrasebookShortcut, (e) => {
-      e.preventDefault();
-
-      const { output } = this.props;
-
-      if (output && !output.phrasebookId) {
-        onTogglePhrasebookClick();
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    const {
-      clearInputShortcut,
-      openImageFileShortcut,
-      openInputLangListShortcut,
-      openOutputLangListShortcut,
-      saveToPhrasebookShortcut,
-      swapLanguagesShortcut,
-    } = this.props;
-
-    Mousetrap.unbind([
-      clearInputShortcut,
-      openImageFileShortcut,
-      openInputLangListShortcut,
-      openOutputLangListShortcut,
-      saveToPhrasebookShortcut,
-      swapLanguagesShortcut,
-    ]);
-  }
-
   renderOutput() {
     const {
       classes,
@@ -387,7 +305,7 @@ class Home extends React.Component {
               </CardActions>
             </Card>
             <Typography
-              variant="body2"
+              variant="body1"
               align="left"
               className={classes.yandexCopyright}
               onClick={() => remote.shell.openExternal('http://translate.yandex.com/')}
@@ -398,7 +316,7 @@ class Home extends React.Component {
             {output.outputDict && <Dictionary output={output} />}
             {output.outputDict && output.outputDict.def.length > 0 && (
               <Typography
-                variant="body2"
+                variant="body1"
                 align="left"
                 className={classes.yandexCopyright}
                 onClick={() => remote.shell.openExternal('https://tech.yandex.com/dictionary/')}
@@ -619,7 +537,6 @@ class Home extends React.Component {
 
 Home.propTypes = {
   classes: PropTypes.object.isRequired,
-  clearInputShortcut: PropTypes.string.isRequired,
   fullscreenInputBox: PropTypes.bool,
   inputLang: PropTypes.string,
   inputText: PropTypes.string,
@@ -637,33 +554,22 @@ Home.propTypes = {
   onSwapOutputButtonClick: PropTypes.func.isRequired,
   onTogglePhrasebookClick: PropTypes.func.isRequired,
   onTranslateButtonClick: PropTypes.func.isRequired,
-  openImageFileShortcut: PropTypes.string.isRequired,
-  openInputLangListShortcut: PropTypes.string.isRequired,
-  openOutputLangListShortcut: PropTypes.string.isRequired,
   output: PropTypes.object,
   outputLang: PropTypes.string,
-  saveToPhrasebookShortcut: PropTypes.string.isRequired,
   screenWidth: PropTypes.number,
-  swapLanguagesShortcut: PropTypes.string.isRequired,
   textToSpeechPlaying: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool,
   locale: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  clearInputShortcut: state.preferences.clearInputShortcut,
   fullscreenInputBox: state.pages.home.fullscreenInputBox,
   inputLang: state.preferences.inputLang,
   inputText: state.pages.home.inputText,
   locale: state.locale,
-  openImageFileShortcut: state.preferences.openImageFileShortcut,
-  openInputLangListShortcut: state.preferences.openInputLangListShortcut,
-  openOutputLangListShortcut: state.preferences.openOutputLangListShortcut,
   output: state.pages.home.output,
   outputLang: state.preferences.outputLang,
-  saveToPhrasebookShortcut: state.preferences.saveToPhrasebookShortcut,
   screenWidth: state.screen.screenWidth,
-  swapLanguagesShortcut: state.preferences.swapLanguagesShortcut,
   textToSpeechPlaying: state.pages.home.textToSpeech.textToSpeechPlaying,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
 });

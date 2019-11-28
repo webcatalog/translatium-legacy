@@ -98,11 +98,6 @@
 	"shortcuts": "Skróty klawiszowe",
 	"openOnMenubar": "Otwórz Translatium na Pasku menu",
 	"openOnTaskbar": "Otwórz Translatium na Pasku zadań",
-	"openInputLangList": "Wybierz język wprowadzania",
-	"openOutputLangList": "Wybierz język wyjściowy",
-	"swapLanguages": "Zamień języki",
-	"clearInput": "Wyczyść wprowadzany tekst",
-	"saveToPhrasebook": "Zapisz do rozmówek",
 
 	"searchLanguages": "Szukaj w językach",
 	"noLanguageFound": "Nie znaleziono języka",

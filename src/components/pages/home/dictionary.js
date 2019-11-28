@@ -62,7 +62,7 @@ const Dictionary = ({
     <div className={classes.container}>
       {output.outputDict.def.map((section) => (
         <React.Fragment key={`dict_section${section.text}${section.pos}}`}>
-          <Typography variant="subheading" align="left" className={classes.subheading}>
+          <Typography variant="subtitle1" align="left" className={classes.subheading}>
             <span
               className={classNames(classes.link, classes.primary)}
               role="button"

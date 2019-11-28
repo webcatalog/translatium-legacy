@@ -44,8 +44,8 @@ const styles = (theme) => ({
     justifyContent: 'center',
   },
   fakeTitleBar: {
-    background: theme.palette.grey[900],
-    color: theme.palette.getContrastText(theme.palette.grey[900]),
+    background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.dark,
+    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
     height: 22,
     WebkitAppRegion: 'drag',
     WebkitUserSelect: 'none',

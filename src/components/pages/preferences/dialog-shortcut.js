@@ -99,6 +99,14 @@ class DialogShortcut extends React.Component {
             {locale.cancel}
           </Button>
           <Button
+            onClick={() => {
+              requestSetPreference(`${identifier}Shortcut`, null);
+              onCloseShortcutDialog();
+            }}
+          >
+            {locale.removeShortcut}
+          </Button>
+          <Button
             color="primary"
             onClick={() => {
               requestSetPreference(`${identifier}Shortcut`, combinator);

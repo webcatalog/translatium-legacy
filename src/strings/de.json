@@ -98,11 +98,6 @@
 	"shortcuts": "Tastenkürzel",
 	"openOnMenubar": "Öffne Translatium von der Menüleiste",
 	"openOnTaskbar": "Öffne Translatium von der Taskleiste",
-	"openInputLangList": "Wähle Eingabe-Sprache",
-	"openOutputLangList": "Wähle Ausgabe-Sprache",
-	"swapLanguages": "Wechsle Sprachen",
-	"clearInput": "Leere den eingegeben Text",
-	"saveToPhrasebook": "Speiche zum Phrasebook",
 
 	"searchLanguages": "Sprache suchen",
 	"noLanguageFound": "Keine Sprache gefunden",

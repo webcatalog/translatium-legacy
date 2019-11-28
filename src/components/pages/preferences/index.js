@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import MenuItem from '@material-ui/core/MenuItem';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -103,8 +102,10 @@ const styles = (theme) => ({
     marginBottom: theme.spacing.unit * 2,
   },
   appBarColorDefault: {
-    background: theme.palette.grey[900],
-    color: theme.palette.getContrastText(theme.palette.grey[900]),
+    background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
+    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
+    WebkitAppRegion: 'drag',
+    WebkitUserSelect: 'none',
   },
 });
 
@@ -123,32 +124,17 @@ const Preferences = (props) => {
     alwaysOnTop,
     attachToMenubar,
     classes,
-    clearInputShortcut,
     langId,
     locale,
     onOpenShortcutDialog,
     onToggle,
     onUpdateLocale,
-    openImageFileShortcut,
-    openInputLangListShortcut,
     openOnMenubarShortcut,
-    openOutputLangListShortcut,
     realtime,
-    saveToPhrasebookShortcut,
-    swapLanguagesShortcut,
     theme,
     translateClipboardOnShortcut,
     translateWhenPressingEnter,
   } = props;
-
-  const shortcuts = [
-    { identifier: 'openInputLangList', combinator: openInputLangListShortcut },
-    { identifier: 'openOutputLangList', combinator: openOutputLangListShortcut },
-    { identifier: 'swapLanguages', combinator: swapLanguagesShortcut },
-    { identifier: 'clearInput', combinator: clearInputShortcut },
-    { identifier: 'openImageFile', combinator: openImageFileShortcut },
-    { identifier: 'saveToPhrasebook', combinator: saveToPhrasebookShortcut },
-  ];
 
   const displayLanguageKeys = Object.keys(displayLanguages);
   displayLanguageKeys.sort((xKey, yKey) => {
@@ -163,11 +149,11 @@ const Preferences = (props) => {
       <DialogShortcut />
       <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
         <Toolbar variant="dense">
-          <Typography variant="title" color="inherit">{locale.preferences}</Typography>
+          <Typography variant="h6" color="inherit">{locale.preferences}</Typography>
         </Toolbar>
       </AppBar>
       <div className={classes.innerContainer}>
-        <Typography variant="body2" className={classes.paperTitle}>
+        <Typography variant="body1" className={classes.paperTitle}>
           {locale.appearance}
         </Typography>
         <Paper className={classes.paper}>
@@ -210,12 +196,19 @@ const Preferences = (props) => {
               )}
             >
               {window.process.platform === 'darwin' && (
-                <MenuItem onClick={() => requestSetPreference('theme', 'automatic')}>{locale.automatic}</MenuItem>
+                <MenuItem onClick={() => requestSetPreference('theme', 'systemDefault')}>{locale.systemDefault}</MenuItem>
               )}
               <MenuItem onClick={() => requestSetPreference('theme', 'light')}>{locale.light}</MenuItem>
               <MenuItem onClick={() => requestSetPreference('theme', 'dark')}>{locale.dark}</MenuItem>
             </EnhancedMenu>
-            <Divider />
+          </List>
+        </Paper>
+
+        <Typography variant="body1" className={classes.paperTitle}>
+          {window.process.platform === 'win32' ? locale.taskbar : locale.menubar}
+        </Typography>
+        <Paper className={classes.paper}>
+          <List dense>
             <ListItem>
               <ListItemText primary={window.process.platform === 'win32' ? locale.attachToTaskbar : locale.attachToMenubar} />
               <ListItemSecondaryAction>
@@ -225,6 +218,34 @@ const Preferences = (props) => {
                     requestSetPreference('attachToMenubar', e.target.checked);
                     requestShowRequireRestartDialog();
                   }}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+            <Divider />
+            <ListItem
+              button
+              disabled={!attachToMenubar}
+              key="openOnMenubar"
+              onClick={() => onOpenShortcutDialog('openOnMenubar', openOnMenubarShortcut)}
+            >
+              <ListItemText
+                primary={window.process.platform === 'win32' ? locale.openOnTaskbar : locale.openOnMenubar}
+                secondary={openOnMenubarShortcut
+                  ? renderCombinator(openOnMenubarShortcut) : locale.openOnMenubarDesc}
+              />
+              <ChevronRightIcon color="action" aria-label={locale.change} />
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary={locale.translateClipboardOnShortcut}
+                secondary={locale.translateClipboardOnShortcutDesc}
+              />
+              <ListItemSecondaryAction>
+                <Switch
+                  checked={attachToMenubar ? translateClipboardOnShortcut : false}
+                  disabled={!attachToMenubar}
+                  onChange={() => onToggle('translateClipboardOnShortcut')}
                 />
               </ListItemSecondaryAction>
             </ListItem>
@@ -248,7 +269,7 @@ const Preferences = (props) => {
           </List>
         </Paper>
 
-        <Typography variant="body2" className={classes.paperTitle}>
+        <Typography variant="body1" className={classes.paperTitle}>
           {locale.advanced}
         </Typography>
         <Paper className={classes.paper}>
@@ -272,20 +293,6 @@ const Preferences = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText
-                primary={locale.translateClipboardOnShortcut}
-                secondary={locale.translateClipboardOnShortcutDesc}
-              />
-              <ListItemSecondaryAction>
-                <Switch
-                  checked={attachToMenubar ? translateClipboardOnShortcut : false}
-                  disabled={!attachToMenubar}
-                  onChange={() => onToggle('translateClipboardOnShortcut')}
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
             {window.process.platform === 'darwin' && (
               <>
                 <Divider />
@@ -300,59 +307,7 @@ const Preferences = (props) => {
           </List>
         </Paper>
 
-        <Typography variant="body2" className={classes.paperTitle}>
-          {locale.shortcuts}
-        </Typography>
-        <Paper className={classes.paper}>
-          <List dense>
-            <ListItem
-              button
-              disabled={!attachToMenubar}
-              key="openOnMenubar"
-              onClick={() => onOpenShortcutDialog('openOnMenubar', openOnMenubarShortcut)}
-            >
-              <ListItemText
-                primary={window.process.platform === 'win32' ? locale.openOnMenubar : locale.openOnTaskbar}
-                secondary={renderCombinator(openOnMenubarShortcut)}
-              />
-              <ListItemSecondaryAction>
-                <IconButton
-                  className={classes.button}
-                  aria-label={locale.change}
-                  onClick={() => onOpenShortcutDialog('openOnMenubar', openOnMenubarShortcut)}
-                >
-                  <ChevronRightIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-            {shortcuts.map(({ identifier, combinator }) => (
-              <React.Fragment key={`listitem${identifier}${combinator}`}>
-                <Divider />
-                <ListItem
-                  button
-                  key={identifier}
-                  onClick={() => onOpenShortcutDialog(identifier, combinator)}
-                >
-                  <ListItemText
-                    primary={locale[identifier]}
-                    secondary={renderCombinator(combinator)}
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton
-                      className={classes.button}
-                      aria-label={locale.change}
-                      onClick={() => onOpenShortcutDialog(identifier, combinator)}
-                    >
-                      <ChevronRightIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              </React.Fragment>
-            ))}
-          </List>
-        </Paper>
-
-        <Typography variant="body2" className={classes.paperTitle} />
+        <Typography variant="body1" className={classes.paperTitle} />
         <Paper className={classes.paper}>
           <List dense>
             <ListItem button>
@@ -362,7 +317,7 @@ const Preferences = (props) => {
         </Paper>
 
         <Paper className={classes.paperAbout}>
-          <Typography variant="title" className={classes.title}>Translatium</Typography>
+          <Typography variant="h6" className={classes.title}>Translatium</Typography>
           <Typography variant="body1" className={classes.version}>
             Version
             {` ${getVersion()}`}
@@ -415,19 +370,13 @@ const Preferences = (props) => {
 Preferences.propTypes = {
   attachToMenubar: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
-  clearInputShortcut: PropTypes.string.isRequired,
   langId: PropTypes.string.isRequired,
   locale: PropTypes.object.isRequired,
   onOpenShortcutDialog: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
   onUpdateLocale: PropTypes.func.isRequired,
-  openImageFileShortcut: PropTypes.string.isRequired,
-  openInputLangListShortcut: PropTypes.string.isRequired,
   openOnMenubarShortcut: PropTypes.string.isRequired,
-  openOutputLangListShortcut: PropTypes.string.isRequired,
   realtime: PropTypes.bool.isRequired,
-  saveToPhrasebookShortcut: PropTypes.string.isRequired,
-  swapLanguagesShortcut: PropTypes.string.isRequired,
   theme: PropTypes.string.isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
   translateClipboardOnShortcut: PropTypes.bool.isRequired,
@@ -436,20 +385,13 @@ Preferences.propTypes = {
 
 const mapStateToProps = (state) => ({
   attachToMenubar: state.preferences.attachToMenubar,
-  clearInputShortcut: state.preferences.clearInputShortcut,
   langId: state.preferences.langId,
   locale: state.locale,
-  openImageFileShortcut: state.preferences.openImageFileShortcut,
-  openInputLangListShortcut: state.preferences.openInputLangListShortcut,
-  openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
-  openOutputLangListShortcut: state.preferences.openOutputLangListShortcut,
   realtime: state.preferences.realtime,
-  saveToPhrasebookShortcut: state.preferences.saveToPhrasebookShortcut,
-  swapLanguagesShortcut: state.preferences.swapLanguagesShortcut,
   theme: state.preferences.theme,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
-  translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
   alwaysOnTop: state.preferences.alwaysOnTop,
+  openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
 });
 
 const mapDispatchToProps = (dispatch) => ({
