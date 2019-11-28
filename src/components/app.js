@@ -214,7 +214,7 @@ class App extends React.Component {
 
 App.propTypes = {
   attachToMenubar: PropTypes.bool.isRequired,
-  classes: PropTypes.object.isRequired.isRequired,
+  classes: PropTypes.object.isRequired,
   fullPageLoading: PropTypes.bool.isRequired,
   locale: PropTypes.object.isRequired,
   onBottomNavigationActionClick: PropTypes.func.isRequired,

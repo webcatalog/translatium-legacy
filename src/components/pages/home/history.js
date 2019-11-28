@@ -34,6 +34,11 @@ const styles = {
   progress: {
     marginTop: 12,
   },
+  textEllipsis: {
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+  },
 };
 
 class History extends React.Component {
@@ -90,6 +95,10 @@ class History extends React.Component {
                     <ListItemText
                       primary={item.outputText}
                       secondary={item.inputText}
+                      classes={{
+                        primary: classes.textEllipsis,
+                        secondary: classes.textEllipsis,
+                      }}
                     />
                     <ListItemSecondaryAction>
                       <Tooltip title={locale.remove} placement="left">

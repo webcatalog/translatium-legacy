@@ -86,7 +86,7 @@ const Dictionary = ({
             )}
           </Typography>
           {section.tr.map((sSection, i) => (
-            <>
+            <React.Fragment key={sSection.text}>
               <Typography variant="body1" align="left">
                 <span className={classes.light}>
                   {i + 1}
@@ -107,7 +107,7 @@ const Dictionary = ({
                   </span>
                 )}
                 {sSection.syn && sSection.syn.map((syn) => (
-                  <>
+                  <React.Fragment key={syn.text}>
                     ,&nbsp;
                     <span
                       className={classNames(classes.link, classes.primary)}
@@ -123,13 +123,13 @@ const Dictionary = ({
                         {syn.gen}
                       </span>
                     )}
-                  </>
+                  </React.Fragment>
                 ))}
                 {sSection.mean && (
                   <>
                     &nbsp;(
                     {sSection.mean.map((mean, j) => (
-                      <>
+                      <React.Fragment key={mean.text}>
                         {j > 0 && <span>,&nbsp;</span>}
                         <span
                           className={classNames(classes.link, classes.light)}
@@ -145,7 +145,7 @@ const Dictionary = ({
                             {mean.gen}
                           </span>
                         )}
-                      </>
+                      </React.Fragment>
                     ))}
                     )
                   </>
@@ -153,7 +153,7 @@ const Dictionary = ({
                 .
               </Typography>
               {sSection.ex && sSection.ex.map((ex, j) => (
-                <Typography variant="body1" align="left">
+                <Typography variant="body1" align="left" key={ex.text}>
                   <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                   <span className={classes.light}>
                     {(j + 10).toString(36)}
@@ -185,7 +185,7 @@ const Dictionary = ({
                   )}
                 </Typography>
               ))}
-            </>
+            </React.Fragment>
           ))}
         </React.Fragment>
       ))}

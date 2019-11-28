@@ -67,8 +67,6 @@ class AppWrapper extends React.Component {
 
   render() {
     const {
-      children,
-      location,
       shouldUseDarkMode,
     } = this.props;
 
@@ -106,17 +104,13 @@ class AppWrapper extends React.Component {
 
     return (
       <MuiThemeProvider theme={theme}>
-        <App location={location}>
-          {children}
-        </App>
+        <App />
       </MuiThemeProvider>
     );
   }
 }
 
 AppWrapper.propTypes = {
-  children: PropTypes.element.isRequired, // matched child route component
-  location: PropTypes.object.isRequired,
   onUpdateIsDarkMode: PropTypes.func.isRequired,
   onUpdateIsFullScreen: PropTypes.func.isRequired,
   shouldUseDarkMode: PropTypes.bool.isRequired,

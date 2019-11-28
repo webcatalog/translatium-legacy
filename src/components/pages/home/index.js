@@ -154,6 +154,7 @@ const styles = (theme) => ({
     fontWeight: 400,
     fontSize: '0.8rem',
     marginLeft: 12,
+    marginRight: 12,
   },
   outputText: {
     fontSize: '1rem',
@@ -167,6 +168,10 @@ const styles = (theme) => ({
   },
   outputActions: {
     padding: '0 4px 2px 4px',
+  },
+  inputRoman: {
+    padding: '0 12px',
+    marginBottom: 12,
   },
 });
 
@@ -252,13 +257,13 @@ class Home extends React.Component {
           >
             {output.inputRoman && (
               <Typography
-                variant="body1"
+                variant="body2"
+                color="textSecondary"
                 className={classNames('text-selectable', classes.inputRoman)}
               >
                 {output.inputRoman}
               </Typography>
             )}
-
             <Card>
               <CardContent className="text-selectable">
                 <Typography
@@ -270,7 +275,7 @@ class Home extends React.Component {
                 </Typography>
 
                 {output.outputRoman && (
-                  <Typography variant="body1" className={classNames('text-selectable', classes.pos)}>
+                  <Typography variant="body2" color="textSecondary" className={classNames('text-selectable', classes.pos)}>
                     {output.outputRoman}
                   </Typography>
                 )}
