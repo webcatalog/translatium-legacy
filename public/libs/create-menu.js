@@ -61,7 +61,10 @@ const createMenu = () => {
     template.unshift({
       label: config.APP_NAME,
       submenu: [
-        { role: 'about', label: `About ${config.APP_NAME}` },
+        {
+          role: 'about',
+          click: () => sendToAllWindows('open-dialog-about'),
+        },
         {
           type: 'separator',
           visible: updaterEnabled,
@@ -122,6 +125,14 @@ const createMenu = () => {
       label: 'File',
       submenu: [
         {
+          role: 'about',
+          click: () => sendToAllWindows('open-dialog-about'),
+        },
+        {
+          type: 'separator',
+          visible: updaterEnabled,
+        },
+        {
           label: 'Check for Updates...',
           click: () => {
             global.updateSilent = false;
@@ -131,7 +142,6 @@ const createMenu = () => {
         },
         {
           type: 'separator',
-          visible: updaterEnabled,
         },
         {
           label: 'Preferences...',
@@ -139,7 +149,7 @@ const createMenu = () => {
           click: () => sendToAllWindows('go-to-preferences'),
         },
         { type: 'separator' },
-        { role: 'quit', label: 'Exit' },
+        { role: 'quit' },
       ],
     });
   }
