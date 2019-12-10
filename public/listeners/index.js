@@ -1,8 +1,9 @@
 const {
-  app,
   BrowserWindow,
+  app,
   dialog,
   ipcMain,
+  shell,
 } = require('electron');
 
 const {
@@ -56,10 +57,17 @@ const loadListeners = () => {
     });
   });
 
+  ipcMain.on('request-open-in-browser', (e, browserUrl) => {
+    shell.openExternal(browserUrl);
+  });
+
   ipcMain.on('request-show-message-box', (e, message, type) => {
     dialog.showMessageBox(BrowserWindow.getAllWindows()[0], {
       type: type || 'error',
       message,
+      buttons: ['OK'],
+      cancelId: 0,
+      defaultId: 0,
     });
   });
 };

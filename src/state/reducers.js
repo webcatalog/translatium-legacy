@@ -6,6 +6,7 @@ import {
 } from 'redux';
 
 import alert from './root/alert/reducers';
+import dialogAbout from './root/dialog-about/reducers';
 import dialogLicenseRegistration from './root/dialog-license-registration/reducers';
 import general from './root/general/reducers';
 import preferences from './root/preferences/reducers';
@@ -20,6 +21,7 @@ import loadListeners from '../listeners';
 
 const rootReducer = combineReducers({
   alert,
+  dialogAbout,
   dialogLicenseRegistration,
   general,
   locale,

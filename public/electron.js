@@ -11,6 +11,7 @@ const { menubar } = require('menubar');
 const createMenu = require('./libs/create-menu');
 const loadListeners = require('./listeners');
 const { getPreference } = require('./libs/preferences');
+const sendToAllWindows = require('./libs/send-to-all-windows');
 
 require('./libs/updater');
 
@@ -56,36 +57,44 @@ const createWindow = () => {
       },
     });
 
-    const contextMenu = Menu.buildFromTemplate([
-      { role: 'about' },
-      {
-        type: 'separator',
-        visible: updaterEnabled,
-      },
-      {
-        label: 'Check for Updates...',
-        click: () => {
-          global.updateSilent = false;
-          autoUpdater.checkForUpdates();
-        },
-        visible: updaterEnabled,
-      },
-      { type: 'separator' },
-      {
-        label: 'Preferences...',
-        click: () => ipcMain.emit('go-to-preferences'),
-      },
-      { type: 'separator' },
-      {
-        label: 'Quit',
-        click: () => {
-          mb.app.quit();
-        },
-      },
-    ]);
-
     mb.on('ready', () => {
       mb.tray.on('right-click', () => {
+        const contextMenu = Menu.buildFromTemplate([
+          {
+            label: 'About Translatium',
+            click: () => {
+              sendToAllWindows('open-dialog-about');
+              mb.showWindow();
+            },
+          },
+          {
+            type: 'separator',
+            visible: updaterEnabled,
+          },
+          {
+            label: 'Check for Updates...',
+            click: () => {
+              global.updateSilent = false;
+              autoUpdater.checkForUpdates();
+            },
+            visible: updaterEnabled,
+          },
+          { type: 'separator' },
+          {
+            label: 'Preferences...',
+            click: () => {
+              sendToAllWindows('go-to-preferences');
+              mb.showWindow();
+            },
+          },
+          { type: 'separator' },
+          {
+            label: 'Quit',
+            click: () => {
+              mb.app.quit();
+            },
+          },
+        ]);
         mb.tray.popUpContextMenu(contextMenu);
       });
     });
@@ -95,7 +104,7 @@ const createWindow = () => {
         try {
           globalShortcut.unregister(combinator);
         } catch (err) {
-          console.log(err);
+          console.log(err); // eslint-disable-line no-console
         }
       }
     });

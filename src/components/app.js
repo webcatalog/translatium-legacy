@@ -19,6 +19,7 @@ import { changeRoute } from '../state/root/router/actions';
 import { open as openDialogLicenseRegistration } from '../state/root/dialog-license-registration/actions';
 
 import Alert from './root/alert';
+import DialogAbout from './root/dialog-about';
 import DialogLicenseRegistration from './root/dialog-license-registration';
 
 import Home from './pages/home';
@@ -156,6 +157,7 @@ class App extends React.Component {
             </div>
           )}
           <Alert />
+          <DialogAbout />
           <DialogLicenseRegistration />
           <Snackbar
             open={snackbarOpen}
