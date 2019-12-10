@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -11,10 +10,12 @@ import Button from '@material-ui/core/Button';
 
 import { closeAlert } from '../../state/root/alert/actions';
 
-const Alert = ({ alertMessage, onClose, locale }) => (
+import connectComponent from '../../helpers/connect-component';
+
+const Alert = ({ alertMessage, onCloseAlert, locale }) => (
   <Dialog
     open={alertMessage != null}
-    onClose={onClose}
+    onClose={onCloseAlert}
   >
     <DialogTitle>{locale.errorOccured}</DialogTitle>
     <DialogContent>
@@ -23,7 +24,7 @@ const Alert = ({ alertMessage, onClose, locale }) => (
       </DialogContentText>
     </DialogContent>
     <DialogActions>
-      <Button color="primary" onClick={onClose}>
+      <Button color="primary" onClick={onCloseAlert}>
         {locale.close}
       </Button>
     </DialogActions>
@@ -32,7 +33,7 @@ const Alert = ({ alertMessage, onClose, locale }) => (
 
 Alert.propTypes = {
   alertMessage: PropTypes.string,
-  onClose: PropTypes.func.isRequired,
+  onCloseAlert: PropTypes.func.isRequired,
   locale: PropTypes.object.isRequired,
 };
 
@@ -41,8 +42,13 @@ const mapStateToProps = (state) => ({
   locale: state.locale,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onClose: () => dispatch(closeAlert()),
-});
+const actionCreators = {
+  closeAlert,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Alert);
+export default connectComponent(
+  Alert,
+  mapStateToProps,
+  actionCreators,
+  null,
+);

@@ -43,9 +43,9 @@ const styles = {
 
 class History extends React.Component {
   componentDidMount() {
-    const { onEnterHistory, onLoadMore } = this.props;
+    const { onLoadHistory } = this.props;
 
-    onEnterHistory();
+    onLoadHistory(true);
 
     if (this.listView) {
       this.listView.onscroll = () => {
@@ -55,7 +55,7 @@ class History extends React.Component {
 
         if (scrollTop + clientHeight > scrollHeight - 200) {
           if (canLoadMore === true && historyLoading === false) {
-            onLoadMore();
+            onLoadHistory();
           }
         }
       };
@@ -71,9 +71,9 @@ class History extends React.Component {
       classes,
       historyItems,
       historyLoading,
-      onDeleteButtonClick,
-      onItemClick,
       locale,
+      onDeleteHistoryItem,
+      onLoadOutput,
     } = this.props;
 
     return (
@@ -90,7 +90,7 @@ class History extends React.Component {
                   <ListItem
                     button
                     key={`historyItem_${item.historyId}`}
-                    onClick={() => onItemClick(item)}
+                    onClick={() => onLoadOutput(item)}
                   >
                     <ListItemText
                       primary={item.outputText}
@@ -105,7 +105,7 @@ class History extends React.Component {
                         <IconButton
                           aria-label={locale.remove}
                           onClick={() => {
-                            onDeleteButtonClick(
+                            onDeleteHistoryItem(
                               item.historyId,
                               item.rev,
                             );
@@ -134,10 +134,9 @@ History.propTypes = {
   classes: PropTypes.object.isRequired,
   historyItems: PropTypes.arrayOf(PropTypes.object),
   historyLoading: PropTypes.bool,
-  onDeleteButtonClick: PropTypes.func.isRequired,
-  onEnterHistory: PropTypes.func.isRequired,
-  onItemClick: PropTypes.func.isRequired,
-  onLoadMore: PropTypes.func.isRequired,
+  onLoadOutput: PropTypes.func.isRequired,
+  onDeleteHistoryItem: PropTypes.func.isRequired,
+  onLoadHistory: PropTypes.func.isRequired,
   locale: PropTypes.object.isRequired,
 };
 
@@ -148,16 +147,15 @@ const mapStateToProps = (state) => ({
   locale: state.locale,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onItemClick: (output) => dispatch(loadOutput(output)),
-  onDeleteButtonClick: (id, rev) => dispatch(deleteHistoryItem(id, rev)),
-  onEnterHistory: () => dispatch(loadHistory(true)),
-  onLoadMore: () => dispatch(loadHistory()),
-});
+const actionCreators = {
+  loadOutput,
+  deleteHistoryItem,
+  loadHistory,
+};
 
 export default connectComponent(
   History,
   mapStateToProps,
-  mapDispatchToProps,
+  actionCreators,
   styles,
 );

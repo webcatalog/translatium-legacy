@@ -42,20 +42,28 @@ const styles = (theme) => ({
 
 const Dictionary = ({
   classes,
+  onUpdateInputLang,
+  onUpdateInputText,
+  onUpdateOutputLang,
   output,
-  onLinkClick,
 }) => {
   const inputLang = output.inputLang;
   const outputLang = output.outputLang;
   const isSingleLangDict = output.outputDict.lang === `${output.inputLang}-${output.inputLang}`;
 
-  const translateForward = (text) => onLinkClick(inputLang, outputLang, text);
+  const onLinkClick = (inputText) => {
+    onUpdateInputLang(inputLang);
+    onUpdateOutputLang(outputLang);
+    onUpdateInputText(inputText);
+  };
+
+  const translateForward = (text) => onLinkClick(text);
   const translateBackward = (text) => {
     // Cannot translate forward if the dict is single lang (en-en)
     if (isSingleLangDict) {
       return translateForward(text);
     }
-    return onLinkClick(outputLang, inputLang, text);
+    return onLinkClick(text);
   };
 
   return (
@@ -195,21 +203,25 @@ const Dictionary = ({
 
 Dictionary.propTypes = {
   classes: PropTypes.object.isRequired,
+  onUpdateInputLang: PropTypes.func.isRequired,
+  onUpdateInputText: PropTypes.func.isRequired,
+  onUpdateOutputLang: PropTypes.func.isRequired,
   output: PropTypes.object.isRequired,
-  onLinkClick: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onLinkClick: (inputLang, outputLang, inputText) => {
-    dispatch(updateInputLang(inputLang));
-    dispatch(updateOutputLang(outputLang));
-    dispatch(updateInputText(inputText));
-  },
+const mapStateToProps = (state) => ({
+  output: state.pages.home.output,
 });
+
+const actionCreators = {
+  updateInputLang,
+  updateOutputLang,
+  updateInputText,
+};
 
 export default connectComponent(
   Dictionary,
-  null,
-  mapDispatchToProps,
+  mapStateToProps,
+  actionCreators,
   styles,
 );

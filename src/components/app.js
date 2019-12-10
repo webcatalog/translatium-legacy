@@ -96,8 +96,8 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
-    const { onResize } = this.props;
-    window.removeEventListener('resize', onResize);
+    const { onScreenResize } = this.props;
+    window.removeEventListener('resize', () => onScreenResize(window.innerWidth));
   }
 
   render() {
@@ -106,7 +106,7 @@ class App extends React.Component {
       classes,
       fullPageLoading,
       locale,
-      onBottomNavigationActionClick,
+      onChangeRoute,
       onRequestCloseSnackbar,
       route,
       shouldShowBottomNav,
@@ -179,7 +179,7 @@ class App extends React.Component {
                 <BottomNavigationAction
                   label={locale.home}
                   icon={<ActionHome className={classes.icon} />}
-                  onClick={() => onBottomNavigationActionClick(ROUTE_HOME)}
+                  onClick={() => onChangeRoute(ROUTE_HOME)}
                   classes={{
                     wrapper: classes.bottomNavigationActionWrapper,
                     label: classes.bottomNavigationActionLabel,
@@ -188,7 +188,7 @@ class App extends React.Component {
                 <BottomNavigationAction
                   label={locale.phrasebook}
                   icon={<ToggleStar className={classes.icon} />}
-                  onClick={() => onBottomNavigationActionClick(ROUTE_PHRASEBOOK)}
+                  onClick={() => onChangeRoute(ROUTE_PHRASEBOOK)}
                   classes={{
                     wrapper: classes.bottomNavigationActionWrapper,
                     label: classes.bottomNavigationActionLabel,
@@ -197,7 +197,7 @@ class App extends React.Component {
                 <BottomNavigationAction
                   label={locale.preferences}
                   icon={<ActionSettings className={classes.icon} />}
-                  onClick={() => onBottomNavigationActionClick(ROUTE_PREFERENCES)}
+                  onClick={() => onChangeRoute(ROUTE_PREFERENCES)}
                   classes={{
                     wrapper: classes.bottomNavigationActionWrapper,
                     label: classes.bottomNavigationActionLabel,
@@ -217,10 +217,10 @@ App.propTypes = {
   classes: PropTypes.object.isRequired,
   fullPageLoading: PropTypes.bool.isRequired,
   locale: PropTypes.object.isRequired,
-  onBottomNavigationActionClick: PropTypes.func.isRequired,
+  onChangeRoute: PropTypes.func.isRequired,
   onOpenDialogLicenseRegistration: PropTypes.func.isRequired,
   onRequestCloseSnackbar: PropTypes.func.isRequired,
-  onResize: PropTypes.func.isRequired,
+  onScreenResize: PropTypes.func.isRequired,
   registered: PropTypes.bool.isRequired,
   route: PropTypes.string.isRequired,
   shouldShowBottomNav: PropTypes.bool.isRequired,
@@ -239,18 +239,16 @@ const mapStateToProps = (state) => ({
   snackbarOpen: state.snackbar.open,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onResize: () => {
-    dispatch(screenResize(window.innerWidth));
-  },
-  onBottomNavigationActionClick: (pathname) => dispatch(changeRoute(pathname)),
-  onRequestCloseSnackbar: () => dispatch(closeSnackbar()),
-  onOpenDialogLicenseRegistration: () => dispatch(openDialogLicenseRegistration()),
-});
+const actionCreators = {
+  screenResize,
+  changeRoute,
+  closeSnackbar,
+  openDialogLicenseRegistration,
+};
 
 export default connectComponent(
   App,
   mapStateToProps,
-  mapDispatchToProps,
+  actionCreators,
   styles,
 );

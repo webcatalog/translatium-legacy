@@ -14,13 +14,13 @@ import ToggleStar from '@material-ui/icons/Star';
 import Divider from '@material-ui/core/Divider';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import connectComponent from '../../helpers/connect-component';
+import connectComponent from '../../../helpers/connect-component';
 
-import { deletePhrasebookItem, loadPhrasebook } from '../../state/pages/phrasebook/actions';
-import { loadOutput } from '../../state/pages/home/actions';
-import { changeRoute } from '../../state/root/router/actions';
+import { deletePhrasebookItem, loadPhrasebook } from '../../../state/pages/phrasebook/actions';
+import { loadOutput } from '../../../state/pages/home/actions';
+import { changeRoute } from '../../../state/root/router/actions';
 
-import { ROUTE_HOME } from '../../constants/routes';
+import { ROUTE_HOME } from '../../../constants/routes';
 
 
 const styles = (theme) => ({
@@ -65,9 +65,9 @@ const styles = (theme) => ({
 
 class Phrasebook extends React.Component {
   componentDidMount() {
-    const { onEnterPhrasebook, onLoadMore } = this.props;
+    const { onLoadPhrasebook } = this.props;
 
-    onEnterPhrasebook();
+    onLoadPhrasebook(true);
 
     if (this.listView) {
       this.listView.onscroll = () => {
@@ -75,7 +75,7 @@ class Phrasebook extends React.Component {
         if (scrollTop + clientHeight > scrollHeight - 200) {
           const { canLoadMore, phrasebookLoading } = this.props;
           if (canLoadMore === true && phrasebookLoading === false) {
-            onLoadMore();
+            onLoadPhrasebook();
           }
         }
       };
@@ -89,11 +89,12 @@ class Phrasebook extends React.Component {
   render() {
     const {
       classes,
+      locale,
+      onChangeRoute,
+      onDeletePhrasebookItem,
+      onLoadOutput,
       phrasebookItems,
       phrasebookLoading,
-      onDeleteButtonClick,
-      onItemClick,
-      locale,
     } = this.props;
 
     return (
@@ -122,7 +123,10 @@ class Phrasebook extends React.Component {
                   <ListItem
                     button
                     key={`phrasebookItem_${item.phrasebookId}`}
-                    onClick={() => onItemClick(item)}
+                    onClick={() => {
+                      onLoadOutput(item);
+                      onChangeRoute(ROUTE_HOME);
+                    }}
                   >
                     <ListItemText
                       primary={item.outputText}
@@ -132,12 +136,10 @@ class Phrasebook extends React.Component {
                       <Tooltip title={locale.remove} placement="left">
                         <IconButton
                           aria-label={locale.removeFromPhrasebook}
-                          onClick={() => {
-                            onDeleteButtonClick(
-                              item.phrasebookId,
-                              item.rev,
-                            );
-                          }}
+                          onClick={() => onDeletePhrasebookItem(
+                            item.phrasebookId,
+                            item.rev,
+                          )}
                         >
                           <ToggleStar />
                         </IconButton>
@@ -160,13 +162,13 @@ class Phrasebook extends React.Component {
 Phrasebook.propTypes = {
   canLoadMore: PropTypes.bool,
   classes: PropTypes.object.isRequired,
-  onDeleteButtonClick: PropTypes.func.isRequired,
-  onEnterPhrasebook: PropTypes.func.isRequired,
-  onItemClick: PropTypes.func.isRequired,
-  onLoadMore: PropTypes.func.isRequired,
+  locale: PropTypes.object.isRequired,
+  onChangeRoute: PropTypes.func.isRequired,
+  onDeletePhrasebookItem: PropTypes.func.isRequired,
+  onLoadOutput: PropTypes.func.isRequired,
+  onLoadPhrasebook: PropTypes.func.isRequired,
   phrasebookItems: PropTypes.arrayOf(PropTypes.object),
   phrasebookLoading: PropTypes.bool,
-  locale: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -176,19 +178,16 @@ const mapStateToProps = (state) => ({
   locale: state.locale,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onItemClick: (output) => {
-    dispatch(loadOutput(output));
-    dispatch(changeRoute(ROUTE_HOME));
-  },
-  onDeleteButtonClick: (id, rev) => dispatch(deletePhrasebookItem(id, rev)),
-  onEnterPhrasebook: () => dispatch(loadPhrasebook(true)),
-  onLoadMore: () => dispatch(loadPhrasebook()),
-});
+const actionCreators = {
+  changeRoute,
+  deletePhrasebookItem,
+  loadOutput,
+  loadPhrasebook,
+};
 
 export default connectComponent(
   Phrasebook,
   mapStateToProps,
-  mapDispatchToProps,
+  actionCreators,
   styles,
 );

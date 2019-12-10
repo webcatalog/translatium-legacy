@@ -9,16 +9,16 @@ import IconButton from '@material-ui/core/IconButton';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 
-import connectComponent from '../../helpers/connect-component';
+import connectComponent from '../../../helpers/connect-component';
 
-import EnhancedMenu from './enhanced-menu';
+import EnhancedMenu from '../../shared/enhanced-menu';
 
-import { setZoomLevel, setMode } from '../../state/pages/ocr/actions';
-import { loadOutput } from '../../state/pages/home/actions';
-import { openSnackbar } from '../../state/root/snackbar/actions';
-import { changeRoute } from '../../state/root/router/actions';
+import { setZoomLevel, setMode } from '../../../state/pages/ocr/actions';
+import { loadOutput } from '../../../state/pages/home/actions';
+import { openSnackbar } from '../../../state/root/snackbar/actions';
+import { changeRoute } from '../../../state/root/router/actions';
 
-import { ROUTE_HOME } from '../../constants/routes';
+import { ROUTE_HOME } from '../../../constants/routes';
 
 const { remote } = window.require('electron');
 
@@ -65,10 +65,10 @@ const styles = {
 
 class Ocr extends React.Component {
   componentDidMount() {
-    const { ocr, onCloseClick } = this.props;
+    const { ocr, onChangeRoute } = this.props;
 
     if (!ocr) {
-      onCloseClick();
+      onChangeRoute(ROUTE_HOME);
     }
   }
 
@@ -77,11 +77,11 @@ class Ocr extends React.Component {
       classes,
       inputLang,
       ocr,
-      onCloseClick,
-      onModeMenuItemClick,
-      onRequestCopyToClipboard,
-      onTextOnlyMenuItemClick,
-      onUpdateZoomLevel,
+      onChangeRoute,
+      onLoadOutput,
+      onOpenSnackbar,
+      onSetMode,
+      onSetZoomLevel,
       outputLang,
       locale,
     } = this.props;
@@ -94,7 +94,7 @@ class Ocr extends React.Component {
       <div className={classes.container}>
         <Fab
           className={classes.closeButton}
-          onClick={onCloseClick}
+          onClick={() => onChangeRoute(ROUTE_HOME)}
         >
           <CloseIcon />
         </Fab>
@@ -126,14 +126,14 @@ class Ocr extends React.Component {
           className={classes.minusButton}
           onClick={() => {
             if (ocr.zoomLevel < 0.1) return;
-            onUpdateZoomLevel(ocr.zoomLevel - 0.1 || 1);
+            onSetZoomLevel(ocr.zoomLevel - 0.1 || 1);
           }}
         >
           <ZoomOutIcon />
         </Fab>
         <Fab
           className={classes.plusButton}
-          onClick={() => onUpdateZoomLevel(ocr.zoomLevel + 0.1 || 1)}
+          onClick={() => onSetZoomLevel(ocr.zoomLevel + 0.1 || 1)}
         >
           <ZoomInIcon />
         </Fab>
@@ -145,13 +145,21 @@ class Ocr extends React.Component {
             </IconButton>
           )}
         >
-          <MenuItem onClick={() => onModeMenuItemClick(ocr.mode)}>
+          <MenuItem
+            onClick={() => {
+              const newMode = ocr.mode === 'input' ? 'output' : 'input';
+              onSetMode(newMode);
+            }}
+          >
             {ocr.mode === 'input'
               ? `${locale.displayTranslatedText} (${locale[outputLang]})`
               : `${locale.displayOriginalText} (${locale[inputLang]})`}
           </MenuItem>
           <MenuItem
-            onClick={() => onRequestCopyToClipboard(ocr.inputText, locale.copied)}
+            onClick={() => {
+              remote.clipboard.writeText(ocr.inputText);
+              onOpenSnackbar(locale.copied);
+            }}
           >
             {locale.copyOriginalText}
             {' '}
@@ -160,7 +168,10 @@ class Ocr extends React.Component {
 )
           </MenuItem>
           <MenuItem
-            onClick={() => onRequestCopyToClipboard(ocr.outputText, locale.copied)}
+            onClick={() => {
+              remote.clipboard.writeText(ocr.outputText);
+              onOpenSnackbar(locale.copied);
+            }}
           >
             {locale.copyTranslatedText}
             {' '}
@@ -169,9 +180,15 @@ class Ocr extends React.Component {
 )
           </MenuItem>
           <MenuItem
-            onClick={() => onTextOnlyMenuItemClick(
-              inputLang, outputLang, ocr.inputText, ocr.outputText,
-            )}
+            onClick={() => {
+              onLoadOutput({
+                inputLang,
+                outputLang,
+                inputText: ocr.inputText,
+                outputText: ocr.outputText,
+              });
+              onChangeRoute(ROUTE_HOME);
+            }}
           >
             {locale.displayTextOnly}
           </MenuItem>
@@ -184,14 +201,14 @@ class Ocr extends React.Component {
 Ocr.propTypes = {
   classes: PropTypes.object.isRequired,
   inputLang: PropTypes.string,
-  ocr: PropTypes.object.isRequired,
-  onCloseClick: PropTypes.func.isRequired,
-  onModeMenuItemClick: PropTypes.func.isRequired,
-  onRequestCopyToClipboard: PropTypes.func.isRequired,
-  onTextOnlyMenuItemClick: PropTypes.func.isRequired,
-  onUpdateZoomLevel: PropTypes.func.isRequired,
-  outputLang: PropTypes.string,
   locale: PropTypes.object.isRequired,
+  ocr: PropTypes.object.isRequired,
+  onChangeRoute: PropTypes.func.isRequired,
+  onLoadOutput: PropTypes.func.isRequired,
+  onOpenSnackbar: PropTypes.func.isRequired,
+  onSetMode: PropTypes.func.isRequired,
+  onSetZoomLevel: PropTypes.func.isRequired,
+  outputLang: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
@@ -201,31 +218,17 @@ const mapStateToProps = (state) => ({
   locale: state.locale,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onCloseClick: () => dispatch(changeRoute(ROUTE_HOME)),
-  onUpdateZoomLevel: (value) => dispatch(setZoomLevel(value)),
-  onModeMenuItemClick: (currentMode) => {
-    let newMode;
-    if (currentMode === 'input') newMode = 'output';
-    else newMode = 'input';
-
-    dispatch(setMode(newMode));
-  },
-  onTextOnlyMenuItemClick: (inputLang, outputLang, inputText, outputText) => {
-    dispatch(loadOutput({
-      inputLang, outputLang, inputText, outputText,
-    }));
-    dispatch(changeRoute(ROUTE_HOME));
-  },
-  onRequestCopyToClipboard: (text, localeCopied) => {
-    remote.clipboard.writeText(text);
-    dispatch(openSnackbar(localeCopied));
-  },
-});
+const actionCreators = {
+  changeRoute,
+  loadOutput,
+  openSnackbar,
+  setMode,
+  setZoomLevel,
+};
 
 export default connectComponent(
   Ocr,
   mapStateToProps,
-  mapDispatchToProps,
+  actionCreators,
   styles,
 );
