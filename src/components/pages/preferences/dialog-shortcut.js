@@ -141,14 +141,14 @@ const mapStateToProps = (state) => ({
   locale: state.locale,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onCloseShortcutDialog: () => dispatch(closeShortcutDialog()),
-  onSetCombinator: (combinator) => dispatch(setCombinator(combinator)),
-});
+const actionCreators = {
+  closeShortcutDialog,
+  setCombinator,
+};
 
 export default connectComponent(
   DialogShortcut,
   mapStateToProps,
-  mapDispatchToProps,
+  actionCreators,
   styles,
 );

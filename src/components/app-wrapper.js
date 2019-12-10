@@ -120,14 +120,14 @@ const mapStateToProps = (state) => ({
   shouldUseDarkMode: getShouldUseDarkMode(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onUpdateIsDarkMode: (...args) => dispatch(updateIsDarkMode(...args)),
-  onUpdateIsFullScreen: (...args) => dispatch(updateIsFullScreen(...args)),
-});
+const actionCreators = {
+  updateIsDarkMode,
+  updateIsFullScreen,
+};
 
 export default connectComponent(
   AppWrapper,
   mapStateToProps,
-  mapDispatchToProps,
+  actionCreators,
   null,
 );

@@ -15,18 +15,18 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import grey from '@material-ui/core/colors/grey';
 
-import connectComponent from '../../helpers/connect-component';
+import connectComponent from '../../../helpers/connect-component';
 
 import {
   getInputLanguages,
   getOutputLanguages,
   getOcrSupportedLanguages,
-} from '../../helpers/language-utils';
+} from '../../../helpers/language-utils';
 
-import { changeRoute } from '../../state/root/router/actions';
-import { updateInputLang, updateOutputLang } from '../../state/root/preferences/actions';
-import { updateLanguageListSearch } from '../../state/pages/language-list/actions';
-import { ROUTE_HOME, ROUTE_OCR } from '../../constants/routes';
+import { changeRoute } from '../../../state/root/router/actions';
+import { updateInputLang, updateOutputLang } from '../../../state/root/preferences/actions';
+import { updateLanguageListSearch } from '../../../state/pages/language-list/actions';
+import { ROUTE_HOME, ROUTE_OCR } from '../../../constants/routes';
 
 const styles = (theme) => ({
   container: {
@@ -87,22 +87,27 @@ class LanguageList extends React.Component {
   }
 
   handleEscKey(evt) {
-    const { onCloseClick, mode } = this.props;
+    const { onChangeRoute, mode } = this.props;
     if (evt.key === 'Escape' || evt.key === 'Esc') {
-      onCloseClick(mode);
+      if (mode && mode.startsWith('ocr')) {
+        onChangeRoute(ROUTE_OCR);
+      } else {
+        onChangeRoute(ROUTE_HOME);
+      }
     }
   }
 
   render() {
     const {
       classes,
-      onCloseClick,
-      onLanguageClick,
+      locale,
+      mode,
+      onChangeRoute,
+      onUpdateInputLang,
       onUpdateLanguageListSearch,
+      onUpdateOutputLang,
       recentLanguages,
       search,
-      mode,
-      locale,
     } = this.props;
 
     let languages;
@@ -127,6 +132,20 @@ class LanguageList extends React.Component {
       });
     }
 
+    const onLanguageClick = (value) => {
+      if (mode === 'inputLang') {
+        onUpdateInputLang(value);
+      } else if (mode === 'outputLang') {
+        onUpdateOutputLang(value);
+      }
+
+      if (mode && mode.startsWith('ocr')) {
+        onChangeRoute(ROUTE_OCR);
+      } else {
+        onChangeRoute(ROUTE_HOME);
+      }
+    };
+
     return (
       <div className={classes.container}>
         <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
@@ -134,7 +153,16 @@ class LanguageList extends React.Component {
             <Typography variant="h6" color="inherit" className={classes.title}>
               {mode === 'inputLang' ? locale.chooseAnInputLanguage : locale.chooseAnOutputLanguage}
             </Typography>
-            <IconButton color="inherit" onClick={() => onCloseClick(mode)}>
+            <IconButton
+              color="inherit"
+              onClick={() => {
+                if (mode && mode.startsWith('ocr')) {
+                  onChangeRoute(ROUTE_OCR);
+                } else {
+                  onChangeRoute(ROUTE_HOME);
+                }
+              }}
+            >
               <CloseIcon />
             </IconButton>
           </Toolbar>
@@ -216,37 +244,21 @@ class LanguageList extends React.Component {
 LanguageList.propTypes = {
   classes: PropTypes.object.isRequired,
   locale: PropTypes.object.isRequired,
-  onCloseClick: PropTypes.func.isRequired,
-  onLanguageClick: PropTypes.func.isRequired,
+  mode: PropTypes.string,
+  onChangeRoute: PropTypes.func.isRequired,
+  onUpdateInputLang: PropTypes.func.isRequired,
   onUpdateLanguageListSearch: PropTypes.func.isRequired,
+  onUpdateOutputLang: PropTypes.func.isRequired,
   recentLanguages: PropTypes.arrayOf(PropTypes.string),
   search: PropTypes.string,
-  mode: PropTypes.string,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onCloseClick: (mode) => {
-    if (mode && mode.startsWith('ocr')) {
-      dispatch(changeRoute(ROUTE_OCR));
-    } else {
-      dispatch(changeRoute(ROUTE_HOME));
-    }
-  },
-  onLanguageClick: (mode, value) => {
-    if (mode === 'inputLang') {
-      dispatch(updateInputLang(value));
-    } else if (mode === 'outputLang') {
-      dispatch(updateOutputLang(value));
-    }
-
-    if (mode && mode.startsWith('ocr')) {
-      dispatch(changeRoute(ROUTE_OCR));
-    } else {
-      dispatch(changeRoute(ROUTE_HOME));
-    }
-  },
-  onUpdateLanguageListSearch: (search) => dispatch(updateLanguageListSearch(search)),
-});
+const actionCreators = {
+  changeRoute,
+  updateLanguageListSearch,
+  updateInputLang,
+  updateOutputLang,
+};
 
 const mapStateToProps = (state) => ({
   recentLanguages: state.preferences.recentLanguages,
@@ -258,6 +270,6 @@ const mapStateToProps = (state) => ({
 export default connectComponent(
   LanguageList,
   mapStateToProps,
-  mapDispatchToProps,
+  actionCreators,
   styles,
 );

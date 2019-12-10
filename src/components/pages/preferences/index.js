@@ -16,7 +16,7 @@ import Divider from '@material-ui/core/Divider';
 
 import connectComponent from '../../../helpers/connect-component';
 
-import EnhancedMenu from '../enhanced-menu';
+import EnhancedMenu from '../../shared/enhanced-menu';
 
 import { toggleSetting } from '../../../state/root/preferences/actions';
 import { updateLocale } from '../../../state/root/locale/actions';
@@ -91,7 +91,7 @@ const Preferences = (props) => {
     langId,
     locale,
     onOpenShortcutDialog,
-    onToggle,
+    onToggleSetting,
     onUpdateLocale,
     openOnMenubarShortcut,
     realtime,
@@ -209,7 +209,7 @@ const Preferences = (props) => {
                 <Switch
                   checked={attachToMenubar ? translateClipboardOnShortcut : false}
                   disabled={!attachToMenubar}
-                  onChange={() => onToggle('translateClipboardOnShortcut')}
+                  onChange={() => onToggleSetting('translateClipboardOnShortcut')}
                 />
               </ListItemSecondaryAction>
             </ListItem>
@@ -243,7 +243,7 @@ const Preferences = (props) => {
               <ListItemSecondaryAction>
                 <Switch
                   checked={realtime}
-                  onChange={() => onToggle('realtime')}
+                  onChange={() => onToggleSetting('realtime')}
                 />
               </ListItemSecondaryAction>
             </ListItem>
@@ -253,7 +253,7 @@ const Preferences = (props) => {
               <ListItemSecondaryAction>
                 <Switch
                   checked={translateWhenPressingEnter}
-                  onChange={() => onToggle('translateWhenPressingEnter')}
+                  onChange={() => onToggleSetting('translateWhenPressingEnter')}
                 />
               </ListItemSecondaryAction>
             </ListItem>
@@ -290,7 +290,7 @@ Preferences.propTypes = {
   langId: PropTypes.string.isRequired,
   locale: PropTypes.object.isRequired,
   onOpenShortcutDialog: PropTypes.func.isRequired,
-  onToggle: PropTypes.func.isRequired,
+  onToggleSetting: PropTypes.func.isRequired,
   onUpdateLocale: PropTypes.func.isRequired,
   openOnMenubarShortcut: PropTypes.string,
   realtime: PropTypes.bool.isRequired,
@@ -312,17 +312,15 @@ const mapStateToProps = (state) => ({
   translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onToggle: (name) => dispatch(toggleSetting(name)),
-  onOpenShortcutDialog: (identifier, combinator) => dispatch(
-    openShortcutDialog(identifier, combinator),
-  ),
-  onUpdateLocale: (lId) => dispatch(updateLocale(lId)),
-});
+const actionCreators = {
+  updateLocale,
+  openShortcutDialog,
+  toggleSetting,
+};
 
 export default connectComponent(
   Preferences,
   mapStateToProps,
-  mapDispatchToProps,
+  actionCreators,
   styles,
 );

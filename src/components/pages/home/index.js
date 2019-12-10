@@ -33,7 +33,7 @@ import FileCopy from '@material-ui/icons/FileCopy';
 
 import connectComponent from '../../../helpers/connect-component';
 
-import EnhancedMenu from '../enhanced-menu';
+import EnhancedMenu from '../../shared/enhanced-menu';
 
 import {
   isOcrSupported,
@@ -180,15 +180,17 @@ class Home extends React.Component {
     const {
       classes,
       fullscreenInputBox,
-      onRequestCopyToClipboard,
-      onStartTextToSpeech,
+      locale,
       onEndTextToSpeech,
-      onSwapOutputButtonClick,
-      onTogglePhrasebookClick,
+      onOpenSnackbar,
+      onStartTextToSpeech,
+      onTogglePhrasebook,
+      onUpdateInputLang,
+      onUpdateInputText,
+      onUpdateOutputLang,
       output,
       screenWidth,
       textToSpeechPlaying,
-      locale,
     } = this.props;
 
     if (fullscreenInputBox === true) {
@@ -210,21 +212,24 @@ class Home extends React.Component {
           {
             Icon: output.phrasebookId ? ToggleStar : ToggleStarBorder,
             tooltip: output.phrasebookId ? locale.removeFromPhrasebook : locale.addToPhrasebook,
-            onClick: onTogglePhrasebookClick,
+            onClick: onTogglePhrasebook,
           },
           {
             Icon: ActionSwapVert,
             tooltip: locale.swap,
-            onClick: () => onSwapOutputButtonClick(
-              output.outputLang,
-              output.inputLang,
-              output.outputText,
-            ),
+            onClick: () => {
+              onUpdateInputLang(output.inputLang);
+              onUpdateOutputLang(output.outputLang);
+              onUpdateInputText(output.inputText);
+            },
           },
           {
             Icon: FileCopy,
             tooltip: locale.copy,
-            onClick: () => onRequestCopyToClipboard(output.outputText, locale.copied),
+            onClick: () => {
+              remote.clipboard.writeText(output.outputText);
+              onOpenSnackbar(locale.copied);
+            },
           },
         ];
 
@@ -325,7 +330,7 @@ class Home extends React.Component {
               {locale.translatedByYandexTranslate}
             </Typography>
 
-            {output.outputDict && <Dictionary output={output} />}
+            {output.outputDict && <Dictionary />}
             {output.outputDict && output.outputDict.def.length > 0 && (
               <Typography
                 variant="body1"
@@ -349,16 +354,16 @@ class Home extends React.Component {
       inputLang,
       inputText,
       locale,
-      onClearButtonClick,
+      onChangeRoute,
       onEndTextToSpeech,
-      onFullscreenButtonClick,
-      onInsertText,
-      onKeyDown, onInputText,
-      onLanguageClick,
-      onOpenImageButtonClick,
+      onInsertInputText,
+      onLoadImage,
       onStartTextToSpeech,
-      onSwapButtonClick,
-      onTranslateButtonClick,
+      onSwapLanguages,
+      onToggleFullscreenInputBox,
+      onTranslate,
+      onUpdateInputText,
+      onUpdateLanguageListMode,
       output,
       outputLang,
       screenWidth,
@@ -370,7 +375,7 @@ class Home extends React.Component {
       {
         Icon: ContentClear,
         tooltip: locale.clear,
-        onClick: onClearButtonClick,
+        onClick: () => onUpdateInputText(''),
       },
       {
         Icon: (() => (
@@ -381,7 +386,7 @@ class Home extends React.Component {
         tooltip: locale.pasteFromClipboard,
         onClick: () => {
           const text = remote.clipboard.readText();
-          onInsertText(text);
+          onInsertInputText(text);
         },
       },
     ];
@@ -419,14 +424,14 @@ class Home extends React.Component {
       controllers.push({
         Icon: ImageImage,
         tooltip: locale.openImageFile,
-        onClick: onOpenImageButtonClick,
+        onClick: () => onLoadImage(false),
       });
     }
 
     controllers.push({
       Icon: fullscreenInputBox ? NavigationFullscreenExit : NavigationFullscreen,
       tooltip: fullscreenInputBox ? locale.exitFullscreen : locale.fullscreen,
-      onClick: onFullscreenButtonClick,
+      onClick: onToggleFullscreenInputBox,
     });
 
     const maxVisibleIcon = Math.min(Math.round((screenWidth - 200) / 56), controllers.length);
@@ -444,7 +449,10 @@ class Home extends React.Component {
               <Button
                 color="inherit"
                 className={classes.languageTitle}
-                onClick={() => onLanguageClick('inputLang')}
+                onClick={() => {
+                  onUpdateLanguageListMode('inputLang');
+                  onChangeRoute(ROUTE_LANGUAGE_LIST);
+                }}
               >
                 {inputLang === 'auto' && output && output.inputLang ? `${locale[output.inputLang]} (${locale.auto})` : locale[inputLang]}
               </Button>
@@ -453,7 +461,7 @@ class Home extends React.Component {
                   <IconButton
                     color="inherit"
                     disabled={inputLang === 'auto'}
-                    onClick={onSwapButtonClick}
+                    onClick={onSwapLanguages}
                   >
                     <ActionSwapHoriz />
                   </IconButton>
@@ -462,7 +470,10 @@ class Home extends React.Component {
               <Button
                 color="inherit"
                 className={classes.languageTitle}
-                onClick={() => onLanguageClick('outputLang')}
+                onClick={() => {
+                  onUpdateLanguageListMode('outputLang');
+                  onChangeRoute(ROUTE_LANGUAGE_LIST);
+                }}
               >
                 {locale[outputLang]}
               </Button>
@@ -482,11 +493,38 @@ class Home extends React.Component {
               className={classNames('mousetrap', 'text-selectable', classes.textarea)}
               lang={inputLang}
               maxLength="1000"
-              onChange={onInputText}
-              onClick={onInputText}
-              onInput={onInputText}
-              onKeyDown={translateWhenPressingEnter ? (e) => onKeyDown(e) : null}
-              onKeyUp={onInputText}
+              onChange={(e) => onUpdateInputText(
+                e.target.value,
+                e.target.selectionStart,
+                e.target.selectionEnd,
+              )}
+              onClick={(e) => onUpdateInputText(
+                e.target.value,
+                e.target.selectionStart,
+                e.target.selectionEnd,
+              )}
+              onInput={(e) => onUpdateInputText(
+                e.target.value,
+                e.target.selectionStart,
+                e.target.selectionEnd,
+              )}
+              onKeyDown={translateWhenPressingEnter ? (e) => {
+                if (e.key === 'Enter') {
+                  onTranslate(true);
+                  e.target.blur();
+                }
+
+                onUpdateInputText(
+                  e.target.value,
+                  e.target.selectionStart,
+                  e.target.selectionEnd,
+                );
+              } : null}
+              onKeyUp={(e) => onUpdateInputText(
+                e.target.value,
+                e.target.selectionStart,
+                e.target.selectionEnd,
+              )}
               placeholder={locale.typeSomethingHere}
               spellCheck="false"
               value={inputText}
@@ -531,7 +569,7 @@ class Home extends React.Component {
                     variant="outlined"
                     size="medium"
                     color="default"
-                    onClick={onTranslateButtonClick}
+                    onClick={() => onTranslate(true)}
                     classes={{ label: classes.translateButtonLabel }}
                   >
                     {locale.translate}
@@ -552,26 +590,26 @@ Home.propTypes = {
   fullscreenInputBox: PropTypes.bool,
   inputLang: PropTypes.string,
   inputText: PropTypes.string,
-  onClearButtonClick: PropTypes.func.isRequired,
+  locale: PropTypes.object.isRequired,
+  onChangeRoute: PropTypes.func.isRequired,
   onEndTextToSpeech: PropTypes.func.isRequired,
-  onFullscreenButtonClick: PropTypes.func.isRequired,
-  onInputText: PropTypes.func.isRequired,
-  onInsertText: PropTypes.func.isRequired,
-  onKeyDown: PropTypes.func.isRequired,
-  onLanguageClick: PropTypes.func.isRequired,
-  onOpenImageButtonClick: PropTypes.func.isRequired,
-  onRequestCopyToClipboard: PropTypes.func.isRequired,
+  onInsertInputText: PropTypes.func.isRequired,
+  onLoadImage: PropTypes.func.isRequired,
+  onOpenSnackbar: PropTypes.func.isRequired,
   onStartTextToSpeech: PropTypes.func.isRequired,
-  onSwapButtonClick: PropTypes.func.isRequired,
-  onSwapOutputButtonClick: PropTypes.func.isRequired,
-  onTogglePhrasebookClick: PropTypes.func.isRequired,
-  onTranslateButtonClick: PropTypes.func.isRequired,
+  onSwapLanguages: PropTypes.func.isRequired,
+  onToggleFullscreenInputBox: PropTypes.func.isRequired,
+  onTogglePhrasebook: PropTypes.func.isRequired,
+  onTranslate: PropTypes.func.isRequired,
+  onUpdateInputLang: PropTypes.func.isRequired,
+  onUpdateInputText: PropTypes.func.isRequired,
+  onUpdateLanguageListMode: PropTypes.func.isRequired,
+  onUpdateOutputLang: PropTypes.func.isRequired,
   output: PropTypes.object,
   outputLang: PropTypes.string,
   screenWidth: PropTypes.number,
   textToSpeechPlaying: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool,
-  locale: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -586,55 +624,26 @@ const mapStateToProps = (state) => ({
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onLanguageClick: (type) => {
-    dispatch(updateLanguageListMode(type));
-    dispatch(changeRoute(ROUTE_LANGUAGE_LIST));
-  },
-  onSwapButtonClick: () => dispatch(swapLanguages()),
-  onKeyDown: (e) => {
-    if (e.key === 'Enter') {
-      dispatch(translate(true));
-      e.target.blur();
-    }
-
-    const inputText = e.target.value;
-
-    dispatch(updateInputText(inputText, e.target.selectionStart, e.target.selectionEnd));
-  },
-  onInputText: (e) => {
-    const inputText = e.target.value;
-
-    dispatch(updateInputText(inputText, e.target.selectionStart, e.target.selectionEnd));
-  },
-  onClearButtonClick: () => dispatch(updateInputText('')),
-  onInsertText: (text) => dispatch(insertInputText(text)),
-  onTranslateButtonClick: () => dispatch(translate(true)),
-  onTogglePhrasebookClick: () => dispatch(togglePhrasebook()),
-  onOpenImageButtonClick: () => dispatch(loadImage(false)),
-  onSwapOutputButtonClick: (inputLang, outputLang, inputText) => {
-    dispatch(updateInputLang(inputLang));
-    dispatch(updateOutputLang(outputLang));
-    dispatch(updateInputText(inputText));
-  },
-  onFullscreenButtonClick: () => dispatch(toggleFullscreenInputBox()),
-  onSuggestedInputLangClick: (value) => dispatch(updateInputLang(value)),
-  onSuggestedInputTextClick: (text) => dispatch(updateInputText(text)),
-  onRequestCopyToClipboard: (text, localeCopied) => {
-    remote.clipboard.writeText(text);
-    dispatch(openSnackbar(localeCopied));
-  },
-  onStartTextToSpeech: (lang, text) => {
-    dispatch(startTextToSpeech(lang, text));
-  },
-  onEndTextToSpeech: () => {
-    dispatch(endTextToSpeech());
-  },
-});
+const actionCreators = {
+  changeRoute,
+  endTextToSpeech,
+  insertInputText,
+  loadImage,
+  openSnackbar,
+  startTextToSpeech,
+  swapLanguages,
+  toggleFullscreenInputBox,
+  togglePhrasebook,
+  translate,
+  updateInputLang,
+  updateInputText,
+  updateLanguageListMode,
+  updateOutputLang,
+};
 
 export default connectComponent(
   Home,
   mapStateToProps,
-  mapDispatchToProps,
+  actionCreators,
   styles,
 );

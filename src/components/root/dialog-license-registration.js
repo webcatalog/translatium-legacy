@@ -119,10 +119,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const actionCreators = (dispatch) => ({
-  onUpdateForm: (changes) => dispatch(updateForm(changes)),
-  onRegister: () => dispatch(register()),
-});
+const actionCreators = {
+  updateForm,
+  register,
+};
 
 export default connectComponent(
   DialogLicenseRegistration,
