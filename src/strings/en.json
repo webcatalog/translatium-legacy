@@ -99,6 +99,7 @@
 	"openOnMenubar": "Define a shortcut to open Translatium on menubar",
 	"openOnTaskbar": "Define a shortcut to open Translatium on taskbar",
 	"openOnMenubarDesc": "Define a keyboard shortcut to open Translatium quickly.",
+	"typeNewKeyboardCombinator": "Type the new keyboard combinator.",
 
 	"searchLanguages": "Search Languages",
 	"noLanguageFound": "No Language Found",

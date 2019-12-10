@@ -74,14 +74,12 @@ class DialogShortcut extends React.Component {
     return (
       <Dialog open={open} onClose={onCloseShortcutDialog}>
         <DialogTitle>
-          {locale.shortcuts}
-:
           {' '}
           {identifier === 'openOnMenubar' && window.process.platform === 'win32' ? locale.openOnTaskbar : locale[identifier]}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Type the new keyboard combinator.
+            {locale.typeNewKeyboardCombinator}
           </DialogContentText>
           <DialogContentText className={classes.combinatorContainer}>
             {combinator && combinator !== '+' && combinator.split('+').map((key, i) => (

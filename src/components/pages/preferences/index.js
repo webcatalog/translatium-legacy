@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -62,44 +61,11 @@ const styles = (theme) => ({
     maxWidth: 480,
     margin: '0 auto',
   },
-  paperAbout: {
-    maxWidth: 480,
-    margin: '0 auto',
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-    paddingLeft: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    boxSizing: 'border-box',
-    textAlign: 'center',
-    '&:not(:first-child)': {
-      marginTop: 36,
-    },
-  },
   shortcutKey: {
     lineHeight: '48px',
     padding: '0 16px',
     fontSize: 15,
     color: theme.palette.text.secondary,
-  },
-  madeBy: {
-    marginTop: theme.spacing.unit * 2,
-  },
-  link: {
-    fontWeight: 600,
-    cursor: 'pointer',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  },
-  icon: {
-    height: 96,
-    width: 96,
-  },
-  title: {
-    marginTop: theme.spacing.unit,
-  },
-  version: {
-    marginBottom: theme.spacing.unit * 2,
   },
   appBarColorDefault: {
     background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
@@ -116,8 +82,6 @@ const renderCombinator = (combinator) => combinator
   .replace('mod', window.process.platform !== 'darwin' ? 'ctrl' : '⌘')
   .replace('meta', '⌘')
   .toUpperCase();
-
-const getVersion = () => remote.app.getVersion();
 
 const Preferences = (props) => {
   const {
@@ -314,53 +278,6 @@ const Preferences = (props) => {
               <ListItemText primary={locale.quit} onClick={() => remote.app.quit()} />
             </ListItem>
           </List>
-        </Paper>
-
-        <Paper className={classes.paperAbout}>
-          <Typography variant="h6" className={classes.title}>Translatium</Typography>
-          <Typography variant="body1" className={classes.version}>
-            Version
-            {` ${getVersion()}`}
-          </Typography>
-
-          {window.process.platform === 'win32' && (
-            <>
-              <Button onClick={() => remote.shell.openExternal('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}>
-                {locale.rateMicrosoftStore}
-              </Button>
-              <br />
-            </>
-          )}
-          {window.process.platform === 'darwin' && (
-            <>
-              <Button onClick={() => remote.shell.openExternal('macappstore://itunes.apple.com/app/id1176624652?mt=12')}>
-                {locale.rateMacAppStore}
-              </Button>
-              <br />
-            </>
-          )}
-          <Button onClick={() => remote.shell.openExternal('https://translatiumapp.com')}>
-            {locale.website}
-          </Button>
-          <br />
-          <Button onClick={() => remote.shell.openExternal('https://translatiumapp.com/support')}>
-            {locale.support}
-          </Button>
-          <br />
-
-          <Typography variant="body1" className={classes.madeBy}>
-            <span>Made with </span>
-            <span role="img" aria-label="love">❤</span>
-            <span> by </span>
-            <span
-              onClick={() => remote.shell.openExternal('https://quanglam2807.com')}
-              role="link"
-              tabIndex="0"
-              className={classes.link}
-            >
-              Quang Lam
-            </span>
-          </Typography>
         </Paper>
       </div>
     </div>
