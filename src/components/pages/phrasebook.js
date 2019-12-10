@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { replace } from 'react-router-redux';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -19,6 +18,10 @@ import connectComponent from '../../helpers/connect-component';
 
 import { deletePhrasebookItem, loadPhrasebook } from '../../state/pages/phrasebook/actions';
 import { loadOutput } from '../../state/pages/home/actions';
+import { changeRoute } from '../../state/root/router/actions';
+
+import { ROUTE_HOME } from '../../constants/routes';
+
 
 const styles = (theme) => ({
   emptyContainer: {
@@ -51,6 +54,12 @@ const styles = (theme) => ({
   },
   progress: {
     marginTop: 12,
+  },
+  appBarColorDefault: {
+    background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
+    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
+    WebkitAppRegion: 'drag',
+    WebkitUserSelect: 'none',
   },
 });
 
@@ -89,9 +98,9 @@ class Phrasebook extends React.Component {
 
     return (
       <div className={classes.container}>
-        <AppBar position="static">
+        <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
           <Toolbar variant="dense">
-            <Typography variant="title" color="inherit">{locale.phrasebook}</Typography>
+            <Typography variant="h6" color="inherit">{locale.phrasebook}</Typography>
           </Toolbar>
         </AppBar>
         {(() => {
@@ -100,7 +109,7 @@ class Phrasebook extends React.Component {
               <div className={classes.emptyContainer}>
                 <div className={classes.emptyInnerContainer}>
                   <ToggleStar className={classes.bigIcon} />
-                  <Typography variant="headline">{locale.phrasebookIsEmpty}</Typography>
+                  <Typography variant="h5">{locale.phrasebookIsEmpty}</Typography>
                 </div>
               </div>
             );
@@ -135,7 +144,7 @@ class Phrasebook extends React.Component {
                       </Tooltip>
                     </ListItemSecondaryAction>
                   </ListItem>
-                ), <Divider inset={false} />])}
+                ), <Divider inset={false} key={`phrasebookDivider_${item.phrasebookId}`} />])}
               </List>
               {phrasebookLoading && (
                 <LinearProgress variant="indeterminate" className={classes.progress} />
@@ -170,7 +179,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onItemClick: (output) => {
     dispatch(loadOutput(output));
-    dispatch(replace('/'));
+    dispatch(changeRoute(ROUTE_HOME));
   },
   onDeleteButtonClick: (id, rev) => dispatch(deletePhrasebookItem(id, rev)),
   onEnterPhrasebook: () => dispatch(loadPhrasebook(true)),

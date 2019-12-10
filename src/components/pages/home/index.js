@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { push } from 'react-router-redux';
 import classNames from 'classnames';
-import Mousetrap from 'mousetrap';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ListItem from '@material-ui/core/ListItem';
@@ -44,6 +42,7 @@ import {
 
 import { loadImage } from '../../../state/pages/ocr/actions';
 import { openSnackbar } from '../../../state/root/snackbar/actions';
+import { changeRoute } from '../../../state/root/router/actions';
 import {
   swapLanguages,
   updateInputLang,
@@ -61,6 +60,10 @@ import {
   startTextToSpeech,
   endTextToSpeech,
 } from '../../../state/pages/home/text-to-speech/actions';
+
+import { updateLanguageListMode } from '../../../state/pages/language-list/actions';
+
+import { ROUTE_LANGUAGE_LIST } from '../../../constants/routes';
 
 import Dictionary from './dictionary';
 import History from './history';
@@ -100,9 +103,10 @@ const styles = (theme) => ({
     outline: 0,
     margin: 0,
     padding: 12,
-    fontSize: 16,
+    fontSize: '1rem',
     boxSizing: 'border-box',
     flex: 1,
+    resize: 'none',
   },
   controllerContainer: {
     flexBasis: 48,
@@ -121,7 +125,7 @@ const styles = (theme) => ({
   },
   resultContainer: {
     flex: 1,
-    padding: '0 12px 12px 12px',
+    paddingBottom: 12,
     boxSizing: 'border-box',
     overflowY: 'auto',
     WebkitOverflowScrolling: 'touch',
@@ -135,9 +139,6 @@ const styles = (theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  outputCard: {
-    marginTop: 12,
-  },
   languageTitle: {
     flex: 1,
     textOverflow: 'ellipsis',
@@ -150,90 +151,31 @@ const styles = (theme) => ({
   yandexCopyright: {
     color: theme.palette.text.disabled,
     cursor: 'pointer',
+    fontWeight: 400,
+    fontSize: '0.8rem',
+    marginLeft: 12,
+    marginRight: 12,
+  },
+  outputText: {
+    fontSize: '1rem',
+  },
+  appBarColorDefault: {
+    background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
+    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
+  },
+  translateButtonLabel: {
+    fontWeight: 500,
+  },
+  outputActions: {
+    padding: '0 4px 2px 4px',
+  },
+  inputRoman: {
+    padding: '0 12px',
+    marginBottom: 12,
   },
 });
 
 class Home extends React.Component {
-  componentDidMount() {
-    const {
-      clearInputShortcut,
-      onClearButtonClick,
-      onLanguageClick,
-      onOpenImageButtonClick,
-      onSwapButtonClick,
-      onTogglePhrasebookClick,
-      openImageFileShortcut,
-      openInputLangListShortcut,
-      openOutputLangListShortcut,
-      saveToPhrasebookShortcut,
-      swapLanguagesShortcut,
-    } = this.props;
-
-
-    Mousetrap.bind(openInputLangListShortcut, (e) => {
-      e.preventDefault();
-
-      onLanguageClick('inputLang');
-    });
-
-    Mousetrap.bind(openOutputLangListShortcut, (e) => {
-      e.preventDefault();
-
-      onLanguageClick('outputLang');
-    });
-
-    Mousetrap.bind(swapLanguagesShortcut, (e) => {
-      e.preventDefault();
-
-      onSwapButtonClick();
-    });
-
-    Mousetrap.bind(clearInputShortcut, (e) => {
-      e.preventDefault();
-      onClearButtonClick();
-    });
-
-    Mousetrap.bind(openImageFileShortcut, (e) => {
-      e.preventDefault();
-
-      const { inputLang } = this.props;
-
-      if (isOcrSupported(inputLang)) {
-        onOpenImageButtonClick();
-      }
-    });
-
-    Mousetrap.bind(saveToPhrasebookShortcut, (e) => {
-      e.preventDefault();
-
-      const { output } = this.props;
-
-      if (output && !output.phrasebookId) {
-        onTogglePhrasebookClick();
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    const {
-      clearInputShortcut,
-      openImageFileShortcut,
-      openInputLangListShortcut,
-      openOutputLangListShortcut,
-      saveToPhrasebookShortcut,
-      swapLanguagesShortcut,
-    } = this.props;
-
-    Mousetrap.unbind([
-      clearInputShortcut,
-      openImageFileShortcut,
-      openInputLangListShortcut,
-      openOutputLangListShortcut,
-      saveToPhrasebookShortcut,
-      swapLanguagesShortcut,
-    ]);
-  }
-
   renderOutput() {
     const {
       classes,
@@ -315,30 +257,30 @@ class Home extends React.Component {
           >
             {output.inputRoman && (
               <Typography
-                variant="body1"
+                variant="body2"
+                color="textSecondary"
                 className={classNames('text-selectable', classes.inputRoman)}
               >
                 {output.inputRoman}
               </Typography>
             )}
-
-            <Card className={classes.outputCard}>
+            <Card>
               <CardContent className="text-selectable">
                 <Typography
-                  variant="headline"
+                  variant="body1"
                   lang={output.outputLang}
-                  className="text-selectable"
+                  className={classNames('text-selectable', classes.outputText)}
                 >
                   {output.outputText}
                 </Typography>
 
                 {output.outputRoman && (
-                  <Typography variant="body1" className={classNames('text-selectable', classes.pos)}>
+                  <Typography variant="body2" color="textSecondary" className={classNames('text-selectable', classes.pos)}>
                     {output.outputRoman}
                   </Typography>
                 )}
               </CardContent>
-              <CardActions>
+              <CardActions className={classes.outputActions}>
                 {controllers.slice(0, maxVisibleIcon).map(({ Icon, tooltip, onClick }) => (
                   <Tooltip title={tooltip} placement="bottom" key={`outputTool_${tooltip}`}>
                     <IconButton
@@ -375,8 +317,8 @@ class Home extends React.Component {
               </CardActions>
             </Card>
             <Typography
-              variant="body2"
-              align="right"
+              variant="body1"
+              align="left"
               className={classes.yandexCopyright}
               onClick={() => remote.shell.openExternal('http://translate.yandex.com/')}
             >
@@ -384,10 +326,10 @@ class Home extends React.Component {
             </Typography>
 
             {output.outputDict && <Dictionary output={output} />}
-            {output.outputDict && (
+            {output.outputDict && output.outputDict.def.length > 0 && (
               <Typography
-                variant="body2"
-                align="right"
+                variant="body1"
+                align="left"
                 className={classes.yandexCopyright}
                 onClick={() => remote.shell.openExternal('https://tech.yandex.com/dictionary/')}
               >
@@ -497,7 +439,7 @@ class Home extends React.Component {
           className={classes.anotherContainer}
           role="presentation"
         >
-          <AppBar position="static">
+          <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
             <Toolbar variant="dense">
               <Button
                 color="inherit"
@@ -585,7 +527,13 @@ class Home extends React.Component {
               </div>
               <div className={classes.controllerContainerRight}>
                 <Tooltip title={locale.andSaveToHistory} placement={fullscreenInputBox ? 'top' : 'bottom'}>
-                  <Button variant="raised" color="primary" onClick={onTranslateButtonClick}>
+                  <Button
+                    variant="outlined"
+                    size="medium"
+                    color="default"
+                    onClick={onTranslateButtonClick}
+                    classes={{ label: classes.translateButtonLabel }}
+                  >
                     {locale.translate}
                   </Button>
                 </Tooltip>
@@ -601,7 +549,6 @@ class Home extends React.Component {
 
 Home.propTypes = {
   classes: PropTypes.object.isRequired,
-  clearInputShortcut: PropTypes.string.isRequired,
   fullscreenInputBox: PropTypes.bool,
   inputLang: PropTypes.string,
   inputText: PropTypes.string,
@@ -619,42 +566,31 @@ Home.propTypes = {
   onSwapOutputButtonClick: PropTypes.func.isRequired,
   onTogglePhrasebookClick: PropTypes.func.isRequired,
   onTranslateButtonClick: PropTypes.func.isRequired,
-  openImageFileShortcut: PropTypes.string.isRequired,
-  openInputLangListShortcut: PropTypes.string.isRequired,
-  openOutputLangListShortcut: PropTypes.string.isRequired,
   output: PropTypes.object,
   outputLang: PropTypes.string,
-  saveToPhrasebookShortcut: PropTypes.string.isRequired,
   screenWidth: PropTypes.number,
-  swapLanguagesShortcut: PropTypes.string.isRequired,
   textToSpeechPlaying: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool,
   locale: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  clearInputShortcut: state.preferences.clearInputShortcut,
   fullscreenInputBox: state.pages.home.fullscreenInputBox,
   inputLang: state.preferences.inputLang,
   inputText: state.pages.home.inputText,
   locale: state.locale,
-  openImageFileShortcut: state.preferences.openImageFileShortcut,
-  openInputLangListShortcut: state.preferences.openInputLangListShortcut,
-  openOutputLangListShortcut: state.preferences.openOutputLangListShortcut,
   output: state.pages.home.output,
   outputLang: state.preferences.outputLang,
-  saveToPhrasebookShortcut: state.preferences.saveToPhrasebookShortcut,
   screenWidth: state.screen.screenWidth,
-  swapLanguagesShortcut: state.preferences.swapLanguagesShortcut,
   textToSpeechPlaying: state.pages.home.textToSpeech.textToSpeechPlaying,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLanguageClick: (type) => dispatch(push({
-    pathname: '/language-list',
-    query: { type },
-  })),
+  onLanguageClick: (type) => {
+    dispatch(updateLanguageListMode(type));
+    dispatch(changeRoute(ROUTE_LANGUAGE_LIST));
+  },
   onSwapButtonClick: () => dispatch(swapLanguages()),
   onKeyDown: (e) => {
     if (e.key === 'Enter') {

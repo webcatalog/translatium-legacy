@@ -6,13 +6,12 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import pink from '@material-ui/core/colors/blue';
 import red from '@material-ui/core/colors/pink';
 import grey from '@material-ui/core/colors/grey';
+import green from '@material-ui/core/colors/green';
 
 import connectComponent from '../helpers/connect-component';
 
 import { updateIsDarkMode, updateIsFullScreen } from '../state/root/general/actions';
 import { getShouldUseDarkMode } from '../state/root/general/utils';
-
-import colorPairs from '../constants/colors';
 
 import App from './app';
 
@@ -68,16 +67,17 @@ class AppWrapper extends React.Component {
 
   render() {
     const {
-      children,
-      location,
-      primaryColorId,
       shouldUseDarkMode,
     } = this.props;
 
     const themeObj = {
       palette: {
         type: shouldUseDarkMode ? 'dark' : 'light',
-        primary: colorPairs[primaryColorId],
+        primary: {
+          light: green[300],
+          main: green[600],
+          dark: green[700],
+        },
         secondary: {
           light: pink[300],
           main: pink[500],
@@ -88,6 +88,9 @@ class AppWrapper extends React.Component {
           main: red[500],
           dark: red[700],
         },
+      },
+      typography: {
+        useNextVariants: true,
       },
     };
 
@@ -101,26 +104,20 @@ class AppWrapper extends React.Component {
 
     return (
       <MuiThemeProvider theme={theme}>
-        <App location={location}>
-          {children}
-        </App>
+        <App />
       </MuiThemeProvider>
     );
   }
 }
 
 AppWrapper.propTypes = {
-  children: PropTypes.element.isRequired, // matched child route component
-  location: PropTypes.object.isRequired,
   onUpdateIsDarkMode: PropTypes.func.isRequired,
   onUpdateIsFullScreen: PropTypes.func.isRequired,
-  primaryColorId: PropTypes.string.isRequired,
   shouldUseDarkMode: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   shouldUseDarkMode: getShouldUseDarkMode(state),
-  primaryColorId: state.preferences.primaryColorId,
 });
 
 const mapDispatchToProps = (dispatch) => ({

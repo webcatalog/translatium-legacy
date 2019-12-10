@@ -81,8 +81,22 @@ const translateText = (inputLang, outputLang, inputText) => {
         output.outputLang = outputLang;
         output.inputText = inputText;
         output.outputText = outputLang === 'zh-TW' ? mConv.phrase('s2t', response.text[0]) : response.text[0];
-        output.outputRoman = outputLang.startsWith('zh') ? tr(response.text[0]) : undefined;
-        output.inputRoman = inputLang === 'zh' ? tr(inputText) : undefined;
+
+        if (outputLang.startsWith('zh')) {
+          const outputRoman = tr(response.text[0]);
+          if (outputRoman !== response.text[0]) {
+            output.outputRoman = outputRoman;
+          }
+        }
+
+        if (inputLang === 'zh') {
+          const inputRoman = tr(inputText);
+          if (inputRoman !== inputText) {
+            output.inputRoman = inputRoman;
+          }
+        }
+
+        if (output.outputRoman === output.outputText) output.outputRoman = undefined;
       }),
   );
 

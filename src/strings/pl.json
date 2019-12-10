@@ -73,7 +73,6 @@
 	"attachToMenubar": "Dołącz do paska menu",
 	"attachToTaskbar": "Dołącz do paska zadań",
 
-	"primaryColor": "Kolor podstawowy",
 	"translateWhenPressingEnter": "Tłumacz po naciśnięciu klawisza Enter",
 	"realtime": "Tłumaczenie w czasie rzeczywistym",
 
@@ -89,7 +88,6 @@
 	"appearance": "Wygląd",
 	"restartRequired": "wymagane ponowne uruchomienie",
 	"advanced": "Zaawansowane",
-	"about": "O",
 
 	"alwaysOnTop": "Utrzymuj okno zawsze na wierzchu",
 	"alwaysOnTopDesc": "Okno nie ukryje się podczas rozmycia.",
@@ -100,11 +98,6 @@
 	"shortcuts": "Skróty klawiszowe",
 	"openOnMenubar": "Otwórz Translatium na Pasku menu",
 	"openOnTaskbar": "Otwórz Translatium na Pasku zadań",
-	"openInputLangList": "Wybierz język wprowadzania",
-	"openOutputLangList": "Wybierz język wyjściowy",
-	"swapLanguages": "Zamień języki",
-	"clearInput": "Wyczyść wprowadzany tekst",
-	"saveToPhrasebook": "Zapisz do rozmówek",
 
 	"searchLanguages": "Szukaj w językach",
 	"noLanguageFound": "Nie znaleziono języka",

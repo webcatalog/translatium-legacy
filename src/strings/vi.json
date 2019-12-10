@@ -73,7 +73,6 @@
 	"attachToMenubar": "Gắn vào menubar",
 	"attachToTaskbar": "Gắn vào taskbar",
 
-	"primaryColor": "Màu chủ đạo",
 	"translateWhenPressingEnter": "Dịch khi nhấn Enter",
 	"realtime": "Dịch thời gian thực",
 
@@ -89,7 +88,6 @@
 	"appearance": "Giao diện",
 	"restartRequired": "cần khởi động lại",
 	"advanced": "Nâng cao",
-	"about": "Thông tin",
 
 	"alwaysOnTop": "Giữ cửa sổ luôn ở trên đầu",
 	"alwaysOnTopDesc": "Cửa sổ sẽ không ẩn khi bạn rời chuột đi.",
@@ -100,11 +98,6 @@
 	"shortcuts": "Phím tắt",
 	"openOnMenubar": "Mở Translatium trên Menubar",
 	"openOnTaskbar": "Mở Translatium trên taskbar",
-	"openInputLangList": "Chọn ngôn ngữ đầu vào",
-	"openOutputLangList": "Chọn ngôn ngữ đầu ra",
-	"swapLanguages": "Tráo ngôn ngữ",
-	"clearInput": "Xóa văn bản",
-	"saveToPhrasebook": "Lưu vào Sổ từ ngữ",
 
     "searchLanguages": "Tìm kiếm Ngôn ngữ",
 	"noLanguageFound": "Không tìm thấy ngôn ngữ",

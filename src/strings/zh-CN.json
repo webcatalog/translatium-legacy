@@ -73,7 +73,6 @@
 	"attachToMenubar": "附加到菜单栏",
 	"attachToTaskbar": "附加到任务栏",
 
-	"primaryColor": "主色调",
 	"translateWhenPressingEnter": "按下「Enter」翻译",
 	"realtime": "实时翻译",
 
@@ -89,7 +88,6 @@
 	"appearance": "外观",
 	"restartRequired": "需要重启",
 	"advanced": "高级",
-	"about": "关于",
 
 	"alwaysOnTop": "保持窗口始终在顶部",
 	"alwaysOnTopDesc": "窗口不会隐藏在模糊上。",
@@ -100,11 +98,6 @@
 	"shortcuts": "键盘快捷键",
 	"openOnMenubar": "在菜单栏上打开 Translatium",
 	"openOnTaskbar": "在任务栏上打开Translatium",
-	"openInputLangList": "选择输入语言",
-	"openOutputLangList": "选择输出语言",
-	"swapLanguages": "交换翻译语言",
-	"clearInput": "清空输入文字",
-	"saveToPhrasebook": "保存到收藏夹",
 
 	"searchLanguages": "搜索语言",
 	"noLanguageFound": "没有找到对应语言",

@@ -73,7 +73,6 @@
 	"attachToMenubar": "Anexar à barra de menus",
 	"attachToTaskbar": "Anexar à barra de tarefas",
 
-	"primaryColor": "Cor Primária",
 	"translateWhenPressingEnter": "Traduzir ao pressionar Enter",
 	"realtime": "Tradução em Tempo Real",
 
@@ -89,7 +88,6 @@
 	"appearance": "Aparência",
 	"restartRequired": "é necessário reiniciar o app",
 	"advanced": "Avançado",
-	"about": "Sobre",
 
 	"alwaysOnTop": "Mantenha a janela sempre no topo",
 	"alwaysOnTopDesc": "A janela não se esconderá no borrão.",
@@ -100,11 +98,6 @@
 	"shortcuts": "Atalhos do Teclado",
 	"openOnMenubar": "Abrir o app Translatium na Barra de Menus",
 	"openOnTaskbar": "Abra o app Translatium na Barra de Tarefas",
-	"openInputLangList": "Selecione o idioma de entrada",
-	"openOutputLangList": "Selecione o idioma de saída",
-	"swapLanguages": "Trocar os idiomas",
-	"clearInput": "Limpar o texto inserido",
-	"saveToPhrasebook": "Salvar nos Favoritos",
 
 	"searchLanguages": "Pesquisar idiomas",
 	"noLanguageFound": "Nenhuma idioma encontrado",

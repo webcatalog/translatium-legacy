@@ -74,20 +74,18 @@ class DialogShortcut extends React.Component {
     return (
       <Dialog open={open} onClose={onCloseShortcutDialog}>
         <DialogTitle>
-          {locale.shortcuts}
-:
           {' '}
           {identifier === 'openOnMenubar' && window.process.platform === 'win32' ? locale.openOnTaskbar : locale[identifier]}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Type the new keyboard combinator.
+            {locale.typeNewKeyboardCombinator}
           </DialogContentText>
           <DialogContentText className={classes.combinatorContainer}>
             {combinator && combinator !== '+' && combinator.split('+').map((key, i) => (
               <span key={key}>
                 {i > 0 && <span className={classes.plusText}>+</span>}
-                <Button variant="raised">
+                <Button variant="contained">
                   {renderCombinator(key)}
                 </Button>
               </span>
@@ -97,6 +95,14 @@ class DialogShortcut extends React.Component {
         <DialogActions>
           <Button onClick={onCloseShortcutDialog}>
             {locale.cancel}
+          </Button>
+          <Button
+            onClick={() => {
+              requestSetPreference(`${identifier}Shortcut`, null);
+              onCloseShortcutDialog();
+            }}
+          >
+            {locale.removeShortcut}
           </Button>
           <Button
             color="primary"

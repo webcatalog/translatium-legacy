@@ -1,6 +1,4 @@
 /* global fetch FormData document Image */
-import { push } from 'react-router-redux';
-
 import { UPDATE_OCR } from '../../../constants/actions';
 
 import translateArray from '../../../helpers/translate-array';
@@ -8,6 +6,9 @@ import openFileToBlobAsync from '../../../helpers/open-file-to-blob-async';
 import { toOcrSpaceLanguage } from '../../../helpers/language-utils';
 
 import { openAlert } from '../../root/alert/actions';
+import { changeRoute } from '../../root/router/actions';
+
+import { ROUTE_OCR } from '../../../constants/routes';
 
 export const loadImage = () => (dispatch, getState) => {
   const { inputLang, outputLang } = getState().preferences;
@@ -123,7 +124,7 @@ export const loadImage = () => (dispatch, getState) => {
               });
 
 
-              dispatch(push('/ocr'));
+              dispatch(changeRoute(ROUTE_OCR));
             });
         })
         .catch((e) => {

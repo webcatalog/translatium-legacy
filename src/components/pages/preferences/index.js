@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -24,7 +22,6 @@ import { toggleSetting } from '../../../state/root/preferences/actions';
 import { updateLocale } from '../../../state/root/locale/actions';
 import { openShortcutDialog } from '../../../state/pages/preferences/shortcut-dialog/actions';
 
-import colorPairs from '../../../constants/colors';
 import displayLanguages from '../../../constants/display-languages';
 
 import DialogShortcut from './dialog-shortcut';
@@ -49,7 +46,7 @@ const styles = (theme) => ({
   },
   paperTitle: {
     width: '100%',
-    maxWidth: 720,
+    maxWidth: 480,
     margin: '0 auto',
     fontWeight: 600,
     color: theme.palette.text.primary,
@@ -61,18 +58,8 @@ const styles = (theme) => ({
     },
   },
   paper: {
-    maxWidth: 720,
+    maxWidth: 480,
     margin: '0 auto',
-  },
-  paperAbout: {
-    maxWidth: 720,
-    margin: '0 auto',
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-    paddingLeft: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    boxSizing: 'border-box',
-    textAlign: 'center',
   },
   shortcutKey: {
     lineHeight: '48px',
@@ -80,25 +67,11 @@ const styles = (theme) => ({
     fontSize: 15,
     color: theme.palette.text.secondary,
   },
-  madeBy: {
-    marginTop: theme.spacing.unit * 2,
-  },
-  link: {
-    fontWeight: 600,
-    cursor: 'pointer',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  },
-  icon: {
-    height: 96,
-    width: 96,
-  },
-  title: {
-    marginTop: theme.spacing.unit,
-  },
-  version: {
-    marginBottom: theme.spacing.unit * 2,
+  appBarColorDefault: {
+    background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
+    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
+    WebkitAppRegion: 'drag',
+    WebkitUserSelect: 'none',
   },
 });
 
@@ -110,40 +83,22 @@ const renderCombinator = (combinator) => combinator
   .replace('meta', '⌘')
   .toUpperCase();
 
-const getVersion = () => remote.app.getVersion();
-
 const Preferences = (props) => {
   const {
     alwaysOnTop,
     attachToMenubar,
     classes,
-    clearInputShortcut,
     langId,
     locale,
     onOpenShortcutDialog,
     onToggle,
     onUpdateLocale,
-    openImageFileShortcut,
-    openInputLangListShortcut,
     openOnMenubarShortcut,
-    openOutputLangListShortcut,
-    primaryColorId,
     realtime,
-    saveToPhrasebookShortcut,
-    swapLanguagesShortcut,
     theme,
     translateClipboardOnShortcut,
     translateWhenPressingEnter,
   } = props;
-
-  const shortcuts = [
-    { identifier: 'openInputLangList', combinator: openInputLangListShortcut },
-    { identifier: 'openOutputLangList', combinator: openOutputLangListShortcut },
-    { identifier: 'swapLanguages', combinator: swapLanguagesShortcut },
-    { identifier: 'clearInput', combinator: clearInputShortcut },
-    { identifier: 'openImageFile', combinator: openImageFileShortcut },
-    { identifier: 'saveToPhrasebook', combinator: saveToPhrasebookShortcut },
-  ];
 
   const displayLanguageKeys = Object.keys(displayLanguages);
   displayLanguageKeys.sort((xKey, yKey) => {
@@ -156,13 +111,13 @@ const Preferences = (props) => {
   return (
     <div className={classes.container}>
       <DialogShortcut />
-      <AppBar position="static">
+      <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
         <Toolbar variant="dense">
-          <Typography variant="title" color="inherit">{locale.preferences}</Typography>
+          <Typography variant="h6" color="inherit">{locale.preferences}</Typography>
         </Toolbar>
       </AppBar>
       <div className={classes.innerContainer}>
-        <Typography variant="body2" className={classes.paperTitle}>
+        <Typography variant="body1" className={classes.paperTitle}>
           {locale.appearance}
         </Typography>
         <Paper className={classes.paper}>
@@ -205,37 +160,19 @@ const Preferences = (props) => {
               )}
             >
               {window.process.platform === 'darwin' && (
-                <MenuItem onClick={() => requestSetPreference('theme', 'automatic')}>{locale.automatic}</MenuItem>
+                <MenuItem onClick={() => requestSetPreference('theme', 'systemDefault')}>{locale.systemDefault}</MenuItem>
               )}
               <MenuItem onClick={() => requestSetPreference('theme', 'light')}>{locale.light}</MenuItem>
               <MenuItem onClick={() => requestSetPreference('theme', 'dark')}>{locale.dark}</MenuItem>
             </EnhancedMenu>
-            <Divider />
-            <EnhancedMenu
-              id="changeColor"
-              buttonElement={(
-                <ListItem button>
-                  <ListItemText
-                    primary={locale.primaryColor}
-                    secondary={locale[primaryColorId]}
-                  />
-                  <ChevronRightIcon color="action" aria-label={locale.change} />
-                </ListItem>
-              )}
-            >
-              {Object.keys(colorPairs).map((colorId) => (
-                <MenuItem
-                  key={`color_${colorId}`}
-                  value={colorId}
-                  onClick={() => {
-                    requestSetPreference('primaryColorId', colorId);
-                  }}
-                >
-                  {locale[colorId]}
-                </MenuItem>
-              ))}
-            </EnhancedMenu>
-            <Divider />
+          </List>
+        </Paper>
+
+        <Typography variant="body1" className={classes.paperTitle}>
+          {window.process.platform === 'win32' ? locale.taskbar : locale.menubar}
+        </Typography>
+        <Paper className={classes.paper}>
+          <List dense>
             <ListItem>
               <ListItemText primary={window.process.platform === 'win32' ? locale.attachToTaskbar : locale.attachToMenubar} />
               <ListItemSecondaryAction>
@@ -245,6 +182,34 @@ const Preferences = (props) => {
                     requestSetPreference('attachToMenubar', e.target.checked);
                     requestShowRequireRestartDialog();
                   }}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+            <Divider />
+            <ListItem
+              button
+              disabled={!attachToMenubar}
+              key="openOnMenubar"
+              onClick={() => onOpenShortcutDialog('openOnMenubar', openOnMenubarShortcut)}
+            >
+              <ListItemText
+                primary={window.process.platform === 'win32' ? locale.openOnTaskbar : locale.openOnMenubar}
+                secondary={openOnMenubarShortcut
+                  ? renderCombinator(openOnMenubarShortcut) : locale.openOnMenubarDesc}
+              />
+              <ChevronRightIcon color="action" aria-label={locale.change} />
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary={locale.translateClipboardOnShortcut}
+                secondary={locale.translateClipboardOnShortcutDesc}
+              />
+              <ListItemSecondaryAction>
+                <Switch
+                  checked={attachToMenubar ? translateClipboardOnShortcut : false}
+                  disabled={!attachToMenubar}
+                  onChange={() => onToggle('translateClipboardOnShortcut')}
                 />
               </ListItemSecondaryAction>
             </ListItem>
@@ -268,7 +233,7 @@ const Preferences = (props) => {
           </List>
         </Paper>
 
-        <Typography variant="body2" className={classes.paperTitle}>
+        <Typography variant="body1" className={classes.paperTitle}>
           {locale.advanced}
         </Typography>
         <Paper className={classes.paper}>
@@ -292,20 +257,6 @@ const Preferences = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText
-                primary={locale.translateClipboardOnShortcut}
-                secondary={locale.translateClipboardOnShortcutDesc}
-              />
-              <ListItemSecondaryAction>
-                <Switch
-                  checked={attachToMenubar ? translateClipboardOnShortcut : false}
-                  disabled={!attachToMenubar}
-                  onChange={() => onToggle('translateClipboardOnShortcut')}
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
             {window.process.platform === 'darwin' && (
               <>
                 <Divider />
@@ -320,115 +271,13 @@ const Preferences = (props) => {
           </List>
         </Paper>
 
-        <Typography variant="body2" className={classes.paperTitle}>
-          {locale.shortcuts}
-        </Typography>
-        <Paper className={classes.paper}>
-          <List dense>
-            <ListItem
-              button
-              disabled={!attachToMenubar}
-              key="openOnMenubar"
-              onClick={() => onOpenShortcutDialog('openOnMenubar', openOnMenubarShortcut)}
-            >
-              <ListItemText
-                primary={window.process.platform === 'win32' ? locale.openOnMenubar : locale.openOnTaskbar}
-                secondary={renderCombinator(openOnMenubarShortcut)}
-              />
-              <ListItemSecondaryAction>
-                <IconButton
-                  className={classes.button}
-                  aria-label={locale.change}
-                  onClick={() => onOpenShortcutDialog('openOnMenubar', openOnMenubarShortcut)}
-                >
-                  <ChevronRightIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-            {shortcuts.map(({ identifier, combinator }) => (
-              <React.Fragment key={`listitem${identifier}${combinator}`}>
-                <Divider />
-                <ListItem
-                  button
-                  key={identifier}
-                  onClick={() => onOpenShortcutDialog(identifier, combinator)}
-                >
-                  <ListItemText
-                    primary={locale[identifier]}
-                    secondary={renderCombinator(combinator)}
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton
-                      className={classes.button}
-                      aria-label={locale.change}
-                      onClick={() => onOpenShortcutDialog(identifier, combinator)}
-                    >
-                      <ChevronRightIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              </React.Fragment>
-            ))}
-          </List>
-        </Paper>
-
-        <Typography variant="body2" className={classes.paperTitle} />
+        <Typography variant="body1" className={classes.paperTitle} />
         <Paper className={classes.paper}>
           <List dense>
             <ListItem button>
               <ListItemText primary={locale.quit} onClick={() => remote.app.quit()} />
             </ListItem>
           </List>
-        </Paper>
-
-        <Typography variant="body2" className={classes.paperTitle}>
-          {locale.about}
-        </Typography>
-        <Paper className={classes.paperAbout}>
-          <Typography variant="title" className={classes.title}>Translatium</Typography>
-          <Typography variant="body1" className={classes.version}>
-            Version
-            {` ${getVersion()}`}
-          </Typography>
-
-          {window.process.platform === 'win32' && (
-            <>
-              <Button onClick={() => remote.shell.openExternal('ms-windows-store://review/?ProductId=9wzdncrcsg9k')}>
-                {locale.rateMicrosoftStore}
-              </Button>
-              <br />
-            </>
-          )}
-          {window.process.platform === 'darwin' && (
-            <>
-              <Button onClick={() => remote.shell.openExternal('macappstore://itunes.apple.com/app/id1176624652?mt=12')}>
-                {locale.rateMacAppStore}
-              </Button>
-              <br />
-            </>
-          )}
-          <Button onClick={() => remote.shell.openExternal('https://translatiumapp.com')}>
-            {locale.website}
-          </Button>
-          <br />
-          <Button onClick={() => remote.shell.openExternal('https://translatiumapp.com/support')}>
-            {locale.support}
-          </Button>
-          <br />
-
-          <Typography variant="body1" className={classes.madeBy}>
-            <span>Made with </span>
-            <span role="img" aria-label="love">❤</span>
-            <span> by </span>
-            <span
-              onClick={() => remote.shell.openExternal('https://quanglam2807.com')}
-              role="link"
-              tabIndex="0"
-              className={classes.link}
-            >
-              Quang Lam
-            </span>
-          </Typography>
         </Paper>
       </div>
     </div>
@@ -438,20 +287,13 @@ const Preferences = (props) => {
 Preferences.propTypes = {
   attachToMenubar: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
-  clearInputShortcut: PropTypes.string.isRequired,
   langId: PropTypes.string.isRequired,
   locale: PropTypes.object.isRequired,
   onOpenShortcutDialog: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
   onUpdateLocale: PropTypes.func.isRequired,
-  openImageFileShortcut: PropTypes.string.isRequired,
-  openInputLangListShortcut: PropTypes.string.isRequired,
-  openOnMenubarShortcut: PropTypes.string.isRequired,
-  openOutputLangListShortcut: PropTypes.string.isRequired,
-  primaryColorId: PropTypes.string.isRequired,
+  openOnMenubarShortcut: PropTypes.string,
   realtime: PropTypes.bool.isRequired,
-  saveToPhrasebookShortcut: PropTypes.string.isRequired,
-  swapLanguagesShortcut: PropTypes.string.isRequired,
   theme: PropTypes.string.isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
   translateClipboardOnShortcut: PropTypes.bool.isRequired,
@@ -460,21 +302,14 @@ Preferences.propTypes = {
 
 const mapStateToProps = (state) => ({
   attachToMenubar: state.preferences.attachToMenubar,
-  clearInputShortcut: state.preferences.clearInputShortcut,
   langId: state.preferences.langId,
   locale: state.locale,
-  openImageFileShortcut: state.preferences.openImageFileShortcut,
-  openInputLangListShortcut: state.preferences.openInputLangListShortcut,
-  openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
-  openOutputLangListShortcut: state.preferences.openOutputLangListShortcut,
-  primaryColorId: state.preferences.primaryColorId,
   realtime: state.preferences.realtime,
-  saveToPhrasebookShortcut: state.preferences.saveToPhrasebookShortcut,
-  swapLanguagesShortcut: state.preferences.swapLanguagesShortcut,
   theme: state.preferences.theme,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
-  translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
   alwaysOnTop: state.preferences.alwaysOnTop,
+  openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
+  translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
 });
 
 const mapDispatchToProps = (dispatch) => ({
