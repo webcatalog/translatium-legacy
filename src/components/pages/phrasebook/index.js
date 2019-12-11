@@ -62,6 +62,10 @@ const styles = (theme) => ({
     WebkitAppRegion: 'drag',
     WebkitUserSelect: 'none',
   },
+  title: {
+    flex: 1,
+    textAlign: 'center',
+  },
 });
 
 class Phrasebook extends React.Component {
@@ -101,7 +105,7 @@ class Phrasebook extends React.Component {
       <div className={classes.container}>
         <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
           <Toolbar variant="dense">
-            <Typography variant="h6" color="inherit">{getLocale('phrasebook')}</Typography>
+            <Typography variant="h6" color="inherit" className={classes.title}>{getLocale('phrasebook')}</Typography>
           </Toolbar>
         </AppBar>
         {(() => {

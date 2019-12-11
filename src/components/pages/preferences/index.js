@@ -73,13 +73,17 @@ const styles = (theme) => ({
     WebkitAppRegion: 'drag',
     WebkitUserSelect: 'none',
   },
+  title: {
+    flex: 1,
+    textAlign: 'center',
+  },
 });
 
 const renderCombinator = (combinator) => combinator
   .replace(/\+/g, ' + ')
-  .replace('alt', process.platform !== 'darwin' ? 'alt' : '⌥')
-  .replace('shift', process.platform !== 'darwin' ? 'shift' : '⇧')
-  .replace('mod', process.platform !== 'darwin' ? 'ctrl' : '⌘')
+  .replace('alt', window.process.platform !== 'darwin' ? 'alt' : '⌥')
+  .replace('shift', window.process.platform !== 'darwin' ? 'shift' : '⇧')
+  .replace('mod', window.process.platform !== 'darwin' ? 'ctrl' : '⌘')
   .replace('meta', '⌘')
   .toUpperCase();
 
@@ -111,7 +115,7 @@ const Preferences = (props) => {
       <DialogShortcut />
       <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
         <Toolbar variant="dense">
-          <Typography variant="h6" color="inherit">{getLocale('preferences')}</Typography>
+          <Typography variant="h6" color="inherit" className={classes.title}>{getLocale('preferences')}</Typography>
         </Toolbar>
       </AppBar>
       <div className={classes.innerContainer}>
@@ -157,7 +161,7 @@ const Preferences = (props) => {
                 </ListItem>
               )}
             >
-              {process.platform === 'darwin' && (
+              {window.process.platform === 'darwin' && (
                 <MenuItem onClick={() => requestSetPreference('theme', 'systemDefault')}>{getLocale('systemDefault')}</MenuItem>
               )}
               <MenuItem onClick={() => requestSetPreference('theme', 'light')}>{getLocale('light')}</MenuItem>
@@ -165,7 +169,7 @@ const Preferences = (props) => {
             </EnhancedMenu>
             <Divider />
             <ListItem>
-              <ListItemText primary={process.platform === 'win32' ? getLocale('attachToTaskbar') : getLocale('attachToMenubar')} />
+              <ListItemText primary={window.process.platform === 'win32' ? getLocale('attachToTaskbar') : getLocale('attachToMenubar')} />
               <ListItemSecondaryAction>
                 <Switch
                   checked={attachToMenubar}
@@ -204,7 +208,7 @@ const Preferences = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
-            {process.platform === 'darwin' && (
+            {window.process.platform === 'darwin' && (
               <>
                 <Divider />
                 <ListItem

@@ -27,6 +27,7 @@ localeLangIds.forEach((localeJson) => {
     if (locales[key]) {
       newLocales[key] = locales[key];
     } else {
+      newLocales[key] = null;
       const translateTextRes = await translateText('en', localeJson.replace('.json', ''), enLocales[key]);
       newLocales[key] = translateTextRes.outputText;
     }

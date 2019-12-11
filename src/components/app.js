@@ -145,10 +145,8 @@ class App extends React.Component {
 
     return (
       <div className={classes.container}>
-        {process.platform === 'darwin' && !attachToMenubar && (
-          <div className={classes.fakeTitleBar}>
-            Translatium
-          </div>
+        {window.process.platform === 'darwin' && !attachToMenubar && (
+          <div className={classes.fakeTitleBar} />
         )}
         <div className={classes.contentContainer}>
           {fullPageLoading && (

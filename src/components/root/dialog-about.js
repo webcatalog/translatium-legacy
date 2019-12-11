@@ -8,6 +8,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 
 import connectComponent from '../../helpers/connect-component';
+import getLocale from '../../helpers/get-locale';
 
 import { close } from '../../state/root/dialog-about/actions';
 import iconPng from '../../assets/icon.png';
@@ -76,7 +77,7 @@ const About = (props) => {
       transition={Transition}
     >
       <EnhancedDialogTitle onClose={onClose}>
-        About
+        {getLocale('about')}
       </EnhancedDialogTitle>
       <DialogContent className={classes.dialogContent}>
         <img src={iconPng} alt="Translatium" className={classes.icon} />
@@ -91,16 +92,16 @@ const About = (props) => {
         <Button
           onClick={() => requestOpenInBrowser('https://translatiumapp.com')}
         >
-          Website
+          {getLocale('website')}
         </Button>
 
         <Button
           onClick={() => requestOpenInBrowser('https://translatiumapp.com/support')}
         >
-          Support
+          {getLocale('support')}
         </Button>
 
-        <Typography variant="body1" className={classes.madeBy}>
+        <Typography variant="body2" className={classes.madeBy}>
           <span>Made with </span>
           <span role="img" aria-label="love">❤</span>
           <span> by </span>

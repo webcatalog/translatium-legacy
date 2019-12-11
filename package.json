@@ -22,7 +22,7 @@
     "dist": "yarn run build && babel-node packager.js",
     "lint": "eslint ./src ./public ./packager.js --ext js --fix",
     "test": "mocha",
-    "run-localizer": "npx babel-node localizer.js"
+    "localize": "npx babel-node localizer.js"
   },
   "dependencies": {
     "electron-is-dev": "1.1.0",

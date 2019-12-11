@@ -30,9 +30,9 @@ const styles = {
 
 const renderCombinator = (combinator) => combinator
   .replace(/\+/g, ' + ')
-  .replace('alt', process.platform !== 'darwin' ? 'alt' : '⌥')
-  .replace('shift', process.platform !== 'darwin' ? 'shift' : '⇧')
-  .replace('mod', process.platform !== 'darwin' ? 'ctrl' : '⌘')
+  .replace('alt', window.process.platform !== 'darwin' ? 'alt' : '⌥')
+  .replace('shift', window.process.platform !== 'darwin' ? 'shift' : '⇧')
+  .replace('mod', window.process.platform !== 'darwin' ? 'ctrl' : '⌘')
   .replace('meta', '⌘')
   .toUpperCase();
 

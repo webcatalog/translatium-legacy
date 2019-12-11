@@ -11,6 +11,7 @@ const { menubar } = require('menubar');
 const createMenu = require('./libs/create-menu');
 const loadListeners = require('./listeners');
 const { getPreference } = require('./libs/preferences');
+const { getLocale } = require('./libs/locales');
 const sendToAllWindows = require('./libs/send-to-all-windows');
 
 require('./libs/updater');
@@ -61,7 +62,7 @@ const createWindow = () => {
       mb.tray.on('right-click', () => {
         const contextMenu = Menu.buildFromTemplate([
           {
-            label: 'About Translatium',
+            label: getLocale('about'),
             click: () => {
               sendToAllWindows('open-dialog-about');
               mb.showWindow();
@@ -72,7 +73,7 @@ const createWindow = () => {
             visible: updaterEnabled,
           },
           {
-            label: 'Check for Updates...',
+            label: getLocale('checkForUpdates'),
             click: () => {
               global.updateSilent = false;
               autoUpdater.checkForUpdates();
@@ -81,7 +82,7 @@ const createWindow = () => {
           },
           { type: 'separator' },
           {
-            label: 'Preferences...',
+            label: getLocale('preferencesMenuItem'),
             click: () => {
               sendToAllWindows('go-to-preferences');
               mb.showWindow();
@@ -89,7 +90,7 @@ const createWindow = () => {
           },
           { type: 'separator' },
           {
-            label: 'Quit',
+            label: getLocale('Quit'),
             click: () => {
               mb.app.quit();
             },

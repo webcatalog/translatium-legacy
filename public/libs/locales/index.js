@@ -15,6 +15,7 @@ const initLocales = () => {
 
 const getLocale = (id) => {
   if (locales == null) initLocales();
+  if (!locales[id]) throw Error('Locale ID is not available.');
   return locales[id];
 };
 

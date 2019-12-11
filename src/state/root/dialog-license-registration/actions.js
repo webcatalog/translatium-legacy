@@ -25,7 +25,7 @@ export const open = () => ({
 
 const getValidationRules = () => ({
   licenseKey: {
-    fieldName: 'License Key',
+    fieldName: getLocale('licenseKey'),
     required: true,
     licenseKey: true,
   },
