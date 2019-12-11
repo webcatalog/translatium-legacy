@@ -9,6 +9,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import connectComponent from '../../../helpers/connect-component';
+import getLocale from '../../../helpers/get-locale';
 
 import {
   closeShortcutDialog,
@@ -29,9 +30,9 @@ const styles = {
 
 const renderCombinator = (combinator) => combinator
   .replace(/\+/g, ' + ')
-  .replace('alt', window.process.platform !== 'darwin' ? 'alt' : '⌥')
-  .replace('shift', window.process.platform !== 'darwin' ? 'shift' : '⇧')
-  .replace('mod', window.process.platform !== 'darwin' ? 'ctrl' : '⌘')
+  .replace('alt', process.platform !== 'darwin' ? 'alt' : '⌥')
+  .replace('shift', process.platform !== 'darwin' ? 'shift' : '⇧')
+  .replace('mod', process.platform !== 'darwin' ? 'ctrl' : '⌘')
   .replace('meta', '⌘')
   .toUpperCase();
 
@@ -68,18 +69,16 @@ class DialogShortcut extends React.Component {
       identifier,
       onCloseShortcutDialog,
       open,
-      locale,
     } = this.props;
 
     return (
       <Dialog open={open} onClose={onCloseShortcutDialog}>
         <DialogTitle>
-          {' '}
-          {identifier === 'openOnMenubar' && window.process.platform === 'win32' ? locale.openOnTaskbar : locale[identifier]}
+          {getLocale('openKeyboardShortcut')}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {locale.typeNewKeyboardCombinator}
+            {getLocale('typeNewKeyboardCombinator')}
           </DialogContentText>
           <DialogContentText className={classes.combinatorContainer}>
             {combinator && combinator !== '+' && combinator.split('+').map((key, i) => (
@@ -94,7 +93,7 @@ class DialogShortcut extends React.Component {
         </DialogContent>
         <DialogActions>
           <Button onClick={onCloseShortcutDialog}>
-            {locale.cancel}
+            {getLocale('cancel')}
           </Button>
           <Button
             onClick={() => {
@@ -102,7 +101,7 @@ class DialogShortcut extends React.Component {
               onCloseShortcutDialog();
             }}
           >
-            {locale.removeShortcut}
+            {getLocale('removeShortcut')}
           </Button>
           <Button
             color="primary"
@@ -111,7 +110,7 @@ class DialogShortcut extends React.Component {
               onCloseShortcutDialog();
             }}
           >
-            {locale.save}
+            {getLocale('save')}
           </Button>
         </DialogActions>
       </Dialog>
@@ -131,14 +130,12 @@ DialogShortcut.propTypes = {
   onCloseShortcutDialog: PropTypes.func.isRequired,
   onSetCombinator: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  locale: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   combinator: state.pages.preferences.shortcutDialog.combinator,
   identifier: state.pages.preferences.shortcutDialog.identifier,
   open: state.pages.preferences.shortcutDialog.open,
-  locale: state.locale,
 });
 
 const actionCreators = {

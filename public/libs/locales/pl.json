@@ -2,11 +2,9 @@
 	"home": "Strona Główna",
 	"phrasebook": "Rozmówki",
 	"preferences": "Ustawienia",
-
 	"website": "Strona internetowa",
-
+	"support": "Support",
 	"typeSomethingHere": "Wpisz coś tutaj ...",
-
 	"clear": "Wyczyść",
 	"openImageFile": "Otwórz plik obrazu",
 	"more": "Więcej",
@@ -14,110 +12,62 @@
 	"exitFullscreen": "Zamknij tryb pełnoekranowy",
 	"translate": "Przetłumacz",
 	"translateFrom": "Przetłumacz z",
-	"didYouMean": "Czy chodziło ci o",
-
 	"errorOccured": "Wystąpił błąd.",
 	"cannotConnectToServer": "Aplikacja nie może odnaleźć serwera. Sprawdź połączenie internetowe lub włącz tryb chiński, jeśli jesteś w Chinach.",
 	"cannotOpenTheFile": "Aplikacja nie może otworzyć wybranego pliku.",
 	"cannotRecognizeImage": "Aplikacja nie rozpoznaje żadnego tekstu na wybranym obrazie.",
-
 	"listen": "Słuchaj",
 	"stop": "Zatrzymaj",
-
 	"swap": "Zamień",
 	"copy": "Kopiuj",
 	"copied": "Skopiowano do schowka",
 	"share": "Udostepnij",
 	"addToPhrasebook": "Dodaj do rozmówek",
 	"removeFromPhrasebook": "Usuń z rozmówek",
-
 	"translatedByYandexTranslate": "Powered by Yandex.Translate.",
 	"translatedByYandexDictionary": "Powered by Yandex.Dictionary.",
-
 	"fromLanguage": "z {1}",
-
 	"chooseAnInputLanguage": "Przetłumacz z",
 	"chooseAnOutputLanguage": "Przetłumacz na",
-
 	"displayOriginalText": "Wyświetlaj tekst źródłowy",
 	"displayTranslatedText": "Wyświetlaj tłumaczenie",
 	"copyOriginalText": "Kopiuj tekst źródłowy",
 	"copyTranslatedText": "Kopiuj tłumaczenie",
 	"displayTextOnly": "Wyświetlaj tylko tekst",
 	"phrasebookIsEmpty": "Rozmówki są puste.",
-
-	"red": "czerwony",
-	"pink": "róźowy",
-	"purple": "fioletowy",
-	"deepPurple": "głęboki fiolet",
-	"indigo": "indygo",
-	"blue": "niebieski",
-	"lightBlue": "jasny niebieski",
-	"cyan": "cyjan",
-	"teal": "morski",
-	"green": "zielony",
-	"lightGreen": "jasny zielony",
-	"orange": "pomarańczowy",
-	"deepOrange": "głęboka pomarańcz",
-	"brown": "brązowy",
-	"blueGrey": "niebiesko szary",
-	"grey": "szary",
-	"darkGrey": "ciemno szary",
-	"black": "czarny",
-
 	"theme": "Motyw",
-	"automatic": "Automatyczny",
+	"systemDefault": "Domyślnie system ",
 	"light": "Światło",
 	"dark": "Ciemny",
-
 	"attachToMenubar": "Dołącz do paska menu",
 	"attachToTaskbar": "Dołącz do paska zadań",
-
 	"translateWhenPressingEnter": "Tłumacz po naciśnięciu klawisza Enter",
 	"realtime": "Tłumaczenie w czasie rzeczywistym",
-
 	"rateMacAppStore": "Oceń Translatium w Mac App Store",
 	"rateMicrosoftStore": "Oceń Translatium w Sklepie Microsoft",
-
 	"displayLanguage": "Język aplikacji",
-	"change": "Zmień",
 	"close": "Zamknij",
-
 	"quit": "Zamknij",
-
-	"appearance": "Wygląd",
-	"restartRequired": "wymagane ponowne uruchomienie",
+	"general": "Ogólne",
 	"advanced": "Zaawansowane",
-
 	"alwaysOnTop": "Utrzymuj okno zawsze na wierzchu",
 	"alwaysOnTopDesc": "Okno nie ukryje się podczas rozmycia.",
-
 	"translateClipboardOnShortcut": "Przetłumacz schowek skrótem",
 	"translateClipboardOnShortcutDesc": "Gdy otworzysz Translatium za pomocą skrótu, zawartość schowka zostanie automatycznie przetłumaczona.",
-
-	"shortcuts": "Skróty klawiszowe",
-	"openOnMenubar": "Otwórz Translatium na Pasku menu",
-	"openOnTaskbar": "Otwórz Translatium na Pasku zadań",
-
+	"openKeyboardShortcut": "Określić kombinację klawiszy, aby otworzyć Translatium szybko",
+	"typeNewKeyboardCombinator": "Wprowadź nową klawiaturę kombinatora.",
 	"searchLanguages": "Szukaj w językach",
 	"noLanguageFound": "Nie znaleziono języka",
 	"searchResults": "Wyniki wyszukiwania",
 	"recentlyUsed": "Ostatnio używane",
 	"allLanguages": "Wszystkie języki",
-
 	"remove": "Usuń",
 	"andSaveToHistory": "& zapisz do historii",
-
 	"save": "Zapisz",
-	"resetToDefault": "Przywróć domyślne",
+	"removeShortcut": "Usunąć skrót",
 	"cancel": "Anuluj",
-
 	"pasteFromClipboard": "Wklej ze schowka",
-
 	"popclipExtension": "PopClip Extension",
-
-	"support": "Support",
-
 	"licenseRegistration": "Rejestracja licencji",
 	"licenseKey": "Klucz licencyjny",
 	"licenseContentText": "Aby kontynuować, zakup klucz licencyjny bezterminowy (4,99 USD) w naszym sklepie.",
@@ -125,9 +75,7 @@
 	"licenseRegistered": "Rejestracja zakończona! Dziękujemy za wsparcie przyszłego rozwoju Translatium.",
 	"visitStore": "Odwiedź sklep...",
 	"register": "Zarejestrować",
-
 	"auto": "Wykryj język",
-
 	"af": "afrikaans",
 	"am": "amharski",
 	"ar": "arabski",
@@ -166,7 +114,7 @@
 	"is": "islandzki",
 	"it": "włoski",
 	"ja": "japoński",
-	"jv" : "jawajski",
+	"jv": "jawajski",
 	"ka": "gruziński",
 	"kk": "Kazachski",
 	"km": "Khmerski",

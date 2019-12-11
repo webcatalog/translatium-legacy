@@ -30,7 +30,7 @@ class AppWrapper extends React.Component {
     remote.getCurrentWindow().on('enter-full-screen', this.handleEnterFullScreen);
     remote.getCurrentWindow().on('leave-full-screen', this.handleLeaveFullScreen);
 
-    if (window.process.platform === 'darwin') {
+    if (process.platform === 'darwin') {
       this.appleInterfaceThemeChangedNotificationId = remote.systemPreferences
         .subscribeNotification(
           'AppleInterfaceThemeChangedNotification',
@@ -43,7 +43,7 @@ class AppWrapper extends React.Component {
     remote.getCurrentWindow().removeListener('enter-full-screen', this.handleEnterFullScreen);
     remote.getCurrentWindow().removeListener('leave-full-screen', this.handleLeaveFullScreen);
 
-    if (window.process.platform === 'darwin') {
+    if (process.platform === 'darwin') {
       remote.systemPreferences.unsubscribeNotification(
         this.appleInterfaceThemeChangedNotificationId,
       );

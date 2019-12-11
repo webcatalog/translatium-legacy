@@ -32,6 +32,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FileCopy from '@material-ui/icons/FileCopy';
 
 import connectComponent from '../../../helpers/connect-component';
+import getLocale from '../../../helpers/get-locale';
 
 import EnhancedMenu from '../../shared/enhanced-menu';
 
@@ -180,7 +181,6 @@ class Home extends React.Component {
     const {
       classes,
       fullscreenInputBox,
-      locale,
       onEndTextToSpeech,
       onOpenSnackbar,
       onStartTextToSpeech,
@@ -211,12 +211,12 @@ class Home extends React.Component {
         const controllers = [
           {
             Icon: output.phrasebookId ? ToggleStar : ToggleStarBorder,
-            tooltip: output.phrasebookId ? locale.removeFromPhrasebook : locale.addToPhrasebook,
+            tooltip: output.phrasebookId ? getLocale('removeFromPhrasebook') : getLocale('addToPhrasebook'),
             onClick: onTogglePhrasebook,
           },
           {
             Icon: ActionSwapVert,
-            tooltip: locale.swap,
+            tooltip: getLocale('swap'),
             onClick: () => {
               onUpdateInputLang(output.inputLang);
               onUpdateOutputLang(output.outputLang);
@@ -225,10 +225,10 @@ class Home extends React.Component {
           },
           {
             Icon: FileCopy,
-            tooltip: locale.copy,
+            tooltip: getLocale('copy'),
             onClick: () => {
               remote.clipboard.writeText(output.outputText);
-              onOpenSnackbar(locale.copied);
+              onOpenSnackbar(getLocale('copied'));
             },
           },
         ];
@@ -236,7 +236,7 @@ class Home extends React.Component {
         if (isTtsSupported(output.outputLang)) {
           controllers.unshift({
             Icon: textToSpeechPlaying ? AVStop : AVVolumeUp,
-            tooltip: textToSpeechPlaying ? locale.stop : locale.listen,
+            tooltip: textToSpeechPlaying ? getLocale('stop') : getLocale('listen'),
             onClick: () => {
               if (textToSpeechPlaying) {
                 return onEndTextToSpeech();
@@ -300,7 +300,7 @@ class Home extends React.Component {
                   <EnhancedMenu
                     id="homeMore2"
                     buttonElement={(
-                      <IconButton aria-label={locale.more} tooltipPosition="bottom-center">
+                      <IconButton aria-label={getLocale('more')} tooltipPosition="bottom-center">
                         <NavigationMoreVert />
                       </IconButton>
                     )}
@@ -327,7 +327,7 @@ class Home extends React.Component {
               className={classes.yandexCopyright}
               onClick={() => remote.shell.openExternal('http://translate.yandex.com/')}
             >
-              {locale.translatedByYandexTranslate}
+              {getLocale('translatedByYandexTranslate')}
             </Typography>
 
             {output.outputDict && <Dictionary />}
@@ -338,7 +338,7 @@ class Home extends React.Component {
                 className={classes.yandexCopyright}
                 onClick={() => remote.shell.openExternal('https://tech.yandex.com/dictionary/')}
               >
-                {locale.translatedByYandexDictionary}
+                {getLocale('translatedByYandexDictionary')}
               </Typography>
             )}
           </div>
@@ -353,7 +353,6 @@ class Home extends React.Component {
       fullscreenInputBox,
       inputLang,
       inputText,
-      locale,
       onChangeRoute,
       onEndTextToSpeech,
       onInsertInputText,
@@ -374,7 +373,7 @@ class Home extends React.Component {
     const controllers = [
       {
         Icon: ContentClear,
-        tooltip: locale.clear,
+        tooltip: getLocale('clear'),
         onClick: () => onUpdateInputText(''),
       },
       {
@@ -383,7 +382,7 @@ class Home extends React.Component {
             <path d="M19,20H5V4H7V7H17V4H19M12,2A1,1 0 0,1 13,3A1,1 0 0,1 12,4A1,1 0 0,1 11,3A1,1 0 0,1 12,2M19,2H14.82C14.4,0.84 13.3,0 12,0C10.7,0 9.6,0.84 9.18,2H5A2,2 0 0,0 3,4V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V4A2,2 0 0,0 19,2Z" />
           </SvgIcon>
         )),
-        tooltip: locale.pasteFromClipboard,
+        tooltip: getLocale('pasteFromClipboard'),
         onClick: () => {
           const text = remote.clipboard.readText();
           onInsertInputText(text);
@@ -394,7 +393,7 @@ class Home extends React.Component {
     if (isTtsSupported(inputLang)) {
       controllers.push({
         Icon: textToSpeechPlaying ? AVStop : AVVolumeUp,
-        tooltip: textToSpeechPlaying ? locale.stop : locale.listen,
+        tooltip: textToSpeechPlaying ? getLocale('stop') : getLocale('listen'),
         onClick: () => {
           if (textToSpeechPlaying) {
             window.speechSynthesis.cancel();
@@ -408,7 +407,7 @@ class Home extends React.Component {
       && isTtsSupported(output.inputLang) && inputText === output.inputText) {
       controllers.push({
         Icon: textToSpeechPlaying ? AVStop : AVVolumeUp,
-        tooltip: textToSpeechPlaying ? locale.stop : locale.listen,
+        tooltip: textToSpeechPlaying ? getLocale('stop') : getLocale('listen'),
         onClick: () => {
           if (textToSpeechPlaying) {
             window.speechSynthesis.cancel();
@@ -423,14 +422,14 @@ class Home extends React.Component {
     if (isOcrSupported(inputLang)) {
       controllers.push({
         Icon: ImageImage,
-        tooltip: locale.openImageFile,
+        tooltip: getLocale('openImageFile'),
         onClick: () => onLoadImage(false),
       });
     }
 
     controllers.push({
       Icon: fullscreenInputBox ? NavigationFullscreenExit : NavigationFullscreen,
-      tooltip: fullscreenInputBox ? locale.exitFullscreen : locale.fullscreen,
+      tooltip: fullscreenInputBox ? getLocale('exitFullscreen') : getLocale('fullscreen'),
       onClick: onToggleFullscreenInputBox,
     });
 
@@ -454,9 +453,9 @@ class Home extends React.Component {
                   onChangeRoute(ROUTE_LANGUAGE_LIST);
                 }}
               >
-                {inputLang === 'auto' && output && output.inputLang ? `${locale[output.inputLang]} (${locale.auto})` : locale[inputLang]}
+                {inputLang === 'auto' && output && output.inputLang ? `${getLocale(output.inputLang)} (${getLocale('auto')})` : getLocale(inputLang)}
               </Button>
-              <Tooltip title={locale.swap} placement="bottom">
+              <Tooltip title={getLocale('swap')} placement="bottom">
                 <div>
                   <IconButton
                     color="inherit"
@@ -475,7 +474,7 @@ class Home extends React.Component {
                   onChangeRoute(ROUTE_LANGUAGE_LIST);
                 }}
               >
-                {locale[outputLang]}
+                {getLocale(outputLang)}
               </Button>
             </Toolbar>
           </AppBar>
@@ -525,7 +524,7 @@ class Home extends React.Component {
                 e.target.selectionStart,
                 e.target.selectionEnd,
               )}
-              placeholder={locale.typeSomethingHere}
+              placeholder={getLocale('typeSomethingHere')}
               spellCheck="false"
               value={inputText}
             />
@@ -545,7 +544,7 @@ class Home extends React.Component {
                   <EnhancedMenu
                     id="homeMore"
                     buttonElement={(
-                      <IconButton aria-label={locale.more}>
+                      <IconButton aria-label={getLocale('more')}>
                         <NavigationMoreVert />
                       </IconButton>
                     )}
@@ -564,7 +563,7 @@ class Home extends React.Component {
                 )}
               </div>
               <div className={classes.controllerContainerRight}>
-                <Tooltip title={locale.andSaveToHistory} placement={fullscreenInputBox ? 'top' : 'bottom'}>
+                <Tooltip title={getLocale('andSaveToHistory')} placement={fullscreenInputBox ? 'top' : 'bottom'}>
                   <Button
                     variant="outlined"
                     size="medium"
@@ -572,7 +571,7 @@ class Home extends React.Component {
                     onClick={() => onTranslate(true)}
                     classes={{ label: classes.translateButtonLabel }}
                   >
-                    {locale.translate}
+                    {getLocale('translate')}
                   </Button>
                 </Tooltip>
               </div>
@@ -590,7 +589,6 @@ Home.propTypes = {
   fullscreenInputBox: PropTypes.bool,
   inputLang: PropTypes.string,
   inputText: PropTypes.string,
-  locale: PropTypes.object.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
   onEndTextToSpeech: PropTypes.func.isRequired,
   onInsertInputText: PropTypes.func.isRequired,
@@ -616,7 +614,6 @@ const mapStateToProps = (state) => ({
   fullscreenInputBox: state.pages.home.fullscreenInputBox,
   inputLang: state.preferences.inputLang,
   inputText: state.pages.home.inputText,
-  locale: state.locale,
   output: state.pages.home.output,
   outputLang: state.preferences.outputLang,
   screenWidth: state.screen.screenWidth,

@@ -62,7 +62,7 @@ const createMenu = () => {
       label: config.APP_NAME,
       submenu: [
         {
-          role: 'about',
+          label: 'About Translatium',
           click: () => sendToAllWindows('open-dialog-about'),
         },
         {
@@ -125,7 +125,7 @@ const createMenu = () => {
       label: 'File',
       submenu: [
         {
-          role: 'about',
+          label: 'About Translatium',
           click: () => sendToAllWindows('open-dialog-about'),
         },
         {

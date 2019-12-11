@@ -12,6 +12,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import ToggleStar from '@material-ui/icons/Star';
 
 import connectComponent from '../helpers/connect-component';
+import getLocale from '../helpers/get-locale';
 
 import { screenResize } from '../state/root/screen/actions';
 import { closeSnackbar } from '../state/root/snackbar/actions';
@@ -106,7 +107,6 @@ class App extends React.Component {
       attachToMenubar,
       classes,
       fullPageLoading,
-      locale,
       onChangeRoute,
       onRequestCloseSnackbar,
       route,
@@ -145,7 +145,7 @@ class App extends React.Component {
 
     return (
       <div className={classes.container}>
-        {window.process.platform === 'darwin' && !attachToMenubar && (
+        {process.platform === 'darwin' && !attachToMenubar && (
           <div className={classes.fakeTitleBar}>
             Translatium
           </div>
@@ -166,7 +166,7 @@ class App extends React.Component {
             onClose={onRequestCloseSnackbar}
             action={(
               <Button color="secondary" size="small" onClick={onRequestCloseSnackbar}>
-                {locale.close}
+                {getLocale('close')}
               </Button>
             )}
           />
@@ -179,7 +179,7 @@ class App extends React.Component {
                 showLabels
               >
                 <BottomNavigationAction
-                  label={locale.home}
+                  label={getLocale('home')}
                   icon={<ActionHome className={classes.icon} />}
                   onClick={() => onChangeRoute(ROUTE_HOME)}
                   classes={{
@@ -188,7 +188,7 @@ class App extends React.Component {
                   }}
                 />
                 <BottomNavigationAction
-                  label={locale.phrasebook}
+                  label={getLocale('phrasebook')}
                   icon={<ToggleStar className={classes.icon} />}
                   onClick={() => onChangeRoute(ROUTE_PHRASEBOOK)}
                   classes={{
@@ -197,7 +197,7 @@ class App extends React.Component {
                   }}
                 />
                 <BottomNavigationAction
-                  label={locale.preferences}
+                  label={getLocale('preferences')}
                   icon={<ActionSettings className={classes.icon} />}
                   onClick={() => onChangeRoute(ROUTE_PREFERENCES)}
                   classes={{
@@ -218,7 +218,6 @@ App.propTypes = {
   attachToMenubar: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   fullPageLoading: PropTypes.bool.isRequired,
-  locale: PropTypes.object.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
   onOpenDialogLicenseRegistration: PropTypes.func.isRequired,
   onRequestCloseSnackbar: PropTypes.func.isRequired,
@@ -233,7 +232,6 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   attachToMenubar: state.preferences.attachToMenubar,
   fullPageLoading: Boolean(state.pages.ocr && state.pages.ocr.status === 'loading'),
-  locale: state.locale,
   registered: state.preferences.registered,
   route: state.router.route,
   shouldShowBottomNav: true,

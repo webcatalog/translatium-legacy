@@ -7,6 +7,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 
 import connectComponent from '../../helpers/connect-component';
+import getLocale from '../../helpers/get-locale';
 
 const styles = (theme) => ({
   root: {
@@ -23,12 +24,12 @@ const styles = (theme) => ({
 });
 
 const EnhancedDialogTitle = ({
-  children, classes, onClose, locale,
+  children, classes, onClose,
 }) => (
   <MuiDialogTitle disableTypography className={classes.root}>
     <Typography variant="h6">{children}</Typography>
     {onClose ? (
-      <IconButton aria-label={locale.close} className={classes.closeButton} onClick={onClose}>
+      <IconButton aria-label={getLocale('close')} className={classes.closeButton} onClick={onClose}>
         <CloseIcon />
       </IconButton>
     ) : null}
@@ -42,16 +43,11 @@ EnhancedDialogTitle.propTypes = {
     PropTypes.string,
   ]).isRequired,
   onClose: PropTypes.func.isRequired,
-  locale: PropTypes.object.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  locale: state.locale,
-});
 
 export default connectComponent(
   EnhancedDialogTitle,
-  mapStateToProps,
+  null,
   null,
   styles,
 );

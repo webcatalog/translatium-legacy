@@ -9,6 +9,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 
 import connectComponent from '../../helpers/connect-component';
+import getLocale from '../../helpers/get-locale';
 
 import {
   updateForm,
@@ -35,7 +36,6 @@ const DialogLicenseRegistration = (props) => {
     classes,
     licenseKey,
     licenseKeyError,
-    locale,
     onRegister,
     onUpdateForm,
     open,
@@ -49,23 +49,23 @@ const DialogLicenseRegistration = (props) => {
       open={open}
     >
       <EnhancedDialogTitle>
-        {locale.licenseRegistration}
+        {getLocale('licenseRegistration')}
       </EnhancedDialogTitle>
       <DialogContent>
         <DialogContentText className={classes.dialogContentText}>
-          {locale.licenseContentText}
+          {getLocale('licenseContentText')}
         </DialogContentText>
         <TextField
           fullWidth
           id=""
-          label={licenseKeyError || locale.licenseKey}
+          label={licenseKeyError || getLocale('licenseKey')}
           margin="normal"
           onChange={(e) => onUpdateForm({ licenseKey: e.target.value })}
           value={licenseKey}
           placeholder="0-0000000000000-00000000-00000000-00000000-00000000"
           error={Boolean(licenseKeyError)}
           variant="outlined"
-          helperText={locale.licenseHelper}
+          helperText={getLocale('licenseHelper')}
         />
       </DialogContent>
       <DialogActions className={classes.dialogActions}>
@@ -73,14 +73,14 @@ const DialogLicenseRegistration = (props) => {
           <Button
             onClick={() => remote.shell.openExternal('https://webcatalog.onfastspring.com/translatiumapp/translatium')}
           >
-            {locale.visitStore}
+            {getLocale('visitStore')}
           </Button>
         </div>
         <Button
           color="primary"
           onClick={onRegister}
         >
-          {locale.register}
+          {getLocale('register')}
         </Button>
       </DialogActions>
     </Dialog>
@@ -96,7 +96,6 @@ DialogLicenseRegistration.propTypes = {
   classes: PropTypes.object.isRequired,
   licenseKey: PropTypes.string,
   licenseKeyError: PropTypes.string,
-  locale: PropTypes.object.isRequired,
   onRegister: PropTypes.func.isRequired,
   onUpdateForm: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
@@ -115,7 +114,6 @@ const mapStateToProps = (state) => {
     licenseKey,
     licenseKeyError,
     open,
-    locale: state.locale,
   };
 };
 

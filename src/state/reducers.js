@@ -12,7 +12,6 @@ import general from './root/general/reducers';
 import preferences from './root/preferences/reducers';
 import screen from './root/screen/reducers';
 import snackbar from './root/snackbar/reducers';
-import locale from './root/locale/reducers';
 import router from './root/router/reducers';
 
 import pages from './pages/reducers';
@@ -24,7 +23,6 @@ const rootReducer = combineReducers({
   dialogAbout,
   dialogLicenseRegistration,
   general,
-  locale,
   pages,
   preferences,
   router,

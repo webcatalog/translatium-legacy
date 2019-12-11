@@ -2,11 +2,9 @@
 	"home": "Início",
 	"phrasebook": "Favoritos",
 	"preferences": "Configrações",
-
 	"website": "Site",
-
+	"support": "Suporte",
 	"typeSomethingHere": "Digite alguma coisa aqui...",
-
 	"clear": "Limpar",
 	"openImageFile": "Abrir uma imagem",
 	"more": "Mais",
@@ -14,110 +12,62 @@
 	"exitFullscreen": "Sair da Tela Cheia",
 	"translate": "Traduzir",
 	"translateFrom": "Traduzir do",
-	"didYouMean": "Você quer dizer",
-
 	"errorOccured": "Ocorreu um erro.",
 	"cannotConnectToServer": "O aplicativo não pode se conectar ao servidor. Verifique sua conexão com a Internet ou ligue o Modo China se você estiver na China.",
 	"cannotOpenTheFile": "O aplicativo não pode abrir o arquivo selecionado.",
 	"cannotRecognizeImage": "O aplicativo não reconheceu nenhum texto na sua imagem.",
-
 	"listen": "Ouvir",
 	"stop": "Parar",
-
 	"swap": "Inverter",
 	"copy": "Copiar",
 	"copied": "Copiar para a área de transferência",
 	"share": "Compartilhar",
 	"addToPhrasebook": "Adicionar aos favoritos",
 	"removeFromPhrasebook": "Remover dos favoritos",
-
 	"translatedByYandexTranslate": "Powered by Yandex.Translate.",
 	"translatedByYandexDictionary": "Powered by Yandex.Dictionary.",
-
 	"fromLanguage": "Do {1}",
-
 	"chooseAnInputLanguage": "Traduzir do",
 	"chooseAnOutputLanguage": "Traduzir para",
-
 	"displayOriginalText": "Exibir texto original",
 	"displayTranslatedText": "Exibir texto traduzido",
 	"copyOriginalText": "Copiar texto original",
 	"copyTranslatedText": "Copiar texto traduzido",
 	"displayTextOnly": "Exibir apenas texto",
 	"phrasebookIsEmpty": "O Favoritos está vazio.",
-
-	"red": "Vermelho",
-	"pink": "Rosa",
-	"purple": "Roxo",
-	"deepPurple": "Roxo Escuro",
-	"indigo": "Indigo",
-	"blue": "Azul",
-	"lightBlue": "Azul Claro",
-	"cyan": "Cyan",
-	"teal": "Teal",
-	"green": "Verde",
-	"lightGreen": "Verde Claro",
-	"orange": "Laranja",
-	"deepOrange": "Laranja Escuro",
-	"brown": "Marrom",
-	"blueGrey": "Azul Acinzentado",
-	"grey": "Cinza",
-	"darkGrey": "Cinza Escuro",
-	"black": "Preto",
-
 	"theme": "Tema",
-	"automatic": "Automática",
+	"systemDefault": "Sistema padrão",
 	"light": "Leve",
 	"dark": "Sombria",
-
 	"attachToMenubar": "Anexar à barra de menus",
 	"attachToTaskbar": "Anexar à barra de tarefas",
-
 	"translateWhenPressingEnter": "Traduzir ao pressionar Enter",
 	"realtime": "Tradução em Tempo Real",
-
 	"rateMacAppStore": "Classifique o app Translatium na Mac App Store",
 	"rateMicrosoftStore": "Classifique o app Translatium na Microsoft Store",
-
 	"displayLanguage": "Idioma",
-	"change": "Mudar",
 	"close": "Fechar",
-
 	"quit": "Sair",
-
-	"appearance": "Aparência",
-	"restartRequired": "é necessário reiniciar o app",
+	"general": "Geral",
 	"advanced": "Avançado",
-
 	"alwaysOnTop": "Mantenha a janela sempre no topo",
 	"alwaysOnTopDesc": "A janela não se esconderá no borrão.",
-
 	"translateClipboardOnShortcut": "Traduzir a área de transferência no atalho",
 	"translateClipboardOnShortcutDesc": "Quando você abre o Translatium com um atalho, ele irá traduzir automaticamente o conteúdo da área de transferência.",
-
-	"shortcuts": "Atalhos do Teclado",
-	"openOnMenubar": "Abrir o app Translatium na Barra de Menus",
-	"openOnTaskbar": "Abra o app Translatium na Barra de Tarefas",
-
+	"openKeyboardShortcut": "Definir um atalho de teclado para abrir rapidamente Translatium",
+	"typeNewKeyboardCombinator": "Digite o novo teclado combinator.",
 	"searchLanguages": "Pesquisar idiomas",
 	"noLanguageFound": "Nenhuma idioma encontrado",
 	"searchResults": "Procurar Resultados",
 	"recentlyUsed": "Usado recentemente",
 	"allLanguages": "Todos os idiomas",
-
 	"remove": "Remover",
 	"andSaveToHistory": "e salvar na História",
-
 	"save": "Salvar",
-	"resetToDefault": "Restaurar ao padrão",
+	"removeShortcut": "Remover atalho",
 	"cancel": "Cancelar",
-
 	"pasteFromClipboard": "Colar da Área de Transferência",
-
 	"popclipExtension": "PopClip Extension",
-
-	"support": "Suporte",
-
 	"licenseRegistration": "Registro de Licença",
 	"licenseKey": "Chave de licença",
 	"licenseContentText": "Para continuar, compre uma chave de licença permanente (US $ 4,99) em nossa loja.",
@@ -125,9 +75,7 @@
 	"licenseRegistered": "Registro concluído! Obrigado por apoiar o desenvolvimento futuro do Translatium.",
 	"visitStore": "Visitar loja...",
 	"register": "Registo",
-
 	"auto": "Detectar Automaticamente",
-
 	"af": "Africâner",
 	"am": "Amárica",
 	"ar": "Árabe",

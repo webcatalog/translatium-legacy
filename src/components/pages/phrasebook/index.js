@@ -15,6 +15,7 @@ import Divider from '@material-ui/core/Divider';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import connectComponent from '../../../helpers/connect-component';
+import getLocale from '../../../helpers/get-locale';
 
 import { deletePhrasebookItem, loadPhrasebook } from '../../../state/pages/phrasebook/actions';
 import { loadOutput } from '../../../state/pages/home/actions';
@@ -89,7 +90,6 @@ class Phrasebook extends React.Component {
   render() {
     const {
       classes,
-      locale,
       onChangeRoute,
       onDeletePhrasebookItem,
       onLoadOutput,
@@ -101,7 +101,7 @@ class Phrasebook extends React.Component {
       <div className={classes.container}>
         <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
           <Toolbar variant="dense">
-            <Typography variant="h6" color="inherit">{locale.phrasebook}</Typography>
+            <Typography variant="h6" color="inherit">{getLocale('phrasebook')}</Typography>
           </Toolbar>
         </AppBar>
         {(() => {
@@ -110,7 +110,7 @@ class Phrasebook extends React.Component {
               <div className={classes.emptyContainer}>
                 <div className={classes.emptyInnerContainer}>
                   <ToggleStar className={classes.bigIcon} />
-                  <Typography variant="h5">{locale.phrasebookIsEmpty}</Typography>
+                  <Typography variant="h5">{getLocale('phrasebookIsEmpty')}</Typography>
                 </div>
               </div>
             );
@@ -133,9 +133,9 @@ class Phrasebook extends React.Component {
                       secondary={item.inputText}
                     />
                     <ListItemSecondaryAction>
-                      <Tooltip title={locale.remove} placement="left">
+                      <Tooltip title={getLocale('remove')} placement="left">
                         <IconButton
-                          aria-label={locale.removeFromPhrasebook}
+                          aria-label={getLocale('removeFromPhrasebook')}
                           onClick={() => onDeletePhrasebookItem(
                             item.phrasebookId,
                             item.rev,
@@ -162,7 +162,6 @@ class Phrasebook extends React.Component {
 Phrasebook.propTypes = {
   canLoadMore: PropTypes.bool,
   classes: PropTypes.object.isRequired,
-  locale: PropTypes.object.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
   onDeletePhrasebookItem: PropTypes.func.isRequired,
   onLoadOutput: PropTypes.func.isRequired,
@@ -175,7 +174,6 @@ const mapStateToProps = (state) => ({
   phrasebookItems: state.pages.phrasebook.items,
   canLoadMore: state.pages.phrasebook.canLoadMore,
   phrasebookLoading: state.pages.phrasebook.loading,
-  locale: state.locale,
 });
 
 const actionCreators = {

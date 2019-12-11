@@ -13,16 +13,28 @@ const {
   setPreference,
 } = require('../libs/preferences');
 
+const {
+  getLocale,
+  getLocales,
+} = require('../libs/locales');
+
 const loadListeners = () => {
+  // Locale
+  ipcMain.on('get-locale', (e, id) => {
+    e.returnValue = getLocale(id);
+  });
+
+  ipcMain.on('get-locales', (e) => {
+    e.returnValue = getLocales();
+  });
+
   // Preferences
   ipcMain.on('get-preference', (e, name) => {
-    const val = getPreference(name);
-    e.returnValue = val;
+    e.returnValue = getPreference(name);
   });
 
   ipcMain.on('get-preferences', (e) => {
-    const preferences = getPreferences();
-    e.returnValue = preferences;
+    e.returnValue = getPreferences();
   });
 
   ipcMain.on('request-set-preference', (e, name, value) => {

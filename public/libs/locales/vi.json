@@ -2,11 +2,9 @@
 	"home": "Trang chủ",
 	"phrasebook": "Sổ từ ngữ",
 	"preferences": "Cài đặt",
-
 	"website": "Trang web",
-
+	"support": "Hỗ trợ",
 	"typeSomethingHere": "Nhập ở đây...",
-
 	"clear": "Xoá",
 	"openImageFile": "Mở file ảnh",
 	"more": "Thêm",
@@ -14,110 +12,62 @@
 	"exitFullscreen": "Thoát toàn màn hình",
 	"translate": "Dịch",
 	"translateFrom": "Dịch từ",
-	"didYouMean": "Có phải ý bạn là",
-
 	"errorOccured": "Đã có lỗi xảy ra.",
 	"cannotConnectToServer": "Ứng dụng không thể kết nối với máy chủ. Vui lòng kiểm tra kết nối Internet hoặc kích hoạt Chế độ Trung Quốc nếu bạn đang ở Trung Quốc.",
 	"cannotOpenTheFile": "Ứng dụng không thể mở tệp bạn đã chọn.",
 	"cannotRecognizeImage": "Ứng dụng không thể nhận diện được bất kỳ văn bản nào trên ảnh bạn chọn.",
-
 	"listen": "Nghe",
 	"stop": "Dừng",
-
 	"swap": "Tráo đổi",
 	"copy": "Sao chép",
 	"copied": "Đã sao chép vào Clipboard",
 	"share": "Chia sẻ",
 	"addToPhrasebook": "Thêm vào Sổ từ ngữ",
 	"removeFromPhrasebook": "Xoá khỏi Sổ từ ngữ",
-
 	"translatedByYandexTranslate": "Powered by Yandex.Translate.",
 	"translatedByYandexDictionary": "Powered by Yandex.Dictionary.",
-
 	"fromLanguage": "từ {1}",
-
 	"chooseAnInputLanguage": "Dịch từ",
 	"chooseAnOutputLanguage": "Dịch sang",
-
 	"displayOriginalText": "Hiển thị văn bản gốc",
 	"displayTranslatedText": "Hiển thị văn bản đã dịch",
 	"copyOriginalText": "Sao chép văn bản gốc",
 	"copyTranslatedText": "Sao chép văn bản đã dịch",
 	"displayTextOnly": "Chỉ hiển thị chữ",
 	"phrasebookIsEmpty": "Sổ từ ngữ còn trống.",
-
-	"red": "Đỏ",
-	"pink": "Hồng",
-	"purple": "Tím",
-	"deepPurple": "Tím Đậm",
-	"indigo": "Chàm",
-	"blue": "Xanh",
-	"lightBlue": "Xanh Nhạt",
-	"cyan": "Lục Lam",
-	"teal": "Teal",
-	"green": "Xanh Lá",
-	"lightGreen": "Xanh Lá Nhạt",
-	"orange": "Cam",
-	"deepOrange": "Cam Đậm",
-	"brown": "Nâu",
-	"blueGrey": "Xám Xanh",
-	"grey": "Xám",
-	"darkGrey": "Xám Đậm",
-	"black": "Đen",
-
 	"theme": "Chủ đề",
-	"automatic": "Tự động",
+	"systemDefault": "Hệ thống định",
 	"light": "Sáng",
 	"dark": "Tối",
-
 	"attachToMenubar": "Gắn vào menubar",
 	"attachToTaskbar": "Gắn vào taskbar",
-
 	"translateWhenPressingEnter": "Dịch khi nhấn Enter",
 	"realtime": "Dịch thời gian thực",
-
 	"rateMacAppStore": "Đánh giá Translatium trên Mac App Store",
 	"rateMicrosoftStore": "Đánh giá Translatium trên Microsoft Store",
-
 	"displayLanguage": "Ngôn ngữ hiển thị",
-	"change": "Thay đổi",
 	"close": "Đóng",
-
 	"quit": "Thoát",
-
-	"appearance": "Giao diện",
-	"restartRequired": "cần khởi động lại",
+	"general": "Tổng",
 	"advanced": "Nâng cao",
-
 	"alwaysOnTop": "Giữ cửa sổ luôn ở trên đầu",
 	"alwaysOnTopDesc": "Cửa sổ sẽ không ẩn khi bạn rời chuột đi.",
-
 	"translateClipboardOnShortcut": "Dịch clipboard khi dùng phím tắt",
 	"translateClipboardOnShortcutDesc": "Khi bạn mở Translatium bằng phím tắt, phần mềm sẽ tự động dịch nội dung trong clipboard của bạn.",
-
-	"shortcuts": "Phím tắt",
-	"openOnMenubar": "Mở Translatium trên Menubar",
-	"openOnTaskbar": "Mở Translatium trên taskbar",
-
-    "searchLanguages": "Tìm kiếm Ngôn ngữ",
+	"openKeyboardShortcut": "Xác định một bàn phím để mở Translatium nhanh chóng",
+	"typeNewKeyboardCombinator": "Gõ phím mới kết hợp.",
+	"searchLanguages": "Tìm kiếm Ngôn ngữ",
 	"noLanguageFound": "Không tìm thấy ngôn ngữ",
 	"searchResults": "Kết quả Tìm kiếm",
 	"recentlyUsed": "Được dùng gần đây",
 	"allLanguages": "Tất cả ngôn ngữ",
-
-    "remove": "Xoá",
+	"remove": "Xoá",
 	"andSaveToHistory": "& lưu vào Lịch sử",
-
 	"save": "Lưu",
-	"resetToDefault": "Phục hồi về Mặc định",
+	"removeShortcut": "Bỏ tắt",
 	"cancel": "Huỷ",
-
 	"pasteFromClipboard": "Dán từ Clipboard",
-
 	"popclipExtension": "PopClip Extension",
-
-	"support": "Hỗ trợ",
-
 	"licenseRegistration": "Đăng ký Bản quyền",
 	"licenseKey": "Mã bản quyền",
 	"licenseContentText": "Để tiếp tục, vui lòng mua mã bản quyền vĩnh viễn ($4.99) từ cửa hàng của chúng tôi.",
@@ -125,9 +75,7 @@
 	"licenseRegistered": "Đăng ký hoàn tất! Cảm ơn bạn đã ủng hộ Translatium.",
 	"visitStore": "Vào Cửa hàng...",
 	"register": "Đăng ký",
-
-	"auto" : "Tự động nhận diện",
-
+	"auto": "Tự động nhận diện",
 	"af": "Tiếng Afrikaans",
 	"am": "Tiếng Amhara",
 	"ar": "Tiếng Ả Rập",
