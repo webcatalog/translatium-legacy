@@ -32,9 +32,6 @@ const data = {
     'th', 'tl', 'tr', 'tt', 'udm', 'uk', 'ur', 'uz', 'vi',
     'xh', 'yi', 'zh-CN', 'zh-TW',
   ],
-  outputNotSupported: [
-    'auto',
-  ],
   ocrSpaceSupported: {
     ar: 'ara',
     bg: 'bul',
@@ -74,7 +71,7 @@ export const isOcrSupported = (lang) => (toOcrSpaceLanguage(lang) !== null);
 export const isInput = (lang) => !(data.all.indexOf(lang) > -1);
 
 // Check if language is supported as output
-export const isOutput = (lang) => !(data.outputNotSupported.indexOf(lang) > -1);
+export const isOutput = (lang) => lang !== 'auto';
 
 // Check if language is supported by provider
 export const isGoogleSupported = (lang) => (data.google.indexOf(lang) > -1);

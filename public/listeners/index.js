@@ -50,13 +50,14 @@ const loadListeners = () => {
       buttons: [getLocale('resetNow'), getLocale('cancel')],
       message: getLocale('resetDesc'),
       cancelId: 1,
-    }, (response) => {
-      if (response === 0) {
-        resetPreferences();
+    })
+      .then((response) => {
+        if (response === 0) {
+          resetPreferences();
 
-        ipcMain.emit('request-show-require-restart-dialog');
-      }
-    });
+          ipcMain.emit('request-show-require-restart-dialog');
+        }
+      });
   });
 
   ipcMain.on('request-show-require-restart-dialog', () => {
@@ -65,11 +66,12 @@ const loadListeners = () => {
       buttons: [getLocale('quitNow'), getLocale('later')],
       message: getLocale('requireRestartDesc'),
       cancelId: 1,
-    }, (response) => {
-      if (response === 0) {
-        app.quit();
-      }
-    });
+    })
+      .then((response) => {
+        if (response === 0) {
+          app.quit();
+        }
+      });
   });
 
   ipcMain.on('request-open-in-browser', (e, browserUrl) => {
@@ -86,7 +88,21 @@ const loadListeners = () => {
     });
   });
 
-  ipcMain.handle('translate-with-google-async', (e, ...args) => translateWithGoogle(...args));
+  // make sure there's a delay between requests
+  // https://github.com/vitalets/google-translate-api/issues/9
+  let p = Promise.resolve();
+  ipcMain.handle('translate-with-google-async', (e, ...args) => {
+    const p1 = p.then(() => translateWithGoogle(...args));
+    p = p1.then(() => new Promise((resolve, reject) => {
+      try {
+        setTimeout(() => { resolve(); }, 500);
+      } catch (err) {
+        reject(err);
+      }
+    }));
+    return p1;
+  });
+
   ipcMain.handle('tts-with-google-async', (e, ...args) => googleTTS('hello', 'en', 1));
 };
 

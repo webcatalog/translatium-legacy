@@ -54,6 +54,7 @@ const createWindow = () => {
         minHeight: 500,
         webPreferences: {
           nodeIntegration: true,
+          preload: path.join(__dirname, 'preload', 'menubar.js'),
         },
       },
     });
@@ -148,7 +149,7 @@ const createWindow = () => {
       minWidth: 400,
       minHeight: 500,
       titleBarStyle: 'hidden',
-      autoHideMenuBar: true,
+      autoHideMenuBar: false,
       webPreferences: {
         nodeIntegration: true,
         webSecurity: false,
