@@ -24,6 +24,7 @@
     "test": "mocha"
   },
   "dependencies": {
+    "@vitalets/google-translate-api": "3.0.0",
     "electron-is-dev": "1.1.0",
     "electron-settings": "3.2.0",
     "electron-updater": "4.2.0",
