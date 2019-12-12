@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ActionHome from '@material-ui/icons/Home';
@@ -60,8 +61,8 @@ const styles = (theme) => ({
     justifyContent: 'center',
   },
   fakeTitleBar: {
-    background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.dark,
-    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
+    background: theme.palette.type === 'dark' ? theme.palette.common.black : theme.palette.primary.dark,
+    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.common.black) : theme.palette.primary.contrastText,
     height: 22,
     WebkitAppRegion: 'drag',
     WebkitUserSelect: 'none',
@@ -87,6 +88,15 @@ const styles = (theme) => ({
     fontSize: '0.8rem !important',
     paddingLeft: 4,
   },
+  hidden: {
+    display: 'none !important',
+  },
+  preloadedRouteContainer: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'hidden',
+  },
 });
 
 class App extends React.Component {
@@ -104,9 +114,9 @@ class App extends React.Component {
 
   render() {
     const {
-      attachToMenubar,
       classes,
       fullPageLoading,
+      isFullScreen,
       onChangeRoute,
       onCloseSnackbar,
       route,
@@ -122,7 +132,7 @@ class App extends React.Component {
         case ROUTE_PHRASEBOOK:
           return <Phrasebook key="installed" />;
         case ROUTE_LANGUAGE_LIST:
-          return <LanguageList key="language-list" />;
+          return null; // already preloaded
         case ROUTE_OCR:
           return <Ocr key="ocr" />;
         default:
@@ -145,7 +155,7 @@ class App extends React.Component {
 
     return (
       <div className={classes.container}>
-        {window.process.platform === 'darwin' && !attachToMenubar && (
+        {window.process.platform === 'darwin' && !isFullScreen && window.mode !== 'menubar' && (
           <div className={classes.fakeTitleBar} />
         )}
         <div className={classes.contentContainer}>
@@ -169,6 +179,14 @@ class App extends React.Component {
             )}
           />
           {renderRoute()}
+          <div
+            className={classNames(
+              classes.preloadedRouteContainer,
+              route !== ROUTE_LANGUAGE_LIST && classes.hidden,
+            )}
+          >
+            <LanguageList key="language-list" />
+          </div>
           {bottomNavigationSelectedIndex > -1 && shouldShowBottomNav && (
             <Paper elevation={2} style={{ zIndex: 1000 }}>
               <BottomNavigation
@@ -213,12 +231,12 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  attachToMenubar: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   fullPageLoading: PropTypes.bool.isRequired,
+  isFullScreen: PropTypes.bool.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
-  onOpenDialogLicenseRegistration: PropTypes.func.isRequired,
   onCloseSnackbar: PropTypes.func.isRequired,
+  onOpenDialogLicenseRegistration: PropTypes.func.isRequired,
   onScreenResize: PropTypes.func.isRequired,
   registered: PropTypes.bool.isRequired,
   route: PropTypes.string.isRequired,
@@ -228,8 +246,8 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  attachToMenubar: state.preferences.attachToMenubar,
   fullPageLoading: Boolean(state.pages.ocr && state.pages.ocr.status === 'loading'),
+  isFullScreen: state.general.isFullScreen,
   registered: state.preferences.registered,
   route: state.router.route,
   shouldShowBottomNav: true,
