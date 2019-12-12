@@ -13,6 +13,8 @@ import {
   requestShowMessageBox,
 } from '../../../senders';
 
+import getLocale from '../../../helpers/get-locale';
+
 export const close = () => ({
   type: DIALOG_LICENSE_REGISTRATION_CLOSE,
 });
@@ -23,7 +25,7 @@ export const open = () => ({
 
 const getValidationRules = () => ({
   licenseKey: {
-    fieldName: 'License Key',
+    fieldName: getLocale('licenseKey'),
     required: true,
     licenseKey: true,
   },
@@ -37,7 +39,7 @@ export const updateForm = (changes) => ({
 export const register = () => (dispatch, getState) => {
   const state = getState();
 
-  const { dialogLicenseRegistration, locale } = state;
+  const { dialogLicenseRegistration } = state;
   const { form } = dialogLicenseRegistration;
 
   const validatedChanges = validate(form, getValidationRules());
@@ -47,7 +49,7 @@ export const register = () => (dispatch, getState) => {
 
   requestSetPreference('registered', true);
 
-  requestShowMessageBox(locale.licenseRegistered);
+  requestShowMessageBox(getLocale('licenseRegistered'));
 
   dispatch(close());
   return null;

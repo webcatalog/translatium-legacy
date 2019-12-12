@@ -11,21 +11,22 @@ import Button from '@material-ui/core/Button';
 import { closeAlert } from '../../state/root/alert/actions';
 
 import connectComponent from '../../helpers/connect-component';
+import getLocale from '../../helpers/get-locale';
 
-const Alert = ({ alertMessage, onCloseAlert, locale }) => (
+const Alert = ({ alertMessage, onCloseAlert }) => (
   <Dialog
     open={alertMessage != null}
     onClose={onCloseAlert}
   >
-    <DialogTitle>{locale.errorOccured}</DialogTitle>
+    <DialogTitle>{getLocale('errorOccured')}</DialogTitle>
     <DialogContent>
       <DialogContentText>
-        {locale[alertMessage]}
+        {alertMessage != null ? getLocale(alertMessage) : null}
       </DialogContentText>
     </DialogContent>
     <DialogActions>
       <Button color="primary" onClick={onCloseAlert}>
-        {locale.close}
+        {getLocale('close')}
       </Button>
     </DialogActions>
   </Dialog>
@@ -34,12 +35,10 @@ const Alert = ({ alertMessage, onCloseAlert, locale }) => (
 Alert.propTypes = {
   alertMessage: PropTypes.string,
   onCloseAlert: PropTypes.func.isRequired,
-  locale: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   alertMessage: state.alert.message,
-  locale: state.locale,
 });
 
 const actionCreators = {

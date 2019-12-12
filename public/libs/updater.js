@@ -3,6 +3,7 @@ const { autoUpdater } = require('electron-updater');
 
 const sendToAllWindows = require('./send-to-all-windows');
 const createMenu = require('./create-menu');
+const { getLocale } = require('./locales');
 
 global.updateSilent = true;
 global.updateAvailable = false;
@@ -11,9 +12,9 @@ autoUpdater.on('update-available', (info) => {
   if (!global.updateSilent) {
     const win = BrowserWindow.getFocusedWindow();
     dialog.showMessageBox(win, {
-      title: 'An Update is Available',
-      message: 'There is an available update. It is being downloaded. We will let you know when it is ready',
-      buttons: ['OK'],
+      title: getLocale('updateAvailable'),
+      message: getLocale('updateAvailableDesc'),
+      buttons: [getLocale('ok')],
       cancelId: 0,
       defaultId: 0,
     });
@@ -27,9 +28,9 @@ autoUpdater.on('update-not-available', (info) => {
   if (!global.updateSilent) {
     const win = BrowserWindow.getFocusedWindow();
     dialog.showMessageBox(win, {
-      title: 'No Updates',
-      message: 'There are currently no updates available.',
-      buttons: ['OK'],
+      title: getLocale('noUpdates'),
+      message: getLocale('noUpdatesDesc'),
+      buttons: [getLocale('ok')],
       cancelId: 0,
       defaultId: 0,
     });
@@ -43,9 +44,9 @@ autoUpdater.on('error', (err) => {
   if (!global.updateSilent) {
     const win = BrowserWindow.getFocusedWindow();
     dialog.showMessageBox(win, {
-      title: 'Failed to Check for Updates',
-      message: 'Failed to check for updates. Please check your Internet connection.',
-      buttons: ['OK'],
+      title: getLocale('failedToCheckForUpdates'),
+      message: getLocale('failedToCheckForUpdatesDesc'),
+      buttons: [getLocale('ok')],
       cancelId: 0,
       defaultId: 0,
     });
@@ -62,9 +63,9 @@ autoUpdater.on('update-downloaded', (info) => {
 
   const dialogOpts = {
     type: 'info',
-    buttons: ['Restart', 'Later'],
-    title: 'Application Update',
-    detail: `A new version (${info.version}) has been downloaded. Restart the application to apply the updates.`,
+    buttons: [getLocale('restart'), getLocale('later')],
+    title: getLocale('applicationUpdate'),
+    detail: getLocale('applicationUpdate').replace('$VERSION', info.version),
     cancelId: 1,
   };
 

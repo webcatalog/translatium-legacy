@@ -12,6 +12,7 @@ import Divider from '@material-ui/core/Divider';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import connectComponent from '../../../helpers/connect-component';
+import getLocale from '../../../helpers/get-locale';
 
 import { deleteHistoryItem, loadHistory } from '../../../state/pages/home/history/actions';
 import { loadOutput } from '../../../state/pages/home/actions';
@@ -71,7 +72,6 @@ class History extends React.Component {
       classes,
       historyItems,
       historyLoading,
-      locale,
       onDeleteHistoryItem,
       onLoadOutput,
     } = this.props;
@@ -101,9 +101,9 @@ class History extends React.Component {
                       }}
                     />
                     <ListItemSecondaryAction>
-                      <Tooltip title={locale.remove} placement="left">
+                      <Tooltip title={getLocale('remove')} placement="left">
                         <IconButton
-                          aria-label={locale.remove}
+                          aria-label={getLocale('remove')}
                           onClick={() => {
                             onDeleteHistoryItem(
                               item.historyId,
@@ -137,14 +137,12 @@ History.propTypes = {
   onLoadOutput: PropTypes.func.isRequired,
   onDeleteHistoryItem: PropTypes.func.isRequired,
   onLoadHistory: PropTypes.func.isRequired,
-  locale: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   historyItems: state.pages.home.history.items,
   canLoadMore: state.pages.home.history.canLoadMore,
   historyLoading: state.pages.home.history.loading,
-  locale: state.locale,
 });
 
 const actionCreators = {
