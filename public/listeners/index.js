@@ -7,6 +7,7 @@ const {
 } = require('electron');
 
 const translateWithGoogle = require('@vitalets/google-translate-api');
+const googleTTS = require('google-tts-api');
 
 const {
   getPreference,
@@ -86,6 +87,7 @@ const loadListeners = () => {
   });
 
   ipcMain.handle('translate-with-google-async', (e, ...args) => translateWithGoogle(...args));
+  ipcMain.handle('tts-with-google-async', (e, ...args) => googleTTS('hello', 'en', 1));
 };
 
 module.exports = loadListeners;
