@@ -1,23 +1,24 @@
 import isUrl from './is-url';
 import isValidLicenseKey from './is-valid-license-key';
+import getLocale from './get-locale';
 
 const kits = {
   required: (val, ruleVal, fieldName) => {
     if (!val || val === '') {
-      return '{fieldName} is required.'.replace('{fieldName}', fieldName);
+      return getLocale('isRequired').replace('$FIELDNAME', fieldName);
     }
 
     return null;
   },
   url: (val, maxLength, fieldName) => {
     if (!isUrl(val)) {
-      return '{fieldName} is not valid.'.replace('{fieldName}', fieldName);
+      return getLocale('isNotValid').replace('$FIELDNAME', fieldName);
     }
     return null;
   },
   licenseKey: (val, ruleVal, fieldName) => {
     if (!isValidLicenseKey(val)) {
-      return '{fieldName} is not valid.'.replace('{fieldName}', fieldName);
+      return getLocale('isNotValid').replace('$FIELDNAME', fieldName);
     }
     return null;
   },

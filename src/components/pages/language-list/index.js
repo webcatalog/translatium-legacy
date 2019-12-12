@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import grey from '@material-ui/core/colors/grey';
 
 import connectComponent from '../../../helpers/connect-component';
+import getLocale from '../../../helpers/get-locale';
 
 import {
   getInputLanguages,
@@ -100,7 +101,6 @@ class LanguageList extends React.Component {
   render() {
     const {
       classes,
-      locale,
       mode,
       onChangeRoute,
       onUpdateInputLang,
@@ -118,13 +118,13 @@ class LanguageList extends React.Component {
     languages.sort((x, y) => {
       if (x === 'auto') return -1;
       if (y === 'auto') return 1;
-      return locale[x].localeCompare(locale[y]);
+      return getLocale(x).localeCompare(getLocale(y));
     });
 
     let searchResults = [];
     if (search) {
       searchResults = languages.filter((langId) => {
-        if (locale[langId].toLowerCase().indexOf(search.toLowerCase()) < 0) {
+        if (getLocale(langId).toLowerCase().indexOf(search.toLowerCase()) < 0) {
           return false;
         }
 
@@ -151,7 +151,7 @@ class LanguageList extends React.Component {
         <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
           <Toolbar variant="dense">
             <Typography variant="h6" color="inherit" className={classes.title}>
-              {mode === 'inputLang' ? locale.chooseAnInputLanguage : locale.chooseAnOutputLanguage}
+              {mode === 'inputLang' ? getLocale('chooseAnInputLanguage') : getLocale('chooseAnOutputLanguage')}
             </Typography>
             <IconButton
               color="inherit"
@@ -170,10 +170,10 @@ class LanguageList extends React.Component {
         <div className={classes.inputContainer}>
           <Input
             value={search}
-            placeholder={locale.searchLanguages}
+            placeholder={getLocale('searchLanguages')}
             className={classes.input}
             inputProps={{
-              'aria-label': locale.searchLanguages,
+              'aria-label': getLocale('searchLanguages'),
             }}
             onChange={(event) => onUpdateLanguageListSearch(event.target.value)}
           />
@@ -184,14 +184,14 @@ class LanguageList extends React.Component {
         {(search && search.length > 0) ? (
           <div className={classes.listContainer}>
             <List
-              subheader={<ListSubheader disableSticky>{locale.searchResults}</ListSubheader>}
+              subheader={<ListSubheader disableSticky>{getLocale('searchResults')}</ListSubheader>}
             >
               {searchResults.length < 1 ? (
                 <ListItem
                   button
                   disabled
                 >
-                  <ListItemText primary={locale.noLanguageFound} />
+                  <ListItemText primary={getLocale('noLanguageFound')} />
                 </ListItem>
               )
                 : searchResults.map((langId) => (
@@ -200,7 +200,7 @@ class LanguageList extends React.Component {
                     key={`lang_${langId}`}
                     onClick={() => onLanguageClick(mode, langId)}
                   >
-                    <ListItemText primary={locale[langId]} />
+                    <ListItemText primary={getLocale(langId)} />
                   </ListItem>
                 ))}
             </List>
@@ -208,7 +208,7 @@ class LanguageList extends React.Component {
         ) : (
           <div className={classes.listContainer}>
             <List
-              subheader={<ListSubheader disableSticky>{locale.recentlyUsed}</ListSubheader>}
+              subheader={<ListSubheader disableSticky>{getLocale('recentlyUsed')}</ListSubheader>}
             >
               {recentLanguages.map((langId) => (
                 <ListItem
@@ -216,13 +216,13 @@ class LanguageList extends React.Component {
                   key={`lang_recent_${langId}`}
                   onClick={() => onLanguageClick(mode, langId)}
                 >
-                  <ListItemText primary={locale[langId]} />
+                  <ListItemText primary={getLocale(langId)} />
                 </ListItem>
               ))}
             </List>
             <Divider />
             <List
-              subheader={<ListSubheader disableSticky>{locale.allLanguages}</ListSubheader>}
+              subheader={<ListSubheader disableSticky>{getLocale('allLanguages')}</ListSubheader>}
             >
               {languages.map((langId) => (
                 <ListItem
@@ -230,7 +230,7 @@ class LanguageList extends React.Component {
                   key={`lang_${langId}`}
                   onClick={() => onLanguageClick(mode, langId)}
                 >
-                  <ListItemText primary={locale[langId]} />
+                  <ListItemText primary={getLocale(langId)} />
                 </ListItem>
               ))}
             </List>
@@ -243,7 +243,6 @@ class LanguageList extends React.Component {
 
 LanguageList.propTypes = {
   classes: PropTypes.object.isRequired,
-  locale: PropTypes.object.isRequired,
   mode: PropTypes.string,
   onChangeRoute: PropTypes.func.isRequired,
   onUpdateInputLang: PropTypes.func.isRequired,
@@ -264,7 +263,6 @@ const mapStateToProps = (state) => ({
   recentLanguages: state.preferences.recentLanguages,
   search: state.pages.languageList.search,
   mode: state.pages.languageList.mode,
-  locale: state.locale,
 });
 
 export default connectComponent(

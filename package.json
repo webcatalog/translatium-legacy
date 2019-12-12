@@ -21,7 +21,8 @@
     "eject": "react-scripts eject",
     "dist": "yarn run build && babel-node packager.js",
     "lint": "eslint ./src ./public ./packager.js --ext js --fix",
-    "test": "mocha"
+    "test": "mocha",
+    "localize": "npx babel-node localizer.js"
   },
   "dependencies": {
     "electron-is-dev": "1.1.0",
@@ -30,7 +31,7 @@
     "menubar": "6.0.8"
   },
   "devDependencies": {
-    "@material-ui/core": "3.9.3",
+    "@material-ui/core": "3.9.4",
     "@material-ui/icons": "3.0.2",
     "babel-cli": "6.26.0",
     "babel-preset-env": "1.7.0",
@@ -38,9 +39,10 @@
     "blueimp-md5": "2.12.0",
     "chai": "4.2.0",
     "classnames": "2.2.6",
-    "concurrently": "5.0.0",
+    "concurrently": "5.0.1",
     "cross-env": "6.0.3",
     "del": "5.1.0",
+    "dotenv": "8.2.0",
     "electron": "5.0.12",
     "electron-builder": "21.2.0",
     "electron-notarize": "0.2.1",
@@ -52,6 +54,7 @@
     "fs-extra": "8.1.0",
     "glob": "7.1.6",
     "mocha": "6.2.2",
+    "node-fetch": "2.6.0",
     "pouchdb-browser": "7.1.1",
     "prop-types": "15.7.2",
     "react": "16.12.0",

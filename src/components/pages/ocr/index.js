@@ -10,6 +10,7 @@ import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 
 import connectComponent from '../../../helpers/connect-component';
+import getLocale from '../../../helpers/get-locale';
 
 import EnhancedMenu from '../../shared/enhanced-menu';
 
@@ -83,7 +84,6 @@ class Ocr extends React.Component {
       onSetMode,
       onSetZoomLevel,
       outputLang,
-      locale,
     } = this.props;
 
     if (!ocr) return null;
@@ -152,31 +152,31 @@ class Ocr extends React.Component {
             }}
           >
             {ocr.mode === 'input'
-              ? `${locale.displayTranslatedText} (${locale[outputLang]})`
-              : `${locale.displayOriginalText} (${locale[inputLang]})`}
+              ? `${getLocale('displayTranslatedText')} (${getLocale(outputLang)})`
+              : `${getLocale('displayOriginalText')} (${getLocale(inputLang)})`}
           </MenuItem>
           <MenuItem
             onClick={() => {
               remote.clipboard.writeText(ocr.inputText);
-              onOpenSnackbar(locale.copied);
+              onOpenSnackbar(getLocale('copied'));
             }}
           >
-            {locale.copyOriginalText}
+            {getLocale('copyOriginalText')}
             {' '}
 (
-            {locale[inputLang]}
+            {getLocale(inputLang)}
 )
           </MenuItem>
           <MenuItem
             onClick={() => {
               remote.clipboard.writeText(ocr.outputText);
-              onOpenSnackbar(locale.copied);
+              onOpenSnackbar(getLocale('copied'));
             }}
           >
-            {locale.copyTranslatedText}
+            {getLocale('copyTranslatedText')}
             {' '}
 (
-            {locale[outputLang]}
+            {getLocale(outputLang)}
 )
           </MenuItem>
           <MenuItem
@@ -190,7 +190,7 @@ class Ocr extends React.Component {
               onChangeRoute(ROUTE_HOME);
             }}
           >
-            {locale.displayTextOnly}
+            {getLocale('displayTextOnly')}
           </MenuItem>
         </EnhancedMenu>
       </div>
@@ -201,7 +201,6 @@ class Ocr extends React.Component {
 Ocr.propTypes = {
   classes: PropTypes.object.isRequired,
   inputLang: PropTypes.string,
-  locale: PropTypes.object.isRequired,
   ocr: PropTypes.object.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
   onLoadOutput: PropTypes.func.isRequired,
@@ -215,7 +214,6 @@ const mapStateToProps = (state) => ({
   inputLang: state.preferences.inputLang,
   outputLang: state.preferences.outputLang,
   ocr: state.pages.ocr,
-  locale: state.locale,
 });
 
 const actionCreators = {

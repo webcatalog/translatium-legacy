@@ -15,11 +15,11 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
 import connectComponent from '../../../helpers/connect-component';
+import getLocale from '../../../helpers/get-locale';
 
 import EnhancedMenu from '../../shared/enhanced-menu';
 
 import { toggleSetting } from '../../../state/root/preferences/actions';
-import { updateLocale } from '../../../state/root/locale/actions';
 import { openShortcutDialog } from '../../../state/pages/preferences/shortcut-dialog/actions';
 
 import displayLanguages from '../../../constants/display-languages';
@@ -73,6 +73,10 @@ const styles = (theme) => ({
     WebkitAppRegion: 'drag',
     WebkitUserSelect: 'none',
   },
+  title: {
+    flex: 1,
+    textAlign: 'center',
+  },
 });
 
 const renderCombinator = (combinator) => combinator
@@ -89,10 +93,8 @@ const Preferences = (props) => {
     attachToMenubar,
     classes,
     langId,
-    locale,
     onOpenShortcutDialog,
     onToggleSetting,
-    onUpdateLocale,
     openOnMenubarShortcut,
     realtime,
     theme,
@@ -113,12 +115,12 @@ const Preferences = (props) => {
       <DialogShortcut />
       <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
         <Toolbar variant="dense">
-          <Typography variant="h6" color="inherit">{locale.preferences}</Typography>
+          <Typography variant="h6" color="inherit" className={classes.title}>{getLocale('preferences')}</Typography>
         </Toolbar>
       </AppBar>
       <div className={classes.innerContainer}>
         <Typography variant="body1" className={classes.paperTitle}>
-          {locale.appearance}
+          {getLocale('general')}
         </Typography>
         <Paper className={classes.paper}>
           <List dense>
@@ -127,10 +129,10 @@ const Preferences = (props) => {
               buttonElement={(
                 <ListItem button>
                   <ListItemText
-                    primary={locale.displayLanguage}
+                    primary={getLocale('displayLanguage')}
                     secondary={displayLanguages[langId].displayName}
                   />
-                  <ChevronRightIcon color="action" aria-label={locale.change} />
+                  <ChevronRightIcon color="action" />
                 </ListItem>
               )}
             >
@@ -141,7 +143,7 @@ const Preferences = (props) => {
                   onClick={() => {
                     if (lId !== langId) {
                       requestSetPreference('langId', lId);
-                      onUpdateLocale(lId);
+                      requestShowRequireRestartDialog();
                     }
                   }}
                 >
@@ -154,27 +156,20 @@ const Preferences = (props) => {
               id="theme"
               buttonElement={(
                 <ListItem button>
-                  <ListItemText primary="Theme" secondary={locale[theme]} />
-                  <ChevronRightIcon color="action" aria-label={locale.change} />
+                  <ListItemText primary="Theme" secondary={getLocale(theme)} />
+                  <ChevronRightIcon color="action" />
                 </ListItem>
               )}
             >
               {window.process.platform === 'darwin' && (
-                <MenuItem onClick={() => requestSetPreference('theme', 'systemDefault')}>{locale.systemDefault}</MenuItem>
+                <MenuItem onClick={() => requestSetPreference('theme', 'systemDefault')}>{getLocale('systemDefault')}</MenuItem>
               )}
-              <MenuItem onClick={() => requestSetPreference('theme', 'light')}>{locale.light}</MenuItem>
-              <MenuItem onClick={() => requestSetPreference('theme', 'dark')}>{locale.dark}</MenuItem>
+              <MenuItem onClick={() => requestSetPreference('theme', 'light')}>{getLocale('light')}</MenuItem>
+              <MenuItem onClick={() => requestSetPreference('theme', 'dark')}>{getLocale('dark')}</MenuItem>
             </EnhancedMenu>
-          </List>
-        </Paper>
-
-        <Typography variant="body1" className={classes.paperTitle}>
-          {window.process.platform === 'win32' ? locale.taskbar : locale.menubar}
-        </Typography>
-        <Paper className={classes.paper}>
-          <List dense>
+            <Divider />
             <ListItem>
-              <ListItemText primary={window.process.platform === 'win32' ? locale.attachToTaskbar : locale.attachToMenubar} />
+              <ListItemText primary={window.process.platform === 'win32' ? getLocale('attachToTaskbar') : getLocale('attachToMenubar')} />
               <ListItemSecondaryAction>
                 <Switch
                   checked={attachToMenubar}
@@ -185,61 +180,17 @@ const Preferences = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
-            <Divider />
-            <ListItem
-              button
-              disabled={!attachToMenubar}
-              key="openOnMenubar"
-              onClick={() => onOpenShortcutDialog('openOnMenubar', openOnMenubarShortcut)}
-            >
-              <ListItemText
-                primary={window.process.platform === 'win32' ? locale.openOnTaskbar : locale.openOnMenubar}
-                secondary={openOnMenubarShortcut
-                  ? renderCombinator(openOnMenubarShortcut) : locale.openOnMenubarDesc}
-              />
-              <ChevronRightIcon color="action" aria-label={locale.change} />
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText
-                primary={locale.translateClipboardOnShortcut}
-                secondary={locale.translateClipboardOnShortcutDesc}
-              />
-              <ListItemSecondaryAction>
-                <Switch
-                  checked={attachToMenubar ? translateClipboardOnShortcut : false}
-                  disabled={!attachToMenubar}
-                  onChange={() => onToggleSetting('translateClipboardOnShortcut')}
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText
-                primary={locale.alwaysOnTop}
-                secondary={locale.alwaysOnTopDesc}
-              />
-              <ListItemSecondaryAction>
-                <Switch
-                  checked={attachToMenubar ? alwaysOnTop : false}
-                  disabled={!attachToMenubar}
-                  onChange={(e) => {
-                    requestSetPreference('alwaysOnTop', e.target.checked);
-                    requestShowRequireRestartDialog();
-                  }}
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
           </List>
         </Paper>
 
+
         <Typography variant="body1" className={classes.paperTitle}>
-          {locale.advanced}
+          {getLocale('advanced')}
         </Typography>
         <Paper className={classes.paper}>
           <List dense>
             <ListItem>
-              <ListItemText primary={locale.realtime} />
+              <ListItemText primary={getLocale('realtime')} />
               <ListItemSecondaryAction>
                 <Switch
                   checked={realtime}
@@ -249,7 +200,7 @@ const Preferences = (props) => {
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText primary={locale.translateWhenPressingEnter} />
+              <ListItemText primary={getLocale('translateWhenPressingEnter')} />
               <ListItemSecondaryAction>
                 <Switch
                   checked={translateWhenPressingEnter}
@@ -264,7 +215,53 @@ const Preferences = (props) => {
                   button
                   onClick={() => remote.shell.openExternal('https://translatiumapp.com/popclip')}
                 >
-                  <ListItemText primary={locale.popclipExtension} />
+                  <ListItemText primary={getLocale('popclipExtension')} />
+                </ListItem>
+              </>
+            )}
+            {attachToMenubar && (
+              <>
+                <Divider />
+                <ListItem
+                  button
+                  key="openOnMenubar"
+                  onClick={() => onOpenShortcutDialog('openOnMenubar', openOnMenubarShortcut)}
+                >
+                  <ListItemText
+                    primary={getLocale('openKeyboardShortcut')}
+                    secondary={openOnMenubarShortcut
+                      ? renderCombinator(openOnMenubarShortcut) : null}
+                  />
+                  <ChevronRightIcon color="action" />
+                </ListItem>
+                <Divider />
+                <ListItem>
+                  <ListItemText
+                    primary={getLocale('translateClipboardOnShortcut')}
+                    secondary={getLocale('translateClipboardOnShortcutDesc')}
+                  />
+                  <ListItemSecondaryAction>
+                    <Switch
+                      checked={attachToMenubar ? translateClipboardOnShortcut : false}
+                      onChange={() => onToggleSetting('translateClipboardOnShortcut')}
+                    />
+                  </ListItemSecondaryAction>
+                </ListItem>
+                <Divider />
+                <ListItem>
+                  <ListItemText
+                    primary={getLocale('alwaysOnTop')}
+                    secondary={getLocale('alwaysOnTopDesc')}
+                  />
+                  <ListItemSecondaryAction>
+                    <Switch
+                      checked={attachToMenubar ? alwaysOnTop : false}
+                      onChange={(e) => {
+                        requestSetPreference('alwaysOnTop', e.target.checked);
+                        requestShowRequireRestartDialog();
+                      }}
+                    />
+                  </ListItemSecondaryAction>
                 </ListItem>
               </>
             )}
@@ -275,7 +272,7 @@ const Preferences = (props) => {
         <Paper className={classes.paper}>
           <List dense>
             <ListItem button>
-              <ListItemText primary={locale.quit} onClick={() => remote.app.quit()} />
+              <ListItemText primary={getLocale('quit')} onClick={() => remote.app.quit()} />
             </ListItem>
           </List>
         </Paper>
@@ -288,10 +285,8 @@ Preferences.propTypes = {
   attachToMenubar: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   langId: PropTypes.string.isRequired,
-  locale: PropTypes.object.isRequired,
   onOpenShortcutDialog: PropTypes.func.isRequired,
   onToggleSetting: PropTypes.func.isRequired,
-  onUpdateLocale: PropTypes.func.isRequired,
   openOnMenubarShortcut: PropTypes.string,
   realtime: PropTypes.bool.isRequired,
   theme: PropTypes.string.isRequired,
@@ -303,7 +298,6 @@ Preferences.propTypes = {
 const mapStateToProps = (state) => ({
   attachToMenubar: state.preferences.attachToMenubar,
   langId: state.preferences.langId,
-  locale: state.locale,
   realtime: state.preferences.realtime,
   theme: state.preferences.theme,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
@@ -313,7 +307,6 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = {
-  updateLocale,
   openShortcutDialog,
   toggleSetting,
 };

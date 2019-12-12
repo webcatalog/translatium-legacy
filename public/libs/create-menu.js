@@ -5,6 +5,7 @@ const { autoUpdater } = require('electron-updater');
 const config = require('../config');
 
 const sendToAllWindows = require('./send-to-all-windows');
+const { getLocale } = require('./locales');
 
 const {
   Menu,
@@ -15,42 +16,46 @@ const createMenu = () => {
 
   const template = [
     {
-      label: 'Edit',
+      role: 'edit',
+      label: getLocale('edit'),
       submenu: [
-        { role: 'undo' },
-        { role: 'redo' },
+        { role: 'undo', label: getLocale('undo') },
+        { role: 'redo', label: getLocale('redo') },
         { type: 'separator' },
-        { role: 'cut' },
-        { role: 'copy' },
-        { role: 'paste' },
-        { role: 'delete' },
-        { role: 'selectall' },
+        { role: 'cut', label: getLocale('cut') },
+        { role: 'copy', label: getLocale('copy') },
+        { role: 'paste', label: getLocale('paste') },
+        { role: 'delete', label: getLocale('delete') },
+        { role: 'selectall', label: getLocale('selectAll') },
       ],
     },
     {
-      label: 'View',
+      role: 'view',
+      label: getLocale('view'),
       submenu: [
-        { role: 'togglefullscreen' },
+        { role: 'togglefullscreen', label: getLocale('toggleFullscreen') },
         { type: 'separator' },
-        { role: 'toggledevtools' },
+        { role: 'toggledevtools', label: getLocale('toggleDevTools') },
       ],
     },
     {
       role: 'window',
+      label: getLocale('window'),
       submenu: [
-        { role: 'minimize' },
-        { role: 'close' },
+        { role: 'minimize', label: getLocale('minimize') },
+        { role: 'close', label: getLocale('close') },
       ],
     },
     {
       role: 'help',
+      label: getLocale('help'),
       submenu: [
         {
-          label: `Learn more about ${config.APP_NAME}`,
+          label: getLocale('learnMore'),
           click: () => electron.shell.openExternal(config.APP_URL),
         },
         {
-          label: 'Report an Issue...',
+          label: getLocale('reportAnIssue'),
           click: () => electron.shell.openExternal('https://github.com/translatium/translatium/issues'),
         },
       ],
@@ -62,7 +67,7 @@ const createMenu = () => {
       label: config.APP_NAME,
       submenu: [
         {
-          role: 'about',
+          label: getLocale('about'),
           click: () => sendToAllWindows('open-dialog-about'),
         },
         {
@@ -70,7 +75,7 @@ const createMenu = () => {
           visible: updaterEnabled,
         },
         {
-          label: 'Check for Updates...',
+          label: getLocale('checkForUpdates'),
           click: () => {
             global.updateSilent = false;
             autoUpdater.checkForUpdates();
@@ -79,53 +84,35 @@ const createMenu = () => {
         },
         { type: 'separator' },
         {
-          label: 'Preferences...',
+          label: getLocale('preferencesMenuItem'),
           accelerator: 'Cmd+,',
           click: () => sendToAllWindows('go-to-preferences'),
         },
         { type: 'separator' },
-        {
-          role: 'hide',
-          label: `Hide ${config.APP_NAME}`,
-        },
-        { role: 'hideothers' },
-        { role: 'unhide' },
+        { role: 'hide', label: getLocale('hide') },
+        { role: 'hideothers', label: getLocale('hideOthers') },
+        { role: 'unhide', label: getLocale('unhide') },
         { type: 'separator' },
-        {
-          role: 'quit',
-          label: `Quit ${config.APP_NAME}`,
-        },
+        { role: 'quit', label: getLocale('quit') },
       ],
     });
 
-    // Edit menu
-    template[1].submenu.push(
-      { type: 'separator' },
-      {
-        label: 'Speech',
-        submenu: [
-          { role: 'startspeaking' },
-          { role: 'stopspeaking' },
-        ],
-      },
-    );
-
     // Window menu
     template[3].submenu = [
-      { role: 'minimize' },
-      { role: 'zoom' },
+      { role: 'minimize', label: getLocale('minimize') },
+      { role: 'zoom', label: getLocale('zoom') },
       { type: 'separator' },
-      { role: 'close' },
+      { role: 'close', label: getLocale('close') },
       { type: 'separator' },
-      { role: 'front' },
+      { role: 'front', label: getLocale('bringAllToFront') },
     ];
   } else {
     // File menu for Windows & Linux
     template.unshift({
-      label: 'File',
+      label: getLocale('file'),
       submenu: [
         {
-          role: 'about',
+          label: getLocale('about'),
           click: () => sendToAllWindows('open-dialog-about'),
         },
         {
@@ -133,7 +120,7 @@ const createMenu = () => {
           visible: updaterEnabled,
         },
         {
-          label: 'Check for Updates...',
+          label: getLocale('checkForUpdates'),
           click: () => {
             global.updateSilent = false;
             autoUpdater.checkForUpdates();
@@ -144,12 +131,12 @@ const createMenu = () => {
           type: 'separator',
         },
         {
-          label: 'Preferences...',
+          label: getLocale('preferencesMenuItem'),
           accelerator: 'Ctrl+,',
           click: () => sendToAllWindows('go-to-preferences'),
         },
         { type: 'separator' },
-        { role: 'quit' },
+        { role: 'quit', label: getLocale('quit') },
       ],
     });
   }

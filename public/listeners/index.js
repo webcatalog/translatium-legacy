@@ -13,16 +13,28 @@ const {
   setPreference,
 } = require('../libs/preferences');
 
+const {
+  getLocale,
+  getLocales,
+} = require('../libs/locales');
+
 const loadListeners = () => {
+  // Locale
+  ipcMain.on('get-locale', (e, id) => {
+    e.returnValue = getLocale(id);
+  });
+
+  ipcMain.on('get-locales', (e) => {
+    e.returnValue = getLocales();
+  });
+
   // Preferences
   ipcMain.on('get-preference', (e, name) => {
-    const val = getPreference(name);
-    e.returnValue = val;
+    e.returnValue = getPreference(name);
   });
 
   ipcMain.on('get-preferences', (e) => {
-    const preferences = getPreferences();
-    e.returnValue = preferences;
+    e.returnValue = getPreferences();
   });
 
   ipcMain.on('request-set-preference', (e, name, value) => {
@@ -32,8 +44,8 @@ const loadListeners = () => {
   ipcMain.on('request-reset-preferences', () => {
     dialog.showMessageBox(BrowserWindow.getAllWindows()[0], {
       type: 'question',
-      buttons: ['Reset Now', 'Cancel'],
-      message: 'Are you sure? All preferences will be restored to their original defaults. This action cannot be undone.',
+      buttons: [getLocale('resetNow'), getLocale('cancel')],
+      message: getLocale('resetDesc'),
       cancelId: 1,
     }, (response) => {
       if (response === 0) {
@@ -47,8 +59,8 @@ const loadListeners = () => {
   ipcMain.on('request-show-require-restart-dialog', () => {
     dialog.showMessageBox({
       type: 'question',
-      buttons: ['Quit Now', 'Later'],
-      message: 'You need to quit and then manually restart the app for this change to take affect.',
+      buttons: [getLocale('quitNow'), getLocale('later')],
+      message: getLocale('requireRestartDesc'),
       cancelId: 1,
     }, (response) => {
       if (response === 0) {
@@ -65,7 +77,7 @@ const loadListeners = () => {
     dialog.showMessageBox(BrowserWindow.getAllWindows()[0], {
       type: type || 'error',
       message,
-      buttons: ['OK'],
+      buttons: [getLocale('ok')],
       cancelId: 0,
       defaultId: 0,
     });
