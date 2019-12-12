@@ -18,7 +18,7 @@ export const toggleFullscreenInputBox = () => ({
 
 export const translate = (saveToHistory) => ((dispatch, getState) => {
   const { preferences, pages: { home } } = getState();
-  const { inputLang, outputLang } = preferences;
+  const { inputLang, outputLang, preferredTranslationService } = preferences;
   const { inputText, fullscreenInputBox } = home;
 
   // Safe
@@ -38,7 +38,7 @@ export const translate = (saveToHistory) => ((dispatch, getState) => {
     },
   });
 
-  translateText(inputLang, outputLang, inputText)
+  translateText(inputLang, outputLang, inputText, preferredTranslationService)
     .then((result) => {
       // Prevent slow request to display outdated info
       const currentOutput = getState().pages.home.output;
@@ -59,7 +59,7 @@ export const translate = (saveToHistory) => ((dispatch, getState) => {
       }
     })
     .catch((err) => {
-      console.log(err);
+      console.log(err); // eslint-disable-line no-console
       // Prevent slow request to display outdated info
       const currentOutput = getState().pages.home.output;
       if (currentOutput && currentOutput.identifier === identifier) {
@@ -73,6 +73,7 @@ export const translate = (saveToHistory) => ((dispatch, getState) => {
     });
 });
 
+let timeout;
 export const updateInputText = (
   inputText, selectionStart, selectionEnd,
 ) => ((dispatch, getState) => {
@@ -92,10 +93,16 @@ export const updateInputText = (
   // No change in inputText, no need to re-run task
   if (currentInputText === inputText) return;
 
+  clearTimeout(timeout);
   if (realtime === true && fullscreenInputBox === false && inputText.trim().length > 0) {
+    dispatch({
+      type: UPDATE_OUTPUT,
+      output: null,
+    });
+
     // delay to save bandwidth
     const tmpHome = getState().pages.home;
-    setTimeout(() => {
+    timeout = setTimeout(() => {
       if (getState().pages.home.inputText !== inputText) return;
       dispatch(translate());
     }, tmpHome.output ? 500 : 0);

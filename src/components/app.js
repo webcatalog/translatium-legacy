@@ -108,7 +108,7 @@ class App extends React.Component {
       classes,
       fullPageLoading,
       onChangeRoute,
-      onRequestCloseSnackbar,
+      onCloseSnackbar,
       route,
       shouldShowBottomNav,
       snackbarMessage,
@@ -161,9 +161,9 @@ class App extends React.Component {
             open={snackbarOpen}
             message={snackbarMessage || ''}
             autoHideDuration={4000}
-            onClose={onRequestCloseSnackbar}
+            onClose={onCloseSnackbar}
             action={(
-              <Button color="secondary" size="small" onClick={onRequestCloseSnackbar}>
+              <Button color="secondary" size="small" onClick={onCloseSnackbar}>
                 {getLocale('close')}
               </Button>
             )}
@@ -218,7 +218,7 @@ App.propTypes = {
   fullPageLoading: PropTypes.bool.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
   onOpenDialogLicenseRegistration: PropTypes.func.isRequired,
-  onRequestCloseSnackbar: PropTypes.func.isRequired,
+  onCloseSnackbar: PropTypes.func.isRequired,
   onScreenResize: PropTypes.func.isRequired,
   registered: PropTypes.bool.isRequired,
   route: PropTypes.string.isRequired,

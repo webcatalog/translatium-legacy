@@ -66,6 +66,7 @@ const defaultPreferences = {
   theme: process.platform === 'darwin' ? 'systemDefault' : 'light',
   translateClipboardOnShortcut: false,
   translateWhenPressingEnter: true,
+  preferredTranslationService: 'google',
 };
 
 const getPreferences = () => ({ ...defaultPreferences, ...settings.get(`preferences.${v}`) });

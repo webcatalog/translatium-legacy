@@ -6,11 +6,12 @@ import AppBar from '@material-ui/core/AppBar';
 import CloseIcon from '@material-ui/icons/Close';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import Input from '@material-ui/core/Input/Input';
+import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import grey from '@material-ui/core/colors/grey';
@@ -56,9 +57,6 @@ const styles = (theme) => ({
     flex: 1,
     overflowY: 'auto',
     WebkitOverflowScrolling: 'touch',
-  },
-  clearButton: {
-    color: grey[500],
   },
   title: {
     flexGrow: 1,
@@ -168,18 +166,24 @@ class LanguageList extends React.Component {
           </Toolbar>
         </AppBar>
         <div className={classes.inputContainer}>
-          <Input
+          <TextField
             value={search}
             placeholder={getLocale('searchLanguages')}
             className={classes.input}
-            inputProps={{
+            InputProps={{
               'aria-label': getLocale('searchLanguages'),
+              endAdornment: search && search.length > 0 && (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => onUpdateLanguageListSearch('')}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
             }}
             onChange={(event) => onUpdateLanguageListSearch(event.target.value)}
           />
-          {search && search.length > 0 && (
-            <CloseIcon className={classes.clearButton} onClick={() => onUpdateLanguageListSearch('')} />
-          )}
         </div>
         {(search && search.length > 0) ? (
           <div className={classes.listContainer}>
@@ -198,7 +202,7 @@ class LanguageList extends React.Component {
                   <ListItem
                     button
                     key={`lang_${langId}`}
-                    onClick={() => onLanguageClick(mode, langId)}
+                    onClick={() => onLanguageClick(langId)}
                   >
                     <ListItemText primary={getLocale(langId)} />
                   </ListItem>
@@ -214,7 +218,7 @@ class LanguageList extends React.Component {
                 <ListItem
                   button
                   key={`lang_recent_${langId}`}
-                  onClick={() => onLanguageClick(mode, langId)}
+                  onClick={() => onLanguageClick(langId)}
                 >
                   <ListItemText primary={getLocale(langId)} />
                 </ListItem>
@@ -228,7 +232,7 @@ class LanguageList extends React.Component {
                 <ListItem
                   button
                   key={`lang_${langId}`}
-                  onClick={() => onLanguageClick(mode, langId)}
+                  onClick={() => onLanguageClick(langId)}
                 >
                   <ListItemText primary={getLocale(langId)} />
                 </ListItem>

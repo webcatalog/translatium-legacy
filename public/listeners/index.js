@@ -85,14 +85,7 @@ const loadListeners = () => {
     });
   });
 
-  ipcMain.on('translate-with-google', (e, ...args) => {
-    translateWithGoogle(...args)
-      .then((res) => {
-        e.returnValue = res;
-      }).catch((err) => {
-        e.returnValue = err;
-      });
-  });
+  ipcMain.handle('translate-with-google-async', (e, ...args) => translateWithGoogle(...args));
 };
 
 module.exports = loadListeners;

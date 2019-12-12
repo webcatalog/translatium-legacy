@@ -27,27 +27,32 @@ const dictPairs = [
 const dics = { s2t: [s2tChar, s2tPhrase] };
 const mConv = createConverterMap(dics);
 
+const getPlatform = () => {
+  if (process.platform) return process.platform;
+  return window.process.platform;
+};
+
 const getYandexTranslateApiKey = () => {
-  if (window.process.platform === 'darwin' && process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_MAC) {
+  if (getPlatform() === 'darwin' && process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_MAC) {
     return process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_MAC;
   }
-  if (window.process.platform === 'linux' && process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_LINUX) {
+  if (getPlatform() === 'linux' && process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_LINUX) {
     return process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_LINUX;
   }
-  if (window.process.platform === 'win32' && process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_WINDOWS) {
+  if (getPlatform() === 'win32' && process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_WINDOWS) {
     return process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY_WINDOWS;
   }
   return process.env.REACT_APP_YANDEX_TRANSLATE_API_KEY;
 };
 
 const getYandexDictionaryApiKey = () => {
-  if (window.process.platform === 'darwin' && process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY_MAC) {
+  if (getPlatform() === 'darwin' && process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY_MAC) {
     return process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY_MAC;
   }
-  if (window.process.platform === 'linux' && process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY_LINUX) {
+  if (getPlatform() === 'linux' && process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY_LINUX) {
     return process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY_LINUX;
   }
-  if (window.process.platform === 'win32' && process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY_WINDOWS) {
+  if (getPlatform() === 'win32' && process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY_WINDOWS) {
     return process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY_WINDOWS;
   }
   return process.env.REACT_APP_YANDEX_DICTIONARY_API_KEY;
@@ -56,12 +61,19 @@ const getYandexDictionaryApiKey = () => {
 const yandexTranslateApiKey = getYandexTranslateApiKey();
 const yandexDictionaryApiKey = getYandexDictionaryApiKey();
 
+export const yandexStandardlizedLanguage = (lang) => {
+  const i = lang.indexOf('-');
+  if (i > 0) return lang.slice(0, i);
+  return lang;
+};
+
 const translateTextWithYandex = (inputLang, outputLang, inputText) => {
-  const processedOutputLang = outputLang.startsWith('zh') ? 'zh' : outputLang;
-  const lang = inputLang === 'auto' ? processedOutputLang : `${inputLang}-${processedOutputLang}`;
+  const lang = inputLang === 'auto'
+    ? yandexStandardlizedLanguage(outputLang)
+    : `${yandexStandardlizedLanguage(inputLang)}-${yandexStandardlizedLanguage(outputLang)}`;
 
   const output = {
-    inputLang, outputLang,
+    inputLang, outputLang, provider: 'yandex',
   };
 
   const p = [];
