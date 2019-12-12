@@ -4,9 +4,9 @@ require('dotenv').config();
 
 const path = require('path');
 const fsExtra = require('fs-extra');
+const translate = require('@vitalets/google-translate-api');
 
 global.fetch = require('node-fetch');
-const translateText = require('./src/helpers/translate-text').default;
 
 const localeDir = path.resolve(__dirname, 'public', 'libs', 'locales');
 
@@ -28,8 +28,8 @@ localeLangIds.forEach((localeJson) => {
       newLocales[key] = locales[key];
     } else {
       newLocales[key] = null;
-      const translateTextRes = await translateText('en', localeJson.replace('.json', ''), enLocales[key]);
-      newLocales[key] = translateTextRes.outputText;
+      const translateTextRes = await translate(enLocales[key], { from: 'en', to: localeJson.replace('.json', '') });
+      newLocales[key] = translateTextRes.text;
     }
   });
 

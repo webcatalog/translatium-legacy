@@ -51,19 +51,19 @@ const Dictionary = ({
   const outputLang = output.outputLang;
   const isSingleLangDict = output.outputDict.lang === `${output.inputLang}-${output.inputLang}`;
 
-  const onLinkClick = (inputText) => {
-    onUpdateInputLang(inputLang);
-    onUpdateOutputLang(outputLang);
-    onUpdateInputText(inputText);
+  const onLinkClick = (_inputLang, _outputLang, _inputText) => {
+    onUpdateInputLang(_inputLang);
+    onUpdateOutputLang(_outputLang);
+    onUpdateInputText(_inputText);
   };
 
-  const translateForward = (text) => onLinkClick(text);
+  const translateForward = (text) => onLinkClick(inputLang, outputLang, text);
   const translateBackward = (text) => {
     // Cannot translate forward if the dict is single lang (en-en)
     if (isSingleLangDict) {
       return translateForward(text);
     }
-    return onLinkClick(text);
+    return onLinkClick(outputLang, inputLang, text);
   };
 
   return (

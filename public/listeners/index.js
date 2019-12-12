@@ -6,6 +6,8 @@ const {
   shell,
 } = require('electron');
 
+const translateWithGoogle = require('@vitalets/google-translate-api');
+
 const {
   getPreference,
   getPreferences,
@@ -82,6 +84,8 @@ const loadListeners = () => {
       defaultId: 0,
     });
   });
+
+  ipcMain.handle('translate-with-google-async', (e, ...args) => translateWithGoogle(...args));
 };
 
 module.exports = loadListeners;

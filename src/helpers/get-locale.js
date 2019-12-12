@@ -4,7 +4,10 @@ let locales;
 
 const getLocale = (id) => {
   if (locales == null) locales = getLocales();
-  if (!locales[id]) throw Error('Locale ID is not available.');
+  if (!locales[id]) {
+    console.log('Missing locale id', id); // eslint-disable-line no-console
+    return id;
+  }
   return locales[id];
 };
 

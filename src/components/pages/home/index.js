@@ -66,7 +66,8 @@ import { updateLanguageListMode } from '../../../state/pages/language-list/actio
 
 import { ROUTE_LANGUAGE_LIST } from '../../../constants/routes';
 
-import Dictionary from './dictionary';
+import YandexDictionary from './yandex-dictionary';
+import GoogleDictionary from './google-dictionary';
 import History from './history';
 
 const { remote } = window.require('electron');
@@ -142,12 +143,15 @@ const styles = (theme) => ({
   },
   languageTitle: {
     flex: 1,
+  },
+  languageTitleLabel: {
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    fontSize: 16,
+    fontSize: 14,
     textTransform: 'none',
-    fontWeight: 500,
+    fontWeight: 400,
+    display: 'inline-block',
   },
   yandexCopyright: {
     color: theme.palette.text.disabled,
@@ -321,17 +325,31 @@ class Home extends React.Component {
                 )}
               </CardActions>
             </Card>
-            <Typography
-              variant="body1"
-              align="left"
-              className={classes.yandexCopyright}
-              onClick={() => remote.shell.openExternal('http://translate.yandex.com/')}
-            >
-              {getLocale('translatedByYandexTranslate')}
-            </Typography>
+            {output.provider === 'yandex' && (
+              <Typography
+                variant="body1"
+                align="left"
+                className={classes.yandexCopyright}
+                onClick={() => remote.shell.openExternal('http://translate.yandex.com/')}
+              >
+                {getLocale('translatedByYandexTranslate')}
+              </Typography>
+            )}
+            {output.provider === 'google' && (
+              <Typography
+                variant="body1"
+                align="left"
+                className={classes.yandexCopyright}
+                onClick={() => remote.shell.openExternal('http://translate.google.com/')}
+              >
+                {getLocale('translatedByGoogleTranslate')}
+              </Typography>
+            )}
 
-            {output.outputDict && <Dictionary />}
-            {output.outputDict && output.outputDict.def.length > 0 && (
+
+            {output.provider === 'yandex' && output.outputDict && <YandexDictionary />}
+            {output.provider === 'google' && (output.inputDict || output.outputDict) && <GoogleDictionary />}
+            {output.provider === 'yandex' && output.outputDict && output.outputDict.def.length > 0 && (
               <Typography
                 variant="body1"
                 align="left"
@@ -339,6 +357,16 @@ class Home extends React.Component {
                 onClick={() => remote.shell.openExternal('https://tech.yandex.com/dictionary/')}
               >
                 {getLocale('translatedByYandexDictionary')}
+              </Typography>
+            )}
+            {output.provider === 'google' && (output.inputDict || output.outputDict) && (
+              <Typography
+                variant="body1"
+                align="left"
+                className={classes.yandexCopyright}
+                onClick={() => remote.shell.openExternal('https://translate.google.com/')}
+              >
+                {getLocale('translatedByGoogleTranslate')}
               </Typography>
             )}
           </div>
@@ -447,7 +475,7 @@ class Home extends React.Component {
             <Toolbar variant="dense">
               <Button
                 color="inherit"
-                className={classes.languageTitle}
+                classes={{ root: classes.languageTitle, label: classes.languageTitleLabel }}
                 onClick={() => {
                   onUpdateLanguageListMode('inputLang');
                   onChangeRoute(ROUTE_LANGUAGE_LIST);
@@ -468,7 +496,7 @@ class Home extends React.Component {
               </Tooltip>
               <Button
                 color="inherit"
-                className={classes.languageTitle}
+                classes={{ root: classes.languageTitle, label: classes.languageTitleLabel }}
                 onClick={() => {
                   onUpdateLanguageListMode('outputLang');
                   onChangeRoute(ROUTE_LANGUAGE_LIST);

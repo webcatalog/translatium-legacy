@@ -96,6 +96,7 @@ const Preferences = (props) => {
     onOpenShortcutDialog,
     onToggleSetting,
     openOnMenubarShortcut,
+    preferredTranslationService,
     realtime,
     theme,
     translateClipboardOnShortcut,
@@ -180,6 +181,19 @@ const Preferences = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
+            <Divider />
+            <EnhancedMenu
+              id="preferredTranslationService"
+              buttonElement={(
+                <ListItem button>
+                  <ListItemText primary={getLocale('preferredTranslationService')} secondary={preferredTranslationService === 'google' ? 'Google' : 'Yandex'} />
+                  <ChevronRightIcon color="action" />
+                </ListItem>
+              )}
+            >
+              <MenuItem onClick={() => requestSetPreference('preferredTranslationService', 'google')}>Google</MenuItem>
+              <MenuItem onClick={() => requestSetPreference('preferredTranslationService', 'yandex')}>Yandex</MenuItem>
+            </EnhancedMenu>
           </List>
         </Paper>
 
@@ -282,28 +296,30 @@ const Preferences = (props) => {
 };
 
 Preferences.propTypes = {
+  alwaysOnTop: PropTypes.bool.isRequired,
   attachToMenubar: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   langId: PropTypes.string.isRequired,
   onOpenShortcutDialog: PropTypes.func.isRequired,
   onToggleSetting: PropTypes.func.isRequired,
   openOnMenubarShortcut: PropTypes.string,
+  preferredTranslationService: PropTypes.string.isRequired,
   realtime: PropTypes.bool.isRequired,
   theme: PropTypes.string.isRequired,
-  translateWhenPressingEnter: PropTypes.bool.isRequired,
   translateClipboardOnShortcut: PropTypes.bool.isRequired,
-  alwaysOnTop: PropTypes.bool.isRequired,
+  translateWhenPressingEnter: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  alwaysOnTop: state.preferences.alwaysOnTop,
   attachToMenubar: state.preferences.attachToMenubar,
   langId: state.preferences.langId,
+  openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
+  preferredTranslationService: state.preferences.preferredTranslationService,
   realtime: state.preferences.realtime,
   theme: state.preferences.theme,
-  translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
-  alwaysOnTop: state.preferences.alwaysOnTop,
-  openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
   translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
+  translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
 });
 
 const actionCreators = {

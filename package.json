@@ -25,10 +25,11 @@
     "localize": "npx babel-node localizer.js"
   },
   "dependencies": {
+    "@vitalets/google-translate-api": "3.0.0",
     "electron-is-dev": "1.1.0",
     "electron-settings": "3.2.0",
     "electron-updater": "4.2.0",
-    "menubar": "6.0.8"
+    "menubar": "7.1.0"
   },
   "devDependencies": {
     "@material-ui/core": "3.9.4",
@@ -43,7 +44,7 @@
     "cross-env": "6.0.3",
     "del": "5.1.0",
     "dotenv": "8.2.0",
-    "electron": "5.0.12",
+    "electron": "7.1.4",
     "electron-builder": "21.2.0",
     "electron-notarize": "0.2.1",
     "eslint": "6.6.0",
