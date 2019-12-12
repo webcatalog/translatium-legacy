@@ -70,20 +70,21 @@ autoUpdater.on('update-downloaded', (info) => {
   };
 
   const win = BrowserWindow.getFocusedWindow();
-  dialog.showMessageBox(win, dialogOpts, (response) => {
-    if (response === 0) {
-      // Fix autoUpdater.quitAndInstall() does not quit immediately
-      // https://github.com/electron/electron/issues/3583
-      // https://github.com/electron-userland/electron-builder/issues/1604
-      setImmediate(() => {
-        app.removeAllListeners('window-all-closed');
-        if (win != null) {
-          win.close();
-        }
-        autoUpdater.quitAndInstall(false);
-      });
-    }
-  });
+  dialog.showMessageBox(win, dialogOpts)
+    .then((response) => {
+      if (response === 0) {
+        // Fix autoUpdater.quitAndInstall() does not quit immediately
+        // https://github.com/electron/electron/issues/3583
+        // https://github.com/electron-userland/electron-builder/issues/1604
+        setImmediate(() => {
+          app.removeAllListeners('window-all-closed');
+          if (win != null) {
+            win.close();
+          }
+          autoUpdater.quitAndInstall(false);
+        });
+      }
+    });
 });
 
 autoUpdater.checkForUpdates();
