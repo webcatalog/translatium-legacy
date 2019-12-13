@@ -13,12 +13,9 @@ import getLocale from '../../../helpers/get-locale';
 
 import { changeRoute } from '../../../state/root/router/actions';
 import { updateInputLang, updateOutputLang } from '../../../state/root/preferences/actions';
-import { ROUTE_HOME, ROUTE_OCR } from '../../../constants/routes';
+import { ROUTE_HOME } from '../../../constants/routes';
 
-import {
-  getLanguages,
-  isOcrSupported,
-} from '../../../helpers/language-utils';
+import { getLanguages } from '../../../helpers/language-utils';
 
 const styles = {
   listContainer: {
@@ -32,7 +29,6 @@ const langList = getLanguages()
   .map((id) => ({
     id,
     locale: getLocale(id),
-    ocr: isOcrSupported(id),
   }))
   .sort((x, y) => {
     if (x.id === 'auto') return -1;
@@ -57,13 +53,9 @@ class LanguageListList extends React.Component {
   }
 
   handleEscKey(evt) {
-    const { onChangeRoute, mode } = this.props;
+    const { onChangeRoute } = this.props;
     if (evt.key === 'Escape' || evt.key === 'Esc') {
-      if (mode && mode.startsWith('ocr')) {
-        onChangeRoute(ROUTE_OCR);
-      } else {
-        onChangeRoute(ROUTE_HOME);
-      }
+      onChangeRoute(ROUTE_HOME);
     }
   }
 
@@ -85,11 +77,7 @@ class LanguageListList extends React.Component {
         onUpdateOutputLang(value);
       }
 
-      if (mode && mode.startsWith('ocr')) {
-        onChangeRoute(ROUTE_OCR);
-      } else {
-        onChangeRoute(ROUTE_HOME);
-      }
+      onChangeRoute(ROUTE_HOME);
     };
 
     const isSearch = search && search.length > 0;

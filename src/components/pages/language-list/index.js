@@ -71,13 +71,9 @@ class LanguageList extends React.Component {
   }
 
   handleEscKey(evt) {
-    const { onChangeRoute, mode } = this.props;
+    const { onChangeRoute } = this.props;
     if (evt.key === 'Escape' || evt.key === 'Esc') {
-      if (mode && mode.startsWith('ocr')) {
-        onChangeRoute(ROUTE_OCR);
-      } else {
-        onChangeRoute(ROUTE_HOME);
-      }
+      onChangeRoute(ROUTE_HOME);
     }
   }
 

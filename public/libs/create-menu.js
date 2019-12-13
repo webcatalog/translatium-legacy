@@ -1,15 +1,11 @@
 
-const electron = require('electron');
+const { Menu, shell } = require('electron');
 const { autoUpdater } = require('electron-updater');
 
 const config = require('../config');
 
 const sendToAllWindows = require('./send-to-all-windows');
 const { getLocale } = require('./locales');
-
-const {
-  Menu,
-} = electron;
 
 const createMenu = () => {
   const updaterEnabled = process.env.SNAP == null && !process.mas && !process.windowsStore;
@@ -27,6 +23,47 @@ const createMenu = () => {
         { role: 'paste', label: getLocale('paste') },
         { role: 'delete', label: getLocale('delete') },
         { role: 'selectall', label: getLocale('selectAll') },
+        { type: 'separator' },
+        {
+          label: getLocale('selectInputLang'),
+          accelerator: 'CmdOrCtrl+1',
+          click: () => sendToAllWindows('go-to-language-list', 'inputLang'),
+        },
+        {
+          label: getLocale('selectOutputLang'),
+          accelerator: 'CmdOrCtrl+2',
+          click: () => sendToAllWindows('go-to-language-list', 'outputLang'),
+        },
+        {
+          label: getLocale('swapLanguages'),
+          accelerator: 'CmdOrCtrl+3',
+          click: () => sendToAllWindows('swap-languages'),
+        },
+        {
+          label: getLocale('clearInputText'),
+          accelerator: 'CmdOrCtrl+Delete',
+          click: () => sendToAllWindows('clear-input-text'),
+        },
+        {
+          label: getLocale('translate'),
+          accelerator: 'CmdOrCtrl+T',
+          click: () => sendToAllWindows('translate'),
+        },
+        {
+          label: getLocale('translateClipboard'),
+          accelerator: 'CmdOrCtrl+Shift+V',
+          click: () => sendToAllWindows('translate-clipboard'),
+        },
+        {
+          label: getLocale('addToPhrasebook'),
+          accelerator: 'CmdOrCtrl+S',
+          click: () => sendToAllWindows('add-to-phrasebook'),
+        },
+        {
+          label: getLocale('removeFromPhrasebook'),
+          accelerator: 'CmdOrCtrl+R',
+          click: () => sendToAllWindows('remove-from-phrasebook'),
+        },
       ],
     },
     {
@@ -52,11 +89,11 @@ const createMenu = () => {
       submenu: [
         {
           label: getLocale('learnMore'),
-          click: () => electron.shell.openExternal(config.APP_URL),
+          click: () => shell.openExternal(config.APP_URL),
         },
         {
           label: getLocale('reportAnIssue'),
-          click: () => electron.shell.openExternal('https://github.com/translatium/translatium/issues'),
+          click: () => shell.openExternal('https://github.com/translatium/translatium/issues'),
         },
       ],
     },
@@ -85,7 +122,7 @@ const createMenu = () => {
         { type: 'separator' },
         {
           label: getLocale('preferencesMenuItem'),
-          accelerator: 'Cmd+,',
+          accelerator: 'CmdOrCtrl+,',
           click: () => sendToAllWindows('go-to-preferences'),
         },
         { type: 'separator' },
@@ -132,7 +169,7 @@ const createMenu = () => {
         },
         {
           label: getLocale('preferencesMenuItem'),
-          accelerator: 'Ctrl+,',
+          accelerator: 'CmdOrCtrl+,',
           click: () => sendToAllWindows('go-to-preferences'),
         },
         { type: 'separator' },
