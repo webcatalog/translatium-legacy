@@ -103,7 +103,7 @@ const loadListeners = () => {
     return p1;
   });
 
-  ipcMain.handle('tts-with-google-async', (e, ...args) => googleTTS('hello', 'en', 1));
+  ipcMain.handle('tts-with-google-async', (e, ...args) => googleTTS(...args));
 };
 
 module.exports = loadListeners;

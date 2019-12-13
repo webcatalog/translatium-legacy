@@ -332,7 +332,7 @@ class Home extends React.Component {
                 className={classes.yandexCopyright}
                 onClick={() => remote.shell.openExternal('http://translate.yandex.com/')}
               >
-                {getLocale('translatedByYandexTranslate')}
+                Powered by Yandex.Translate
               </Typography>
             )}
             {output.provider === 'google' && (
@@ -342,7 +342,7 @@ class Home extends React.Component {
                 className={classes.yandexCopyright}
                 onClick={() => remote.shell.openExternal('http://translate.google.com/')}
               >
-                {getLocale('translatedByGoogleTranslate')}
+                Powered by Google Translate
               </Typography>
             )}
 
@@ -356,7 +356,7 @@ class Home extends React.Component {
                 className={classes.yandexCopyright}
                 onClick={() => remote.shell.openExternal('https://tech.yandex.com/dictionary/')}
               >
-                {getLocale('translatedByYandexDictionary')}
+                Powered by Yandex.Dictionary
               </Typography>
             )}
             {output.provider === 'google' && (output.inputDict || output.outputDict) && (
@@ -366,7 +366,7 @@ class Home extends React.Component {
                 className={classes.yandexCopyright}
                 onClick={() => remote.shell.openExternal('https://translate.google.com/')}
               >
-                {getLocale('translatedByGoogleTranslate')}
+                Powered by Google Translate
               </Typography>
             )}
           </div>

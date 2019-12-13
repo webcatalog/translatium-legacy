@@ -3,7 +3,7 @@ const data = {
     'auto', 'af', 'sq', 'am', 'ar', 'ar-DZ', 'ar-BH', 'ar-EG', 'ar-IL',
     'ar-JO', 'ar-KW', 'ar-LB', 'ar-MA', 'ar-OM', 'ar-PS', 'ar-QA', 'ar-SA',
     'ar-TN', 'ar-AE', 'hy', 'az', 'eu', 'be', 'bn', 'bs', 'bg', 'ca',
-    'ceb', 'ny', 'zh', 'zh-YUE', 'zh-CN', 'zh-HK', 'zh-TW', 'co', 'hr',
+    'ceb', 'ny', 'zh', 'zh-CN', 'zh-HK', 'zh-TW', 'co', 'hr',
     'cs', 'da', 'nl', 'en', 'en-AU', 'en-CA', 'en-IN', 'en-IE', 'en-NZ',
     'en-PH', 'en-ZA', 'en-UK', 'en-US', 'eo', 'et', 'tl', 'fi', 'fr',
     'fy', 'gl', 'ka', 'de', 'el', 'gu', 'ht', 'ha', 'haw', 'iw',
@@ -31,6 +31,57 @@ const data = {
     'sl', 'sq', 'sr', 'su', 'sv', 'sw', 'ta', 'te', 'tg',
     'th', 'tl', 'tr', 'tt', 'udm', 'uk', 'ur', 'uz', 'vi',
     'xh', 'yi', 'zh-CN', 'zh-TW',
+  ],
+  ttsSupported: [
+    'af',
+    'sq',
+    'ar',
+    'hy',
+    'bn',
+    'bs',
+    'ca',
+    'zh',
+    'zh-TW',
+    'zh-CN',
+    'zh-HK',
+    'hr',
+    'cs',
+    'da',
+    'nl',
+    'en',
+    'eo',
+    'fi',
+    'fr',
+    'de',
+    'el',
+    'hi',
+    'hu',
+    'is',
+    'id',
+    'it',
+    'ja',
+    'km',
+    'ko',
+    'la',
+    'lv',
+    'mk',
+    'no',
+    'pl',
+    'pt',
+    'ro',
+    'ru',
+    'sr',
+    'si',
+    'sk',
+    'es',
+    'sw',
+    'sv',
+    'ta',
+    'th',
+    'tr',
+    'uk',
+    'vi',
+    'cy',
   ],
   ocrSpaceSupported: {
     ar: 'ara',
@@ -61,6 +112,11 @@ const data = {
 };
 data.all = Array.from(new Set(data.google.concat(data.yandex)));
 
+export const toCountryFreeLanguage = (lang) => {
+  const i = lang.indexOf('-');
+  if (i > 0) return lang.slice(0, i);
+  return lang;
+};
 
 export const toOcrSpaceLanguage = (lang) => data.ocrSpaceSupported[lang] || null;
 
@@ -106,18 +162,10 @@ export const isTtsSupported = (lang) => {
       return true;
     }
   }
-  return false;
+
+  return data.ttsSupported.indexOf(lang) > -1
+    || data.ttsSupported.indexOf(toCountryFreeLanguage(lang)) > -1;
 };
 
 // Get list of all languages that support TTS
-export const getTTSSupportedLanguages = () => {
-  const voices = window.speechSynthesis.getVoices();
-  const langs = [];
-  for (let i = 0; i < voices.length; i += 1) {
-    const voice = voices[i];
-    const lang = voice.lang.substring(0, 2);
-    if (!langs.includes(lang)) {
-      langs.push(lang);
-    }
-  }
-};
+export const getTTSSupportedLanguages = () => data.all.filter((lang) => isTtsSupported(lang));

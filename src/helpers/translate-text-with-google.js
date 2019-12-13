@@ -1,8 +1,8 @@
 import { translateWithGoogleAsync } from '../senders';
 
 export const googleStandardlizedLanguage = (lang) => {
-  if (lang === 'zh-YUE' || lang === 'zh-HK') return 'zh-CN';
-  if (lang !== 'zh') {
+  if (lang === 'zh-HK') return 'zh-TW';
+  if (!lang.startsWith('zh')) {
     const i = lang.indexOf('-');
     if (i > 0) return lang.slice(0, i);
   }

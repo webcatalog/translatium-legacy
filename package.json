@@ -14,7 +14,7 @@
   },
   "scripts": {
     "postinstall": "npx patch-package",
-    "start": "cross-env BROWSER=none react-scripts start",
+    "start": "cross-env REACT_APP_GOOGLE_ENDPOINT=http://localhost:3000 BROWSER=none react-scripts start",
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "build": "react-scripts build",
     "test-ui": "react-scripts test --env=jsdom",
@@ -55,6 +55,7 @@
     "eslint-plugin-react": "7.14.3",
     "fs-extra": "8.1.0",
     "glob": "7.1.6",
+    "http-proxy-middleware": "0.20.0",
     "mocha": "6.2.2",
     "node-fetch": "2.6.0",
     "pouchdb-browser": "7.1.1",
