@@ -96,7 +96,6 @@ const Preferences = (props) => {
     onOpenShortcutDialog,
     onToggleSetting,
     openOnMenubarShortcut,
-    preferredTranslationService,
     realtime,
     theme,
     translateClipboardOnShortcut,
@@ -181,19 +180,6 @@ const Preferences = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
-            <Divider />
-            <EnhancedMenu
-              id="preferredTranslationService"
-              buttonElement={(
-                <ListItem button>
-                  <ListItemText primary={getLocale('preferredTranslationService')} secondary={preferredTranslationService === 'google' ? 'Google' : 'Yandex'} />
-                  <ChevronRightIcon color="action" />
-                </ListItem>
-              )}
-            >
-              <MenuItem onClick={() => requestSetPreference('preferredTranslationService', 'google')}>Google</MenuItem>
-              <MenuItem onClick={() => requestSetPreference('preferredTranslationService', 'yandex')}>Yandex</MenuItem>
-            </EnhancedMenu>
           </List>
         </Paper>
 
@@ -303,7 +289,6 @@ Preferences.propTypes = {
   onOpenShortcutDialog: PropTypes.func.isRequired,
   onToggleSetting: PropTypes.func.isRequired,
   openOnMenubarShortcut: PropTypes.string,
-  preferredTranslationService: PropTypes.string.isRequired,
   realtime: PropTypes.bool.isRequired,
   theme: PropTypes.string.isRequired,
   translateClipboardOnShortcut: PropTypes.bool.isRequired,
@@ -315,7 +300,6 @@ const mapStateToProps = (state) => ({
   attachToMenubar: state.preferences.attachToMenubar,
   langId: state.preferences.langId,
   openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
-  preferredTranslationService: state.preferences.preferredTranslationService,
   realtime: state.preferences.realtime,
   theme: state.preferences.theme,
   translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,

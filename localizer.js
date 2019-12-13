@@ -4,9 +4,9 @@ require('dotenv').config();
 
 const path = require('path');
 const fsExtra = require('fs-extra');
-const translate = require('@vitalets/google-translate-api');
 
 global.fetch = require('node-fetch');
+const translateText = require('./src/helpers/translate-text').default;
 
 const localeDir = path.resolve(__dirname, 'public', 'libs', 'locales');
 
@@ -23,25 +23,17 @@ localeLangIds.forEach((localeJson) => {
   const locales = fsExtra.readJsonSync(path.resolve(localeDir, localeJson));
 
   const newLocales = {};
-
-  let p = Promise.resolve();
-
-  Object.keys(enLocales).forEach((key) => {
-    const run = async () => {
-      if (locales[key]) {
-        newLocales[key] = locales[key];
-      } else {
-        console.log('Fetching', localeJson, key, '...');
-        newLocales[key] = null;
-        const translateTextRes = await translate(enLocales[key], { from: 'en', to: localeJson.replace('.json', '') });
-        newLocales[key] = translateTextRes.text;
-      }
-    };
-
-    p = p.then(() => run());
+  const p = Object.keys(enLocales).map(async (key) => {
+    if (locales[key]) {
+      newLocales[key] = locales[key];
+    } else {
+      newLocales[key] = null;
+      const translateTextRes = await translateText('en', localeJson.replace('.json', ''), enLocales[key]);
+      newLocales[key] = translateTextRes.outputText;
+    }
   });
 
-  p.then(() => {
+  Promise.all(p).then(() => {
     console.log(`Done ${localeJson}.`);
     fsExtra.writeJsonSync(path.resolve(localeDir, localeJson), newLocales, {
       spaces: '\t',

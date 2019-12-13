@@ -67,7 +67,6 @@ import { updateLanguageListMode } from '../../../state/pages/language-list/actio
 import { ROUTE_LANGUAGE_LIST } from '../../../constants/routes';
 
 import YandexDictionary from './yandex-dictionary';
-import GoogleDictionary from './google-dictionary';
 import History from './history';
 
 const { remote } = window.require('electron');
@@ -325,31 +324,17 @@ class Home extends React.Component {
                 )}
               </CardActions>
             </Card>
-            {output.provider === 'yandex' && (
-              <Typography
-                variant="body1"
-                align="left"
-                className={classes.yandexCopyright}
-                onClick={() => remote.shell.openExternal('http://translate.yandex.com/')}
-              >
-                Powered by Yandex.Translate
-              </Typography>
-            )}
-            {output.provider === 'google' && (
-              <Typography
-                variant="body1"
-                align="left"
-                className={classes.yandexCopyright}
-                onClick={() => remote.shell.openExternal('http://translate.google.com/')}
-              >
-                Powered by Google Translate
-              </Typography>
-            )}
+            <Typography
+              variant="body1"
+              align="left"
+              className={classes.yandexCopyright}
+              onClick={() => remote.shell.openExternal('http://translate.yandex.com/')}
+            >
+              Powered by Yandex.Translate
+            </Typography>
 
-
-            {output.provider === 'yandex' && output.outputDict && <YandexDictionary />}
-            {output.provider === 'google' && (output.inputDict || output.outputDict) && <GoogleDictionary />}
-            {output.provider === 'yandex' && output.outputDict && output.outputDict.def.length > 0 && (
+            {output.outputDict && <YandexDictionary />}
+            {output.outputDict && output.outputDict.def.length > 0 && (
               <Typography
                 variant="body1"
                 align="left"
@@ -357,16 +342,6 @@ class Home extends React.Component {
                 onClick={() => remote.shell.openExternal('https://tech.yandex.com/dictionary/')}
               >
                 Powered by Yandex.Dictionary
-              </Typography>
-            )}
-            {output.provider === 'google' && (output.inputDict || output.outputDict) && (
-              <Typography
-                variant="body1"
-                align="left"
-                className={classes.yandexCopyright}
-                onClick={() => remote.shell.openExternal('https://translate.google.com/')}
-              >
-                Powered by Google Translate
               </Typography>
             )}
           </div>

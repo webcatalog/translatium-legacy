@@ -18,7 +18,7 @@ export const toggleFullscreenInputBox = () => ({
 
 export const translate = (saveToHistory) => ((dispatch, getState) => {
   const { preferences, pages: { home } } = getState();
-  const { inputLang, outputLang, preferredTranslationService } = preferences;
+  const { inputLang, outputLang } = preferences;
   const { inputText, fullscreenInputBox } = home;
 
   // Safe
@@ -38,7 +38,7 @@ export const translate = (saveToHistory) => ((dispatch, getState) => {
     },
   });
 
-  translateText(inputLang, outputLang, inputText, preferredTranslationService)
+  translateText(inputLang, outputLang, inputText)
     .then((result) => {
       // Prevent slow request to display outdated info
       const currentOutput = getState().pages.home.output;
