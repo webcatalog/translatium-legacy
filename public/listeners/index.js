@@ -48,7 +48,7 @@ const loadListeners = () => {
       message: getLocale('resetDesc'),
       cancelId: 1,
     })
-      .then((response) => {
+      .then(({ response }) => {
         if (response === 0) {
           resetPreferences();
 
@@ -64,7 +64,7 @@ const loadListeners = () => {
       message: getLocale('requireRestartDesc'),
       cancelId: 1,
     })
-      .then((response) => {
+      .then(({ response }) => {
         if (response === 0) {
           app.quit();
         }

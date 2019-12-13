@@ -177,6 +177,7 @@ const Preferences = (props) => {
                     requestSetPreference('attachToMenubar', e.target.checked);
                     requestShowRequireRestartDialog();
                   }}
+                  color="primary"
                 />
               </ListItemSecondaryAction>
             </ListItem>
@@ -195,6 +196,7 @@ const Preferences = (props) => {
                 <Switch
                   checked={realtime}
                   onChange={() => onToggleSetting('realtime')}
+                  color="primary"
                 />
               </ListItemSecondaryAction>
             </ListItem>
@@ -205,6 +207,7 @@ const Preferences = (props) => {
                 <Switch
                   checked={translateWhenPressingEnter}
                   onChange={() => onToggleSetting('translateWhenPressingEnter')}
+                  color="primary"
                 />
               </ListItemSecondaryAction>
             </ListItem>
@@ -244,6 +247,7 @@ const Preferences = (props) => {
                     <Switch
                       checked={attachToMenubar ? translateClipboardOnShortcut : false}
                       onChange={() => onToggleSetting('translateClipboardOnShortcut')}
+                      color="primary"
                     />
                   </ListItemSecondaryAction>
                 </ListItem>
@@ -260,6 +264,7 @@ const Preferences = (props) => {
                         requestSetPreference('alwaysOnTop', e.target.checked);
                         requestShowRequireRestartDialog();
                       }}
+                      color="primary"
                     />
                   </ListItemSecondaryAction>
                 </ListItem>

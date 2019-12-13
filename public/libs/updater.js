@@ -71,7 +71,7 @@ autoUpdater.on('update-downloaded', (info) => {
 
   const win = BrowserWindow.getFocusedWindow();
   dialog.showMessageBox(win, dialogOpts)
-    .then((response) => {
+    .then(({ response }) => {
       if (response === 0) {
         // Fix autoUpdater.quitAndInstall() does not quit immediately
         // https://github.com/electron/electron/issues/3583
