@@ -25,11 +25,9 @@
     "localize": "npx babel-node localizer.js"
   },
   "dependencies": {
-    "@vitalets/google-translate-api": "3.0.0",
     "electron-is-dev": "1.1.0",
     "electron-settings": "3.2.0",
     "electron-updater": "4.2.0",
-    "google-tts-api": "0.0.4",
     "menubar": "7.1.0"
   },
   "devDependencies": {
@@ -55,7 +53,6 @@
     "eslint-plugin-react": "7.14.3",
     "fs-extra": "8.1.0",
     "glob": "7.1.6",
-    "http-proxy-middleware": "0.20.0",
     "mocha": "6.2.2",
     "node-fetch": "2.6.0",
     "pouchdb-browser": "7.1.1",

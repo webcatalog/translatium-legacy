@@ -6,9 +6,6 @@ const {
   shell,
 } = require('electron');
 
-const translateWithGoogle = require('@vitalets/google-translate-api');
-const googleTTS = require('google-tts-api');
-
 const {
   getPreference,
   getPreferences,
@@ -87,23 +84,6 @@ const loadListeners = () => {
       defaultId: 0,
     });
   });
-
-  // make sure there's a delay between requests
-  // https://github.com/vitalets/google-translate-api/issues/9
-  let p = Promise.resolve();
-  ipcMain.handle('translate-with-google-async', (e, ...args) => {
-    const p1 = p.then(() => translateWithGoogle(...args));
-    p = p1.then(() => new Promise((resolve, reject) => {
-      try {
-        setTimeout(() => { resolve(); }, 500);
-      } catch (err) {
-        reject(err);
-      }
-    }));
-    return p1;
-  });
-
-  ipcMain.handle('tts-with-google-async', (e, ...args) => googleTTS(...args));
 };
 
 module.exports = loadListeners;
