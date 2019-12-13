@@ -1,5 +1,5 @@
 
-const { Menu } = require('electron');
+const { Menu, shell } = require('electron');
 const { autoUpdater } = require('electron-updater');
 
 const config = require('../config');
@@ -89,11 +89,11 @@ const createMenu = () => {
       submenu: [
         {
           label: getLocale('learnMore'),
-          click: () => electron.shell.openExternal(config.APP_URL),
+          click: () => shell.openExternal(config.APP_URL),
         },
         {
           label: getLocale('reportAnIssue'),
-          click: () => electron.shell.openExternal('https://github.com/translatium/translatium/issues'),
+          click: () => shell.openExternal('https://github.com/translatium/translatium/issues'),
         },
       ],
     },
