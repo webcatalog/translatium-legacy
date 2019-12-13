@@ -17,3 +17,4 @@ export const getLocales = () => ipcRenderer.sendSync('get-locales');
 
 // Translate
 export const translateWithGoogleAsync = (...args) => ipcRenderer.invoke('translate-with-google-async', ...args);
+export const ttsWithGoogleAsync = (...args) => ipcRenderer.invoke('tts-with-google-async', ...args);

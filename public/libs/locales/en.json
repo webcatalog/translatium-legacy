@@ -67,9 +67,6 @@
 	"removeFromPhrasebook": "Remove from Phrasebook",
 	"translateFrom": "Translate from",
 	"didYouMean":  "Did you mean",
-	"translatedByYandexTranslate": "Powered by Yandex.Translate.",
-	"translatedByYandexDictionary": "Powered by Yandex.Dictionary.",
-	"translatedByGoogleTranslate": "Powered by Google Translate.",
 	"fromLanguage": "from {1}",
 	"chooseAnInputLanguage": "Translate from",
 	"chooseAnOutputLanguage": "Translate to",
@@ -280,9 +277,8 @@
 	"yi": "Yiddish",
 	"yo": "Yoruba",
 	"zh": "Chinese",
-	"zh-CN": "Chinese (Mandarin, China)",
-	"zh-HK": "Chinese (Mandarin, Hong Kong)",
-	"zh-TW": "Chinese (Mandarin, Taiwan)",
-	"zh-YUE": "Chinese (Cantonese, Hong Kong)",
+	"zh-CN": "Chinese (Simplified, China)",
+	"zh-HK": "Chinese (Traditional, Hong Kong)",
+	"zh-TW": "Chinese (Traditional, Taiwan)",
 	"zu": "Zulu"
 }
