@@ -1,9 +1,8 @@
 import { getLocales } from '../senders';
 
-let locales;
+const locales = getLocales();
 
 const getLocale = (id) => {
-  if (locales == null) locales = getLocales();
   if (!locales[id]) {
     console.log('Missing locale id', id); // eslint-disable-line no-console
     return id;
