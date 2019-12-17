@@ -76,18 +76,10 @@ layout: default
         if (/Linux/.test(window.navigator.platform)) {
           document.getElementById('mac').style.display = 'none';
           document.getElementById('linux').style.display = '';
-          document.title = 'Download for Linux - Translatium';
-          history.replaceState({}, 'Download for Linux - Translatium', '/download/linux');
         }
         else if (['Win32', 'Win64', 'Windows', 'WinCE'].indexOf(window.navigator.platform) !== -1) {
           document.getElementById('mac').style.display = 'none';
           document.getElementById('windows').style.display = '';
-          document.title = 'Download for Windows - Translatium';
-          history.replaceState({}, 'Download for Windows - Translatium', '/download/windows');
-        }
-        else {
-          document.title = 'Download for macOS - Translatium';
-          history.replaceState({}, 'Download for macOS - Translatium', '/download/mac');
         }
       </script>
       {% endif %}
@@ -214,7 +206,9 @@ layout: default
 <section class="section">
   <div class="container">
     <div class="content has-text-centered">
-      <img src="{{ "/images/translatium-screenshot-2.png" | relative_url }}" alt="Translatium on macOS" class="demo_main" />
+      <a href="{{ '/images/translatium-screenshot-2.png' | relative_url }}">
+        <img src="{{ '/images/translatium-screenshot-2.png' | relative_url }}" alt="Translatium on macOS" class="demo_main" />
+      </a>
     </div>
   </div>
 </section>

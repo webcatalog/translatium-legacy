@@ -6,6 +6,7 @@ const config = require('../config');
 
 const sendToAllWindows = require('./send-to-all-windows');
 const { getLocale } = require('./locales');
+const { getPreference } = require('./preferences');
 
 const createMenu = () => {
   const updaterEnabled = process.env.SNAP == null && !process.mas && !process.windowsStore;
@@ -100,6 +101,8 @@ const createMenu = () => {
   ];
 
   if (process.platform === 'darwin') {
+    const registered = getPreference('registered');
+
     template.unshift({
       label: config.APP_NAME,
       submenu: [
@@ -118,6 +121,16 @@ const createMenu = () => {
             autoUpdater.checkForUpdates();
           },
           visible: updaterEnabled,
+        },
+        {
+          type: 'separator',
+          visible: process.env.SNAP == null && !process.mas && !process.windowsStore,
+        },
+        {
+          label: registered ? getLocale('registered') : getLocale('registration'),
+          enabled: !registered,
+          click: registered ? null : () => sendToAllWindows('open-license-registration-dialog'),
+          visible: process.env.SNAP == null && !process.mas && !process.windowsStore,
         },
         { type: 'separator' },
         {
