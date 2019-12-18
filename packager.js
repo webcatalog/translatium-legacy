@@ -73,13 +73,9 @@ const opts = {
       darkModeSupport: true,
       hardenedRuntime: true,
       gatekeeperAssess: false,
-      entitlements: 'build-resources/entitlements.mac.plist',
-      entitlementsInherit: 'build-resources/entitlements.mac.plist',
     },
     mas: {
       category: 'public.app-category.productivity',
-      entitlements: 'build-resources/entitlements.mas.plist',
-      entitlementsInherit: 'build-resources/entitlements.mas.inherit.plist',
       // provisioningProfile: 'build-resources/embedded-development.provisionprofile',
       provisioningProfile: 'build-resources/embedded.provisionprofile',
       hardenedRuntime: true,
