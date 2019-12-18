@@ -71,6 +71,10 @@ const opts = {
     },
     mac: {
       darkModeSupport: true,
+      hardenedRuntime: true,
+      gatekeeperAssess: false,
+      entitlements: 'build-resources/entitlements.mac.plist',
+      entitlementsInherit: 'build-resources/entitlements.mac.plist',
     },
     mas: {
       category: 'public.app-category.productivity',
