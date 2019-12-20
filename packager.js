@@ -29,8 +29,7 @@ const appVersion = fs.readJSONSync(path.join(__dirname, 'package.json')).version
 let targets;
 switch (process.platform) {
   case 'darwin': {
-    // targets = Platform.MAC.createTarget(['mas-dev']);
-    targets = Platform.MAC.createTarget(['mas', 'zip', 'dmg']);
+    targets = Platform.MAC.createTarget([process.env.CI ? 'mas' : 'mas-dev', 'zip', 'dmg']);
     break;
   }
   case 'win32': {
@@ -71,14 +70,12 @@ const opts = {
     },
     mac: {
       darkModeSupport: true,
-      hardenedRuntime: true,
-      gatekeeperAssess: false,
     },
     mas: {
       category: 'public.app-category.productivity',
-      // provisioningProfile: 'build-resources/embedded-development.provisionprofile',
-      provisioningProfile: 'build-resources/embedded.provisionprofile',
-      hardenedRuntime: true,
+      provisioningProfile: targets.has(Platform.MAC) && targets.get(Platform.MAC).get(1).indexOf('mas-dev') > -1
+        ? 'build-resources/embedded-development.provisionprofile'
+        : 'build-resources/embedded.provisionprofile',
       darkModeSupport: true,
     },
     linux: {

@@ -1,5 +1,5 @@
 diff --git a/node_modules/app-builder-lib/out/electron/electronMac.js b/node_modules/app-builder-lib/out/electron/electronMac.js
-index 8d9f9fc..14c1829 100644
+index 8d9f9fc..2e92fe6 100644
 --- a/node_modules/app-builder-lib/out/electron/electronMac.js
 +++ b/node_modules/app-builder-lib/out/electron/electronMac.js
 @@ -175,7 +175,7 @@ async function createMacApp(packager, appOutDir, asarIntegrity, isMas) {
@@ -10,4 +10,17 @@ index 8d9f9fc..14c1829 100644
 +    helper.CFBundleIdentifier = `${helperBundleIdentifier}.${postfix.replace(/[^a-z0-9]/gim, "")}`;
      helper.CFBundleVersion = appPlist.CFBundleVersion;
    }
+ 
+diff --git a/node_modules/app-builder-lib/out/macPackager.js b/node_modules/app-builder-lib/out/macPackager.js
+index 764537a..81594db 100644
+--- a/node_modules/app-builder-lib/out/macPackager.js
++++ b/node_modules/app-builder-lib/out/macPackager.js
+@@ -351,7 +351,7 @@ class MacPackager extends _platformPackager().PlatformPackager {
+       // https://github.com/electron-userland/electron-osx-sign/issues/196
+       // will fail on 10.14.5+ because a signed but unnotarized app is also rejected.
+       "gatekeeper-assess": options.gatekeeperAssess === true,
+-      hardenedRuntime: options.hardenedRuntime !== false
++      hardenedRuntime: isMas ? masOptions && masOptions.hardenedRuntime === true : options.hardenedRuntime !== false
+     };
+     await this.adjustSignOptions(signOptions, masOptions);
  
