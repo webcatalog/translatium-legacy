@@ -1,5 +1,5 @@
 
-const { Menu, shell } = require('electron');
+const { app, Menu, shell } = require('electron');
 const { autoUpdater } = require('electron-updater');
 
 const config = require('../config');
@@ -73,7 +73,11 @@ const createMenu = () => {
       submenu: [
         { role: 'togglefullscreen', label: getLocale('toggleFullscreen') },
         { type: 'separator' },
-        { role: 'toggledevtools', label: getLocale('toggleDevTools') },
+        {
+          role: 'toggledevtools',
+          label: getLocale('toggleDevTools'),
+          visible: !app.isPackaged,
+        },
       ],
     },
     {

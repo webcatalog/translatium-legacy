@@ -5,7 +5,6 @@ import Fab from '@material-ui/core/Fab';
 import CloseIcon from '@material-ui/icons/Close';
 import NavigationMoreVert from '@material-ui/icons/MoreVert';
 import MenuItem from '@material-ui/core/MenuItem';
-import IconButton from '@material-ui/core/IconButton';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 
@@ -23,7 +22,7 @@ import { ROUTE_HOME } from '../../../constants/routes';
 
 const { remote } = window.require('electron');
 
-const styles = {
+const styles = (theme) => ({
   container: {
     flex: 1,
     display: 'flex',
@@ -62,7 +61,19 @@ const styles = {
     left: 96,
     zIndex: 100,
   },
-};
+  line: {
+    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    color: '#fff',
+    whiteSpace: 'nowrap',
+    position: 'absolute',
+    cursor: 'pointer',
+    '&:focus, &:active': {
+      outlineColor: theme.palette.primary.main,
+      outlineStyle: 'auto',
+      outlineWidth: 5,
+    },
+  },
+});
 
 class Ocr extends React.Component {
   componentDidMount() {
@@ -94,6 +105,7 @@ class Ocr extends React.Component {
       <div className={classes.container}>
         <Fab
           className={classes.closeButton}
+          size="small"
           onClick={() => onChangeRoute(ROUTE_HOME)}
         >
           <CloseIcon />
@@ -104,16 +116,19 @@ class Ocr extends React.Component {
           >
             {ocr[lineVarName].map((line) => (
               <div
+                role="button"
+                tabIndex={0}
                 key={`ocrText_${line.text}`}
+                className={classes.line}
                 style={{
-                  backgroundColor: 'rgba(0, 0, 0, 0.75)',
-                  color: '#fff',
-                  whiteSpace: 'nowrap',
-                  position: 'absolute',
                   top: line.top,
                   left: line.left,
                   fontSize: line.height,
                   lineHeight: `${line.height}px`,
+                }}
+                onClick={() => {
+                  remote.clipboard.writeText(line.text);
+                  onOpenSnackbar(getLocale('copied'));
                 }}
               >
                 {line.text}
@@ -124,6 +139,7 @@ class Ocr extends React.Component {
         </div>
         <Fab
           className={classes.minusButton}
+          size="small"
           onClick={() => {
             if (ocr.zoomLevel < 0.1) return;
             onSetZoomLevel(ocr.zoomLevel - 0.1 || 1);
@@ -133,6 +149,7 @@ class Ocr extends React.Component {
         </Fab>
         <Fab
           className={classes.plusButton}
+          size="small"
           onClick={() => onSetZoomLevel(ocr.zoomLevel + 0.1 || 1)}
         >
           <ZoomInIcon />
@@ -140,9 +157,9 @@ class Ocr extends React.Component {
         <EnhancedMenu
           id="ocrMore"
           buttonElement={(
-            <IconButton className={classes.moreButton}>
-              <NavigationMoreVert color="#fff" />
-            </IconButton>
+            <Fab className={classes.moreButton} size="small">
+              <NavigationMoreVert />
+            </Fab>
           )}
         >
           <MenuItem
