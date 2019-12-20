@@ -88,7 +88,7 @@ class Ocr extends React.Component {
 
     if (!ocr) return null;
 
-    const lineVarName = `${ocr.mode || 'ouLatput'}Lines`;
+    const lineVarName = `${ocr.mode || 'output'}Lines`;
 
     return (
       <div className={classes.container}>
