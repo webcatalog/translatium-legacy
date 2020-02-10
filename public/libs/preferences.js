@@ -53,7 +53,7 @@ const getRegistered = () => {
 const v = '2019';
 
 const defaultPreferences = {
-  registered: getRegistered(),
+  registered: app.isPackaged ? getRegistered() : true,
   alwaysOnTop: false,
   attachToMenubar: false,
   clearInputShortcut: 'mod+shift+d',

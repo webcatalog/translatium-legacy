@@ -180,9 +180,9 @@ class Ocr extends React.Component {
           >
             {getLocale('copyOriginalText')}
             {' '}
-(
+            (
             {getLocale(inputLang)}
-)
+            )
           </MenuItem>
           <MenuItem
             onClick={() => {
@@ -192,9 +192,9 @@ class Ocr extends React.Component {
           >
             {getLocale('copyTranslatedText')}
             {' '}
-(
+            (
             {getLocale(outputLang)}
-)
+            )
           </MenuItem>
           <MenuItem
             onClick={() => {

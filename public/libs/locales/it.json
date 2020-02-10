@@ -7,6 +7,8 @@
 	"paste": "Incollare",
 	"delete": "Eliminare",
 	"selectAll": "Seleziona Tutto",
+	"lookUp": "Consultare “{selection}”",
+	"copyLink": "Copia Link",
 	"selectInputLang": "Selezionare La Lingua Di Input",
 	"selectOutputLang": "Selezionare La Lingua Dell'Uscita",
 	"swapLanguages": "Swap Lingue",
