@@ -20,7 +20,7 @@
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "dist": "yarn run build && babel-node packager.js",
-    "lint": "eslint ./src ./public ./packager.js --ext js --fix",
+    "lint": "eslint ./src ./public ./packager.js --ext js",
     "test": "mocha",
     "localize": "npx babel-node localizer.js"
   },
