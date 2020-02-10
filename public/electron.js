@@ -13,6 +13,7 @@ const loadListeners = require('./listeners');
 const { getPreference } = require('./libs/preferences');
 const { getLocale } = require('./libs/locales');
 const sendToAllWindows = require('./libs/send-to-all-windows');
+const setContextMenu = require('./libs/set-context-menu');
 
 require('./libs/updater');
 
@@ -176,6 +177,7 @@ const createWindow = () => {
 app.on('ready', () => {
   createWindow();
   createMenu();
+  setContextMenu();
 });
 
 // Quit when all windows are closed.

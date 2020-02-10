@@ -539,7 +539,7 @@ class Home extends React.Component {
                       aria-label={tooltip}
                       onClick={onClick}
                     >
-                      {<Icon fontSize="small" />}
+                      <Icon fontSize="small" />
                     </IconButton>
                   </Tooltip>
                 ))}
