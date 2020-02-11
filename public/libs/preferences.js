@@ -39,6 +39,7 @@ const getDefaultLangId = () => {
 };
 
 const getRegistered = () => {
+  if (app.isPackaged) return true;
   if (process.env.SNAP == null && !process.mas && !process.windowsStore) {
     if (process.platform === 'linux') {
       return true; // The app is free on Linux
@@ -53,7 +54,7 @@ const getRegistered = () => {
 const v = '2019';
 
 const defaultPreferences = {
-  registered: app.isPackaged ? getRegistered() : true,
+  registered: getRegistered(),
   alwaysOnTop: false,
   attachToMenubar: false,
   clearInputShortcut: 'mod+shift+d',
