@@ -1,5 +1,5 @@
 
-const { app, Menu, shell } = require('electron');
+const { Menu, shell } = require('electron');
 const { autoUpdater } = require('electron-updater');
 
 const config = require('../config');
@@ -72,12 +72,6 @@ const createMenu = () => {
       label: getLocale('view'),
       submenu: [
         { role: 'togglefullscreen', label: getLocale('toggleFullscreen') },
-        { type: 'separator' },
-        {
-          role: 'toggledevtools',
-          label: getLocale('toggleDevTools'),
-          visible: !app.isPackaged,
-        },
       ],
     },
     {
@@ -99,6 +93,11 @@ const createMenu = () => {
         {
           label: getLocale('reportAnIssue'),
           click: () => shell.openExternal('https://github.com/translatium/translatium/issues'),
+        },
+        { type: 'separator' },
+        {
+          role: 'toggledevtools',
+          label: getLocale('toggleDevTools'),
         },
       ],
     },
