@@ -39,7 +39,7 @@ const getDefaultLangId = () => {
 };
 
 const getRegistered = () => {
-  if (app.isPackaged) return true;
+  if (!app.isPackaged) return true;
   if (process.env.SNAP == null && !process.mas && !process.windowsStore) {
     if (process.platform === 'linux') {
       return true; // The app is free on Linux
