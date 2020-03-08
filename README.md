@@ -2,7 +2,7 @@
 
 |macOS|Linux|Windows|
 |---|---|---|
-|[![GitHub Actions Build Status](https://github.com/quanglam2807/translatium/workflows/macOS/badge.svg)](https://github.com/quanglam2807/translatium/actions)|[![GitHub Actions Build Status](https://github.com/quanglam2807/translatium/workflows/Linux/badge.svg)](https://github.com/quanglam2807/translatium/actions)|[![GitHub Actions Build Status](https://github.com/quanglam2807/translatium/workflows/Windows/badge.svg)](https://github.com/quanglam2807/translatium/actions)|
+|[![GitHub Actions Build Status](https://github.com/atomery/translatium/workflows/macOS/badge.svg)](https://github.com/atomery/translatium/actions)|[![GitHub Actions Build Status](https://github.com/atomery/translatium/workflows/Linux/badge.svg)](https://github.com/atomery/translatium/actions)|[![GitHub Actions Build Status](https://github.com/atomery/translatium/workflows/Windows/badge.svg)](https://github.com/atomery/translatium/actions)|
 
 **[Translatium](https://translatiumapp.com)** - Translate Any Languages like a Pro.
 
@@ -12,7 +12,7 @@
 ## Development
 ```
 # First, clone the project:
-git clone https://github.com/quanglam2807/translatium.git
+git clone https://github.com/atomery/translatium.git
 cd translatium
 
 # set API keys

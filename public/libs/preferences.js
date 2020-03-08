@@ -5,7 +5,7 @@ const sendToAllWindows = require('./send-to-all-windows');
 const displayLanguages = require('./display-languages');
 
 // Legacy code
-// https://github.com/quanglam2807/translatium/blob/v8.6.1/src/helpers/get-default-lang-id.js
+// https://github.com/atomery/translatium/blob/v8.6.1/src/helpers/get-default-lang-id.js
 // strip country code from langId
 // en-US => en / vi-vn => vi
 const getLanguageCode = (langId) => {
