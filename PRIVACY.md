@@ -9,6 +9,7 @@ Still, the app does use third party services that may collect information used t
 * [Yandex.Translate](https://yandex.com/legal/translate_termsofuse/18092015/) for translatation.
 * [Yandex.Dictionary](https://yandex.com/legal/dictionary_api/) for dictionary.
 * [OCR.Space](https://ocr.space/privacypolicy) for optical character recognition (OCR).
+* [Cloudflare](https://www.cloudflare.com/privacypolicy/) for CDN and domain management.
 
 ---
 
@@ -16,6 +17,7 @@ Our websites use:
 
 * [Google Tag Manager](https://support.google.com/analytics/answer/6004245?hl=en) and [Google Analytics](https://support.google.com/analytics/answer/6004245?hl=en) for analytics.
 * [Basin](https://usebasin.com/privacy) for form submissions.
+* [Cloudflare](https://www.cloudflare.com/privacypolicy/) for CDN and domain management.
 
 ---
 
