@@ -163,6 +163,7 @@ class Ocr extends React.Component {
           )}
         >
           <MenuItem
+            dense
             onClick={() => {
               const newMode = ocr.mode === 'input' ? 'output' : 'input';
               onSetMode(newMode);
@@ -173,6 +174,7 @@ class Ocr extends React.Component {
               : `${getLocale('displayOriginalText')} (${getLocale(inputLang)})`}
           </MenuItem>
           <MenuItem
+            dense
             onClick={() => {
               remote.clipboard.writeText(ocr.inputText);
               onOpenSnackbar(getLocale('copied'));
@@ -185,6 +187,7 @@ class Ocr extends React.Component {
             )
           </MenuItem>
           <MenuItem
+            dense
             onClick={() => {
               remote.clipboard.writeText(ocr.outputText);
               onOpenSnackbar(getLocale('copied'));
@@ -197,6 +200,7 @@ class Ocr extends React.Component {
             )
           </MenuItem>
           <MenuItem
+            dense
             onClick={() => {
               onLoadOutput({
                 inputLang,

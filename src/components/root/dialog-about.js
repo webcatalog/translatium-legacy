@@ -27,23 +27,23 @@ const styles = (theme) => ({
     textAlign: 'center',
   },
   title: {
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(1),
   },
   version: {
-    marginBottom: theme.spacing.unit * 2,
+    marginBottom: theme.spacing(2),
   },
   versionSmallContainer: {
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 2,
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
   versionSmall: {
     fontSize: 13,
   },
   goToTheWebsiteButton: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(1),
   },
   madeBy: {
-    marginTop: theme.spacing.unit * 2,
+    marginTop: theme.spacing(2),
   },
   link: {
     fontWeight: 600,
@@ -81,7 +81,7 @@ const About = (props) => {
         <img src={iconPng} alt="Translatium" className={classes.icon} />
         <Typography variant="title" className={classes.title}>Translatium</Typography>
         <Typography
-          variant="body1"
+          variant="body2"
           className={classes.version}
         >
           {`Version v${remote.app.getVersion()}`}

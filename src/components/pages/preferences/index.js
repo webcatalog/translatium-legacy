@@ -119,11 +119,11 @@ const Preferences = (props) => {
         </Toolbar>
       </AppBar>
       <div className={classes.innerContainer}>
-        <Typography variant="body1" className={classes.paperTitle}>
+        <Typography variant="body2" className={classes.paperTitle}>
           {getLocale('general')}
         </Typography>
         <Paper className={classes.paper}>
-          <List dense>
+          <List dense disablePadding>
             <EnhancedMenu
               id="changeDisplayLanguage"
               buttonElement={(
@@ -138,6 +138,7 @@ const Preferences = (props) => {
             >
               {displayLanguageKeys.map((lId) => (
                 <MenuItem
+                  dense
                   key={`lang_${lId}`}
                   value={lId}
                   onClick={() => {
@@ -162,16 +163,17 @@ const Preferences = (props) => {
               )}
             >
               {window.process.platform === 'darwin' && (
-                <MenuItem onClick={() => requestSetPreference('theme', 'systemDefault')}>{getLocale('systemDefault')}</MenuItem>
+                <MenuItem dense onClick={() => requestSetPreference('theme', 'systemDefault')}>{getLocale('systemDefault')}</MenuItem>
               )}
-              <MenuItem onClick={() => requestSetPreference('theme', 'light')}>{getLocale('light')}</MenuItem>
-              <MenuItem onClick={() => requestSetPreference('theme', 'dark')}>{getLocale('dark')}</MenuItem>
+              <MenuItem dense onClick={() => requestSetPreference('theme', 'light')}>{getLocale('light')}</MenuItem>
+              <MenuItem dense onClick={() => requestSetPreference('theme', 'dark')}>{getLocale('dark')}</MenuItem>
             </EnhancedMenu>
             <Divider />
             <ListItem>
               <ListItemText primary={window.process.platform === 'win32' ? getLocale('attachToTaskbar') : getLocale('attachToMenubar')} />
               <ListItemSecondaryAction>
                 <Switch
+                  edge="end"
                   checked={attachToMenubar}
                   onChange={(e) => {
                     requestSetPreference('attachToMenubar', e.target.checked);
@@ -185,15 +187,16 @@ const Preferences = (props) => {
         </Paper>
 
 
-        <Typography variant="body1" className={classes.paperTitle}>
+        <Typography variant="body2" className={classes.paperTitle}>
           {getLocale('advanced')}
         </Typography>
         <Paper className={classes.paper}>
-          <List dense>
+          <List dense disablePadding>
             <ListItem>
               <ListItemText primary={getLocale('realtime')} />
               <ListItemSecondaryAction>
                 <Switch
+                  edge="end"
                   checked={realtime}
                   onChange={() => onToggleSetting('realtime')}
                   color="primary"
@@ -205,6 +208,7 @@ const Preferences = (props) => {
               <ListItemText primary={getLocale('translateWhenPressingEnter')} />
               <ListItemSecondaryAction>
                 <Switch
+                  edge="end"
                   checked={translateWhenPressingEnter}
                   onChange={() => onToggleSetting('translateWhenPressingEnter')}
                   color="primary"
@@ -245,6 +249,7 @@ const Preferences = (props) => {
                   />
                   <ListItemSecondaryAction>
                     <Switch
+                      edge="end"
                       checked={attachToMenubar ? translateClipboardOnShortcut : false}
                       onChange={() => onToggleSetting('translateClipboardOnShortcut')}
                       color="primary"
@@ -259,6 +264,7 @@ const Preferences = (props) => {
                   />
                   <ListItemSecondaryAction>
                     <Switch
+                      edge="end"
                       checked={attachToMenubar ? alwaysOnTop : false}
                       onChange={(e) => {
                         requestSetPreference('alwaysOnTop', e.target.checked);
@@ -273,9 +279,9 @@ const Preferences = (props) => {
           </List>
         </Paper>
 
-        <Typography variant="body1" className={classes.paperTitle} />
+        <Typography variant="body2" className={classes.paperTitle} />
         <Paper className={classes.paper}>
-          <List dense>
+          <List dense disablePadding>
             <ListItem button>
               <ListItemText primary={getLocale('quit')} onClick={() => remote.app.quit()} />
             </ListItem>

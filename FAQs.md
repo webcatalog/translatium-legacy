@@ -1,13 +1,13 @@
-#### How many languages does Translatim support?
+##### How many languages does Translatim support?
 You can find the list of supported languages [here](https://translatiumapp.com/languages).
 
-#### Does Translatim require Internet connection?
+##### Does Translatim require Internet connection?
 Yes, most features of Translatium require Internet connection to work.
 
-#### Does Translatium support PopClip?
+##### Does Translatium support PopClip?
 Yes, it does. You can download the PopClip extension from [here](https://translatiumapp.com/popclip).
 
-#### Why speech recognition and some other features are removed?
+##### Why speech recognition and some other features are removed?
 On November 7th, 2018, Translatium was removed from sale because the unofficial Google Translate [APIs](https://en.wikipedia.org/wiki/Application_programming_interface) the app relied on were partially blocked by Google. In August 2019, we managed to bring the app back to life using legitimate APIs from other providers. While this decision allows the app to continue operating, it also forces us to remove certain features from the app. Still, we will try to add these features back in the future if possible.
 
 ##### Where can I download previous versions of Translatium?

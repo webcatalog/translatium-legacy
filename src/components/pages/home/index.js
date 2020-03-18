@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -25,7 +22,6 @@ import ContentClear from '@material-ui/icons/Clear';
 import ImageImage from '@material-ui/icons/Image';
 import NavigationFullscreen from '@material-ui/icons/Fullscreen';
 import NavigationFullscreenExit from '@material-ui/icons/FullscreenExit';
-import NavigationMoreVert from '@material-ui/icons/MoreVert';
 import ToggleStar from '@material-ui/icons/Star';
 import ToggleStarBorder from '@material-ui/icons/StarBorder';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -33,8 +29,6 @@ import FileCopy from '@material-ui/icons/FileCopy';
 
 import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
-
-import EnhancedMenu from '../../shared/enhanced-menu';
 
 import {
   isOcrSupported,
@@ -192,7 +186,6 @@ class Home extends React.Component {
       onUpdateInputText,
       onUpdateOutputLang,
       output,
-      screenWidth,
       textToSpeechPlaying,
     } = this.props;
 
@@ -253,9 +246,6 @@ class Home extends React.Component {
           });
         }
 
-        const maxVisibleIcon = Math.min(Math.round((screenWidth - 120) / 56), controllers.length);
-        const showMoreButton = (maxVisibleIcon < controllers.length);
-
         return (
           <div
             className={classNames(
@@ -275,7 +265,7 @@ class Home extends React.Component {
             <Card>
               <CardContent className="text-selectable">
                 <Typography
-                  variant="body1"
+                  variant="body2"
                   lang={output.outputLang}
                   className={classNames('text-selectable', classes.outputText)}
                 >
@@ -289,7 +279,7 @@ class Home extends React.Component {
                 )}
               </CardContent>
               <CardActions className={classes.outputActions}>
-                {controllers.slice(0, maxVisibleIcon).map(({ Icon, tooltip, onClick }) => (
+                {controllers.map(({ Icon, tooltip, onClick }) => (
                   <Tooltip title={tooltip} placement="bottom" key={`outputTool_${tooltip}`}>
                     <IconButton
                       aria-label={tooltip}
@@ -299,33 +289,10 @@ class Home extends React.Component {
                     </IconButton>
                   </Tooltip>
                 ))}
-                {showMoreButton && (
-                  <EnhancedMenu
-                    id="homeMore2"
-                    buttonElement={(
-                      <IconButton aria-label={getLocale('more')} tooltipPosition="bottom-center">
-                        <NavigationMoreVert />
-                      </IconButton>
-                    )}
-                    anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
-                    targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-                  >
-                    {
-                      controllers
-                        .slice(maxVisibleIcon, controllers.length)
-                        .map(({ Icon, tooltip, onClick }) => (
-                          <ListItem button onClick={onClick} key={`outputTool_${tooltip}`}>
-                            <ListItemIcon><Icon fontSize="small" /></ListItemIcon>
-                            <ListItemText primary={tooltip} />
-                          </ListItem>
-                        ))
-                    }
-                  </EnhancedMenu>
-                )}
               </CardActions>
             </Card>
             <Typography
-              variant="body1"
+              variant="body2"
               align="left"
               className={classes.yandexCopyright}
               onClick={() => remote.shell.openExternal('http://translate.yandex.com/')}
@@ -336,7 +303,7 @@ class Home extends React.Component {
             {output.outputDict && <YandexDictionary />}
             {output.outputDict && output.outputDict.def.length > 0 && (
               <Typography
-                variant="body1"
+                variant="body2"
                 align="left"
                 className={classes.yandexCopyright}
                 onClick={() => remote.shell.openExternal('https://tech.yandex.com/dictionary/')}
@@ -368,7 +335,6 @@ class Home extends React.Component {
       onUpdateLanguageListMode,
       output,
       outputLang,
-      screenWidth,
       textToSpeechPlaying,
       translateWhenPressingEnter,
     } = this.props;
@@ -435,10 +401,6 @@ class Home extends React.Component {
       tooltip: fullscreenInputBox ? getLocale('exitFullscreen') : getLocale('fullscreen'),
       onClick: onToggleFullscreenInputBox,
     });
-
-    const maxVisibleIcon = Math.min(Math.round((screenWidth - 200) / 56), controllers.length);
-
-    const showMoreButton = (maxVisibleIcon < controllers.length);
 
     return (
       <div className={classes.container}>
@@ -533,7 +495,7 @@ class Home extends React.Component {
             />
             <div className={classes.controllerContainer}>
               <div className={classes.controllerContainerLeft}>
-                {controllers.slice(0, maxVisibleIcon).map(({ Icon, tooltip, onClick }) => (
+                {controllers.map(({ Icon, tooltip, onClick }) => (
                   <Tooltip title={tooltip} placement={fullscreenInputBox ? 'top' : 'bottom'} key={`inputTool_${tooltip}`}>
                     <IconButton
                       aria-label={tooltip}
@@ -543,27 +505,6 @@ class Home extends React.Component {
                     </IconButton>
                   </Tooltip>
                 ))}
-                {showMoreButton && (
-                  <EnhancedMenu
-                    id="homeMore"
-                    buttonElement={(
-                      <IconButton aria-label={getLocale('more')}>
-                        <NavigationMoreVert />
-                      </IconButton>
-                    )}
-                  >
-                    {
-                      controllers
-                        .slice(maxVisibleIcon, controllers.length)
-                        .map(({ Icon, tooltip, onClick }) => (
-                          <ListItem button onClick={onClick} key={`inputTool_${tooltip}`}>
-                            <ListItemIcon><Icon fontSize="small" /></ListItemIcon>
-                            <ListItemText primary={tooltip} />
-                          </ListItem>
-                        ))
-                    }
-                  </EnhancedMenu>
-                )}
               </div>
               <div className={classes.controllerContainerRight}>
                 <Tooltip title={getLocale('andSaveToHistory')} placement={fullscreenInputBox ? 'top' : 'bottom'}>
@@ -608,7 +549,6 @@ Home.propTypes = {
   onUpdateOutputLang: PropTypes.func.isRequired,
   output: PropTypes.object,
   outputLang: PropTypes.string,
-  screenWidth: PropTypes.number,
   textToSpeechPlaying: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool,
 };
@@ -619,7 +559,6 @@ const mapStateToProps = (state) => ({
   inputText: state.pages.home.inputText,
   output: state.pages.home.output,
   outputLang: state.preferences.outputLang,
-  screenWidth: state.screen.screenWidth,
   textToSpeechPlaying: state.pages.home.textToSpeech.textToSpeechPlaying,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
 });
