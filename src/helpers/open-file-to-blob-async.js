@@ -19,7 +19,7 @@ const openFileToBlobAsync = () => new Promise((resolve, reject) => {
       { name: 'Images', extensions: ['jpg', 'jpeg', 'png'] },
     ],
   }, (filePaths) => {
-    if (filePaths) {
+    if (Array.isArray(filePaths) && filePaths.length) {
       const filePath = filePaths[0];
       const fs = window.require('fs');
       fs.readFile(filePath, (err, data) => {
