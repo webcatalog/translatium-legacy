@@ -30,10 +30,10 @@ const styles = (theme) => ({
   inputContainer: {
     background: theme.palette.background.paper,
     display: 'flex',
-    paddingTop: theme.spacing.unit * 2,
-    paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit,
+    paddingTop: theme.spacing(2),
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+    paddingBottom: theme.spacing(1),
     borderBottom: `solid 1px ${grey[300]}`,
   },
   input: {

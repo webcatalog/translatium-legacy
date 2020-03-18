@@ -95,7 +95,7 @@ const Dictionary = ({
           </Typography>
           {section.tr.map((sSection, i) => (
             <React.Fragment key={sSection.text}>
-              <Typography variant="body1" align="left">
+              <Typography variant="body2" align="left">
                 <span className={classes.light}>
                   {i + 1}
                   .&nbsp;
@@ -161,7 +161,7 @@ const Dictionary = ({
                 .
               </Typography>
               {sSection.ex && sSection.ex.map((ex, j) => (
-                <Typography variant="body1" align="left" key={ex.text}>
+                <Typography variant="body2" align="left" key={ex.text}>
                   <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                   <span className={classes.light}>
                     {(j + 10).toString(36)}
