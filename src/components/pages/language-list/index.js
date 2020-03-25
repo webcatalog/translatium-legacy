@@ -9,7 +9,6 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import grey from '@material-ui/core/colors/grey';
 
 import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
@@ -28,17 +27,13 @@ const styles = (theme) => ({
     overflow: 'hidden',
   },
   inputContainer: {
-    background: theme.palette.background.paper,
     display: 'flex',
-    paddingTop: theme.spacing(2),
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
-    paddingBottom: theme.spacing(1),
-    borderBottom: `solid 1px ${grey[300]}`,
+    padding: theme.spacing(1.5, 2, 0, 2),
   },
   input: {
     width: '100%',
     fontSize: 16,
+    margin: 0,
     '&::before': {
       background: 'none',
     },
@@ -51,6 +46,12 @@ const styles = (theme) => ({
     color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
     WebkitAppRegion: 'drag',
     WebkitUserSelect: 'none',
+  },
+  toolbar: {
+    minHeight: 40,
+  },
+  toolbarIconButton: {
+    padding: theme.spacing(1),
   },
 });
 
@@ -88,13 +89,14 @@ class LanguageList extends React.Component {
 
     return (
       <div className={classes.container}>
-        <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
-          <Toolbar variant="dense">
-            <Typography variant="h6" color="inherit" className={classes.title}>
+        <AppBar position="static" color="default" elevation={1} classes={{ colorDefault: classes.appBarColorDefault }}>
+          <Toolbar variant="dense" className={classes.toolbar}>
+            <Typography variant="subtitle1" color="inherit" className={classes.title}>
               {mode === 'inputLang' ? getLocale('chooseAnInputLanguage') : getLocale('chooseAnOutputLanguage')}
             </Typography>
             <IconButton
               color="inherit"
+              className={classes.toolbarIconButton}
               onClick={() => {
                 if (mode && mode.startsWith('ocr')) {
                   onChangeRoute(ROUTE_OCR);
@@ -103,12 +105,14 @@ class LanguageList extends React.Component {
                 }
               }}
             >
-              <CloseIcon />
+              <CloseIcon fontSize="small" />
             </IconButton>
           </Toolbar>
         </AppBar>
         <div className={classes.inputContainer}>
           <TextField
+            margin="dense"
+            variant="standard"
             value={search}
             placeholder={getLocale('searchLanguages')}
             className={classes.input}
@@ -118,8 +122,9 @@ class LanguageList extends React.Component {
                 <InputAdornment position="end">
                   <IconButton
                     onClick={() => onUpdateLanguageListSearch('')}
+                    size="small"
                   >
-                    <CloseIcon />
+                    <CloseIcon fontSize="small" />
                   </IconButton>
                 </InputAdornment>
               ),

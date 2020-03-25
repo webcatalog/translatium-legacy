@@ -17,7 +17,7 @@ import getLocale from '../../../helpers/get-locale';
 import { deleteHistoryItem, loadHistory } from '../../../state/pages/home/history/actions';
 import { loadOutput } from '../../../state/pages/home/actions';
 
-const styles = {
+const styles = (theme) => ({
   container: {
     flex: 1,
     display: 'flex',
@@ -31,6 +31,7 @@ const styles = {
     WebkitOverflowScrolling: 'touch',
     padding: 0,
     boxSizing: 'border-box',
+    color: theme.palette.text.primary,
   },
   progress: {
     marginTop: 12,
@@ -40,7 +41,7 @@ const styles = {
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
   },
-};
+});
 
 class History extends React.Component {
   componentDidMount() {
@@ -85,7 +86,7 @@ class History extends React.Component {
 
           return (
             <div className={classes.listContainer} ref={(c) => { this.listView = c; }}>
-              <List>
+              <List disablePadding>
                 {historyItems.map((item) => [(
                   <ListItem
                     button
@@ -116,7 +117,7 @@ class History extends React.Component {
                       </Tooltip>
                     </ListItemSecondaryAction>
                   </ListItem>
-                ), <Divider inset={false} key="divider" />])}
+                ), <Divider key="divider" />])}
               </List>
               {historyLoading && (
                 <LinearProgress variant="indeterminate" className={classes.progress} />

@@ -14,7 +14,6 @@ import AppWrapper from './components/app-wrapper';
 const { webFrame } = window.require('electron');
 
 webFrame.setVisualZoomLevelLimits(1, 1);
-webFrame.setLayoutZoomLevelLimits(0, 0);
 
 render(
   <Provider store={store}>

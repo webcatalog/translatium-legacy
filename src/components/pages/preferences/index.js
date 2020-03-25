@@ -60,6 +60,7 @@ const styles = (theme) => ({
   paper: {
     maxWidth: 480,
     margin: '0 auto',
+    border: theme.palette.type === 'dark' ? 'none' : '1px solid rgba(0, 0, 0, 0.12)',
   },
   shortcutKey: {
     lineHeight: '48px',
@@ -76,6 +77,9 @@ const styles = (theme) => ({
   title: {
     flex: 1,
     textAlign: 'center',
+  },
+  toolbar: {
+    minHeight: 40,
   },
 });
 
@@ -113,16 +117,16 @@ const Preferences = (props) => {
   return (
     <div className={classes.container}>
       <DialogShortcut />
-      <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
-        <Toolbar variant="dense">
-          <Typography variant="h6" color="inherit" className={classes.title}>{getLocale('preferences')}</Typography>
+      <AppBar position="static" color="default" elevation={1} classes={{ colorDefault: classes.appBarColorDefault }}>
+        <Toolbar variant="dense" className={classes.toolbar}>
+          <Typography variant="subtitle1" color="inherit" className={classes.title}>{getLocale('preferences')}</Typography>
         </Toolbar>
       </AppBar>
       <div className={classes.innerContainer}>
         <Typography variant="body2" className={classes.paperTitle}>
           {getLocale('general')}
         </Typography>
-        <Paper className={classes.paper}>
+        <Paper elevation={0} className={classes.paper}>
           <List dense disablePadding>
             <EnhancedMenu
               id="changeDisplayLanguage"
@@ -190,7 +194,7 @@ const Preferences = (props) => {
         <Typography variant="body2" className={classes.paperTitle}>
           {getLocale('advanced')}
         </Typography>
-        <Paper className={classes.paper}>
+        <Paper elevation={0} className={classes.paper}>
           <List dense disablePadding>
             <ListItem>
               <ListItemText primary={getLocale('realtime')} />
@@ -280,7 +284,7 @@ const Preferences = (props) => {
         </Paper>
 
         <Typography variant="body2" className={classes.paperTitle} />
-        <Paper className={classes.paper}>
+        <Paper elevation={0} className={classes.paper}>
           <List dense disablePadding>
             <ListItem button>
               <ListItemText primary={getLocale('quit')} onClick={() => remote.app.quit()} />
