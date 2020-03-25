@@ -1,7 +1,15 @@
 /* eslint import/no-unresolved: [2, { ignore: ['electron'] }] */
 /* eslint-disable import/no-extraneous-dependencies */
 
-const electron = require('electron');
+const {
+  BrowserWindow,
+  Menu,
+  app,
+  clipboard,
+  globalShortcut,
+  ipcMain,
+  nativeTheme,
+} = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
 const url = require('url');
@@ -17,14 +25,8 @@ const setContextMenu = require('./libs/set-context-menu');
 
 require('./libs/updater');
 
-const {
-  app,
-  BrowserWindow,
-  clipboard,
-  globalShortcut,
-  Menu,
-  ipcMain,
-} = electron;
+// see https://github.com/electron/electron/issues/18397
+app.allowRendererProcessReuse = true;
 
 // Register protocol
 app.setAsDefaultProtocolClient('translatium');
@@ -178,6 +180,10 @@ app.on('ready', () => {
   createWindow();
   createMenu();
   setContextMenu();
+
+  nativeTheme.addListener('updated', () => {
+    sendToAllWindows('native-theme-updated');
+  });
 });
 
 // Quit when all windows are closed.

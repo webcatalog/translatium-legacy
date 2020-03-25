@@ -104,7 +104,7 @@ const styles = (theme) => ({
     resize: 'none',
   },
   controllerContainer: {
-    flexBasis: 48,
+    flexBasis: 40,
     paddingLeft: 8,
     paddingRight: 8,
     boxSizing: 'border-box',
@@ -116,7 +116,10 @@ const styles = (theme) => ({
   },
   controllerContainerRight: {
     float: 'right',
-    paddingTop: 6,
+    paddingTop: 5,
+  },
+  controllerIconButton: {
+    padding: theme.spacing(1),
   },
   resultContainer: {
     flex: 1,
@@ -509,6 +512,7 @@ class Home extends React.Component {
                 {controllers.map(({ Icon, tooltip, onClick }) => (
                   <Tooltip title={tooltip} placement={fullscreenInputBox ? 'top' : 'bottom'} key={`inputTool_${tooltip}`}>
                     <IconButton
+                      className={classes.controllerIconButton}
                       aria-label={tooltip}
                       onClick={onClick}
                     >
@@ -521,7 +525,7 @@ class Home extends React.Component {
                 <Tooltip title={getLocale('andSaveToHistory')} placement={fullscreenInputBox ? 'top' : 'bottom'}>
                   <Button
                     variant="outlined"
-                    size="medium"
+                    size="small"
                     color="default"
                     onClick={() => onTranslate(true)}
                     classes={{ label: classes.translateButtonLabel }}

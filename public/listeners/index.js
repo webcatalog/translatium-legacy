@@ -3,6 +3,7 @@ const {
   app,
   dialog,
   ipcMain,
+  nativeTheme,
   shell,
 } = require('electron');
 
@@ -54,7 +55,8 @@ const loadListeners = () => {
 
           ipcMain.emit('request-show-require-restart-dialog');
         }
-      });
+      })
+      .catch(console.log); // eslint-disable-line no-console
   });
 
   ipcMain.on('request-show-require-restart-dialog', () => {
@@ -68,7 +70,8 @@ const loadListeners = () => {
         if (response === 0) {
           app.quit();
         }
-      });
+      })
+      .catch(console.log); // eslint-disable-line no-console
   });
 
   ipcMain.on('request-open-in-browser', (e, browserUrl) => {
@@ -82,7 +85,21 @@ const loadListeners = () => {
       buttons: [getLocale('ok')],
       cancelId: 0,
       defaultId: 0,
-    });
+    })
+      .catch(console.log); // eslint-disable-line no-console
+  });
+
+  // Native Theme
+  ipcMain.on('get-should-use-dark-colors', (e) => {
+    e.returnValue = nativeTheme.shouldUseDarkColors;
+  });
+
+  ipcMain.on('get-theme-source', (e) => {
+    e.returnValue = nativeTheme.themeSource;
+  });
+
+  ipcMain.on('request-set-theme-source', (e, val) => {
+    nativeTheme.themeSource = val;
   });
 };
 
