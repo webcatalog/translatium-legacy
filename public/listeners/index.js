@@ -85,8 +85,7 @@ const loadListeners = () => {
       buttons: [getLocale('ok')],
       cancelId: 0,
       defaultId: 0,
-    })
-      .catch(console.log); // eslint-disable-line no-console
+    }).catch(console.log); // eslint-disable-line no-console
   });
 
   // Native Theme
