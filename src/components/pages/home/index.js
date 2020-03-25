@@ -104,11 +104,11 @@ const styles = (theme) => ({
     resize: 'none',
   },
   controllerContainer: {
-    flexBasis: 48,
+    flexBasis: 40,
     paddingLeft: 8,
     paddingRight: 8,
     boxSizing: 'border-box',
-    borderTop: `1px solid ${theme.palette.text.disabled}`,
+    borderTop: `1px solid ${theme.palette.divider}`,
   },
   controllerContainerLeft: {
     paddingTop: 2,
@@ -116,7 +116,10 @@ const styles = (theme) => ({
   },
   controllerContainerRight: {
     float: 'right',
-    paddingTop: 6,
+    paddingTop: 5,
+  },
+  controllerIconButton: {
+    padding: theme.spacing(1),
   },
   resultContainer: {
     flex: 1,
@@ -170,6 +173,15 @@ const styles = (theme) => ({
   inputRoman: {
     padding: '0 12px',
     marginBottom: 12,
+  },
+  card: {
+    border: theme.palette.type === 'dark' ? 'none' : '1px solid rgba(0, 0, 0, 0.12)',
+  },
+  toolbar: {
+    minHeight: 40,
+  },
+  toolbarIconButton: {
+    padding: theme.spacing(1),
   },
 });
 
@@ -262,7 +274,7 @@ class Home extends React.Component {
                 {output.inputRoman}
               </Typography>
             )}
-            <Card>
+            <Card elevation={0} square className={classes.card}>
               <CardContent className="text-selectable">
                 <Typography
                   variant="body2"
@@ -408,8 +420,8 @@ class Home extends React.Component {
           className={classes.anotherContainer}
           role="presentation"
         >
-          <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
-            <Toolbar variant="dense">
+          <AppBar position="static" color="default" elevation={0} classes={{ colorDefault: classes.appBarColorDefault }}>
+            <Toolbar variant="dense" className={classes.toolbar}>
               <Button
                 color="inherit"
                 classes={{ root: classes.languageTitle, label: classes.languageTitleLabel }}
@@ -424,10 +436,11 @@ class Home extends React.Component {
                 <div>
                   <IconButton
                     color="inherit"
+                    className={classes.toolbarIconButton}
                     disabled={inputLang === 'auto'}
                     onClick={onSwapLanguages}
                   >
-                    <ActionSwapHoriz />
+                    <ActionSwapHoriz fontSize="small" />
                   </IconButton>
                 </div>
               </Tooltip>
@@ -444,7 +457,8 @@ class Home extends React.Component {
             </Toolbar>
           </AppBar>
           <Paper
-            elevation={2}
+            elevation={1}
+            square
             className={classNames(
               classes.inputContainer,
               { [classes.inputContainerFullScreen]: fullscreenInputBox },
@@ -498,6 +512,7 @@ class Home extends React.Component {
                 {controllers.map(({ Icon, tooltip, onClick }) => (
                   <Tooltip title={tooltip} placement={fullscreenInputBox ? 'top' : 'bottom'} key={`inputTool_${tooltip}`}>
                     <IconButton
+                      className={classes.controllerIconButton}
                       aria-label={tooltip}
                       onClick={onClick}
                     >
@@ -510,7 +525,7 @@ class Home extends React.Component {
                 <Tooltip title={getLocale('andSaveToHistory')} placement={fullscreenInputBox ? 'top' : 'bottom'}>
                   <Button
                     variant="outlined"
-                    size="medium"
+                    size="small"
                     color="default"
                     onClick={() => onTranslate(true)}
                     classes={{ label: classes.translateButtonLabel }}

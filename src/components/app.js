@@ -188,7 +188,7 @@ class App extends React.Component {
             <LanguageList key="language-list" />
           </div>
           {bottomNavigationSelectedIndex > -1 && shouldShowBottomNav && (
-            <Paper elevation={2} style={{ zIndex: 1000 }}>
+            <Paper elevation={1} style={{ zIndex: 1000 }}>
               <BottomNavigation
                 value={bottomNavigationSelectedIndex}
                 classes={{ root: classes.bottomNavigation }}

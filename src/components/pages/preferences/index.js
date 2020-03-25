@@ -26,7 +26,11 @@ import displayLanguages from '../../../constants/display-languages';
 
 import DialogShortcut from './dialog-shortcut';
 
-import { requestSetPreference, requestShowRequireRestartDialog } from '../../../senders';
+import {
+  requestSetPreference,
+  requestSetThemeSource,
+  requestShowRequireRestartDialog,
+} from '../../../senders';
 
 const { remote } = window.require('electron');
 
@@ -60,6 +64,7 @@ const styles = (theme) => ({
   paper: {
     maxWidth: 480,
     margin: '0 auto',
+    border: theme.palette.type === 'dark' ? 'none' : '1px solid rgba(0, 0, 0, 0.12)',
   },
   shortcutKey: {
     lineHeight: '48px',
@@ -76,6 +81,9 @@ const styles = (theme) => ({
   title: {
     flex: 1,
     textAlign: 'center',
+  },
+  toolbar: {
+    minHeight: 40,
   },
 });
 
@@ -97,7 +105,7 @@ const Preferences = (props) => {
     onToggleSetting,
     openOnMenubarShortcut,
     realtime,
-    theme,
+    themeSource,
     translateClipboardOnShortcut,
     translateWhenPressingEnter,
   } = props;
@@ -113,16 +121,16 @@ const Preferences = (props) => {
   return (
     <div className={classes.container}>
       <DialogShortcut />
-      <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
-        <Toolbar variant="dense">
-          <Typography variant="h6" color="inherit" className={classes.title}>{getLocale('preferences')}</Typography>
+      <AppBar position="static" color="default" elevation={1} classes={{ colorDefault: classes.appBarColorDefault }}>
+        <Toolbar variant="dense" className={classes.toolbar}>
+          <Typography variant="subtitle1" color="inherit" className={classes.title}>{getLocale('preferences')}</Typography>
         </Toolbar>
       </AppBar>
       <div className={classes.innerContainer}>
         <Typography variant="body2" className={classes.paperTitle}>
           {getLocale('general')}
         </Typography>
-        <Paper className={classes.paper}>
+        <Paper elevation={0} className={classes.paper}>
           <List dense disablePadding>
             <EnhancedMenu
               id="changeDisplayLanguage"
@@ -157,16 +165,16 @@ const Preferences = (props) => {
               id="theme"
               buttonElement={(
                 <ListItem button>
-                  <ListItemText primary="Theme" secondary={getLocale(theme)} />
+                  <ListItemText primary="Theme" secondary={getLocale(themeSource)} />
                   <ChevronRightIcon color="action" />
                 </ListItem>
               )}
             >
               {window.process.platform === 'darwin' && (
-                <MenuItem dense onClick={() => requestSetPreference('theme', 'systemDefault')}>{getLocale('systemDefault')}</MenuItem>
+                <MenuItem dense onClick={() => requestSetThemeSource('system')}>{getLocale('system')}</MenuItem>
               )}
-              <MenuItem dense onClick={() => requestSetPreference('theme', 'light')}>{getLocale('light')}</MenuItem>
-              <MenuItem dense onClick={() => requestSetPreference('theme', 'dark')}>{getLocale('dark')}</MenuItem>
+              <MenuItem dense onClick={() => requestSetThemeSource('light')}>{getLocale('light')}</MenuItem>
+              <MenuItem dense onClick={() => requestSetThemeSource('dark')}>{getLocale('dark')}</MenuItem>
             </EnhancedMenu>
             <Divider />
             <ListItem>
@@ -190,7 +198,7 @@ const Preferences = (props) => {
         <Typography variant="body2" className={classes.paperTitle}>
           {getLocale('advanced')}
         </Typography>
-        <Paper className={classes.paper}>
+        <Paper elevation={0} className={classes.paper}>
           <List dense disablePadding>
             <ListItem>
               <ListItemText primary={getLocale('realtime')} />
@@ -280,7 +288,7 @@ const Preferences = (props) => {
         </Paper>
 
         <Typography variant="body2" className={classes.paperTitle} />
-        <Paper className={classes.paper}>
+        <Paper elevation={0} className={classes.paper}>
           <List dense disablePadding>
             <ListItem button>
               <ListItemText primary={getLocale('quit')} onClick={() => remote.app.quit()} />
@@ -301,7 +309,7 @@ Preferences.propTypes = {
   onToggleSetting: PropTypes.func.isRequired,
   openOnMenubarShortcut: PropTypes.string,
   realtime: PropTypes.bool.isRequired,
-  theme: PropTypes.string.isRequired,
+  themeSource: PropTypes.string.isRequired,
   translateClipboardOnShortcut: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
 };
@@ -312,7 +320,7 @@ const mapStateToProps = (state) => ({
   langId: state.preferences.langId,
   openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
   realtime: state.preferences.realtime,
-  theme: state.preferences.theme,
+  themeSource: state.general.themeSource,
   translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
 });

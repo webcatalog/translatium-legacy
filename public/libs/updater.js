@@ -17,7 +17,7 @@ autoUpdater.on('update-available', (info) => {
       buttons: [getLocale('ok')],
       cancelId: 0,
       defaultId: 0,
-    });
+    }).catch(console.log); // eslint-disable-line no-console
     global.updateSilent = true;
   }
 
@@ -33,7 +33,7 @@ autoUpdater.on('update-not-available', (info) => {
       buttons: [getLocale('ok')],
       cancelId: 0,
       defaultId: 0,
-    });
+    }).catch(console.log); // eslint-disable-line no-console
     global.updateSilent = true;
   }
 
@@ -49,7 +49,7 @@ autoUpdater.on('error', (err) => {
       buttons: [getLocale('ok')],
       cancelId: 0,
       defaultId: 0,
-    });
+    }).catch(console.log); // eslint-disable-line no-console
     global.updateSilent = true;
   }
 
@@ -84,7 +84,6 @@ autoUpdater.on('update-downloaded', (info) => {
           autoUpdater.quitAndInstall(false);
         });
       }
-    });
+    })
+    .catch(console.log); // eslint-disable-line no-console
 });
-
-autoUpdater.checkForUpdates();

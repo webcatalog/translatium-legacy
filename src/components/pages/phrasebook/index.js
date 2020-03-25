@@ -66,6 +66,9 @@ const styles = (theme) => ({
     flex: 1,
     textAlign: 'center',
   },
+  toolbar: {
+    minHeight: 40,
+  },
 });
 
 class Phrasebook extends React.Component {
@@ -103,9 +106,9 @@ class Phrasebook extends React.Component {
 
     return (
       <div className={classes.container}>
-        <AppBar position="static" color="default" classes={{ colorDefault: classes.appBarColorDefault }}>
-          <Toolbar variant="dense">
-            <Typography variant="h6" color="inherit" className={classes.title}>{getLocale('phrasebook')}</Typography>
+        <AppBar position="static" color="default" elevation={1} classes={{ colorDefault: classes.appBarColorDefault }}>
+          <Toolbar variant="dense" className={classes.toolbar}>
+            <Typography variant="subtitle1" color="inherit" className={classes.title}>{getLocale('phrasebook')}</Typography>
           </Toolbar>
         </AppBar>
         {(() => {
@@ -114,7 +117,7 @@ class Phrasebook extends React.Component {
               <div className={classes.emptyContainer}>
                 <div className={classes.emptyInnerContainer}>
                   <ToggleStar className={classes.bigIcon} />
-                  <Typography variant="h5">{getLocale('phrasebookIsEmpty')}</Typography>
+                  <Typography variant="h5" color="textSecondary">{getLocale('phrasebookIsEmpty')}</Typography>
                 </div>
               </div>
             );
@@ -122,7 +125,7 @@ class Phrasebook extends React.Component {
 
           return (
             <div className={classes.listContainer} ref={(c) => { this.listView = c; }}>
-              <List>
+              <List disablePadding>
                 {phrasebookItems.map((item) => [(
                   <ListItem
                     button
@@ -150,7 +153,7 @@ class Phrasebook extends React.Component {
                       </Tooltip>
                     </ListItemSecondaryAction>
                   </ListItem>
-                ), <Divider inset={false} key={`phrasebookDivider_${item.phrasebookId}`} />])}
+                ), <Divider key={`phrasebookDivider_${item.phrasebookId}`} />])}
               </List>
               {phrasebookLoading && (
                 <LinearProgress variant="indeterminate" className={classes.progress} />

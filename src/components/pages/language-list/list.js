@@ -17,13 +17,14 @@ import { ROUTE_HOME } from '../../../constants/routes';
 
 import { getLanguages } from '../../../helpers/language-utils';
 
-const styles = {
+const styles = (theme) => ({
   listContainer: {
     flex: 1,
     overflowY: 'auto',
     WebkitOverflowScrolling: 'touch',
+    color: theme.palette.text.primary,
   },
-};
+});
 
 const langList = getLanguages()
   .map((id) => ({
@@ -88,6 +89,7 @@ class LanguageListList extends React.Component {
         {!isSearch && (
           <>
             <List
+              dense
               subheader={<ListSubheader disableSticky>{getLocale('recentlyUsed')}</ListSubheader>}
             >
               {recentLanguages.map((langId) => (
@@ -104,6 +106,7 @@ class LanguageListList extends React.Component {
           </>
         )}
         <List
+          dense
           subheader={<ListSubheader disableSticky>{isSearch ? getLocale('searchResults') : getLocale('allLanguages')}</ListSubheader>}
         >
           {langList.length < 1 ? (
