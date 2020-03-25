@@ -64,7 +64,6 @@ const defaultPreferences = {
   outputLang: 'zh',
   realtime: true,
   recentLanguages: ['en', 'zh'],
-  theme: process.platform === 'darwin' ? 'systemDefault' : 'light',
   translateClipboardOnShortcut: false,
   translateWhenPressingEnter: true,
 };

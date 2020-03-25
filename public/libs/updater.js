@@ -90,5 +90,3 @@ autoUpdater.on('update-downloaded', (info) => {
     })
     .catch(console.log); // eslint-disable-line no-console
 });
-
-autoUpdater.checkForUpdates();

@@ -26,7 +26,11 @@ import displayLanguages from '../../../constants/display-languages';
 
 import DialogShortcut from './dialog-shortcut';
 
-import { requestSetPreference, requestShowRequireRestartDialog } from '../../../senders';
+import {
+  requestSetPreference,
+  requestSetThemeSource,
+  requestShowRequireRestartDialog,
+} from '../../../senders';
 
 const { remote } = window.require('electron');
 
@@ -101,7 +105,7 @@ const Preferences = (props) => {
     onToggleSetting,
     openOnMenubarShortcut,
     realtime,
-    theme,
+    themeSource,
     translateClipboardOnShortcut,
     translateWhenPressingEnter,
   } = props;
@@ -161,16 +165,16 @@ const Preferences = (props) => {
               id="theme"
               buttonElement={(
                 <ListItem button>
-                  <ListItemText primary="Theme" secondary={getLocale(theme)} />
+                  <ListItemText primary="Theme" secondary={getLocale(themeSource)} />
                   <ChevronRightIcon color="action" />
                 </ListItem>
               )}
             >
               {window.process.platform === 'darwin' && (
-                <MenuItem dense onClick={() => requestSetPreference('theme', 'systemDefault')}>{getLocale('systemDefault')}</MenuItem>
+                <MenuItem dense onClick={() => requestSetThemeSource('system')}>{getLocale('system')}</MenuItem>
               )}
-              <MenuItem dense onClick={() => requestSetPreference('theme', 'light')}>{getLocale('light')}</MenuItem>
-              <MenuItem dense onClick={() => requestSetPreference('theme', 'dark')}>{getLocale('dark')}</MenuItem>
+              <MenuItem dense onClick={() => requestSetThemeSource('light')}>{getLocale('light')}</MenuItem>
+              <MenuItem dense onClick={() => requestSetThemeSource('dark')}>{getLocale('dark')}</MenuItem>
             </EnhancedMenu>
             <Divider />
             <ListItem>
@@ -305,7 +309,7 @@ Preferences.propTypes = {
   onToggleSetting: PropTypes.func.isRequired,
   openOnMenubarShortcut: PropTypes.string,
   realtime: PropTypes.bool.isRequired,
-  theme: PropTypes.string.isRequired,
+  themeSource: PropTypes.string.isRequired,
   translateClipboardOnShortcut: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
 };
@@ -316,7 +320,7 @@ const mapStateToProps = (state) => ({
   langId: state.preferences.langId,
   openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
   realtime: state.preferences.realtime,
-  theme: state.preferences.theme,
+  themeSource: state.general.themeSource,
   translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
 });

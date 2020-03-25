@@ -184,6 +184,10 @@ app.on('ready', () => {
   nativeTheme.addListener('updated', () => {
     sendToAllWindows('native-theme-updated');
   });
+
+  if (autoUpdater.isUpdaterActive()) {
+    autoUpdater.checkForUpdates();
+  }
 });
 
 // Quit when all windows are closed.
