@@ -15,7 +15,7 @@ import getLocale from '../../../helpers/get-locale';
 
 import { changeRoute } from '../../../state/root/router/actions';
 import { updateLanguageListSearch } from '../../../state/pages/language-list/actions';
-import { ROUTE_HOME, ROUTE_OCR } from '../../../constants/routes';
+import { ROUTE_HOME, ROUTE_LANGUAGE_LIST } from '../../../constants/routes';
 
 import LanguageListList from './list';
 
@@ -72,7 +72,10 @@ class LanguageList extends React.Component {
   }
 
   handleEscKey(evt) {
-    const { onChangeRoute } = this.props;
+    const { route, onChangeRoute } = this.props;
+    if (route !== ROUTE_LANGUAGE_LIST) {
+      return;
+    }
     if (evt.key === 'Escape' || evt.key === 'Esc') {
       onChangeRoute(ROUTE_HOME);
     }
@@ -97,13 +100,7 @@ class LanguageList extends React.Component {
             <IconButton
               color="inherit"
               className={classes.toolbarIconButton}
-              onClick={() => {
-                if (mode && mode.startsWith('ocr')) {
-                  onChangeRoute(ROUTE_OCR);
-                } else {
-                  onChangeRoute(ROUTE_HOME);
-                }
-              }}
+              onClick={() => onChangeRoute(ROUTE_HOME)}
             >
               <CloseIcon fontSize="small" />
             </IconButton>
@@ -143,6 +140,7 @@ LanguageList.propTypes = {
   mode: PropTypes.string,
   onChangeRoute: PropTypes.func.isRequired,
   onUpdateLanguageListSearch: PropTypes.func.isRequired,
+  route: PropTypes.string.isRequired,
   search: PropTypes.string,
 };
 
@@ -154,6 +152,7 @@ const actionCreators = {
 const mapStateToProps = (state) => ({
   mode: state.pages.languageList.mode,
   recentLanguages: state.preferences.recentLanguages,
+  route: state.router.route,
   search: state.pages.languageList.search,
 });
 
