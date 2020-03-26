@@ -92,13 +92,13 @@ const About = (props) => {
         </Typography>
 
         <Button
-          onClick={() => requestOpenInBrowser('https://translatiumapp.com')}
+          onClick={() => requestOpenInBrowser('https://translatiumapp.com?utm_source=translatium_app')}
         >
           {getLocale('website')}
         </Button>
 
         <Button
-          onClick={() => requestOpenInBrowser('https://translatiumapp.com/support')}
+          onClick={() => requestOpenInBrowser('https://atomery.com/support?app=translatium&utm_source=translatium_app')}
         >
           {getLocale('support')}
         </Button>
@@ -108,8 +108,8 @@ const About = (props) => {
           <span role="img" aria-label="love">❤</span>
           <span> by </span>
           <span
-            onClick={() => requestOpenInBrowser('https://atomery.com/')}
-            onKeyDown={() => requestOpenInBrowser('https://atomery.com/')}
+            onClick={() => requestOpenInBrowser('https://atomery.com?utm_source=translatium_app')}
+            onKeyDown={() => requestOpenInBrowser('https://atomery.com?utm_source=translatium_app')}
             role="link"
             tabIndex="0"
             className={classes.link}
