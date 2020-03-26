@@ -20,7 +20,8 @@ import getLocale from '../../../helpers/get-locale';
 import EnhancedMenu from '../../shared/enhanced-menu';
 
 import { toggleSetting } from '../../../state/root/preferences/actions';
-import { openShortcutDialog } from '../../../state/pages/preferences/shortcut-dialog/actions';
+import { open as openDialogAbout } from '../../../state/root/dialog-about/actions';
+import { open as openDialogShortcut } from '../../../state/pages/preferences/shortcut-dialog/actions';
 
 import displayLanguages from '../../../constants/display-languages';
 
@@ -107,7 +108,8 @@ const Preferences = (props) => {
     attachToMenubar,
     classes,
     langId,
-    onOpenShortcutDialog,
+    onOpenDialogAbout,
+    onOpenDialogShortcut,
     onToggleSetting,
     openOnMenubarShortcut,
     realtime,
@@ -239,13 +241,14 @@ const Preferences = (props) => {
                 </ListItem>
               </>
             )}
-            {attachToMenubar && (
+            {window.mode === 'menubar' && (
               <>
                 <Divider />
                 <ListItem
                   button
                   key="openOnMenubar"
-                  onClick={() => onOpenShortcutDialog('openOnMenubar', openOnMenubarShortcut)}
+                  onClick={() => onOpenDialogShortcut('openOnMenubar', openOnMenubarShortcut)}
+                  disabled={!attachToMenubar}
                 >
                   <ListItemText
                     primary={getLocale('openKeyboardShortcut')}
@@ -266,6 +269,7 @@ const Preferences = (props) => {
                       checked={attachToMenubar ? translateClipboardOnShortcut : false}
                       onChange={() => onToggleSetting('translateClipboardOnShortcut')}
                       color="primary"
+                      disabled={!attachToMenubar}
                     />
                   </ListItemSecondaryAction>
                 </ListItem>
@@ -284,6 +288,7 @@ const Preferences = (props) => {
                         requestShowRequireRestartDialog();
                       }}
                       color="primary"
+                      disabled={!attachToMenubar}
                     />
                   </ListItemSecondaryAction>
                 </ListItem>
@@ -328,6 +333,34 @@ const Preferences = (props) => {
         <Paper elevation={0} className={classes.paper}>
           <List dense disablePadding>
             <ListItem button>
+              <ListItemText primary={getLocale('about')} onClick={onOpenDialogAbout} />
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemText primary={getLocale('website')} onClick={() => requestOpenInBrowser('https://translatiumapp.com?utm_source=translatium_app')} />
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemText primary={getLocale('support')} onClick={() => requestOpenInBrowser('https://atomery.com/support?app=translatium&utm_source=translatium_app')} />
+            </ListItem>
+            {window.process.platform === 'darwin' && (
+              <>
+                <Divider />
+                <ListItem button>
+                  <ListItemText primary={getLocale('rateMacAppStore')} onClick={() => requestOpenInBrowser('macappstore://apps.apple.com/app/id1176624652?action=write-review')} />
+                </ListItem>
+              </>
+            )}
+            {window.process.platform === 'win32' && (
+              <>
+                <Divider />
+                <ListItem button>
+                  <ListItemText primary={getLocale('rateMicrosoftStore')} onClick={() => requestOpenInBrowser('ms-windows-store://review/?ProductId=9wzdncrcsg9k')} />
+                </ListItem>
+              </>
+            )}
+            <Divider />
+            <ListItem button>
               <ListItemText primary={getLocale('quit')} onClick={() => window.require('electron').remote.app.quit()} />
             </ListItem>
           </List>
@@ -342,7 +375,8 @@ Preferences.propTypes = {
   attachToMenubar: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   langId: PropTypes.string.isRequired,
-  onOpenShortcutDialog: PropTypes.func.isRequired,
+  onOpenDialogAbout: PropTypes.func.isRequired,
+  onOpenDialogShortcut: PropTypes.func.isRequired,
   onToggleSetting: PropTypes.func.isRequired,
   openOnMenubarShortcut: PropTypes.string,
   realtime: PropTypes.bool.isRequired,
@@ -363,7 +397,8 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = {
-  openShortcutDialog,
+  openDialogAbout,
+  openDialogShortcut,
   toggleSetting,
 };
 

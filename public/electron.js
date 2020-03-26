@@ -66,7 +66,7 @@ const createWindow = () => {
       mb.tray.on('right-click', () => {
         const contextMenu = Menu.buildFromTemplate([
           {
-            label: getLocale('about'),
+            label: getLocale('aboutApp').replace('{appName}', app.name),
             click: () => {
               sendToAllWindows('open-dialog-about');
               mb.showWindow();

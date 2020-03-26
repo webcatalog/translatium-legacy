@@ -1,5 +1,5 @@
 
-const { Menu, shell } = require('electron');
+const { app, Menu, shell } = require('electron');
 const { autoUpdater } = require('electron-updater');
 
 const config = require('../config');
@@ -110,7 +110,7 @@ const createMenu = () => {
       label: config.APP_NAME,
       submenu: [
         {
-          label: getLocale('about'),
+          label: getLocale('aboutApp').replace('{appName}', app.name),
           click: () => sendToAllWindows('open-dialog-about'),
         },
         {

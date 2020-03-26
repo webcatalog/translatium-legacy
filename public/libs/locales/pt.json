@@ -26,6 +26,7 @@
 	"reportAnIssue": "Relatório de um Problema...",
 	"file": "Arquivo",
 	"about": "Sobre",
+	"aboutApp": "Sobre {appName}",
 	"checkForUpdates": "Verificar Atualizações...",
 	"hide": "Ocultar Translatium",
 	"hideOthers": "Ocultar Outros",

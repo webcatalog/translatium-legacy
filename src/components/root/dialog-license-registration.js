@@ -18,8 +18,6 @@ import {
 
 import EnhancedDialogTitle from '../shared/enhanced-dialog-title';
 
-const { remote } = window.require('electron');
-
 const styles = (theme) => ({
   dialogContentText: {
     marginTop: theme.spacing(2),
@@ -40,6 +38,8 @@ const DialogLicenseRegistration = (props) => {
     onUpdateForm,
     open,
   } = props;
+
+  const { remote } = window.require('electron');
 
   return (
     <Dialog
@@ -71,7 +71,7 @@ const DialogLicenseRegistration = (props) => {
       <DialogActions className={classes.dialogActions}>
         <div style={{ flex: 1 }}>
           <Button
-            onClick={() => remote.shell.openExternal('https://webcatalog.onfastspring.com/translatiumapp/translatium')}
+            onClick={() => remote.shell.openExternal('https://webcatalog.onfastspring.com/translatiumapp/translatium?utm_source=translatium_app')}
           >
             {getLocale('visitStore')}
           </Button>

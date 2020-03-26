@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
-import Slide from '@material-ui/core/Slide';
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
+import MLink from '@material-ui/core/Link';
 
 import connectComponent from '../../helpers/connect-component';
 import getLocale from '../../helpers/get-locale';
@@ -23,7 +23,7 @@ const styles = (theme) => ({
     width: 96,
   },
   dialogContent: {
-    minWidth: 320,
+    minWidth: 280,
     textAlign: 'center',
   },
   title: {
@@ -50,17 +50,9 @@ const styles = (theme) => ({
   },
   link: {
     fontWeight: 600,
-    cursor: 'pointer',
-    outline: 'none',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
+    lineHeight: 1,
   },
 });
-
-/* eslint-disable react/jsx-props-no-spreading */
-const Transition = (props) => <Slide direction="left" {...props} />;
-/* eslint-enable react/jsx-props-no-spreading */
 
 const About = (props) => {
   const {
@@ -76,14 +68,13 @@ const About = (props) => {
       className={classes.root}
       onClose={onClose}
       open={open}
-      transition={Transition}
     >
       <EnhancedDialogTitle onClose={onClose}>
         {getLocale('about')}
       </EnhancedDialogTitle>
       <DialogContent className={classes.dialogContent}>
         <img src={iconPng} alt="Translatium" className={classes.icon} />
-        <Typography variant="title" className={classes.title}>Translatium</Typography>
+        <Typography variant="h6" className={classes.title}>Translatium</Typography>
         <Typography
           variant="body2"
           className={classes.version}
@@ -107,15 +98,14 @@ const About = (props) => {
           <span>Made with </span>
           <span role="img" aria-label="love">❤</span>
           <span> by </span>
-          <span
+          <MLink
+            component="button"
+            variant="body2"
             onClick={() => requestOpenInBrowser('https://atomery.com?utm_source=translatium_app')}
-            onKeyDown={() => requestOpenInBrowser('https://atomery.com?utm_source=translatium_app')}
-            role="link"
-            tabIndex="0"
             className={classes.link}
           >
             Atomery
-          </span>
+          </MLink>
         </Typography>
       </DialogContent>
     </Dialog>

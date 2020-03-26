@@ -12,7 +12,7 @@ import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
 import {
-  closeShortcutDialog,
+  close as closeDialogShortcut,
   setCombinator,
 } from '../../../state/pages/preferences/shortcut-dialog/actions';
 
@@ -67,12 +67,12 @@ class DialogShortcut extends React.Component {
       classes,
       combinator,
       identifier,
-      onCloseShortcutDialog,
+      onCloseDialogShortcut,
       open,
     } = this.props;
 
     return (
-      <Dialog open={open} onClose={onCloseShortcutDialog}>
+      <Dialog open={open} onClose={onCloseDialogShortcut}>
         <DialogTitle>
           {getLocale('openKeyboardShortcut')}
         </DialogTitle>
@@ -92,13 +92,13 @@ class DialogShortcut extends React.Component {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onCloseShortcutDialog}>
+          <Button onClick={onCloseDialogShortcut}>
             {getLocale('cancel')}
           </Button>
           <Button
             onClick={() => {
               requestSetPreference(`${identifier}Shortcut`, null);
-              onCloseShortcutDialog();
+              onCloseDialogShortcut();
             }}
           >
             {getLocale('removeShortcut')}
@@ -107,7 +107,7 @@ class DialogShortcut extends React.Component {
             color="primary"
             onClick={() => {
               requestSetPreference(`${identifier}Shortcut`, combinator);
-              onCloseShortcutDialog();
+              onCloseDialogShortcut();
             }}
           >
             {getLocale('save')}
@@ -127,7 +127,7 @@ DialogShortcut.propTypes = {
   classes: PropTypes.object.isRequired,
   combinator: PropTypes.string,
   identifier: PropTypes.string,
-  onCloseShortcutDialog: PropTypes.func.isRequired,
+  onCloseDialogShortcut: PropTypes.func.isRequired,
   onSetCombinator: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
 };
@@ -139,7 +139,7 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = {
-  closeShortcutDialog,
+  closeDialogShortcut,
   setCombinator,
 };
 

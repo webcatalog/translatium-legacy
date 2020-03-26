@@ -1,3 +1,4 @@
+/* global document */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -19,8 +20,6 @@ import { openSnackbar } from '../../../state/root/snackbar/actions';
 import { changeRoute } from '../../../state/root/router/actions';
 
 import { ROUTE_HOME } from '../../../constants/routes';
-
-const { remote } = window.require('electron');
 
 const styles = (theme) => ({
   container: {
@@ -76,11 +75,35 @@ const styles = (theme) => ({
 });
 
 class Ocr extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleEscKey = this.handleEscKey.bind(this);
+  }
+
   componentDidMount() {
     const { ocr, onChangeRoute } = this.props;
 
     if (!ocr) {
       onChangeRoute(ROUTE_HOME);
+    }
+
+    document.addEventListener('keydown', this.handleEscKey);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleEscKey);
+  }
+
+  handleEscKey(evt) {
+    const { ocr, onChangeRoute, onSetZoomLevel } = this.props;
+    if (evt.key === 'Escape' || evt.key === 'Esc') {
+      onChangeRoute(ROUTE_HOME);
+    } else if ((evt.metaKey || evt.ctrlKey) && evt.key === '=') {
+      onSetZoomLevel(ocr.zoomLevel + 0.1 || 1);
+    } else if ((evt.metaKey || evt.ctrlKey) && evt.key === '-') {
+      if (ocr.zoomLevel < 0.1) return;
+      onSetZoomLevel(ocr.zoomLevel - 0.1 || 1);
     }
   }
 
@@ -97,12 +120,16 @@ class Ocr extends React.Component {
       outputLang,
     } = this.props;
 
+    const { remote } = window.require('electron');
+
     if (!ocr) return null;
 
     const lineVarName = `${ocr.mode || 'output'}Lines`;
 
     return (
-      <div className={classes.container}>
+      <div
+        className={classes.container}
+      >
         <Fab
           className={classes.closeButton}
           size="small"

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import Typography from '@material-ui/core/Typography';
+import MLink from '@material-ui/core/Link';
 
 import connectComponent from '../../../helpers/connect-component';
 
@@ -32,11 +33,6 @@ const styles = (theme) => ({
   lighter: {
     color: theme.palette.text.disabled,
     fontStyle: 'italic',
-  },
-  link: {
-    '&:hover': {
-      textDecoration: 'underline',
-    },
   },
 });
 
@@ -71,14 +67,14 @@ const Dictionary = ({
       {output.outputDict.def.map((section) => (
         <React.Fragment key={`dict_section${section.text}${section.pos}}`}>
           <Typography variant="subtitle1" align="left" className={classes.subheading}>
-            <span
+            <MLink
+              component="button"
+              variant="body1"
               className={classNames(classes.link, classes.primary)}
-              role="button"
-              tabIndex="0"
               onClick={() => translateForward(section.text)}
             >
               {section.text}
-            </span>
+            </MLink>
             {section.ts && (
               <span className={classes.light}>
                 &nbsp;[
@@ -100,14 +96,14 @@ const Dictionary = ({
                   {i + 1}
                   .&nbsp;
                 </span>
-                <span
+                <MLink
+                  component="button"
+                  variant="body2"
                   className={classNames(classes.link, classes.primary)}
-                  role="button"
-                  tabIndex="0"
                   onClick={() => translateBackward(sSection.text)}
                 >
                   {sSection.text}
-                </span>
+                </MLink>
                 {sSection.gen && (
                   <span className={classes.light}>
                     &nbsp;
@@ -117,14 +113,14 @@ const Dictionary = ({
                 {sSection.syn && sSection.syn.map((syn) => (
                   <React.Fragment key={syn.text}>
                     ,&nbsp;
-                    <span
+                    <MLink
+                      component="button"
+                      variant="body2"
                       className={classNames(classes.link, classes.primary)}
-                      role="button"
-                      tabIndex="0"
                       onClick={() => translateBackward(syn.text)}
                     >
                       {syn.text}
-                    </span>
+                    </MLink>
                     {syn.gen && (
                       <span className={classes.light}>
                         &nbsp;
@@ -139,14 +135,14 @@ const Dictionary = ({
                     {sSection.mean.map((mean, j) => (
                       <React.Fragment key={mean.text}>
                         {j > 0 && <span>,&nbsp;</span>}
-                        <span
+                        <MLink
+                          component="button"
+                          variant="body2"
                           className={classNames(classes.link, classes.light)}
-                          role="button"
-                          tabIndex="0"
                           onClick={() => translateForward(mean.text)}
                         >
                           {mean.text}
-                        </span>
+                        </MLink>
                         {mean.gen && (
                           <span className={classes.light}>
                             &nbsp;
@@ -167,26 +163,26 @@ const Dictionary = ({
                     {(j + 10).toString(36)}
                     .&nbsp;
                   </span>
-                  <span
+                  <MLink
+                    component="button"
+                    variant="body2"
                     className={classNames(classes.link, classes.primary)}
-                    role="button"
-                    tabIndex="0"
                     onClick={() => translateBackward(ex.text)}
                   >
                     {ex.text}
-                  </span>
+                  </MLink>
                   {ex.tr && (
                     <>
                       &nbsp;(
                       {ex.tr.map((tr) => (
-                        <span
+                        <MLink
+                          component="button"
+                          variant="body2"
                           className={classNames(classes.link, classes.light)}
-                          role="button"
-                          tabIndex="0"
                           onClick={() => translateForward(ex.text)}
                         >
                           {tr.text}
-                        </span>
+                        </MLink>
                       ))}
                       )
                     </>

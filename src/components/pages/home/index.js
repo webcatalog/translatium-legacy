@@ -63,8 +63,6 @@ import { ROUTE_LANGUAGE_LIST } from '../../../constants/routes';
 import YandexDictionary from './yandex-dictionary';
 import History from './history';
 
-const { remote } = window.require('electron');
-
 const styles = (theme) => ({
   container: {
     flex: 1,
@@ -92,21 +90,21 @@ const styles = (theme) => ({
     height: '100%',
   },
   textarea: {
+    ...theme.typography.body1,
     border: 0,
     color: theme.palette.text.primary,
     backgroundColor: theme.palette.background.paper,
     outline: 0,
     margin: 0,
-    padding: 12,
-    fontSize: '1rem',
+    padding: theme.spacing(1.5),
     boxSizing: 'border-box',
     flex: 1,
     resize: 'none',
   },
   controllerContainer: {
     flexBasis: 40,
-    paddingLeft: 8,
-    paddingRight: 8,
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
     boxSizing: 'border-box',
     borderTop: `1px solid ${theme.palette.divider}`,
   },
@@ -123,7 +121,7 @@ const styles = (theme) => ({
   },
   resultContainer: {
     flex: 1,
-    paddingBottom: 12,
+    paddingBottom: theme.spacing(1.5),
     boxSizing: 'border-box',
     overflowY: 'auto',
     WebkitOverflowScrolling: 'touch',
@@ -157,9 +155,6 @@ const styles = (theme) => ({
     marginLeft: 12,
     marginRight: 12,
   },
-  outputText: {
-    fontSize: '1rem',
-  },
   appBarColorDefault: {
     background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
     color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
@@ -168,9 +163,10 @@ const styles = (theme) => ({
     fontWeight: 500,
   },
   outputActions: {
-    padding: '0 4px 2px 4px',
+    padding: theme.spacing(0, 1, 0.5, 1),
   },
   inputRoman: {
+    ...theme.typography.body2,
     padding: '0 12px',
     marginBottom: 12,
   },
@@ -201,6 +197,8 @@ class Home extends React.Component {
       textToSpeechPlaying,
     } = this.props;
 
+    const { remote } = window.require('electron');
+
     if (fullscreenInputBox === true) {
       return null;
     }
@@ -226,9 +224,9 @@ class Home extends React.Component {
             Icon: ActionSwapVert,
             tooltip: getLocale('swap'),
             onClick: () => {
-              onUpdateInputLang(output.inputLang);
-              onUpdateOutputLang(output.outputLang);
-              onUpdateInputText(output.inputText);
+              onUpdateInputLang(output.outputLang);
+              onUpdateOutputLang(output.inputLang);
+              onUpdateInputText(output.outputText);
             },
           },
           {
@@ -277,7 +275,7 @@ class Home extends React.Component {
             <Card elevation={0} square className={classes.card}>
               <CardContent className="text-selectable">
                 <Typography
-                  variant="body2"
+                  variant="body1"
                   lang={output.outputLang}
                   className={classNames('text-selectable', classes.outputText)}
                 >
@@ -294,6 +292,7 @@ class Home extends React.Component {
                 {controllers.map(({ Icon, tooltip, onClick }) => (
                   <Tooltip title={tooltip} placement="bottom" key={`outputTool_${tooltip}`}>
                     <IconButton
+                      className={classes.controllerIconButton}
                       aria-label={tooltip}
                       onClick={onClick}
                     >
@@ -350,6 +349,8 @@ class Home extends React.Component {
       textToSpeechPlaying,
       translateWhenPressingEnter,
     } = this.props;
+
+    const { remote } = window.require('electron');
 
     const controllers = [
       {

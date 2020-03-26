@@ -14,12 +14,13 @@
   },
   "scripts": {
     "postinstall": "npx patch-package",
-    "start": "cross-env REACT_APP_GOOGLE_ENDPOINT=http://localhost:3000 BROWSER=none react-scripts start",
+    "start": "cross-env BROWSER=none react-scripts start",
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "build": "react-scripts build",
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "dist": "yarn run build && babel-node packager.js",
+    "dist:no-sign": "cross-env CSC_IDENTITY_AUTO_DISCOVERY=false yarn dist",
     "lint": "eslint ./src ./public ./packager.js --ext js",
     "test": "mocha",
     "localize": "npx babel-node localizer.js"
@@ -29,6 +30,7 @@
     "electron-is-dev": "1.1.0",
     "electron-settings": "3.2.0",
     "electron-updater": "4.2.5",
+    "fs-extra": "9.0.0",
     "menubar": "8.0.1"
   },
   "devDependencies": {
@@ -52,7 +54,7 @@
     "eslint-plugin-import": "2.20.1",
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-react": "7.19.0",
-    "fs-extra": "9.0.0",
+    "eslint-plugin-react-hooks": "1.7.0",
     "glob": "7.1.6",
     "mocha": "7.1.1",
     "node-fetch": "2.6.0",
@@ -64,7 +66,7 @@
     "react-scripts": "3.4.1",
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
-    "tongwen-core": "3.2.1",
+    "tongwen-core": "3.2.3",
     "transliteration": "2.1.8",
     "typeface-roboto": "0.0.75",
     "wait-on": "4.0.1"

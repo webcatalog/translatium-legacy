@@ -1,4 +1,4 @@
-/* global document */
+/* global */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -38,104 +38,79 @@ const langList = getLanguages()
   });
 
 
-class LanguageListList extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleEscKey = this.handleEscKey.bind(this);
-  }
-
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleEscKey);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleEscKey);
-  }
-
-  handleEscKey(evt) {
-    const { onChangeRoute } = this.props;
-    if (evt.key === 'Escape' || evt.key === 'Esc') {
-      onChangeRoute(ROUTE_HOME);
+const LanguageListList = ({
+  classes,
+  mode,
+  onChangeRoute,
+  onUpdateInputLang,
+  onUpdateOutputLang,
+  recentLanguages,
+  search,
+}) => {
+  const onLanguageClick = (value) => {
+    if (mode === 'inputLang') {
+      onUpdateInputLang(value);
+    } else if (mode === 'outputLang') {
+      onUpdateOutputLang(value);
     }
-  }
 
-  render() {
-    const {
-      classes,
-      mode,
-      onChangeRoute,
-      onUpdateInputLang,
-      onUpdateOutputLang,
-      recentLanguages,
-      search,
-    } = this.props;
+    onChangeRoute(ROUTE_HOME);
+  };
 
-    const onLanguageClick = (value) => {
-      if (mode === 'inputLang') {
-        onUpdateInputLang(value);
-      } else if (mode === 'outputLang') {
-        onUpdateOutputLang(value);
-      }
+  const isSearch = search && search.length > 0;
+  const normalizedSearch = isSearch ? search.toLowerCase() : null;
 
-      onChangeRoute(ROUTE_HOME);
-    };
+  return (
+    <div className={classes.listContainer}>
+      {!isSearch && (
+        <>
+          <List
+            dense
+            subheader={<ListSubheader disableSticky>{getLocale('recentlyUsed')}</ListSubheader>}
+          >
+            {recentLanguages.map((langId) => (
+              <ListItem
+                button
+                key={`lang_recent_${langId}`}
+                onClick={() => onLanguageClick(langId)}
+              >
+                <ListItemText primary={getLocale(langId)} />
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+        </>
+      )}
+      <List
+        dense
+        subheader={<ListSubheader disableSticky>{isSearch ? getLocale('searchResults') : getLocale('allLanguages')}</ListSubheader>}
+      >
+        {langList.length < 1 ? (
+          <ListItem
+            button
+            disabled
+          >
+            <ListItemText primary={getLocale('noLanguageFound')} />
+          </ListItem>
+        )
+          : langList.map(({ id, locale }) => {
+            if (isSearch && locale.toLowerCase().indexOf(normalizedSearch) < 0) return null;
+            if (mode === 'outputLang' && id === 'auto') return null;
 
-    const isSearch = search && search.length > 0;
-    const normalizedSearch = isSearch ? search.toLowerCase() : null;
-
-    return (
-      <div className={classes.listContainer}>
-        {!isSearch && (
-          <>
-            <List
-              dense
-              subheader={<ListSubheader disableSticky>{getLocale('recentlyUsed')}</ListSubheader>}
-            >
-              {recentLanguages.map((langId) => (
-                <ListItem
-                  button
-                  key={`lang_recent_${langId}`}
-                  onClick={() => onLanguageClick(langId)}
-                >
-                  <ListItemText primary={getLocale(langId)} />
-                </ListItem>
-              ))}
-            </List>
-            <Divider />
-          </>
-        )}
-        <List
-          dense
-          subheader={<ListSubheader disableSticky>{isSearch ? getLocale('searchResults') : getLocale('allLanguages')}</ListSubheader>}
-        >
-          {langList.length < 1 ? (
-            <ListItem
-              button
-              disabled
-            >
-              <ListItemText primary={getLocale('noLanguageFound')} />
-            </ListItem>
-          )
-            : langList.map(({ id, locale }) => {
-              if (isSearch && locale.toLowerCase().indexOf(normalizedSearch) < 0) return null;
-              if (mode === 'outputLang' && id === 'auto') return null;
-
-              return (
-                <ListItem
-                  button
-                  key={`lang_${id}`}
-                  onClick={() => onLanguageClick(id)}
-                >
-                  <ListItemText primary={locale} />
-                </ListItem>
-              );
-            })}
-        </List>
-      </div>
-    );
-  }
-}
+            return (
+              <ListItem
+                button
+                key={`lang_${id}`}
+                onClick={() => onLanguageClick(id)}
+              >
+                <ListItemText primary={locale} />
+              </ListItem>
+            );
+          })}
+      </List>
+    </div>
+  );
+};
 
 LanguageListList.propTypes = {
   classes: PropTypes.object.isRequired,

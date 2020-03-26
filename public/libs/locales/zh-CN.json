@@ -26,6 +26,7 @@
 	"reportAnIssue": "报告的一个问题...",
 	"file": "文件",
 	"about": "关于",
+	"aboutApp": "关于{appName}",
 	"checkForUpdates": "检查更新...",
 	"hide": "隐藏Translatium",
 	"hideOthers": "隐藏其他人",

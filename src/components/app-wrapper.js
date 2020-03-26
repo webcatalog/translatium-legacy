@@ -13,8 +13,6 @@ import { updateIsFullScreen } from '../state/root/general/actions';
 
 import App from './app';
 
-const { remote } = window.require('electron');
-
 class AppWrapper extends React.Component {
   constructor(props) {
     super(props);
@@ -24,11 +22,13 @@ class AppWrapper extends React.Component {
   }
 
   componentDidMount() {
+    const { remote } = window.require('electron');
     remote.getCurrentWindow().on('enter-full-screen', this.handleEnterFullScreen);
     remote.getCurrentWindow().on('leave-full-screen', this.handleLeaveFullScreen);
   }
 
   componentWillUnmount() {
+    const { remote } = window.require('electron');
     remote.getCurrentWindow().removeListener('enter-full-screen', this.handleEnterFullScreen);
     remote.getCurrentWindow().removeListener('leave-full-screen', this.handleLeaveFullScreen);
   }
@@ -49,6 +49,9 @@ class AppWrapper extends React.Component {
     } = this.props;
 
     const themeObj = {
+      typography: {
+        fontSize: 13.5,
+      },
       palette: {
         type: shouldUseDarkColors ? 'dark' : 'light',
         primary: {
@@ -66,9 +69,6 @@ class AppWrapper extends React.Component {
           main: red[500],
           dark: red[700],
         },
-      },
-      typography: {
-        useNextVariants: true,
       },
     };
 
