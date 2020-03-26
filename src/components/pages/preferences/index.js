@@ -27,12 +27,15 @@ import displayLanguages from '../../../constants/display-languages';
 import DialogShortcut from './dialog-shortcut';
 
 import {
+  requestOpenInBrowser,
   requestSetPreference,
   requestSetThemeSource,
   requestShowRequireRestartDialog,
 } from '../../../senders';
 
-const { remote } = window.require('electron');
+import webcatalogLogo from '../../../assets/webcatalog-logo.svg';
+import translatiumLogo from '../../../assets/translatium-logo.svg';
+import singleboxLogo from '../../../assets/singlebox-logo.svg';
 
 const styles = (theme) => ({
   container: {
@@ -52,11 +55,11 @@ const styles = (theme) => ({
     width: '100%',
     maxWidth: 480,
     margin: '0 auto',
-    fontWeight: 600,
+    fontWeight: 500,
     color: theme.palette.text.primary,
-    marginBottom: 4,
+    marginBottom: 2,
     paddingLeft: 16,
-    fontSize: 15,
+    fontSize: '0.9rem',
     '&:not(:first-child)': {
       marginTop: 36,
     },
@@ -84,6 +87,9 @@ const styles = (theme) => ({
   },
   toolbar: {
     minHeight: 40,
+  },
+  logo: {
+    height: 28,
   },
 });
 
@@ -116,7 +122,6 @@ const Preferences = (props) => {
     const y = displayLanguages[yKey].displayName;
     return x.localeCompare(y);
   });
-
 
   return (
     <div className={classes.container}>
@@ -228,7 +233,7 @@ const Preferences = (props) => {
                 <Divider />
                 <ListItem
                   button
-                  onClick={() => remote.shell.openExternal('https://translatiumapp.com/popclip')}
+                  onClick={() => window.require('electron').remote.shell.openExternal('https://translatiumapp.com/popclip')}
                 >
                   <ListItemText primary={getLocale('popclipExtension')} />
                 </ListItem>
@@ -287,11 +292,43 @@ const Preferences = (props) => {
           </List>
         </Paper>
 
+        <Typography variant="subtitle2" color="textPrimary" className={classes.paperTitle}>
+          Atomery Apps
+        </Typography>
+        <Paper elevation={0} className={classes.paper}>
+          <List disablePadding dense>
+            <ListItem button onClick={() => requestOpenInBrowser('https://webcatalogapp.com?utm_source=translatium_app')}>
+              <ListItemText
+                primary={(<img src={webcatalogLogo} alt="WebCatalog" className={classes.logo} />)}
+                secondary="Run Web Apps like Real Apps"
+              />
+              <ChevronRightIcon color="action" />
+            </ListItem>
+            <Divider />
+            <ListItem button onClick={() => requestOpenInBrowser('https://singleboxapp.com?utm_source=translatium_app')}>
+              <ListItemText
+                primary={(<img src={singleboxLogo} alt="Singlebox" className={classes.logo} />)}
+                secondary="All Your Apps in One Single Window"
+              />
+              <ChevronRightIcon color="action" />
+            </ListItem>
+            <Divider />
+            <ListItem button onClick={() => requestOpenInBrowser('https://translatiumapp.com?utm_source=translatium_app')}>
+              <ListItemText
+                primary={(<img src={translatiumLogo} alt="Translatium" className={classes.logo} />)}
+                secondary="Translate Any Languages like a Pro"
+              />
+              <ChevronRightIcon color="action" />
+            </ListItem>
+          </List>
+        </Paper>
+
+
         <Typography variant="body2" className={classes.paperTitle} />
         <Paper elevation={0} className={classes.paper}>
           <List dense disablePadding>
             <ListItem button>
-              <ListItemText primary={getLocale('quit')} onClick={() => remote.app.quit()} />
+              <ListItemText primary={getLocale('quit')} onClick={() => window.require('electron').remote.app.quit()} />
             </ListItem>
           </List>
         </Paper>

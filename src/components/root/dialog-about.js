@@ -27,6 +27,8 @@ const styles = (theme) => ({
     textAlign: 'center',
   },
   title: {
+    display: 'block',
+    fontWeight: '600',
     marginTop: theme.spacing(1),
   },
   version: {
@@ -44,10 +46,12 @@ const styles = (theme) => ({
   },
   madeBy: {
     marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
   link: {
     fontWeight: 600,
     cursor: 'pointer',
+    outline: 'none',
     '&:hover': {
       textDecoration: 'underline',
     },
@@ -88,13 +92,13 @@ const About = (props) => {
         </Typography>
 
         <Button
-          onClick={() => requestOpenInBrowser('https://translatiumapp.com')}
+          onClick={() => requestOpenInBrowser('https://translatiumapp.com?utm_source=translatium_app')}
         >
           {getLocale('website')}
         </Button>
 
         <Button
-          onClick={() => requestOpenInBrowser('https://translatiumapp.com/support')}
+          onClick={() => requestOpenInBrowser('https://atomery.com/support?app=translatium&utm_source=translatium_app')}
         >
           {getLocale('support')}
         </Button>
@@ -104,13 +108,13 @@ const About = (props) => {
           <span role="img" aria-label="love">❤</span>
           <span> by </span>
           <span
-            onClick={() => requestOpenInBrowser('https://quanglam2807.com/')}
-            onKeyDown={() => requestOpenInBrowser('https://quanglam2807.com/')}
+            onClick={() => requestOpenInBrowser('https://atomery.com?utm_source=translatium_app')}
+            onKeyDown={() => requestOpenInBrowser('https://atomery.com?utm_source=translatium_app')}
             role="link"
             tabIndex="0"
             className={classes.link}
           >
-            Quang Lam
+            Atomery
           </span>
         </Typography>
       </DialogContent>
