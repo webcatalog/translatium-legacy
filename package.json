@@ -14,7 +14,7 @@
   },
   "scripts": {
     "postinstall": "npx patch-package",
-    "start": "cross-env REACT_APP_GOOGLE_ENDPOINT=http://localhost:3000 BROWSER=none react-scripts start",
+    "start": "cross-env BROWSER=none react-scripts start",
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "build": "react-scripts build",
     "test-ui": "react-scripts test --env=jsdom",

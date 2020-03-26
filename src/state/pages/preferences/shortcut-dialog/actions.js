@@ -4,11 +4,11 @@ import {
   DIALOG_SHORTCUT_SET_COMBINATOR,
 } from '../../../../constants/actions';
 
-export const closeShortcutDialog = () => ({
+export const close = () => ({
   type: DIALOG_SHORTCUT_CLOSE,
 });
 
-export const openShortcutDialog = (identifier, combinator) => ({
+export const open = (identifier, combinator) => ({
   type: DIALOG_SHORTCUT_OPEN,
   identifier,
   combinator,

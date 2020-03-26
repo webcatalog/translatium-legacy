@@ -49,6 +49,9 @@ class AppWrapper extends React.Component {
     } = this.props;
 
     const themeObj = {
+      typography: {
+        fontSize: 13.5,
+      },
       palette: {
         type: shouldUseDarkColors ? 'dark' : 'light',
         primary: {
@@ -66,9 +69,6 @@ class AppWrapper extends React.Component {
           main: red[500],
           dark: red[700],
         },
-      },
-      typography: {
-        useNextVariants: true,
       },
     };
 
