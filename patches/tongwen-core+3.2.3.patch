@@ -1,0 +1,17 @@
+diff --git a/node_modules/tongwen-core/esm/dictionary/shared/group-pack.js b/node_modules/tongwen-core/esm/dictionary/shared/group-pack.js
+index f710c63..6d616b3 100644
+--- a/node_modules/tongwen-core/esm/dictionary/shared/group-pack.js
++++ b/node_modules/tongwen-core/esm/dictionary/shared/group-pack.js
+@@ -1,11 +1,4 @@
+-var __spreadArrays = (this && this.__spreadArrays) || function () {
+-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+-            r[k] = a[j];
+-    return r;
+-};
+-var mergeList = function (list) { return Object.assign.apply(Object, __spreadArrays([{}], list)); };
++var mergeList = function (list) { return Object.assign.apply(Object, [{}].concat(list)); };
+ var group = function (words) {
+     return Object.entries(words).reduce(function (grouped, _a) {
+         var key = _a[0], value = _a[1];

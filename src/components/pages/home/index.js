@@ -63,8 +63,6 @@ import { ROUTE_LANGUAGE_LIST } from '../../../constants/routes';
 import YandexDictionary from './yandex-dictionary';
 import History from './history';
 
-const { remote } = window.require('electron');
-
 const styles = (theme) => ({
   container: {
     flex: 1,
@@ -198,6 +196,8 @@ class Home extends React.Component {
       output,
       textToSpeechPlaying,
     } = this.props;
+
+    const { remote } = window.require('electron');
 
     if (fullscreenInputBox === true) {
       return null;
@@ -349,6 +349,8 @@ class Home extends React.Component {
       textToSpeechPlaying,
       translateWhenPressingEnter,
     } = this.props;
+
+    const { remote } = window.require('electron');
 
     const controllers = [
       {

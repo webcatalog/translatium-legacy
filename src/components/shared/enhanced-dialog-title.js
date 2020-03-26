@@ -13,7 +13,7 @@ const styles = (theme) => ({
   root: {
     borderBottom: `1px solid ${theme.palette.divider}`,
     margin: 0,
-    padding: theme.spacing(2),
+    padding: theme.spacing(1, 2),
   },
   closeButton: {
     position: 'absolute',
@@ -29,8 +29,8 @@ const EnhancedDialogTitle = ({
   <MuiDialogTitle disableTypography className={classes.root}>
     <Typography variant="h6">{children}</Typography>
     {onClose ? (
-      <IconButton aria-label={getLocale('close')} className={classes.closeButton} onClick={onClose}>
-        <CloseIcon />
+      <IconButton size="small" aria-label={getLocale('close')} className={classes.closeButton} onClick={onClose}>
+        <CloseIcon size="small" />
       </IconButton>
     ) : null}
   </MuiDialogTitle>

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
-import Slide from '@material-ui/core/Slide';
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -24,7 +23,7 @@ const styles = (theme) => ({
     width: 96,
   },
   dialogContent: {
-    minWidth: 320,
+    minWidth: 280,
     textAlign: 'center',
   },
   title: {
@@ -55,10 +54,6 @@ const styles = (theme) => ({
   },
 });
 
-/* eslint-disable react/jsx-props-no-spreading */
-const Transition = (props) => <Slide direction="left" {...props} />;
-/* eslint-enable react/jsx-props-no-spreading */
-
 const About = (props) => {
   const {
     classes,
@@ -73,7 +68,6 @@ const About = (props) => {
       className={classes.root}
       onClose={onClose}
       open={open}
-      transition={Transition}
     >
       <EnhancedDialogTitle onClose={onClose}>
         {getLocale('about')}

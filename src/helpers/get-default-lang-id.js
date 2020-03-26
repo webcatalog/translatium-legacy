@@ -1,4 +1,3 @@
-const { remote } = window.require('electron');
 
 const getLanguageCode = (langId) => {
   const parts = langId.toLowerCase().replace('_', '-').split('-');
@@ -7,6 +6,7 @@ const getLanguageCode = (langId) => {
 };
 
 const getDefaultLangId = () => {
+  const { remote } = window.require('electron');
   const userLanguages = [remote.app.getLocale()];
   let defaultLangId = 'en';
 

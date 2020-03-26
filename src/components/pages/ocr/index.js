@@ -21,8 +21,6 @@ import { changeRoute } from '../../../state/root/router/actions';
 
 import { ROUTE_HOME } from '../../../constants/routes';
 
-const { remote } = window.require('electron');
-
 const styles = (theme) => ({
   container: {
     flex: 1,
@@ -121,6 +119,8 @@ class Ocr extends React.Component {
       onSetZoomLevel,
       outputLang,
     } = this.props;
+
+    const { remote } = window.require('electron');
 
     if (!ocr) return null;
 
