@@ -8,11 +8,9 @@ import { changeRoute } from '../state/root/router/actions';
 import { open as openDialogAbout } from '../state/root/dialog-about/actions';
 import {
   updateShouldUseDarkColors,
-  updateThemeSource,
 } from '../state/root/general/actions';
 import {
   getShouldUseDarkColors,
-  getThemeSource,
 } from '../senders';
 
 import { ROUTE_PREFERENCES, ROUTE_LANGUAGE_LIST } from '../constants/routes';
@@ -79,7 +77,6 @@ const loadListeners = (store) => {
   ipcRenderer.on('open-dialog-about', () => store.dispatch(openDialogAbout()));
 
   ipcRenderer.on('native-theme-updated', () => {
-    store.dispatch(updateThemeSource(getThemeSource()));
     store.dispatch(updateShouldUseDarkColors(getShouldUseDarkColors()));
   });
 };

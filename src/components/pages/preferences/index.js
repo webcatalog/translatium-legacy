@@ -30,7 +30,6 @@ import DialogShortcut from './dialog-shortcut';
 import {
   requestOpenInBrowser,
   requestSetPreference,
-  requestSetThemeSource,
   requestShowRequireRestartDialog,
 } from '../../../senders';
 
@@ -178,10 +177,10 @@ const Preferences = (props) => {
               )}
             >
               {window.process.platform === 'darwin' && (
-                <MenuItem dense onClick={() => requestSetThemeSource('system')}>{getLocale('system')}</MenuItem>
+                <MenuItem dense onClick={() => requestSetPreference('themeSource', 'system')}>{getLocale('system')}</MenuItem>
               )}
-              <MenuItem dense onClick={() => requestSetThemeSource('light')}>{getLocale('light')}</MenuItem>
-              <MenuItem dense onClick={() => requestSetThemeSource('dark')}>{getLocale('dark')}</MenuItem>
+              <MenuItem dense onClick={() => requestSetPreference('themeSource', 'light')}>{getLocale('light')}</MenuItem>
+              <MenuItem dense onClick={() => requestSetPreference('themeSource', 'dark')}>{getLocale('dark')}</MenuItem>
             </EnhancedMenu>
             <Divider />
             <ListItem>
@@ -391,7 +390,7 @@ const mapStateToProps = (state) => ({
   langId: state.preferences.langId,
   openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
   realtime: state.preferences.realtime,
-  themeSource: state.general.themeSource,
+  themeSource: state.preferences.themeSource,
   translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
 });

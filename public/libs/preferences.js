@@ -1,4 +1,4 @@
-const { app, ipcMain } = require('electron');
+const { app, nativeTheme, ipcMain } = require('electron');
 const settings = require('electron-settings');
 
 const sendToAllWindows = require('./send-to-all-windows');
@@ -54,7 +54,6 @@ const getRegistered = () => {
 const v = '2019';
 
 const defaultPreferences = {
-  registered: getRegistered(),
   alwaysOnTop: false,
   attachToMenubar: false,
   clearInputShortcut: 'mod+shift+d',
@@ -64,6 +63,8 @@ const defaultPreferences = {
   outputLang: 'zh',
   realtime: true,
   recentLanguages: ['en', 'zh'],
+  registered: getRegistered(),
+  themeSource: 'system',
   translateClipboardOnShortcut: false,
   translateWhenPressingEnter: true,
 };
@@ -85,6 +86,10 @@ const setPreference = (name, value) => {
 
   settings.set(`preferences.${v}.${name}`, value);
   sendToAllWindows('set-preference', name, value);
+
+  if (name === 'themeSource') {
+    nativeTheme.themeSource = value;
+  }
 };
 
 const resetPreferences = () => {
