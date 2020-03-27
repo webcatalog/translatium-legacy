@@ -1,7 +1,7 @@
 {
   "name": "Translatium",
   "description": "Translate Any Languages like a Pro",
-  "version": "11.0.0",
+  "version": "11.0.1",
   "main": "public/electron.js",
   "repository": "https://github.com/translatium/translatium",
   "author": {
