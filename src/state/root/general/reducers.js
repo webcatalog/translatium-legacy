@@ -2,12 +2,10 @@ import { combineReducers } from 'redux';
 
 import {
   UPDATE_SHOULD_USE_DARK_COLORS,
-  UPDATE_THEME_SOURCE,
   UPDATE_IS_FULL_SCREEN,
 } from '../../../constants/actions';
 
 import {
-  getThemeSource,
   getShouldUseDarkColors,
 } from '../../../senders';
 
@@ -27,16 +25,7 @@ const shouldUseDarkColors = (state = getShouldUseDarkColors(), action) => {
   }
 };
 
-const themeSource = (state = getThemeSource(), action) => {
-  switch (action.type) {
-    case UPDATE_THEME_SOURCE: return action.themeSource;
-    default: return state;
-  }
-};
-
-
 export default combineReducers({
   shouldUseDarkColors,
-  themeSource,
   isFullScreen,
 });

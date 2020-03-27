@@ -17,5 +17,3 @@ export const getLocales = () => ipcRenderer.sendSync('get-locales');
 
 // Native Theme
 export const getShouldUseDarkColors = () => ipcRenderer.sendSync('get-should-use-dark-colors');
-export const getThemeSource = () => ipcRenderer.sendSync('get-theme-source');
-export const requestSetThemeSource = (val) => ipcRenderer.send('request-set-theme-source', val);
