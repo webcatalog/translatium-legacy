@@ -39,6 +39,8 @@
 	"registered": "Zarejestrowany",
 	"registration": "Rejestracja...",
 	"ok": "OK",
+	"learnMore2": "Dowiedz się więcej",
+	"appImageLauncherDesc": "Aktualizacje aplikacji są niezgodne z AppImageLauncher. Do aktualizacji, aby działać poprawnie, proszę korzystać z innych metod, aby uruchomić/zainstalować aplikację.",
 	"updateAvailable": "Dostępna jest aktualizacja",
 	"updateAvailableDesc": "Jest dostępna aktualizacja. To czas ładowania. Damy ci znać, kiedy będzie gotowy",
 	"noUpdates": "Nie Ma Aktualizacji",
