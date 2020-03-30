@@ -6,9 +6,11 @@ const {
   Menu,
   app,
   clipboard,
+  dialog,
   globalShortcut,
   ipcMain,
   nativeTheme,
+  shell,
 } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
@@ -91,6 +93,24 @@ if (!gotTheLock) {
             {
               label: getLocale('checkForUpdates'),
               click: () => {
+                // https://github.com/atomery/webcatalog/issues/634
+                if (process.platform === 'linux' && process.env.DESKTOPINTEGRATION === 'AppImageLauncher') {
+                  dialog.showMessageBox(mainWindow, {
+                    type: 'error',
+                    message: getLocale('appImageLauncherDesc'),
+                    buttons: [getLocale('ok'), getLocale('learnMore2')],
+                    cancelId: 0,
+                    defaultId: 0,
+                  })
+                    .then(({ response }) => {
+                      if (response === 1) {
+                        shell.openExternal('https://github.com/atomery/webcatalog/issues/634');
+                      }
+                    })
+                    .catch(console.log); // eslint-disable-line
+                  return;
+                }
+
                 global.updateSilent = false;
                 autoUpdater.checkForUpdates();
               },
@@ -201,7 +221,24 @@ if (!gotTheLock) {
     });
 
     if (autoUpdater.isUpdaterActive()) {
-      autoUpdater.checkForUpdates();
+      // https://github.com/atomery/webcatalog/issues/634
+      if (process.platform === 'linux' && process.env.DESKTOPINTEGRATION === 'AppImageLauncher') {
+        dialog.showMessageBox(mainWindow, {
+          type: 'error',
+          message: getLocale('appImageLauncherDesc'),
+          buttons: [getLocale('ok'), getLocale('learnMore2')],
+          cancelId: 0,
+          defaultId: 0,
+        })
+          .then(({ response }) => {
+            if (response === 1) {
+              shell.openExternal('https://github.com/atomery/webcatalog/issues/634');
+            }
+          })
+          .catch(console.log); // eslint-disable-line
+      } else {
+        autoUpdater.checkForUpdates();
+      }
     }
   });
 

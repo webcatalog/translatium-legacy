@@ -39,6 +39,8 @@
 	"registered": "注冊",
 	"registration": "登記...",
 	"ok": "確定",
+	"learnMore2": "瞭解更多",
+	"appImageLauncherDesc": "該應用程序的更新程序是不符合AppImageLauncher. 用於更新程序的正常工作，請使用其他方法進行/安裝應用程序。",
 	"updateAvailable": "更新可用",
 	"updateAvailableDesc": "有可用的更新。 它正在下載。 我們將讓你知道什麼時候准備好",
 	"noUpdates": "沒有更新",
