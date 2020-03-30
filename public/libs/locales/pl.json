@@ -94,6 +94,7 @@
 	"attachToTaskbar": "Dołącz do paska zadań",
 	"translateWhenPressingEnter": "Tłumacz po naciśnięciu klawisza Enter",
 	"realtime": "Tłumaczenie w czasie rzeczywistym",
+	"realtimeDesc": "Ta funkcja działa tylko z tekstem nie więcej niż 280 znaków.",
 	"rateMacAppStore": "Oceń Translatium w Mac App Store",
 	"rateMicrosoftStore": "Oceń Translatium w Sklepie Microsoft",
 	"displayLanguage": "Język aplikacji",

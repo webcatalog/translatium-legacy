@@ -94,6 +94,7 @@
 	"attachToTaskbar": "Anexar à barra de tarefas",
 	"translateWhenPressingEnter": "Traduzir ao pressionar Enter",
 	"realtime": "Tradução em Tempo Real",
+	"realtimeDesc": "Este recurso só funciona com o texto não é mais do que 280 caracteres.",
 	"rateMacAppStore": "Classifique o app Translatium na Mac App Store",
 	"rateMicrosoftStore": "Classifique o app Translatium na Microsoft Store",
 	"displayLanguage": "Idioma",

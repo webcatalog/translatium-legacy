@@ -1,3 +1,38 @@
+diff --git a/node_modules/tongwen-core/.DS_Store b/node_modules/tongwen-core/.DS_Store
+new file mode 100644
+index 0000000..726a431
+Binary files /dev/null and b/node_modules/tongwen-core/.DS_Store differ
+diff --git a/node_modules/tongwen-core/cjs/.DS_Store b/node_modules/tongwen-core/cjs/.DS_Store
+new file mode 100644
+index 0000000..4ce4121
+Binary files /dev/null and b/node_modules/tongwen-core/cjs/.DS_Store differ
+diff --git a/node_modules/tongwen-core/cjs/dictionary/.DS_Store b/node_modules/tongwen-core/cjs/dictionary/.DS_Store
+new file mode 100644
+index 0000000..ae7b239
+Binary files /dev/null and b/node_modules/tongwen-core/cjs/dictionary/.DS_Store differ
+diff --git a/node_modules/tongwen-core/cjs/dictionary/shared/group-pack.js b/node_modules/tongwen-core/cjs/dictionary/shared/group-pack.js
+index d09db7d..f195632 100644
+--- a/node_modules/tongwen-core/cjs/dictionary/shared/group-pack.js
++++ b/node_modules/tongwen-core/cjs/dictionary/shared/group-pack.js
+@@ -1,13 +1,6 @@
+ "use strict";
+-var __spreadArrays = (this && this.__spreadArrays) || function () {
+-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+-            r[k] = a[j];
+-    return r;
+-};
+ Object.defineProperty(exports, "__esModule", { value: true });
+-var mergeList = function (list) { return Object.assign.apply(Object, __spreadArrays([{}], list)); };
++var mergeList = function (list) { return Object.assign.apply(Object, [{}].concat(list)); };
+ var group = function (words) {
+     return Object.entries(words).reduce(function (grouped, _a) {
+         var key = _a[0], value = _a[1];
+diff --git a/node_modules/tongwen-core/esm/.DS_Store b/node_modules/tongwen-core/esm/.DS_Store
+new file mode 100644
+index 0000000..7bfbb4f
+Binary files /dev/null and b/node_modules/tongwen-core/esm/.DS_Store differ
 diff --git a/node_modules/tongwen-core/esm/dictionary/shared/group-pack.js b/node_modules/tongwen-core/esm/dictionary/shared/group-pack.js
 index f710c63..6d616b3 100644
 --- a/node_modules/tongwen-core/esm/dictionary/shared/group-pack.js

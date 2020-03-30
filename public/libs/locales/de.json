@@ -94,6 +94,7 @@
 	"attachToTaskbar": "An Taskleiste anhängen",
 	"translateWhenPressingEnter": "Mit Enter übersetzen",
 	"realtime": "Echtzeit Übersetzung",
+	"realtimeDesc": "Diese Funktion funktioniert nur bei text, der nicht länger als 280 Zeichen.",
 	"rateMacAppStore": "Translatium im Mac App Store bewerten",
 	"rateMicrosoftStore": "Translatium im Microsoft Store bewerten",
 	"displayLanguage": "Zeige Sprachen",

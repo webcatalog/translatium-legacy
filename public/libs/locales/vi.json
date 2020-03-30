@@ -94,6 +94,7 @@
 	"attachToTaskbar": "Gắn vào taskbar",
 	"translateWhenPressingEnter": "Dịch khi nhấn Enter",
 	"realtime": "Dịch thời gian thực",
+	"realtimeDesc": "Tính năng này chỉ hoạt động với văn bản dài không quá 280 ký tự.",
 	"rateMacAppStore": "Đánh giá Translatium trên Mac App Store",
 	"rateMicrosoftStore": "Đánh giá Translatium trên Microsoft Store",
 	"displayLanguage": "Ngôn ngữ hiển thị",
