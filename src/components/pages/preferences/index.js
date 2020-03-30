@@ -207,7 +207,10 @@ const Preferences = (props) => {
         <Paper elevation={0} className={classes.paper}>
           <List dense disablePadding>
             <ListItem>
-              <ListItemText primary={getLocale('realtime')} />
+              <ListItemText
+                primary={getLocale('realtime')}
+                secondary={getLocale('realtimeDesc')}
+              />
               <ListItemSecondaryAction>
                 <Switch
                   edge="end"

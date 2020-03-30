@@ -94,7 +94,13 @@ export const updateInputText = (
   if (currentInputText === inputText) return;
 
   clearTimeout(timeout);
-  if (realtime === true && fullscreenInputBox === false && inputText.trim().length > 0) {
+  // only run real time translation if the text no longer than 280 characters (Twitter's limit)
+  if (
+    realtime === true
+    && fullscreenInputBox === false
+    && inputText.trim().length > 0
+    && inputText.length <= 280
+  ) {
     dispatch({
       type: UPDATE_OUTPUT,
       output: null,

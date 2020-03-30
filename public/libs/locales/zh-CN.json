@@ -94,6 +94,7 @@
 	"attachToTaskbar": "附加到任务栏",
 	"translateWhenPressingEnter": "按下「Enter」翻译",
 	"realtime": "实时翻译",
+	"realtimeDesc": "此功能只适用文本的时间不超过280符。",
 	"rateMacAppStore": "在 Mac App Store 上评价 Translatium",
 	"rateMicrosoftStore": "在 Microsoft Store 上评价 Translatium",
 	"displayLanguage": "显示语言",
