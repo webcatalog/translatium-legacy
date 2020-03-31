@@ -133,13 +133,13 @@ const createMenu = () => {
         },
         {
           type: 'separator',
-          visible: process.env.SNAP == null && !process.mas && !process.platform === 'win32',
+          visible: process.platform === 'darwin' && !process.mas,
         },
         {
           label: registered ? getLocale('registered') : getLocale('registration'),
           enabled: !registered,
           click: registered ? null : () => sendToAllWindows('open-license-registration-dialog'),
-          visible: process.env.SNAP == null && !process.mas && !process.platform === 'win32',
+          visible: process.platform === 'darwin' && !process.mas,
         },
         { type: 'separator' },
         {
