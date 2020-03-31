@@ -1,9 +1,7 @@
 
 const {
-  BrowserWindow,
   Menu,
   app,
-  dialog,
   shell,
 } = require('electron');
 const { autoUpdater } = require('electron-updater');

@@ -6,11 +6,9 @@ const {
   Menu,
   app,
   clipboard,
-  dialog,
   globalShortcut,
   ipcMain,
   nativeTheme,
-  shell,
 } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
