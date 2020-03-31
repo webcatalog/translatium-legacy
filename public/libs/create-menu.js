@@ -1,15 +1,14 @@
 
 const {
-  BrowserWindow,
   Menu,
   app,
-  dialog,
   shell,
 } = require('electron');
 const { autoUpdater } = require('electron-updater');
 
 const config = require('../config');
 
+const prepareUpdaterForAppImage = require('./prepare-updater-for-appimage');
 const sendToAllWindows = require('./send-to-all-windows');
 const { getLocale } = require('./locales');
 const { getPreference } = require('./preferences');
@@ -181,24 +180,7 @@ const createMenu = () => {
         {
           label: getLocale('checkForUpdates'),
           click: () => {
-            // https://github.com/atomery/webcatalog/issues/634
-            if (process.platform === 'linux' && process.env.DESKTOPINTEGRATION === 'AppImageLauncher') {
-              dialog.showMessageBox(BrowserWindow.getAllWindows()[0], {
-                type: 'error',
-                message: getLocale('appImageLauncherDesc'),
-                buttons: [getLocale('ok'), getLocale('learnMore2')],
-                cancelId: 0,
-                defaultId: 0,
-              })
-                .then(({ response }) => {
-                  if (response === 1) {
-                    shell.openExternal('https://github.com/atomery/webcatalog/issues/634');
-                  }
-                })
-                .catch(console.log); // eslint-disable-line
-              return;
-            }
-
+            prepareUpdaterForAppImage(autoUpdater);
             global.updateSilent = false;
             autoUpdater.checkForUpdates();
           },

@@ -6,11 +6,9 @@ const {
   Menu,
   app,
   clipboard,
-  dialog,
   globalShortcut,
   ipcMain,
   nativeTheme,
-  shell,
 } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
@@ -24,6 +22,7 @@ const { getPreference } = require('./libs/preferences');
 const { getLocale } = require('./libs/locales');
 const sendToAllWindows = require('./libs/send-to-all-windows');
 const setContextMenu = require('./libs/set-context-menu');
+const prepareUpdaterForAppImage = require('./libs/prepare-updater-for-appimage');
 
 require('./libs/updater');
 
@@ -93,24 +92,7 @@ if (!gotTheLock) {
             {
               label: getLocale('checkForUpdates'),
               click: () => {
-                // https://github.com/atomery/webcatalog/issues/634
-                if (process.platform === 'linux' && process.env.DESKTOPINTEGRATION === 'AppImageLauncher') {
-                  dialog.showMessageBox(mainWindow, {
-                    type: 'error',
-                    message: getLocale('appImageLauncherDesc'),
-                    buttons: [getLocale('ok'), getLocale('learnMore2')],
-                    cancelId: 0,
-                    defaultId: 0,
-                  })
-                    .then(({ response }) => {
-                      if (response === 1) {
-                        shell.openExternal('https://github.com/atomery/webcatalog/issues/634');
-                      }
-                    })
-                    .catch(console.log); // eslint-disable-line
-                  return;
-                }
-
+                prepareUpdaterForAppImage(autoUpdater);
                 global.updateSilent = false;
                 autoUpdater.checkForUpdates();
               },
@@ -224,24 +206,8 @@ if (!gotTheLock) {
     });
 
     if (autoUpdater.isUpdaterActive()) {
-      // https://github.com/atomery/webcatalog/issues/634
-      if (process.platform === 'linux' && process.env.DESKTOPINTEGRATION === 'AppImageLauncher') {
-        dialog.showMessageBox(mainWindow, {
-          type: 'error',
-          message: getLocale('appImageLauncherDesc'),
-          buttons: [getLocale('ok'), getLocale('learnMore2')],
-          cancelId: 0,
-          defaultId: 0,
-        })
-          .then(({ response }) => {
-            if (response === 1) {
-              shell.openExternal('https://github.com/atomery/webcatalog/issues/634');
-            }
-          })
-          .catch(console.log); // eslint-disable-line
-      } else {
-        autoUpdater.checkForUpdates();
-      }
+      prepareUpdaterForAppImage(autoUpdater);
+      autoUpdater.checkForUpdates();
     }
   });
 
