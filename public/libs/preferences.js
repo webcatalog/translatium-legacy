@@ -38,15 +38,16 @@ const getDefaultLangId = () => {
   return defaultLangId;
 };
 
-const getRegistered = () => {
+const getDefaultRegistered = () => {
   if (!app.isPackaged) return true;
-  if (process.env.SNAP == null && !process.mas && !process.windowsStore) {
-    if (process.platform === 'linux') {
-      return true; // The app is free on Linux
-    }
+
+  // only check for license in non Mac App Store distribution
+  if (process.platform === 'darwin' && !process.mas) {
     return false;
   }
-  // Always True for store distributions
+
+  // Linux: The app is always free
+  // Mac App Store & Windows Store distributions use provided licensing systems
   return true;
 };
 
@@ -63,7 +64,7 @@ const defaultPreferences = {
   outputLang: 'zh',
   realtime: true,
   recentLanguages: ['en', 'zh'],
-  registered: getRegistered(),
+  registered: getDefaultRegistered(),
   themeSource: 'system',
   translateClipboardOnShortcut: false,
   translateWhenPressingEnter: true,
