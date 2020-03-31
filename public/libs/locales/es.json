@@ -39,8 +39,6 @@
 	"registered": "Registrado",
 	"registration": "Registro de...",
 	"ok": "OK",
-	"learnMore2": "Aprender más",
-	"appImageLauncherDesc": "La app updater es incompatible con AppImageLauncher. Para el updater para que funcione correctamente, por favor, utilice otros métodos para ejecutar/instalar la aplicación.",
 	"updateAvailable": "Una Actualización está Disponible",
 	"updateAvailableDesc": "Si hay una actualización disponible. Está siendo descargado. Le informaremos cuando está listo",
 	"noUpdates": "No Hay Actualizaciones",

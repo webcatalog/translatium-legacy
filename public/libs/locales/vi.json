@@ -39,8 +39,6 @@
 	"registered": "Đăng ký",
 	"registration": "Đăng ký...",
 	"ok": "OK",
-	"learnMore2": "Tìm hiểu thêm",
-	"appImageLauncherDesc": "Trình cập nhật ứng dụng không tương thích với AppImageLauncher. Để sử dụng trình cập nhật, xin vui lòng sử dụng cách khác để cài đặt Translatium.",
 	"updateAvailable": "Ứng dụng có bản cập nhật mới",
 	"updateAvailableDesc": "Ứng dụng có bản cập nhật mới. Nó đang được tải xuống. Chúng tôi sẽ cho bạn biết khi xong.",
 	"noUpdates": "Không có cập nhật mới",
