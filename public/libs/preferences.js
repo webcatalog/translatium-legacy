@@ -38,16 +38,26 @@ const getDefaultLangId = () => {
   return defaultLangId;
 };
 
-const getRegistered = () => {
+const getDefaultRegistered = () => {
   if (!app.isPackaged) return true;
-  if (process.env.SNAP == null && !process.mas && !process.windowsStore) {
-    if (process.platform === 'linux') {
-      return true; // The app is free on Linux
-    }
-    return false;
+
+  if (process.platform === 'linux') {
+    return true; // The app is always free on Linux
   }
-  // Always True for store distributions
-  return true;
+
+  // avoid using process.windowsStore to check as it's buggy
+  // see https://github.com/electron/electron/issues/18161
+  // the app is only distributed on Windows Store so platform check if sufficient
+  if (process.platform === 'win32') {
+    return true; // no license check for Windows Store distribution
+  }
+
+  if (process.platform === 'darwin') {
+    return Boolean(process.mas);
+  }
+
+  // Undetected cases
+  return false;
 };
 
 // scope
@@ -63,7 +73,7 @@ const defaultPreferences = {
   outputLang: 'zh',
   realtime: true,
   recentLanguages: ['en', 'zh'],
-  registered: getRegistered(),
+  registered: getDefaultRegistered(),
   themeSource: 'system',
   translateClipboardOnShortcut: false,
   translateWhenPressingEnter: true,

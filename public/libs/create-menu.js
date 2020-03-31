@@ -15,7 +15,7 @@ const { getLocale } = require('./locales');
 const { getPreference } = require('./preferences');
 
 const createMenu = () => {
-  const updaterEnabled = process.env.SNAP == null && !process.mas && !process.windowsStore;
+  const updaterEnabled = process.env.SNAP == null && !process.mas && !process.platform === 'win32';
 
   const template = [
     {
@@ -133,13 +133,13 @@ const createMenu = () => {
         },
         {
           type: 'separator',
-          visible: process.env.SNAP == null && !process.mas && !process.windowsStore,
+          visible: process.env.SNAP == null && !process.mas && !process.platform === 'win32',
         },
         {
           label: registered ? getLocale('registered') : getLocale('registration'),
           enabled: !registered,
           click: registered ? null : () => sendToAllWindows('open-license-registration-dialog'),
-          visible: process.env.SNAP == null && !process.mas && !process.windowsStore,
+          visible: process.env.SNAP == null && !process.mas && !process.platform === 'win32',
         },
         { type: 'separator' },
         {
