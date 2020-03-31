@@ -185,6 +185,9 @@ if (!gotTheLock) {
         minHeight: 500,
         titleBarStyle: 'hidden',
         autoHideMenuBar: false,
+        // manually set dock icon for AppImage
+        // Snap icon is set correct already so no need to intervene
+        icon: process.platform === 'linux' && process.env.SNAP == null ? path.resolve(__dirname, 'images', 'icon-linux.png') : undefined,
         webPreferences: {
           nodeIntegration: true,
           webSecurity: false,
