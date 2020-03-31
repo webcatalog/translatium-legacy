@@ -1,7 +1,7 @@
 {
   "name": "Translatium",
   "description": "Translate Any Languages like a Pro",
-  "version": "11.0.1",
+  "version": "11.1.0",
   "main": "public/electron.js",
   "repository": "https://github.com/translatium/translatium",
   "author": {
@@ -51,7 +51,7 @@
     "electron-notarize": "0.3.0",
     "eslint": "6.8.0",
     "eslint-config-airbnb": "18.1.0",
-    "eslint-plugin-import": "2.20.1",
+    "eslint-plugin-import": "2.20.2",
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-react": "7.19.0",
     "eslint-plugin-react-hooks": "1.7.0",
