@@ -70,6 +70,11 @@ const opts = {
     },
     mac: {
       darkModeSupport: true,
+      // https://github.com/electron/electron/issues/15958#issuecomment-447685065
+      // alternative solution for app.requestSingleInstanceLock in signed mas builds (Mac App Store)
+      extendInfo: {
+        LSMultipleInstancesProhibited: true,
+      },
     },
     mas: {
       category: 'public.app-category.productivity',
