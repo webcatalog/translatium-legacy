@@ -34,7 +34,9 @@ app.allowRendererProcessReuse = true;
 let mb;
 let mainWindow;
 
-const gotTheLock = app.requestSingleInstanceLock();
+// app.requestSingleInstanceLock doesnt work for signed mas builds (Mac App Store)
+// see https://github.com/electron/electron/issues/15958
+const gotTheLock = process.mas || app.requestSingleInstanceLock();
 
 app.on('second-instance', () => {
   if (mainWindow != null) {
