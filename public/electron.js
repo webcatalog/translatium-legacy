@@ -57,7 +57,7 @@ if (!gotTheLock) {
   const REACT_PATH = isDev ? 'http://localhost:3000' : `file://${path.resolve(__dirname, 'index.html')}`;
 
   const createWindow = () => {
-    const updaterEnabled = process.env.SNAP == null && !process.mas && !process.platform === 'win32';
+    const updaterEnabled = process.env.SNAP == null && !process.mas && process.platform !== 'win32';
     const attachToMenubar = getPreference('attachToMenubar');
     if (attachToMenubar) {
       mb = menubar({
