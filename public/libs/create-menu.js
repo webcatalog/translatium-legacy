@@ -14,7 +14,7 @@ const { getLocale } = require('./locales');
 const { getPreference } = require('./preferences');
 
 const createMenu = () => {
-  const updaterEnabled = process.env.SNAP == null && !process.mas && !process.platform === 'win32';
+  const updaterEnabled = process.env.SNAP == null && !process.mas && process.platform !== 'win32';
 
   const template = [
     {
