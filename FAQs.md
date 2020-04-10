@@ -23,7 +23,7 @@ The trial has no time limit but only lets you install up to 2 apps (with up to 2
 Your license is valid perpetually. It has no time limit, never expires and works with all versions (including major updates).
 
 ##### Can I install Translatium on multiple computers?
-Yes, you can as long as you're the only person who use the app on these computers.
+Yes, you can as long as you're the only person who uses the app on these computers.
 
 ##### Do you offer refunds?
 Yes, we offer a full refund within 30 days of your purchase.

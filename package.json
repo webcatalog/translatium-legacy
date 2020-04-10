@@ -27,14 +27,14 @@
   },
   "dependencies": {
     "cli-truncate": "2.1.0",
-    "electron-is-dev": "1.1.0",
+    "electron-is-dev": "1.2.0",
     "electron-settings": "3.2.0",
     "electron-updater": "4.2.5",
     "fs-extra": "9.0.0",
     "menubar": "8.0.1"
   },
   "devDependencies": {
-    "@material-ui/core": "4.9.8",
+    "@material-ui/core": "4.9.9",
     "@material-ui/icons": "4.9.1",
     "babel-cli": "6.26.0",
     "babel-preset-env": "1.7.0",
@@ -46,7 +46,7 @@
     "cross-env": "7.0.2",
     "del": "5.1.0",
     "dotenv": "8.2.0",
-    "electron": "8.2.0",
+    "electron": "8.2.1",
     "electron-builder": "22.4.1",
     "electron-notarize": "0.3.0",
     "eslint": "6.8.0",
@@ -69,7 +69,7 @@
     "tongwen-core": "3.2.3",
     "transliteration": "2.1.8",
     "typeface-roboto": "0.0.75",
-    "wait-on": "4.0.1"
+    "wait-on": "4.0.2"
   },
   "homepage": "./",
   "private": true,

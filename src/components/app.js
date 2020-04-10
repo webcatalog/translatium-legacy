@@ -156,7 +156,19 @@ class App extends React.Component {
     return (
       <div className={classes.container}>
         {window.process.platform === 'darwin' && !isFullScreen && window.mode !== 'menubar' && (
-          <div className={classes.fakeTitleBar} />
+          <div
+            className={classes.fakeTitleBar}
+            onDoubleClick={() => {
+              // feature: double click on title bar to expand #656
+              // https://github.com/atomery/webcatalog/issues/656
+              const win = window.require('electron').remote.getCurrentWindow();
+              if (win.isMaximized()) {
+                win.unmaximize();
+              } else {
+                win.maximize();
+              }
+            }}
+          />
         )}
         <div className={classes.contentContainer}>
           {fullPageLoading && (
