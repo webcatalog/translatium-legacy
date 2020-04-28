@@ -438,7 +438,15 @@ class Home extends React.Component {
                   <IconButton
                     color="inherit"
                     className={classes.toolbarIconButton}
-                    disabled={inputLang === 'auto'}
+                    disabled={(() => {
+                      if (inputLang !== 'auto') {
+                        return false;
+                      }
+                      if (inputLang === 'auto' && output && output.inputLang) {
+                        return false;
+                      }
+                      return true;
+                    })()}
                     onClick={onSwapLanguages}
                   >
                     <ActionSwapHoriz fontSize="small" />
