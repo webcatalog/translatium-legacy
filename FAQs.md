@@ -17,7 +17,7 @@ Even though previous versions of Translatium are no longer officially supported,
 Yes, you can find the source code on [GitHub](https://github.com/atomery/translatium) under the MPL-2 license.
 
 ##### How long will my Translatium trial last?
-The trial has no time limit but only lets you install up to 2 apps (with up to 2 workspaces per app).
+The trial will last for 24 hours with all features unlocked.
 
 ##### How long does my Translatium license last?
 Your license is valid perpetually. It has no time limit, never expires and works with all versions (including major updates).
@@ -33,4 +33,6 @@ You should have received an email with your license key when you purchased Trans
 
 If you purchase the license from other stores, such as [BundleHunt](https://bundlehunt.com/), please contact the corresponding store to retrieve your license key.
 
-If you purchase the app from App Store or Microsoft Store, the license is tied to your account.
+If you purchase the app from App Store, the license is tied to your Apple account.
+
+If you purchase the app from Microsoft Store, the license is tied to your Microsoft account.
