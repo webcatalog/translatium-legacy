@@ -33,13 +33,21 @@ const runAfterLanguageChange = (language) => ((dispatch, getState) => {
 });
 
 export const swapLanguages = () => ((dispatch, getState) => {
-  const { inputLang, outputLang } = getState().preferences;
+  const state = getState();
+  const { inputLang, outputLang } = state.preferences;
+  const { output } = state.pages.home;
 
-  if (inputLang === 'auto') return;
+  if (inputLang === 'auto') {
+    if (output && output.inputLang) {
+      requestSetPreference('inputLang', outputLang);
+      requestSetPreference('outputLang', output.inputLang === 'zh' ? 'zh-CN' : output.inputLang);
+      dispatch(runAfterLanguageChange());
+    }
+    return;
+  }
 
   requestSetPreference('inputLang', outputLang.startsWith('zh') ? 'zh' : outputLang);
   requestSetPreference('outputLang', inputLang === 'zh' ? 'zh-CN' : inputLang);
-
   dispatch(runAfterLanguageChange());
 });
 
