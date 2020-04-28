@@ -48,6 +48,15 @@ app.on('second-instance', () => {
 if (!gotTheLock) {
   app.quit();
 } else {
+  // mock app.whenReady
+  const fullyReady = false;
+  const whenFullyReady = () => {
+    if (fullyReady) return Promise.resolve();
+    return new Promise((resolve) => {
+      ipcMain.once('fully-ready', () => resolve());
+    });
+  };
+
   // Register protocol
   app.setAsDefaultProtocolClient('translatium');
 
@@ -56,7 +65,7 @@ if (!gotTheLock) {
 
   const REACT_PATH = isDev ? 'http://localhost:3000' : `file://${path.resolve(__dirname, 'index.html')}`;
 
-  const createWindow = () => {
+  const createWindowAsync = () => new Promise((resolve) => {
     const updaterEnabled = process.env.SNAP == null && !process.mas && process.platform !== 'win32';
     const attachToMenubar = getPreference('attachToMenubar');
     if (attachToMenubar) {
@@ -118,6 +127,8 @@ if (!gotTheLock) {
           ]);
           mb.tray.popUpContextMenu(contextMenu);
         });
+
+        resolve();
       });
 
       ipcMain.on('unset-show-menubar-shortcut', (e, combinator) => {
@@ -169,6 +180,7 @@ if (!gotTheLock) {
         minHeight: 500,
         titleBarStyle: 'hidden',
         autoHideMenuBar: false,
+        show: false,
         // manually set dock icon for AppImage
         // Snap icon is set correct already so no need to intervene
         icon: process.platform === 'linux' && process.env.SNAP == null ? path.resolve(__dirname, 'images', 'icon-linux.png') : undefined,
@@ -178,9 +190,6 @@ if (!gotTheLock) {
         },
       });
 
-      // and load the index.html of the app.
-      mainWindow.loadURL(REACT_PATH);
-
       // Emitted when the window is closed.
       mainWindow.on('closed', () => {
         // Dereference the window object, usually you would store windows
@@ -189,8 +198,27 @@ if (!gotTheLock) {
         mainWindow = null;
         createMenu();
       });
+
+      mainWindow.once('ready-to-show', () => {
+        mainWindow.show();
+        // if (!wasOpenedAsHidden) {
+        // mainWindow.show();
+        // }
+      });
+
+      // ensure redux is loaded first
+      // if not, redux might not be able catch changes sent from ipcMain
+      mainWindow.webContents.once('did-stop-loading', () => {
+        resolve();
+      });
+
+      // and load the index.html of the app.
+      mainWindow.loadURL(REACT_PATH);
     }
-  };
+  }).then(() => {
+    // trigger whenFullyReady
+    ipcMain.emit('fully-ready');
+  });
 
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
@@ -199,7 +227,7 @@ if (!gotTheLock) {
     const themeSource = getPreference('themeSource');
     nativeTheme.themeSource = themeSource;
 
-    createWindow();
+    createWindowAsync();
     createMenu();
     setContextMenu();
 
@@ -219,42 +247,48 @@ if (!gotTheLock) {
   });
 
   app.on('activate', () => {
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    const attachToMenubar = getPreference('attachToMenubar');
+    app.whenReady()
+      .then(() => {
+        // On OS X it's common to re-create a window in the app when the
+        // dock icon is clicked and there are no other windows open.
+        const attachToMenubar = getPreference('attachToMenubar');
 
-    if (attachToMenubar) {
-      if (mb == null) {
-        createWindow();
-      } else {
-        mb.on('ready', () => {
-          mb.showWindow();
-        });
-      }
-    } else if (mainWindow == null) {
-      createWindow();
-    } else {
-      mainWindow.show();
-    }
+        if (attachToMenubar) {
+          if (mb == null) {
+            createWindowAsync();
+          } else {
+            mb.on('ready', () => {
+              mb.showWindow();
+            });
+          }
+        } else if (mainWindow == null) {
+          createWindowAsync();
+        } else {
+          mainWindow.show();
+        }
+      });
   });
 
   app.on('open-url', (e, urlStr) => {
     e.preventDefault();
 
-    if (urlStr.startsWith('translatium://')) {
-      const urlObj = url.parse(urlStr, true);
-      const text = decodeURIComponent(urlObj.query.text || '');
+    whenFullyReady()
+      .then(() => {
+        if (urlStr.startsWith('translatium://')) {
+          const urlObj = url.parse(urlStr, true);
+          const text = decodeURIComponent(urlObj.query.text || '');
 
-      const attachToMenubar = getPreference('attachToMenubar');
-      if (attachToMenubar) {
-        if (mb && mb.window) {
-          mb.window.send('set-input-lang', 'auto');
-          mb.window.send('set-input-text', text);
+          const attachToMenubar = getPreference('attachToMenubar');
+          if (attachToMenubar) {
+            if (mb && mb.window) {
+              mb.window.send('set-input-lang', 'auto');
+              mb.window.send('set-input-text', text);
+            }
+          } else if (mainWindow) {
+            mainWindow.send('set-input-lang', 'auto');
+            mainWindow.send('set-input-text', text);
+          }
         }
-      } else if (mainWindow) {
-        mainWindow.send('set-input-lang', 'auto');
-        mainWindow.send('set-input-text', text);
-      }
-    }
+      });
   });
 }
