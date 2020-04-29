@@ -14,7 +14,12 @@ import {
   getShouldUseDarkColors,
 } from '../senders';
 
-import { ROUTE_PREFERENCES, ROUTE_LANGUAGE_LIST } from '../constants/routes';
+import {
+  ROUTE_HOME,
+  ROUTE_LANGUAGE_LIST,
+  ROUTE_PHRASEBOOK,
+  ROUTE_PREFERENCES,
+} from '../constants/routes';
 
 const { ipcRenderer, remote } = window.require('electron');
 
@@ -37,6 +42,14 @@ const loadListeners = (store) => {
   ipcRenderer.on('go-to-language-list', (mode) => {
     store.dispatch(updateLanguageListMode(mode));
     store.dispatch(changeRoute(ROUTE_LANGUAGE_LIST));
+  });
+
+  ipcRenderer.on('go-to-home', () => {
+    store.dispatch(changeRoute(ROUTE_HOME));
+  });
+
+  ipcRenderer.on('go-to-phrasebook', () => {
+    store.dispatch(changeRoute(ROUTE_PHRASEBOOK));
   });
 
   ipcRenderer.on('swap-languages', () => {

@@ -31,6 +31,12 @@ const createMenu = () => {
         { role: 'selectall', label: getLocale('selectAll') },
         { type: 'separator' },
         {
+          label: getLocale('find'),
+          accelerator: 'CmdOrCtrl+F',
+          click: () => sendToAllWindows('open-find'),
+        },
+        { type: 'separator' },
+        {
           label: getLocale('selectInputLang'),
           accelerator: 'CmdOrCtrl+1',
           click: () => sendToAllWindows('go-to-language-list', 'inputLang'),
@@ -76,6 +82,17 @@ const createMenu = () => {
       role: 'view',
       label: getLocale('view'),
       submenu: [
+        {
+          label: getLocale('home'),
+          accelerator: 'CmdOrCtrl+Shift+H',
+          click: () => sendToAllWindows('go-to-home'),
+        },
+        {
+          label: getLocale('phrasebook'),
+          accelerator: 'CmdOrCtrl+Shift+B',
+          click: () => sendToAllWindows('go-to-phrasebook'),
+        },
+        { type: 'separator' },
         { role: 'togglefullscreen', label: getLocale('toggleFullscreen') },
       ],
     },
