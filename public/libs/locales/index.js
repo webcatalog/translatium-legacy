@@ -1,7 +1,4 @@
-const fsExtra = require('fs-extra');
-const path = require('path');
-
-const locales = fsExtra.readJsonSync(path.resolve(__dirname, 'en.json'));
+const locales = require('./en.json');
 
 const getLocale = (id) => {
   if (!locales[id]) {
