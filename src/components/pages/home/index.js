@@ -27,6 +27,8 @@ import ToggleStarBorder from '@material-ui/icons/StarBorder';
 import Tooltip from '@material-ui/core/Tooltip';
 import FileCopy from '@material-ui/icons/FileCopy';
 
+import Countdown from 'react-countdown';
+
 import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
@@ -50,15 +52,16 @@ import {
   translate,
   updateInputText,
 } from '../../../state/pages/home/actions';
-
 import {
   startTextToSpeech,
   endTextToSpeech,
 } from '../../../state/pages/home/text-to-speech/actions';
-
 import { updateLanguageListMode } from '../../../state/pages/language-list/actions';
+import { open as openDialogLicenseRegistration } from '../../../state/root/dialog-license-registration/actions';
 
 import { ROUTE_LANGUAGE_LIST } from '../../../constants/routes';
+
+import getTrialExpirationTime from '../../../helpers/get-trial-expiration-time';
 
 import YandexDictionary from './yandex-dictionary';
 import History from './history';
@@ -179,9 +182,54 @@ const styles = (theme) => ({
   toolbarIconButton: {
     padding: theme.spacing(1),
   },
+  trialCountdown: {
+    color: theme.palette.text.disabled,
+    fontWeight: 400,
+    fontSize: '0.8rem',
+    marginTop: theme.spacing(1),
+    marginLeft: 12,
+    marginRight: 12,
+  },
 });
 
 class Home extends React.Component {
+  renderCountdown() {
+    const { classes, registered, onOpenDialogLicenseRegistration } = this.props;
+
+    if (registered) return null;
+
+    return (
+      <Typography
+        variant="body2"
+        align="left"
+        className={classes.trialCountdown}
+      >
+        <Countdown
+          date={getTrialExpirationTime()}
+          renderer={({
+            hours, minutes, seconds, completed,
+          }) => {
+            if (completed) {
+              // Render a completed state
+              return getLocale('trialExpired');
+            }
+            // Render a countdown
+            // eslint-disable-next-line react/jsx-one-expression-per-line
+            return getLocale('trialExpireIn').replace('$TIME', `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`);
+          }}
+          onComplete={() => {
+            onOpenDialogLicenseRegistration();
+          }}
+          onMount={({ completed }) => {
+            if (completed) {
+              onOpenDialogLicenseRegistration();
+            }
+          }}
+        />
+      </Typography>
+    );
+  }
+
   renderOutput() {
     const {
       classes,
@@ -322,6 +370,7 @@ class Home extends React.Component {
                 Powered by Yandex.Dictionary
               </Typography>
             )}
+            {this.renderCountdown()}
           </div>
         );
       }
@@ -477,7 +526,7 @@ class Home extends React.Component {
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
-              className={classNames('mousetrap', 'text-selectable', classes.textarea)}
+              className={classNames('text-selectable', classes.textarea)}
               lang={inputLang}
               maxLength="1000"
               onChange={(e) => onUpdateInputText(
@@ -561,6 +610,7 @@ Home.propTypes = {
   onEndTextToSpeech: PropTypes.func.isRequired,
   onInsertInputText: PropTypes.func.isRequired,
   onLoadImage: PropTypes.func.isRequired,
+  onOpenDialogLicenseRegistration: PropTypes.func.isRequired,
   onOpenSnackbar: PropTypes.func.isRequired,
   onStartTextToSpeech: PropTypes.func.isRequired,
   onSwapLanguages: PropTypes.func.isRequired,
@@ -573,6 +623,7 @@ Home.propTypes = {
   onUpdateOutputLang: PropTypes.func.isRequired,
   output: PropTypes.object,
   outputLang: PropTypes.string,
+  registered: PropTypes.bool.isRequired,
   textToSpeechPlaying: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool,
 };
@@ -583,6 +634,7 @@ const mapStateToProps = (state) => ({
   inputText: state.pages.home.inputText,
   output: state.pages.home.output,
   outputLang: state.preferences.outputLang,
+  registered: state.preferences.registered,
   textToSpeechPlaying: state.pages.home.textToSpeech.textToSpeechPlaying,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
 });
@@ -592,6 +644,7 @@ const actionCreators = {
   endTextToSpeech,
   insertInputText,
   loadImage,
+  openDialogLicenseRegistration,
   openSnackbar,
   startTextToSpeech,
   swapLanguages,

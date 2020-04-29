@@ -38,6 +38,8 @@ import {
   ROUTE_OCR,
 } from '../constants/routes';
 
+import getTrialExpirationTime from '../helpers/get-trial-expiration-time';
+
 const styles = (theme) => ({
   container: {
     height: '100vh',
@@ -102,7 +104,7 @@ const styles = (theme) => ({
 class App extends React.Component {
   componentDidMount() {
     const { registered, onOpenDialogLicenseRegistration } = this.props;
-    if (!registered) {
+    if (!registered && new Date() > getTrialExpirationTime()) {
       onOpenDialogLicenseRegistration();
     }
   }
