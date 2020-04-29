@@ -9,7 +9,6 @@ const del = require('del');
 const { getSignVendorPath } = require('app-builder-lib/out/codeSign/windowsCodeSign');
 const { notarize } = require('electron-notarize');
 
-const displayLanguages = require('./src/constants/display-languages').default;
 
 // https://stackoverflow.com/a/17466459
 const runCmd = (cmd, args, callBack) => {
@@ -97,7 +96,7 @@ const opts = {
       ],
     },
     afterPack: ({ appOutDir }) => new Promise((resolve, reject) => {
-      const languages = Object.keys(displayLanguages);
+      const languages = ['en'];
 
       if (process.platform === 'darwin') {
         glob(`${appOutDir}/Translatium.app/Contents/Resources/!(${languages.join('|').replace(/-/g, '_')}).lproj`, (err, files) => {
