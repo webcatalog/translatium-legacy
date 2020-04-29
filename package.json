@@ -15,7 +15,7 @@
   "scripts": {
     "postinstall": "npx patch-package",
     "start": "cross-env BROWSER=none react-scripts start",
-    "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\" -k",
     "build": "react-scripts build",
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
@@ -61,6 +61,7 @@
     "pouchdb-browser": "7.2.1",
     "prop-types": "15.7.2",
     "react": "16.13.1",
+    "react-countdown": "2.2.1",
     "react-dom": "16.13.1",
     "react-redux": "7.2.0",
     "react-scripts": "3.4.1",

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
@@ -8,15 +8,20 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 
+import Countdown from 'react-countdown';
+
 import connectComponent from '../../helpers/connect-component';
 import getLocale from '../../helpers/get-locale';
 
 import {
+  close,
   updateForm,
   register,
 } from '../../state/root/dialog-license-registration/actions';
 
 import EnhancedDialogTitle from '../shared/enhanced-dialog-title';
+
+import getTrialExpirationTime from '../../helpers/get-trial-expiration-time';
 
 const styles = (theme) => ({
   dialogContentText: {
@@ -34,10 +39,13 @@ const DialogLicenseRegistration = (props) => {
     classes,
     licenseKey,
     licenseKeyError,
+    onClose,
     onRegister,
     onUpdateForm,
     open,
   } = props;
+
+  const [trialExpired, setTrialExpired] = useState(false);
 
   const { remote } = window.require('electron');
 
@@ -45,14 +53,35 @@ const DialogLicenseRegistration = (props) => {
     <Dialog
       fullWidth
       maxWidth="xs"
-      // onClose={onClose}
+      onClose={trialExpired ? null : onClose}
       open={open}
     >
-      <EnhancedDialogTitle>
+      <EnhancedDialogTitle onClose={trialExpired ? null : onClose}>
         {getLocale('licenseRegistration')}
       </EnhancedDialogTitle>
       <DialogContent>
         <DialogContentText className={classes.dialogContentText}>
+          <Countdown
+            date={getTrialExpirationTime()}
+            renderer={({
+              hours, minutes, seconds, completed,
+            }) => {
+              if (completed) {
+                // Render a completed state
+                return getLocale('trialExpired');
+              }
+              // Render a countdown
+              // eslint-disable-next-line react/jsx-one-expression-per-line
+              return getLocale('trialExpireIn').replace('$TIME', `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`);
+            }}
+            onComplete={() => {
+              setTrialExpired(true);
+            }}
+            onMount={({ completed }) => {
+              setTrialExpired(completed);
+            }}
+          />
+          .&nbsp;
           {getLocale('licenseContentText')}
         </DialogContentText>
         <TextField
@@ -96,6 +125,7 @@ DialogLicenseRegistration.propTypes = {
   classes: PropTypes.object.isRequired,
   licenseKey: PropTypes.string,
   licenseKeyError: PropTypes.string,
+  onClose: PropTypes.func.isRequired,
   onRegister: PropTypes.func.isRequired,
   onUpdateForm: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
@@ -118,6 +148,7 @@ const mapStateToProps = (state) => {
 };
 
 const actionCreators = {
+  close,
   updateForm,
   register,
 };

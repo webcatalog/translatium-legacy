@@ -92,17 +92,16 @@ const createMenu = () => {
       label: getLocale('help'),
       submenu: [
         {
-          label: getLocale('learnMore'),
-          click: () => shell.openExternal(config.APP_URL),
+          label: getLocale('translatiumSupport'),
+          click: () => shell.openExternal('https://atomery.com/support?app=translatium'),
         },
         {
-          label: getLocale('reportAnIssue'),
+          label: getLocale('reportAnIssueViaGitHub'),
           click: () => shell.openExternal('https://github.com/translatium/translatium/issues'),
         },
-        { type: 'separator' },
         {
-          role: 'toggledevtools',
-          label: getLocale('toggleDevTools'),
+          label: getLocale('learnMore'),
+          click: () => shell.openExternal(config.APP_URL),
         },
       ],
     },
