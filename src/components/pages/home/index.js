@@ -193,6 +193,31 @@ const styles = (theme) => ({
 });
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef();
+    this.handleOpenFind = this.handleOpenFind.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.inputRef && this.inputRef.current) {
+      this.inputRef.current.focus();
+    }
+
+    const { ipcRenderer } = window.require('electron');
+    ipcRenderer.on('open-find', this.handleOpenFind);
+  }
+
+  componentWillUnmount() {
+    const { ipcRenderer } = window.require('electron');
+    ipcRenderer.removeListener('open-find', this.handleOpenFind);
+  }
+
+  handleOpenFind() {
+    this.inputRef.current.focus();
+    this.inputRef.current.select();
+  }
+
   renderCountdown() {
     const { classes, registered, onOpenDialogLicenseRegistration } = this.props;
 
@@ -523,6 +548,7 @@ class Home extends React.Component {
             )}
           >
             <textarea
+              ref={this.inputRef}
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"

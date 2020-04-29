@@ -61,24 +61,42 @@ class LanguageList extends React.Component {
     super(props);
 
     this.handleEscKey = this.handleEscKey.bind(this);
+    this.handleOpenFind = this.handleOpenFind.bind(this);
+    this.inputRef = React.createRef();
+    this.state = { preventEsc: false };
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleEscKey);
+
+    const { ipcRenderer } = window.require('electron');
+    ipcRenderer.on('open-find', this.handleOpenFind);
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleEscKey);
+
+    const { ipcRenderer } = window.require('electron');
+    ipcRenderer.removeListener('open-find', this.handleOpenFind);
   }
 
   handleEscKey(evt) {
     const { route, onChangeRoute } = this.props;
-    if (route !== ROUTE_LANGUAGE_LIST) {
+    const { preventEsc } = this.state;
+    console.log(this.state);
+    if (route !== ROUTE_LANGUAGE_LIST || preventEsc) {
       return;
     }
     if (evt.key === 'Escape' || evt.key === 'Esc') {
       onChangeRoute(ROUTE_HOME);
     }
+  }
+
+  handleOpenFind() {
+    const { route } = this.props;
+    if (route !== ROUTE_LANGUAGE_LIST) return;
+    this.inputRef.current.focus();
+    this.inputRef.current.select();
   }
 
   render() {
@@ -108,6 +126,7 @@ class LanguageList extends React.Component {
         </AppBar>
         <div className={classes.inputContainer}>
           <TextField
+            inputRef={this.inputRef}
             margin="dense"
             variant="standard"
             value={search}
@@ -127,6 +146,22 @@ class LanguageList extends React.Component {
               ),
             }}
             onChange={(event) => onUpdateLanguageListSearch(event.target.value)}
+            onKeyDown={(e) => {
+              if ((e.keyCode || e.which) === 27) { // Escape
+                onUpdateLanguageListSearch('');
+                e.target.blur();
+              }
+            }}
+            onBlur={() => {
+              this.setState({
+                preventEsc: false,
+              });
+            }}
+            onFocus={() => {
+              this.setState({
+                preventEsc: true,
+              });
+            }}
           />
         </div>
         <LanguageListList />
