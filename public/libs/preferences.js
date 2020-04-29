@@ -2,41 +2,6 @@ const { app, nativeTheme, ipcMain } = require('electron');
 const settings = require('electron-settings');
 
 const sendToAllWindows = require('./send-to-all-windows');
-const displayLanguages = require('./display-languages');
-
-// Legacy code
-// https://github.com/atomery/translatium/blob/v8.6.1/src/helpers/get-default-lang-id.js
-// strip country code from langId
-// en-US => en / vi-vn => vi
-const getLanguageCode = (langId) => {
-  const parts = langId.toLowerCase().replace('_', '-').split('-');
-
-  return parts[0];
-};
-
-const getDefaultLangId = () => {
-  const userLanguages = [app.getLocale()];
-
-  let defaultLangId = 'en';
-
-  userLanguages.some((userLang) => {
-    let isMatch = false;
-
-    Object.keys(displayLanguages).some((appLang) => {
-      isMatch = getLanguageCode(appLang) === getLanguageCode(userLang);
-
-      if (isMatch) {
-        defaultLangId = appLang;
-      }
-
-      return isMatch;
-    });
-
-    return isMatch;
-  });
-
-  return defaultLangId;
-};
 
 const getDefaultRegistered = () => {
   if (!app.isPackaged) return true;
@@ -59,7 +24,6 @@ const defaultPreferences = {
   attachToMenubar: false,
   clearInputShortcut: 'mod+shift+d',
   inputLang: 'en',
-  langId: getDefaultLangId(),
   openOnMenubarShortcut: null,
   outputLang: 'zh',
   realtime: true,

@@ -23,8 +23,6 @@ import { toggleSetting } from '../../../state/root/preferences/actions';
 import { open as openDialogAbout } from '../../../state/root/dialog-about/actions';
 import { open as openDialogShortcut } from '../../../state/pages/preferences/shortcut-dialog/actions';
 
-import displayLanguages from '../../../constants/display-languages';
-
 import DialogShortcut from './dialog-shortcut';
 
 import {
@@ -106,7 +104,6 @@ const Preferences = (props) => {
     alwaysOnTop,
     attachToMenubar,
     classes,
-    langId,
     onOpenDialogAbout,
     onOpenDialogShortcut,
     onToggleSetting,
@@ -116,13 +113,6 @@ const Preferences = (props) => {
     translateClipboardOnShortcut,
     translateWhenPressingEnter,
   } = props;
-
-  const displayLanguageKeys = Object.keys(displayLanguages);
-  displayLanguageKeys.sort((xKey, yKey) => {
-    const x = displayLanguages[xKey].displayName;
-    const y = displayLanguages[yKey].displayName;
-    return x.localeCompare(y);
-  });
 
   return (
     <div className={classes.container}>
@@ -138,35 +128,6 @@ const Preferences = (props) => {
         </Typography>
         <Paper elevation={0} className={classes.paper}>
           <List dense disablePadding>
-            <EnhancedMenu
-              id="changeDisplayLanguage"
-              buttonElement={(
-                <ListItem button>
-                  <ListItemText
-                    primary={getLocale('displayLanguage')}
-                    secondary={displayLanguages[langId].displayName}
-                  />
-                  <ChevronRightIcon color="action" />
-                </ListItem>
-              )}
-            >
-              {displayLanguageKeys.map((lId) => (
-                <MenuItem
-                  dense
-                  key={`lang_${lId}`}
-                  value={lId}
-                  onClick={() => {
-                    if (lId !== langId) {
-                      requestSetPreference('langId', lId);
-                      requestShowRequireRestartDialog();
-                    }
-                  }}
-                >
-                  {displayLanguages[lId].displayName}
-                </MenuItem>
-              ))}
-            </EnhancedMenu>
-            <Divider />
             <EnhancedMenu
               id="theme"
               buttonElement={(
@@ -376,7 +337,6 @@ Preferences.propTypes = {
   alwaysOnTop: PropTypes.bool.isRequired,
   attachToMenubar: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
-  langId: PropTypes.string.isRequired,
   onOpenDialogAbout: PropTypes.func.isRequired,
   onOpenDialogShortcut: PropTypes.func.isRequired,
   onToggleSetting: PropTypes.func.isRequired,
@@ -390,7 +350,6 @@ Preferences.propTypes = {
 const mapStateToProps = (state) => ({
   alwaysOnTop: state.preferences.alwaysOnTop,
   attachToMenubar: state.preferences.attachToMenubar,
-  langId: state.preferences.langId,
   openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
   realtime: state.preferences.realtime,
   themeSource: state.preferences.themeSource,
