@@ -110,7 +110,7 @@
 	"translateClipboardOnShortcutDesc": "When you open Translatium with a shortcut, it will automatically translate your clipboard contents.",
 	"openKeyboardShortcut": "Define a keyboard shortcut to open Translatium quickly",
 	"typeNewKeyboardCombinator": "Type the new keyboard combinator.",
-	"searchLanguages": "Search Languages",
+	"searchLanguages": "Search languages...",
 	"noLanguageFound": "No Language Found",
 	"searchResults": "Search Results",
 	"recentlyUsed": "Recently Used",

@@ -110,7 +110,7 @@ class Phrasebook extends React.Component {
 
     return (
       <div className={classes.container}>
-        <AppBar position="static" color="default" elevation={1} classes={{ colorDefault: classes.appBarColorDefault }}>
+        <AppBar position="static" color="default" elevation={0} classes={{ colorDefault: classes.appBarColorDefault }}>
           <Toolbar variant="dense" className={classes.toolbar}>
             <Typography variant="subtitle1" color="inherit" className={classes.title}>{getLocale('phrasebook')}</Typography>
           </Toolbar>
