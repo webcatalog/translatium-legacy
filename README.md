@@ -9,6 +9,19 @@
 **master** branch only includes the source code of Translatium 9 & up. For older versions, check out the **legacy-** branches.
 
 ---
+## Licensing
+### Usage
+**Translatium is paid software.**  [Pay just $14.99](https://webcatalog.onfastspring.com/translatium) to unlock the app perpetually.
+
+The license:
+- Has no time limit and never expires.
+- Works with all versions (including major updates).
+- Permits uses on all of the devices you own (regardless of platforms or operating systems).
+
+### Source Code
+On the other hand, **the source code is freely available** for use, modification and distribution under the permissions, limitations and conditions listed in the [Mozilla Public License 2.0](LICENSE).
+
+---
 ## Development
 ```
 # First, clone the project:
