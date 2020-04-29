@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   search: '',
-  type: 'inputLang',
+  mode: 'inputLang',
 };
 
 const languageList = (state = initialState, action) => {
