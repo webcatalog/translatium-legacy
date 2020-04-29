@@ -59,6 +59,7 @@
     "mocha": "7.1.2",
     "node-fetch": "2.6.0",
     "pouchdb-browser": "7.2.1",
+    "pouchdb-quick-search": "1.3.0",
     "prop-types": "15.7.2",
     "react": "16.13.1",
     "react-countdown": "2.2.1",

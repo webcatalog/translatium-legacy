@@ -34,6 +34,8 @@
 	"quit": "Quit",
 	"home": "Home",
 	"phrasebook": "Phrasebook",
+	"searchSavedTranslations": "Search saved translations...",
+	"noMatchingResults": "No Matching Results",
 	"preferences": "Preferences",
 	"preferencesMenuItem": "Preferences...",
 	"registered": "Registered",

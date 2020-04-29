@@ -59,3 +59,7 @@ a {
 [role=button], [role=link] {
   cursor: pointer;
 }
+
+highlight {
+  background-color: #FFFF00;
+}
