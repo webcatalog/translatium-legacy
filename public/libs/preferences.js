@@ -41,12 +41,15 @@ const getDefaultLangId = () => {
 const getDefaultRegistered = () => {
   if (!app.isPackaged) return true;
 
-  // only check for license in non Mac App Store distribution
+  // only check for license in non Mac App Store distribution or Linux
   if (process.platform === 'darwin' && !process.mas) {
     return false;
   }
 
-  // Linux: The app is always free
+  if (process.platform === 'linux') {
+    return false;
+  }
+
   // Mac App Store & Windows Store distributions use provided licensing systems
   return true;
 };
