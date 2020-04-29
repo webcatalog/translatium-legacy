@@ -134,8 +134,6 @@ class Phrasebook extends React.Component {
             );
           }
 
-          console.log(phrasebookItems);
-
           return (
             <div className={classes.listContainer} ref={(c) => { this.listView = c; }}>
               <List disablePadding>
@@ -187,14 +185,14 @@ class Phrasebook extends React.Component {
 }
 
 Phrasebook.propTypes = {
-  canLoadMore: PropTypes.bool,
+  canLoadMore: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
   onDeletePhrasebookItem: PropTypes.func.isRequired,
   onLoadOutput: PropTypes.func.isRequired,
   onLoadPhrasebook: PropTypes.func.isRequired,
-  phrasebookItems: PropTypes.arrayOf(PropTypes.object),
-  phrasebookLoading: PropTypes.bool,
+  phrasebookItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  phrasebookLoading: PropTypes.bool.isRequired,
   query: PropTypes.string.isRequired,
 };
 

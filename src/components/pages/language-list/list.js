@@ -114,12 +114,12 @@ const LanguageListList = ({
 
 LanguageListList.propTypes = {
   classes: PropTypes.object.isRequired,
-  mode: PropTypes.string,
+  mode: PropTypes.string.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
   onUpdateInputLang: PropTypes.func.isRequired,
   onUpdateOutputLang: PropTypes.func.isRequired,
-  recentLanguages: PropTypes.arrayOf(PropTypes.string),
-  search: PropTypes.string,
+  recentLanguages: PropTypes.arrayOf(PropTypes.string).isRequired,
+  search: PropTypes.string.isRequired,
 };
 
 const actionCreators = {

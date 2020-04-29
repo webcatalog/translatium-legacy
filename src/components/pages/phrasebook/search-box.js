@@ -20,6 +20,7 @@ const styles = (theme) => ({
     position: 'relative',
     borderRadius: 0,
     paddingRight: theme.spacing(1.5),
+    paddingLeft: theme.spacing(1.5),
   },
   toolbarSectionSearch: {
     alignItems: 'center',
@@ -49,7 +50,7 @@ const styles = (theme) => ({
     margin: 0,
     color: theme.palette.text.primary,
     width: '100%',
-    paddingLeft: theme.spacing(1.5),
+    padding: 0,
     '&:focus': {
       outline: 0,
     },

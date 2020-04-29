@@ -100,7 +100,7 @@ class LanguageList extends React.Component {
 
 LanguageList.propTypes = {
   classes: PropTypes.object.isRequired,
-  mode: PropTypes.string,
+  mode: PropTypes.string.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
   route: PropTypes.string.isRequired,
 };
