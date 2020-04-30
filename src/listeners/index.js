@@ -13,6 +13,7 @@ import {
 import {
   getShouldUseDarkColors,
 } from '../senders';
+import { setSystemPreference } from '../state/root/system-preferences/actions';
 
 import {
   ROUTE_HOME,
@@ -94,6 +95,10 @@ const loadListeners = (store) => {
 
   ipcRenderer.on('native-theme-updated', () => {
     store.dispatch(updateShouldUseDarkColors(getShouldUseDarkColors()));
+  });
+
+  ipcRenderer.on('set-system-preference', (e, name, value) => {
+    store.dispatch(setSystemPreference(name, value));
   });
 };
 

@@ -213,12 +213,12 @@ if (!gotTheLock) {
         createMenu();
       });
 
-      mainWindow.once('ready-to-show', () => {
-        mainWindow.show();
-        // if (!wasOpenedAsHidden) {
-        // mainWindow.show();
-        // }
-      });
+      const { wasOpenedAsHidden } = app.getLoginItemSettings();
+      if (!wasOpenedAsHidden) {
+        mainWindow.once('ready-to-show', () => {
+          mainWindow.show();
+        });
+      }
 
       // ensure redux is loaded first
       // if not, redux might not be able catch changes sent from ipcMain
