@@ -17,3 +17,8 @@ export const getLocales = () => ipcRenderer.sendSync('get-locales');
 
 // Native Theme
 export const getShouldUseDarkColors = () => ipcRenderer.sendSync('get-should-use-dark-colors');
+
+// System Preferences
+export const getSystemPreference = (name) => ipcRenderer.sendSync('get-system-preference', name);
+export const getSystemPreferences = () => ipcRenderer.sendSync('get-system-preferences');
+export const requestSetSystemPreference = (name, value) => ipcRenderer.send('request-set-system-preference', name, value);

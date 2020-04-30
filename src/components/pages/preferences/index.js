@@ -28,6 +28,7 @@ import DialogShortcut from './dialog-shortcut';
 import {
   requestOpenInBrowser,
   requestSetPreference,
+  requestSetSystemPreference,
   requestShowRequireRestartDialog,
 } from '../../../senders';
 
@@ -99,6 +100,12 @@ const renderCombinator = (combinator) => combinator
   .replace('meta', '⌘')
   .toUpperCase();
 
+const getOpenAtLoginString = (openAtLogin) => {
+  if (openAtLogin === 'yes-hidden') return getLocale('yesHidden');
+  if (openAtLogin === 'yes') return getLocale('yes');
+  return getLocale('no2');
+};
+
 const Preferences = (props) => {
   const {
     alwaysOnTop,
@@ -107,6 +114,7 @@ const Preferences = (props) => {
     onOpenDialogAbout,
     onOpenDialogShortcut,
     onToggleSetting,
+    openAtLogin,
     openOnMenubarShortcut,
     realtime,
     themeSource,
@@ -146,29 +154,6 @@ const Preferences = (props) => {
             </EnhancedMenu>
             <Divider />
             <ListItem>
-              <ListItemText primary={window.process.platform === 'win32' ? getLocale('attachToTaskbar') : getLocale('attachToMenubar')} />
-              <ListItemSecondaryAction>
-                <Switch
-                  edge="end"
-                  checked={attachToMenubar}
-                  onChange={(e) => {
-                    requestSetPreference('attachToMenubar', e.target.checked);
-                    requestShowRequireRestartDialog();
-                  }}
-                  color="primary"
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
-          </List>
-        </Paper>
-
-
-        <Typography variant="body2" className={classes.paperTitle}>
-          {getLocale('advanced')}
-        </Typography>
-        <Paper elevation={0} className={classes.paper}>
-          <List dense disablePadding>
-            <ListItem>
               <ListItemText
                 primary={getLocale('realtime')}
                 secondary={getLocale('realtimeDesc')}
@@ -194,71 +179,116 @@ const Preferences = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
+          </List>
+        </Paper>
+
+        <Typography variant="body2" className={classes.paperTitle}>
+          {getLocale(window.process.platform === 'win32' ? 'taskbar' : 'menubar')}
+        </Typography>
+        <Paper elevation={0} className={classes.paper}>
+          <List dense disablePadding>
+            <ListItem>
+              <ListItemText primary={window.process.platform === 'win32' ? getLocale('attachToTaskbar') : getLocale('attachToMenubar')} />
+              <ListItemSecondaryAction>
+                <Switch
+                  edge="end"
+                  checked={attachToMenubar}
+                  onChange={(e) => {
+                    requestSetPreference('attachToMenubar', e.target.checked);
+                    requestShowRequireRestartDialog();
+                  }}
+                  color="primary"
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+            <Divider />
+            <ListItem
+              button
+              key="openOnMenubar"
+              onClick={() => onOpenDialogShortcut('openOnMenubar', openOnMenubarShortcut)}
+              disabled={!attachToMenubar}
+            >
+              <ListItemText
+                primary={getLocale('openKeyboardShortcut')}
+                secondary={openOnMenubarShortcut
+                  ? renderCombinator(openOnMenubarShortcut) : null}
+              />
+              <ChevronRightIcon color="action" />
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary={getLocale('translateClipboardOnShortcut')}
+                secondary={getLocale('translateClipboardOnShortcutDesc')}
+              />
+              <ListItemSecondaryAction>
+                <Switch
+                  edge="end"
+                  checked={attachToMenubar ? translateClipboardOnShortcut : false}
+                  onChange={() => onToggleSetting('translateClipboardOnShortcut')}
+                  color="primary"
+                  disabled={!attachToMenubar}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary={getLocale('alwaysOnTop')}
+                secondary={getLocale('alwaysOnTopDesc')}
+              />
+              <ListItemSecondaryAction>
+                <Switch
+                  edge="end"
+                  checked={attachToMenubar ? alwaysOnTop : false}
+                  onChange={(e) => {
+                    requestSetPreference('alwaysOnTop', e.target.checked);
+                    requestShowRequireRestartDialog();
+                  }}
+                  color="primary"
+                  disabled={!attachToMenubar}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+          </List>
+        </Paper>
+
+
+        <Typography variant="body2" className={classes.paperTitle}>
+          {getLocale('advanced')}
+        </Typography>
+        <Paper elevation={0} className={classes.paper}>
+          <List dense disablePadding>
             {window.process.platform === 'darwin' && (
               <>
-                <Divider />
                 <ListItem
                   button
                   onClick={() => window.require('electron').remote.shell.openExternal('https://translatiumapp.com/popclip')}
                 >
                   <ListItemText primary={getLocale('popclipExtension')} />
-                </ListItem>
-              </>
-            )}
-            {window.mode === 'menubar' && (
-              <>
-                <Divider />
-                <ListItem
-                  button
-                  key="openOnMenubar"
-                  onClick={() => onOpenDialogShortcut('openOnMenubar', openOnMenubarShortcut)}
-                  disabled={!attachToMenubar}
-                >
-                  <ListItemText
-                    primary={getLocale('openKeyboardShortcut')}
-                    secondary={openOnMenubarShortcut
-                      ? renderCombinator(openOnMenubarShortcut) : null}
-                  />
                   <ChevronRightIcon color="action" />
                 </ListItem>
                 <Divider />
-                <ListItem>
-                  <ListItemText
-                    primary={getLocale('translateClipboardOnShortcut')}
-                    secondary={getLocale('translateClipboardOnShortcutDesc')}
-                  />
-                  <ListItemSecondaryAction>
-                    <Switch
-                      edge="end"
-                      checked={attachToMenubar ? translateClipboardOnShortcut : false}
-                      onChange={() => onToggleSetting('translateClipboardOnShortcut')}
-                      color="primary"
-                      disabled={!attachToMenubar}
-                    />
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <Divider />
-                <ListItem>
-                  <ListItemText
-                    primary={getLocale('alwaysOnTop')}
-                    secondary={getLocale('alwaysOnTopDesc')}
-                  />
-                  <ListItemSecondaryAction>
-                    <Switch
-                      edge="end"
-                      checked={attachToMenubar ? alwaysOnTop : false}
-                      onChange={(e) => {
-                        requestSetPreference('alwaysOnTop', e.target.checked);
-                        requestShowRequireRestartDialog();
-                      }}
-                      color="primary"
-                      disabled={!attachToMenubar}
-                    />
-                  </ListItemSecondaryAction>
-                </ListItem>
               </>
             )}
-            <Divider />
+            {window.process.platform !== 'linux' && (
+              <>
+                <EnhancedMenu
+                  id="openAtLogin"
+                  buttonElement={(
+                    <ListItem button>
+                      <ListItemText primary={getLocale('openAtLogin')} secondary={getOpenAtLoginString(openAtLogin)} />
+                      <ChevronRightIcon color="action" />
+                    </ListItem>
+                  )}
+                >
+                  <MenuItem dense onClick={() => requestSetSystemPreference('openAtLogin', 'yes')}>{getLocale('yes')}</MenuItem>
+                  {!process.mas && <MenuItem dense onClick={() => requestSetSystemPreference('openAtLogin', 'yes-hidden')}>{getLocale('yesHidden')}</MenuItem>}
+                  <MenuItem dense onClick={() => requestSetSystemPreference('openAtLogin', 'no')}>{getLocale('no2')}</MenuItem>
+                </EnhancedMenu>
+                <Divider />
+              </>
+            )}
             <ListItem>
               <ListItemText
                 primary={getLocale('useHardwareAcceleration')}
@@ -362,6 +392,7 @@ Preferences.propTypes = {
   onOpenDialogAbout: PropTypes.func.isRequired,
   onOpenDialogShortcut: PropTypes.func.isRequired,
   onToggleSetting: PropTypes.func.isRequired,
+  openAtLogin: PropTypes.oneOf(['yes', 'yes-hidden', 'no']).isRequired,
   openOnMenubarShortcut: PropTypes.string,
   realtime: PropTypes.bool.isRequired,
   themeSource: PropTypes.string.isRequired,
@@ -373,6 +404,7 @@ Preferences.propTypes = {
 const mapStateToProps = (state) => ({
   alwaysOnTop: state.preferences.alwaysOnTop,
   attachToMenubar: state.preferences.attachToMenubar,
+  openAtLogin: state.systemPreferences.openAtLogin,
   openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
   realtime: state.preferences.realtime,
   themeSource: state.preferences.themeSource,

@@ -10,9 +10,10 @@ import dialogAbout from './root/dialog-about/reducers';
 import dialogLicenseRegistration from './root/dialog-license-registration/reducers';
 import general from './root/general/reducers';
 import preferences from './root/preferences/reducers';
+import router from './root/router/reducers';
 import screen from './root/screen/reducers';
 import snackbar from './root/snackbar/reducers';
-import router from './root/router/reducers';
+import systemPreferences from './root/system-preferences/reducers';
 
 import pages from './pages/reducers';
 
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   router,
   screen,
   snackbar,
+  systemPreferences,
 });
 
 const configureStore = (initialState) => {

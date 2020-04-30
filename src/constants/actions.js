@@ -46,3 +46,6 @@ export const CHANGE_ROUTE = 'CHANGE_ROUTE';
 // Dialog About
 export const DIALOG_ABOUT_CLOSE = 'DIALOG_ABOUT_CLOSE';
 export const DIALOG_ABOUT_OPEN = 'DIALOG_ABOUT_OPEN';
+
+// System Preferences
+export const SET_SYSTEM_PREFERENCE = 'SET_SYSTEM_PREFERENCE';

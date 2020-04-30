@@ -15,6 +15,12 @@ const {
 } = require('../libs/preferences');
 
 const {
+  getSystemPreference,
+  getSystemPreferences,
+  setSystemPreference,
+} = require('../libs/system-preferences');
+
+const {
   getLocale,
   getLocales,
 } = require('../libs/locales');
@@ -27,6 +33,21 @@ const loadListeners = () => {
 
   ipcMain.on('get-locales', (e) => {
     e.returnValue = getLocales();
+  });
+
+  // System Preferences
+  ipcMain.on('get-system-preference', (e, name) => {
+    const val = getSystemPreference(name);
+    e.returnValue = val;
+  });
+
+  ipcMain.on('get-system-preferences', (e) => {
+    const preferences = getSystemPreferences();
+    e.returnValue = preferences;
+  });
+
+  ipcMain.on('request-set-system-preference', (e, name, value) => {
+    setSystemPreference(name, value);
   });
 
   // Preferences
