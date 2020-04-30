@@ -351,6 +351,10 @@ const Preferences = (props) => {
   );
 };
 
+Preferences.defaultProps = {
+  openOnMenubarShortcut: null,
+};
+
 Preferences.propTypes = {
   alwaysOnTop: PropTypes.bool.isRequired,
   attachToMenubar: PropTypes.bool.isRequired,

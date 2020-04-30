@@ -1,4 +1,4 @@
-import { UPDATE_PHRASEBOOK, UPDATE_OUTPUT } from '../../../constants/actions';
+import { UPDATE_PHRASEBOOK, UPDATE_OUTPUT, UPDATE_PHRASEBOOK_QUERY } from '../../../constants/actions';
 import phrasebookDb from '../../../helpers/phrasebook-db';
 
 const defaultOptions = {
@@ -9,9 +9,9 @@ const defaultOptions = {
 
 export const loadPhrasebook = (init, limit) => ((dispatch, getState) => {
   const { phrasebook } = getState().pages;
-  const { canLoadMore } = phrasebook;
+  const { canLoadMore, query } = phrasebook;
 
-  const items = (init === true) ? [] : phrasebook.items;
+  const items = (init === true) ? [] : [...phrasebook.items];
 
   dispatch({
     type: UPDATE_PHRASEBOOK,
@@ -28,10 +28,19 @@ export const loadPhrasebook = (init, limit) => ((dispatch, getState) => {
   }
   if (limit) options.limit = limit;
 
-  phrasebookDb.allDocs(options)
+  Promise.resolve()
+    .then(() => {
+      if (query) {
+        options.query = query;
+        options.fields = ['data.inputText', 'data.outputText'];
+        options.highlighting = true;
+        options.highlighting_pre = '<highlight>';
+        options.highlighting_post = '</highlight>';
+        return phrasebookDb.search(options);
+      }
+      return phrasebookDb.allDocs(options);
+    })
     .then((response) => {
-      let newItems = items;
-
       response.rows.forEach((row) => {
         // Old data compatibility
         if (row.doc.inputObj) { // Version 1
@@ -39,25 +48,22 @@ export const loadPhrasebook = (init, limit) => ((dispatch, getState) => {
           const { outputText } = row.doc.outputObj;
           const { _id, _rev } = row.doc;
 
-          newItems = [
-            ...newItems,
-            {
-              phrasebookId: _id,
-              rev: _rev,
-              inputLang,
-              outputLang,
-              inputText,
-              outputText,
-            },
-          ];
+          items.push({
+            phrasebookId: _id,
+            rev: _rev,
+            inputLang,
+            outputLang,
+            inputText,
+            outputText,
+          });
         } else if (row.doc.phrasebookVersion === 3) { // Latest
           const newItem = row.doc.data;
           /* eslint-disable no-underscore-dangle */
           newItem.phrasebookId = row.doc._id;
           newItem.rev = row.doc._rev;
           /* eslint-enable no-underscore-dangle */
-
-          newItems = [...newItems, newItem];
+          newItem.highlighting = row.highlighting;
+          items.push(newItem);
         } else { // Version 2
           const {
             _id, _rev,
@@ -66,25 +72,25 @@ export const loadPhrasebook = (init, limit) => ((dispatch, getState) => {
             inputDict, outputDict,
           } = row.doc;
 
-          newItems = [
-            ...newItems,
-            {
-              phrasebookId: _id,
-              rev: _rev,
-              inputLang,
-              outputLang,
-              inputText,
-              outputText,
-              inputDict,
-              outputDict,
-            },
-          ];
+          items.push({
+            phrasebookId: _id,
+            rev: _rev,
+            inputLang,
+            outputLang,
+            inputText,
+            outputText,
+            inputDict,
+            outputDict,
+          });
         }
       });
 
+      // verify the result query matched the current query
+      if (query !== getState().pages.phrasebook.query) return;
+
       dispatch({
         type: UPDATE_PHRASEBOOK,
-        items: newItems,
+        items,
         canLoadMore: (response.total_rows > 0 && items.length < response.total_rows),
         loading: false,
       });
@@ -135,3 +141,19 @@ export const deletePhrasebookItem = (id, rev) => ((dispatch, getState) => {
       console.log(e);
     });
 });
+
+let timeout = null;
+export const updateQuery = (query) => (dispatch) => {
+  dispatch({
+    type: UPDATE_PHRASEBOOK_QUERY,
+    query,
+  });
+  clearTimeout(timeout);
+  if (query === '') {
+    dispatch(loadPhrasebook(true));
+  } else {
+    timeout = setTimeout(() => {
+      dispatch(loadPhrasebook(true));
+    }, 300);
+  }
+};

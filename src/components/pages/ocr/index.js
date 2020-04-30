@@ -248,14 +248,14 @@ class Ocr extends React.Component {
 
 Ocr.propTypes = {
   classes: PropTypes.object.isRequired,
-  inputLang: PropTypes.string,
+  inputLang: PropTypes.string.isRequired,
   ocr: PropTypes.object.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
   onLoadOutput: PropTypes.func.isRequired,
   onOpenSnackbar: PropTypes.func.isRequired,
   onSetMode: PropTypes.func.isRequired,
   onSetZoomLevel: PropTypes.func.isRequired,
-  outputLang: PropTypes.string,
+  outputLang: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
