@@ -32,6 +32,10 @@ const Alert = ({ alertMessage, onCloseAlert }) => (
   </Dialog>
 );
 
+Alert.defaultProps = {
+  alertMessage: null,
+};
+
 Alert.propTypes = {
   alertMessage: PropTypes.string,
   onCloseAlert: PropTypes.func.isRequired,

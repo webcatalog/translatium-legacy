@@ -10,9 +10,11 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ToggleStar from '@material-ui/icons/Star';
 import Divider from '@material-ui/core/Divider';
 import Tooltip from '@material-ui/core/Tooltip';
+
+import ToggleStarIcon from '@material-ui/icons/Star';
+import SearchIcon from '@material-ui/icons/Search';
 
 import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
@@ -23,6 +25,7 @@ import { changeRoute } from '../../../state/root/router/actions';
 
 import { ROUTE_HOME } from '../../../constants/routes';
 
+import SearchBox from './search-box';
 
 const styles = (theme) => ({
   emptyContainer: {
@@ -102,22 +105,30 @@ class Phrasebook extends React.Component {
       onLoadOutput,
       phrasebookItems,
       phrasebookLoading,
+      query,
     } = this.props;
 
     return (
       <div className={classes.container}>
-        <AppBar position="static" color="default" elevation={1} classes={{ colorDefault: classes.appBarColorDefault }}>
+        <AppBar position="static" color="default" elevation={0} classes={{ colorDefault: classes.appBarColorDefault }}>
           <Toolbar variant="dense" className={classes.toolbar}>
             <Typography variant="subtitle1" color="inherit" className={classes.title}>{getLocale('phrasebook')}</Typography>
           </Toolbar>
         </AppBar>
+        <SearchBox />
         {(() => {
           if (phrasebookItems.length < 1 && phrasebookLoading === false) {
             return (
               <div className={classes.emptyContainer}>
                 <div className={classes.emptyInnerContainer}>
-                  <ToggleStar className={classes.bigIcon} />
-                  <Typography variant="h5" color="textSecondary">{getLocale('phrasebookIsEmpty')}</Typography>
+                  {query ? (
+                    <SearchIcon className={classes.bigIcon} />
+                  ) : (
+                    <ToggleStarIcon className={classes.bigIcon} />
+                  )}
+                  <Typography variant="h5" color="textSecondary">
+                    {query ? getLocale('noMatchingResults') : getLocale('phrasebookIsEmpty')}
+                  </Typography>
                 </div>
               </div>
             );
@@ -136,8 +147,15 @@ class Phrasebook extends React.Component {
                     }}
                   >
                     <ListItemText
-                      primary={item.outputText}
-                      secondary={item.inputText}
+                      primary={item.highlighting && item.highlighting['data.outputText'] ? (
+                        // eslint-disable-next-line react/no-danger
+                        <span dangerouslySetInnerHTML={{ __html: item.highlighting['data.outputText'] }} />
+                      ) : item.outputText}
+                      secondary={item.highlighting && item.highlighting['data.inputText'] ? (
+                        // eslint-disable-next-line react/no-danger
+                        <span dangerouslySetInnerHTML={{ __html: item.highlighting['data.inputText'] }} />
+                      ) : item.inputText}
+                      primaryTypographyProps={{ color: 'textPrimary' }}
                     />
                     <ListItemSecondaryAction>
                       <Tooltip title={getLocale('remove')} placement="left">
@@ -148,7 +166,7 @@ class Phrasebook extends React.Component {
                             item.rev,
                           )}
                         >
-                          <ToggleStar />
+                          <ToggleStarIcon />
                         </IconButton>
                       </Tooltip>
                     </ListItemSecondaryAction>
@@ -167,20 +185,22 @@ class Phrasebook extends React.Component {
 }
 
 Phrasebook.propTypes = {
-  canLoadMore: PropTypes.bool,
+  canLoadMore: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
   onDeletePhrasebookItem: PropTypes.func.isRequired,
   onLoadOutput: PropTypes.func.isRequired,
   onLoadPhrasebook: PropTypes.func.isRequired,
-  phrasebookItems: PropTypes.arrayOf(PropTypes.object),
-  phrasebookLoading: PropTypes.bool,
+  phrasebookItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  phrasebookLoading: PropTypes.bool.isRequired,
+  query: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  phrasebookItems: state.pages.phrasebook.items,
   canLoadMore: state.pages.phrasebook.canLoadMore,
+  phrasebookItems: state.pages.phrasebook.items,
   phrasebookLoading: state.pages.phrasebook.loading,
+  query: state.pages.phrasebook.query,
 });
 
 const actionCreators = {

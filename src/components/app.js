@@ -244,6 +244,10 @@ class App extends React.Component {
   }
 }
 
+App.defaultProps = {
+  snackbarMessage: null,
+};
+
 App.propTypes = {
   classes: PropTypes.object.isRequired,
   fullPageLoading: PropTypes.bool.isRequired,

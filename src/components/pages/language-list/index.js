@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
@@ -14,10 +12,11 @@ import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
 import { changeRoute } from '../../../state/root/router/actions';
-import { updateLanguageListSearch } from '../../../state/pages/language-list/actions';
 import { ROUTE_HOME, ROUTE_LANGUAGE_LIST } from '../../../constants/routes';
 
 import LanguageListList from './list';
+import SearchBox from './search-box';
+
 
 const styles = (theme) => ({
   container: {
@@ -25,18 +24,6 @@ const styles = (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     overflow: 'hidden',
-  },
-  inputContainer: {
-    display: 'flex',
-    padding: theme.spacing(1.5, 2, 0, 2),
-  },
-  input: {
-    width: '100%',
-    fontSize: 16,
-    margin: 0,
-    '&::before': {
-      background: 'none',
-    },
   },
   title: {
     flexGrow: 1,
@@ -61,30 +48,19 @@ class LanguageList extends React.Component {
     super(props);
 
     this.handleEscKey = this.handleEscKey.bind(this);
-    this.handleOpenFind = this.handleOpenFind.bind(this);
-    this.inputRef = React.createRef();
-    this.state = { preventEsc: false };
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleEscKey);
-
-    const { ipcRenderer } = window.require('electron');
-    ipcRenderer.on('open-find', this.handleOpenFind);
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleEscKey);
-
-    const { ipcRenderer } = window.require('electron');
-    ipcRenderer.removeListener('open-find', this.handleOpenFind);
   }
 
   handleEscKey(evt) {
     const { route, onChangeRoute } = this.props;
-    const { preventEsc } = this.state;
-    console.log(this.state);
-    if (route !== ROUTE_LANGUAGE_LIST || preventEsc) {
+    if (route !== ROUTE_LANGUAGE_LIST || window.preventEsc) {
       return;
     }
     if (evt.key === 'Escape' || evt.key === 'Esc') {
@@ -92,25 +68,16 @@ class LanguageList extends React.Component {
     }
   }
 
-  handleOpenFind() {
-    const { route } = this.props;
-    if (route !== ROUTE_LANGUAGE_LIST) return;
-    this.inputRef.current.focus();
-    this.inputRef.current.select();
-  }
-
   render() {
     const {
       classes,
       mode,
       onChangeRoute,
-      onUpdateLanguageListSearch,
-      search,
     } = this.props;
 
     return (
       <div className={classes.container}>
-        <AppBar position="static" color="default" elevation={1} classes={{ colorDefault: classes.appBarColorDefault }}>
+        <AppBar position="static" color="default" elevation={0} classes={{ colorDefault: classes.appBarColorDefault }}>
           <Toolbar variant="dense" className={classes.toolbar}>
             <Typography variant="subtitle1" color="inherit" className={classes.title}>
               {mode === 'inputLang' ? getLocale('chooseAnInputLanguage') : getLocale('chooseAnOutputLanguage')}
@@ -124,46 +91,7 @@ class LanguageList extends React.Component {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <div className={classes.inputContainer}>
-          <TextField
-            inputRef={this.inputRef}
-            margin="dense"
-            variant="standard"
-            value={search}
-            placeholder={getLocale('searchLanguages')}
-            className={classes.input}
-            InputProps={{
-              'aria-label': getLocale('searchLanguages'),
-              endAdornment: search && search.length > 0 && (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={() => onUpdateLanguageListSearch('')}
-                    size="small"
-                  >
-                    <CloseIcon fontSize="small" />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            onChange={(event) => onUpdateLanguageListSearch(event.target.value)}
-            onKeyDown={(e) => {
-              if ((e.keyCode || e.which) === 27) { // Escape
-                onUpdateLanguageListSearch('');
-                e.target.blur();
-              }
-            }}
-            onBlur={() => {
-              this.setState({
-                preventEsc: false,
-              });
-            }}
-            onFocus={() => {
-              this.setState({
-                preventEsc: true,
-              });
-            }}
-          />
-        </div>
+        <SearchBox />
         <LanguageListList />
       </div>
     );
@@ -172,16 +100,13 @@ class LanguageList extends React.Component {
 
 LanguageList.propTypes = {
   classes: PropTypes.object.isRequired,
-  mode: PropTypes.string,
+  mode: PropTypes.string.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
-  onUpdateLanguageListSearch: PropTypes.func.isRequired,
   route: PropTypes.string.isRequired,
-  search: PropTypes.string,
 };
 
 const actionCreators = {
   changeRoute,
-  updateLanguageListSearch,
 };
 
 const mapStateToProps = (state) => ({

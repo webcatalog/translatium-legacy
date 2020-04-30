@@ -627,11 +627,15 @@ class Home extends React.Component {
   }
 }
 
+Home.defaultProps = {
+  output: null,
+};
+
 Home.propTypes = {
   classes: PropTypes.object.isRequired,
-  fullscreenInputBox: PropTypes.bool,
-  inputLang: PropTypes.string,
-  inputText: PropTypes.string,
+  fullscreenInputBox: PropTypes.bool.isRequired,
+  inputLang: PropTypes.string.isRequired,
+  inputText: PropTypes.string.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
   onEndTextToSpeech: PropTypes.func.isRequired,
   onInsertInputText: PropTypes.func.isRequired,
@@ -648,10 +652,10 @@ Home.propTypes = {
   onUpdateLanguageListMode: PropTypes.func.isRequired,
   onUpdateOutputLang: PropTypes.func.isRequired,
   output: PropTypes.object,
-  outputLang: PropTypes.string,
+  outputLang: PropTypes.string.isRequired,
   registered: PropTypes.bool.isRequired,
   textToSpeechPlaying: PropTypes.bool.isRequired,
-  translateWhenPressingEnter: PropTypes.bool,
+  translateWhenPressingEnter: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({

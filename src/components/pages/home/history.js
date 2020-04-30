@@ -131,10 +131,10 @@ class History extends React.Component {
 }
 
 History.propTypes = {
-  canLoadMore: PropTypes.bool,
+  canLoadMore: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
-  historyItems: PropTypes.arrayOf(PropTypes.object),
-  historyLoading: PropTypes.bool,
+  historyItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  historyLoading: PropTypes.bool.isRequired,
   onLoadOutput: PropTypes.func.isRequired,
   onDeleteHistoryItem: PropTypes.func.isRequired,
   onLoadHistory: PropTypes.func.isRequired,
