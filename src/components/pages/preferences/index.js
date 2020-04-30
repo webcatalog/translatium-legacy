@@ -112,6 +112,7 @@ const Preferences = (props) => {
     themeSource,
     translateClipboardOnShortcut,
     translateWhenPressingEnter,
+    useHardwareAcceleration,
   } = props;
 
   return (
@@ -257,6 +258,23 @@ const Preferences = (props) => {
                 </ListItem>
               </>
             )}
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary={getLocale('useHardwareAcceleration')}
+              />
+              <ListItemSecondaryAction>
+                <Switch
+                  edge="end"
+                  color="primary"
+                  checked={useHardwareAcceleration}
+                  onChange={(e) => {
+                    requestSetPreference('useHardwareAcceleration', e.target.checked);
+                    requestShowRequireRestartDialog();
+                  }}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
           </List>
         </Paper>
 
@@ -349,6 +367,7 @@ Preferences.propTypes = {
   themeSource: PropTypes.string.isRequired,
   translateClipboardOnShortcut: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
+  useHardwareAcceleration: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -359,6 +378,7 @@ const mapStateToProps = (state) => ({
   themeSource: state.preferences.themeSource,
   translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
+  useHardwareAcceleration: state.preferences.useHardwareAcceleration,
 });
 
 const actionCreators = {
