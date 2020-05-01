@@ -1,7 +1,7 @@
 {
   "name": "Translatium",
   "description": "Translate Any Languages like a Pro",
-  "version": "11.1.2",
+  "version": "12.0.0",
   "main": "public/electron.js",
   "repository": "https://github.com/translatium/translatium",
   "author": {
@@ -46,8 +46,8 @@
     "cross-env": "7.0.2",
     "del": "5.1.0",
     "dotenv": "8.2.0",
-    "electron": "8.2.3",
-    "electron-builder": "22.5.1",
+    "electron": "8.2.5",
+    "electron-builder": "22.6.0",
     "electron-notarize": "0.3.0",
     "eslint": "6.8.0",
     "eslint-config-airbnb": "18.1.0",
