@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "cli-truncate": "2.1.0",
+    "cyrillic-to-translit-js": "3.1.0",
     "electron-is-dev": "1.2.0",
     "electron-settings": "3.2.0",
     "electron-updater": "4.3.1",
