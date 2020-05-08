@@ -1,6 +1,7 @@
 import { transliterate as tr } from 'transliteration';
 import { transliterate as hebTr } from 'hebrew-transliteration';
 import cyrillicToTranslit from 'cyrillic-to-translit-js';
+import greekUtils from 'greek-utils';
 
 const transliterate = (text, lang) => {
   // Chinese
@@ -18,6 +19,10 @@ const transliterate = (text, lang) => {
   // Ukrainian
   if (lang === 'uk') {
     return cyrillicToTranslit({ preset: 'uk' }).transform(text);
+  }
+  // Greek
+  if (lang === 'el') {
+    return greekUtils.toTransliteratedLatin(text);
   }
 
   return text;
