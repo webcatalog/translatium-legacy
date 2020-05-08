@@ -5,6 +5,7 @@ import s2tPhrase from 'tongwen-core/dictionaries/s2t-phrase.json';
 
 // https://tech.yandex.com/translate/doc/dg/reference/translate-docpage/
 import { transliterate as tr } from 'transliteration';
+import { transliterate as hebTr } from 'hebrew-transliteration';
 
 // https://tech.yandex.com/dictionary/doc/dg/reference/getLangs-docpage/
 const dictPairs = [
@@ -99,10 +100,20 @@ const translateTextWithYandex = (inputLang, outputLang, inputText) => {
           if (outputRoman !== response.text[0]) {
             output.outputRoman = outputRoman;
           }
+        } else if (outputLang === 'he') {
+          const outputRoman = hebTr(response.text[0], { qametsQatan: true });
+          if (outputRoman !== response.text[0]) {
+            output.outputRoman = outputRoman;
+          }
         }
 
         if (inputLang === 'zh') {
           const inputRoman = tr(inputText);
+          if (inputRoman !== inputText) {
+            output.inputRoman = inputRoman;
+          }
+        } else if (inputLang === 'he') {
+          const inputRoman = hebTr(inputText, { qametsQatan: true });
           if (inputRoman !== inputText) {
             output.inputRoman = inputRoman;
           }
