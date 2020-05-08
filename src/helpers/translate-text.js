@@ -5,7 +5,7 @@ import s2tPhrase from 'tongwen-core/dictionaries/s2t-phrase.json';
 
 // https://tech.yandex.com/translate/doc/dg/reference/translate-docpage/
 import { transliterate as tr } from 'transliteration';
-const heb = require('hebrew-transliteration');
+import heb from 'hebrew-transliteration';
 
 // https://tech.yandex.com/dictionary/doc/dg/reference/getLangs-docpage/
 const dictPairs = [
