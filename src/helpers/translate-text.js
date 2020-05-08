@@ -3,10 +3,9 @@ import { createConverterMap } from 'tongwen-core';
 import s2tChar from 'tongwen-core/dictionaries/s2t-char.json';
 import s2tPhrase from 'tongwen-core/dictionaries/s2t-phrase.json';
 
-// https://tech.yandex.com/translate/doc/dg/reference/translate-docpage/
-import { transliterate as tr } from 'transliteration';
-import { transliterate as hebTr } from 'hebrew-transliteration';
+import transliterate from './transliterate';
 
+// https://tech.yandex.com/translate/doc/dg/reference/translate-docpage/
 // https://tech.yandex.com/dictionary/doc/dg/reference/getLangs-docpage/
 const dictPairs = [
   'be-be', 'be-ru', 'bg-ru', 'cs-cs', 'cs-en', 'cs-ru', 'da-en',
@@ -95,28 +94,14 @@ const translateTextWithYandex = (inputLang, outputLang, inputText) => {
         output.inputText = inputText;
         output.outputText = outputLang === 'zh-TW' ? mConv.phrase('s2t', response.text[0]) : response.text[0];
 
-        if (outputLang.startsWith('zh')) {
-          const outputRoman = tr(response.text[0]);
-          if (outputRoman !== response.text[0]) {
-            output.outputRoman = outputRoman;
-          }
-        } else if (outputLang === 'he') {
-          const outputRoman = hebTr(response.text[0], { qametsQatan: true });
-          if (outputRoman !== response.text[0]) {
-            output.outputRoman = outputRoman;
-          }
+        const outputRoman = transliterate(response.text[0], outputLang);
+        if (outputRoman !== response.text[0]) {
+          output.outputRoman = outputRoman;
         }
 
-        if (inputLang === 'zh') {
-          const inputRoman = tr(inputText);
-          if (inputRoman !== inputText) {
-            output.inputRoman = inputRoman;
-          }
-        } else if (inputLang === 'he') {
-          const inputRoman = hebTr(inputText, { qametsQatan: true });
-          if (inputRoman !== inputText) {
-            output.inputRoman = inputRoman;
-          }
+        const inputRoman = transliterate(inputText, inputLang);
+        if (inputRoman !== inputText) {
+          output.inputRoman = inputRoman;
         }
 
         if (output.outputRoman === output.outputText) output.outputRoman = undefined;
