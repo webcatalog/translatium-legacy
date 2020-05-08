@@ -4,8 +4,8 @@ import cyrillicToTranslit from 'cyrillic-to-translit-js';
 import greekUtils from 'greek-utils';
 
 const transliterate = (text, lang) => {
-  // Chinese
-  if (lang.startsWith('zh')) {
+  // Chinese || Korean
+  if (lang.startsWith('zh') || lang === 'ko') {
     return tr(text[0]);
   }
   // Hebrew
