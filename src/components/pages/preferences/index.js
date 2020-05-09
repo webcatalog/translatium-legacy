@@ -86,6 +86,8 @@ const styles = (theme) => ({
   },
   toolbar: {
     minHeight: 40,
+    paddingRight: theme.spacing(1.5),
+    paddingLeft: theme.spacing(1.5),
   },
   logo: {
     height: 28,
@@ -126,11 +128,13 @@ const Preferences = (props) => {
   return (
     <div className={classes.container}>
       <DialogShortcut />
-      <AppBar position="static" color="default" elevation={1} classes={{ colorDefault: classes.appBarColorDefault }}>
-        <Toolbar variant="dense" className={classes.toolbar}>
-          <Typography variant="subtitle1" color="inherit" className={classes.title}>{getLocale('preferences')}</Typography>
-        </Toolbar>
-      </AppBar>
+      {window.process.platform === 'darwin' && window.mode !== 'menubar' && (
+        <AppBar position="static" color="default" elevation={1} classes={{ colorDefault: classes.appBarColorDefault }}>
+          <Toolbar variant="dense" className={classes.toolbar}>
+            <Typography variant="subtitle1" color="inherit" className={classes.title}>{getLocale('preferences')}</Typography>
+          </Toolbar>
+        </AppBar>
+      )}
       <div className={classes.innerContainer}>
         <Typography variant="body2" className={classes.paperTitle}>
           {getLocale('general')}
@@ -146,9 +150,7 @@ const Preferences = (props) => {
                 </ListItem>
               )}
             >
-              {window.process.platform === 'darwin' && (
-                <MenuItem dense onClick={() => requestSetPreference('themeSource', 'system')}>{getLocale('system')}</MenuItem>
-              )}
+              <MenuItem dense onClick={() => requestSetPreference('themeSource', 'system')}>{getLocale('system')}</MenuItem>
               <MenuItem dense onClick={() => requestSetPreference('themeSource', 'light')}>{getLocale('light')}</MenuItem>
               <MenuItem dense onClick={() => requestSetPreference('themeSource', 'dark')}>{getLocale('dark')}</MenuItem>
             </EnhancedMenu>

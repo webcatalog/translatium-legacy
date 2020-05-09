@@ -29,13 +29,17 @@ const styles = (theme) => ({
     flexGrow: 1,
   },
   appBarColorDefault: {
-    background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
-    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
+    // eslint-disable-next-line no-nested-ternary
+    background: theme.palette.type === 'dark' ? theme.palette.grey[900] : (window.process.platform === 'darwin' ? theme.palette.primary.main : null),
+    // eslint-disable-next-line no-nested-ternary
+    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : (window.process.platform === 'darwin' ? theme.palette.primary.contrastText : null),
     WebkitAppRegion: 'drag',
     WebkitUserSelect: 'none',
   },
   toolbar: {
     minHeight: 40,
+    paddingRight: theme.spacing(1.5),
+    paddingLeft: theme.spacing(1.5),
   },
   toolbarIconButton: {
     padding: theme.spacing(1),
