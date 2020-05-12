@@ -182,37 +182,41 @@ const createMenu = () => {
     ];
   } else {
     // File menu for Windows & Linux
+    const submenu = [
+      {
+        label: getLocale('about'),
+        click: () => sendToAllWindows('open-dialog-about'),
+      },
+      {
+        type: 'separator',
+      },
+      {
+        label: getLocale('preferencesMenuItem'),
+        accelerator: 'CmdOrCtrl+,',
+        click: () => sendToAllWindows('go-to-preferences'),
+      },
+      { type: 'separator' },
+      { role: 'quit', label: getLocale('quit') },
+    ];
+    if (updaterEnabled) {
+      submenu.splice(1, 0, {
+        type: 'separator',
+      });
+      submenu.splice(2, 0, {
+        label: getLocale('checkForUpdates'),
+        click: () => {
+          prepareUpdaterForAppImage(autoUpdater);
+          global.updateSilent = false;
+          autoUpdater.checkForUpdates();
+        },
+      });
+      submenu.splice(3, 0, {
+        type: 'separator',
+      });
+    }
     template.unshift({
       label: getLocale('file'),
-      submenu: [
-        {
-          label: getLocale('about'),
-          click: () => sendToAllWindows('open-dialog-about'),
-        },
-        {
-          type: 'separator',
-          visible: updaterEnabled,
-        },
-        {
-          label: getLocale('checkForUpdates'),
-          click: () => {
-            prepareUpdaterForAppImage(autoUpdater);
-            global.updateSilent = false;
-            autoUpdater.checkForUpdates();
-          },
-          visible: updaterEnabled,
-        },
-        {
-          type: 'separator',
-        },
-        {
-          label: getLocale('preferencesMenuItem'),
-          accelerator: 'CmdOrCtrl+,',
-          click: () => sendToAllWindows('go-to-preferences'),
-        },
-        { type: 'separator' },
-        { role: 'quit', label: getLocale('quit') },
-      ],
+      submenu,
     });
   }
 

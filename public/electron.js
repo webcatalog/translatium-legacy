@@ -133,7 +133,7 @@ if (!gotTheLock) {
             },
             { type: 'separator' },
             {
-              label: getLocale('Quit'),
+              label: getLocale('quit'),
               click: () => {
                 mb.app.quit();
               },

@@ -71,6 +71,8 @@ const styles = (theme) => ({
   },
   toolbar: {
     minHeight: 40,
+    paddingRight: theme.spacing(1.5),
+    paddingLeft: theme.spacing(1.5),
   },
 });
 
@@ -110,11 +112,13 @@ class Phrasebook extends React.Component {
 
     return (
       <div className={classes.container}>
-        <AppBar position="static" color="default" elevation={0} classes={{ colorDefault: classes.appBarColorDefault }}>
-          <Toolbar variant="dense" className={classes.toolbar}>
-            <Typography variant="subtitle1" color="inherit" className={classes.title}>{getLocale('phrasebook')}</Typography>
-          </Toolbar>
-        </AppBar>
+        {window.process.platform === 'darwin' && window.mode !== 'menubar' && (
+          <AppBar position="static" color="default" elevation={0} classes={{ colorDefault: classes.appBarColorDefault }}>
+            <Toolbar variant="dense" className={classes.toolbar}>
+              <Typography variant="subtitle1" color="inherit" className={classes.title}>{getLocale('phrasebook')}</Typography>
+            </Toolbar>
+          </AppBar>
+        )}
         <SearchBox />
         {(() => {
           if (phrasebookItems.length < 1 && phrasebookLoading === false) {
