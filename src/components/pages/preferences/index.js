@@ -156,18 +156,6 @@ const Preferences = (props) => {
             </EnhancedMenu>
             <Divider />
             <ListItem>
-              <ListItemText primary={getLocale('showTransliteration')} />
-              <ListItemSecondaryAction>
-                <Switch
-                  edge="end"
-                  checked={showTransliteration}
-                  onChange={() => onToggleSetting('showTransliteration')}
-                  color="primary"
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
-            <Divider />
-            <ListItem>
               <ListItemText
                 primary={getLocale('realtime')}
                 secondary={getLocale('realtimeDesc')}
@@ -177,6 +165,18 @@ const Preferences = (props) => {
                   edge="end"
                   checked={realtime}
                   onChange={() => onToggleSetting('realtime')}
+                  color="primary"
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText primary={getLocale('showTransliteration')} />
+              <ListItemSecondaryAction>
+                <Switch
+                  edge="end"
+                  checked={showTransliteration}
+                  onChange={() => onToggleSetting('showTransliteration')}
                   color="primary"
                 />
               </ListItemSecondaryAction>
