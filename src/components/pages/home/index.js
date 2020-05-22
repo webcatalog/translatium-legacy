@@ -271,6 +271,7 @@ class Home extends React.Component {
       onUpdateInputText,
       onUpdateOutputLang,
       output,
+      showTransliteration,
       textToSpeechPlaying,
     } = this.props;
 
@@ -340,7 +341,7 @@ class Home extends React.Component {
               { [classes.resultContainerHidden]: fullscreenInputBox },
             )}
           >
-            {output.inputRoman && (
+            {showTransliteration && output.inputRoman && (
               <Typography
                 variant="body2"
                 color="textSecondary"
@@ -359,7 +360,7 @@ class Home extends React.Component {
                   {output.outputText}
                 </Typography>
 
-                {output.outputRoman && (
+                {showTransliteration && output.outputRoman && (
                   <Typography variant="body2" color="textSecondary" className={classNames('text-selectable', classes.pos)}>
                     {output.outputRoman}
                   </Typography>
@@ -658,6 +659,7 @@ Home.propTypes = {
   output: PropTypes.object,
   outputLang: PropTypes.string.isRequired,
   registered: PropTypes.bool.isRequired,
+  showTransliteration: PropTypes.bool.isRequired,
   textToSpeechPlaying: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
 };
@@ -669,6 +671,7 @@ const mapStateToProps = (state) => ({
   output: state.pages.home.output,
   outputLang: state.preferences.outputLang,
   registered: state.preferences.registered,
+  showTransliteration: state.preferences.showTransliteration,
   textToSpeechPlaying: state.pages.home.textToSpeech.textToSpeechPlaying,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
 });

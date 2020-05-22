@@ -118,6 +118,7 @@ const Preferences = (props) => {
     openAtLogin,
     openOnMenubarShortcut,
     realtime,
+    showTransliteration,
     themeSource,
     translateClipboardOnShortcut,
     translateWhenPressingEnter,
@@ -164,6 +165,18 @@ const Preferences = (props) => {
                   edge="end"
                   checked={realtime}
                   onChange={() => onToggleSetting('realtime')}
+                  color="primary"
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText primary={getLocale('showTransliteration')} />
+              <ListItemSecondaryAction>
+                <Switch
+                  edge="end"
+                  checked={showTransliteration}
+                  onChange={() => onToggleSetting('showTransliteration')}
                   color="primary"
                 />
               </ListItemSecondaryAction>
@@ -396,6 +409,7 @@ Preferences.propTypes = {
   openAtLogin: PropTypes.oneOf(['yes', 'yes-hidden', 'no']).isRequired,
   openOnMenubarShortcut: PropTypes.string,
   realtime: PropTypes.bool.isRequired,
+  showTransliteration: PropTypes.bool.isRequired,
   themeSource: PropTypes.string.isRequired,
   translateClipboardOnShortcut: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
@@ -408,6 +422,7 @@ const mapStateToProps = (state) => ({
   openAtLogin: state.systemPreferences.openAtLogin,
   openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
   realtime: state.preferences.realtime,
+  showTransliteration: state.preferences.showTransliteration,
   themeSource: state.preferences.themeSource,
   translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
