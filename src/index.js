@@ -15,6 +15,16 @@ const { webFrame } = window.require('electron');
 
 webFrame.setVisualZoomLevelLimits(1, 1);
 
+// https://github.com/atomery/translatium/issues/28
+// remove text formatting when copying
+document.addEventListener('copy', (e) => {
+  const textOnly = document.getSelection().toString();
+  const clipdata = e.clipboardData || window.clipboardData;
+  clipdata.setData('text/plain', textOnly);
+  clipdata.setData('text/html', textOnly);
+  e.preventDefault();
+});
+
 render(
   <Provider store={store}>
     <AppWrapper />
