@@ -77,8 +77,7 @@ const styles = (theme) => ({
   appBarColorDefault: {
     background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
     color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
-    WebkitAppRegion: 'drag',
-    WebkitUserSelect: 'none',
+
   },
   title: {
     flex: 1,
