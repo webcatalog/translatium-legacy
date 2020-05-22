@@ -85,7 +85,8 @@ if (!gotTheLock) {
     if (attachToMenubar) {
       mb = menubar({
         index: REACT_PATH,
-        icon: path.resolve(__dirname, 'images', 'menubarTemplate.png'),
+        // icon template is not supported on Windows & Linux
+        icon: path.resolve(__dirname, 'images', process.platform === 'darwin' ? 'menubarTemplate.png' : 'menubar.png'),
         preloadWindow: true,
         browserWindow: {
           alwaysOnTop: getPreference('alwaysOnTop'),
