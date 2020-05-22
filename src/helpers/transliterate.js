@@ -5,7 +5,7 @@ import greekUtils from 'greek-utils';
 
 const transliterate = (text, lang) => {
   // Chinese || Korean
-  if (lang.startsWith('zh') || lang === 'ko') {
+  if (lang.startsWith('zh')) {
     return tr(text[0]);
   }
   // Hebrew
