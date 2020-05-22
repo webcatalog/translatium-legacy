@@ -33,8 +33,8 @@ const styles = (theme) => ({
     background: theme.palette.type === 'dark' ? theme.palette.grey[900] : (window.process.platform === 'darwin' ? theme.palette.primary.main : null),
     // eslint-disable-next-line no-nested-ternary
     color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : (window.process.platform === 'darwin' ? theme.palette.primary.contrastText : null),
-    WebkitAppRegion: 'drag',
-    WebkitUserSelect: 'none',
+    WebkitAppRegion: window.process.platform === 'darwin' ? 'drag' : undefined,
+    WebkitUserSelect: window.process.platform === 'darwin' ? 'none' : undefined,
   },
   toolbar: {
     minHeight: 40,
