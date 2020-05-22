@@ -81,18 +81,33 @@ const loadListeners = () => {
   });
 
   ipcMain.on('request-show-require-restart-dialog', () => {
-    dialog.showMessageBox({
+    if (process.mas) {
+      return dialog.showMessageBox({
+        type: 'question',
+        buttons: [getLocale('quitNow'), getLocale('later')],
+        message: getLocale('requireRestartDescMas'),
+        cancelId: 1,
+      })
+        .then(({ response }) => {
+          if (response === 0) {
+            app.quit();
+          }
+        })
+        .catch(console.log); // eslint-disable-line no-console
+    }
+
+    return dialog.showMessageBox({
       type: 'question',
-      buttons: [getLocale('quitNow'), getLocale('later')],
+      buttons: [getLocale('restartNow'), getLocale('later')],
       message: getLocale('requireRestartDesc'),
       cancelId: 1,
+    }).then(({ response }) => {
+      if (response === 0) {
+        app.relaunch();
+        app.exit(0);
+      }
     })
-      .then(({ response }) => {
-        if (response === 0) {
-          app.quit();
-        }
-      })
-      .catch(console.log); // eslint-disable-line no-console
+    .catch(console.log); // eslint-disable-line
   });
 
   ipcMain.on('request-open-in-browser', (e, browserUrl) => {
