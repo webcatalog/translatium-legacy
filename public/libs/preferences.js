@@ -32,6 +32,7 @@ const defaultPreferences = {
   realtime: true,
   recentLanguages: ['en', 'zh'],
   registered: getDefaultRegistered(),
+  showTransliteration: true,
   themeSource: 'system',
   translateClipboardOnShortcut: false,
   translateWhenPressingEnter: true,
