@@ -8,7 +8,9 @@ const glob = require('glob');
 const del = require('del');
 const { getSignVendorPath } = require('app-builder-lib/out/codeSign/windowsCodeSign');
 const { notarize } = require('electron-notarize');
+const semver = require('semver');
 
+const packageJson = require('./package.json');
 
 // https://stackoverflow.com/a/17466459
 const runCmd = (cmd, args, callBack) => {
@@ -90,7 +92,7 @@ const opts = {
       publish: [
         {
           provider: 'snapStore',
-          channels: ['edge'],
+          channels: [semver.prerelease(packageJson.version) ? 'edge' : 'stable'],
         },
         'github',
       ],
