@@ -4,10 +4,12 @@
 const {
   BrowserWindow,
   Menu,
+  Tray,
   app,
   clipboard,
   globalShortcut,
   ipcMain,
+  nativeImage,
   nativeTheme,
 } = require('electron');
 const fs = require('fs');
@@ -83,10 +85,14 @@ if (!gotTheLock) {
     const updaterEnabled = process.env.SNAP == null && !process.mas && process.platform !== 'win32';
     const attachToMenubar = getPreference('attachToMenubar');
     if (attachToMenubar) {
+      // setImage after Tray instance is created to avoid
+      // "Segmentation fault (core dumped)" bug on Linux
+      const tray = new Tray(nativeImage.createEmpty());
+      // icon template is not supported on Windows & Linux
+      const iconPath = path.resolve(__dirname, 'images', process.platform === 'darwin' ? 'menubarTemplate.png' : 'menubar.png');
+      tray.setImage(iconPath);
       mb = menubar({
         index: REACT_PATH,
-        // icon template is not supported on Windows & Linux
-        icon: path.resolve(__dirname, 'images', process.platform === 'darwin' ? 'menubarTemplate.png' : 'menubar.png'),
         preloadWindow: true,
         browserWindow: {
           alwaysOnTop: getPreference('alwaysOnTop'),
