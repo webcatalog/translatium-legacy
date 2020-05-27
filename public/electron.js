@@ -87,6 +87,8 @@ if (!gotTheLock) {
     if (attachToMenubar) {
       // setImage after Tray instance is created to avoid
       // "Segmentation fault (core dumped)" bug on Linux
+      // https://github.com/electron/electron/issues/22137#issuecomment-586105622
+      // https://github.com/atomery/translatium/issues/164
       const tray = new Tray(nativeImage.createEmpty());
       // icon template is not supported on Windows & Linux
       const iconPath = path.resolve(__dirname, 'images', process.platform === 'darwin' ? 'menubarTemplate.png' : 'menubar.png');
