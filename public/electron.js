@@ -95,6 +95,7 @@ if (!gotTheLock) {
       tray.setImage(iconPath);
       mb = menubar({
         index: REACT_PATH,
+        tray,
         preloadWindow: true,
         browserWindow: {
           alwaysOnTop: getPreference('alwaysOnTop'),
