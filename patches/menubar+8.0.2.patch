@@ -1,0 +1,13 @@
+diff --git a/node_modules/menubar/lib/Menubar.js b/node_modules/menubar/lib/Menubar.js
+index 3ed44a4..edc5d26 100644
+--- a/node_modules/menubar/lib/Menubar.js
++++ b/node_modules/menubar/lib/Menubar.js
+@@ -246,6 +246,8 @@ var Menubar = /** @class */ (function (_super) {
+                         // https://github.com/maxogden/menubar/issues/233
+                         this._browserWindow.setPosition(Math.round(x), Math.round(y));
+                         this._browserWindow.show();
++                        // backport fron this PR https://github.com/maxogden/menubar/pull/287
++                        this._isVisible = true;
+                         this.emit('after-show');
+                         return [2 /*return*/];
+                 }
