@@ -1,12 +1,8 @@
 # Translatium [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](LICENSE)
 
-<blockquote>
-We've made the decision to sunset Translatium due to unexpected challenges involved in maintaining a product that meets customers’ expectations. Thank you so much for using and supporting Translatium!
-
-On June 4, Translatium will be removed from sale on all distribution channels, including Atomery Store, Mac App Store, Microsoft Store and Snap Store. After the mentioned date, we will try our best to keep the app running as long as we can; and current users can still download, activate, and use the app normally. .
-
-If you any questions or concerns, feel free to contact us via support@atomery.com.
-</blockquote>
+> We've made the decision to sunset Translatium due to unexpected challenges involved in maintaining a product that meets customers’ expectations. Thank you so much for using and supporting Translatium!
+> On June 4, Translatium will be removed from sale on all distribution channels, including Atomery Store, Mac App Store, Microsoft Store and Snap Store. After the mentioned date, we will try our best to keep the app running as long as we can; and current users can still download, activate, and use the app normally.
+> If you any questions or concerns, feel free to contact us via support@atomery.com.
 
 |macOS|Linux|Windows|
 |---|---|---|
