@@ -29,7 +29,6 @@ const defaultPreferences = {
   inputLang: 'en',
   openOnMenubarShortcut: null,
   outputLang: 'zh',
-  realtime: true,
   recentLanguages: ['en', 'zh'],
   registered: getDefaultRegistered(),
   showTransliteration: true,

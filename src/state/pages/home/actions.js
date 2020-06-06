@@ -73,15 +73,12 @@ export const translate = (saveToHistory) => ((dispatch, getState) => {
     });
 });
 
-let timeout;
 export const updateInputText = (
   inputText, selectionStart, selectionEnd,
 ) => ((dispatch, getState) => {
-  const { preferences, pages } = getState();
+  const { pages } = getState();
   const { home } = pages;
-  const { realtime } = preferences;
   const currentInputText = home.inputText;
-  const { fullscreenInputBox } = home;
 
   dispatch({
     type: UPDATE_INPUT_TEXT,
@@ -93,31 +90,10 @@ export const updateInputText = (
   // No change in inputText, no need to re-run task
   if (currentInputText === inputText) return;
 
-  clearTimeout(timeout);
-  // only run real time translation if the text no longer than 280 characters (Twitter's limit)
-  if (
-    realtime === true
-    && fullscreenInputBox === false
-    && inputText.trim().length > 0
-    && inputText.length <= 280
-  ) {
-    dispatch({
-      type: UPDATE_OUTPUT,
-      output: null,
-    });
-
-    // delay to save bandwidth
-    const tmpHome = getState().pages.home;
-    timeout = setTimeout(() => {
-      if (getState().pages.home.inputText !== inputText) return;
-      dispatch(translate());
-    }, tmpHome.output ? 500 : 0);
-  } else {
-    dispatch({
-      type: UPDATE_OUTPUT,
-      output: null,
-    });
-  }
+  dispatch({
+    type: UPDATE_OUTPUT,
+    output: null,
+  });
 });
 
 export const insertInputText = (text) => (dispatch, getState) => {
