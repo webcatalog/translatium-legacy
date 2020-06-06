@@ -596,7 +596,7 @@ class Home extends React.Component {
               <div className={classes.controllerContainerLeft}>
                 {controllers.map(({
                   Icon, tooltip, onClick, disabled,
-                }) => disabled ? (
+                }) => (disabled ? (
                   <IconButton
                     className={classes.controllerIconButton}
                     aria-label={tooltip}
@@ -615,7 +615,7 @@ class Home extends React.Component {
                       <Icon fontSize="small" />
                     </IconButton>
                   </Tooltip>
-                ))}
+                )))}
               </div>
               <div className={classes.controllerContainerRight}>
                 <Tooltip title={window.process.platform === 'darwin' ? '⌘ + T' : 'Ctrl + T'} placement={fullscreenInputBox ? 'top' : 'bottom'}>
