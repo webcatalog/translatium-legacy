@@ -6,9 +6,10 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ActionDelete from '@material-ui/icons/Delete';
 import Divider from '@material-ui/core/Divider';
 import Tooltip from '@material-ui/core/Tooltip';
+
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
@@ -111,7 +112,7 @@ class History extends React.Component {
                             );
                           }}
                         >
-                          <ActionDelete />
+                          <DeleteIcon />
                         </IconButton>
                       </Tooltip>
                     </ListItemSecondaryAction>
@@ -131,9 +132,9 @@ History.propTypes = {
   classes: PropTypes.object.isRequired,
   historyItems: PropTypes.arrayOf(PropTypes.object).isRequired,
   historyLoading: PropTypes.bool.isRequired,
-  onLoadOutput: PropTypes.func.isRequired,
   onDeleteHistoryItem: PropTypes.func.isRequired,
   onLoadHistory: PropTypes.func.isRequired,
+  onLoadOutput: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -143,9 +144,9 @@ const mapStateToProps = (state) => ({
 });
 
 const actionCreators = {
-  loadOutput,
   deleteHistoryItem,
   loadHistory,
+  loadOutput,
 };
 
 export default connectComponent(

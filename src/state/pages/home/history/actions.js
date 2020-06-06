@@ -8,10 +8,9 @@ const defaultOptions = {
 };
 
 export const loadHistory = (init, limit) => ((dispatch, getState) => {
-  const { items, canLoadMore } = getState().pages.home.history;
-
-  // only init once.
-  if (init === true && items.length > 0) return;
+  const { history } = getState().pages.home;
+  const items = init ? [] : history.items;
+  const canLoadMore = init ? false : history.canLoadMore;
 
   dispatch({
     type: UPDATE_HISTORY,
@@ -19,7 +18,6 @@ export const loadHistory = (init, limit) => ((dispatch, getState) => {
     canLoadMore,
     loading: true,
   });
-
 
   const options = { ...defaultOptions };
   const l = items.length;
@@ -31,7 +29,7 @@ export const loadHistory = (init, limit) => ((dispatch, getState) => {
 
   historyDb.allDocs(options)
     .then((response) => {
-      let newItems = items;
+      const newItems = [...items];
 
       response.rows.forEach((row) => {
         /* eslint-disable no-underscore-dangle */
@@ -39,7 +37,7 @@ export const loadHistory = (init, limit) => ((dispatch, getState) => {
         newItem.historyId = row.doc._id;
         newItem.rev = row.doc._rev;
 
-        newItems = [...newItems, newItem];
+        newItems.push(newItem);
         /* eslint-enable no-underscore-dangle */
       });
 

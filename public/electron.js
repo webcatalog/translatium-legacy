@@ -101,7 +101,7 @@ if (!gotTheLock) {
           alwaysOnTop: getPreference('alwaysOnTop'),
           width: 400,
           height: 500,
-          minWidth: 400,
+          minWidth: 460,
           minHeight: 500,
           webPreferences: {
             nodeIntegration: true,

@@ -127,13 +127,11 @@ const Preferences = (props) => {
   return (
     <div className={classes.container}>
       <DialogShortcut />
-      {window.process.platform === 'darwin' && window.mode !== 'menubar' && (
-        <AppBar position="static" color="default" elevation={1} classes={{ colorDefault: classes.appBarColorDefault }}>
-          <Toolbar variant="dense" className={classes.toolbar}>
-            <Typography variant="subtitle1" color="inherit" className={classes.title}>{getLocale('preferences')}</Typography>
-          </Toolbar>
-        </AppBar>
-      )}
+      <AppBar position="static" color="default" elevation={1} classes={{ colorDefault: classes.appBarColorDefault }}>
+        <Toolbar variant="dense" className={classes.toolbar}>
+          <Typography variant="subtitle1" color="inherit" className={classes.title}>{getLocale('preferences')}</Typography>
+        </Toolbar>
+      </AppBar>
       <div className={classes.innerContainer}>
         <Typography variant="body2" className={classes.paperTitle}>
           {getLocale('general')}
