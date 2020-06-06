@@ -3,54 +3,212 @@ layout: default
 ---
 <div class="hero-body">
   <div class="container">
-    <div style="max-width: 800px; margin: 0 auto;">
-      <h1 class="title is-size-3-desktop is-size-4 has-text-centered">
-        Sunsetting Translatium on June 4, 2020
+    <div class="has-text-centered">
+      <h1 class="title is-size-3-desktop is-size-4">
+        Translate Any Languages like a Pro
       </h1>
+      <h2 class="subtitle is-size-5-desktop is-size-6">
+        Instantly translate between over 90 languages with Translatium.
+      </h2>
 
-      <div class="content">
-        <p>
-          We've made the decision to sunset Translatium due to unexpected challenges involved in maintaining a product that meets customers’ expectations. Thank you so much for using and supporting Translatium!
-        </p>
-        <p>
-          On June 4, Translatium will be removed from sale on all distribution channels, including Atomery Store, Mac App Store, Microsoft Store and Snap Store. After the mentioned date, we will try our best to keep the app running as long as we can; and current users can still download, activate, and use the app normally. .
-        </p>
-
-        <p>If you any questions or concerns, feel free to contact us via <a href="mailto:support@atomery.com">support@atomery.com</a>.</p>
-
-        <h3>Download</h3>
-        <h5><i class="fab fa-apple"></i> macOS</h5>
-        <div class="buttons">
-          <a class="button is-medium is-black" href="https://github.com/atomery/translatium/releases/download/v{{ site.translatium_version }}/Translatium-{{ site.translatium_version }}.dmg">
-            Download for macOS
-          </a>
+      {% if page.platform == "mac" %}
+      <div class="buttons is-centered">
+        <a href="https://itunes.apple.com/us/app/translatium/id1176624652" class="download-btn">
+          <img src="{{ '/images/mac-app-store.png' | relative_url }}" alt="Mac App Store" />
+        </a>
+      </div>
+      <p><small>Also available <a href="https://github.com/atomery/translatium/releases/download/v{{ site.translatium_version }}/Translatium-{{ site.translatium_version }}.dmg">outside the Mac App Store</a>.</small></p>
+      <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/atomery/translatium/releases">Release Notes</a>). macOS 10.10 or later, 64-bit.</small></p>
+      <br />
+      <p>Also available on&nbsp;&nbsp;&nbsp;<a href="/download/windows"><i class="fab fa-windows"></i> Windows</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
+      {% elsif page.platform == "linux" %}
+      <div class="buttons is-centered">
+        <a href="https://snapcraft.io/translatium" class="download-btn">
+          <img src="{{ '/images/snap-store.png' | relative_url }}" alt="Snap Store" />
+        </a>
+      </div>
+      <p><small>Also available as <a href="https://github.com/atomery/translatium/releases/download/v{{ site.translatium_version }}/translatium-{{ site.translatium_version }}-x86_64.AppImage">AppImage</a>.</small></p>
+      <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/atomery/translatium/releases">Release Notes</a>). Linux, 64-bit.</small></p>
+      <br />
+      <p>Also available on&nbsp;&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> macOS</a> | <a href="/download/windows"><i class="fab fa-windows"></i> Windows</a>.</p>
+      {% elsif page.platform == "windows" %}
+      <div class="buttons is-centered">
+        <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing" class="download-btn">
+          <img src="{{ '/images/microsoft-store.png' | relative_url }}" alt="Microsoft Store" />
+        </a>
+      </div>
+      <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/atomery/translatium/releases">Release Notes</a>). Windows 10 v1607 and later, 64-bit.</small></p>
+      <br />
+      <p>Also available on&nbsp;&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> macOS</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
+      {% else %}
+      <div id="mac">
+        <div class="buttons is-centered">
           <a href="https://itunes.apple.com/us/app/translatium/id1176624652" class="download-btn">
             <img src="{{ '/images/mac-app-store.png' | relative_url }}" alt="Mac App Store" />
           </a>
         </div>
-
-        <h5><i class="fab fa-windows"></i> Windows</h5>
-        <div class="buttons">
-          <a class="button is-medium is-black" href="https://github.com/atomery/translatium/releases/download/v{{ site.translatium_version }}/Translatium-Setup-{{ site.translatium_version }}.exe">
-            Download for Windows
-          </a>
-          <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing" class="download-btn">
-            <img src="{{ '/images/microsoft-store.png' | relative_url }}" alt="Microsoft Store" />
-          </a>
-        </div>
-
-        <h5><i class="fab fa-linux"></i> Linux</h5>
-        <div class="buttons">
-          <a class="button is-medium is-black" href="https://github.com/atomery/translatium/releases/download/v{{ site.translatium_version }}/Translatium-{{ site.translatium_version }}.AppImage">
-            Download AppImage
-          </a>
+        <p><small>Also available <a href="https://github.com/atomery/translatium/releases/download/v{{ site.translatium_version }}/Translatium-{{ site.translatium_version }}.dmg">outside the Mac App Store</a>.</small></p>
+        <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/atomery/translatium/releases">Release Notes</a>). macOS 10.10 or later, 64-bit.</small></p>
+        <br />
+        <p>Also available on&nbsp;&nbsp;&nbsp;<a href="/download/windows"><i class="fab fa-windows"></i> Windows</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
+      </div>
+      <div style="display:none" id="linux" style="display:none">
+        <div class="buttons is-centered">
           <a href="https://snapcraft.io/translatium" class="download-btn">
             <img src="{{ '/images/snap-store.png' | relative_url }}" alt="Snap Store" />
           </a>
         </div>
-
-        <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/atomery/translatium/releases">Release Notes</a>).</small></p>
+        <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/atomery/translatium/releases">Release Notes</a>). Linux, 64-bit.</small></p>
+        <br />
+        <p>Also available on&nbsp;&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> macOS</a> | <a href="/download/windows"><i class="fab fa-windows"></i> Windows</a>.</p>
       </div>
+      <div style="display:none" id="windows" style="display:none">
+        <div class="buttons is-centered">
+          <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing" class="download-btn">
+            <img src="{{ '/images/microsoft-store.png' | relative_url }}" alt="Microsoft Store" />
+          </a>
+        </div>
+        <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/atomery/translatium/releases">Release Notes</a>). Windows 10 v1607 and later, 64-bit.</small></p>
+        <br />
+        <p>Also available on&nbsp;&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> macOS</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
+      </div>
+      <script>
+        if (/Linux/.test(window.navigator.platform)) {
+          document.getElementById('mac').style.display = 'none';
+          document.getElementById('linux').style.display = '';
+        }
+        else if (['Win32', 'Win64', 'Windows', 'WinCE'].indexOf(window.navigator.platform) !== -1) {
+          document.getElementById('mac').style.display = 'none';
+          document.getElementById('windows').style.display = '';
+        }
+      </script>
+      {% endif %}
+      <br />
+
+      <p>
+        <a href="/images/translatium-screenshot.png">
+          <img src="/images/translatium-screenshot.png" alt="Translatium" class="demo_main">
+        </a>
+      </p>
     </div>
   </div>
 </div>
+
+<section class="section">
+  <div class="container">
+    <div class="content has-text-centered">
+      <h2 class="title is-4">
+        Features
+      </h2>
+      <nav class="columns is-multiline">
+        <div class="column is-half-tablet is-one-third-desktop">
+          <div class="has-text-centered">
+            <span class="icon is-large">
+              <i class="fa fa-2x fa-language"></i>
+            </span>
+            <p><strong><a href="/languages">90+ Languages</a></strong><br>90+ languages & dialects.</p>
+          </div>
+        </div>
+        <div class="column is-half-tablet is-one-third-desktop">
+          <div class="has-text-centered">
+            <span class="icon is-large">
+              <i class="fa fa-2x fa-globe"></i>
+            </span>
+            <p><strong>Auto Detect Language</strong><br>Identify languages automatically.</p>
+          </div>
+        </div>
+        <div class="column is-half-tablet is-one-third-desktop">
+          <div class="has-text-centered">
+            <span class="icon is-large">
+              <i class="fa fa-2x fa-headphones"></i>
+            </span>
+            <p><strong>Text-To-Speech</strong><br/>Listen to your translations.</p>
+          </div>
+        </div>
+        <div class="column is-half-tablet is-one-third-desktop">
+          <div class="has-text-centered">
+            <span class="icon is-large">
+              <i class="fa fa-2x fa-camera"></i>
+            </span>
+            <p><strong>Camera Translation</strong><br>Take a picture to translate.</p>
+          </div>
+        </div>
+        <div class="column is-half-tablet is-one-third-desktop">
+          <div class="has-text-centered">
+            <span class="icon is-large">
+              <i class="fa fa-2x fa-book"></i>
+            </span>
+            <p><strong>Dictionary</strong><br>Synonyms, examples and more.</p>
+          </div>
+        </div>
+        <div class="column is-half-tablet is-one-third-desktop">
+          <div class="has-text-centered">
+            <span class="icon is-large">
+              <i class="fa fa-2x fa-history"></i>
+            </span>
+            <p><strong>History</strong><br>Access to previous translations.</p>
+          </div>
+        </div>
+        <div class="column is-half-tablet is-one-third-desktop">
+          <div class="has-text-centered">
+            <span class="icon is-large">
+              <i class="fa fa-2x fa-star"></i>
+            </span>
+            <p><strong>Phrasebook</strong><br>Save your favorite translations.</p>
+          </div>
+        </div>
+        <div class="column is-half-tablet is-one-third-desktop">
+          <div class="has-text-centered">
+            <span class="icon is-large">
+              <i class="fa fa-2x fa-paint-brush"></i>
+            </span>
+            <p><strong>Personalization</strong><br>Beautiful dark theme and more.</p>
+          </div>
+        </div>
+        <div class="column is-half-tablet is-one-third-desktop">
+          <div class="has-text-centered">
+            <span class="icon is-large">
+              <i class="fa fa-2x fa-bars"></i>
+            </span>
+            <p><strong>Stay in Menu Bar</strong><br>Access quickly from anywhere.</p>
+          </div>
+        </div>
+        <div class="column is-half-tablet is-one-third-desktop">
+          <div class="has-text-centered">
+            <span class="icon is-large">
+              <i class="fa fa-2x fa-keyboard"></i>
+            </span>
+            <p><strong>Keyboard Shortcuts</strong><br>Be productive!</p>
+          </div>
+        </div>
+        <div class="column is-half-tablet is-one-third-desktop">
+          <div class="has-text-centered">
+            <span class="icon is-large">
+              <i class="fa fa-2x fa-clipboard"></i>
+            </span>
+            <p><strong>Clipboard</strong><br>Easily copy and share translations.</p>
+          </div>
+        </div>
+        <div class="column is-half-tablet is-one-third-desktop">
+          <div class="has-text-centered">
+            <span class="icon is-large">
+              <i class="fa fa-2x fa-exchange-alt"></i>
+            </span>
+            <p><strong>Transliteration</strong><br>Read non-latin characters.</p>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a href="{{ '/images/translatium-screenshot-2.png' | relative_url }}">
+        <img src="{{ '/images/translatium-screenshot-2.png' | relative_url }}" alt="Translatium on macOS" class="demo_main" />
+      </a>
+    </div>
+  </div>
+</section>
