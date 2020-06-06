@@ -436,6 +436,7 @@ class Home extends React.Component {
         Icon: ContentClear,
         tooltip: getLocale('clear'),
         onClick: () => onUpdateInputText(''),
+        disabled: inputText.length < 1,
       },
       {
         Icon: (() => (
@@ -598,12 +599,15 @@ class Home extends React.Component {
             />
             <div className={classes.controllerContainer}>
               <div className={classes.controllerContainerLeft}>
-                {controllers.map(({ Icon, tooltip, onClick }) => (
+                {controllers.map(({
+                  Icon, tooltip, onClick, disabled,
+                }) => (
                   <Tooltip title={tooltip} placement={fullscreenInputBox ? 'top' : 'bottom'} key={`inputTool_${tooltip}`}>
                     <IconButton
                       className={classes.controllerIconButton}
                       aria-label={tooltip}
                       onClick={onClick}
+                      disabled={disabled}
                     >
                       <Icon fontSize="small" />
                     </IconButton>

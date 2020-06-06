@@ -117,7 +117,6 @@ const Preferences = (props) => {
     onToggleSetting,
     openAtLogin,
     openOnMenubarShortcut,
-    realtime,
     showTransliteration,
     themeSource,
     translateClipboardOnShortcut,
@@ -154,21 +153,6 @@ const Preferences = (props) => {
               <MenuItem dense onClick={() => requestSetPreference('themeSource', 'light')}>{getLocale('light')}</MenuItem>
               <MenuItem dense onClick={() => requestSetPreference('themeSource', 'dark')}>{getLocale('dark')}</MenuItem>
             </EnhancedMenu>
-            <Divider />
-            <ListItem>
-              <ListItemText
-                primary={getLocale('realtime')}
-                secondary={getLocale('realtimeDesc')}
-              />
-              <ListItemSecondaryAction>
-                <Switch
-                  edge="end"
-                  checked={realtime}
-                  onChange={() => onToggleSetting('realtime')}
-                  color="primary"
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
             <Divider />
             <ListItem>
               <ListItemText primary={getLocale('showTransliteration')} />
@@ -408,7 +392,6 @@ Preferences.propTypes = {
   onToggleSetting: PropTypes.func.isRequired,
   openAtLogin: PropTypes.oneOf(['yes', 'yes-hidden', 'no']).isRequired,
   openOnMenubarShortcut: PropTypes.string,
-  realtime: PropTypes.bool.isRequired,
   showTransliteration: PropTypes.bool.isRequired,
   themeSource: PropTypes.string.isRequired,
   translateClipboardOnShortcut: PropTypes.bool.isRequired,
@@ -421,7 +404,6 @@ const mapStateToProps = (state) => ({
   attachToMenubar: state.preferences.attachToMenubar,
   openAtLogin: state.systemPreferences.openAtLogin,
   openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
-  realtime: state.preferences.realtime,
   showTransliteration: state.preferences.showTransliteration,
   themeSource: state.preferences.themeSource,
   translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
