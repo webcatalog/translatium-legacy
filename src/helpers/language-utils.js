@@ -109,12 +109,8 @@ export const isInput = (lang) => !(data.all.indexOf(lang) > -1);
 // Check if language is supported as output
 export const isOutput = (lang) => lang !== 'auto';
 
-// Check if language is supported by provider
-export const isYandexSupported = (lang) => (data.yandex.indexOf(lang) > -1);
-
 // Get list of all languages
 export const getLanguages = () => data.all;
-export const getYandexLanguages = () => data.yandex;
 
 // Get list of all output languages
 export const getOutputLanguages = () => data

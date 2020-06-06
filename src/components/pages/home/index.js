@@ -150,7 +150,7 @@ const styles = (theme) => ({
     fontWeight: 400,
     display: 'inline-block',
   },
-  yandexCopyright: {
+  copyright: {
     color: theme.palette.text.disabled,
     cursor: 'pointer',
     fontWeight: 400,
@@ -174,6 +174,7 @@ const styles = (theme) => ({
     ...theme.typography.body2,
     padding: '0 12px',
     marginBottom: 12,
+    whiteSpace: 'pre-wrap',
   },
   card: {
     border: theme.palette.type === 'dark' ? 'none' : '1px solid rgba(0, 0, 0, 0.12)',
@@ -193,6 +194,9 @@ const styles = (theme) => ({
     marginTop: theme.spacing(1),
     marginLeft: 12,
     marginRight: 12,
+  },
+  outputText: {
+    whiteSpace: 'pre-wrap',
   },
 });
 
@@ -380,24 +384,15 @@ class Home extends React.Component {
                 ))}
               </CardActions>
             </Card>
-            <Typography
-              variant="body2"
-              align="left"
-              className={classes.yandexCopyright}
-              onClick={() => remote.shell.openExternal('http://translate.yandex.com/')}
-            >
-              Powered by Yandex.Translate
-            </Typography>
 
             {output.outputDict && <YandexDictionary />}
             {output.outputDict && output.outputDict.def.length > 0 && (
               <Typography
                 variant="body2"
                 align="left"
-                className={classes.yandexCopyright}
-                onClick={() => remote.shell.openExternal('https://tech.yandex.com/dictionary/')}
+                className={classes.copyright}
               >
-                Powered by Yandex.Dictionary
+                Powered by Google Translate
               </Typography>
             )}
             {this.renderCountdown()}
