@@ -144,6 +144,8 @@
 	"history": "History",
 	"historyDesc": "View previously translated words and phrases here.",
 	"clearHistory": "Clear history",
+	"reset": "Reset",
+	"restorePreferencesToDefault": "Restore preferences to their original defaults",
 	"auto": "Auto detect",
 	"af": "Afrikaans",
 	"sq": "Albanian",
