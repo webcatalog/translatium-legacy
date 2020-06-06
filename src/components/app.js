@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
-import ActionHome from '@material-ui/icons/Home';
-import ActionSettings from '@material-ui/icons/Settings';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Snackbar from '@material-ui/core/Snackbar';
-import ToggleStar from '@material-ui/icons/Star';
+
+import HomeIcon from '@material-ui/icons/Home';
+import SettingsIcon from '@material-ui/icons/Settings';
+import StarIcon from '@material-ui/icons/Star';
+import HistoryIcon from '@material-ui/icons/History';
 
 import connectComponent from '../helpers/connect-component';
 import getLocale from '../helpers/get-locale';
@@ -25,6 +27,7 @@ import DialogAbout from './root/dialog-about';
 import DialogLicenseRegistration from './root/dialog-license-registration';
 
 import Home from './pages/home';
+import History from './pages/history';
 import Phrasebook from './pages/phrasebook';
 import Preferences from './pages/preferences';
 import LanguageList from './pages/language-list';
@@ -32,6 +35,7 @@ import Ocr from './pages/ocr';
 
 import {
   ROUTE_HOME,
+  ROUTE_HISTORY,
   ROUTE_PHRASEBOOK,
   ROUTE_PREFERENCES,
   ROUTE_LANGUAGE_LIST,
@@ -80,15 +84,8 @@ const styles = (theme) => ({
     flexDirection: 'column',
     overflow: 'hidden',
   },
-  bottomNavigation: {
-    height: 40,
-  },
-  bottomNavigationActionWrapper: {
-    flexDirection: 'row',
-  },
   bottomNavigationActionLabel: {
     fontSize: '0.8rem !important',
-    paddingLeft: 4,
   },
   hidden: {
     display: 'none !important',
@@ -131,8 +128,10 @@ class App extends React.Component {
       switch (route) {
         case ROUTE_PREFERENCES:
           return <Preferences key="preferences" />;
+        case ROUTE_HISTORY:
+          return <History key="history" />;
         case ROUTE_PHRASEBOOK:
-          return <Phrasebook key="installed" />;
+          return <Phrasebook key="phrasebook" />;
         case ROUTE_LANGUAGE_LIST:
           return null; // already preloaded
         case ROUTE_OCR:
@@ -145,8 +144,10 @@ class App extends React.Component {
     const bottomNavigationSelectedIndex = (() => {
       switch (route) {
         case ROUTE_PREFERENCES:
-          return 2;
+          return 3;
         case ROUTE_PHRASEBOOK:
+          return 2;
+        case ROUTE_HISTORY:
           return 1;
         case ROUTE_HOME:
           return 0;
@@ -218,7 +219,7 @@ class App extends React.Component {
               >
                 <BottomNavigationAction
                   label={getLocale('home')}
-                  icon={<ActionHome className={classes.icon} />}
+                  icon={<HomeIcon className={classes.icon} />}
                   onClick={() => onChangeRoute(ROUTE_HOME)}
                   classes={{
                     wrapper: classes.bottomNavigationActionWrapper,
@@ -226,8 +227,17 @@ class App extends React.Component {
                   }}
                 />
                 <BottomNavigationAction
+                  label={getLocale('history')}
+                  icon={<HistoryIcon className={classes.icon} />}
+                  onClick={() => onChangeRoute(ROUTE_HISTORY)}
+                  classes={{
+                    wrapper: classes.bottomNavigationActionWrapper,
+                    label: classes.bottomNavigationActionLabel,
+                  }}
+                />
+                <BottomNavigationAction
                   label={getLocale('phrasebook')}
-                  icon={<ToggleStar className={classes.icon} />}
+                  icon={<StarIcon className={classes.icon} />}
                   onClick={() => onChangeRoute(ROUTE_PHRASEBOOK)}
                   classes={{
                     wrapper: classes.bottomNavigationActionWrapper,
@@ -236,7 +246,7 @@ class App extends React.Component {
                 />
                 <BottomNavigationAction
                   label={getLocale('preferences')}
-                  icon={<ActionSettings className={classes.icon} />}
+                  icon={<SettingsIcon className={classes.icon} />}
                   onClick={() => onChangeRoute(ROUTE_PREFERENCES)}
                   classes={{
                     wrapper: classes.bottomNavigationActionWrapper,

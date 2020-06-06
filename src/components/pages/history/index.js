@@ -2,23 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import Divider from '@material-ui/core/Divider';
+import ListItemText from '@material-ui/core/ListItemText';
+import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import ToggleStarIcon from '@material-ui/icons/Star';
+import Typography from '@material-ui/core/Typography';
+import DeleteIcon from '@material-ui/icons/Delete';
+import HistoryIcon from '@material-ui/icons/History';
 import SearchIcon from '@material-ui/icons/Search';
+import ClearAllIcon from '@material-ui/icons/ClearAll';
 
 import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
-import { deletePhrasebookItem, loadPhrasebook } from '../../../state/pages/phrasebook/actions';
+import { deleteHistoryItem, loadHistory, clearAllHistory } from '../../../state/pages/history/actions';
 import { loadOutput } from '../../../state/pages/home/actions';
 import { changeRoute } from '../../../state/root/router/actions';
 
@@ -71,21 +73,28 @@ const styles = (theme) => ({
     paddingRight: theme.spacing(1.5),
     paddingLeft: theme.spacing(1.5),
   },
+  appBarMenu: {
+    position: 'absolute',
+    right: theme.spacing(1.5),
+  },
+  toolbarIconButton: {
+    padding: theme.spacing(1),
+  },
 });
 
-class Phrasebook extends React.Component {
+class History extends React.Component {
   componentDidMount() {
-    const { onLoadPhrasebook } = this.props;
+    const { onLoadHistory } = this.props;
 
-    onLoadPhrasebook(true);
+    onLoadHistory(true);
 
     if (this.listView) {
       this.listView.onscroll = () => {
         const { scrollTop, clientHeight, scrollHeight } = this.listView;
         if (scrollTop + clientHeight > scrollHeight - 200) {
-          const { canLoadMore, phrasebookLoading } = this.props;
-          if (canLoadMore === true && phrasebookLoading === false) {
-            onLoadPhrasebook();
+          const { canLoadMore, historyLoading } = this.props;
+          if (canLoadMore === true && historyLoading === false) {
+            onLoadHistory();
           }
         }
       };
@@ -99,11 +108,12 @@ class Phrasebook extends React.Component {
   render() {
     const {
       classes,
+      historyItems,
+      historyLoading,
       onChangeRoute,
-      onDeletePhrasebookItem,
+      onClearAllHistory,
+      onDeleteHistoryItem,
       onLoadOutput,
-      phrasebookItems,
-      phrasebookLoading,
       query,
     } = this.props;
 
@@ -111,26 +121,37 @@ class Phrasebook extends React.Component {
       <div className={classes.container}>
         <AppBar position="static" color="default" elevation={0} classes={{ colorDefault: classes.appBarColorDefault }}>
           <Toolbar variant="dense" className={classes.toolbar}>
-            <Typography variant="subtitle1" color="inherit" className={classes.title}>{getLocale('phrasebook')}</Typography>
+            <Typography variant="subtitle1" color="inherit" className={classes.title}>{getLocale('history')}</Typography>
+            <div className={classes.appBarMenu}>
+              <Tooltip title={getLocale('clearHistory')} placement="left">
+                <IconButton
+                  aria-label={getLocale('clearHistory')}
+                  className={classes.toolbarIconButton}
+                  onClick={onClearAllHistory}
+                >
+                  <ClearAllIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
+            </div>
           </Toolbar>
         </AppBar>
         <SearchBox />
         {(() => {
-          if (phrasebookItems.length < 1 && phrasebookLoading === false) {
+          if (historyItems.length < 1 && historyLoading === false) {
             return (
               <div className={classes.emptyContainer}>
                 <div className={classes.emptyInnerContainer}>
                   {query ? (
                     <SearchIcon className={classes.bigIcon} />
                   ) : (
-                    <ToggleStarIcon className={classes.bigIcon} />
+                    <HistoryIcon className={classes.bigIcon} />
                   )}
                   <Typography variant="h5" color="textSecondary">
-                    {query ? getLocale('noMatchingResults') : getLocale('phrasebookIsEmpty')}
+                    {query ? getLocale('noMatchingResults') : getLocale('history')}
                   </Typography>
                   {!query && (
                     <Typography variant="body2" color="textSecondary">
-                      {getLocale('phrasebookDesc')}
+                      {getLocale('historyDesc')}
                     </Typography>
                   )}
                 </div>
@@ -141,41 +162,35 @@ class Phrasebook extends React.Component {
           return (
             <div className={classes.listContainer} ref={(c) => { this.listView = c; }}>
               <List disablePadding>
-                {phrasebookItems.map((item) => [(
+                {historyItems.map((item) => [(
                   <ListItem
                     button
-                    key={`phrasebookItem_${item.phrasebookId}`}
+                    key={`historyItem_${item.historyId}`}
                     onClick={() => {
                       onLoadOutput(item);
                       onChangeRoute(ROUTE_HOME);
                     }}
                   >
                     <ListItemText
-                      primary={item.highlighting && item.highlighting['data.outputText'] ? (
-                        // eslint-disable-next-line react/no-danger
-                        <span dangerouslySetInnerHTML={{ __html: item.highlighting['data.outputText'] }} />
-                      ) : item.outputText}
-                      secondary={item.highlighting && item.highlighting['data.inputText'] ? (
-                        // eslint-disable-next-line react/no-danger
-                        <span dangerouslySetInnerHTML={{ __html: item.highlighting['data.inputText'] }} />
-                      ) : item.inputText}
+                      primary={item.outputText}
+                      secondary={item.inputText}
                       primaryTypographyProps={{ color: 'textPrimary' }}
                     />
                     <ListItemSecondaryAction>
                       <Tooltip title={getLocale('remove')} placement="left">
                         <IconButton
-                          aria-label={getLocale('removeFromPhrasebook')}
-                          onClick={() => onDeletePhrasebookItem(
-                            item.phrasebookId,
+                          aria-label={getLocale('remove')}
+                          onClick={() => onDeleteHistoryItem(
+                            item.historyId,
                             item.rev,
                           )}
                         >
-                          <ToggleStarIcon />
+                          <DeleteIcon />
                         </IconButton>
                       </Tooltip>
                     </ListItemSecondaryAction>
                   </ListItem>
-                ), <Divider key={`phrasebookDivider_${item.phrasebookId}`} />])}
+                ), <Divider key={`historyDivider_${item.historyId}`} />])}
               </List>
             </div>
           );
@@ -185,34 +200,36 @@ class Phrasebook extends React.Component {
   }
 }
 
-Phrasebook.propTypes = {
+History.propTypes = {
   canLoadMore: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
+  historyItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  historyLoading: PropTypes.bool.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
-  onDeletePhrasebookItem: PropTypes.func.isRequired,
+  onClearAllHistory: PropTypes.func.isRequired,
+  onDeleteHistoryItem: PropTypes.func.isRequired,
+  onLoadHistory: PropTypes.func.isRequired,
   onLoadOutput: PropTypes.func.isRequired,
-  onLoadPhrasebook: PropTypes.func.isRequired,
-  phrasebookItems: PropTypes.arrayOf(PropTypes.object).isRequired,
-  phrasebookLoading: PropTypes.bool.isRequired,
   query: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  canLoadMore: state.pages.phrasebook.canLoadMore,
-  phrasebookItems: state.pages.phrasebook.items,
-  phrasebookLoading: state.pages.phrasebook.loading,
-  query: state.pages.phrasebook.query,
+  canLoadMore: state.pages.history.canLoadMore,
+  historyItems: state.pages.history.items,
+  historyLoading: state.pages.history.loading,
+  query: state.pages.history.query,
 });
 
 const actionCreators = {
   changeRoute,
-  deletePhrasebookItem,
+  clearAllHistory,
+  deleteHistoryItem,
+  loadHistory,
   loadOutput,
-  loadPhrasebook,
 };
 
 export default connectComponent(
-  Phrasebook,
+  History,
   mapStateToProps,
   actionCreators,
   styles,

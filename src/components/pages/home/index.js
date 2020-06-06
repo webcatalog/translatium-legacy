@@ -598,6 +598,7 @@ class Home extends React.Component {
                   Icon, tooltip, onClick, disabled,
                 }) => (disabled ? (
                   <IconButton
+                    key={`inputTool_${tooltip}`}
                     className={classes.controllerIconButton}
                     aria-label={tooltip}
                     onClick={onClick}
@@ -618,18 +619,29 @@ class Home extends React.Component {
                 )))}
               </div>
               <div className={classes.controllerContainerRight}>
-                <Tooltip title={window.process.platform === 'darwin' ? '⌘ + T' : 'Ctrl + T'} placement={fullscreenInputBox ? 'top' : 'bottom'}>
+                {(inputText.length < 1 || (output && output.status === 'loading')) ? (
                   <Button
                     variant="outlined"
                     size="small"
                     color="default"
-                    onClick={() => onTranslate()}
                     classes={{ label: classes.translateButtonLabel }}
-                    disabled={inputText.length < 1 || (output && output.status === 'loading')}
+                    disabled
                   >
                     {getLocale('translate')}
                   </Button>
-                </Tooltip>
+                ) : (
+                  <Tooltip title={window.process.platform === 'darwin' ? '⌘ + T' : 'Ctrl + T'} placement={fullscreenInputBox ? 'top' : 'bottom'}>
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      color="default"
+                      onClick={() => onTranslate()}
+                      classes={{ label: classes.translateButtonLabel }}
+                    >
+                      {getLocale('translate')}
+                    </Button>
+                  </Tooltip>
+                )}
               </div>
             </div>
           </Paper>

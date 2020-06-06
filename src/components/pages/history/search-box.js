@@ -12,7 +12,7 @@ import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
 
-import { loadPhrasebook, updateQuery } from '../../../state/pages/phrasebook/actions';
+import { loadHistory, updateQuery } from '../../../state/pages/history/actions';
 
 const styles = (theme) => ({
   toolbarSearchContainer: {
@@ -73,7 +73,7 @@ const SearchBox = ({
   classes,
   onUpdateQuery,
   query,
-  onLoadPhrasebook,
+  onLoadHistory,
 }) => {
   const inputRef = useRef(null);
   // https://stackoverflow.com/a/57556594
@@ -108,7 +108,7 @@ const SearchBox = ({
         <IconButton
           color="default"
           aria-label={getLocale('search')}
-          onClick={() => onLoadPhrasebook(true)}
+          onClick={() => onLoadHistory(true)}
           className={classes.toolbarIconButton}
         >
           <KeyboardReturnIcon fontSize="small" />
@@ -132,7 +132,7 @@ const SearchBox = ({
             onInput={(e) => onUpdateQuery(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === 'Enter' && query.length > 0) {
-                onLoadPhrasebook(true);
+                onLoadHistory(true);
               } else if (e.key === 'Escape') {
                 e.target.blur();
                 onUpdateQuery('');
@@ -155,17 +155,17 @@ SearchBox.defaultProps = {
 SearchBox.propTypes = {
   classes: PropTypes.object.isRequired,
   onUpdateQuery: PropTypes.func.isRequired,
-  onLoadPhrasebook: PropTypes.func.isRequired,
+  onLoadHistory: PropTypes.func.isRequired,
   query: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
-  query: state.pages.phrasebook.query,
+  query: state.pages.history.query,
 });
 
 const actionCreators = {
   updateQuery,
-  loadPhrasebook,
+  loadHistory,
 };
 
 export default connectComponent(

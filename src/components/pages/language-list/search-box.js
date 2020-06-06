@@ -65,6 +65,9 @@ const styles = (theme) => ({
       display: 'none',
     },
   },
+  toolbarIconButton: {
+    padding: theme.spacing(1),
+  },
 });
 
 const SearchBox = ({
@@ -97,8 +100,9 @@ const SearchBox = ({
         color="default"
         aria-label={getLocale('clear')}
         onClick={() => onUpdateQuery('')}
+        className={classes.toolbarIconButton}
       >
-        <CloseIcon fontSize="small" className={classes.icon} />
+        <CloseIcon fontSize="small" />
       </IconButton>
     </Tooltip>
   );
