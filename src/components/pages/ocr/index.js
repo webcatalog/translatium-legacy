@@ -3,9 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Fab from '@material-ui/core/Fab';
+import MenuItem from '@material-ui/core/MenuItem';
+import Tooltip from '@material-ui/core/Tooltip';
+
 import CloseIcon from '@material-ui/icons/Close';
 import NavigationMoreVert from '@material-ui/icons/MoreVert';
-import MenuItem from '@material-ui/core/MenuItem';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 
@@ -130,13 +132,15 @@ class Ocr extends React.Component {
       <div
         className={classes.container}
       >
-        <Fab
-          className={classes.closeButton}
-          size="small"
-          onClick={() => onChangeRoute(ROUTE_HOME)}
-        >
-          <CloseIcon />
-        </Fab>
+        <Tooltip title={getLocale('close')} placement="right">
+          <Fab
+            className={classes.closeButton}
+            size="small"
+            onClick={() => onChangeRoute(ROUTE_HOME)}
+          >
+            <CloseIcon />
+          </Fab>
+        </Tooltip>
         <div className={classes.zoomContainer}>
           <div
             style={{ zoom: ocr.zoomLevel || 1, position: 'relative' }}
@@ -164,29 +168,37 @@ class Ocr extends React.Component {
             <img src={ocr.imageUrl} alt="" />
           </div>
         </div>
-        <Fab
-          className={classes.minusButton}
-          size="small"
-          onClick={() => {
-            if (ocr.zoomLevel < 0.1) return;
-            onSetZoomLevel(ocr.zoomLevel - 0.1 || 1);
-          }}
-        >
-          <ZoomOutIcon />
-        </Fab>
-        <Fab
-          className={classes.plusButton}
-          size="small"
-          onClick={() => onSetZoomLevel(ocr.zoomLevel + 0.1 || 1)}
-        >
-          <ZoomInIcon />
-        </Fab>
+        <Tooltip title={getLocale('zoomOut')} placement="top">
+          <Fab
+            className={classes.minusButton}
+            size="small"
+            aria-label={getLocale('zoomOut')}
+            onClick={() => {
+              if (ocr.zoomLevel < 0.1) return;
+              onSetZoomLevel(ocr.zoomLevel - 0.1 || 1);
+            }}
+          >
+            <ZoomOutIcon />
+          </Fab>
+        </Tooltip>
+        <Tooltip title={getLocale('zoomIn')} placement="top">
+          <Fab
+            className={classes.plusButton}
+            size="small"
+            aria-label={getLocale('zoomIn')}
+            onClick={() => onSetZoomLevel(ocr.zoomLevel + 0.1 || 1)}
+          >
+            <ZoomInIcon />
+          </Fab>
+        </Tooltip>
         <EnhancedMenu
           id="ocrMore"
           buttonElement={(
-            <Fab className={classes.moreButton} size="small">
-              <NavigationMoreVert />
-            </Fab>
+            <Tooltip title={getLocale('more')} placement="top">
+              <Fab className={classes.moreButton} size="small" aria-label={getLocale('more')}>
+                <NavigationMoreVert />
+              </Fab>
+            </Tooltip>
           )}
         >
           <MenuItem

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ThemeProvider as MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider as MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
 import pink from '@material-ui/core/colors/blue';
 import red from '@material-ui/core/colors/pink';
 import grey from '@material-ui/core/colors/grey';
@@ -12,6 +12,25 @@ import connectComponent from '../helpers/connect-component';
 import { updateIsFullScreen } from '../state/root/general/actions';
 
 import App from './app';
+
+const GlobalCss = withStyles({
+  // @global is handled by jss-plugin-global.
+  // overwite material-ui styles
+  '@global': {
+    '.MuiTooltip-tooltipPlacementLeft': {
+      margin: '0 8px',
+    },
+    '.MuiTooltip-tooltipPlacementRight': {
+      margin: '0 8px',
+    },
+    '.MuiTooltip-tooltipPlacementTop': {
+      margin: '8px 0',
+    },
+    '.MuiTooltip-tooltipPlacementBottom': {
+      margin: '8px 0',
+    },
+  },
+})(() => null);
 
 class AppWrapper extends React.Component {
   constructor(props) {
@@ -82,6 +101,7 @@ class AppWrapper extends React.Component {
 
     return (
       <MuiThemeProvider theme={theme}>
+        <GlobalCss />
         <App />
       </MuiThemeProvider>
     );

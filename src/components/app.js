@@ -138,7 +138,7 @@ class App extends React.Component {
         case ROUTE_OCR:
           return <Ocr key="ocr" />;
         default:
-          return <Home key="home" />;
+          return null; // already preloaded
       }
     };
 
@@ -193,6 +193,14 @@ class App extends React.Component {
             )}
           />
           {renderRoute()}
+          <div
+            className={classNames(
+              classes.preloadedRouteContainer,
+              route !== ROUTE_HOME && classes.hidden,
+            )}
+          >
+            <Home key="language-list" />
+          </div>
           <div
             className={classNames(
               classes.preloadedRouteContainer,

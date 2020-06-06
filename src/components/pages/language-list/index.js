@@ -6,6 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import connectComponent from '../../../helpers/connect-component';
@@ -84,13 +85,16 @@ class LanguageList extends React.Component {
             <Typography variant="subtitle1" color="inherit" className={classes.title}>
               {mode === 'inputLang' ? getLocale('chooseAnInputLanguage') : getLocale('chooseAnOutputLanguage')}
             </Typography>
-            <IconButton
-              color="inherit"
-              className={classes.toolbarIconButton}
-              onClick={() => onChangeRoute(ROUTE_HOME)}
-            >
-              <CloseIcon fontSize="small" />
-            </IconButton>
+            <Tooltip title={getLocale('close')} placement="left">
+              <IconButton
+                color="inherit"
+                className={classes.toolbarIconButton}
+                aria-label={getLocale('close')}
+                onClick={() => onChangeRoute(ROUTE_HOME)}
+              >
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
           </Toolbar>
         </AppBar>
         <SearchBox />

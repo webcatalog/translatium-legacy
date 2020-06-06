@@ -11,6 +11,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
+import { translate } from '../../../state/pages/home/actions';
 import { changeRoute } from '../../../state/root/router/actions';
 import { updateInputLang, updateOutputLang } from '../../../state/root/preferences/actions';
 import { ROUTE_HOME } from '../../../constants/routes';
@@ -42,6 +43,7 @@ const LanguageListList = ({
   classes,
   mode,
   onChangeRoute,
+  onTranslate,
   onUpdateInputLang,
   onUpdateOutputLang,
   recentLanguages,
@@ -50,8 +52,10 @@ const LanguageListList = ({
   const onLanguageClick = (value) => {
     if (mode === 'inputLang') {
       onUpdateInputLang(value);
+      onTranslate(value);
     } else if (mode === 'outputLang') {
       onUpdateOutputLang(value);
+      onTranslate(null, value);
     }
 
     onChangeRoute(ROUTE_HOME);
@@ -96,7 +100,6 @@ const LanguageListList = ({
           : langList.map(({ id, locale }) => {
             if (isSearch && locale.toLowerCase().indexOf(normalizedSearch) < 0) return null;
             if (mode === 'outputLang' && id === 'auto') return null;
-            if (mode === 'outputLang' && id === 'zh') return null;
 
             return (
               <ListItem
@@ -117,6 +120,7 @@ LanguageListList.propTypes = {
   classes: PropTypes.object.isRequired,
   mode: PropTypes.string.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
+  onTranslate: PropTypes.func.isRequired,
   onUpdateInputLang: PropTypes.func.isRequired,
   onUpdateOutputLang: PropTypes.func.isRequired,
   recentLanguages: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -125,6 +129,7 @@ LanguageListList.propTypes = {
 
 const actionCreators = {
   changeRoute,
+  translate,
   updateInputLang,
   updateOutputLang,
 };

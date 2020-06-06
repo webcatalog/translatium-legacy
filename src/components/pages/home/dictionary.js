@@ -7,7 +7,7 @@ import MLink from '@material-ui/core/Link';
 import connectComponent from '../../../helpers/connect-component';
 
 import { updateInputLang, updateOutputLang } from '../../../state/root/preferences/actions';
-import { updateInputText } from '../../../state/pages/home/actions';
+import { updateInputText, translate } from '../../../state/pages/home/actions';
 
 const styles = (theme) => ({
   container: {
@@ -42,6 +42,7 @@ const styles = (theme) => ({
 
 const Dictionary = ({
   classes,
+  onTranslate,
   onUpdateInputLang,
   onUpdateInputText,
   onUpdateOutputLang,
@@ -53,6 +54,7 @@ const Dictionary = ({
     onUpdateInputLang(_inputLang);
     onUpdateOutputLang(_outputLang);
     onUpdateInputText(_inputText);
+    onTranslate(_inputLang, _outputLang, _inputText);
   };
 
   const translateForward = (text) => onLinkClick(inputLang, outputLang, text);
@@ -104,6 +106,7 @@ const Dictionary = ({
 
 Dictionary.propTypes = {
   classes: PropTypes.object.isRequired,
+  onTranslate: PropTypes.func.isRequired,
   onUpdateInputLang: PropTypes.func.isRequired,
   onUpdateInputText: PropTypes.func.isRequired,
   onUpdateOutputLang: PropTypes.func.isRequired,
@@ -118,6 +121,7 @@ const actionCreators = {
   updateInputLang,
   updateOutputLang,
   updateInputText,
+  translate,
 };
 
 export default connectComponent(

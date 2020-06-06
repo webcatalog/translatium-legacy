@@ -18,10 +18,15 @@ export const toggleFullscreenInputBox = () => ({
   type: TOGGLE_FULLSCREEN_INPUT_BOX,
 });
 
-export const translate = (saveToHistory) => ((dispatch, getState) => {
+export const translate = (
+  _inputLang, _outputLang, _inputText,
+) => ((dispatch, getState) => {
   const { preferences, pages: { home } } = getState();
-  const { inputLang, outputLang } = preferences;
-  const { inputText, fullscreenInputBox } = home;
+  const { fullscreenInputBox } = home;
+
+  const inputLang = _inputLang || preferences.inputLang;
+  const outputLang = _outputLang || preferences.outputLang;
+  const inputText = _inputText || home.inputText;
 
   // Safe
   if (inputText.trim().length < 1) return;
@@ -50,9 +55,7 @@ export const translate = (saveToHistory) => ((dispatch, getState) => {
         r.inputLang = result.inputLang || inputLang;
         r.outputLang = result.outputLang || outputLang;
 
-        if (saveToHistory === true) {
-          dispatch(addHistoryItem(r));
-        }
+        dispatch(addHistoryItem(r));
 
         dispatch({
           type: UPDATE_OUTPUT,

@@ -1,7 +1,5 @@
 import { setPreference, updateInputLang, swapLanguages } from '../state/root/preferences/actions';
-import {
-  insertInputText, updateInputText, translate, togglePhrasebook,
-} from '../state/pages/home/actions';
+import { updateInputText, translate, togglePhrasebook } from '../state/pages/home/actions';
 import { updateLanguageListMode } from '../state/pages/language-list/actions';
 import { } from '../state/pages/phrasebook/actions';
 import { changeRoute } from '../state/root/router/actions';
@@ -32,7 +30,12 @@ const loadListeners = (store) => {
 
   ipcRenderer.on('set-preference', (e, name, value) => store.dispatch(setPreference(name, value)));
 
-  ipcRenderer.on('set-input-text', (e, text) => store.dispatch(updateInputText(text, 0, 0)));
+  ipcRenderer.on('set-input-text', (e, text) => {
+    store.dispatch(updateInputText(text, 0, 0));
+
+    const { inputLang, outputLang } = store.getState().preferences;
+    store.dispatch(translate(inputLang, outputLang, text));
+  });
 
   ipcRenderer.on('set-input-lang', (e, value) => store.dispatch(updateInputLang(value)));
 
@@ -66,9 +69,10 @@ const loadListeners = (store) => {
   });
 
   ipcRenderer.on('translate-clipboard', () => {
-    const text = remote.clipboard.readText();
-    store.dispatch(insertInputText(text));
-    store.dispatch(translate());
+    const { inputLang, outputLang } = store.getState().preferences;
+    const inputText = remote.clipboard.readText();
+    store.dispatch(updateInputText(inputText));
+    store.dispatch(translate(inputLang, outputLang, inputText));
   });
 
   ipcRenderer.on('add-to-phrasebook', () => {
