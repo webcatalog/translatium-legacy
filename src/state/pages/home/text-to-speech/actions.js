@@ -7,13 +7,7 @@ export const startTextToSpeech = (textToSpeechLang, textToSpeechText) => ((dispa
 
   let voice;
   for (let i = 0; i < voices.length; i += 1) {
-    // special case for Chinese
-    if (textToSpeechLang === 'zh') {
-      if (voices[i].lang === 'zh-CN') {
-        voice = voices[i];
-        break;
-      }
-    } else if (voices[i].lang.startsWith(textToSpeechLang)) {
+    if (voices[i].lang.startsWith(textToSpeechLang)) {
       voice = voices[i];
       break;
     }

@@ -52,6 +52,11 @@ class AppWrapper extends React.Component {
       typography: {
         fontSize: 13.5,
       },
+      breakpoints: {
+        values: {
+          sm: 0, // use desktop components even when window is small
+        },
+      },
       palette: {
         type: shouldUseDarkColors ? 'dark' : 'light',
         primary: {

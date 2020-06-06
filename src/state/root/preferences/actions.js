@@ -40,14 +40,14 @@ export const swapLanguages = () => ((dispatch, getState) => {
   if (inputLang === 'auto') {
     if (output && output.inputLang) {
       requestSetPreference('inputLang', outputLang);
-      requestSetPreference('outputLang', output.inputLang === 'zh' ? 'zh-CN' : output.inputLang);
+      requestSetPreference('outputLang', output.inputLang);
       dispatch(runAfterLanguageChange());
     }
     return;
   }
 
-  requestSetPreference('inputLang', outputLang.startsWith('zh') ? 'zh' : outputLang);
-  requestSetPreference('outputLang', inputLang === 'zh' ? 'zh-CN' : inputLang);
+  requestSetPreference('inputLang', outputLang);
+  requestSetPreference('outputLang', inputLang);
   dispatch(runAfterLanguageChange());
 });
 

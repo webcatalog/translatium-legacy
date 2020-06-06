@@ -2,7 +2,7 @@ const data = {
   all: [
     'auto',
     'af', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bn', 'bs',
-    'bg', 'ca', 'ceb', 'ny', 'zh', 'zh-CN', 'zh-TW', 'co', 'hr', 'cs', 'da',
+    'bg', 'ca', 'ceb', 'ny', 'zh-CN', 'zh-TW', 'co', 'hr', 'cs', 'da',
     'nl', 'en', 'eo', 'et', 'tl', 'fi', 'fr', 'fy', 'gl', 'ka',
     'de', 'el', 'gu', 'ht', 'ha', 'haw', 'iw', 'hi', 'hmn', 'hu',
     'is', 'ig', 'id', 'ga', 'it', 'ja', 'jw', 'kn', 'kk', 'km', 'rw',
@@ -21,7 +21,6 @@ const data = {
     'bn',
     'bs',
     'ca',
-    'zh',
     'zh-TW',
     'zh-CN',
     'zh-HK',
@@ -127,12 +126,7 @@ export const isTtsSupported = (lang) => {
   const voices = window.speechSynthesis.getVoices();
   for (let i = 0; i < voices.length; i += 1) {
     const voice = voices[i];
-    // special case for Chinese
-    if (lang === 'zh') {
-      if (voice.lang === 'zh-CN') {
-        return true;
-      }
-    } else if (voice.lang.startsWith(lang)) {
+    if (voice.lang.startsWith(lang)) {
       return true;
     }
   }

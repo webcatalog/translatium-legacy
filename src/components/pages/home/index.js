@@ -46,7 +46,6 @@ import {
   updateOutputLang,
 } from '../../../state/root/preferences/actions';
 import {
-  insertInputText,
   toggleFullscreenInputBox,
   togglePhrasebook,
   translate,
@@ -272,6 +271,7 @@ class Home extends React.Component {
       onOpenSnackbar,
       onStartTextToSpeech,
       onTogglePhrasebook,
+      onTranslate,
       onUpdateInputLang,
       onUpdateInputText,
       onUpdateOutputLang,
@@ -310,6 +310,7 @@ class Home extends React.Component {
               onUpdateInputLang(output.outputLang);
               onUpdateOutputLang(output.inputLang);
               onUpdateInputText(output.outputText);
+              onTranslate(output.outputLang, output.inputLang, output.outputText);
             },
           },
           {
@@ -409,7 +410,6 @@ class Home extends React.Component {
       inputText,
       onChangeRoute,
       onEndTextToSpeech,
-      onInsertInputText,
       onLoadImage,
       onStartTextToSpeech,
       onSwapLanguages,
@@ -438,10 +438,11 @@ class Home extends React.Component {
             <path d="M19,20H5V4H7V7H17V4H19M12,2A1,1 0 0,1 13,3A1,1 0 0,1 12,4A1,1 0 0,1 11,3A1,1 0 0,1 12,2M19,2H14.82C14.4,0.84 13.3,0 12,0C10.7,0 9.6,0.84 9.18,2H5A2,2 0 0,0 3,4V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V4A2,2 0 0,0 19,2Z" />
           </SvgIcon>
         )),
-        tooltip: getLocale('pasteFromClipboard'),
+        tooltip: getLocale('translateClipboard'),
         onClick: () => {
           const text = remote.clipboard.readText();
-          onInsertInputText(text);
+          onUpdateInputText(text);
+          onTranslate(inputLang, outputLang, text);
         },
       },
     ];
@@ -572,7 +573,7 @@ class Home extends React.Component {
               )}
               onKeyDown={translateWhenPressingEnter ? (e) => {
                 if (e.key === 'Enter') {
-                  onTranslate(true);
+                  onTranslate(inputLang, outputLang, inputText);
                   e.target.blur();
                 }
 
@@ -595,13 +596,21 @@ class Home extends React.Component {
               <div className={classes.controllerContainerLeft}>
                 {controllers.map(({
                   Icon, tooltip, onClick, disabled,
-                }) => (
+                }) => disabled ? (
+                  <IconButton
+                    className={classes.controllerIconButton}
+                    aria-label={tooltip}
+                    onClick={onClick}
+                    disabled
+                  >
+                    <Icon fontSize="small" />
+                  </IconButton>
+                ) : (
                   <Tooltip title={tooltip} placement={fullscreenInputBox ? 'top' : 'bottom'} key={`inputTool_${tooltip}`}>
                     <IconButton
                       className={classes.controllerIconButton}
                       aria-label={tooltip}
                       onClick={onClick}
-                      disabled={disabled}
                     >
                       <Icon fontSize="small" />
                     </IconButton>
@@ -609,13 +618,14 @@ class Home extends React.Component {
                 ))}
               </div>
               <div className={classes.controllerContainerRight}>
-                <Tooltip title={getLocale('andSaveToHistory')} placement={fullscreenInputBox ? 'top' : 'bottom'}>
+                <Tooltip title={window.process.platform === 'darwin' ? '⌘ + T' : 'Ctrl + T'} placement={fullscreenInputBox ? 'top' : 'bottom'}>
                   <Button
                     variant="outlined"
                     size="small"
                     color="default"
-                    onClick={() => onTranslate(true)}
+                    onClick={() => onTranslate(inputLang, outputLang, inputText)}
                     classes={{ label: classes.translateButtonLabel }}
+                    disabled={inputText.length < 1 || (output && output.status === 'loading')}
                   >
                     {getLocale('translate')}
                   </Button>
@@ -641,7 +651,6 @@ Home.propTypes = {
   inputText: PropTypes.string.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
   onEndTextToSpeech: PropTypes.func.isRequired,
-  onInsertInputText: PropTypes.func.isRequired,
   onLoadImage: PropTypes.func.isRequired,
   onOpenDialogLicenseRegistration: PropTypes.func.isRequired,
   onOpenSnackbar: PropTypes.func.isRequired,
@@ -677,7 +686,6 @@ const mapStateToProps = (state) => ({
 const actionCreators = {
   changeRoute,
   endTextToSpeech,
-  insertInputText,
   loadImage,
   openDialogLicenseRegistration,
   openSnackbar,
