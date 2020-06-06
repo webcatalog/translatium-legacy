@@ -8,16 +8,20 @@ layout: default
         Translate Any Languages like a Pro
       </h1>
       <h2 class="subtitle is-size-5-desktop is-size-6">
-        Instantly translate between over 90 languages with Translatium.
+        Instantly translate between over 100 languages with Translatium.
       </h2>
 
       {% if page.platform == "mac" %}
       <div class="buttons is-centered">
-        <a href="https://itunes.apple.com/us/app/translatium/id1176624652" class="download-btn">
-          <img src="{{ '/images/mac-app-store.png' | relative_url }}" alt="Mac App Store" />
+        <a class="button is-medium is-black" href="https://github.com/atomery/translatium/releases/download/v{{ site.translatium_version }}/Translatium-{{ site.translatium_version }}.dmg">
+          <i class="fab fa-apple"></i>
+          <span>&nbsp; Download for macOS</span>
+        </a>
+        <a class="button is-medium is-link" href="https://webcatalog.onfastspring.com/translatium">
+          <span>&nbsp; Buy Now - $7<small class="price-end">.99</small></span>
         </a>
       </div>
-      <p><small>Also available <a href="https://github.com/atomery/translatium/releases/download/v{{ site.translatium_version }}/Translatium-{{ site.translatium_version }}.dmg">outside the Mac App Store</a>.</small></p>
+      <p><small>Also available <a href="https://itunes.apple.com/us/app/translatium/id1176624652">on Mac App Store</a>.</small></p>
       <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/atomery/translatium/releases">Release Notes</a>). macOS 10.10 or later, 64-bit.</small></p>
       <br />
       <p>Also available on&nbsp;&nbsp;&nbsp;<a href="/download/windows"><i class="fab fa-windows"></i> Windows</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
@@ -26,28 +30,40 @@ layout: default
         <a href="https://snapcraft.io/translatium" class="download-btn">
           <img src="{{ '/images/snap-store.png' | relative_url }}" alt="Snap Store" />
         </a>
+        <a class="button is-medium is-link" href="https://webcatalog.onfastspring.com/translatium">
+          <span>&nbsp; Buy Now - $7<small class="price-end">.99</small></span>
+        </a>
       </div>
-      <p><small>Also available as <a href="https://github.com/atomery/translatium/releases/download/v{{ site.translatium_version }}/translatium-{{ site.translatium_version }}-x86_64.AppImage">AppImage</a>.</small></p>
+      <p><small>Also available as <a href="https://github.com/atomery/translatium/releases/download/v{{ site.translatium_version }}/Translatium-{{ site.translatium_version }}.AppImage">AppImage</a>.</small></p>
       <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/atomery/translatium/releases">Release Notes</a>). Linux, 64-bit.</small></p>
       <br />
       <p>Also available on&nbsp;&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> macOS</a> | <a href="/download/windows"><i class="fab fa-windows"></i> Windows</a>.</p>
       {% elsif page.platform == "windows" %}
       <div class="buttons is-centered">
-        <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing" class="download-btn">
-          <img src="{{ '/images/microsoft-store.png' | relative_url }}" alt="Microsoft Store" />
+        <a class="button is-medium is-black" href="https://github.com/atomery/translatium/releases/download/v{{ site.translatium_version }}/Translatium-Setup-{{ site.translatium_version }}.exe">
+          <i class="fab fa-windows"></i>
+          <span>&nbsp; Download for Windows</span>
+        </a>
+        <a class="button is-medium is-link" href="https://webcatalog.onfastspring.com/translatium">
+          <span>&nbsp; Buy Now - $7<small class="price-end">.99</small></span>
         </a>
       </div>
+      <p><small>Also available <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing">on Microsoft Store</a>.</small></p>
       <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/atomery/translatium/releases">Release Notes</a>). Windows 10 v1607 and later, 64-bit.</small></p>
       <br />
       <p>Also available on&nbsp;&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> macOS</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
       {% else %}
       <div id="mac">
         <div class="buttons is-centered">
-          <a href="https://itunes.apple.com/us/app/translatium/id1176624652" class="download-btn">
-            <img src="{{ '/images/mac-app-store.png' | relative_url }}" alt="Mac App Store" />
+          <a class="button is-medium is-black" href="https://github.com/atomery/translatium/releases/download/v{{ site.translatium_version }}/Translatium-{{ site.translatium_version }}.dmg">
+            <i class="fab fa-apple"></i>
+            <span>&nbsp; Download for macOS</span>
+          </a>
+          <a class="button is-medium is-link" href="https://webcatalog.onfastspring.com/translatium">
+            <span>&nbsp; Buy Now - $7<small class="price-end">.99</small></span>
           </a>
         </div>
-        <p><small>Also available <a href="https://github.com/atomery/translatium/releases/download/v{{ site.translatium_version }}/Translatium-{{ site.translatium_version }}.dmg">outside the Mac App Store</a>.</small></p>
+        <p><small>Also available <a href="https://itunes.apple.com/us/app/translatium/id1176624652">on Mac App Store</a>.</small></p>
         <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/atomery/translatium/releases">Release Notes</a>). macOS 10.10 or later, 64-bit.</small></p>
         <br />
         <p>Also available on&nbsp;&nbsp;&nbsp;<a href="/download/windows"><i class="fab fa-windows"></i> Windows</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
@@ -57,17 +73,26 @@ layout: default
           <a href="https://snapcraft.io/translatium" class="download-btn">
             <img src="{{ '/images/snap-store.png' | relative_url }}" alt="Snap Store" />
           </a>
+          <a class="button is-medium is-link" href="https://webcatalog.onfastspring.com/translatium">
+            <span>&nbsp; Buy Now - $7<small class="price-end">.99</small></span>
+          </a>
         </div>
+        <p><small>Also available as <a href="https://github.com/atomery/translatium/releases/download/v{{ site.translatium_version }}/Translatium-{{ site.translatium_version }}.AppImage">AppImage</a>.</small></p>
         <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/atomery/translatium/releases">Release Notes</a>). Linux, 64-bit.</small></p>
         <br />
         <p>Also available on&nbsp;&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> macOS</a> | <a href="/download/windows"><i class="fab fa-windows"></i> Windows</a>.</p>
       </div>
       <div style="display:none" id="windows" style="display:none">
         <div class="buttons is-centered">
-          <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing" class="download-btn">
-            <img src="{{ '/images/microsoft-store.png' | relative_url }}" alt="Microsoft Store" />
+          <a class="button is-medium is-black" href="https://github.com/atomery/translatium/releases/download/v{{ site.translatium_version }}/Translatium-Setup-{{ site.translatium_version }}.exe">
+            <i class="fab fa-windows"></i>
+            <span>&nbsp; Download for Windows</span>
+          </a>
+          <a class="button is-medium is-link" href="https://webcatalog.onfastspring.com/translatium">
+            <span>&nbsp; Buy Now - $7<small class="price-end">.99</small></span>
           </a>
         </div>
+        <p><small>Also available <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing">on Microsoft Store</a>.</small></p>
         <p><small>Version {{ site.translatium_version }} (<a href="https://github.com/atomery/translatium/releases">Release Notes</a>). Windows 10 v1607 and later, 64-bit.</small></p>
         <br />
         <p>Also available on&nbsp;&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> macOS</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
@@ -106,7 +131,7 @@ layout: default
             <span class="icon is-large">
               <i class="fa fa-2x fa-language"></i>
             </span>
-            <p><strong><a href="/languages">90+ Languages</a></strong><br>90+ languages & dialects.</p>
+            <p><strong><a href="/languages">100+ Languages</a></strong><br>100+ languages & dialects.</p>
           </div>
         </div>
         <div class="column is-half-tablet is-one-third-desktop">
