@@ -11,17 +11,17 @@ title: Supported Languages
 - Arabic
 - Armenian
 - Azerbaijani
-- Bashkir
 - Basque
 - Belarusian
 - Bengali
 - Bosnian
 - Bulgarian
-- Burmese
 - Catalan
 - Cebuano
+- Chichewa
 - Chinese (Simplified)
 - Chinese (Traditional)
+- Corsican
 - Croatian
 - Czech
 - Danish
@@ -29,19 +29,24 @@ title: Supported Languages
 - English
 - Esperanto
 - Estonian
+- Filipino
 - Finnish
 - French
+- Frisian
 - Galician
 - Georgian
 - German
 - Greek
 - Gujarati
-- Haitian
+- Haitian Creole
+- Hausa
+- Hawaiian
 - Hebrew
-- Hill Mari
 - Hindi
+- Hmong
 - Hungarian
 - Icelandic
+- Igbo
 - Indonesian
 - Irish
 - Italian
@@ -50,7 +55,9 @@ title: Supported Languages
 - Kannada
 - Kazakh
 - Khmer
+- Kinyarwanda
 - Korean
+- Kurdish (Kurmanji)
 - Kyrgyz
 - Lao
 - Latin
@@ -64,38 +71,46 @@ title: Supported Languages
 - Maltese
 - Maori
 - Marathi
-- Mari
 - Mongolian
+- Myanmar (Burmese)
 - Nepali
 - Norwegian
-- Papiamento
+- Odia (Oriya)
+- Pashto
 - Persian
 - Polish
 - Portuguese
 - Punjabi
 - Romanian
 - Russian
-- Scottish Gaelic
+- Samoan
+- Scots Gaelic
 - Serbian
-- Sinhalese
+- Sesotho
+- Shona
+- Sindhi
+- Sinhala
 - Slovak
 - Slovenian
+- Somali
 - Spanish
 - Sundanese
 - Swahili
 - Swedish
-- Tagalog
 - Tajik
 - Tamil
 - Tatar
 - Telugu
 - Thai
 - Turkish
-- Udmurt
+- Turkmen
 - Ukrainian
 - Urdu
+- Uyghur
 - Uzbek
 - Vietnamese
 - Welsh
 - Xhosa
 - Yiddish
+- Yoruba
+- Zulu

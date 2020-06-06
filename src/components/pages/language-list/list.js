@@ -96,6 +96,7 @@ const LanguageListList = ({
           : langList.map(({ id, locale }) => {
             if (isSearch && locale.toLowerCase().indexOf(normalizedSearch) < 0) return null;
             if (mode === 'outputLang' && id === 'auto') return null;
+            if (mode === 'outputLang' && id === 'zh') return null;
 
             return (
               <ListItem

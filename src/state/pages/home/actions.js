@@ -6,9 +6,11 @@ import {
 
 import translateText from '../../../helpers/translate-text';
 import phrasebookDb from '../../../helpers/phrasebook-db';
+import { isInputLanguage, isOutputLanguage } from '../../../helpers/language-utils';
 
 import { openAlert } from '../../root/alert/actions';
 import { addHistoryItem } from './history/actions';
+
 
 import { requestSetPreference } from '../../../senders';
 
@@ -145,8 +147,14 @@ export const loadOutput = (output) => ((dispatch) => {
   });
 
   // Update inputLang, outputLang, inputText without running anything;
-  requestSetPreference('inputLang', output.inputLang);
-  requestSetPreference('outputLang', output.outputLang);
+  // certain languages in history & phrasebook are deprecated so check first
+  if (isInputLanguage(output.inputLang)) {
+    requestSetPreference('inputLang', output.inputLang);
+  }
+  if (isOutputLanguage(output.outputLang)) {
+    requestSetPreference('outputLang', output.outputLang);
+  }
+
   dispatch({
     type: UPDATE_INPUT_TEXT,
     inputText: output.inputText,
