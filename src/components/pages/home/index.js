@@ -573,7 +573,7 @@ class Home extends React.Component {
               )}
               onKeyDown={translateWhenPressingEnter ? (e) => {
                 if (e.key === 'Enter') {
-                  onTranslate(inputLang, outputLang, inputText);
+                  onTranslate();
                   e.target.blur();
                 }
 
@@ -623,7 +623,7 @@ class Home extends React.Component {
                     variant="outlined"
                     size="small"
                     color="default"
-                    onClick={() => onTranslate(inputLang, outputLang, inputText)}
+                    onClick={() => onTranslate()}
                     classes={{ label: classes.translateButtonLabel }}
                     disabled={inputText.length < 1 || (output && output.status === 'loading')}
                   >

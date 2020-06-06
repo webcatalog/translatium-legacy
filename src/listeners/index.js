@@ -65,11 +65,7 @@ const loadListeners = (store) => {
   });
 
   ipcRenderer.on('translate', () => {
-    const { preferences, pages: { home } } = store.getState();
-    const { inputLang, outputLang } = preferences;
-    const { inputText } = home;
-
-    store.dispatch(translate(inputLang, outputLang, inputText));
+    store.dispatch(translate());
   });
 
   ipcRenderer.on('translate-clipboard', () => {

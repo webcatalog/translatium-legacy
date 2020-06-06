@@ -19,9 +19,14 @@ export const toggleFullscreenInputBox = () => ({
 });
 
 export const translate = (
-  inputLang, outputLang, inputText,
+  _inputLang, _outputLang, _inputText,
 ) => ((dispatch, getState) => {
-  const { fullscreenInputBox } = getState().pages.home;
+  const { preferences, pages: { home } } = getState();
+  const { fullscreenInputBox } = home;
+
+  const inputLang = _inputLang || preferences.inputLang;
+  const outputLang = _outputLang || preferences.outputLang;
+  const inputText = _inputText || home.inputText;
 
   // Safe
   if (inputText.trim().length < 1) return;
