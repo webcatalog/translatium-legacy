@@ -5,6 +5,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
+
 
 import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
@@ -90,15 +92,15 @@ const SearchBox = ({
   }, [inputRef, handleOpenFind]);
 
   const clearSearchAction = query.length > 0 && (
-    <>
+    <Tooltip title={getLocale('clear')} placement="left">
       <IconButton
         color="default"
-        aria-label="Clear"
+        aria-label={getLocale('clear')}
         onClick={() => onUpdateQuery('')}
       >
         <CloseIcon fontSize="small" className={classes.icon} />
       </IconButton>
-    </>
+    </Tooltip>
   );
 
   return (

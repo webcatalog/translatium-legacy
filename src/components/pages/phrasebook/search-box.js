@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
@@ -90,20 +91,24 @@ const SearchBox = ({
 
   const clearSearchAction = query.length > 0 && (
     <>
-      <IconButton
-        color="default"
-        aria-label="Clear"
-        onClick={() => onUpdateQuery('')}
-      >
-        <CloseIcon fontSize="small" className={classes.icon} />
-      </IconButton>
-      <IconButton
-        color="default"
-        aria-label="Search"
-        onClick={() => onLoadPhrasebook(true)}
-      >
-        <KeyboardReturnIcon fontSize="small" className={classes.icon} />
-      </IconButton>
+      <Tooltip title={getLocale('clear')}>
+        <IconButton
+          color="default"
+          aria-label={getLocale('clear')}
+          onClick={() => onUpdateQuery('')}
+        >
+          <CloseIcon fontSize="small" className={classes.icon} />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={getLocale('search')}>
+        <IconButton
+          color="default"
+          aria-label={getLocale('search')}
+          onClick={() => onLoadPhrasebook(true)}
+        >
+          <KeyboardReturnIcon fontSize="small" className={classes.icon} />
+        </IconButton>
+      </Tooltip>
     </>
   );
 

@@ -1,22 +1,28 @@
+import { combineReducers } from 'redux';
+
 import {
+  CHANGE_ROUTE,
   UPDATE_LANGUAGE_LIST_SEARCH,
   UPDATE_LANGUAGE_LIST_MODE,
 } from '../../../constants/actions';
 
-const initialState = {
-  search: '',
-  mode: 'inputLang',
-};
-
-const languageList = (state = initialState, action) => {
+const search = (state = '', action) => {
   switch (action.type) {
-    case UPDATE_LANGUAGE_LIST_SEARCH:
-      return { ...state, search: action.search };
-    case UPDATE_LANGUAGE_LIST_MODE:
-      return { ...state, mode: action.mode };
-    default:
-      return state;
+    case CHANGE_ROUTE: return '';
+    case UPDATE_LANGUAGE_LIST_SEARCH: return action.search;
+    default: return state;
   }
 };
 
-export default languageList;
+
+const mode = (state = 'inputLang', action) => {
+  switch (action.type) {
+    case UPDATE_LANGUAGE_LIST_MODE: return action.mode;
+    default: return state;
+  }
+};
+
+export default combineReducers({
+  search,
+  mode,
+});
