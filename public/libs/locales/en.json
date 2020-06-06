@@ -147,6 +147,8 @@
 	"appImageLauncherDesc": "Updater is incompatible with AppImageLauncher. Please uninstall AppImageLauncher or download new updates manually from our website.",
 	"goToWebsite": "Go to Website",
 	"learnMore": "Learn more",
+	"reset": "Reset",
+	"restorePreferencesToDefault": "Restore preferences to their original defaults",
 	"auto": "Auto detect",
 	"af": "Afrikaans",
 	"sq": "Albanian",

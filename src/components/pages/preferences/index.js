@@ -27,6 +27,7 @@ import DialogShortcut from './dialog-shortcut';
 
 import {
   requestOpenInBrowser,
+  requestResetPreferences,
   requestSetPreference,
   requestSetSystemPreference,
   requestShowRequireRestartDialog,
@@ -300,6 +301,18 @@ const Preferences = (props) => {
                   }}
                 />
               </ListItemSecondaryAction>
+            </ListItem>
+          </List>
+        </Paper>
+
+        <Typography variant="subtitle2" color="textPrimary" className={classes.paperTitle}>
+          {getLocale('reset')}
+        </Typography>
+        <Paper elevation={0} className={classes.paper}>
+          <List disablePadding dense>
+            <ListItem button onClick={requestResetPreferences}>
+              <ListItemText primary={getLocale('restorePreferencesToDefault')} />
+              <ChevronRightIcon color="action" />
             </ListItem>
           </List>
         </Paper>
