@@ -67,6 +67,8 @@
 	"clear": "Clear",
 	"openImageFile": "Open image file",
 	"more": "More",
+	"zoomIn": "Zoom in",
+	"zoomOut": "Zoom out",
 	"fullscreen": "Fullscreen",
 	"exitFullscreen": "Exit fullscreen",
 	"translate": "Translate",
