@@ -166,7 +166,7 @@ const Dictionary = ({
                   <MLink
                     component="button"
                     variant="body2"
-                    className={classNames(classes.link, classes.primary)}
+                    className={classes.link}
                     onClick={() => translateBackward(ex.text)}
                   >
                     {ex.text}

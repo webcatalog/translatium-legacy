@@ -63,7 +63,7 @@ import { ROUTE_LANGUAGE_LIST } from '../../../constants/routes';
 
 import getTrialExpirationTime from '../../../helpers/get-trial-expiration-time';
 
-import YandexDictionary from './yandex-dictionary';
+import Dictionary from './dictionary';
 import History from './history';
 
 const styles = (theme) => ({
@@ -177,7 +177,8 @@ const styles = (theme) => ({
     whiteSpace: 'pre-wrap',
   },
   card: {
-    border: theme.palette.type === 'dark' ? 'none' : '1px solid rgba(0, 0, 0, 0.12)',
+    borderTop: theme.palette.type === 'dark' ? 'none' : '1px solid rgba(0, 0, 0, 0.12)',
+    borderBottom: theme.palette.type === 'dark' ? 'none' : '1px solid rgba(0, 0, 0, 0.12)',
   },
   toolbar: {
     minHeight: 40,
@@ -385,16 +386,14 @@ class Home extends React.Component {
               </CardActions>
             </Card>
 
-            {output.outputDict && <YandexDictionary />}
-            {output.outputDict && output.outputDict.def.length > 0 && (
-              <Typography
-                variant="body2"
-                align="left"
-                className={classes.copyright}
-              >
-                Powered by Google Translate
-              </Typography>
-            )}
+            {output.outputDict && output.source === 'translate.googleapis.com' && <Dictionary />}
+            <Typography
+              variant="body2"
+              align="left"
+              className={classes.copyright}
+            >
+              Powered by Google Translate
+            </Typography>
             {this.renderCountdown()}
           </div>
         );

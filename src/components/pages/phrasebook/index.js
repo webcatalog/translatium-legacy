@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -175,9 +174,6 @@ class Phrasebook extends React.Component {
                   </ListItem>
                 ), <Divider key={`phrasebookDivider_${item.phrasebookId}`} />])}
               </List>
-              {phrasebookLoading && (
-                <LinearProgress variant="indeterminate" className={classes.progress} />
-              )}
             </div>
           );
         })()}

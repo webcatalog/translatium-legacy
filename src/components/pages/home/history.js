@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import LinearProgress from '@material-ui/core/LinearProgress';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -119,9 +118,6 @@ class History extends React.Component {
                   </ListItem>
                 ), <Divider key="divider" />])}
               </List>
-              {historyLoading && (
-                <LinearProgress variant="indeterminate" className={classes.progress} />
-              )}
             </div>
           );
         })()}

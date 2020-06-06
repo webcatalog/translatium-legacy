@@ -27,9 +27,9 @@ const defaultPreferences = {
   attachToMenubar: false,
   clearInputShortcut: 'mod+shift+d',
   inputLang: 'en',
-  openOnMenubarShortcut: null,
-  outputLang: 'zh',
-  recentLanguages: ['en', 'zh'],
+  openOnMenubarShortcut: 'alt+shift+t',
+  outputLang: 'zh-CN',
+  recentLanguages: ['en', 'zh-CN'],
   registered: getDefaultRegistered(),
   showTransliteration: true,
   themeSource: 'system',
@@ -37,23 +37,45 @@ const defaultPreferences = {
   translateWhenPressingEnter: true,
 };
 
-const getPreferences = () => ({ ...defaultPreferences, ...settings.get(`preferences.${v}`) });
+let cachedPreferences = null;
+
+const initCachedPreferences = () => {
+  // upgrade from v12 from v13
+  if (settings.get('preferenceVersion', 0) < 13) {
+    settings.delete(`preferences.${v}.inputLang`);
+    settings.delete(`preferences.${v}.outputLang`);
+    settings.delete(`preferences.${v}.recentLanguages`);
+    settings.set('preferenceVersion', 13);
+  }
+
+  cachedPreferences = { ...defaultPreferences, ...settings.get(`preferences.${v}`) };
+};
+
+const getPreferences = () => {
+  // store in memory to boost performance
+  if (cachedPreferences == null) {
+    initCachedPreferences();
+  }
+  return cachedPreferences;
+};
 
 const getPreference = (name) => {
-  if (settings.has(`preferences.${v}.${name}`)) {
-    return settings.get(`preferences.${v}.${name}`);
+  // store in memory to boost performance
+  if (cachedPreferences == null) {
+    initCachedPreferences();
   }
-  return defaultPreferences[name];
+  return cachedPreferences[name];
 };
 
 const setPreference = (name, value) => {
+  sendToAllWindows('set-preference', name, value);
+  cachedPreferences[name] = value;
+  Promise.resolve().then(() => settings.set(`preferences.${v}.${name}`, value));
+
   if (name === 'openOnMenubarShortcut') {
     ipcMain.emit('unset-show-menubar-shortcut', null, getPreference(name));
     ipcMain.emit('set-show-menubar-shortcut', null, value);
   }
-
-  settings.set(`preferences.${v}.${name}`, value);
-  sendToAllWindows('set-preference', name, value);
 
   if (name === 'themeSource') {
     nativeTheme.themeSource = value;
@@ -61,6 +83,7 @@ const setPreference = (name, value) => {
 };
 
 const resetPreferences = () => {
+  cachedPreferences = null;
   settings.deleteAll();
 
   const preferences = getPreferences();
@@ -68,6 +91,7 @@ const resetPreferences = () => {
     sendToAllWindows('set-preference', name, preferences[name]);
   });
 };
+
 
 module.exports = {
   getPreference,

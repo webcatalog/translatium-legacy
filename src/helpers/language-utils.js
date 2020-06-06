@@ -1,17 +1,17 @@
 const data = {
   all: [
     'auto',
-    'af', 'am', 'ar', 'az', 'ba', 'be', 'bg', 'bn', 'bs',
-    'ca', 'ceb', 'cs', 'cy', 'da', 'de', 'el', 'en', 'eo',
-    'es', 'et', 'eu', 'fa', 'fi', 'fr', 'ga', 'gd', 'gl',
-    'gu', 'he', 'hi', 'hr', 'ht', 'hu', 'hy', 'id', 'is',
-    'it', 'ja', 'jv', 'ka', 'kk', 'km', 'kn', 'ko', 'ky',
-    'la', 'lb', 'lo', 'lt', 'lv', 'mg', 'mhr', 'mi', 'mk',
-    'ml', 'mn', 'mr', 'mrj', 'ms', 'mt', 'my', 'ne', 'nl',
-    'no', 'pa', 'pap', 'pl', 'pt', 'ro', 'ru', 'si', 'sk',
-    'sl', 'sq', 'sr', 'su', 'sv', 'sw', 'ta', 'te', 'tg',
-    'th', 'tl', 'tr', 'tt', 'udm', 'uk', 'ur', 'uz', 'vi',
-    'xh', 'yi', 'zh-CN', 'zh-TW',
+    'af', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bn', 'bs',
+    'bg', 'ca', 'ceb', 'ny', 'zh', 'zh-CN', 'zh-TW', 'co', 'hr', 'cs', 'da',
+    'nl', 'en', 'eo', 'et', 'tl', 'fi', 'fr', 'fy', 'gl', 'ka',
+    'de', 'el', 'gu', 'ht', 'ha', 'haw', 'iw', 'hi', 'hmn', 'hu',
+    'is', 'ig', 'id', 'ga', 'it', 'ja', 'jw', 'kn', 'kk', 'km', 'rw',
+    'ko', 'ku', 'ky', 'lo', 'la', 'lv', 'lt', 'lb', 'mk', 'mg', 'ms',
+    'ml', 'mt', 'mi', 'mr', 'mn', 'my', 'ne', 'no', 'or', 'ps', 'fa',
+    'pl', 'pt', 'pa', 'ro', 'ru', 'sm', 'gd', 'sr', 'st', 'sn', 'sd',
+    'si', 'sk', 'sl', 'so', 'es', 'su', 'sw', 'sv', 'tg', 'ta', 'tt',
+    'te', 'th', 'tr', 'tk', 'uk', 'ur', 'ug', 'uz', 'vi', 'cy', 'xh',
+    'yi', 'yo', 'zu',
   ],
   ttsSupported: [
     'af',
@@ -104,10 +104,10 @@ export const toOcrSpaceLanguage = (lang) => data.ocrSpaceSupported[lang] || null
 export const isOcrSupported = (lang) => (toOcrSpaceLanguage(lang) !== null);
 
 // Check if language is supported as input
-export const isInput = (lang) => !(data.all.indexOf(lang) > -1);
+export const isInputLanguage = (lang) => data.all.indexOf(lang) > -1;
 
 // Check if language is supported as output
-export const isOutput = (lang) => lang !== 'auto';
+export const isOutputLanguage = (lang) => lang !== 'auto' && data.all.indexOf(lang) > -1;
 
 // Get list of all languages
 export const getLanguages = () => data.all;
