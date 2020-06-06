@@ -144,6 +144,8 @@
 	"history": "History",
 	"historyDesc": "View previously translated words and phrases here.",
 	"clearHistory": "Clear history",
+	"appImageLauncherDesc": "Updater is incompatible with AppImageLauncher. Please uninstall AppImageLauncher or download new updates manually from our website.",
+	"goToWebsite": "Go to Website",
 	"auto": "Auto detect",
 	"af": "Afrikaans",
 	"sq": "Albanian",

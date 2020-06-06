@@ -3,12 +3,12 @@ const {
   Menu,
   app,
   shell,
+  dialog,
 } = require('electron');
 const { autoUpdater } = require('electron-updater');
 
 const config = require('../config');
 
-const prepareUpdaterForAppImage = require('./prepare-updater-for-appimage');
 const sendToAllWindows = require('./send-to-all-windows');
 const { getLocale } = require('./locales');
 const { getPreference } = require('./preferences');
@@ -205,7 +205,26 @@ const createMenu = () => {
       submenu.splice(2, 0, {
         label: getLocale('checkForUpdates'),
         click: () => {
-          prepareUpdaterForAppImage(autoUpdater);
+          // https://github.com/atomery/webcatalog/issues/634
+          // https://github.com/electron-userland/electron-builder/issues/4046
+          // disable updater if user is using AppImageLauncher
+          if (process.platform === 'linux' && process.env.DESKTOPINTEGRATION === 'AppImageLauncher') {
+            dialog.showMessageBox({
+              type: 'error',
+              message: getLocale('appImageLauncherDesc'),
+              buttons: [getLocale('learnMore'), getLocale('goToWebsite'), getLocale('ok')],
+              cancelId: 2,
+              defaultId: 2,
+            }).then(({ response }) => {
+              if (response === 0) {
+                shell.openExternal('https://github.com/electron-userland/electron-builder/issues/4046');
+              } else if (response === 1) {
+                shell.openExternal('http://translatiumapp.com/');
+              }
+            }).catch(console.log); // eslint-disable-line
+            return;
+          }
+
           global.updateSilent = false;
           autoUpdater.checkForUpdates();
         },

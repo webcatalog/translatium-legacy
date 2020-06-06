@@ -7,10 +7,12 @@ const {
   Tray,
   app,
   clipboard,
+  dialog,
   globalShortcut,
   ipcMain,
   nativeImage,
   nativeTheme,
+  shell,
 } = require('electron');
 const fs = require('fs');
 const settings = require('electron-settings');
@@ -26,7 +28,6 @@ const { getPreference } = require('./libs/preferences');
 const { getLocale } = require('./libs/locales');
 const sendToAllWindows = require('./libs/send-to-all-windows');
 const setContextMenu = require('./libs/set-context-menu');
-const prepareUpdaterForAppImage = require('./libs/prepare-updater-for-appimage');
 
 require('./libs/updater');
 
@@ -127,7 +128,26 @@ if (!gotTheLock) {
             {
               label: getLocale('checkForUpdates'),
               click: () => {
-                prepareUpdaterForAppImage(autoUpdater);
+                // https://github.com/atomery/webcatalog/issues/634
+                // https://github.com/electron-userland/electron-builder/issues/4046
+                // disable updater if user is using AppImageLauncher
+                if (process.platform === 'linux' && process.env.DESKTOPINTEGRATION === 'AppImageLauncher') {
+                  dialog.showMessageBox(mainWindow, {
+                    type: 'error',
+                    message: getLocale('appImageLauncherDesc'),
+                    buttons: [getLocale('learnMore'), getLocale('goToWebsite'), getLocale('ok')],
+                    cancelId: 2,
+                    defaultId: 2,
+                  }).then(({ response }) => {
+                    if (response === 0) {
+                      shell.openExternal('https://github.com/electron-userland/electron-builder/issues/4046');
+                    } else if (response === 1) {
+                      shell.openExternal('http://translatiumapp.com/');
+                    }
+                  }).catch(console.log); // eslint-disable-line
+                  return;
+                }
+
                 global.updateSilent = false;
                 autoUpdater.checkForUpdates();
               },
@@ -260,8 +280,26 @@ if (!gotTheLock) {
     });
 
     if (autoUpdater.isUpdaterActive()) {
-      prepareUpdaterForAppImage(autoUpdater);
-      autoUpdater.checkForUpdates();
+      // https://github.com/atomery/webcatalog/issues/634
+      // https://github.com/electron-userland/electron-builder/issues/4046
+      // disable updater if user is using AppImageLauncher
+      if (process.platform === 'linux' && process.env.DESKTOPINTEGRATION === 'AppImageLauncher') {
+        dialog.showMessageBox(mainWindow, {
+          type: 'error',
+          message: getLocale('appImageLauncherDesc'),
+          buttons: [getLocale('learnMore'), getLocale('goToWebsite'), getLocale('ok')],
+          cancelId: 2,
+          defaultId: 2,
+        }).then(({ response }) => {
+          if (response === 0) {
+            shell.openExternal('https://github.com/electron-userland/electron-builder/issues/4046');
+          } else if (response === 1) {
+            shell.openExternal('http://translatiumapp.com/');
+          }
+        }).catch(console.log); // eslint-disable-line
+      } else {
+        autoUpdater.checkForUpdates();
+      }
     }
   });
 
