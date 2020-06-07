@@ -35,7 +35,7 @@ const defaultPreferences = {
   themeSource: 'system',
   translateClipboardOnShortcut: false,
   translateWhenPressingEnter: true,
-  useHardwareAcceleration: false,
+  useHardwareAcceleration: true,
 };
 
 let cachedPreferences = null;
