@@ -27,4 +27,4 @@ Our websites use:
 
 ---
 
-This privacy policy is subject to change without notice and was last updated on April 28, 2020. If you have any questions feel free to [create a GitHub issue](https://github.com/atomery/translatium/issues) or contact us via [contact@atomery.com](mailto:contact@atomery.com).
+This privacy policy is subject to change without notice and was last updated on June 6, 2020. If you have any questions feel free to [create a GitHub issue](https://github.com/atomery/translatium/issues) or contact us via [contact@atomery.com](mailto:contact@atomery.com).
