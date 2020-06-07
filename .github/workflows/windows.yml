@@ -22,7 +22,7 @@ jobs:
         node-version: 12.x
     - name: Cache yarn cache
       uses: actions/cache@v2
-      id: cache-yarn
+      id: cache-yarn-cache
       with:
         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
