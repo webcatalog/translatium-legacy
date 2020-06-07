@@ -138,7 +138,7 @@ const SearchBox = ({
                 onUpdateQuery('');
               }
             }}
-            placeholder={getLocale('searchSavedTranslations')}
+            placeholder={getLocale('searchPreviousTranslations')}
             value={query}
           />
         </Typography>

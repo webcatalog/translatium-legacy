@@ -125,6 +125,7 @@ class History extends React.Component {
             <div className={classes.appBarMenu}>
               <Tooltip title={getLocale('clearHistory')} placement="left">
                 <IconButton
+                  color="inherit"
                   aria-label={getLocale('clearHistory')}
                   className={classes.toolbarIconButton}
                   onClick={onClearAllHistory}
