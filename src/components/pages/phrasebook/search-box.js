@@ -11,7 +11,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
-
 import { loadPhrasebook, updateQuery } from '../../../state/pages/phrasebook/actions';
 
 const styles = (theme) => ({

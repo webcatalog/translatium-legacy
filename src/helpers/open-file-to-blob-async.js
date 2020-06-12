@@ -1,4 +1,3 @@
-
 /* global Blob */
 
 const getFileType = (ext) => {

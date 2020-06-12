@@ -128,7 +128,6 @@ const Preferences = (props) => {
   } = props;
 
   const displayLanguages = getDisplayLanguages();
-  console.log(displayLanguages);
 
   return (
     <div className={classes.container}>
@@ -277,7 +276,6 @@ const Preferences = (props) => {
           </List>
         </Paper>
 
-
         <Typography variant="body2" className={classes.paperTitle}>
           {getLocale('advanced')}
         </Typography>
@@ -374,7 +372,6 @@ const Preferences = (props) => {
             </ListItem>
           </List>
         </Paper>
-
 
         <Typography variant="body2" className={classes.paperTitle} />
         <Paper elevation={0} className={classes.paper}>

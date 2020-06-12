@@ -38,7 +38,6 @@ const langList = getLanguages()
     return x.locale.localeCompare(y.locale);
   });
 
-
 const LanguageListList = ({
   classes,
   mode,
@@ -63,6 +62,12 @@ const LanguageListList = ({
 
   const isSearch = search && search.length > 0;
   const normalizedSearch = isSearch ? search.toLowerCase() : null;
+
+  const filteredLangList = langList.filter(({ id, locale }) => {
+    if (isSearch && locale.toLowerCase().indexOf(normalizedSearch) < 0) return false;
+    if (mode === 'outputLang' && id === 'auto') return false;
+    return true;
+  });
 
   return (
     <div className={classes.listContainer}>
@@ -89,7 +94,7 @@ const LanguageListList = ({
         dense
         subheader={<ListSubheader disableSticky>{isSearch ? getLocale('searchResults') : getLocale('allLanguages')}</ListSubheader>}
       >
-        {langList.length < 1 ? (
+        {filteredLangList.length < 1 ? (
           <ListItem
             button
             disabled
@@ -97,20 +102,15 @@ const LanguageListList = ({
             <ListItemText primary={getLocale('noLanguageFound')} />
           </ListItem>
         )
-          : langList.map(({ id, locale }) => {
-            if (isSearch && locale.toLowerCase().indexOf(normalizedSearch) < 0) return null;
-            if (mode === 'outputLang' && id === 'auto') return null;
-
-            return (
-              <ListItem
-                button
-                key={`lang_${id}`}
-                onClick={() => onLanguageClick(id)}
-              >
-                <ListItemText primary={locale} />
-              </ListItem>
-            );
-          })}
+          : filteredLangList.map(({ id, locale }) => (
+            <ListItem
+              button
+              key={`lang_${id}`}
+              onClick={() => onLanguageClick(id)}
+            >
+              <ListItemText primary={locale} />
+            </ListItem>
+          ))}
       </List>
     </div>
   );

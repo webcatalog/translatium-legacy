@@ -123,7 +123,6 @@ export const loadImage = () => (dispatch, getState) => {
                 },
               });
 
-
               dispatch(changeRoute(ROUTE_OCR));
             });
         })

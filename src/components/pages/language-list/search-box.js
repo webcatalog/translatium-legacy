@@ -7,7 +7,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 
-
 import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 

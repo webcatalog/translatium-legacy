@@ -151,7 +151,6 @@ const styles = (theme) => ({
   },
   copyright: {
     color: theme.palette.text.disabled,
-    cursor: 'pointer',
     fontWeight: 400,
     fontSize: '0.8rem',
     marginLeft: 12,
