@@ -271,7 +271,6 @@ if (!gotTheLock) {
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
   app.on('ready', () => {
-    console.log('ready');
     initLocales();
 
     const themeSource = getPreference('themeSource');
@@ -315,7 +314,6 @@ if (!gotTheLock) {
   });
 
   app.on('activate', () => {
-    console.log('activate');
     app.whenReady()
       .then(() => {
         // On OS X it's common to re-create a window in the app when the
