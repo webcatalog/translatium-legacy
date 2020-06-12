@@ -1,4 +1,22 @@
-const locales = require('./en.json');
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
+const { app } = require('electron');
+
+const { getPreference } = require('../preferences');
+
+let locales;
+
+const initLocales = () => {
+  const langId = getPreference('displayLanguage');
+  const uiLocales = require(`./${langId}/ui.json`);
+  const languageLocales = require(`./${langId}/languages.json`);
+  locales = { ...uiLocales, ...languageLocales };
+  Object.keys(locales).forEach((key) => {
+    locales[key] = locales[key]
+      .replace('{appName}', app.name)
+      .replace('{price}', '$7.99');
+  });
+};
 
 const getLocale = (id) => {
   if (!locales[id]) {
@@ -11,6 +29,7 @@ const getLocale = (id) => {
 const getLocales = () => locales;
 
 module.exports = {
+  initLocales,
   getLocale,
   getLocales,
 };

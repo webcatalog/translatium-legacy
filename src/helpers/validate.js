@@ -5,20 +5,20 @@ import getLocale from './get-locale';
 const kits = {
   required: (val, ruleVal, fieldName) => {
     if (!val || val === '') {
-      return getLocale('isRequired').replace('$FIELDNAME', fieldName);
+      return getLocale('isRequired').replace('{fieldName}', fieldName);
     }
 
     return null;
   },
   url: (val, maxLength, fieldName) => {
     if (!isUrl(val)) {
-      return getLocale('isNotValid').replace('$FIELDNAME', fieldName);
+      return getLocale('isNotValid').replace('{fieldName}', fieldName);
     }
     return null;
   },
   licenseKey: (val, ruleVal, fieldName) => {
     if (!isValidLicenseKey(val)) {
-      return getLocale('isNotValid').replace('$FIELDNAME', fieldName);
+      return getLocale('isNotValid').replace('{fieldName}', fieldName);
     }
     return null;
   },

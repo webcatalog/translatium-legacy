@@ -31,6 +31,7 @@ import {
   requestSetPreference,
   requestSetSystemPreference,
   requestShowRequireRestartDialog,
+  getDisplayLanguages,
 } from '../../../senders';
 
 import webcatalogLogo from '../../../assets/webcatalog-logo.svg';
@@ -113,6 +114,7 @@ const Preferences = (props) => {
     alwaysOnTop,
     attachToMenubar,
     classes,
+    displayLanguage,
     onOpenDialogAbout,
     onOpenDialogShortcut,
     onToggleSetting,
@@ -124,6 +126,9 @@ const Preferences = (props) => {
     translateWhenPressingEnter,
     useHardwareAcceleration,
   } = props;
+
+  const displayLanguages = getDisplayLanguages();
+  console.log(displayLanguages);
 
   return (
     <div className={classes.container}>
@@ -140,10 +145,30 @@ const Preferences = (props) => {
         <Paper elevation={0} className={classes.paper}>
           <List dense disablePadding>
             <EnhancedMenu
+              id="displayLanguage"
+              buttonElement={(
+                <ListItem button>
+                  <ListItemText primary={getLocale('displayLanguage')} secondary={displayLanguages[displayLanguage].displayName} />
+                  <ChevronRightIcon color="action" />
+                </ListItem>
+              )}
+            >
+              {Object.keys(displayLanguages).map((langCode) => (
+                <MenuItem
+                  key={langCode}
+                  dense
+                  onClick={() => requestSetPreference('displayLanguage', langCode)}
+                >
+                  {displayLanguages[langCode].displayName}
+                </MenuItem>
+              ))}
+            </EnhancedMenu>
+            <Divider />
+            <EnhancedMenu
               id="theme"
               buttonElement={(
                 <ListItem button>
-                  <ListItemText primary="Theme" secondary={getLocale(themeSource)} />
+                  <ListItemText primary={getLocale('theme')} secondary={getLocale(themeSource)} />
                   <ChevronRightIcon color="action" />
                 </ListItem>
               )}
@@ -232,7 +257,6 @@ const Preferences = (props) => {
             <ListItem>
               <ListItemText
                 primary={getLocale('alwaysOnTop')}
-                secondary={getLocale('alwaysOnTopDesc')}
               />
               <ListItemSecondaryAction>
                 <Switch
@@ -398,6 +422,7 @@ Preferences.propTypes = {
   alwaysOnTop: PropTypes.bool.isRequired,
   attachToMenubar: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
+  displayLanguage: PropTypes.string.isRequired,
   onOpenDialogAbout: PropTypes.func.isRequired,
   onOpenDialogShortcut: PropTypes.func.isRequired,
   onToggleSetting: PropTypes.func.isRequired,
@@ -413,6 +438,7 @@ Preferences.propTypes = {
 const mapStateToProps = (state) => ({
   alwaysOnTop: state.preferences.alwaysOnTop,
   attachToMenubar: state.preferences.attachToMenubar,
+  displayLanguage: state.preferences.displayLanguage,
   openAtLogin: state.systemPreferences.openAtLogin,
   openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
   showTransliteration: state.preferences.showTransliteration,

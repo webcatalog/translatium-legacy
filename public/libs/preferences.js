@@ -2,6 +2,7 @@ const { app, nativeTheme, ipcMain } = require('electron');
 const settings = require('electron-settings');
 
 const sendToAllWindows = require('./send-to-all-windows');
+const displayLanguages = require('./locales/languages');
 
 const getDefaultRegistered = () => {
   if (!app.isPackaged) return true;
@@ -19,24 +20,34 @@ const getDefaultRegistered = () => {
   return true;
 };
 
+const getDefaultDisplayLanguage = () => {
+  const appLocale = app.getLocale(); // vi-VN, en-US, etc
+  // by default, strip away country code
+  // strip away country code to get standardized language code
+  // vi-VN -> vi
+  const localeParts = appLocale.split('-');
+  let langCode = localeParts[0];
+  // if locale is 'zh-TW' (traditional chinese), keep it full
+  if (appLocale === 'zh-TW') langCode = 'zh-TW';
+  // use 'zh-CN' for other `zh` cases
+  else if (appLocale.startsWith('zh')) langCode = 'zh-CN';
+  // for Portugese and Spanish, add back specific country code
+  // to match what is used in Crowdin
+  // https://crowdin.com/project/translatium
+  else if (langCode === 'pt') langCode = 'pt-PT';
+  else if (langCode === 'es') langCode = 'es-ES';
+
+  // finally check if we have the locale supported
+  // if not just use English
+  if (Object.keys(displayLanguages).indexOf(langCode) > -1) {
+    return langCode;
+  }
+
+  return '';
+};
+
 // scope
 const v = '2019';
-
-const defaultPreferences = {
-  alwaysOnTop: false,
-  attachToMenubar: false,
-  clearInputShortcut: 'mod+shift+d',
-  inputLang: 'en',
-  openOnMenubarShortcut: 'alt+shift+t',
-  outputLang: 'zh-CN',
-  recentLanguages: ['en', 'zh-CN'],
-  registered: getDefaultRegistered(),
-  showTransliteration: true,
-  themeSource: 'system',
-  translateClipboardOnShortcut: false,
-  translateWhenPressingEnter: true,
-  useHardwareAcceleration: true,
-};
 
 let cachedPreferences = null;
 
@@ -49,6 +60,22 @@ const initCachedPreferences = () => {
     settings.set('preferenceVersion', 13);
   }
 
+  const defaultPreferences = {
+    alwaysOnTop: false,
+    attachToMenubar: false,
+    clearInputShortcut: 'mod+shift+d',
+    displayLanguage: getDefaultDisplayLanguage(),
+    inputLang: 'en',
+    openOnMenubarShortcut: 'alt+shift+t',
+    outputLang: 'zh-CN',
+    recentLanguages: ['en', 'zh-CN'],
+    registered: getDefaultRegistered(),
+    showTransliteration: true,
+    themeSource: 'system',
+    translateClipboardOnShortcut: false,
+    translateWhenPressingEnter: true,
+    useHardwareAcceleration: true,
+  };
   cachedPreferences = { ...defaultPreferences, ...settings.get(`preferences.${v}`) };
 };
 

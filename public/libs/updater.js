@@ -65,7 +65,7 @@ autoUpdater.on('update-downloaded', (info) => {
     type: 'info',
     buttons: [getLocale('restart'), getLocale('later')],
     title: getLocale('applicationUpdate'),
-    detail: getLocale('applicationUpdateDesc').replace('$VERSION', info.version),
+    detail: getLocale('applicationUpdateDesc').replace('{version}', info.version),
     cancelId: 1,
   };
 

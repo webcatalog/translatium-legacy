@@ -133,7 +133,7 @@ const createMenu = () => {
       label: getLocale('help'),
       submenu: [
         {
-          label: getLocale('translatiumSupport'),
+          label: getLocale('appNameSupport'),
           click: () => shell.openExternal('https://atomery.com/support?app=translatium'),
         },
         {
@@ -186,7 +186,6 @@ const createMenu = () => {
         { type: 'separator' },
         { role: 'hide', label: getLocale('hide') },
         { role: 'hideothers', label: getLocale('hideOthers') },
-        { role: 'unhide', label: getLocale('unhide') },
         { type: 'separator' },
         { role: 'quit', label: getLocale('quit') },
       ],

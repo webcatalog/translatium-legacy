@@ -248,7 +248,7 @@ class Home extends React.Component {
             }
             // Render a countdown
             // eslint-disable-next-line react/jsx-one-expression-per-line
-            return getLocale('trialExpireIn').replace('$TIME', `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`);
+            return getLocale('trialExpireIn').replace('{time}', `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`);
           }}
           onComplete={() => {
             onOpenDialogLicenseRegistration();

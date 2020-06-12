@@ -25,7 +25,7 @@ const { menubar } = require('menubar');
 const createMenu = require('./libs/create-menu');
 const loadListeners = require('./listeners');
 const { getPreference } = require('./libs/preferences');
-const { getLocale } = require('./libs/locales');
+const { initLocales, getLocale } = require('./libs/locales');
 const sendToAllWindows = require('./libs/send-to-all-windows');
 const setContextMenu = require('./libs/set-context-menu');
 
@@ -59,7 +59,10 @@ if (!gotTheLock) {
   // would return error
   // https://github.com/nathanbuchar/electron-settings/issues/111
   if (fs.existsSync(settings.file())) {
-    const useHardwareAcceleration = getPreference('useHardwareAcceleration');
+    // access pref using electron-settings directly
+    // to avoid initiate preferences before 'ready'
+    const v = '2019';
+    const useHardwareAcceleration = settings.get(`preferences.${v}.useHardwareAcceleration`, true);
     if (!useHardwareAcceleration) {
       app.disableHardwareAcceleration();
     }
@@ -268,6 +271,9 @@ if (!gotTheLock) {
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
   app.on('ready', () => {
+    console.log('ready');
+    initLocales();
+
     const themeSource = getPreference('themeSource');
     nativeTheme.themeSource = themeSource;
 
@@ -309,6 +315,7 @@ if (!gotTheLock) {
   });
 
   app.on('activate', () => {
+    console.log('activate');
     app.whenReady()
       .then(() => {
         // On OS X it's common to re-create a window in the app when the
