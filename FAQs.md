@@ -7,9 +7,6 @@ Yes, most features of Translatium require Internet connection to work.
 ##### Does Translatium support PopClip?
 Yes, it does. You can download the PopClip extension from [here](https://translatiumapp.com/popclip).
 
-##### Why speech recognition and some other features are removed?
-On November 7th, 2018, Translatium was removed from sale because the unofficial Google Translate [APIs](https://en.wikipedia.org/wiki/Application_programming_interface) the app relied on were partially blocked by Google. In August 2019, we managed to bring the app back to life using legitimate APIs from other providers. While this decision allows the app to continue operating, it also forces us to remove certain features from the app. Still, we will try to add these features back in the future if possible.
-
 ##### Where can I download previous versions of Translatium?
 Even though previous versions of Translatium are no longer officially supported, you can still download them from [here](https://github.com/atomery/translatium/releases).
 
@@ -29,7 +26,7 @@ Yes, you can as long as you're the only person who uses the app on these compute
 Yes, we offer a full refund within 30 days of your purchase.
 
 ##### I lost my license key. How can I retrieve it?
-You should have received an email with your license key when you purchased Translatium from [our store](https://webcatalog.onfastspring.com/). If you can’t find the email, you can retrieve your license key from the [License Manager](https://webcatalog.onfastspring.com/account).
+You should have received an email with your license key when you purchased Translatium from [our store (Atomery Store)](https://webcatalog.onfastspring.com/). If you can’t find the email, you can retrieve your license key from the [License Manager](https://webcatalog.onfastspring.com/account).
 
 If you purchase the license from other stores, such as [BundleHunt](https://bundlehunt.com/), please contact the corresponding store to retrieve your license key.
 

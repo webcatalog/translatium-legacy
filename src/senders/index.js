@@ -14,6 +14,7 @@ export const requestShowRequireRestartDialog = () => ipcRenderer.send('request-s
 // Locale
 export const getLocale = (id) => ipcRenderer.sendSync('get-locale', id);
 export const getLocales = () => ipcRenderer.sendSync('get-locales');
+export const getDisplayLanguages = () => ipcRenderer.sendSync('get-display-languages');
 
 // Native Theme
 export const getShouldUseDarkColors = () => ipcRenderer.sendSync('get-should-use-dark-colors');

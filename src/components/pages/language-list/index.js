@@ -83,7 +83,7 @@ class LanguageList extends React.Component {
         <AppBar position="static" color="default" elevation={0} classes={{ colorDefault: classes.appBarColorDefault }}>
           <Toolbar variant="dense" className={classes.toolbar}>
             <Typography variant="subtitle1" color="inherit" className={classes.title}>
-              {mode === 'inputLang' ? getLocale('chooseAnInputLanguage') : getLocale('chooseAnOutputLanguage')}
+              {mode === 'inputLang' ? getLocale('selectInputLang') : getLocale('selectOutputLang')}
             </Typography>
             <Tooltip title={getLocale('close')} placement="left">
               <IconButton

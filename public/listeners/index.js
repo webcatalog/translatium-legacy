@@ -25,6 +25,8 @@ const {
   getLocales,
 } = require('../libs/locales');
 
+const displayLanguages = require('../libs/locales/languages');
+
 const loadListeners = () => {
   // Locale
   ipcMain.on('get-locale', (e, id) => {
@@ -127,6 +129,11 @@ const loadListeners = () => {
   // Native Theme
   ipcMain.on('get-should-use-dark-colors', (e) => {
     e.returnValue = nativeTheme.shouldUseDarkColors;
+  });
+
+  // Native Theme
+  ipcMain.on('get-display-languages', (e) => {
+    e.returnValue = displayLanguages;
   });
 };
 
