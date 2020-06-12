@@ -12,6 +12,7 @@ const semver = require('semver');
 const { exec } = require('child_process');
 
 const packageJson = require('./package.json');
+const displayLanguages = require('./public/libs/locales/languages');
 
 // sometimes, notarization works but *.app does not have a ticket stapled to it
 // this ensure the *.app has the notarization ticket
@@ -123,7 +124,7 @@ const opts = {
       ],
     },
     afterPack: ({ appOutDir }) => new Promise((resolve, reject) => {
-      const languages = ['en'];
+      const languages = Object.keys(displayLanguages);
 
       if (process.platform === 'darwin') {
         glob(`${appOutDir}/Translatium.app/Contents/Resources/!(${languages.join('|').replace(/-/g, '_')}).lproj`, (err, files) => {

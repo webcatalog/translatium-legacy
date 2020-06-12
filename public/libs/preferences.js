@@ -31,11 +31,6 @@ const getDefaultDisplayLanguage = () => {
   if (appLocale === 'zh-TW') langCode = 'zh-TW';
   // use 'zh-CN' for other `zh` cases
   else if (appLocale.startsWith('zh')) langCode = 'zh-CN';
-  // for Portugese and Spanish, add back specific country code
-  // to match what is used in Crowdin
-  // https://crowdin.com/project/translatium
-  else if (langCode === 'pt') langCode = 'pt-PT';
-  else if (langCode === 'es') langCode = 'es-ES';
 
   // finally check if we have the locale supported
   // if not just use English

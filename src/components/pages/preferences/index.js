@@ -157,7 +157,10 @@ const Preferences = (props) => {
                 <MenuItem
                   key={langCode}
                   dense
-                  onClick={() => requestSetPreference('displayLanguage', langCode)}
+                  onClick={() => {
+                    requestSetPreference('displayLanguage', langCode);
+                    requestShowRequireRestartDialog();
+                  }}
                 >
                   {displayLanguages[langCode].displayName}
                 </MenuItem>
