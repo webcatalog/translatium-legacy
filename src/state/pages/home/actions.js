@@ -11,7 +11,6 @@ import { isInputLanguage, isOutputLanguage } from '../../../helpers/language-uti
 import { openAlert } from '../../root/alert/actions';
 import { addHistoryItem } from './history/actions';
 
-
 import { requestSetPreference } from '../../../senders';
 
 export const toggleFullscreenInputBox = () => ({

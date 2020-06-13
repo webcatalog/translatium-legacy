@@ -13,7 +13,6 @@ export const toggleSetting = (name) => ((dispatch, getState) => {
   requestSetPreference(name, value);
 });
 
-
 const runAfterLanguageChange = (language) => ((dispatch, getState) => {
   const { preferences } = getState();
   const { recentLanguages } = preferences;

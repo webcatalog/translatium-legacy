@@ -14,7 +14,6 @@ const search = (state = '', action) => {
   }
 };
 
-
 const mode = (state = 'inputLang', action) => {
   switch (action.type) {
     case UPDATE_LANGUAGE_LIST_MODE: return action.mode;

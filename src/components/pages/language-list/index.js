@@ -18,7 +18,6 @@ import { ROUTE_HOME, ROUTE_LANGUAGE_LIST } from '../../../constants/routes';
 import LanguageListList from './list';
 import SearchBox from './search-box';
 
-
 const styles = (theme) => ({
   container: {
     flex: 1,
@@ -44,7 +43,6 @@ const styles = (theme) => ({
     padding: theme.spacing(1),
   },
 });
-
 
 class LanguageList extends React.Component {
   constructor(props) {

@@ -11,7 +11,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
-
 import { loadHistory, updateQuery } from '../../../state/pages/history/actions';
 
 const styles = (theme) => ({

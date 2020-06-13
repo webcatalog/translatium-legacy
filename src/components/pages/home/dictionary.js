@@ -21,6 +21,7 @@ const styles = (theme) => ({
     textTransform: 'uppercase',
     color: theme.palette.text.secondary,
     marginTop: theme.spacing(2),
+    userSelect: 'text',
     '&:not(:first-child)': {
       marginTop: theme.spacing(4),
     },
@@ -28,15 +29,18 @@ const styles = (theme) => ({
   word: {
     color: theme.palette.text.primary,
     lineHeight: 1.3,
+    userSelect: 'text',
   },
   translations: {
     color: theme.palette.text.secondary,
+    userSelect: 'text',
     '&:not(:last-child)': {
       marginBottom: theme.spacing(1.5),
     },
   },
   link: {
     color: 'inherit',
+    userSelect: 'text',
   },
 });
 

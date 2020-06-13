@@ -115,7 +115,6 @@ const resetPreferences = () => {
   });
 };
 
-
 module.exports = {
   getPreference,
   getPreferences,
