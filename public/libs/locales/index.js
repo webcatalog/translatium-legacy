@@ -14,7 +14,7 @@ const initLocales = () => {
   Object.keys(locales).forEach((key) => {
     locales[key] = locales[key]
       .replace('{appName}', app.name)
-      .replace('{price}', '$7.99');
+      .replace('{price}', '$9.99');
   });
 };
 

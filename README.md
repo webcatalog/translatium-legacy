@@ -11,7 +11,7 @@
 ---
 ## Licensing
 ### Usage
-**Translatium is paid software.**  [Pay just $7.99](https://webcatalog.onfastspring.com/translatium) to unlock the app perpetually.
+**Translatium is paid software.**  [Pay just $9.99](https://webcatalog.onfastspring.com/translatium) to unlock the app perpetually.
 
 The license:
 - Has no time limit and never expires.
