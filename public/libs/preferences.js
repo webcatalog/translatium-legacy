@@ -4,20 +4,11 @@ const settings = require('electron-settings');
 const sendToAllWindows = require('./send-to-all-windows');
 const displayLanguages = require('./locales/languages');
 
-const getDefaultRegistered = () => {
+const shouldSkipLicenseCheck = () => {
   if (!app.isPackaged) return true;
 
-  // only check for license in non Mac App Store distribution or Linux
-  if (process.platform === 'darwin' && !process.mas) {
-    return false;
-  }
-
-  if (process.platform === 'linux') {
-    return false;
-  }
-
-  // Mac App Store & Windows Store distributions use provided licensing systems
-  return true;
+  // skip license check if it is Mac App Store/Microsoft Store distribution
+  return (process.windowsStore || process.mas);
 };
 
 const getDefaultDisplayLanguage = () => {
@@ -64,7 +55,7 @@ const initCachedPreferences = () => {
     openOnMenubarShortcut: 'alt+shift+t',
     outputLang: 'zh-CN',
     recentLanguages: ['en', 'zh-CN'],
-    registered: getDefaultRegistered(),
+    registered: false,
     showTransliteration: true,
     themeSource: 'system',
     translateClipboardOnShortcut: false,
@@ -72,6 +63,9 @@ const initCachedPreferences = () => {
     useHardwareAcceleration: true,
   };
   cachedPreferences = { ...defaultPreferences, ...settings.get(`preferences.${v}`) };
+  if (shouldSkipLicenseCheck()) {
+    cachedPreferences.registered = true;
+  }
 };
 
 const getPreferences = () => {
