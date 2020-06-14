@@ -34,7 +34,7 @@ import getLocale from '../../../helpers/get-locale';
 
 import {
   isOcrSupported,
-  isTtsSupported,
+  isTTSSupported,
 } from '../../../helpers/language-utils';
 
 import { loadImage } from '../../../state/pages/ocr/actions';
@@ -322,7 +322,7 @@ class Home extends React.Component {
           },
         ];
 
-        if (isTtsSupported(output.outputLang)) {
+        if (isTTSSupported(output.outputLang)) {
           controllers.unshift({
             Icon: textToSpeechPlaying ? AVStop : AVVolumeUp,
             tooltip: textToSpeechPlaying ? getLocale('stop') : getLocale('listen'),
@@ -446,7 +446,7 @@ class Home extends React.Component {
       },
     ];
 
-    if (isTtsSupported(inputLang)) {
+    if (isTTSSupported(inputLang)) {
       controllers.push({
         Icon: textToSpeechPlaying ? AVStop : AVVolumeUp,
         tooltip: textToSpeechPlaying ? getLocale('stop') : getLocale('listen'),
@@ -460,7 +460,7 @@ class Home extends React.Component {
         },
       });
     } else if (output && output.inputLang
-      && isTtsSupported(output.inputLang) && inputText === output.inputText) {
+      && isTTSSupported(output.inputLang) && inputText === output.inputText) {
       controllers.push({
         Icon: textToSpeechPlaying ? AVStop : AVVolumeUp,
         tooltip: textToSpeechPlaying ? getLocale('stop') : getLocale('listen'),
