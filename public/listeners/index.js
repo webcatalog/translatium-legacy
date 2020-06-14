@@ -7,6 +7,8 @@ const {
   shell,
 } = require('electron');
 
+const fetch = require('node-fetch');
+
 const {
   getPreference,
   getPreferences,
@@ -135,6 +137,8 @@ const loadListeners = () => {
   ipcMain.on('get-display-languages', (e) => {
     e.returnValue = displayLanguages;
   });
+
+  ipcMain.handle('node-fetch-buffer', (event, ...args) => fetch(...args).then((res) => res.buffer()));
 };
 
 module.exports = loadListeners;

@@ -22,3 +22,6 @@ export const getShouldUseDarkColors = () => ipcRenderer.sendSync('get-should-use
 export const getSystemPreference = (name) => ipcRenderer.sendSync('get-system-preference', name);
 export const getSystemPreferences = () => ipcRenderer.sendSync('get-system-preferences');
 export const requestSetSystemPreference = (name, value) => ipcRenderer.send('request-set-system-preference', name, value);
+
+// Fetch
+export const nodeFetchBufferAsync = (...args) => ipcRenderer.invoke('node-fetch-buffer', ...args);

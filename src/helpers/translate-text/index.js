@@ -1,5 +1,6 @@
 /* global fetch */
 import getTokenFromText from './get-token-from-text';
+import delayAsync from '../delay-async';
 
 let fallbackId = 0;
 // retry with different endpoints at least 5 times
@@ -10,7 +11,6 @@ const makeRequestAsync = (inputLang, outputLang, inputText, retry = 5) => Promis
       // do not use translate.google.com endpoint as it has request limit
       const tk = getTokenFromText(inputText);
       const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${inputLang}&tl=${outputLang}&hl=en-US&dt=t&dt=bd&dt=qc&dt=rm&dj=1&source=icon&tk=${tk}&q=${encodeURIComponent(inputText)}`;
-      // const url = `https://translate.googleapis.com/translate_a/single??dt=t&dt=bd&dt=qc&dt=rm&client=gtx&sl=${inputLang}&tl=${outputLang}&dj=1&q=${encodeURIComponent(inputText)}&tk=${tk}&hl=en-US`;
       return fetch(url, {
         headers: {
           'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36',
@@ -39,8 +39,6 @@ const makeRequestAsync = (inputLang, outputLang, inputText, retry = 5) => Promis
     }
     return response;
   });
-
-const delayAsync = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const translateText = (inputLang, outputLang, inputText) => Promise.resolve()
   .then(() => delayAsync(300)) // delay to avoid request limit

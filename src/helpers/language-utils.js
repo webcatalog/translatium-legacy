@@ -13,7 +13,7 @@ const data = {
     'te', 'th', 'tr', 'tk', 'uk', 'ur', 'ug', 'uz', 'vi', 'cy', 'xh',
     'yi', 'yo', 'zu',
   ],
-  ttsSupported: [
+  googleTTSSupported: [
     'af',
     'sq',
     'ar',
@@ -23,28 +23,36 @@ const data = {
     'ca',
     'zh-TW',
     'zh-CN',
-    'zh-HK',
     'hr',
     'cs',
     'da',
     'nl',
     'en',
     'eo',
+    'et',
+    'tl',
     'fi',
     'fr',
     'de',
     'el',
+    'gu',
     'hi',
     'hu',
     'is',
     'id',
     'it',
     'ja',
+    'jw',
+    'kn',
     'km',
     'ko',
     'la',
     'lv',
     'mk',
+    'ml',
+    'mr',
+    'my',
+    'ne',
     'no',
     'pl',
     'pt',
@@ -54,12 +62,15 @@ const data = {
     'si',
     'sk',
     'es',
+    'su',
     'sw',
     'sv',
     'ta',
+    'te',
     'th',
     'tr',
     'uk',
+    'ur',
     'vi',
     'cy',
   ],
@@ -122,7 +133,7 @@ export const getInputLanguages = () => data.all;
 export const getOcrSupportedLanguages = () => data.all.filter((lang) => isOcrSupported(lang));
 
 // Check if language supports Text-to-speech
-export const isTtsSupported = (lang) => {
+export const isSystemTTSSupported = (lang) => {
   const voices = window.speechSynthesis.getVoices();
   for (let i = 0; i < voices.length; i += 1) {
     const voice = voices[i];
@@ -131,9 +142,16 @@ export const isTtsSupported = (lang) => {
     }
   }
 
-  return data.ttsSupported.indexOf(lang) > -1
-    || data.ttsSupported.indexOf(toCountryFreeLanguage(lang)) > -1;
+  return false;
+};
+
+export const isGoogleTTSSupported = (lang) => data.googleTTSSupported.indexOf(lang) > -1
+  || data.googleTTSSupported.indexOf(toCountryFreeLanguage(lang)) > -1;
+
+export const isTTSSupported = (lang) => {
+  if (isSystemTTSSupported(lang)) return true;
+  return isGoogleTTSSupported(lang);
 };
 
 // Get list of all languages that support TTS
-export const getTTSSupportedLanguages = () => data.all.filter((lang) => isTtsSupported(lang));
+export const getTTSSupportedLanguages = () => data.all.filter((lang) => isTTSSupported(lang));
