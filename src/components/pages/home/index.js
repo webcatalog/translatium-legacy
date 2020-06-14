@@ -554,7 +554,7 @@ class Home extends React.Component {
               autoCorrect="off"
               className={classNames('text-selectable', classes.textarea)}
               lang={inputLang}
-              maxLength="1000"
+              maxLength="10000" // api limit is 11000 chars
               onChange={(e) => onUpdateInputText(
                 e.target.value,
                 e.target.selectionStart,
