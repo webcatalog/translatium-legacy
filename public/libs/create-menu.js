@@ -111,6 +111,11 @@ const createMenu = () => {
           click: () => sendToAllWindows('go-to-home'),
         },
         {
+          label: getLocale('history'),
+          accelerator: 'CmdOrCtrl+Y',
+          click: () => sendToAllWindows('go-to-history'),
+        },
+        {
           label: getLocale('phrasebook'),
           accelerator: 'CmdOrCtrl+Shift+B',
           click: () => sendToAllWindows('go-to-phrasebook'),
@@ -124,6 +129,8 @@ const createMenu = () => {
       label: getLocale('window'),
       submenu: [
         { role: 'minimize', label: getLocale('minimize') },
+        { role: 'zoom', label: getLocale('zoom') },
+        { type: 'separator' },
         { role: 'close', label: getLocale('close') },
       ],
     },

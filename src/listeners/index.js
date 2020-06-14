@@ -15,6 +15,7 @@ import { setSystemPreference } from '../state/root/system-preferences/actions';
 
 import {
   ROUTE_HOME,
+  ROUTE_HISTORY,
   ROUTE_LANGUAGE_LIST,
   ROUTE_PHRASEBOOK,
   ROUTE_PREFERENCES,
@@ -50,6 +51,10 @@ const loadListeners = (store) => {
 
   ipcRenderer.on('go-to-home', () => {
     store.dispatch(changeRoute(ROUTE_HOME));
+  });
+
+  ipcRenderer.on('go-to-history', () => {
+    store.dispatch(changeRoute(ROUTE_HISTORY));
   });
 
   ipcRenderer.on('go-to-phrasebook', () => {
