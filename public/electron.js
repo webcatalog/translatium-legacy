@@ -21,6 +21,7 @@ const path = require('path');
 const url = require('url');
 const { autoUpdater } = require('electron-updater');
 const { menubar } = require('menubar');
+const windowStateKeeper = require('electron-window-state');
 
 const createMenu = require('./libs/create-menu');
 const loadListeners = require('./listeners');
@@ -97,15 +98,22 @@ if (!gotTheLock) {
       // icon template is not supported on Windows & Linux
       const iconPath = path.resolve(__dirname, 'images', process.platform === 'darwin' ? 'menubarTemplate.png' : 'menubar.png');
       tray.setImage(iconPath);
+
+      const menubarWindowState = windowStateKeeper({
+        file: 'window-state-menubar.json',
+        defaultWidth: 400,
+        defaultHeight: 500,
+      });
+
       mb = menubar({
         index: REACT_PATH,
         tray,
         preloadWindow: true,
         browserWindow: {
           alwaysOnTop: getPreference('alwaysOnTop'),
-          width: 400,
-          height: 500,
-          minWidth: 460,
+          width: menubarWindowState.width,
+          height: menubarWindowState.height,
+          minWidth: 400,
           minHeight: 500,
           webPreferences: {
             nodeIntegration: true,
@@ -190,6 +198,10 @@ if (!gotTheLock) {
 
       let isHidden = true;
 
+      mb.on('after-create-window', () => {
+        menubarWindowState.manage(mb.window);
+      });
+
       mb.on('show', () => {
         isHidden = false;
       });
@@ -220,9 +232,15 @@ if (!gotTheLock) {
       ipcMain.emit('set-show-menubar-shortcut', null, openOnMenubarShortcut);
     } else {
       // Create the browser window.
+      const mainWindowState = windowStateKeeper({
+        defaultWidth: 400,
+        defaultHeight: 500,
+      });
       mainWindow = new BrowserWindow({
-        width: 500,
-        height: 600,
+        x: mainWindowState.x,
+        y: mainWindowState.y,
+        width: mainWindowState.width,
+        height: mainWindowState.height,
         minWidth: 400,
         minHeight: 500,
         titleBarStyle: 'hidden',
@@ -236,6 +254,7 @@ if (!gotTheLock) {
           webSecurity: false,
         },
       });
+      mainWindowState.manage(mainWindow);
 
       // Emitted when the window is closed.
       mainWindow.on('closed', () => {
