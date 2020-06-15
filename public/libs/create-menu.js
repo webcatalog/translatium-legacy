@@ -129,7 +129,6 @@ const createMenu = () => {
       label: getLocale('window'),
       submenu: [
         { role: 'minimize', label: getLocale('minimize') },
-        { role: 'zoom', label: getLocale('zoom') },
         { type: 'separator' },
         { role: 'close', label: getLocale('close') },
       ],
@@ -154,9 +153,8 @@ const createMenu = () => {
     },
   ];
 
+  const registered = getPreference('registered');
   if (process.platform === 'darwin') {
-    const registered = getPreference('registered');
-
     template.unshift({
       label: config.APP_NAME,
       submenu: [
@@ -175,13 +173,13 @@ const createMenu = () => {
         },
         {
           type: 'separator',
-          visible: process.platform === 'darwin' && !process.mas,
+          visible: !process.mas,
         },
         {
           label: registered ? getLocale('registered') : getLocale('registration'),
           enabled: !registered,
           click: registered ? null : () => sendToAllWindows('open-license-registration-dialog'),
-          visible: process.platform === 'darwin' && !process.mas,
+          visible: !process.mas,
         },
         { type: 'separator' },
         {
@@ -212,6 +210,16 @@ const createMenu = () => {
       {
         label: getLocale('about'),
         click: () => sendToAllWindows('open-dialog-about'),
+      },
+      {
+        type: 'separator',
+        visible: !process.windowsStore,
+      },
+      {
+        label: registered ? getLocale('registered') : getLocale('registration'),
+        enabled: !registered,
+        click: registered ? null : () => sendToAllWindows('open-license-registration-dialog'),
+        visible: !process.windowsStore,
       },
       {
         type: 'separator',
