@@ -149,13 +149,6 @@ const styles = (theme) => ({
     fontWeight: 400,
     display: 'inline-block',
   },
-  copyright: {
-    color: theme.palette.text.disabled,
-    fontWeight: 400,
-    fontSize: '0.8rem',
-    marginLeft: 12,
-    marginRight: 12,
-  },
   appBarColorDefault: {
     // eslint-disable-next-line no-nested-ternary
     background: theme.palette.type === 'dark' ? theme.palette.grey[900] : (window.process.platform === 'darwin' ? theme.palette.primary.main : null),
@@ -387,13 +380,6 @@ class Home extends React.Component {
             </Card>
 
             {output.outputDict && output.source === 'translate.googleapis.com' && <Dictionary />}
-            <Typography
-              variant="body2"
-              align="left"
-              className={classes.copyright}
-            >
-              Powered by Google Translate
-            </Typography>
             {this.renderCountdown()}
           </div>
         );
