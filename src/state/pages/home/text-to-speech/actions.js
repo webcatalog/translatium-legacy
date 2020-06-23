@@ -32,7 +32,7 @@ const preloadGoogleTTSAsync = (lang, text, idx, total) => () => {
 };
 
 // max length 100 characters
-const playGoogleTTSAsync = (lang, text, idx, total) => (dispatch) => {
+const playGoogleTTSAsync = (lang, text, idx, total) => () => {
   const uri = encodeURI(`https://translate.google.com/translate_tts?ie=UTF-8&q=${text}&tl=${lang}&total=${total}&idx=${idx}&textlen=8&client=dict-chrome-ex&prev=input`);
 
   const opts = {
@@ -60,10 +60,7 @@ const playGoogleTTSAsync = (lang, text, idx, total) => (dispatch) => {
       });
     })
     .then(() => {
-      finishedIdx = 0;
-    })
-    .catch(() => {
-      dispatch(openAlert('cannotConnectToServer'));
+      finishedIdx = idx;
     });
 };
 
@@ -151,6 +148,9 @@ export const startTextToSpeech = (textToSpeechLang, textToSpeechText) => ((dispa
       .then(() => {
         cachedResponses = {};
         dispatch({ type: END_TEXT_TO_SPEECH });
+      })
+      .catch(() => {
+        dispatch(openAlert('cannotConnectToServer'));
       });
   }
 });
