@@ -94,6 +94,14 @@ const styles = (theme) => ({
   logo: {
     height: 28,
   },
+  copyright: {
+    color: theme.palette.text.disabled,
+    fontWeight: 400,
+    fontSize: '0.8rem',
+    marginLeft: theme.spacing(1.5),
+    marginRight: theme.spacing(1.5),
+    marginTop: theme.spacing(0.5),
+  },
 });
 
 const renderCombinator = (combinator) => combinator
@@ -410,6 +418,13 @@ const Preferences = (props) => {
             </ListItem>
           </List>
         </Paper>
+        <Typography
+          variant="body2"
+          align="right"
+          className={classes.copyright}
+        >
+          Powered by Google Translate
+        </Typography>
       </div>
     </div>
   );
