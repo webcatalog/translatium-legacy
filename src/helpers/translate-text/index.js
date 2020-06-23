@@ -51,7 +51,7 @@ const translateText = (inputLang, outputLang, inputText) => Promise.resolve()
     const outputDict = result.dict;
 
     return {
-      inputLang,
+      inputLang: inputLang === 'auto' ? result.src : inputLang,
       outputLang,
       inputText,
       outputText,
