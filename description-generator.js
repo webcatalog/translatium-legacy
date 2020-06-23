@@ -11,6 +11,7 @@ Object.keys(displayLanguages).forEach((langCode) => {
 
   const supportedLanguageStrings = fs.readJsonSync(path.join(localesDir, langCode, 'languages.json'));
   const supportedLanguages = Object.keys(supportedLanguageStrings)
+    .filter((code) => code !== 'auto')
     .map((code) => supportedLanguageStrings[code])
     .sort((x, y) => x.localeCompare(y));
 
