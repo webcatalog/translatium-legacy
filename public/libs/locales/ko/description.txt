@@ -1,0 +1,7 @@
+{appName}(으)로 즉시 모든 언어 번역 - {operatingSystem}의 가장 강력한 번역 앱입니다.
+
+{appName}에서는 사전, 음역, 음성 출력 지원을 이용하여 100개 이상의 언어 간에 단어, 구, 이미지를 번역할 수 있습니다.
+
+웹사이트를 방문하여 {appName}에 대해 자세히 알아보세요: {appUrl}.
+
+지원 언어: {supportedLanguages}

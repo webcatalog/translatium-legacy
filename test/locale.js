@@ -4,18 +4,22 @@ const fs = require('fs-extra');
 const path = require('path');
 
 describe('All localized languages have valid keys/values', () => {
+  const localesDir = path.resolve(__dirname, '..', 'public', 'libs', 'locales');
   const defaultKeys = Object.keys(
-    fs.readJSONSync(path.resolve(__dirname, '..', 'src', 'strings', 'en.json')),
-  );
+    fs.readJSONSync(path.join(localesDir, 'en', 'languages.json')),
+  ).concat(Object.keys(
+    fs.readJSONSync(path.join(localesDir, 'en', 'ui.json')),
+  ));
 
-  const files = fs.readdirSync(path.resolve(__dirname, '..', 'src', 'strings'));
-  files.forEach((file) => {
-    if (!file.endsWith('.json')) return;
-
-    it(file, () => {
+  // eslint-disable-next-line global-require
+  const displayLanguages = require('../public/libs/locales/languages');
+  Object.keys(displayLanguages).forEach((langCode) => {
+    it(langCode, () => {
       const keys = Object.keys(
-        fs.readJSONSync(path.resolve(__dirname, '..', 'src', 'strings', file)),
-      );
+        fs.readJSONSync(path.join(localesDir, langCode, 'languages.json')),
+      ).concat(Object.keys(
+        fs.readJSONSync(path.join(localesDir, langCode, 'ui.json')),
+      ));
 
       expect(keys).to.deep.equal(defaultKeys);
     });

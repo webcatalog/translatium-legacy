@@ -1,0 +1,7 @@
+Traduisez instantanément n'importe quelle langue avec {appName} - l'application de traduction la plus puissante pour {operatingSystem}.
+
+{appName} vous permet de traduire des mots, des phrases et des images dans plus de 100 langues avec la prise en charge des dictionnaires, de la translittération et de la sortie vocale.
+
+Visitez notre site Web pour en savoir plus sur {appName} : {appUrl}.
+
+Langues prises en charge : {supportedLanguages}
