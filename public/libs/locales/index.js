@@ -13,8 +13,8 @@ const initLocales = () => {
   locales = { ...uiLocales, ...languageLocales };
   Object.keys(locales).forEach((key) => {
     locales[key] = locales[key]
-      .replace('{appName}', app.name)
-      .replace('{price}', '$9.99');
+      .replace(/{appName}/g, app.name)
+      .replace(/{price}/g, '$9.99');
   });
 };
 

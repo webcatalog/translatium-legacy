@@ -1,0 +1,7 @@
+Translate any languages instantly with {appName} - the most powerful translation app for {operatingSystem}.
+
+{appName} lets you translate words, phrases and images between over 100 languages with dictionary, transliteration and voice output support.
+
+Visit our website to learn more about {appName}: {appUrl}.
+
+Supported Languages: {supportedLanguages}

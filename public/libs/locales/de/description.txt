@@ -1,0 +1,7 @@
+Übersetzen Sie jede Sprache sofort mit {appName} - der leistungsfähigsten Übersetzungs-App für {operatingSystem}.
+
+Mit {appName} können Sie Wörter, Redewendungen und Bilder aus und in mehr als 100 Sprachen übersetzen, mit Wörterbuch-, Transliterations- und Sprachausgabeunterstützung.
+
+Besuchen Sie unsere Website, um mehr über {appName} zu erfahren: {appUrl}.
+
+Unterstützte Sprachen: {supportedLanguages}

@@ -1,0 +1,7 @@
+Dịch tức thời bất kỳ ngôn ngữ với {appName} - ứng dụng dịch mạnh mẽ nhất dành cho {operatingSystem}.
+
+{appName} cho phép bạn dịch các từ, cụm từ và hình ảnh qua lại giữa hơn 100 ngôn ngữ với hỗ trợ từ điển, phiên âm và đầu ra giọng nói.
+
+Ghé thăm trang web của chúng tôi để tìm hiểu thêm về {appName}: {appUrl}.
+
+Ngôn ngữ được hỗ trợ: {supportedLanguages}

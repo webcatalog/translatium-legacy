@@ -1,0 +1,7 @@
+使用 {appName} 即时翻译任何语言 - 适用于 {operatingSystem} 的最强大的翻译应用程序。
+
+{appName} 允许您在 100 多种语言之间翻译单词、短语和图像，并提供字典、音译和语音输出支持。
+
+请访问我们的网站以了解关于 {appName} 的更多信息：{appUrl}。
+
+支持的语言：{supportedLanguages}
