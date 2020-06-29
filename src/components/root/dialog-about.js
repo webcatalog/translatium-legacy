@@ -11,7 +11,7 @@ import connectComponent from '../../helpers/connect-component';
 import getLocale from '../../helpers/get-locale';
 
 import { close } from '../../state/root/dialog-about/actions';
-import iconPng from '../../assets/icon.png';
+import iconPng from '../../assets/translatium-icon.png';
 
 import { requestOpenInBrowser } from '../../senders';
 

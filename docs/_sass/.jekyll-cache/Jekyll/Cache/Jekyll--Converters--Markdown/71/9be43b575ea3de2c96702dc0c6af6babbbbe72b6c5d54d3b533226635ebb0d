@@ -1,0 +1,12 @@
+I"I<p>The <a href="/documentation/elements/tag/">tag</a> is a small but useful element that can be used in many contexts, to <strong>enhance</strong> the meaning of the text it’s attached to.</p>
+
+<p>A tag rarely comes on its own though, so Bulma now supports <a href="/documentation/elements/tag/#list-of-tags">list of tags</a>. The same way you can <a href="together">group controls</a>, you can now <strong>group tags together</strong> to form a list that can span multiple lines.</p>
+
+<figure>
+  <a href="http://localhost:4000/documentation/elements/tag/#list-of-tags">
+    <img src="http://localhost:4000/images/blog/list-of-tags.png" alt="List of tags in CSS" width="660" height="401" />
+  </a>
+</figure>
+
+<p>As a <strong>bonus</strong>, there is also a <a href="/documentation/elements/tag/#combinations">delete tag</a> available!</p>
+:ET

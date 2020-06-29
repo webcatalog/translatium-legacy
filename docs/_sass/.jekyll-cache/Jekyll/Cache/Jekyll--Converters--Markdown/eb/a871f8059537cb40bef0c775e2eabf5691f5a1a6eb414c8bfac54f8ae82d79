@@ -1,0 +1,7 @@
+I"2<p>Have you ever wanted to build a <strong>Metro-UI-like grid in CSS</strong>?
+Thanks to Flexbox and the new <a href="https://bulma.io/documentation/layout/tiles/">Bulma tiles</a>, you now can! And it only requires 1 HTML element: the <code class="language-plaintext highlighter-rouge">tile</code> element.</p>
+
+<p><a href="https://bulma.io/documentation/layout/tiles/"><img src="/images/blog/metro-ui-css-grid-tiles.png" alt="Metro UI grid tiles in CSS" /></a></p>
+
+<p>Check out the <a href="https://bulma.io/documentation/layout/tiles/">documentation</a>!</p>
+:ET

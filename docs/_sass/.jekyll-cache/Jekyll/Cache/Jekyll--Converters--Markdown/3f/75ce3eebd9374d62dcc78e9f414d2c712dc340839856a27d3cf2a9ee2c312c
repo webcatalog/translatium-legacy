@@ -1,0 +1,17 @@
+I"*<p>Bulma is <strong>icon library agnostic</strong>: this means that you can use <em>any</em> icon font library (like Font Awesome 4 or 5, Material Design Icons, Open Iconic, Ionicons…) with Bulma’s <code class="language-plaintext highlighter-rouge">icon</code> class.</p>
+
+<p>As a result, <strong>Bulma already supports Font Awesome 5</strong>! 😃</p>
+
+<p>Since the <code class="language-plaintext highlighter-rouge">icon</code> element is simply a <strong>container</strong> for any icon font *allowing the layout to reserve a spot for the icon while it loads), it supports any size of Font Awesome 4 and 5.</p>
+
+<p>For the sake of being in sync with Bulma users, I’ve recently updated the website to actually use Font Awesome 5! The process of <strong>migrating</strong> from Font Awesome 4 to 5 is straightforward. You simply need to:</p>
+
+<ol>
+  <li>include Font Awesome 5 instead, <a href="https://fontawesome.com/get-started">using the script tag</a></li>
+  <li>replace <code class="language-plaintext highlighter-rouge">fa</code> classes with their <code class="language-plaintext highlighter-rouge">fas</code> and <code class="language-plaintext highlighter-rouge">fab</code> equivalents</li>
+</ol>
+
+<p>That’s it!</p>
+
+<p>Check out the <a href="/documentation/elements/icon/">icon documentation</a>.</p>
+:ET

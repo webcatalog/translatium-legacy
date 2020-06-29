@@ -1,0 +1,18 @@
+I"<p>You can now fix a <a href="/documentation/components/navbar/#fixed-navbar">navbar</a> to the <strong>top</strong> or the <strong>bottom</strong>:</p>
+
+<figure>
+  <video width="602.5" height="360" autoplay="" muted="" loop="">
+    <source src="http://localhost:4000/images/blog/fixed-navbar.mp4" type="video/mp4" />
+  </video>
+</figure>
+
+<p><a href="/documentation/components/navbar/#fixed-navbar">Check it out!</a></p>
+
+<p>As a added <strong>bonus</strong>, the bottom navbar required a new <strong>dropup</strong> feature which has also been implemented!</p>
+
+<figure>
+  <a href="http://localhost:4000/documentation/components/navbar/#fixed-navbar">
+    <img src="http://localhost:4000/images/blog/dropup.png" alt="Navbar dropup" width="660" height="239" />
+  </a>
+</figure>
+:ET

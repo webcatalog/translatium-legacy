@@ -1,0 +1,84 @@
+I"_<p>By default, a browser will display links in <strong style="color: blue;">blue</strong>. Bulma has up until now used the <code class="language-plaintext highlighter-rouge">$primary</code> color as the <code class="language-plaintext highlighter-rouge">$link</code> color:</p>
+
+<div class="language-sass highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Old styles</span>
+<span class="nv">$link</span><span class="p">:</span> <span class="nv">$primary</span> <span class="o">!</span><span class="nb">default</span>
+</code></pre></div></div>
+
+<p>But the <em>primary</em> color is mostly used as the <strong>brand</strong> color, and is not necessarily well suited for links. For readability purposes, and to add more flexibility to your design choices:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">$link</code> color defaults to <code class="language-plaintext highlighter-rouge">$blue</code></li>
+  <li><code class="language-plaintext highlighter-rouge">$info</code> is using the new <code class="language-plaintext highlighter-rouge">$cyan</code> color</li>
+  <li><code class="language-plaintext highlighter-rouge">$link</code> has been added to the <code class="language-plaintext highlighter-rouge">$colors</code> map as well</li>
+</ul>
+
+<div class="language-sass highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// New styles</span>
+<span class="nv">$link</span><span class="p">:</span> <span class="nv">$blue</span> <span class="o">!</span><span class="nb">default</span>
+<span class="nv">$info</span><span class="p">:</span> <span class="nv">$cyan</span> <span class="o">!</span><span class="nb">default</span>
+</code></pre></div></div>
+
+<div class="message is-danger">
+  <div class="message-header">
+    Deprecation warning
+  </div>
+  <div class="message-body">
+    <p>
+      Because the modifier <code>is-link</code> for <strong>buttons</strong> already existed, it has been renamed to <code>is-text</code>.
+    </p>
+  </div>
+</div>
+
+<p>As such, the following components are now <strong>blue</strong>:</p>
+
+<ul>
+  <li><a href="/documentation/components/breadcrumb/">breadcrumb</a></li>
+  <li><a href="/documentation/components/dropdown/">dropdown</a></li>
+  <li><a href="/documentation/components/navbar/">navbar</a></li>
+  <li><a href="/documentation/components/pagination/">pagination</a></li>
+  <li><a href="/documentation/components/tabs/">tabs</a></li>
+  <li><a href="/documentation/components/menu/">menu</a></li>
+  <li><a href="/documentation/components/panel/">panel</a></li>
+</ul>
+
+<p>All Bulma elements and components that support <strong>color</strong> modifiers now support the <code class="language-plaintext highlighter-rouge">.is-link</code> color:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"notification is-link"</span><span class="nt">&gt;</span>
+  Link notification.
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"notification is-info"</span><span class="nt">&gt;</span>
+  Info notification.
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"button is-link"</span><span class="nt">&gt;</span>
+  Link button
+<span class="nt">&lt;/button&gt;</span>
+
+<span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"button is-info"</span><span class="nt">&gt;</span>
+  Info button
+<span class="nt">&lt;/button&gt;</span>
+</code></pre></div></div>
+
+<div class="notification is-link">
+  Link notification.
+</div>
+
+<div class="notification is-info">
+  Info notification.
+</div>
+
+<p><button class="button is-link">
+  Link button
+</button></p>
+
+<p><button class="button is-info">
+  Info button
+</button></p>
+
+<p>If you want to use the <code class="language-plaintext highlighter-rouge">$primary</code> color for your links, just <strong>customize</strong> your Bulma setup by including these rules:</p>
+
+<div class="language-sass highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$link</span><span class="p">:</span> <span class="nv">$primary</span> <span class="o">!</span><span class="nb">default</span>
+<span class="nv">$link-invert</span><span class="p">:</span> <span class="nv">$primary-invert</span> <span class="o">!</span><span class="nb">default</span>
+<span class="nv">$link-focus-border</span><span class="p">:</span> <span class="nv">$primary</span> <span class="o">!</span><span class="nb">default</span>
+</code></pre></div></div>
+:ET
