@@ -1,0 +1,10 @@
+I"²<p>Similarly to the <a href="/2017/08/03/list-of-tags/">list of tags</a> launched a few months ago, the <a href="/documentation/elements/button/">button</a> has its own <strong>list of buttons</strong>:</p>
+
+<figure>
+  <a href="http://localhost:4000/documentation/elements/button/#list-of-buttons">
+    <img src="http://localhost:4000/images/blog/list-of-buttons.png" alt="List of buttons in CSS" width="660" height="550" />
+  </a>
+</figure>
+
+<p>Although you could already <strong>group</strong> buttons by using <a href="/documentation/form/general/#form-group">from groups</a>, this new <code class="language-plaintext highlighter-rouge">buttons</code> class makes everything easier.</p>
+:ET
