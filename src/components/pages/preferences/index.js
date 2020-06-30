@@ -333,7 +333,7 @@ const Preferences = (props) => {
                   )}
                 >
                   <MenuItem dense onClick={() => requestSetSystemPreference('openAtLogin', 'yes')}>{getLocale('yes')}</MenuItem>
-                  {!process.mas && <MenuItem dense onClick={() => requestSetSystemPreference('openAtLogin', 'yes-hidden')}>{getLocale('yesHidden')}</MenuItem>}
+                  {!window.process.mas && <MenuItem dense onClick={() => requestSetSystemPreference('openAtLogin', 'yes-hidden')}>{getLocale('yesHidden')}</MenuItem>}
                   <MenuItem dense onClick={() => requestSetSystemPreference('openAtLogin', 'no')}>{getLocale('no2')}</MenuItem>
                 </EnhancedMenu>
                 <Divider />
@@ -370,81 +370,85 @@ const Preferences = (props) => {
           </List>
         </Paper>
 
-        <Typography variant="subtitle2" color="textPrimary" className={classes.paperTitle}>
-          Atomery Apps
-        </Typography>
-        <Paper elevation={0} className={classes.paper}>
-          <List disablePadding dense>
-            <ListItem
-              button
-              onClick={() => requestOpenInBrowser('https://webcatalogapp.com?utm_source=singlebox_app')}
-              className={classes.listItemPromotion}
-            >
-              <div className={classes.promotionBlock}>
-                <div className={classes.promotionLeft}>
-                  <img src={webcatalogIconPng} alt="WebCatalog" className={classes.appIcon} />
-                </div>
-                <div className={classes.promotionRight}>
-                  <div>
-                    <Typography variant="body1" className={classes.appTitle}>
-                      WebCatalog
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      Run Web Apps like Real Apps
-                    </Typography>
+        {!window.process.mas && (
+          <>
+            <Typography variant="subtitle2" color="textPrimary" className={classes.paperTitle}>
+              Atomery Apps
+            </Typography>
+            <Paper elevation={0} className={classes.paper}>
+              <List disablePadding dense>
+                <ListItem
+                  button
+                  onClick={() => requestOpenInBrowser('https://webcatalogapp.com?utm_source=singlebox_app')}
+                  className={classes.listItemPromotion}
+                >
+                  <div className={classes.promotionBlock}>
+                    <div className={classes.promotionLeft}>
+                      <img src={webcatalogIconPng} alt="WebCatalog" className={classes.appIcon} />
+                    </div>
+                    <div className={classes.promotionRight}>
+                      <div>
+                        <Typography variant="body1" className={classes.appTitle}>
+                          WebCatalog
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                          Run Web Apps like Real Apps
+                        </Typography>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <ChevronRightIcon color="action" />
-            </ListItem>
-            <Divider />
-            <ListItem
-              button
-              onClick={() => requestOpenInBrowser('https://singleboxapp.com?utm_source=singlebox_app')}
-              className={classes.listItemPromotion}
-            >
-              <div className={classes.promotionBlock}>
-                <div className={classes.promotionLeft}>
-                  <img src={singleboxIconPng} alt="Singlebox" className={classes.appIcon} />
-                </div>
-                <div className={classes.promotionRight}>
-                  <div>
-                    <Typography variant="body1" className={classes.appTitle}>
-                      Singlebox
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      All Your Apps in One Single Window
-                    </Typography>
+                  <ChevronRightIcon color="action" />
+                </ListItem>
+                <Divider />
+                <ListItem
+                  button
+                  onClick={() => requestOpenInBrowser('https://singleboxapp.com?utm_source=singlebox_app')}
+                  className={classes.listItemPromotion}
+                >
+                  <div className={classes.promotionBlock}>
+                    <div className={classes.promotionLeft}>
+                      <img src={singleboxIconPng} alt="Singlebox" className={classes.appIcon} />
+                    </div>
+                    <div className={classes.promotionRight}>
+                      <div>
+                        <Typography variant="body1" className={classes.appTitle}>
+                          Singlebox
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                          All Your Apps in One Single Window
+                        </Typography>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <ChevronRightIcon color="action" />
-            </ListItem>
-            <Divider />
-            <ListItem
-              button
-              onClick={() => requestOpenInBrowser('https://translatiumapp.com?utm_source=singlebox_app')}
-              className={classes.listItemPromotion}
-            >
-              <div className={classes.promotionBlock}>
-                <div className={classes.promotionLeft}>
-                  <img src={translatiumIconPng} alt="Translatium" className={classes.appIcon} />
-                </div>
-                <div className={classes.promotionRight}>
-                  <div>
-                    <Typography variant="body1" className={classes.appTitle}>
-                      Translatium
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      Translate Any Languages like a Pro
-                    </Typography>
+                  <ChevronRightIcon color="action" />
+                </ListItem>
+                <Divider />
+                <ListItem
+                  button
+                  onClick={() => requestOpenInBrowser('https://translatiumapp.com?utm_source=singlebox_app')}
+                  className={classes.listItemPromotion}
+                >
+                  <div className={classes.promotionBlock}>
+                    <div className={classes.promotionLeft}>
+                      <img src={translatiumIconPng} alt="Translatium" className={classes.appIcon} />
+                    </div>
+                    <div className={classes.promotionRight}>
+                      <div>
+                        <Typography variant="body1" className={classes.appTitle}>
+                          Translatium
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                          Translate Any Languages like a Pro
+                        </Typography>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <ChevronRightIcon color="action" />
-            </ListItem>
-          </List>
-        </Paper>
+                  <ChevronRightIcon color="action" />
+                </ListItem>
+              </List>
+            </Paper>
+          </>
+        )}
 
         <Typography variant="body2" className={classes.paperTitle} />
         <Paper elevation={0} className={classes.paper}>
