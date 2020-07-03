@@ -29,7 +29,7 @@ const getDefaultDisplayLanguage = () => {
     return langCode;
   }
 
-  return '';
+  return 'en';
 };
 
 // scope

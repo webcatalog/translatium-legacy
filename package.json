@@ -35,7 +35,7 @@
     "node-fetch": "2.6.0"
   },
   "devDependencies": {
-    "@material-ui/core": "4.10.2",
+    "@material-ui/core": "4.11.0",
     "@material-ui/icons": "4.9.1",
     "babel-cli": "6.26.0",
     "babel-preset-env": "1.7.0",
@@ -54,7 +54,7 @@
     "eslint-config-airbnb": "18.2.0",
     "eslint-plugin-import": "2.22.0",
     "eslint-plugin-jsx-a11y": "6.3.1",
-    "eslint-plugin-react": "7.20.2",
+    "eslint-plugin-react": "7.20.3",
     "eslint-plugin-react-hooks": "1.7.0",
     "glob": "7.1.6",
     "greek-utils": "1.2.2",
