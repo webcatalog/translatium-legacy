@@ -28,7 +28,7 @@
     "cli-truncate": "2.1.0",
     "electron-is-dev": "1.2.0",
     "electron-settings": "3.2.0",
-    "electron-updater": "4.3.3",
+    "electron-updater": "4.3.4",
     "electron-window-state": "5.0.3",
     "fs-extra": "9.0.1",
     "menubar": "8.0.2",
@@ -47,8 +47,8 @@
     "cross-env": "7.0.2",
     "del": "5.1.0",
     "dotenv": "8.2.0",
-    "electron": "8.3.4",
-    "electron-builder": "22.7.0",
+    "electron": "8.4.0",
+    "electron-builder": "22.8.0",
     "electron-notarize": "0.3.0",
     "eslint": "6.8.0",
     "eslint-config-airbnb": "18.2.0",
@@ -70,7 +70,7 @@
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
     "typeface-roboto": "0.0.75",
-    "wait-on": "5.0.1"
+    "wait-on": "5.1.0"
   },
   "homepage": "./",
   "private": true,

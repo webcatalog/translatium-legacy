@@ -102,6 +102,7 @@ const opts = {
       extendInfo: {
         LSMultipleInstancesProhibited: true,
       },
+      entitlementsLoginHelper: 'build-resources/entitlements.mas.login-helper.plist',
     },
     mas: {
       category: 'public.app-category.productivity',
