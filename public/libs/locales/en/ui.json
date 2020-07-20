@@ -54,6 +54,7 @@
 	"later": "Later",
 	"applicationUpdate": "Application Update",
 	"applicationUpdateDesc": "A new version {version} has been downloaded. Restart the application to apply the updates.",
+	"restartToApplyUpdates": "Restart the application to apply the updates",
 	"resetNow": "Reset Now",
 	"resetDesc": "Are you sure? All preferences will be restored to their original defaults. This action cannot be undone.",
 	"requireRestartDescMas": "You need to quit and then manually restart the app for this change to take effect.",

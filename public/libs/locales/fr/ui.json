@@ -54,6 +54,7 @@
 	"later": "Plus tard",
 	"applicationUpdate": "Mise à jour de l'application",
 	"applicationUpdateDesc": "Une nouvelle version {version} a été téléchargée. Redémarrez l'application pour appliquer les mises à jour.",
+	"restartToApplyUpdates": "Redémarrez l'application pour appliquer les mises à jour",
 	"resetNow": "Réinitialiser maintenant",
 	"resetDesc": "Êtes-vous sûr ? Toutes les préférences seront restaurées à leurs valeurs par défaut. Cette action ne peut pas être annulée.",
 	"requireRestartDescMas": "Vous devez quitter, puis redémarrer manuellement l'application pour que cette modification prenne effet.",

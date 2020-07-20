@@ -6,7 +6,15 @@ const createMenu = require('./create-menu');
 const { getLocale } = require('./locales');
 
 global.updateSilent = true;
-global.updateAvailable = false;
+
+global.updaterObj = {};
+
+autoUpdater.on('checking-for-update', () => {
+  global.updaterObj = {
+    status: 'checking-for-update',
+  };
+  createMenu();
+});
 
 autoUpdater.on('update-available', (info) => {
   if (!global.updateSilent) {
@@ -22,6 +30,12 @@ autoUpdater.on('update-available', (info) => {
   }
 
   sendToAllWindows('log', info);
+
+  global.updaterObj = {
+    status: 'update-available',
+    info,
+  };
+  createMenu();
 });
 
 autoUpdater.on('update-not-available', (info) => {
@@ -38,6 +52,12 @@ autoUpdater.on('update-not-available', (info) => {
   }
 
   sendToAllWindows('log', info);
+
+  global.updaterObj = {
+    status: 'update-not-available',
+    info,
+  };
+  createMenu();
 });
 
 autoUpdater.on('error', (err) => {
@@ -54,11 +74,25 @@ autoUpdater.on('error', (err) => {
   }
 
   sendToAllWindows('log', err);
+  global.updaterObj = {
+    status: 'error',
+    info: err,
+  };
+  createMenu();
+});
+
+autoUpdater.on('update-cancelled', () => {
+  global.updaterObj = {
+    status: 'update-cancelled',
+  };
+  createMenu();
 });
 
 autoUpdater.on('update-downloaded', (info) => {
-  global.updateDownloaded = true;
-
+  global.updaterObj = {
+    status: 'update-downloaded',
+    info,
+  };
   createMenu();
 
   const dialogOpts = {

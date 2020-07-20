@@ -54,6 +54,7 @@
 	"later": "Más tarde",
 	"applicationUpdate": "Actualización de la aplicación",
 	"applicationUpdateDesc": "Se ha descargado una nueva versión {version}. Reinicie la aplicación para aplicar las actualizaciones.",
+	"restartToApplyUpdates": "Reinicie la aplicación para aplicar las actualizaciones",
 	"resetNow": "Restablecer ahora",
 	"resetDesc": "¿Está seguro? Todas las preferencias se restablecerán con sus valores predeterminados originales. Esta acción no se puede deshacer.",
 	"requireRestartDescMas": "Necesita salir y luego reiniciar manualmente la aplicación para que este cambio surta efecto.",
