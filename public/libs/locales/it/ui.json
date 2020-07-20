@@ -54,6 +54,7 @@
 	"later": "Più tardi",
 	"applicationUpdate": "Aggiornamento applicazione",
 	"applicationUpdateDesc": "È stata scaricata la nuova versione {version}. Riavviare l'applicazione per applicare gli aggiornamenti.",
+	"restartToApplyUpdates": "Riavviare l'applicazione per applicare gli aggiornamenti",
 	"resetNow": "Reimpostare ora",
 	"resetDesc": "Continuare? Tutte le preferenze saranno ripristinate ai valori predefiniti originali. Questa azione non può essere annullata.",
 	"requireRestartDescMas": "È necessario uscire e quindi riavviare manualmente l'app per rendere effettiva questa modifica.",

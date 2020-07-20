@@ -54,6 +54,7 @@
 	"later": "Später",
 	"applicationUpdate": "App-Update",
 	"applicationUpdateDesc": "Eine neue Version {version} wurde heruntergeladen. Starten Sie die Anwendung neu, um die Updates zu übernehmen.",
+	"restartToApplyUpdates": "Starten Sie die Anwendung neu, um die Updates zu übernehmen",
 	"resetNow": "Jetzt zurücksetzen",
 	"resetDesc": "Sind Sie sicher? Alle Einstellungen werden auf ihre ursprünglichen Standardwerte zurückgesetzt. Diese Aktion kann nicht rückgängig gemacht werden.",
 	"requireRestartDescMas": "Sie müssen die App beenden und dann manuell neu starten, damit diese Änderung wirksam wird.",

@@ -1,4 +1,5 @@
 const {
+  BrowserWindow,
   Menu,
   app,
   shell,
@@ -15,6 +16,18 @@ const { getPreference } = require('./preferences');
 const createMenu = () => {
   const updaterEnabled = process.env.SNAP == null && !process.mas && !process.windowsStore;
   const handleCheckForUpdates = () => {
+    // restart & apply updates
+    if (global.updaterObj && global.updaterObj.status === 'update-downloaded') {
+      setImmediate(() => {
+        app.removeAllListeners('window-all-closed');
+        const win = BrowserWindow.getFocusedWindow();
+        if (win != null) {
+          win.close();
+        }
+        autoUpdater.quitAndInstall(false);
+      });
+    }
+
     // https://github.com/atomery/webcatalog/issues/634
     // https://github.com/electron-userland/electron-builder/issues/4046
     // disable updater if user is using AppImageLauncher
@@ -38,6 +51,19 @@ const createMenu = () => {
     global.updateSilent = false;
     autoUpdater.checkForUpdates();
   };
+
+  const updaterMenuItem = {
+    label: getLocale('checkForUpdates'),
+    click: handleCheckForUpdates,
+    visible: updaterEnabled,
+  };
+  if (global.updaterObj && global.updaterObj.status === 'update-downloaded') {
+    updaterMenuItem.label = getLocale('restartToApplyUpdates');
+  } else if (global.updaterObj && global.updaterObj.status === 'update-available') {
+    updaterMenuItem.enabled = false;
+  } else if (global.updaterObj && global.updaterObj.status === 'checking-for-update') {
+    updaterMenuItem.enabled = false;
+  }
 
   const template = [
     {
@@ -166,11 +192,7 @@ const createMenu = () => {
           type: 'separator',
           visible: updaterEnabled,
         },
-        {
-          label: getLocale('checkForUpdates'),
-          click: handleCheckForUpdates,
-          visible: updaterEnabled,
-        },
+        updaterMenuItem,
         {
           type: 'separator',
           visible: !process.mas,
@@ -236,10 +258,7 @@ const createMenu = () => {
       submenu.splice(1, 0, {
         type: 'separator',
       });
-      submenu.splice(2, 0, {
-        label: getLocale('checkForUpdates'),
-        click: handleCheckForUpdates,
-      });
+      submenu.splice(2, 0, updaterMenuItem);
       submenu.splice(3, 0, {
         type: 'separator',
       });

@@ -54,6 +54,7 @@
 	"later": "Để sau",
 	"applicationUpdate": "Cập nhật Ứng dụng",
 	"applicationUpdateDesc": "Phiên bản mới {version} đã được tải về. Khởi động lại ứng dụng để cập nhật.",
+	"restartToApplyUpdates": "Khởi động lại ứng dụng để cập nhật",
 	"resetNow": "Cài đặt lại Bây giờ",
 	"resetDesc": "Bạn chắc chứ? Tất cả tuỳ chọn sẽ được khôi phục về trạng thái ban đầu. Tác vụ này không thể được hoàn tác.",
 	"requireRestartDescMas": "Bạn cần thoát và tự khởi động lại ứng dụng để thay đổi này có hiệu lực.",
