@@ -54,6 +54,7 @@
 	"later": "稍后",
 	"applicationUpdate": "应用程序更新",
 	"applicationUpdateDesc": "新版本 {version} 下载完毕。请重新启动应用程序以应用更新。",
+	"restartToApplyUpdates": "请重新启动应用程序以应用更新",
 	"resetNow": "立即重置",
 	"resetDesc": "您确定吗？所有首选项都将恢复为原始默认值。此操作无法撤消。",
 	"requireRestartDescMas": "您需要退出，然后手动重新启动应用程序，此更改才能生效。",
