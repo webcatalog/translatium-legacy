@@ -95,9 +95,10 @@ const styles = (theme) => ({
     color: theme.palette.text.disabled,
     fontWeight: 400,
     fontSize: '0.8rem',
-    marginLeft: theme.spacing(1.5),
-    marginRight: theme.spacing(1.5),
     marginTop: theme.spacing(0.5),
+    width: '100%',
+    maxWidth: 480,
+    margin: '0 auto',
   },
   listItemPromotion: {
     paddingLeft: theme.spacing(1),
