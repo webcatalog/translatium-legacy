@@ -61,7 +61,7 @@ switch (process.platform) {
     break;
   }
   case 'win32': {
-    targets = Platform.WINDOWS.createTarget(['appx', 'nsis']);
+    targets = Platform.WINDOWS.createTarget(['nsis']);
     break;
   }
   default:
@@ -89,11 +89,6 @@ const opts = {
     protocols: {
       name: 'Translatium',
       schemes: ['translatium'],
-    },
-    appx: {
-      applicationId: 'translatium',
-      identityName: '55974nhutquang97.5translate',
-      publisher: 'CN=C635F506-DEEB-41A4-8CAA-16689F486ED2',
     },
     mac: {
       darkModeSupport: true,
