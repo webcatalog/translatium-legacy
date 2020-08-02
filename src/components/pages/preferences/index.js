@@ -473,14 +473,6 @@ const Preferences = (props) => {
                 </ListItem>
               </>
             )}
-            {window.process.platform === 'win32' && (
-              <>
-                <Divider />
-                <ListItem button>
-                  <ListItemText primary={getLocale('rateMicrosoftStore')} onClick={() => requestOpenInBrowser('ms-windows-store://review/?ProductId=9wzdncrcsg9k')} />
-                </ListItem>
-              </>
-            )}
             <Divider />
             <ListItem button>
               <ListItemText primary={getLocale('quit')} onClick={() => window.require('electron').remote.app.quit()} />
