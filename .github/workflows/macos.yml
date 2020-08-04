@@ -2,10 +2,15 @@ name: macOS
 
 on:
   push:
-    branches:
-      - master
     tags:
       - "v*.*.*"
+  pull_request:
+    branches:
+      - master
+      - next
+    paths:
+      - '.github/workflows/macos.yml'
+      - 'dist.js'
 
 jobs:
   build:

@@ -2,10 +2,15 @@ name: Windows
 
 on:
   push:
-    branches:
-      - master
     tags:
       - "v*.*.*"
+  pull_request:
+    branches:
+      - master
+      - next
+    paths:
+      - '.github/workflows/windows.yml'
+      - 'dist.js'
 
 jobs:
   build:

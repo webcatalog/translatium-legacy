@@ -19,9 +19,9 @@
     "build": "react-scripts build",
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "dist": "yarn run build && babel-node packager.js",
+    "dist": "yarn run build && babel-node dist.js",
     "dist:no-sign": "cross-env CSC_IDENTITY_AUTO_DISCOVERY=false yarn dist",
-    "lint": "eslint ./src ./public ./packager.js --ext js",
+    "lint": "eslint ./src ./public ./dist.js --ext js",
     "test": "mocha"
   },
   "dependencies": {
