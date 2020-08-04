@@ -2,17 +2,22 @@ name: macOS
 
 on:
   push:
-    branches:
-      - master
     tags:
       - "v*.*.*"
+  pull_request:
+    branches:
+      - master
+      - next
+    paths:
+      - '.github/workflows/macos.yml'
+      - 'dist.js'
 
 jobs:
   build:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
       with:
         fetch-depth: 1
         submodules: false
