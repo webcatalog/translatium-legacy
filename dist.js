@@ -3,10 +3,8 @@
 const path = require('path');
 const fs = require('fs-extra');
 const builder = require('electron-builder');
-const { spawn } = require('child_process');
 const glob = require('glob');
 const del = require('del');
-const { getSignVendorPath } = require('app-builder-lib/out/codeSign/windowsCodeSign');
 const { notarize } = require('electron-notarize');
 const semver = require('semver');
 const { exec } = require('child_process');
@@ -38,15 +36,6 @@ const verifyNotarizationAsync = (filePath) => new Promise((resolve, reject) => {
     }
   });
 });
-
-// https://stackoverflow.com/a/17466459
-const runCmd = (cmd, args, callBack) => {
-  const child = spawn(cmd, args);
-  let resp = '';
-
-  child.stdout.on('data', (buffer) => { resp += buffer.toString(); });
-  child.stdout.on('end', () => { callBack(resp); });
-};
 
 const { Platform } = builder;
 
