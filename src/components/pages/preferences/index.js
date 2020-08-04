@@ -37,6 +37,7 @@ import {
 import webcatalogIconPng from '../../../assets/webcatalog-icon.png';
 import translatiumIconPng from '../../../assets/translatium-icon.png';
 import singleboxIconPng from '../../../assets/singlebox-icon.png';
+import switchbarIconPng from '../../../assets/switchbar-icon.png';
 
 const styles = (theme) => ({
   container: {
@@ -380,7 +381,7 @@ const Preferences = (props) => {
               <List disablePadding dense>
                 <ListItem
                   button
-                  onClick={() => requestOpenInBrowser('https://webcatalogapp.com?utm_source=singlebox_app')}
+                  onClick={() => requestOpenInBrowser('https://webcatalogapp.com?utm_source=translatium_app')}
                   className={classes.listItemPromotion}
                 >
                   <div className={classes.promotionBlock}>
@@ -403,7 +404,7 @@ const Preferences = (props) => {
                 <Divider />
                 <ListItem
                   button
-                  onClick={() => requestOpenInBrowser('https://singleboxapp.com?utm_source=singlebox_app')}
+                  onClick={() => requestOpenInBrowser('https://singleboxapp.com?utm_source=translatium_app')}
                   className={classes.listItemPromotion}
                 >
                   <div className={classes.promotionBlock}>
@@ -426,7 +427,30 @@ const Preferences = (props) => {
                 <Divider />
                 <ListItem
                   button
-                  onClick={() => requestOpenInBrowser('https://translatiumapp.com?utm_source=singlebox_app')}
+                  onClick={() => requestOpenInBrowser('https://switchbarapp.com?utm_source=translatium_app')}
+                  className={classes.listItemPromotion}
+                >
+                  <div className={classes.promotionBlock}>
+                    <div className={classes.promotionLeft}>
+                      <img src={switchbarIconPng} alt="Switchbar" className={classes.appIcon} />
+                    </div>
+                    <div className={classes.promotionRight}>
+                      <div>
+                        <Typography variant="body1" className={classes.appTitle}>
+                          Switchbar
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                          Open Every Link in the Right App
+                        </Typography>
+                      </div>
+                    </div>
+                  </div>
+                  <ChevronRightIcon color="action" />
+                </ListItem>
+                <Divider />
+                <ListItem
+                  button
+                  onClick={() => requestOpenInBrowser('https://translatiumapp.com?utm_source=translatium_app')}
                   className={classes.listItemPromotion}
                 >
                   <div className={classes.promotionBlock}>
