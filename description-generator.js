@@ -19,7 +19,7 @@ Object.keys(displayLanguages).forEach((langCode) => {
     const desc = rawDesc
       .replace(/{appName}/g, 'Translatium')
       .replace(/{operatingSystem}/g, operatingSystem)
-      .replace(/{appUrl}/g, 'https://translatiumapp.com')
+      .replace(/{appUrl}/g, 'https://atomery.com/translatium')
       .replace(/{supportedLanguages}/g, supportedLanguages.join(langCode === 'zh-CN' ? '，' : ', '));
     const distDescFilePath = path.join(__dirname, 'dist', 'description', langCode, `${operatingSystem}.txt`);
     fs.outputFileSync(distDescFilePath, desc, 'utf8');

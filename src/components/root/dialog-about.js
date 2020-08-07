@@ -83,7 +83,7 @@ const About = (props) => {
         </Typography>
 
         <Button
-          onClick={() => requestOpenInBrowser('https://translatiumapp.com?utm_source=translatium_app')}
+          onClick={() => requestOpenInBrowser('https://atomery.com/translatium?utm_source=translatium_app')}
         >
           {getLocale('website')}
         </Button>
