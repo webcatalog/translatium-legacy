@@ -16,14 +16,4 @@ Still, we use third party services that may collect information used to identify
 
 ---
 
-Our websites use:
-
-* [Basin](https://usebasin.com/privacy) for form submissions.
-* [Cloudflare](https://www.cloudflare.com/privacypolicy/) for CDN and domain management.
-* [Google Fonts](https://support.google.com/analytics/answer/6004245?hl=en) for web fonts.
-* [Google Tag Manager](https://support.google.com/analytics/answer/6004245?hl=en) and [Google Analytics](https://support.google.com/analytics/answer/6004245?hl=en) for analytics.
-* [Mailchimp](https://mailchimp.com/) for newsletter.
-
----
-
-This privacy policy is subject to change without notice and was last updated on August 2, 2020. If you have any questions feel free to [create a GitHub issue](https://github.com/atomery/translatium/issues) or contact us via [contact@atomery.com](mailto:contact@atomery.com).
+This privacy policy is subject to change without notice and was last updated on August 7, 2020. If you have any questions, feel free to contact us via [contact@atomery.com](mailto:contact@atomery.com).
