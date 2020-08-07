@@ -315,7 +315,7 @@ const Preferences = (props) => {
               <>
                 <ListItem
                   button
-                  onClick={() => window.require('electron').remote.shell.openExternal('https://translatiumapp.com/popclip')}
+                  onClick={() => window.require('electron').remote.shell.openExternal('https://atomery.com/translatium/popclip')}
                 >
                   <ListItemText primary={getLocale('popclipExtension')} />
                   <ChevronRightIcon color="action" />
@@ -381,7 +381,7 @@ const Preferences = (props) => {
               <List disablePadding dense>
                 <ListItem
                   button
-                  onClick={() => requestOpenInBrowser('https://webcatalogapp.com?utm_source=translatium_app')}
+                  onClick={() => requestOpenInBrowser('https://atomery.com/webcatalog?utm_source=translatium_app')}
                   className={classes.listItemPromotion}
                 >
                   <div className={classes.promotionBlock}>
@@ -404,7 +404,7 @@ const Preferences = (props) => {
                 <Divider />
                 <ListItem
                   button
-                  onClick={() => requestOpenInBrowser('https://singleboxapp.com?utm_source=translatium_app')}
+                  onClick={() => requestOpenInBrowser('https://atomery.com/singlebox?utm_source=translatium_app')}
                   className={classes.listItemPromotion}
                 >
                   <div className={classes.promotionBlock}>
@@ -427,7 +427,7 @@ const Preferences = (props) => {
                 <Divider />
                 <ListItem
                   button
-                  onClick={() => requestOpenInBrowser('https://switchbarapp.com?utm_source=translatium_app')}
+                  onClick={() => requestOpenInBrowser('https://atomery.com/switchbar?utm_source=translatium_app')}
                   className={classes.listItemPromotion}
                 >
                   <div className={classes.promotionBlock}>
@@ -450,7 +450,7 @@ const Preferences = (props) => {
                 <Divider />
                 <ListItem
                   button
-                  onClick={() => requestOpenInBrowser('https://translatiumapp.com?utm_source=translatium_app')}
+                  onClick={() => requestOpenInBrowser('https://atomery.com/translatium?utm_source=translatium_app')}
                   className={classes.listItemPromotion}
                 >
                   <div className={classes.promotionBlock}>
@@ -483,7 +483,7 @@ const Preferences = (props) => {
             </ListItem>
             <Divider />
             <ListItem button>
-              <ListItemText primary={getLocale('website')} onClick={() => requestOpenInBrowser('https://translatiumapp.com?utm_source=translatium_app')} />
+              <ListItemText primary={getLocale('website')} onClick={() => requestOpenInBrowser('https://atomery.com/translatium?utm_source=translatium_app')} />
             </ListItem>
             <Divider />
             <ListItem button>

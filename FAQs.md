@@ -1,11 +1,11 @@
 ##### How many languages does Translatim support?
-You can find the list of supported languages [here](https://translatiumapp.com/languages).
+You can find the list of supported languages [here](https://atomery.com/translatium/languages).
 
 ##### Does Translatim require Internet connection?
 Yes, most features of Translatium require Internet connection to work.
 
 ##### Does Translatium support PopClip?
-Yes, it does. You can download the PopClip extension from [here](https://translatiumapp.com/popclip).
+Yes, it does. You can download the Translatium PopClip extension from [here](https://atomery.com/translatium/popclip).
 
 ##### Where can I download previous versions of Translatium?
 Even though previous versions of Translatium are no longer officially supported, you can still download them from [here](https://github.com/atomery/translatium/releases).
