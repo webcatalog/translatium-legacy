@@ -70,11 +70,15 @@ if (!gotTheLock) {
   }
 
   // mock app.whenReady
-  const fullyReady = false;
-  const whenFullyReady = () => {
-    if (fullyReady) return Promise.resolve();
+  let trulyReady = false;
+  ipcMain.once('truly-ready', () => { trulyReady = true; });
+  const whenTrulyReady = () => {
+    if (trulyReady) return Promise.resolve();
     return new Promise((resolve) => {
-      ipcMain.once('fully-ready', () => resolve());
+      ipcMain.once('truly-ready', () => {
+        trulyReady = true;
+        resolve();
+      });
     });
   };
 
@@ -282,8 +286,8 @@ if (!gotTheLock) {
       mainWindow.loadURL(REACT_PATH);
     }
   }).then(() => {
-    // trigger whenFullyReady
-    ipcMain.emit('fully-ready');
+    // trigger whenTrulyReady;
+    ipcMain.emit('truly-ready');
   });
 
   // This method will be called when Electron has finished
@@ -358,7 +362,7 @@ if (!gotTheLock) {
   app.on('open-url', (e, urlStr) => {
     e.preventDefault();
 
-    whenFullyReady()
+    whenTrulyReady()
       .then(() => {
         if (urlStr.startsWith('translatium://')) {
           const urlObj = url.parse(urlStr, true);
