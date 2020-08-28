@@ -31,13 +31,28 @@ const makeRequestAsync = (inputLang, outputLang, inputText, retry = 5) => Promis
     return null;
   })
   .then((response) => {
-    // swap endpoint if receiving 429
+    if (response.ok) {
+      return response;
+    }
+
+    // swap endpoint if receiving error (mostly 429)
     // isRetry to avoid endless loop when all endpoints fail
-    if (response.status === 429 && retry > 0) {
+    if (retry > 0) {
       fallbackId = fallbackId >= 5 ? 0 : fallbackId + 1;
       return makeRequestAsync(inputLang, outputLang, inputText, retry - 1);
     }
-    return response;
+
+    return Promise.reject(new Error('Something went wrong.'));
+  })
+  .catch((err) => {
+    // swap endpoint if receiving error
+    // isRetry to avoid endless loop when all endpoints fail
+    if (retry > 0) {
+      fallbackId = fallbackId >= 5 ? 0 : fallbackId + 1;
+      return makeRequestAsync(inputLang, outputLang, inputText, retry - 1);
+    }
+
+    return Promise.reject(err);
   });
 
 const translateText = (inputLang, outputLang, inputText) => Promise.resolve()
