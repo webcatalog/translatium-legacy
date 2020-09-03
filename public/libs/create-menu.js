@@ -28,26 +28,6 @@ const createMenu = () => {
       });
     }
 
-    // https://github.com/atomery/webcatalog/issues/634
-    // https://github.com/electron-userland/electron-builder/issues/4046
-    // disable updater if user is using AppImageLauncher
-    if (process.platform === 'linux' && process.env.DESKTOPINTEGRATION === 'AppImageLauncher') {
-      dialog.showMessageBox({
-        type: 'error',
-        message: getLocale('appImageLauncherDesc'),
-        buttons: [getLocale('learnMore'), getLocale('goToWebsite'), getLocale('ok')],
-        cancelId: 2,
-        defaultId: 2,
-      }).then(({ response }) => {
-        if (response === 0) {
-          shell.openExternal('https://github.com/electron-userland/electron-builder/issues/4046');
-        } else if (response === 1) {
-          shell.openExternal('http://translatiumapp.com/');
-        }
-      }).catch(console.log); // eslint-disable-line
-      return;
-    }
-
     global.updateSilent = false;
     autoUpdater.checkForUpdates();
   };
