@@ -3,7 +3,6 @@ const {
   Menu,
   app,
   shell,
-  dialog,
 } = require('electron');
 const { autoUpdater } = require('electron-updater');
 

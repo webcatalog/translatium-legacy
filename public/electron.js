@@ -7,12 +7,10 @@ const {
   Tray,
   app,
   clipboard,
-  dialog,
   globalShortcut,
   ipcMain,
   nativeImage,
   nativeTheme,
-  shell,
 } = require('electron');
 const fs = require('fs');
 const settings = require('electron-settings');
