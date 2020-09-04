@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import CircularProgress from '@material-ui/core/CircularProgress';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
+import SvgIcon from '@material-ui/core/SvgIcon';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import SvgIcon from '@material-ui/core/SvgIcon';
 
 import AVStop from '@material-ui/icons/Stop';
 import AVVolumeUp from '@material-ui/icons/VolumeUp';
@@ -64,6 +64,7 @@ import getTrialExpirationTime from '../../../helpers/get-trial-expiration-time';
 
 import Dictionary from './dictionary';
 import History from './history';
+import RatingCard from './rating-card';
 
 const styles = (theme) => ({
   container: {
@@ -378,6 +379,8 @@ class Home extends React.Component {
                 ))}
               </CardActions>
             </Card>
+
+            <RatingCard />
 
             {output.outputDict && output.source === 'translate.googleapis.com' && <Dictionary />}
             {this.renderCountdown()}

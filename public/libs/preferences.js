@@ -54,6 +54,8 @@ const initCachedPreferences = () => {
     inputLang: 'en',
     openOnMenubarShortcut: 'alt+shift+t',
     outputLang: 'zh-CN',
+    ratingCardLastClicked: 0,
+    ratingCardDidRate: false,
     recentLanguages: ['en', 'zh-CN'],
     registered: false,
     showTransliteration: true,
