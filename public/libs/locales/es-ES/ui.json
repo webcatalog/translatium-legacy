@@ -137,9 +137,6 @@
 	"history": "Historial",
 	"historyDesc": "Vea aquí las palabras y frases traducidas anteriormente.",
 	"clearHistory": "Borrar historial",
-	"appImageLauncherDesc": "El actualizador es incompatible con AppImageLauncher. Descargue las nuevas actualizaciones manualmente desde nuestro sitio web.",
-	"goToWebsite": "Ir al sitio web",
-	"learnMore": "Más información",
 	"reset": "Restablecer",
 	"restorePreferencesToDefault": "Restaurar las preferencias a sus valores predeterminados originales"
 }

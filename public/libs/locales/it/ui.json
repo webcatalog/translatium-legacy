@@ -137,9 +137,6 @@
 	"history": "Cronologia",
 	"historyDesc": "Visualizzare qui parole e frasi tradotte in precedenza.",
 	"clearHistory": "Cancellare cronologia",
-	"appImageLauncherDesc": "Il programma di aggiornamento è incompatibile con AppImageLauncher. Scaricare manualmente i nuovi aggiornamenti dal nostro sito web.",
-	"goToWebsite": "Andare al sito web",
-	"learnMore": "Maggiori informazioni",
 	"reset": "Reimpostare",
 	"restorePreferencesToDefault": "Ripristinare le preferenze ai valori predefiniti originali"
 }
