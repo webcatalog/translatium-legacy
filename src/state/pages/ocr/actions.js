@@ -54,6 +54,8 @@ export const loadImage = (type = 'file') => (dispatch, getState) => {
                   fileName: 'compressed.jpg',
                 },
                 original: result,
+                maxWidth,
+                maxHeight,
               });
             }, 'image/jpeg', 50);
           };
@@ -64,7 +66,7 @@ export const loadImage = (type = 'file') => (dispatch, getState) => {
         }
       });
     })
-    .then(({ compressed, original }) => {
+    .then(({ compressed, original, maxWidth }) => {
       if (!compressed) return;
 
       const { blob, fileName } = compressed;
@@ -120,6 +122,12 @@ export const loadImage = (type = 'file') => (dispatch, getState) => {
                 text,
               }));
 
+              // ensure that image fits on screen
+              const visibleWidth = window.innerWidth - (56 * 2); // window width minus paddings
+              const zoomLevel = (maxWidth > visibleWidth)
+                ? Math.max(Math.round((visibleWidth / maxWidth) * 1e2) / 1e2, 0.1)
+                : 1;
+
               dispatch({
                 type: UPDATE_OCR,
                 ocr: {
@@ -129,6 +137,7 @@ export const loadImage = (type = 'file') => (dispatch, getState) => {
                   inputLines,
                   outputText,
                   outputLines,
+                  zoomLevel,
                 },
               });
 
