@@ -65,6 +65,11 @@ const initCachedPreferences = () => {
     useHardwareAcceleration: true,
   };
   cachedPreferences = { ...defaultPreferences, ...settings.get(`preferences.${v}`) };
+  // backward compatibility
+  // es-ES is renamed to es
+  if (cachedPreferences.displayLanguage === 'es-ES') {
+    cachedPreferences.displayLanguage = 'es';
+  }
   if (shouldSkipLicenseCheck()) {
     cachedPreferences.registered = true;
   }
