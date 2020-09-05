@@ -5,7 +5,7 @@ const displayLanguages = {
   en: {
     displayName: 'English',
   },
-  'es-ES': {
+  es: {
     displayName: 'español',
   },
   fr: {

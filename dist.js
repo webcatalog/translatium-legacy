@@ -115,7 +115,12 @@ const opts = {
         glob(`${appOutDir}/Translatium.app/Contents/Resources/!(${languages.join('|').replace(/-/g, '_')}).lproj`, (err, files) => {
           console.log('Deleting redundant *.lproj files...');
           if (err) return reject(err);
-          return del(files).then(resolve, reject);
+          return del(files).then(() => {
+            files.forEach((file) => {
+              console.log('Deleted', path.basename(file));
+            });
+            resolve();
+          }, reject);
         });
       } else {
         resolve();
