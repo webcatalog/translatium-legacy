@@ -3,6 +3,7 @@ import { UPDATE_OCR } from '../../../constants/actions';
 
 import translateArray from '../../../helpers/translate-array';
 import openFileToBlobAsync from '../../../helpers/open-file-to-blob-async';
+import takeScreenshotToBlobAsync from '../../../helpers/take-screenshot-to-blob-async';
 import { toOcrSpaceLanguage } from '../../../helpers/language-utils';
 
 import { openAlert } from '../../root/alert/actions';
@@ -10,11 +11,16 @@ import { changeRoute } from '../../root/router/actions';
 
 import { ROUTE_OCR } from '../../../constants/routes';
 
-export const loadImage = () => (dispatch, getState) => {
+export const loadImage = (type = 'file') => (dispatch, getState) => {
   const { inputLang, outputLang } = getState().preferences;
 
   Promise.resolve()
-    .then(() => openFileToBlobAsync())
+    .then(() => {
+      if (type === 'screenshot') {
+        return takeScreenshotToBlobAsync();
+      }
+      return openFileToBlobAsync();
+    })
     .then((result) => {
       if (!result) return null;
 
@@ -43,8 +49,11 @@ export const loadImage = () => (dispatch, getState) => {
 
             canvas.toBlob((blob) => {
               resolve({
-                blob,
-                fileName: result.fileName,
+                compressed: {
+                  blob,
+                  fileName: 'compressed.jpg',
+                },
+                original: result,
               });
             }, 'image/jpeg', 50);
           };
@@ -55,10 +64,10 @@ export const loadImage = () => (dispatch, getState) => {
         }
       });
     })
-    .then((result) => {
-      if (!result) return;
+    .then(({ compressed, original }) => {
+      if (!compressed) return;
 
-      const { blob, fileName } = result;
+      const { blob, fileName } = compressed;
 
       const formData = new FormData();
       formData.append('apikey', process.env.REACT_APP_OCR_SPACE_API_KEY);
@@ -115,7 +124,7 @@ export const loadImage = () => (dispatch, getState) => {
                 type: UPDATE_OCR,
                 ocr: {
                   status: 'done',
-                  imageUrl: URL.createObjectURL(blob, { oneTimeOnly: true }),
+                  imageUrl: URL.createObjectURL(original.blob, { oneTimeOnly: true }),
                   inputText,
                   inputLines,
                   outputText,

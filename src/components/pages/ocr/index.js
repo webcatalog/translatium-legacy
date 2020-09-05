@@ -74,6 +74,9 @@ const styles = (theme) => ({
       outlineWidth: 5,
     },
   },
+  ocrImage: {
+    maxWidth: 1500,
+  },
 });
 
 class Ocr extends React.Component {
@@ -143,13 +146,13 @@ class Ocr extends React.Component {
         </Tooltip>
         <div className={classes.zoomContainer}>
           <div
-            style={{ zoom: ocr.zoomLevel || 1, position: 'relative' }}
+            style={{ zoom: ocr.zoomLevel || 1, position: 'relative', touchAction: 'pinch-zoom' }}
           >
             {ocr[lineVarName].map((line) => (
               <div
                 role="button"
                 tabIndex={0}
-                key={`ocrText_${line.text}`}
+                key={`ocrText_${line.text}_${line.top}_${line.left}`}
                 className={classes.line}
                 style={{
                   top: line.top,
@@ -165,7 +168,7 @@ class Ocr extends React.Component {
                 {line.text}
               </div>
             ))}
-            <img src={ocr.imageUrl} alt="" />
+            <img src={ocr.imageUrl} className={classes.ocrImage} alt="" />
           </div>
         </div>
         <Tooltip title={getLocale('zoomOut')} placement="top">
