@@ -66,9 +66,10 @@ export const loadImage = (type = 'file') => (dispatch, getState) => {
         }
       });
     })
-    .then(({ compressed, original, maxWidth }) => {
-      if (!compressed) return;
+    .then((result) => {
+      if (!result) return;
 
+      const { compressed, original, maxWidth } = result;
       const { blob, fileName } = compressed;
 
       const formData = new FormData();
