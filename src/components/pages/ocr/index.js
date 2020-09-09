@@ -60,9 +60,6 @@ const styles = (theme) => ({
       outlineWidth: 5,
     },
   },
-  ocrImage: {
-    maxWidth: 1500,
-  },
   controllers: {
     bottom: theme.spacing(1),
     left: 0,
@@ -122,6 +119,8 @@ class Ocr extends React.Component {
     const {
       classes,
       imageUrl,
+      imageHeight,
+      imageWidth,
       inputLang,
       inputText,
       lines,
@@ -177,7 +176,14 @@ class Ocr extends React.Component {
                 {line.text}
               </div>
             ))}
-            <img src={imageUrl} className={classes.ocrImage} alt="" />
+            <img
+              src={imageUrl}
+              alt=""
+              style={{
+                height: imageHeight,
+                width: imageWidth,
+              }}
+            />
           </div>
         </div>
         <Paper className={classes.controllers}>
@@ -292,6 +298,8 @@ class Ocr extends React.Component {
 
 Ocr.defaultProps = {
   imageUrl: null,
+  imageHeight: 0,
+  imageWidth: 0,
   inputText: '',
   lines: [],
   mode: 'input',
@@ -302,6 +310,8 @@ Ocr.defaultProps = {
 Ocr.propTypes = {
   classes: PropTypes.object.isRequired,
   imageUrl: PropTypes.string,
+  imageHeight: PropTypes.number,
+  imageWidth: PropTypes.number,
   inputLang: PropTypes.string.isRequired,
   inputText: PropTypes.string,
   lines: PropTypes.array,
@@ -318,6 +328,8 @@ Ocr.propTypes = {
 
 const mapStateToProps = (state) => ({
   imageUrl: state.pages.ocr ? state.pages.ocr.imageUrl : undefined,
+  imageHeight: state.pages.ocr ? state.pages.ocr.imageHeight : undefined,
+  imageWidth: state.pages.ocr ? state.pages.ocr.imageWidth : undefined,
   inputLang: state.preferences.inputLang,
   inputText: state.pages.ocr ? state.pages.ocr.inputText : undefined,
   lines: state.pages.ocr ? state.pages.ocr[`${state.pages.ocr.mode || 'output'}Lines`] : undefined,

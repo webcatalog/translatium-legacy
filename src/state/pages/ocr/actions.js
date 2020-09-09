@@ -54,8 +54,8 @@ export const loadImage = (type = 'file') => (dispatch, getState) => {
                   fileName: 'compressed.jpg',
                 },
                 original: result,
-                maxWidth,
-                maxHeight,
+                imageWidth: maxWidth,
+                imageHeight: maxHeight,
               });
             }, 'image/jpeg', 50);
           };
@@ -69,7 +69,9 @@ export const loadImage = (type = 'file') => (dispatch, getState) => {
     .then((result) => {
       if (!result) return;
 
-      const { compressed, original, maxWidth } = result;
+      const {
+        compressed, original, maxWidth, imageHeight, imageWidth,
+      } = result;
       const { blob, fileName } = compressed;
 
       const formData = new FormData();
@@ -139,6 +141,8 @@ export const loadImage = (type = 'file') => (dispatch, getState) => {
                   outputText,
                   outputLines,
                   zoomLevel,
+                  imageWidth,
+                  imageHeight,
                 },
               });
 
