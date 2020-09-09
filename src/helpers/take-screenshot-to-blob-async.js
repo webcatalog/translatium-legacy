@@ -3,11 +3,8 @@ const takeScreenshotToBlob = () => {
 
   // https://github.com/karaggeorge/mac-screen-capture-permissions/tree/master
   // https://nyrra33.com/2019/07/23/open-preference-pane-programmatically/
-  const permissionStatus = remote.systemPreferences.getMediaAccessStatus('screen');
-  if (permissionStatus !== 'granted') {
-    if (window.process.platform === 'darwin') {
-      remote.shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture');
-    }
+  if (window.process.platform === 'darwin' && remote.systemPreferences.getMediaAccessStatus('screen') !== 'granted') {
+    remote.shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture');
     return Promise.resolve();
   }
 
