@@ -98,7 +98,8 @@ const data = {
     sl: 'slv',
     sv: 'swe',
     tr: 'tur',
-    zh: 'chs',
+    'zh-CN': 'chs',
+    'zh-TW': 'chs',
   },
 };
 
