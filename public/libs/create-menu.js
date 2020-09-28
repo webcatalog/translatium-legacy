@@ -10,7 +10,6 @@ const config = require('../config');
 
 const sendToAllWindows = require('./send-to-all-windows');
 const { getLocale } = require('./locales');
-const { getPreference } = require('./preferences');
 
 const createMenu = () => {
   const updaterEnabled = process.env.SNAP == null && !process.mas && !process.windowsStore;

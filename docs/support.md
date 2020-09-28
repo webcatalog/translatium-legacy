@@ -14,7 +14,7 @@ Yes, most features of Translatium require Internet connection to work.
 Yes, it does. You can download the Translatium PopClip extension from [here](/popclip).
 
 ##### Where can I download previous versions of Translatium?
-Even though previous versions of Translatium are no longer officially supported, you can still download them from [here](https://github.com/atomery/translatium/releases).
+Even though previous versions of Translatium are no longer officially supported, you can still download them from [here](https://github.com/quanglam2807/translatium/releases).
 
 ##### Is Translatium open source?
-Yes, you can find the source code on [GitHub](https://github.com/atomery/translatium) under the MPL-2 license.
+Yes, you can find the source code on [GitHub](https://github.com/quanglam2807/translatium) under the MPL-2 license.

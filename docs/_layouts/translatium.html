@@ -21,69 +21,71 @@ layout: default
 
         {% if page.platform == "mac" %}
         <div class="buttons is-centered is-left-desktop">
-          <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="mac" download href="https://github.com/atomery/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.dmg">
+          <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="mac" download href="https://github.com/quanglam2807/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.dmg">
             <i class="fab fa-apple"></i>
             <span>&nbsp; Download Free for Mac</span>
           </a>
         </div>
         <p><small>Also available <a href="https://itunes.apple.com/us/app/translatium/id1176624652">on Mac App Store</a>.</small></p>
-        <p><small>Version <a href="https://github.com/atomery/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. macOS 10.10 or later.</small></p>
+        <p><small>Version <a href="https://github.com/quanglam2807/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. macOS 10.10 or later.</small></p>
         <br />
         <p>Also available on&nbsp;&nbsp;<a href="/download/windows"><i class="fab fa-windows"></i> Windows</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
         {% elsif page.platform == "linux" %}
         <div class="buttons is-centered is-left-desktop">
-          <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="linux" download href="https://github.com/atomery/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.AppImage">
+          <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="linux" download href="https://github.com/quanglam2807/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.AppImage">
             <i class="fab fa-linux"></i>
             <span>&nbsp; Download Free for Linux</span>
           </a>
         </div>
         <p><small>Also available on <a href="https://snapcraft.io/translatium/">Snap Store</a>.</small></p>
-        <p><small>Version <a href="https://github.com/atomery/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Linux, 64-bit. <a href="https://appimage.org/">How to run an AppImage?</a></small></p>
+        <p><small>Version <a href="https://github.com/quanglam2807/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Linux, 64-bit. <a href="https://appimage.org/">How to run an AppImage?</a></small></p>
         <br />
         <p>Also available on&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> Mac</a> | <a href="/download/windows"><i class="fab fa-windows"></i> Windows</a>.</p>
         {% elsif page.platform == "windows" %}
         <div class="buttons is-centered is-left-desktop">
-          <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="windows" download href="https://github.com/atomery/translatium/releases/download/v{{site.translatium_version }}/Translatium-Setup-{{ site.translatium_version }}.exe">
+          <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="windows" download href="https://github.com/quanglam2807/translatium/releases/download/v{{site.translatium_version }}/Translatium-Setup-{{ site.translatium_version }}.exe">
             <i class="fab fa-windows"></i>
             <span>&nbsp; Download Free for Windows</span>
           </a>
         </div>
-        <p><small>Version <a href="https://github.com/atomery/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Windows 7 and later, 64-bit.</small></p>
+        <p><small>Also available <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing">on Microsoft Store</a>.</small></p>
+        <p><small>Version <a href="https://github.com/quanglam2807/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Windows 7 and later, 64-bit.</small></p>
         <br />
         <p>Also available on&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> Mac</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
         {% else %}
         <div id="mac">
           <div class="buttons is-centered is-left-desktop">
-            <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="mac" download href="https://github.com/atomery/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.dmg">
+            <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="mac" download href="https://github.com/quanglam2807/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.dmg">
               <i class="fab fa-apple"></i>
               <span>&nbsp; Download Free for Mac</span>
             </a>
           </div>
           <p><small>Also available <a href="https://itunes.apple.com/us/app/translatium/id1176624652">on Mac App Store</a>.</small></p>
-          <p><small>Version <a href="https://github.com/atomery/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. macOS 10.10 or later.</small></p>
+          <p><small>Version <a href="https://github.com/quanglam2807/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. macOS 10.10 or later.</small></p>
           <br />
           <p>Also available on&nbsp;&nbsp;<a href="/download/windows"><i class="fab fa-windows"></i> Windows</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
         </div>
         <div style="display:none" id="linux" style="display:none">
           <div class="buttons is-centered is-left-desktop">
-            <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="linux" download href="https://github.com/atomery/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.AppImage">
+            <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="linux" download href="https://github.com/quanglam2807/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.AppImage">
               <i class="fab fa-linux"></i>
               <span>&nbsp; Download Free for Linux</span>
             </a>
           </div>
           <p><small>Also available on <a href="https://snapcraft.io/translatium/">Snap Store</a>.</small></p>
-          <p><small>Version <a href="https://github.com/atomery/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Linux, 64-bit. <a href="https://appimage.org/">How to run an AppImage?</a></small></p>
+          <p><small>Version <a href="https://github.com/quanglam2807/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Linux, 64-bit. <a href="https://appimage.org/">How to run an AppImage?</a></small></p>
           <br />
           <p>Also available on&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> Mac</a> | <a href="/download/windows"><i class="fab fa-windows"></i> Windows</a>.</p>
         </div>
         <div style="display:none" id="windows" style="display:none">
           <div class="buttons is-centered is-left-desktop">
-            <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="windows" download href="https://github.com/atomery/translatium/releases/download/v{{site.translatium_version }}/Translatium-Setup-{{ site.translatium_version }}.exe">
+            <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="windows" download href="https://github.com/quanglam2807/translatium/releases/download/v{{site.translatium_version }}/Translatium-Setup-{{ site.translatium_version }}.exe">
               <i class="fab fa-windows"></i>
               <span>&nbsp; Download Free for Windows</span>
             </a>
           </div>
-          <p><small>Version <a href="https://github.com/atomery/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Windows 7 and later, 64-bit.</small></p>
+          <p><small>Also available <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing">on Microsoft Store</a>.</small></p>
+          <p><small>Version <a href="https://github.com/quanglam2807/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Windows 7 and later, 64-bit.</small></p>
           <br />
           <p>Also available on&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> Mac</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
         </div>
