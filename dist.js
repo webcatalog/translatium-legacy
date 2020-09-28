@@ -7,7 +7,8 @@ const glob = require('glob');
 const del = require('del');
 const { notarize } = require('electron-notarize');
 const semver = require('semver');
-const { exec } = require('child_process');
+const { exec, spawn } = require('child_process');
+const { getSignVendorPath } = require('app-builder-lib/out/codeSign/windowsCodeSign');
 
 const packageJson = require('./package.json');
 const displayLanguages = require('./public/libs/locales/languages');
@@ -36,6 +37,15 @@ const verifyNotarizationAsync = (filePath) => new Promise((resolve, reject) => {
     }
   });
 });
+
+// https://stackoverflow.com/a/17466459
+const runCmd = (cmd, args, callBack) => {
+  const child = spawn(cmd, args);
+  let resp = '';
+
+  child.stdout.on('data', (buffer) => { resp += buffer.toString(); });
+  child.stdout.on('end', () => { callBack(resp); });
+};
 
 const { Platform } = builder;
 
@@ -112,6 +122,36 @@ const opts = {
         },
         'github',
       ],
+    },
+    afterAllArtifactBuild: () => {
+      if (process.platform !== 'win32') {
+        return [];
+      }
+      // Create .appxbundle for backward compability
+      // http://www.jonathanantoine.com/2016/04/12/windows-app-bundles-and-the-subsequent-submissions-must-continue-to-contain-a-windows-phone-8-1-appxbundle-error-message/
+      // https://docs.microsoft.com/en-us/windows/msix/package/create-app-package-with-makeappx-tool
+      // https://github.com/electron-userland/electron-builder/blob/master/packages/app-builder-lib/src/targets/AppxTarget.ts
+      const appxBundlePath = path.join('dist', `Translatium ${appVersion}.appxbundle`);
+      const appxPath = path.join(__dirname, 'dist', `Translatium ${appVersion}.appx`);
+      const bundleDirPath = path.join(__dirname, 'dist', 'appx_bundle');
+      const appxDestPath = path.join(bundleDirPath, 'Translatium.appx');
+      return getSignVendorPath()
+        .then((vendorPath) => {
+          console.log(`Creating ${appxBundlePath}...`);
+          fs.ensureDirSync(bundleDirPath);
+          fs.copyFileSync(appxPath, appxDestPath);
+          return new Promise((resolve) => {
+            const makeAppxPath = path.join(vendorPath, 'windows-10', 'x64', 'makeappx.exe');
+            runCmd(makeAppxPath, ['bundle', '/p', appxBundlePath, '/d', bundleDirPath, '/o'], (text) => {
+              console.log(text);
+              resolve();
+            });
+          })
+            .then(() => {
+              console.log(`Created ${appxBundlePath} successfully`);
+              return [appxBundlePath];
+            });
+        });
     },
     afterPack: ({ appOutDir }) => new Promise((resolve, reject) => {
       const languages = Object.keys(displayLanguages);
