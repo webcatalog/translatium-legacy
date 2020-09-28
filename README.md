@@ -2,30 +2,17 @@
 
 |macOS|Linux|Windows|
 |---|---|---|
-|[![GitHub Actions Build Status](https://github.com/atomery/translatium/workflows/macOS/badge.svg)](https://github.com/atomery/translatium/actions)|[![GitHub Actions Build Status](https://github.com/atomery/translatium/workflows/Linux/badge.svg)](https://github.com/atomery/translatium/actions)|[![GitHub Actions Build Status](https://github.com/atomery/translatium/workflows/Windows/badge.svg)](https://github.com/atomery/translatium/actions)|
+|[![GitHub Actions Build Status](https://github.com/quanglam2807/translatium/workflows/macOS/badge.svg)](https://github.com/quanglam2807/translatium/actions)|[![GitHub Actions Build Status](https://github.com/quanglam2807/translatium/workflows/Linux/badge.svg)](https://github.com/quanglam2807/translatium/actions)|[![GitHub Actions Build Status](https://github.com/quanglam2807/translatium/workflows/Windows/badge.svg)](https://github.com/quanglam2807/translatium/actions)|
 
-**[Translatium](https://atomery.com/translatium)** - Translate Any Languages like a Pro.
+**[Translatium](https://translatiumapp.com)** - Translate Any Languages like a Pro.
 
 **master** branch only includes the source code of Translatium 9 & up. For older versions, check out the **legacy-** branches.
-
----
-## Licensing
-### Usage
-**Translatium is paid software.**  [Pay just $9.99](https://webcatalog.onfastspring.com/translatium) to unlock the app perpetually.
-
-The license:
-- Has no time limit and never expires.
-- Works with all versions (including major updates).
-- Permits uses on all of the devices you own (regardless of platforms or operating systems).
-
-### Source Code
-On the other hand, **the source code is freely available** for use, modification and distribution under the permissions, limitations and conditions listed in the [Mozilla Public License 2.0](LICENSE).
 
 ---
 ## Development
 ```
 # First, clone the project:
-git clone https://github.com/atomery/translatium.git
+git clone https://github.com/quanglam2807/translatium.git
 cd translatium
 
 # set API keys

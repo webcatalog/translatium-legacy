@@ -83,13 +83,13 @@ const About = (props) => {
         </Typography>
 
         <Button
-          onClick={() => requestOpenInBrowser('https://atomery.com/translatium?utm_source=translatium_app')}
+          onClick={() => requestOpenInBrowser('https://translatiumapp.com?utm_source=translatium_app')}
         >
           {getLocale('website')}
         </Button>
 
         <Button
-          onClick={() => requestOpenInBrowser('https://atomery.com/support?app=translatium&utm_source=translatium_app')}
+          onClick={() => requestOpenInBrowser('https://translatiumapp.com/support?utm_source=translatium_app')}
         >
           {getLocale('support')}
         </Button>
@@ -101,10 +101,10 @@ const About = (props) => {
           <MLink
             component="button"
             variant="body2"
-            onClick={() => requestOpenInBrowser('https://atomery.com?utm_source=translatium_app')}
+            onClick={() => requestOpenInBrowser('https://github.com/quanglam2807')}
             className={classes.link}
           >
-            Atomery
+            Quang Lam
           </MLink>
         </Typography>
       </DialogContent>

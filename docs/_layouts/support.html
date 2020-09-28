@@ -1,0 +1,28 @@
+---
+layout: default
+---
+<section class="section">
+<div class="container">
+  <div class="content">
+    <h2 class="title">Support</h2>
+    <hr />
+
+    <div class="is-size-5">
+      <p><b>Email</b><br>
+        Email us at <a href="mailto:support@translatiumapp.com">support@translatiumapp.com</a>.</p>
+
+      {% if page.app_id != 'switchbar' %}
+      <p><b>GitHub</b><br>
+        Create an issue on <a href="https://github.com/quanglam2807/translatium/issues">GitHub</a>.</p>
+      {% endif %}
+    </div>
+
+    <hr />
+
+    <h3>Frequently Asked Questions (FAQs)</h3>
+    <div class="faqs-content">
+      {{ content }}
+    </div>
+  </div>
+</div>
+</section>

@@ -4,7 +4,6 @@ import { updateLanguageListMode } from '../state/pages/language-list/actions';
 import { } from '../state/pages/phrasebook/actions';
 import { changeRoute } from '../state/root/router/actions';
 import { open as openDialogAbout } from '../state/root/dialog-about/actions';
-import { open as openDialogLicenseRegistration } from '../state/root/dialog-license-registration/actions';
 import {
   updateShouldUseDarkColors,
 } from '../state/root/general/actions';
@@ -99,8 +98,6 @@ const loadListeners = (store) => {
   });
 
   ipcRenderer.on('open-dialog-about', () => store.dispatch(openDialogAbout()));
-
-  ipcRenderer.on('open-license-registration-dialog', () => store.dispatch(openDialogLicenseRegistration()));
 
   ipcRenderer.on('native-theme-updated', () => {
     store.dispatch(updateShouldUseDarkColors(getShouldUseDarkColors()));

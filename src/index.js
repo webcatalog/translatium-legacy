@@ -15,7 +15,7 @@ const { webFrame } = window.require('electron');
 
 webFrame.setVisualZoomLevelLimits(1, 1);
 
-// https://github.com/atomery/translatium/issues/28
+// https://github.com/quanglam2807/translatium/issues/28
 // remove text formatting when copying
 document.addEventListener('copy', (e) => {
   const textOnly = document.getSelection().toString();

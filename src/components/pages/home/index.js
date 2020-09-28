@@ -27,8 +27,6 @@ import ToggleStarBorder from '@material-ui/icons/StarBorder';
 import Tooltip from '@material-ui/core/Tooltip';
 import FileCopy from '@material-ui/icons/FileCopy';
 
-import Countdown from 'react-countdown';
-
 import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
@@ -56,11 +54,8 @@ import {
   endTextToSpeech,
 } from '../../../state/pages/home/text-to-speech/actions';
 import { updateLanguageListMode } from '../../../state/pages/language-list/actions';
-import { open as openDialogLicenseRegistration } from '../../../state/root/dialog-license-registration/actions';
 
 import { ROUTE_LANGUAGE_LIST } from '../../../constants/routes';
-
-import getTrialExpirationTime from '../../../helpers/get-trial-expiration-time';
 
 import Dictionary from './dictionary';
 import History from './history';
@@ -180,14 +175,6 @@ const styles = (theme) => ({
   toolbarIconButton: {
     padding: theme.spacing(1),
   },
-  trialCountdown: {
-    color: theme.palette.text.disabled,
-    fontWeight: 400,
-    fontSize: '0.8rem',
-    marginTop: theme.spacing(1),
-    marginLeft: 12,
-    marginRight: 12,
-  },
   outputText: {
     whiteSpace: 'pre-wrap',
   },
@@ -217,43 +204,6 @@ class Home extends React.Component {
   handleOpenFind() {
     this.inputRef.current.focus();
     this.inputRef.current.select();
-  }
-
-  renderCountdown() {
-    const { classes, registered, onOpenDialogLicenseRegistration } = this.props;
-
-    if (registered) return null;
-
-    return (
-      <Typography
-        variant="body2"
-        align="left"
-        className={classes.trialCountdown}
-      >
-        <Countdown
-          date={getTrialExpirationTime()}
-          renderer={({
-            hours, minutes, seconds, completed,
-          }) => {
-            if (completed) {
-              // Render a completed state
-              return getLocale('trialExpired');
-            }
-            // Render a countdown
-            // eslint-disable-next-line react/jsx-one-expression-per-line
-            return getLocale('trialExpireIn').replace('{time}', `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`);
-          }}
-          onComplete={() => {
-            onOpenDialogLicenseRegistration();
-          }}
-          onMount={({ completed }) => {
-            if (completed) {
-              onOpenDialogLicenseRegistration();
-            }
-          }}
-        />
-      </Typography>
-    );
   }
 
   renderOutput() {
@@ -383,7 +333,6 @@ class Home extends React.Component {
             <RatingCard />
 
             {output.outputDict && output.source === 'translate.googleapis.com' && <Dictionary />}
-            {this.renderCountdown()}
           </div>
         );
       }
@@ -661,7 +610,6 @@ Home.propTypes = {
   onChangeRoute: PropTypes.func.isRequired,
   onEndTextToSpeech: PropTypes.func.isRequired,
   onLoadImage: PropTypes.func.isRequired,
-  onOpenDialogLicenseRegistration: PropTypes.func.isRequired,
   onOpenSnackbar: PropTypes.func.isRequired,
   onStartTextToSpeech: PropTypes.func.isRequired,
   onSwapLanguages: PropTypes.func.isRequired,
@@ -674,7 +622,6 @@ Home.propTypes = {
   onUpdateOutputLang: PropTypes.func.isRequired,
   output: PropTypes.object,
   outputLang: PropTypes.string.isRequired,
-  registered: PropTypes.bool.isRequired,
   showTransliteration: PropTypes.bool.isRequired,
   textToSpeechPlaying: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
@@ -686,7 +633,6 @@ const mapStateToProps = (state) => ({
   inputText: state.pages.home.inputText,
   output: state.pages.home.output,
   outputLang: state.preferences.outputLang,
-  registered: state.preferences.registered,
   showTransliteration: state.preferences.showTransliteration,
   textToSpeechPlaying: state.pages.home.textToSpeech.textToSpeechPlaying,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
@@ -696,7 +642,6 @@ const actionCreators = {
   changeRoute,
   endTextToSpeech,
   loadImage,
-  openDialogLicenseRegistration,
   openSnackbar,
   startTextToSpeech,
   swapLanguages,

@@ -1,0 +1,13 @@
+<meta name="description" content="{{ page_description | strip_html | strip | escape }}">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ page.url | replace:'index.html','' | absolute_url }}">
+<meta property="og:title" content="{{ page_title | escape }}">
+<meta property="og:description" content="{{ page_description | strip_html | strip | escape }}">
+<meta property="og:image" content="{{ '/images/social-preview.png' | absolute_url }}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="{{ page.url | replace:'index.html','' | absolute_url }}">
+<meta name="twitter:title" content="{{ page_title | escape }}">
+<meta name="twitter:description" content="{{ page_description | strip_html | strip | escape }}">
+<meta name="twitter:image" content="{{ '/images/social-preview.png' | absolute_url }}">

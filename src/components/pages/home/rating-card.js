@@ -32,7 +32,7 @@ const RatingCard = ({
   ratingCardLastClicked,
   ratingCardDidRate,
 }) => {
-  if (!window.process.mas) return null;
+  if (!window.process.mas && !window.process.windowsStore) return null;
 
   // time gap between rating card request
   // 3 months if user has rated the app, 1 week if user has not
@@ -44,20 +44,38 @@ const RatingCard = ({
     return (
       <Card elevation={0} square className={classNames(classes.card, classes.ratingCard)}>
         <CardActions className={classes.ratingCardActions}>
-          <Button
-            variant="contained"
-            size="small"
-            color="primary"
-            disableElevation
-            classes={{ label: classes.translateButtonLabel }}
-            onClick={() => {
-              requestSetPreference('ratingCardLastClicked', Date.now());
-              requestSetPreference('ratingCardDidRate', true);
-              requestOpenInBrowser('macappstore://apps.apple.com/app/id1176624652?action=write-review');
-            }}
-          >
-            {getLocale('rateMacAppStore')}
-          </Button>
+          {window.process.mas && (
+            <Button
+              variant="contained"
+              size="small"
+              color="primary"
+              disableElevation
+              classes={{ label: classes.translateButtonLabel }}
+              onClick={() => {
+                requestSetPreference('ratingCardLastClicked', Date.now());
+                requestSetPreference('ratingCardDidRate', true);
+                requestOpenInBrowser('macappstore://apps.apple.com/app/id1176624652?action=write-review');
+              }}
+            >
+              {getLocale('rateMacAppStore')}
+            </Button>
+          )}
+          {window.process.windowsStore && (
+            <Button
+              variant="contained"
+              size="small"
+              color="primary"
+              disableElevation
+              classes={{ label: classes.translateButtonLabel }}
+              onClick={() => {
+                requestSetPreference('ratingCardLastClicked', Date.now());
+                requestSetPreference('ratingCardDidRate', true);
+                requestOpenInBrowser('ms-windows-store://review/?ProductId=9wzdncrcsg9k');
+              }}
+            >
+              {getLocale('rateMicrosoftStore')}
+            </Button>
+          )}
           <Button
             variant="contained"
             size="small"

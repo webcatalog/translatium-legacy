@@ -1,0 +1,44 @@
+---
+layout: compress
+---
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {% include head.html %}
+
+  <body>
+    <nav class="bd-navbar navbar is-spaced navbar-2">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/" title="Translatium">
+            <p class="is-size-4 has-text-weight-semibold mb-0">Translatium</p>
+          </a>
+          <span class="burger navbar-burger" data-target="navbarMenu2" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </span>
+        </div>
+        <div id="navbarMenu2" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item" href="https://github.com/quanglam2807/translatium/">
+              GitHub
+            </a>
+            <a class="navbar-item {% if page.id == 'support' %}has-text-weight-semibold{% endif %}" href="/support">
+              Support
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main>
+      {{ content }}
+    </main>
+    <footer class="footer">
+      <div class="container has-text-centered">
+        <p>Made by <a href="https://github.com/quanglam2807">Quang Lam</a>.</p>
+      </div>
+    </footer>
+    {% include google-analytics.html %}
+  </body>
+</html>

@@ -1,0 +1,59 @@
+@import "./bulma/sass/utilities/initial-variables"
+@import "./bulma/sass/utilities/functions"
+
+// set font-weight to only 400, 600 (to load less font data)
+$weight-light: 400
+$weight-normal: 400
+$weight-medium: 400
+$weight-semibold: 600
+$weight-bold: 600
+
+$green: #43A047
+$blue: #43A047
+
+@import "./bulma/sass/utilities/derived-variables"
+
+$footer-background-color: #fff
+$dropdown-item-active-background-color: $background
+$dropdown-item-active-color: $scheme-invert
+
+@import "./bulma/bulma.sass"
+
+html
+  height: 100%
+
+body
+  display: flex
+  flex-direction: column
+  min-height: 100%
+  // fix BUG: columns.is-variable overflow on iOS Safari
+  // https://github.com/jgthms/bulma/issues/1540
+  overflow-x: hidden
+
+main
+  flex-grow: 1
+
+picture
+  line-height: 1
+
+.app-icon-header
+  width: 128px
+  height: 128px
+
+.demo-header
+  max-width: #{'min(100%, 500px)'}
+  max-height: 500px
+  width: auto
+  height: auto
+
+.demo-main
+  max-width: 500px
+  width: 100%
+
+.buttons
+  &.is-left-desktop
+    +desktop
+      justify-content: flex-start
+  &.is-right-desktop
+    +desktop
+      justify-content: flex-end

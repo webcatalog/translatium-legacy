@@ -20,11 +20,9 @@ import getLocale from '../helpers/get-locale';
 import { screenResize } from '../state/root/screen/actions';
 import { closeSnackbar } from '../state/root/snackbar/actions';
 import { changeRoute } from '../state/root/router/actions';
-import { open as openDialogLicenseRegistration } from '../state/root/dialog-license-registration/actions';
 
 import Alert from './root/alert';
 import DialogAbout from './root/dialog-about';
-import DialogLicenseRegistration from './root/dialog-license-registration';
 
 import Home from './pages/home';
 import History from './pages/history';
@@ -41,8 +39,6 @@ import {
   ROUTE_LANGUAGE_LIST,
   ROUTE_OCR,
 } from '../constants/routes';
-
-import getTrialExpirationTime from '../helpers/get-trial-expiration-time';
 
 const styles = (theme) => ({
   container: {
@@ -99,13 +95,6 @@ const styles = (theme) => ({
 });
 
 class App extends React.Component {
-  componentDidMount() {
-    const { registered, onOpenDialogLicenseRegistration } = this.props;
-    if (!registered && new Date() > getTrialExpirationTime()) {
-      onOpenDialogLicenseRegistration();
-    }
-  }
-
   componentWillUnmount() {
     const { onScreenResize } = this.props;
     window.removeEventListener('resize', () => onScreenResize(window.innerWidth));
@@ -181,7 +170,6 @@ class App extends React.Component {
           )}
           <Alert />
           <DialogAbout />
-          <DialogLicenseRegistration />
           <Snackbar
             open={snackbarOpen}
             message={snackbarMessage || ''}
@@ -272,9 +260,7 @@ App.propTypes = {
   isFullScreen: PropTypes.bool.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
   onCloseSnackbar: PropTypes.func.isRequired,
-  onOpenDialogLicenseRegistration: PropTypes.func.isRequired,
   onScreenResize: PropTypes.func.isRequired,
-  registered: PropTypes.bool.isRequired,
   route: PropTypes.string.isRequired,
   shouldShowBottomNav: PropTypes.bool.isRequired,
   snackbarMessage: PropTypes.string,
@@ -284,7 +270,6 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   fullPageLoading: Boolean(state.pages.ocr && state.pages.ocr.status === 'loading'),
   isFullScreen: state.general.isFullScreen,
-  registered: state.preferences.registered,
   route: state.router.route,
   shouldShowBottomNav: true,
   snackbarMessage: state.snackbar.message,
@@ -295,7 +280,6 @@ const actionCreators = {
   screenResize,
   changeRoute,
   closeSnackbar,
-  openDialogLicenseRegistration,
 };
 
 export default connectComponent(
