@@ -13,10 +13,10 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Atomery
-description: We build products that make your life simpler and more productive.
+title: Translatium
+description: Translatium lets you translate words, phrases and images between over 100 languages with dictionary, transliteration and voice output support.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://atomery.com" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://translatiumapp.com" # the base hostname & protocol for your site, e.g. http://example.com
 
 translatium_version: 13.8.2
 

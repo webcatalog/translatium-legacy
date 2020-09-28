@@ -144,7 +144,7 @@ const createMenu = () => {
       submenu: [
         {
           label: getLocale('appNameSupport'),
-          click: () => shell.openExternal('https://atomery.com/support?app=translatium'),
+          click: () => shell.openExternal('https://translatiumapp.com/support'),
         },
         {
           label: getLocale('reportAnIssueViaGitHub'),
@@ -158,7 +158,6 @@ const createMenu = () => {
     },
   ];
 
-  const registered = getPreference('registered');
   if (process.platform === 'darwin') {
     template.unshift({
       label: config.APP_NAME,
@@ -172,16 +171,6 @@ const createMenu = () => {
           visible: updaterEnabled,
         },
         updaterMenuItem,
-        {
-          type: 'separator',
-          visible: !process.mas,
-        },
-        {
-          label: registered ? getLocale('registered') : getLocale('registration'),
-          enabled: !registered,
-          click: registered ? null : () => sendToAllWindows('open-license-registration-dialog'),
-          visible: !process.mas,
-        },
         { type: 'separator' },
         {
           label: getLocale('preferencesMenuItem'),
@@ -211,16 +200,6 @@ const createMenu = () => {
       {
         label: getLocale('about'),
         click: () => sendToAllWindows('open-dialog-about'),
-      },
-      {
-        type: 'separator',
-        visible: !process.windowsStore,
-      },
-      {
-        label: registered ? getLocale('registered') : getLocale('registration'),
-        enabled: !registered,
-        click: registered ? null : () => sendToAllWindows('open-license-registration-dialog'),
-        visible: !process.windowsStore,
       },
       {
         type: 'separator',

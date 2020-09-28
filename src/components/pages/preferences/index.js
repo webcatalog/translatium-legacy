@@ -35,9 +35,6 @@ import {
 } from '../../../senders';
 
 import webcatalogIconPng from '../../../assets/webcatalog-icon.png';
-import translatiumIconPng from '../../../assets/translatium-icon.png';
-import singleboxIconPng from '../../../assets/singlebox-icon.png';
-import switchbarIconPng from '../../../assets/switchbar-icon.png';
 
 const styles = (theme) => ({
   container: {
@@ -315,7 +312,7 @@ const Preferences = (props) => {
               <>
                 <ListItem
                   button
-                  onClick={() => window.require('electron').remote.shell.openExternal('https://atomery.com/translatium/popclip')}
+                  onClick={() => window.require('electron').remote.shell.openExternal('https://translatiumapp.com/popclip')}
                 >
                   <ListItemText primary={getLocale('popclipExtension')} />
                   <ChevronRightIcon color="action" />
@@ -375,13 +372,13 @@ const Preferences = (props) => {
         {!window.process.mas && (
           <>
             <Typography variant="subtitle2" color="textPrimary" className={classes.paperTitle}>
-              Atomery Apps
+              More Apps
             </Typography>
             <Paper elevation={0} className={classes.paper}>
               <List disablePadding dense>
                 <ListItem
                   button
-                  onClick={() => requestOpenInBrowser('https://atomery.com/webcatalog?utm_source=translatium_app')}
+                  onClick={() => requestOpenInBrowser('https://webcatalogapp.com?utm_source=translatium_app')}
                   className={classes.listItemPromotion}
                 >
                   <div className={classes.promotionBlock}>
@@ -401,75 +398,6 @@ const Preferences = (props) => {
                   </div>
                   <ChevronRightIcon color="action" />
                 </ListItem>
-                <Divider />
-                <ListItem
-                  button
-                  onClick={() => requestOpenInBrowser('https://atomery.com/singlebox?utm_source=translatium_app')}
-                  className={classes.listItemPromotion}
-                >
-                  <div className={classes.promotionBlock}>
-                    <div className={classes.promotionLeft}>
-                      <img src={singleboxIconPng} alt="Singlebox" className={classes.appIcon} />
-                    </div>
-                    <div className={classes.promotionRight}>
-                      <div>
-                        <Typography variant="body1" className={classes.appTitle}>
-                          Singlebox
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                          All Your Apps in One Single Window
-                        </Typography>
-                      </div>
-                    </div>
-                  </div>
-                  <ChevronRightIcon color="action" />
-                </ListItem>
-                <Divider />
-                <ListItem
-                  button
-                  onClick={() => requestOpenInBrowser('https://atomery.com/switchbar?utm_source=translatium_app')}
-                  className={classes.listItemPromotion}
-                >
-                  <div className={classes.promotionBlock}>
-                    <div className={classes.promotionLeft}>
-                      <img src={switchbarIconPng} alt="Switchbar" className={classes.appIcon} />
-                    </div>
-                    <div className={classes.promotionRight}>
-                      <div>
-                        <Typography variant="body1" className={classes.appTitle}>
-                          Switchbar
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                          Open Every Link in the Right App
-                        </Typography>
-                      </div>
-                    </div>
-                  </div>
-                  <ChevronRightIcon color="action" />
-                </ListItem>
-                <Divider />
-                <ListItem
-                  button
-                  onClick={() => requestOpenInBrowser('https://atomery.com/translatium?utm_source=translatium_app')}
-                  className={classes.listItemPromotion}
-                >
-                  <div className={classes.promotionBlock}>
-                    <div className={classes.promotionLeft}>
-                      <img src={translatiumIconPng} alt="Translatium" className={classes.appIcon} />
-                    </div>
-                    <div className={classes.promotionRight}>
-                      <div>
-                        <Typography variant="body1" className={classes.appTitle}>
-                          Translatium
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                          Translate Any Languages like a Pro
-                        </Typography>
-                      </div>
-                    </div>
-                  </div>
-                  <ChevronRightIcon color="action" />
-                </ListItem>
               </List>
             </Paper>
           </>
@@ -483,11 +411,11 @@ const Preferences = (props) => {
             </ListItem>
             <Divider />
             <ListItem button>
-              <ListItemText primary={getLocale('website')} onClick={() => requestOpenInBrowser('https://atomery.com/translatium?utm_source=translatium_app')} />
+              <ListItemText primary={getLocale('website')} onClick={() => requestOpenInBrowser('https://translatiumapp.com?utm_source=translatium_app')} />
             </ListItem>
             <Divider />
             <ListItem button>
-              <ListItemText primary={getLocale('support')} onClick={() => requestOpenInBrowser('https://atomery.com/support?app=translatium&utm_source=translatium_app')} />
+              <ListItemText primary={getLocale('support')} onClick={() => requestOpenInBrowser('https://translatiumapp.com/support?utm_source=translatium_app')} />
             </ListItem>
             {window.process.platform === 'darwin' && (
               <>

@@ -4,13 +4,6 @@ const settings = require('electron-settings');
 const sendToAllWindows = require('./send-to-all-windows');
 const displayLanguages = require('./locales/languages');
 
-const shouldSkipLicenseCheck = () => {
-  if (!app.isPackaged) return true;
-
-  // skip license check if it is Mac App Store/Microsoft Store distribution
-  return (process.windowsStore || process.mas);
-};
-
 const getDefaultDisplayLanguage = () => {
   const appLocale = app.getLocale(); // vi-VN, en-US, etc
   // by default, strip away country code
@@ -57,7 +50,6 @@ const initCachedPreferences = () => {
     ratingCardLastClicked: 0,
     ratingCardDidRate: false,
     recentLanguages: ['en', 'zh-CN'],
-    registered: false,
     showTransliteration: true,
     themeSource: 'system',
     translateClipboardOnShortcut: false,
@@ -69,9 +61,6 @@ const initCachedPreferences = () => {
   // es-ES is renamed to es
   if (cachedPreferences.displayLanguage === 'es-ES') {
     cachedPreferences.displayLanguage = 'es';
-  }
-  if (shouldSkipLicenseCheck()) {
-    cachedPreferences.registered = true;
   }
 };
 

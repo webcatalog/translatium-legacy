@@ -1,25 +1,5 @@
 {% assign page_description = site.description %}
 
-{% case page.app_id %}
-  {% when "webcatalog" %}
-    {% assign atomery_app_name = 'WebCatalog' %}
-    {% assign page_description = 'WebCatalog lets you turn any websites into desktop apps.' %}
-  {% when "singlebox" %}
-    {% assign atomery_app_name = 'Singlebox' %}
-    {% assign page_description = 'Singlebox unifies all your web apps in one neat and productive interface as independent workspaces which you can switch between easily using keyboard shortcuts.' %}
-  {% when "switchbar" %}
-    {% assign atomery_app_name = 'Switchbar' %}
-    {% assign page_description = 'Switchbar lets you decide which browser or email client is right for a particular link.' %}
-  {% when "translatium" %}
-    {% assign atomery_app_name = 'Translatium' %}
-    {% assign page_description = 'Translatium lets you translate words, phrases and images between over 100 languages with dictionary, transliteration and voice output support.' %}
-  {% else %}
-{% endcase %}
-
-{% if page.layout == 'catalog-app' %}
-  {% assign page_description = page.content %}
-{% endif %}
-
 {% if page.id != 'landing' %}
 {% capture page_title %}{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}{% endcapture %}
 {% else %}

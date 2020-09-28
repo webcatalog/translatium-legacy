@@ -4,7 +4,7 @@
 |---|---|---|
 |[![GitHub Actions Build Status](https://github.com/atomery/translatium/workflows/macOS/badge.svg)](https://github.com/atomery/translatium/actions)|[![GitHub Actions Build Status](https://github.com/atomery/translatium/workflows/Linux/badge.svg)](https://github.com/atomery/translatium/actions)|[![GitHub Actions Build Status](https://github.com/atomery/translatium/workflows/Windows/badge.svg)](https://github.com/atomery/translatium/actions)|
 
-**[Translatium](https://atomery.com/translatium)** - Translate Any Languages like a Pro.
+**[Translatium](https://translatiumapp.com)** - Translate Any Languages like a Pro.
 
 **master** branch only includes the source code of Translatium 9 & up. For older versions, check out the **legacy-** branches.
 
