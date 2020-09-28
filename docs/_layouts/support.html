@@ -1,0 +1,113 @@
+---
+layout: default
+---
+<section class="section">
+<div class="container">
+  <div class="content">
+    <h2 class="title">Support</h2>
+    <p class="subtitle">We are here to answer your questions! Ask anything. Feedback, issues and more.</p>
+    <hr />
+
+    <div class="columns">
+      <div class="column">
+        <form action="https://usebasin.com/f/c872ef1baa0c" method="POST">
+          <select name="purpose" id="purpose" style="display:none">
+            <option value="general">General Request</option>
+            <option value="webcatalog"{% if page.app_id == 'webcatalog' %}selected="selected"{% endif %}>WebCatalog</option>
+            <option value="singlebox"{% if page.app_id == 'singlebox' %}selected="selected"{% endif %}>Singlebox</option>
+            <option value="switchbar"{% if page.app_id == 'switchbar' %}selected="selected"{% endif %}>Switchbar</option>
+            <option value="translatium"{% if page.app_id == 'translatium' %}selected="selected"{% endif %}>Translatium</option>
+          </select>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Platform (OS)</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control is-fullwidth select">
+                  <select name="platform" id="platform">
+                    <option value="mac">macOS</option>
+                    <option value="windows">Windows</option>
+                    <option value="linux">Linux</option>
+                  </select>
+                  <script>
+                    if (/Linux/.test(window.navigator.platform)) {
+                      document.getElementById('platform').selectedIndex = 2;
+                    }
+                    else if (['Win32', 'Win64', 'Windows', 'WinCE'].indexOf(window.navigator.platform) !== -1) {
+                      document.getElementById('platform').selectedIndex = 1;
+                    }
+                  </script>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Name</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control is-fullwidth">
+                  <input type="text" class="input" name="name" placeholder="Name" required>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Email address</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control is-fullwidth">
+                  <input type="email" class="input" name="email" placeholder="Email" required>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Message</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <textarea class="textarea" name="message" placeholder="How can we help you?"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label">
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <input type="submit" class="button is-black" value="Send">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd">
+        <p><b>Email</b><br>
+          Email us at <a href="mailto:support@atomery.com">support@atomery.com</a>.</p>
+
+        {% if page.app_id != 'switchbar' %}
+        <p><b>GitHub</b><br>
+          Create an issue on <a href="https://github.com/atomery/{{ page.app_id }}/issues">GitHub</a>.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <hr />
+
+    <h3>Frequently Asked Questions (FAQs)</h3>
+    <div class="faqs-content">
+      {{ content }}
+    </div>
+  </div>
+</div>
+</section>

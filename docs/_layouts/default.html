@@ -1,0 +1,139 @@
+---
+layout: compress
+---
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {% include head.html %}
+
+  <body>
+    {% if page.app_id %}
+    {% else %}
+    <nav class="bd-navbar navbar is-spaced navbar-1">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/" title="Atomery">
+            <picture>
+              <source srcset="/images/logo.webp" type="image/webp">
+              <source srcset="/images/logo.png" type="image/png">
+              <img src="/images/logo.png" alt="Atomery">
+            </picture>
+          </a>
+        </div>
+      </div>
+    </nav>
+    {% endif %}
+    {% if page.app_id %}
+    <nav class="bd-navbar navbar is-spaced navbar-2">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/{{ page.app_id }}" title="{{ atomery_app_name }}">
+            <p class="is-size-4 has-text-weight-semibold mb-0">{{ atomery_app_name }}</p>
+          </a>
+          <span class="burger navbar-burger-2" data-target="navbarMenu2" aria-label="menu" aria-expanded="false">
+            <span>Menu</span>
+            <i class="fas fa-caret-down"></i>
+            <i class="fas fa-caret-up"></i>
+          </span>
+        </div>
+        <div id="navbarMenu2" class="navbar-menu">
+          <div class="navbar-start">
+            {% if page.app_id == 'webcatalog' %}
+            <a class="navbar-item{% if page.id == 'webcatalog-pricing' %} has-text-weight-semibold{% endif %}" href="/webcatalog/pricing">
+              Pricing
+            </a>
+            <a class="navbar-item{% if page.id == 'webcatalog-catalog' %} has-text-weight-semibold{% endif %}" href="/webcatalog/catalog">
+              Catalog
+            </a>
+            {% endif %}
+            {% if page.app_id == 'singlebox' %}
+            <a class="navbar-item{% if page.id == 'singlebox-pricing' %} has-text-weight-semibold{% endif %}" href="/singlebox/pricing">
+              Pricing
+            </a>
+            <a class="navbar-item{% if page.id == 'singlebox-services' %} has-text-weight-semibold{% endif %}" href="/singlebox/services">
+              Services
+            </a>
+            {% endif %}
+          </div>
+          <div class="navbar-end">
+            {% if page.app_id != 'switchbar' %}
+            <a class="navbar-item" href="https://github.com/atomery/{{ page.app_id }}/">
+              GitHub
+            </a>
+            {% endif %}
+            <a class="navbar-item {% if page.id == 'support' %}has-text-weight-semibold{% endif %}" href="/{{ page.app_id }}/support">
+              Support
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    {% endif %}
+    <main>
+      {{ content }}
+    </main>
+    <footer class="footer">
+      <div class="container columns">
+          <div class="column is-4-desktop is-6-tablet is-12-mobile">
+            <div class="has-text-centered has-text-left-tablet">
+              <a href="/" title="Atomery">
+                <picture>
+                  <source srcset="/images/logo.webp" type="image/webp">
+                  <source srcset="/images/logo.png" type="image/png">
+                  <img src="/images/logo.png" alt="Atomery" class="footer-logo">
+                </picture>
+              </a>
+            </div>
+            <form action="https://atomery.us19.list-manage.com/subscribe/post?u=c9b8b0cebb5404b186c694c17&amp;id=27fe47916a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
+              <div class="field has-addons">
+                <div class="control is-expanded">
+                  <input class="input" type="email" name="EMAIL" placeholder="Enter your email " required>
+                </div>
+                <div class="control">
+                  <input type="submit" value="Subscribe" name="subscribe" class="button is-black">
+                </div>
+              </div>
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_c9b8b0cebb5404b186c694c17_27fe47916a" tabindex="-1" value=""></div>
+              <p class="help has-text-centered has-text-left-tablet">Subscribe to Our Newsletter. No Spam. We Promise.</p>
+            </form>
+          </div>
+          <div class="column has-text-centered has-text-right-tablet footer-right">
+            <p>
+              <a class="facebook-icon" aria-label="Facebook" href="https://www.facebook.com/AtomeryCom/">
+                <i aria-hidden="true" title="Facebook" class="fab fa-2x fa-facebook-square"></i>
+              </a>
+              <a class="twitter-icon" aria-label="Twitter" href="https://twitter.com/AtomeryCom">
+                <i aria-hidden="true" title="Twitter" class="fab fa-2x fa-twitter-square"></i>
+              </a>
+              <a class="linkedin-icon" aria-label="LinkedIn" href="https://www.linkedin.com/company/atomery">
+                <i aria-hidden="true" title="LinkedIn" class="fab fa-2x fa-linkedin"></i>
+              </a>
+              <a class="medium-icon" aria-label="LinkedIn" href="https://medium.com/atomery">
+                <i aria-hidden="true" title="Medium" class="fab fa-2x fa-medium"></i>
+              </a>
+              <a class="github-icon" aria-label="GitHub" href="https://github.com/atomery">
+                <i aria-hidden="true" title="GitHub" class="fab fa-2x fa-github-square"></i>
+              </a>
+            </p>
+            <p><small>
+              <a href="/" class="{% if page.id == 'about' %}has-text-weight-semibold{% endif %}">
+                Company
+              </a>
+              |
+              <a href="/privacy" class="{% if page.id == 'privacy' %}has-text-weight-semibold{% endif %}">
+                Privacy
+              </a>
+              |
+              <a target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1QfZvMuQcgDmhNiN30r5DFlvXPhXKH9xp?usp=sharing">
+                Press
+              </a>
+            </small></p>
+            <p><small>
+              <span>© {{ 'now' | date: "%Y" }} Atomery Ltd. All rights reserved.</span>
+            </small></p>
+          </div>
+      </div>
+    </footer>
+    {% include google-analytics.html %}
+  </body>
+</html>
