@@ -100,6 +100,7 @@
 	"translateWhenPressingEnter": "Dịch khi nhấn Enter",
 	"showTransliteration": "Hiển thị phiên âm",
 	"rateMacAppStore": "Đánh giá {appName} trên Mac App Store",
+	"rateMicrosoftStore": "Đánh giá {appName} trên Microsoft Store",
 	"displayLanguage": "Ngôn ngữ hiển thị",
 	"close": "Đóng",
 	"general": "Cài đặt chung",

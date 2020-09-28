@@ -100,6 +100,7 @@
 	"translateWhenPressingEnter": "Traduire lorsque vous appuyez sur Entrée",
 	"showTransliteration": "Afficher la translittération",
 	"rateMacAppStore": "Évaluez {appName} sur l'App Store Mac",
+	"rateMicrosoftStore": "Évaluez {appName} sur le Microsoft Store",
 	"displayLanguage": "Langue d'affichage",
 	"close": "Fermer",
 	"general": "Général",

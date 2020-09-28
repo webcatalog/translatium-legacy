@@ -100,6 +100,7 @@
 	"translateWhenPressingEnter": "按 Enter 键时翻译",
 	"showTransliteration": "显示音译",
 	"rateMacAppStore": "在 Mac App Store 上评价 {appName}",
+	"rateMicrosoftStore": "在 Microsoft Store 上评价 {appName}",
 	"displayLanguage": "显示语言",
 	"close": "关闭",
 	"general": "常规​​​​​",

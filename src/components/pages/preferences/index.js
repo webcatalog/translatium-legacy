@@ -417,11 +417,19 @@ const Preferences = (props) => {
             <ListItem button>
               <ListItemText primary={getLocale('support')} onClick={() => requestOpenInBrowser('https://translatiumapp.com/support?utm_source=translatium_app')} />
             </ListItem>
-            {window.process.platform === 'darwin' && (
+            {window.process.mas && (
               <>
                 <Divider />
                 <ListItem button>
                   <ListItemText primary={getLocale('rateMacAppStore')} onClick={() => requestOpenInBrowser('macappstore://apps.apple.com/app/id1176624652?action=write-review')} />
+                </ListItem>
+              </>
+            )}
+            {window.process.windowsStore && (
+              <>
+                <Divider />
+                <ListItem button>
+                  <ListItemText primary={getLocale('rateMicrosoftStore')} onClick={() => requestOpenInBrowser('ms-windows-store://review/?ProductId=9wzdncrcsg9k')} />
                 </ListItem>
               </>
             )}
