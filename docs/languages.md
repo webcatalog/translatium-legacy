@@ -1,5 +1,5 @@
 ---
-layout: translatium-article
+layout: post
 title: Supported Languages
 app_id: translatium
 ---

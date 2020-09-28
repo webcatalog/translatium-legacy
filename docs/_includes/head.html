@@ -21,7 +21,7 @@
 {% endif %}
 
 {% if page.id != 'landing' %}
-{% capture page_title %}{% if page.title %}{{ page.title }} - {% endif %}{% if atomery_app_name %}{{ atomery_app_name }}{% else %}{{ site.title }}{% endif %}{% endcapture %}
+{% capture page_title %}{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}{% endcapture %}
 {% else %}
 {% capture page_title %}{% if page.title %}{{ page.title }}{% endif %}{% endcapture %}
 {% endif %}

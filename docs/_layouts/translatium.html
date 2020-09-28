@@ -1,0 +1,164 @@
+---
+layout: default
+---
+<div class="landing-header-body">
+  <div class="container">
+    <div class="columns is-vcentered">
+      <div class="column has-text-centered has-text-left-desktop">
+        <div class="columns is-desktop is-gapless is-vcentered">
+          <div class="column is-narrow">
+            <picture>
+              <source srcset="/images/translatium-icon.webp" type="image/webp">
+              <source srcset="/images/translatium-icon.png" type="image/png">
+              <img src="/images/translatium-icon.png" alt="Translatium" class="app-icon-header">
+            </picture>
+          </div>
+          <div class="column">
+            <h1 class="title is-size-4-desktop is-size-5">Translate 100+ Languages Instantly</h1>
+            <p class="subtitle is-size-5-desktop is-size-6">Work fast, communicate clearly, just a shortcut away. No browser switching. No interruptions.</p>
+          </div>
+        </div>
+
+        {% if page.platform == "mac" %}
+        <div class="buttons is-centered is-left-desktop">
+          <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="mac" download href="https://github.com/atomery/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.dmg">
+            <i class="fab fa-apple"></i>
+            <span>&nbsp; Download Free for Mac</span>
+          </a>
+        </div>
+        <p><small>Also available <a href="https://itunes.apple.com/us/app/translatium/id1176624652">on Mac App Store</a>.</small></p>
+        <p><small>Version <a href="https://github.com/atomery/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. macOS 10.10 or later.</small></p>
+        <br />
+        <p>Also available on&nbsp;&nbsp;<a href="/download/windows"><i class="fab fa-windows"></i> Windows</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
+        {% elsif page.platform == "linux" %}
+        <div class="buttons is-centered is-left-desktop">
+          <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="linux" download href="https://github.com/atomery/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.AppImage">
+            <i class="fab fa-linux"></i>
+            <span>&nbsp; Download Free for Linux</span>
+          </a>
+        </div>
+        <p><small>Also available on <a href="https://snapcraft.io/translatium/">Snap Store</a>.</small></p>
+        <p><small>Version <a href="https://github.com/atomery/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Linux, 64-bit. <a href="https://appimage.org/">How to run an AppImage?</a></small></p>
+        <br />
+        <p>Also available on&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> Mac</a> | <a href="/download/windows"><i class="fab fa-windows"></i> Windows</a>.</p>
+        {% elsif page.platform == "windows" %}
+        <div class="buttons is-centered is-left-desktop">
+          <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="windows" download href="https://github.com/atomery/translatium/releases/download/v{{site.translatium_version }}/Translatium-Setup-{{ site.translatium_version }}.exe">
+            <i class="fab fa-windows"></i>
+            <span>&nbsp; Download Free for Windows</span>
+          </a>
+        </div>
+        <p><small>Version <a href="https://github.com/atomery/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Windows 7 and later, 64-bit.</small></p>
+        <br />
+        <p>Also available on&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> Mac</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
+        {% else %}
+        <div id="mac">
+          <div class="buttons is-centered is-left-desktop">
+            <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="mac" download href="https://github.com/atomery/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.dmg">
+              <i class="fab fa-apple"></i>
+              <span>&nbsp; Download Free for Mac</span>
+            </a>
+          </div>
+          <p><small>Also available <a href="https://itunes.apple.com/us/app/translatium/id1176624652">on Mac App Store</a>.</small></p>
+          <p><small>Version <a href="https://github.com/atomery/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. macOS 10.10 or later.</small></p>
+          <br />
+          <p>Also available on&nbsp;&nbsp;<a href="/download/windows"><i class="fab fa-windows"></i> Windows</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
+        </div>
+        <div style="display:none" id="linux" style="display:none">
+          <div class="buttons is-centered is-left-desktop">
+            <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="linux" download href="https://github.com/atomery/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.AppImage">
+              <i class="fab fa-linux"></i>
+              <span>&nbsp; Download Free for Linux</span>
+            </a>
+          </div>
+          <p><small>Also available on <a href="https://snapcraft.io/translatium/">Snap Store</a>.</small></p>
+          <p><small>Version <a href="https://github.com/atomery/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Linux, 64-bit. <a href="https://appimage.org/">How to run an AppImage?</a></small></p>
+          <br />
+          <p>Also available on&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> Mac</a> | <a href="/download/windows"><i class="fab fa-windows"></i> Windows</a>.</p>
+        </div>
+        <div style="display:none" id="windows" style="display:none">
+          <div class="buttons is-centered is-left-desktop">
+            <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="windows" download href="https://github.com/atomery/translatium/releases/download/v{{site.translatium_version }}/Translatium-Setup-{{ site.translatium_version }}.exe">
+              <i class="fab fa-windows"></i>
+              <span>&nbsp; Download Free for Windows</span>
+            </a>
+          </div>
+          <p><small>Version <a href="https://github.com/atomery/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Windows 7 and later, 64-bit.</small></p>
+          <br />
+          <p>Also available on&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> Mac</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
+        </div>
+        <script>
+          if (/Linux/.test(window.navigator.platform)) {
+            document.getElementById('mac').style.display = 'none';
+            document.getElementById('linux').style.display = '';
+          }
+          else if (['Win32', 'Win64', 'Windows', 'WinCE'].indexOf(window.navigator.platform) !== -1) {
+            document.getElementById('mac').style.display = 'none';
+            document.getElementById('windows').style.display = '';
+          }
+        </script>
+        {% endif %}
+      </div>
+      <div class="column is-narrow has-text-centered has-text-left-desktop">
+        <picture>
+          <source srcset="/images/translatium-screenshot.webp, /images/translatium-screenshot@2x.webp 2x" type="image/webp">
+          <source srcset="/images/translatium-screenshot.png 1x, /images/translatium-screenshot@2x.png 2x" type="image/png">
+          <img src="/images/translatium-screenshot.png" alt="Translatium" class="demo-header">
+        </picture>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="content">
+      <div class="columns is-multiline">
+        <div class="column is-6">
+          <p class="title is-4 mb-1">100+ languages</p>
+          <p>English, Spanish, French, German, Japanese, Chinese, Arabic, and many more. <a href="/languages">See them all</a>.</p>
+        </div>
+        <div class="column is-6">
+          <p class="title is-4 mb-1">Perfect pronunciation</p>
+          <p>Translatium speaks translations directly to you, accent and all. It also displays intuitive phonetics.</p>
+        </div>
+        <div class="column is-6">
+          <p class="title is-4 mb-1">Phrasebook</p>
+          <p>Keep your translation history and favorite phrases. Look up anytime you need, even without the Internet.</p>
+        </div>
+        <div class="column is-6">
+          <p class="title is-4 mb-1">Full-on reference</p>
+          <p>See word genders and scroll through synonyms to say what you mean and mean what you say.</p>
+        </div>
+        <div class="column is-6">
+          <p class="title is-4 mb-1">Image translation</p>
+          <p>Translate text in images instantly with our powerful OCR tool. And yes, that includes screenshots.</p>
+        </div>
+        <div class="column is-6">
+          <p class="title is-4 mb-1">Menu bar integration</p>
+          <p>Stay right there in your menu bar, just a shortcut away. No browser switching. No interruptions.</p>
+        </div>
+        <div class="column is-6">
+          <p class="title is-4 mb-1">PopClip extension</p>
+          <p>Select text with your mouse and translate with just one click. Just install our <a href="/popclip">PopClip extension</a>.</p>
+        </div>
+        <div class="column is-6">
+          <p class="title is-4 mb-1">Dark theme</p>
+          <p>Translatium blends in perfectly with your system with beautiful light and dark themes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="content has-text-centered">
+      <picture>
+        <source srcset="/images/translatium-screenshot-2.webp 1x, /images/translatium-screenshot-2@2x.webp 2x" type="image/webp">
+        <source srcset="/images/translatium-screenshot-2.png 1x, /images/translatium-screenshot-2@2x.png 2x" type="image/png">
+        <img src="/images/translatium-screenshot-2.png" alt="Translatium (dark theme)" class="demo-main" loading="lazy" />
+      </picture>
+    </div>
+  </div>
+</section>

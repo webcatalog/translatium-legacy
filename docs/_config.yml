@@ -18,43 +18,16 @@ description: We build products that make your life simpler and more productive.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://atomery.com" # the base hostname & protocol for your site, e.g. http://example.com
 
-permalink: /blog/:title
-excerpt_separator: <!--more-->
-highlighter: rouge
-feed:
-  path: /blog/atom.xml
-
-webcatalog_version: 24.8.0
-juli_version_prerelease: 10.0.0-beta.2
-juli_version: 9.8.0
-singlebox_version: 9.8.0
-switchbar_version: 0.2.0
 translatium_version: 13.8.2
 
 pagination:
   enabled: true
-
-collections:
-  catalog_apps:
-    output: true
-    permalink: /webcatalog/catalog/:path/
-
-defaults:
-  - scope:
-      path: ""
-      type: "catalog_apps"
-    values:
-      layout: "catalog-app"
-      app_id: "webcatalog"
 
 markdown: kramdown
 plugins:
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-paginate-v2
-
-google_analytics: UA-159584254-2
-fastspring_account_id: webcatalog
 
 exclude:
   - yarn.lock
