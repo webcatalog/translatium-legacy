@@ -9,14 +9,11 @@ $weight-semibold: 600
 $weight-bold: 600
 
 $green: #43A047
-$red: #E53935
-$blue: #1E88E5
-$cyan: #5E35B1
-$footer-background-color: #fff
-$family-sans-serif: 'Inter', BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif
+$blue: #43A047
 
 @import "./bulma/sass/utilities/derived-variables"
 
+$footer-background-color: #fff
 $dropdown-item-active-background-color: $background
 $dropdown-item-active-color: $scheme-invert
 
@@ -39,112 +36,9 @@ main
 picture
   line-height: 1
 
-.app-card
-  border-radius: 4px
-  box-shadow: none
-  width: 320px
-  margin: 0 auto
-  .title
-    margin-top: 8px
-    margin-bottom: 0
-  img
-    height: 86px
-    width: 86px
-    &.is-rounded
-      border-radius: 36px
-    &.is-person
-      height: 128px
-      width: 128px
-      border-radius: 16px
-  &.is-hoverable
-    cursor: pointer
-    transition: box-shadow 0.5s
-    a
-      color: #000 !important
-    &:hover
-      box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02)
-
-.content
-  h6, h5
-    font-weight: $weight-semibold
-    margin-bottom: 0
-    &:not(:first-child)
-      margin-top: 1.75rem
-
-.footer
-  padding: 1.5rem
-  .container
-    margin: 0 auto
-
-.footer-right
-  display: flex
-  flex-direction: column
-  justify-content: flex-end
-  a
-    color: #000
-    &:hover
-      color: $blue
-
-.footer-logo
-  height: 28px
-  margin-bottom: 0.2rem
-
-.app-item
-  padding-right: 1.5rem !important
-  .image
-    img
-      max-height: unset
-  .media-content
-    height: 64px
-    display: flex
-    align-items: center
-
-.linkedin-icon:not(:hover)
-  color: #0077b5
-
-.github-icon:not(:hover)
-  color: #000
-
-.facebook-icon:not(:hover)
-  color: #4267B2
-
-.twitter-icon:not(:hover)
-  color: #1DA1F2
-
-.medium-icon:not(:hover)
-  color: #212529
-
 .app-icon-header
   width: 128px
   height: 128px
-
-.app-icon-home
-  width: 96px
-  height: 96px
-
-.company-logo-home
-  height: 40px
-  width: auto
-
-.has-text-left-desktop
-  .app-icon-header
-    +desktop
-      left: -10px
-      position: relative
-
-  .app-icon-home
-    +desktop
-      left: -8px
-      position: relative
-
-.navbar-brand
-  .navbar-item, .navbar-link
-    color: #000
-
-.demo-home
-  max-height: 300px
-  width: auto
-  height: auto
 
 .demo-header
   max-width: #{'min(100%, 500px)'}
@@ -156,63 +50,6 @@ picture
   max-width: 500px
   width: 100%
 
-.download-btn img
-  height: 50px
-  border-radius: 4px
-
-.cookie-notice
-  width: 100%
-  max-width: 512px
-  padding: 12px
-  position: fixed
-  left: 0
-  bottom: 0
-  .buttons
-    margin-top: 12px
-
-.hero-blog
-  .hero-body
-    background: url("/images/chris-slupski-tCM6cQjIQ7Q-unsplash.jpg")
-    background-position: center
-    background-size: cover
-    background-repeat: no-repeat
-    height: 400px
-  a
-    color: #fff
-
-.blog-section
-  margin-top: -148px
-  .columns
-    flex-direction: column-reverse
-    +desktop
-      flex-direction: row
-  .articles
-    .article
-      padding: 1.5rem 0
-      &:not(:first-child)
-        margin-top: 6rem
-      .highlighter-rouge
-        margin-bottom: 1.5rem
-
-  .social-column
-    +desktop
-      padding-top: 148px
-    .sticky-container
-      position: sticky
-      top: 0
-      padding: 1rem
-    .button
-      display: block
-      margin-top: 1rem
-
-  .button
-    &.is-facebook
-      background: #4267B2
-    &.is-twitter
-      background: #1DA1F2
-    &.is-rss
-      background: #f26522
-
 .buttons
   &.is-left-desktop
     +desktop
@@ -220,102 +57,3 @@ picture
   &.is-right-desktop
     +desktop
       justify-content: flex-end
-
-small.price-end
-  font-size: 0.7em
-  vertical-align: 0.3em
-
-.content
-  .table
-    ul
-      margin-top: 0
-    td.highlight.is-info
-      background: $blue
-      color: #fff
-      border-color: #dbdbdb
-      a
-        color: #fff
-        &:hover
-          text-decoration: underline
-
-.hero.is-link
-  a:hover
-    text-decoration: underline
-
-+desktop
-  .navbar-item.download
-    background: $black
-    color: #fff
-    margin-right: 0.5rem
-    &:hover
-      background: $blue
-      color: #fff !important
-
-.navbar-1
-  z-index: 50
-
-.navbar-burger-2
-  color: $navbar-burger-color
-  cursor: pointer
-  display: block
-  height: $navbar-height
-  line-height: $navbar-height
-  padding: 0 1rem
-  position: relative
-  user-select: none
-  .fa-caret-up
-    display: none
-  &.is-active
-    .fa-caret-down
-      display: none
-    .fa-caret-up
-      display: initial
-  &:hover
-    background-color: bulmaRgba(black, 0.05)
-  +ltr-property("margin", auto, false)
-
-+from($navbar-breakpoint)
-  .navbar-burger-2
-    display: none
-
-.landing-header-body
-  padding: 1rem 1.5rem
-
-.app-list
-  max-width: 820px
-  margin: 0 auto
-
-.table
-  th
-    font-weight: $weight-semibold
-
-$pricing-table-column-width: 220px
-
-.pricing-table
-  th
-    &:not(:first-child)
-      text-align: center !important
-      min-width: $pricing-table-column-width
-  tbody
-    color: $grey
-    td
-      white-space: nowrap
-      border: 0
-      &:not(:first-child)
-        text-align: center
-        width: $pricing-table-column-width
-  .plan-price
-    color: $text
-    padding: .75em
-    align-content: center
-    text-align: center
-
-    .plan-price-amount
-      font-size: $size-3
-      +desktop
-        font-size: $size-2
-      font-weight: $weight-bold
-
-    .plan-price-desc
-      font-size: $size-normal
-      font-weight: $weight-light

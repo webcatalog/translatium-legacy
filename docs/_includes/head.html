@@ -14,9 +14,7 @@
   {% include social-meta.html %}
 
   <title>{{ page_title | escape }}</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap">
   <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/assets/syntax/monokai.css' | relative_url }}">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
   <link rel="shortcut icon" href="{{ '/images/favicon.png' | relative_url }}" type="image/png">
   {% if paginator.previous_page %}
