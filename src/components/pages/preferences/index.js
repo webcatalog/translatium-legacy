@@ -378,7 +378,7 @@ const Preferences = (props) => {
               <List disablePadding dense>
                 <ListItem
                   button
-                  onClick={() => requestOpenInBrowser('https://webcatalogapp.com?utm_source=translatium_app')}
+                  onClick={() => requestOpenInBrowser('https://webcatalog.app?utm_source=translatium_app')}
                   className={classes.listItemPromotion}
                 >
                   <div className={classes.promotionBlock}>

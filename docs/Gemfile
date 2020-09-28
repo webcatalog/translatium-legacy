@@ -21,5 +21,3 @@ gem "minima", "~> 2.0"
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'jekyll-sitemap'
-gem 'jekyll-feed'
-gem 'jekyll-paginate-v2'
