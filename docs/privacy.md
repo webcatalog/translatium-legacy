@@ -15,5 +15,4 @@ But we employ third party companies and individuals to provide our services. The
 
 This Privacy Policy was last updated on September 28, 2020.
 
-## 10. Contact Us
 If you have any questions feel free to contact us via <support@translatiumapp.com>.
