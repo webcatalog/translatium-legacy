@@ -1,12 +1,12 @@
 const takeScreenshotToBlob = () => {
   const { desktopCapturer, remote } = window.require('electron');
-  const permissions = remote.require('node-mac-permissions');
 
   // use node-mac-permissions
   // as Electron API doesn't support askForScreenCaptureAccess()
   // shell.openExternal('x-apple.systempreferences...') is not sufficient as it doesn't ensure
   // the app is added to app list in system pref
   if (window.process.platform === 'darwin') {
+    const permissions = remote.require('node-mac-permissions');
     const authStatus = permissions.getAuthStatus('screen');
     if (authStatus === 'denied' || authStatus === 'restricted') {
       permissions.askForScreenCaptureAccess();
