@@ -4,7 +4,7 @@
 |---|---|---|
 |[![GitHub Actions Build Status](https://github.com/quanglam2807/translatium/workflows/macOS/badge.svg)](https://github.com/quanglam2807/translatium/actions)|[![GitHub Actions Build Status](https://github.com/quanglam2807/translatium/workflows/Linux/badge.svg)](https://github.com/quanglam2807/translatium/actions)|[![GitHub Actions Build Status](https://github.com/quanglam2807/translatium/workflows/Windows/badge.svg)](https://github.com/quanglam2807/translatium/actions)|
 
-**[Translatium](https://translatiumapp.com)** - Translate Any Languages like a Pro.
+**[Translatium](https://translatiumapp.com)** - Translate Any of the Language like a Pro.
 
 **master** branch only includes the source code of Translatium 9 & up. For older versions, check out the **legacy-** branches.
 
