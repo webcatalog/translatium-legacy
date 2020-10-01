@@ -1,11 +1,17 @@
 const takeScreenshotToBlob = () => {
   const { desktopCapturer, remote } = window.require('electron');
+  const permissions = remote.require('node-mac-permissions');
 
-  // https://github.com/karaggeorge/mac-screen-capture-permissions/tree/master
-  // https://nyrra33.com/2019/07/23/open-preference-pane-programmatically/
-  if (window.process.platform === 'darwin' && remote.systemPreferences.getMediaAccessStatus('screen') !== 'granted') {
-    remote.shell.openExternal('x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture');
-    return Promise.resolve();
+  // use node-mac-permissions
+  // as Electron API doesn't support askForScreenCaptureAccess()
+  // shell.openExternal('x-apple.systempreferences...') is not sufficient as it doesn't ensure
+  // the app is added to app list in system pref
+  if (window.process.platform === 'darwin') {
+    const authStatus = permissions.getAuthStatus('screen');
+    if (authStatus === 'denied' || authStatus === 'restricted') {
+      permissions.askForScreenCaptureAccess();
+      return Promise.resolve();
+    }
   }
 
   return new Promise((resolve, reject) => {
