@@ -32,7 +32,8 @@
     "electron-window-state": "5.0.3",
     "fs-extra": "9.0.1",
     "menubar": "8.0.2",
-    "node-fetch": "2.6.1"
+    "node-fetch": "2.6.1",
+    "node-mac-permissions": "2.2.0"
   },
   "devDependencies": {
     "@material-ui/core": "4.11.0",
