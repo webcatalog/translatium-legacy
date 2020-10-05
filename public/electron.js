@@ -332,10 +332,12 @@ if (!gotTheLock) {
             if (mb && mb.window) {
               mb.window.send('set-input-lang', 'auto');
               mb.window.send('set-input-text', text);
+              mb.showWindow();
             }
           } else if (mainWindow) {
             mainWindow.send('set-input-lang', 'auto');
             mainWindow.send('set-input-text', text);
+            mainWindow.show();
           }
         }
       });
