@@ -330,11 +330,13 @@ if (!gotTheLock) {
           const attachToMenubar = getPreference('attachToMenubar');
           if (attachToMenubar) {
             if (mb && mb.window) {
+              mb.window.send('go-to-home');
               mb.window.send('set-input-lang', 'auto');
               mb.window.send('set-input-text', text);
               mb.showWindow();
             }
           } else if (mainWindow) {
+            mainWindow.send('go-to-home');
             mainWindow.send('set-input-lang', 'auto');
             mainWindow.send('set-input-text', text);
             mainWindow.show();
