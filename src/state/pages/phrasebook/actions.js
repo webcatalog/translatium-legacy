@@ -1,4 +1,5 @@
 import { UPDATE_PHRASEBOOK, UPDATE_OUTPUT, UPDATE_PHRASEBOOK_QUERY } from '../../../constants/actions';
+import LUNR_LANGUAGES from '../../../constants/lunr-languages';
 import phrasebookDb from '../../../helpers/phrasebook-db';
 
 const defaultOptions = {
@@ -36,6 +37,7 @@ export const loadPhrasebook = (init, limit) => ((dispatch, getState) => {
         options.highlighting = true;
         options.highlighting_pre = '<highlight>';
         options.highlighting_post = '</highlight>';
+        options.language = LUNR_LANGUAGES;
         return phrasebookDb.search(options);
       }
       return phrasebookDb.allDocs(options);
