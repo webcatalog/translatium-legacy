@@ -3,6 +3,7 @@ import {
   UPDATE_HISTORY_PAGE,
   UPDATE_HISTORY_PAGE_QUERY,
 } from '../../../constants/actions';
+import LUNR_LANGUAGES from '../../../constants/lunr-languages';
 import historyDb from '../../../helpers/history-db';
 
 import { loadHistory as loadHomeHistory } from '../home/history/actions';
@@ -43,6 +44,7 @@ export const loadHistory = (init, limit) => ((dispatch, getState) => {
         options.highlighting = true;
         options.highlighting_pre = '<highlight>';
         options.highlighting_post = '</highlight>';
+        options.language = LUNR_LANGUAGES;
         return historyDb.search(options);
       }
       return historyDb.allDocs(options);
