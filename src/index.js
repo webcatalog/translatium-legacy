@@ -14,6 +14,8 @@ import AppWrapper from './components/app-wrapper';
 // have to make this global for the languages plugin, sadly
 global.lunr = require('lunr');
 require('lunr-languages/lunr.stemmer.support')(global.lunr);
+require('lunr-languages/tinyseg')(global.lunr);
+global.lunr.wordcut = require('lunr-languages/wordcut');
 require('lunr-languages/lunr.multi')(global.lunr);
 require('lunr-languages/lunr.da')(global.lunr);
 require('lunr-languages/lunr.de')(global.lunr);
