@@ -391,7 +391,7 @@ const Preferences = (props) => {
                           WebCatalog
                         </Typography>
                         <Typography variant="body2" color="textSecondary">
-                          Turn Websites into Desktop Apps
+                          Get Exclusive Desktop Apps
                         </Typography>
                       </div>
                     </div>

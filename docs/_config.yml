@@ -18,7 +18,7 @@ description: Translatium lets you translate words, phrases and images between ov
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://translatiumapp.com" # the base hostname & protocol for your site, e.g. http://example.com
 
-translatium_version: 14.0.3
+translatium_version: 14.1.0
 
 pagination:
   enabled: true
