@@ -7,10 +7,12 @@ const {
   Tray,
   app,
   clipboard,
+  dialog,
   globalShortcut,
   ipcMain,
   nativeImage,
   nativeTheme,
+  shell,
 } = require('electron');
 const fs = require('fs');
 const settings = require('electron-settings');
@@ -277,7 +279,39 @@ if (!gotTheLock) {
     const themeSource = getPreference('themeSource');
     nativeTheme.themeSource = themeSource;
 
-    createWindowAsync();
+    createWindowAsync()
+      .then(() => {
+        // if (!app.isPackaged) return; // dev environment
+        // Mac
+        if (process.platform === 'darwin' && !process.mas) {
+          dialog.showMessageBox({
+            type: 'question',
+            buttons: ['Learn More...', 'OK'],
+            message: 'The direct download version of Translatium will no longer be updated soon. Please get the app from the Mac App Store instead.',
+            cancelId: 1,
+          })
+            .then(({ response }) => {
+              if (response === 0) {
+                shell.openExternal('https://translatiumapp.com/download/mac?utm_source=mac-dmg');
+              }
+            })
+            .catch(console.log); // eslint-disable-line no-console
+        // Windows
+        } else if (process.platform === 'win32' && !process.windowsStore) {
+          dialog.showMessageBox({
+            type: 'question',
+            buttons: ['Learn More...', 'OK'],
+            message: 'The direct download version of Translatium will no longer be updated soon. Please get the app from the Microsoft Store instead.',
+            cancelId: 1,
+          })
+            .then(({ response }) => {
+              if (response === 0) {
+                shell.openExternal('https://translatiumapp.com/download/windows?utm_source=windows-nsis');
+              }
+            })
+            .catch(console.log); // eslint-disable-line no-console
+        }
+      });
     createMenu();
     setContextMenu();
 
