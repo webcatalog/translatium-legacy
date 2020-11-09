@@ -281,7 +281,7 @@ if (!gotTheLock) {
 
     createWindowAsync()
       .then(() => {
-        // if (!app.isPackaged) return; // dev environment
+        if (isDev) return; // dev environment
         // Mac
         if (process.platform === 'darwin' && !process.mas) {
           dialog.showMessageBox({

@@ -20,4 +20,4 @@ Even though previous versions of Translatium are no longer officially supported,
 Yes, you can find the source code on [GitHub](https://github.com/quanglam2807/translatium) under the MPL-2 license.
 
 ##### Are there any other apps made by the same developer?
-Yes, feel free to try out **[WebCatalog](https://webcatalog.app)** and get access to thousands of exclusive desktop apps with many additional features to enhance your workflow.
+Yes, feel free to try out **[WebCatalog](https://webcatalog.app)** - the only application store that turns any websites into desktop apps and gives you access to thousands of exclusive apps with many amazing features to enhance your workflow.

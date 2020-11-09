@@ -369,39 +369,35 @@ const Preferences = (props) => {
           </List>
         </Paper>
 
-        {!window.process.mas && (
-          <>
-            <Typography variant="subtitle2" color="textPrimary" className={classes.paperTitle}>
-              More Apps
-            </Typography>
-            <Paper elevation={0} className={classes.paper}>
-              <List disablePadding dense>
-                <ListItem
-                  button
-                  onClick={() => requestOpenInBrowser('https://webcatalog.app?utm_source=translatium_app')}
-                  className={classes.listItemPromotion}
-                >
-                  <div className={classes.promotionBlock}>
-                    <div className={classes.promotionLeft}>
-                      <img src={webcatalogIconPng} alt="WebCatalog" className={classes.appIcon} />
-                    </div>
-                    <div className={classes.promotionRight}>
-                      <div>
-                        <Typography variant="body1" className={classes.appTitle}>
-                          WebCatalog
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                          Get Exclusive Desktop Apps
-                        </Typography>
-                      </div>
-                    </div>
+        <Typography variant="subtitle2" color="textPrimary" className={classes.paperTitle}>
+          More Apps
+        </Typography>
+        <Paper elevation={0} className={classes.paper}>
+          <List disablePadding dense>
+            <ListItem
+              button
+              onClick={() => requestOpenInBrowser('https://webcatalog.app?utm_source=translatium_app')}
+              className={classes.listItemPromotion}
+            >
+              <div className={classes.promotionBlock}>
+                <div className={classes.promotionLeft}>
+                  <img src={webcatalogIconPng} alt="WebCatalog" className={classes.appIcon} />
+                </div>
+                <div className={classes.promotionRight}>
+                  <div>
+                    <Typography variant="body1" className={classes.appTitle}>
+                      WebCatalog
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary">
+                      Turn Any Websites Into Desktop Apps
+                    </Typography>
                   </div>
-                  <ChevronRightIcon color="action" />
-                </ListItem>
-              </List>
-            </Paper>
-          </>
-        )}
+                </div>
+              </div>
+              <ChevronRightIcon color="action" />
+            </ListItem>
+          </List>
+        </Paper>
 
         <Typography variant="body2" className={classes.paperTitle} />
         <Paper elevation={0} className={classes.paper}>
