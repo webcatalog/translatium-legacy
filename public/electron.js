@@ -287,7 +287,7 @@ if (!gotTheLock) {
           dialog.showMessageBox({
             type: 'question',
             buttons: ['Learn More...', 'OK'],
-            message: 'The direct download version of Translatium will no longer be updated soon. Please get the app from the Mac App Store instead.',
+            message: 'The direct download version of Translatium will no longer be updated. Please get the app from the Mac App Store instead.',
             cancelId: 1,
           })
             .then(({ response }) => {
@@ -301,7 +301,7 @@ if (!gotTheLock) {
           dialog.showMessageBox({
             type: 'question',
             buttons: ['Learn More...', 'OK'],
-            message: 'The direct download version of Translatium will no longer be updated soon. Please get the app from the Microsoft Store instead.',
+            message: 'The direct download version of Translatium will no longer be updated. Please get the app from the Microsoft Store instead.',
             cancelId: 1,
           })
             .then(({ response }) => {
