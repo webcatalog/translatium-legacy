@@ -2,23 +2,17 @@
 layout: default
 ---
 
+<section class="hero is-link">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">{{ page.title }}</h1>
+    </div>
+  </div>
+</section>
+
 <div class="hero-body">
   <div class="container">
-    <nav class="breadcrumb" aria-label="breadcrumbs">
-      <ul>
-        <li>
-          <a href="/">
-            <span class="icon">
-              <i class="fas fa-home" aria-label="Home"></i>
-            </span>
-          </a>
-        </li>
-        <li class="is-active"><a href="#">{{ page.title }}</a></li>
-      </ul>
-    </nav>
     <div class="content">
-      <h1>{{ page.title }}</h1>
-      <hr>
       {{ content }}
     </div>
   </div>

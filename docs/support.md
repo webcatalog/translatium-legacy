@@ -1,7 +1,7 @@
 ---
-layout: support
+layout: help
 id: support
-title: Support
+title: Help
 app_id: translatium
 ---
 ##### How many languages does Translatim support?
@@ -18,3 +18,6 @@ Even though previous versions of Translatium are no longer officially supported,
 
 ##### Is Translatium open source?
 Yes, you can find the source code on [GitHub](https://github.com/quanglam2807/translatium) under the MPL-2 license.
+
+##### Are there any other apps made by the same developer?
+Yes, feel free to try out **[WebCatalog](https://webcatalog.app)** and get access to thousands of exclusive desktop apps with many additional features to enhance your workflow.

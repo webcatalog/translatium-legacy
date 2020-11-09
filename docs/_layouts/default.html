@@ -11,7 +11,7 @@ layout: compress
       <div class="container">
         <div class="navbar-brand">
           <a class="navbar-item" href="/" title="Translatium">
-            <p class="is-size-4 has-text-weight-semibold mb-0">Translatium</p>
+            <img src="/images/logo.png" alt="Translatium" style="height: 36px !important; max-height: 36px !important">
           </a>
           <span class="burger navbar-burger" data-target="navbarMenu2" aria-label="menu" aria-expanded="false">
             <span aria-hidden="true"></span>
@@ -21,14 +21,14 @@ layout: compress
         </div>
         <div id="navbarMenu2" class="navbar-menu">
           <div class="navbar-end">
-            <a class="navbar-item" href="https://github.com/quanglam2807/translatium/">
-              GitHub
+            <a class="navbar-item {% if page.id == 'support' %}has-text-weight-semibold{% endif %}" href="/support">
+              Help
             </a>
             <a class="navbar-item {% if page.id == 'privacy' %}has-text-weight-semibold{% endif %}" href="/privacy">
               Privacy
             </a>
-            <a class="navbar-item {% if page.id == 'support' %}has-text-weight-semibold{% endif %}" href="/support">
-              Support
+            <a class="navbar-item" href="https://github.com/quanglam2807/translatium/">
+              <i title="GitHub" class="fab fa-github"></i>
             </a>
           </div>
         </div>

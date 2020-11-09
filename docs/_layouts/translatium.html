@@ -3,111 +3,82 @@ layout: default
 ---
 <div class="landing-header-body">
   <div class="container">
-    <div class="columns is-vcentered">
-      <div class="column has-text-centered has-text-left-desktop">
-        <div class="columns is-desktop is-gapless is-vcentered">
-          <div class="column is-narrow">
-            <picture>
-              <source srcset="/images/translatium-icon.webp" type="image/webp">
-              <source srcset="/images/translatium-icon.png" type="image/png">
-              <img src="/images/translatium-icon.png" alt="Translatium" class="app-icon-header">
-            </picture>
-          </div>
-          <div class="column">
-            <h1 class="title is-size-4-desktop is-size-5">Translate 100+ Languages Instantly</h1>
-            <p class="subtitle is-size-5-desktop is-size-6">Work fast, communicate clearly, just a shortcut away. No browser switching. No interruptions.</p>
-          </div>
-        </div>
+    <div class="column has-text-centered">
+      <h1 class="title is-size-3-desktop is-size-4">Translate 100+ Languages Instantly</h1>
+      <p class="subtitle is-size-5-desktop is-size-6">Work fast, communicate clearly, just a shortcut away. No browser switching. No interruptions.</p>
 
-        {% if page.platform == "mac" %}
-        <div class="buttons is-centered is-left-desktop">
-          <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="mac" download href="https://github.com/quanglam2807/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.dmg">
-            <i class="fab fa-apple"></i>
-            <span>&nbsp; Download Free for Mac</span>
+      {% if page.platform == "mac" %}
+      <p>
+        <a href="https://itunes.apple.com/us/app/translatium/id1176624652" title="Download on the Mac App Store">
+          <img src="/images/mac-app-store-badge.svg" alt="Download on the Mac App Store" class="store-badge">
+        </a>
+      </p>
+      <br />
+      <p>Also available on&nbsp;&nbsp;<a href="/download/windows"><i class="fab fa-windows"></i> Windows</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
+      {% elsif page.platform == "linux" %}
+      <p>
+        <a href="https://snapcraft.io/translatium/" title="Get from Snap Store">
+          <img src="/images/snap-store-badge.svg" alt="Get from Snap Store" class="store-badge">
+        </a>
+      </p>
+      <p><small>Also available as <a href="https://github.com/quanglam2807/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.AppImage">AppImage</a>.</small></p>
+      <br />
+      <p>Also available on&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> Mac</a> | <a href="/download/windows"><i class="fab fa-windows"></i> Windows</a>.</p>
+      {% elsif page.platform == "windows" %}
+      <p>
+        <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing" title="Get from Microsoft Store">
+          <img src="/images/microsoft-store-badge.svg" alt="Get from Microsoft Store" class="store-badge">
+        </a>
+      </p>
+      <br />
+      <p>Also available on&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> Mac</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
+      {% else %}
+      <div id="mac">
+        <p>
+          <a href="https://itunes.apple.com/us/app/translatium/id1176624652" title="Download on the Mac App Store">
+            <img src="/images/mac-app-store-badge.svg" alt="Download on the Mac App Store" class="store-badge">
           </a>
-        </div>
-        <p><small>Also available <a href="https://itunes.apple.com/us/app/translatium/id1176624652">on Mac App Store</a>.</small></p>
-        <p><small>Version <a href="https://github.com/quanglam2807/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. macOS 10.10 or later.</small></p>
+        </p>
         <br />
         <p>Also available on&nbsp;&nbsp;<a href="/download/windows"><i class="fab fa-windows"></i> Windows</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
-        {% elsif page.platform == "linux" %}
-        <div class="buttons is-centered is-left-desktop">
-          <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="linux" download href="https://github.com/quanglam2807/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.AppImage">
-            <i class="fab fa-linux"></i>
-            <span>&nbsp; Download Free for Linux</span>
+      </div>
+      <div style="display:none" id="linux" style="display:none">
+        <p>
+          <a href="https://snapcraft.io/translatium/" title="Get from Snap Store">
+            <img src="/images/snap-store-badge.svg" alt="Get from Snap Store" class="store-badge">
           </a>
-        </div>
-        <p><small>Also available on <a href="https://snapcraft.io/translatium/">Snap Store</a>.</small></p>
-        <p><small>Version <a href="https://github.com/quanglam2807/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Linux, 64-bit. <a href="https://appimage.org/">How to run an AppImage?</a></small></p>
+        </p>
+        <p><small>Also available as <a href="https://github.com/quanglam2807/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.AppImage">AppImage</a>.</small></p>
         <br />
         <p>Also available on&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> Mac</a> | <a href="/download/windows"><i class="fab fa-windows"></i> Windows</a>.</p>
-        {% elsif page.platform == "windows" %}
-        <div class="buttons is-centered is-left-desktop">
-          <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="windows" download href="https://github.com/quanglam2807/translatium/releases/download/v{{site.translatium_version }}/Translatium-Setup-{{ site.translatium_version }}.exe">
-            <i class="fab fa-windows"></i>
-            <span>&nbsp; Download Free for Windows</span>
+      </div>
+      <div style="display:none" id="windows" style="display:none">
+        <p>
+          <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing" title="Get from Microsoft Store">
+            <img src="/images/microsoft-store-badge.svg" alt="Get from Microsoft Store" class="store-badge">
           </a>
-        </div>
-        <p><small>Also available <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing">on Microsoft Store</a>.</small></p>
-        <p><small>Version <a href="https://github.com/quanglam2807/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Windows 7 and later, 64-bit.</small></p>
+        </p>
         <br />
         <p>Also available on&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> Mac</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
-        {% else %}
-        <div id="mac">
-          <div class="buttons is-centered is-left-desktop">
-            <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="mac" download href="https://github.com/quanglam2807/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.dmg">
-              <i class="fab fa-apple"></i>
-              <span>&nbsp; Download Free for Mac</span>
-            </a>
-          </div>
-          <p><small>Also available <a href="https://itunes.apple.com/us/app/translatium/id1176624652">on Mac App Store</a>.</small></p>
-          <p><small>Version <a href="https://github.com/quanglam2807/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. macOS 10.10 or later.</small></p>
-          <br />
-          <p>Also available on&nbsp;&nbsp;<a href="/download/windows"><i class="fab fa-windows"></i> Windows</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
-        </div>
-        <div style="display:none" id="linux" style="display:none">
-          <div class="buttons is-centered is-left-desktop">
-            <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="linux" download href="https://github.com/quanglam2807/translatium/releases/download/v{{site.translatium_version }}/Translatium-{{ site.translatium_version }}.AppImage">
-              <i class="fab fa-linux"></i>
-              <span>&nbsp; Download Free for Linux</span>
-            </a>
-          </div>
-          <p><small>Also available on <a href="https://snapcraft.io/translatium/">Snap Store</a>.</small></p>
-          <p><small>Version <a href="https://github.com/quanglam2807/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Linux, 64-bit. <a href="https://appimage.org/">How to run an AppImage?</a></small></p>
-          <br />
-          <p>Also available on&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> Mac</a> | <a href="/download/windows"><i class="fab fa-windows"></i> Windows</a>.</p>
-        </div>
-        <div style="display:none" id="windows" style="display:none">
-          <div class="buttons is-centered is-left-desktop">
-            <a class="button is-medium is-black landing-download" data-app-id="translatium" data-platform="windows" download href="https://github.com/quanglam2807/translatium/releases/download/v{{site.translatium_version }}/Translatium-Setup-{{ site.translatium_version }}.exe">
-              <i class="fab fa-windows"></i>
-              <span>&nbsp; Download Free for Windows</span>
-            </a>
-          </div>
-          <p><small>Also available <a href="https://www.microsoft.com/store/apps/9wzdncrcsg9k?cid=landing">on Microsoft Store</a>.</small></p>
-          <p><small>Version <a href="https://github.com/quanglam2807/translatium/releases" title="Release Notes">{{site.translatium_version }}</a>. Windows 7 and later, 64-bit.</small></p>
-          <br />
-          <p>Also available on&nbsp;&nbsp;<a href="/download/mac"><i class="fab fa-apple"></i> Mac</a> | <a href="/download/linux"><i class="fab fa-linux"></i> Linux</a>.</p>
-        </div>
-        <script>
-          if (/Linux/.test(window.navigator.platform)) {
-            document.getElementById('mac').style.display = 'none';
-            document.getElementById('linux').style.display = '';
-          }
-          else if (['Win32', 'Win64', 'Windows', 'WinCE'].indexOf(window.navigator.platform) !== -1) {
-            document.getElementById('mac').style.display = 'none';
-            document.getElementById('windows').style.display = '';
-          }
-        </script>
-        {% endif %}
       </div>
-      <div class="column is-narrow has-text-centered has-text-left-desktop">
-        <picture>
-          <source srcset="/images/translatium-screenshot.webp, /images/translatium-screenshot@2x.webp 2x" type="image/webp">
-          <source srcset="/images/translatium-screenshot.png 1x, /images/translatium-screenshot@2x.png 2x" type="image/png">
-          <img src="/images/translatium-screenshot.png" alt="Translatium" class="demo-header">
-        </picture>
-      </div>
+      <script>
+        if (/Linux/.test(window.navigator.platform)) {
+          document.getElementById('mac').style.display = 'none';
+          document.getElementById('linux').style.display = '';
+        }
+        else if (['Win32', 'Win64', 'Windows', 'WinCE'].indexOf(window.navigator.platform) !== -1) {
+          document.getElementById('mac').style.display = 'none';
+          document.getElementById('windows').style.display = '';
+        }
+      </script>
+      {% endif %}
+    </div>
+    <div class="column is-narrow has-text-centered">
+      <picture>
+        <source srcset="/images/translatium-screenshot.webp, /images/translatium-screenshot@2x.webp 2x" type="image/webp">
+        <source srcset="/images/translatium-screenshot.png 1x, /images/translatium-screenshot@2x.png 2x" type="image/png">
+        <img src="/images/translatium-screenshot.png" alt="Translatium" class="demo-header">
+      </picture>
     </div>
   </div>
 </div>
@@ -137,11 +108,11 @@ layout: default
           <p>Translate text in images instantly with our powerful OCR tool. And yes, that includes screenshots.</p>
         </div>
         <div class="column is-6">
-          <p class="title is-4 mb-1">Menu bar integration</p>
+          <p class="title is-4 mb-1">Menu bar integration <span class="tag is-black">macOS only</span></p>
           <p>Stay right there in your menu bar, just a shortcut away. No browser switching. No interruptions.</p>
         </div>
         <div class="column is-6">
-          <p class="title is-4 mb-1">PopClip extension</p>
+          <p class="title is-4 mb-1">PopClip extension <span class="tag is-black">macOS only</span></p>
           <p>Select text with your mouse and translate with just one click. Just install our <a href="/popclip">PopClip extension</a>.</p>
         </div>
         <div class="column is-6">
@@ -149,26 +120,6 @@ layout: default
           <p>Translatium blends in perfectly with your system with beautiful light and dark themes.</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="has-text-centered">
-      <br />
-      <br />
-      <br />
-      <p class="title is-3 mb-3">
-        Looking for more apps?
-      </p>
-      <p class="subtitle is-5 mt-1">Get access to thousands of exclusive desktop apps on <a class="has-text-info" href="https://webcatalog.app">WebCatalog</a>!</p>
-      <p>
-        <a class="button is-info is-large" href="https://webcatalog.app">
-          Get WebCatalog
-        </a>
-      </p>
-      <p class="mt-1">It's free!</p>
     </div>
   </div>
 </section>

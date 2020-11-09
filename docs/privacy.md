@@ -10,7 +10,7 @@ But we employ third party companies and individuals to provide our services. The
 
 - [Cloudflare](https://fastspring.com/privacy/) - DNS, CDN and domain management (US)
 - [GitHub](https://help.github.com/articles/github-privacy-statement/) - software distribution, engineering tools (US)
-- [Google](https://policies.google.com/privacy?hl=en) - machine translation service (US)
+- [Google Translate](https://policies.google.com/privacy?hl=en) - machine translation service (US)
 - [OCR.Space](https://ocr.space/privacypolicy) - OCR service (Germany)
 
 This Privacy Policy was last updated on September 28, 2020.

@@ -17,6 +17,7 @@ $link: $green
 $footer-background-color: #fff
 $dropdown-item-active-background-color: $background
 $dropdown-item-active-color: $scheme-invert
+$widescreen: 960px
 
 @import "./bulma/bulma.sass"
 
@@ -42,8 +43,8 @@ picture
   height: 128px
 
 .demo-header
-  max-width: #{'min(100%, 500px)'}
-  max-height: 500px
+  max-width: #{'min(100%, 600px)'}
+  max-height: 600px
   width: auto
   height: auto
 
@@ -51,10 +52,16 @@ picture
   max-width: 500px
   width: 100%
 
-.buttons
-  &.is-left-desktop
-    +desktop
-      justify-content: flex-start
-  &.is-right-desktop
-    +desktop
-      justify-content: flex-end
+.store-badge
+  height: 60px;
+  margin: 16px 0;
+
+.landing-header-body
+  padding: 3rem 1.5rem
+  +widescreen
+    padding-top: 1rem
+    padding-bottom: 1rem
+
+.faqs-content
+  h5
+    margin-bottom: 0
