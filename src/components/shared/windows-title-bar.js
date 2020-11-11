@@ -23,7 +23,8 @@ const styles = (theme) => ({
     // leave space for resizing cursor
     // https://github.com/electron/electron/issues/3022
     padding: 2,
-    background: theme.palette.type === 'dark' ? undefined : theme.palette.grey[300],
+    background: theme.palette.type === 'dark' ? theme.palette.common.black : theme.palette.primary.dark,
+    color: theme.palette.common.white,
   },
   toolbar: {
     minHeight: 28,
@@ -34,8 +35,6 @@ const styles = (theme) => ({
     userSelect: 'none',
   },
   left: {
-    // leave space for traffic light buttons
-    paddingLeft: window.process.platform === 'darwin' && window.mode !== 'menubar' ? 64 : 0,
     boxSizing: 'border-box',
   },
   center: {
@@ -43,7 +42,7 @@ const styles = (theme) => ({
     fontSize: '0.8rem',
     height: TOOLBAR_HEIGHT,
     lineHeight: `${TOOLBAR_HEIGHT}px`,
-    color: theme.palette.text.secondary,
+    color: '#fff',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -75,14 +74,14 @@ const styles = (theme) => ({
     padding: 0,
     margin: 0,
     '&:hover': {
-      backgroundColor: theme.palette.type === 'dark' ? theme.palette.common.black : theme.palette.grey[400],
+      backgroundColor: theme.palette.action.hover,
     },
   },
   windowsIcon: {
     height: '100%',
     width: '100%',
     maskSize: '23.1%',
-    backgroundColor: theme.palette.type === 'dark' ? theme.palette.common.white : theme.palette.text.primary,
+    backgroundColor: theme.palette.common.white,
     cursor: 'pointer',
   },
   windowsIconClose: {
@@ -109,12 +108,13 @@ const EnhancedAppBar = ({
   isMaximized,
   title,
 }) => {
+  const { remote } = window.require('electron');
   const onDoubleClick = (e) => {
     // feature: double click on title bar to expand #656
     // https://github.com/webcatalog/webcatalog-app/issues/656
     // https://stackoverflow.com/questions/10554446/no-onclick-when-child-is-clicked
     if (e.target === e.currentTarget) {
-      const win = window.require('electron').remote.getCurrentWindow();
+      const win = remote.getCurrentWindow();
       if (win.isMaximized()) {
         win.unmaximize();
       } else {
@@ -122,6 +122,8 @@ const EnhancedAppBar = ({
       }
     }
   };
+
+  const menubarMode = remote.getGlobal('attachToMenubar');
 
   return (
     <AppBar
@@ -135,24 +137,22 @@ const EnhancedAppBar = ({
         className={classes.toolbar}
       >
         <div className={classes.left} onDoubleClick={onDoubleClick}>
-          {(window.mode !== 'main' && window.mode !== 'menubar') ? null : (
-            <IconButton
-              size="small"
-              color="inherit"
-              aria-label="Menu"
-              className={classnames(
-                classes.iconButton,
-                classes.noDrag,
-              )}
-              onClick={(e) => {
-                e.stopPropagation();
-                requestShowAppMenu(e.x, e.y);
-              }}
-              disableRipple
-            >
-              <MenuIcon fontSize="small" />
-            </IconButton>
-          )}
+          <IconButton
+            size="small"
+            color="inherit"
+            aria-label="Menu"
+            className={classnames(
+              classes.iconButton,
+              classes.noDrag,
+            )}
+            onClick={(e) => {
+              e.stopPropagation();
+              requestShowAppMenu(e.x, e.y);
+            }}
+            disableRipple
+          >
+            <MenuIcon fontSize="small" />
+          </IconButton>
         </div>
         <div className={classes.center} onDoubleClick={onDoubleClick}>
           {title}
@@ -167,13 +167,13 @@ const EnhancedAppBar = ({
                 aria-label="Minimize"
                 onClick={(e) => {
                   e.stopPropagation();
-                  const browserWindow = window.remote.getCurrentWindow();
+                  const browserWindow = remote.getCurrentWindow();
                   browserWindow.minimize();
                 }}
               >
                 <div className={classnames(classes.windowsIcon, classes.windowsIconMinimize)} />
               </button>
-              {window.mode === 'main' && (
+              {!menubarMode && (
                 <button
                   className={classes.windowsIconBg}
                   type="button"
@@ -181,7 +181,7 @@ const EnhancedAppBar = ({
                   aria-label={isMaximized ? 'Unmaximize' : 'Maximize'}
                   onClick={(e) => {
                     e.stopPropagation();
-                    const browserWindow = window.remote.getCurrentWindow();
+                    const browserWindow = remote.getCurrentWindow();
                     if (browserWindow.isMaximized()) {
                       browserWindow.unmaximize();
                     } else {
@@ -198,7 +198,7 @@ const EnhancedAppBar = ({
                   />
                 </button>
               )}
-              {window.mode !== 'menubar' && (
+              {!menubarMode && (
                 <button
                   className={classes.windowsIconBg}
                   type="button"
@@ -206,7 +206,7 @@ const EnhancedAppBar = ({
                   aria-label={isMaximized ? 'Unmaximize' : 'Maximize'}
                   onClick={(e) => {
                     e.stopPropagation();
-                    const browserWindow = window.remote.getCurrentWindow();
+                    const browserWindow = remote.getCurrentWindow();
                     browserWindow.close();
                   }}
                 >
@@ -224,7 +224,7 @@ const EnhancedAppBar = ({
 };
 
 EnhancedAppBar.defaultProps = {
-  title: '',
+  title: 'Translatium',
 };
 
 EnhancedAppBar.propTypes = {
@@ -233,9 +233,8 @@ EnhancedAppBar.propTypes = {
   title: PropTypes.string,
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   isMaximized: state.general.isMaximized,
-  title: ownProps.title || ((window.mode === 'main' || window.mode === 'menubar') && state.general.title ? state.general.title : window.remote.getGlobal('appJson').name),
 });
 
 export default connectComponent(

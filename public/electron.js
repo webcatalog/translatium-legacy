@@ -231,6 +231,7 @@ if (!gotTheLock) {
         titleBarStyle: 'hidden',
         autoHideMenuBar: false,
         show: false,
+        frame: process.platform === 'darwin',
         // manually set dock icon for AppImage
         // Snap icon is set correct already so no need to intervene
         icon: process.platform === 'linux' && process.env.SNAP == null ? path.resolve(__dirname, 'images', 'icon-linux.png') : undefined,
@@ -240,6 +241,20 @@ if (!gotTheLock) {
         },
       });
       mainWindowState.manage(mainWindow);
+
+      mainWindow.on('enter-full-screen', () => {
+        mainWindow.webContents.send('set-is-full-screen', true);
+      });
+      mainWindow.on('leave-full-screen', () => {
+        mainWindow.webContents.send('set-is-full-screen', false);
+      });
+
+      mainWindow.on('maximize', () => {
+        mainWindow.webContents.send('set-is-maximized', true);
+      });
+      mainWindow.on('unmaximize', () => {
+        mainWindow.webContents.send('set-is-maximized', false);
+      });
 
       // Emitted when the window is closed.
       mainWindow.on('closed', () => {
@@ -284,9 +299,8 @@ if (!gotTheLock) {
     // When ipcRenderer sends mouse click co-ordinates, show menu at that position.
     // https://dev.to/saisandeepvaddi/creating-a-custom-menu-bar-in-electron-1pi3
     ipcMain.on('request-show-app-menu', (e, x, y) => {
-      const win = mainWindow.get();
-      if (win) {
-        showMenu(win, x, y);
+      if (mainWindow) {
+        showMenu(mainWindow, x, y);
       }
     });
 
