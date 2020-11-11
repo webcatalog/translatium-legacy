@@ -1,5 +1,6 @@
 const { ipcRenderer } = window.require('electron');
 
+export const requestShowAppMenu = (x, y) => window.ipcRenderer.send('request-show-app-menu', x, y);
 export const requestOpenInBrowser = (url) => ipcRenderer.send('request-open-in-browser', url);
 export const requestShowMessageBox = (message, type) => ipcRenderer.send('request-show-message-box', message, type);
 

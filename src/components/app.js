@@ -21,6 +21,8 @@ import { screenResize } from '../state/root/screen/actions';
 import { closeSnackbar } from '../state/root/snackbar/actions';
 import { changeRoute } from '../state/root/router/actions';
 
+import WindowsTitleBar from './shared/windows-title-bar';
+
 import Alert from './root/alert';
 import DialogAbout from './root/dialog-about';
 
@@ -161,6 +163,9 @@ class App extends React.Component {
               }
             }}
           />
+        )}
+        {window.process.platform !== 'darwin' && (
+          <WindowsTitleBar title="Translatium" />
         )}
         <div className={classes.contentContainer}>
           {fullPageLoading && (

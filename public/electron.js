@@ -23,7 +23,7 @@ const { autoUpdater } = require('electron-updater');
 const { menubar } = require('menubar');
 const windowStateKeeper = require('electron-window-state');
 
-const createMenu = require('./libs/create-menu');
+const { createMenu, showMenu } = require('./libs/menu');
 const loadListeners = require('./listeners');
 const { getPreference } = require('./libs/preferences');
 const { initLocales, getLocale } = require('./libs/locales');
@@ -279,6 +279,16 @@ if (!gotTheLock) {
 
     const themeSource = getPreference('themeSource');
     nativeTheme.themeSource = themeSource;
+
+    // Register an event listener.
+    // When ipcRenderer sends mouse click co-ordinates, show menu at that position.
+    // https://dev.to/saisandeepvaddi/creating-a-custom-menu-bar-in-electron-1pi3
+    ipcMain.on('request-show-app-menu', (e, x, y) => {
+      const win = mainWindow.get();
+      if (win) {
+        showMenu(win, x, y);
+      }
+    });
 
     createWindowAsync()
       .then(() => {
