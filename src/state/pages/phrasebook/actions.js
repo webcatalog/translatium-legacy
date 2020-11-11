@@ -1,3 +1,6 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import { UPDATE_PHRASEBOOK, UPDATE_OUTPUT, UPDATE_PHRASEBOOK_QUERY } from '../../../constants/actions';
 import LUNR_LANGUAGES from '../../../constants/lunr-languages';
 import phrasebookDb from '../../../helpers/phrasebook-db';

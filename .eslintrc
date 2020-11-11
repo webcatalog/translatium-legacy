@@ -3,7 +3,11 @@
   "globals": {
     "window": true
   },
+  "plugins": [
+    "header"
+  ],
   "rules": {
+    "header/header": [2, "build-resources/copyright.txt"],
     "import/no-extraneous-dependencies": [2, { "devDependencies": true }],
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "class-methods-use-this": [0],

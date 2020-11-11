@@ -21,7 +21,7 @@
     "eject": "react-scripts eject",
     "dist": "yarn run build && babel-node dist.js",
     "dist:no-sign": "cross-env CSC_IDENTITY_AUTO_DISCOVERY=false yarn dist",
-    "lint": "eslint ./src ./public ./dist.js --ext js",
+    "lint": "eslint ./src ./public ./*.js ./test --ext js",
     "test": "mocha"
   },
   "dependencies": {
@@ -53,6 +53,7 @@
     "electron-notarize": "1.0.0",
     "eslint": "6.8.0",
     "eslint-config-airbnb": "18.2.1",
+    "eslint-plugin-header": "3.1.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsx-a11y": "6.4.1",
     "eslint-plugin-react": "7.21.5",

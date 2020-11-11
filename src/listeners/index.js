@@ -1,3 +1,6 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import { setPreference, updateInputLang, swapLanguages } from '../state/root/preferences/actions';
 import { updateInputText, translate, togglePhrasebook } from '../state/pages/home/actions';
 import { updateLanguageListMode } from '../state/pages/language-list/actions';
