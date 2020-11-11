@@ -6,6 +6,8 @@ import { changeRoute } from '../state/root/router/actions';
 import { open as openDialogAbout } from '../state/root/dialog-about/actions';
 import {
   updateShouldUseDarkColors,
+  updateIsMaximized,
+  updateIsFullScreen,
 } from '../state/root/general/actions';
 import {
   getShouldUseDarkColors,
@@ -105,6 +107,14 @@ const loadListeners = (store) => {
 
   ipcRenderer.on('set-system-preference', (e, name, value) => {
     store.dispatch(setSystemPreference(name, value));
+  });
+
+  ipcRenderer.on('set-is-maximized', (e, isMaximized) => {
+    store.dispatch(updateIsMaximized(isMaximized));
+  });
+
+  ipcRenderer.on('set-is-full-screen', (e, isFullScreen) => {
+    store.dispatch(updateIsFullScreen(isFullScreen));
   });
 };
 

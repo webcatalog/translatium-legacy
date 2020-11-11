@@ -2,7 +2,7 @@ const { app, dialog, BrowserWindow } = require('electron');
 const { autoUpdater } = require('electron-updater');
 
 const sendToAllWindows = require('./send-to-all-windows');
-const createMenu = require('./create-menu');
+const { createMenu } = require('./menu');
 const { getLocale } = require('./locales');
 
 global.updateSilent = true;

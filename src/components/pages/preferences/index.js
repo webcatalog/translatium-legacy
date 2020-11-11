@@ -75,10 +75,8 @@ const styles = (theme) => ({
     color: theme.palette.text.secondary,
   },
   appBarColorDefault: {
-    // eslint-disable-next-line no-nested-ternary
-    background: theme.palette.type === 'dark' ? theme.palette.grey[900] : (window.process.platform === 'darwin' ? theme.palette.primary.main : null),
-    // eslint-disable-next-line no-nested-ternary
-    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : (window.process.platform === 'darwin' ? theme.palette.primary.contrastText : null),
+    background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
+    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
   },
   title: {
     flex: 1,

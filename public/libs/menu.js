@@ -11,6 +11,8 @@ const config = require('../config');
 const sendToAllWindows = require('./send-to-all-windows');
 const { getLocale } = require('./locales');
 
+let menu;
+
 const createMenu = () => {
   const updaterEnabled = process.env.SNAP == null && !process.mas && !process.windowsStore;
   const handleCheckForUpdates = () => {
@@ -226,8 +228,23 @@ const createMenu = () => {
     });
   }
 
-  const menu = Menu.buildFromTemplate(template);
+  menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 };
 
-module.exports = createMenu;
+// https://dev.to/saisandeepvaddi/creating-a-custom-menu-bar-in-electron-1pi3
+// Register an event listener.
+// When ipcRenderer sends mouse click co-ordinates, show menu at that position.
+const showMenu = (window, x, y) => {
+  if (!menu) return;
+  menu.popup({
+    window,
+    x,
+    y,
+  });
+};
+
+module.exports = {
+  createMenu,
+  showMenu,
+};
