@@ -31,6 +31,10 @@ const setSystemPreference = (name, value) => {
         openAtLogin: value.startsWith('yes'),
         openAsHidden: value === 'yes-hidden',
       });
+      // app.setLoginItemSettings causes dock icon to unexpectedly resurface in MAS menubar mode
+      if (process.platform === 'darwin' && global.attachToMenubar) {
+        app.dock.hide();
+      }
       break;
     }
     default: {
