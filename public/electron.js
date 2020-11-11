@@ -93,6 +93,7 @@ if (!gotTheLock) {
   const createWindowAsync = () => new Promise((resolve) => {
     const updaterEnabled = process.env.SNAP == null && !process.mas && !process.windowsStore;
     const attachToMenubar = getPreference('attachToMenubar');
+    global.attachToMenubar = attachToMenubar;
     if (attachToMenubar) {
       // setImage after Tray instance is created to avoid
       // "Segmentation fault (core dumped)" bug on Linux
