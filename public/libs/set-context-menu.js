@@ -1,3 +1,6 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 /* eslint-disable no-param-reassign */
 
 // https://github.com/sindresorhus/electron-context-menu/blob/296ae9cbaf8f29e5e1e5f4c7d233e74a605c5507/index.js
