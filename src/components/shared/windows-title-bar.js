@@ -111,13 +111,12 @@ const EnhancedAppBar = ({
   isMaximized,
   title,
 }) => {
-  const { remote } = window.require('electron');
   const onDoubleClick = (e) => {
     // feature: double click on title bar to expand #656
     // https://github.com/webcatalog/webcatalog-app/issues/656
     // https://stackoverflow.com/questions/10554446/no-onclick-when-child-is-clicked
     if (e.target === e.currentTarget) {
-      const win = remote.getCurrentWindow();
+      const win = window.remote.getCurrentWindow();
       if (win.isMaximized()) {
         win.unmaximize();
       } else {
@@ -126,7 +125,7 @@ const EnhancedAppBar = ({
     }
   };
 
-  const menubarMode = remote.getGlobal('attachToMenubar');
+  const menubarMode = window.remote.getGlobal('attachToMenubar');
 
   return (
     <AppBar
@@ -170,7 +169,7 @@ const EnhancedAppBar = ({
                 aria-label="Minimize"
                 onClick={(e) => {
                   e.stopPropagation();
-                  const browserWindow = remote.getCurrentWindow();
+                  const browserWindow = window.remote.getCurrentWindow();
                   browserWindow.minimize();
                 }}
               >
@@ -184,7 +183,7 @@ const EnhancedAppBar = ({
                   aria-label={isMaximized ? 'Unmaximize' : 'Maximize'}
                   onClick={(e) => {
                     e.stopPropagation();
-                    const browserWindow = remote.getCurrentWindow();
+                    const browserWindow = window.remote.getCurrentWindow();
                     if (browserWindow.isMaximized()) {
                       browserWindow.unmaximize();
                     } else {
@@ -209,7 +208,7 @@ const EnhancedAppBar = ({
                   aria-label={isMaximized ? 'Unmaximize' : 'Maximize'}
                   onClick={(e) => {
                     e.stopPropagation();
-                    const browserWindow = remote.getCurrentWindow();
+                    const browserWindow = window.remote.getCurrentWindow();
                     browserWindow.close();
                   }}
                 >

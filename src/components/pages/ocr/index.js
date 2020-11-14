@@ -138,8 +138,6 @@ class Ocr extends React.Component {
       zoomLevel,
     } = this.props;
 
-    const { remote } = window.require('electron');
-
     if (!imageUrl) return null;
 
     return (
@@ -172,7 +170,7 @@ class Ocr extends React.Component {
                   lineHeight: `${line.height}px`,
                 }}
                 onClick={() => {
-                  remote.clipboard.writeText(line.text);
+                  window.remote.clipboard.writeText(line.text);
                   onOpenSnackbar(getLocale('copied'));
                 }}
               >
@@ -254,7 +252,7 @@ class Ocr extends React.Component {
               <MenuItem
                 dense
                 onClick={() => {
-                  remote.clipboard.writeText(inputText);
+                  window.remote.clipboard.writeText(inputText);
                   onOpenSnackbar(getLocale('copied'));
                 }}
               >
@@ -267,7 +265,7 @@ class Ocr extends React.Component {
               <MenuItem
                 dense
                 onClick={() => {
-                  remote.clipboard.writeText(outputText);
+                  window.remote.clipboard.writeText(outputText);
                   onOpenSnackbar(getLocale('copied'));
                 }}
               >

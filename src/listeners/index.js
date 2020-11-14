@@ -25,66 +25,64 @@ import {
   ROUTE_PREFERENCES,
 } from '../constants/routes';
 
-const { ipcRenderer, remote } = window.require('electron');
-
 const loadListeners = (store) => {
-  ipcRenderer.on('log', (e, message) => {
+  window.ipcRenderer.on('log', (e, message) => {
     // eslint-disable-next-line
     if (message) console.log(message);
   });
 
-  ipcRenderer.on('set-preference', (e, name, value) => store.dispatch(setPreference(name, value)));
+  window.ipcRenderer.on('set-preference', (e, name, value) => store.dispatch(setPreference(name, value)));
 
-  ipcRenderer.on('set-input-text', (e, text) => {
+  window.ipcRenderer.on('set-input-text', (e, text) => {
     store.dispatch(updateInputText(text, 0, 0));
 
     const { inputLang, outputLang } = store.getState().preferences;
     store.dispatch(translate(inputLang, outputLang, text));
   });
 
-  ipcRenderer.on('set-input-lang', (e, value) => store.dispatch(updateInputLang(value)));
+  window.ipcRenderer.on('set-input-lang', (e, value) => store.dispatch(updateInputLang(value)));
 
-  ipcRenderer.on('go-to-preferences', () => store.dispatch(changeRoute(ROUTE_PREFERENCES)));
+  window.ipcRenderer.on('go-to-preferences', () => store.dispatch(changeRoute(ROUTE_PREFERENCES)));
 
-  ipcRenderer.on('go-to-preferences', () => store.dispatch(changeRoute(ROUTE_PREFERENCES)));
+  window.ipcRenderer.on('go-to-preferences', () => store.dispatch(changeRoute(ROUTE_PREFERENCES)));
 
-  ipcRenderer.on('go-to-language-list', (mode) => {
+  window.ipcRenderer.on('go-to-language-list', (mode) => {
     store.dispatch(updateLanguageListMode(mode));
     store.dispatch(changeRoute(ROUTE_LANGUAGE_LIST));
   });
 
-  ipcRenderer.on('go-to-home', () => {
+  window.ipcRenderer.on('go-to-home', () => {
     store.dispatch(changeRoute(ROUTE_HOME));
   });
 
-  ipcRenderer.on('go-to-history', () => {
+  window.ipcRenderer.on('go-to-history', () => {
     store.dispatch(changeRoute(ROUTE_HISTORY));
   });
 
-  ipcRenderer.on('go-to-phrasebook', () => {
+  window.ipcRenderer.on('go-to-phrasebook', () => {
     store.dispatch(changeRoute(ROUTE_PHRASEBOOK));
   });
 
-  ipcRenderer.on('swap-languages', () => {
+  window.ipcRenderer.on('swap-languages', () => {
     store.dispatch(swapLanguages());
   });
 
-  ipcRenderer.on('clear-input-text', () => {
+  window.ipcRenderer.on('clear-input-text', () => {
     store.dispatch(updateInputText(''));
   });
 
-  ipcRenderer.on('translate', () => {
+  window.ipcRenderer.on('translate', () => {
     store.dispatch(translate());
   });
 
-  ipcRenderer.on('translate-clipboard', () => {
+  window.ipcRenderer.on('translate-clipboard', () => {
     const { inputLang, outputLang } = store.getState().preferences;
-    const inputText = remote.clipboard.readText();
+    const inputText = window.remote.clipboard.readText();
     store.dispatch(updateInputText(inputText));
     store.dispatch(translate(inputLang, outputLang, inputText));
   });
 
-  ipcRenderer.on('add-to-phrasebook', () => {
+  window.ipcRenderer.on('add-to-phrasebook', () => {
     const { output } = store.getState().pages.home;
     if (!output) return;
     const { phrasebookId } = output;
@@ -93,7 +91,7 @@ const loadListeners = (store) => {
     }
   });
 
-  ipcRenderer.on('remove-from-phrasebook', () => {
+  window.ipcRenderer.on('remove-from-phrasebook', () => {
     const { output } = store.getState().pages.home;
     if (!output) return;
     const { phrasebookId } = output;
@@ -102,21 +100,21 @@ const loadListeners = (store) => {
     }
   });
 
-  ipcRenderer.on('open-dialog-about', () => store.dispatch(openDialogAbout()));
+  window.ipcRenderer.on('open-dialog-about', () => store.dispatch(openDialogAbout()));
 
-  ipcRenderer.on('native-theme-updated', () => {
+  window.ipcRenderer.on('native-theme-updated', () => {
     store.dispatch(updateShouldUseDarkColors(getShouldUseDarkColors()));
   });
 
-  ipcRenderer.on('set-system-preference', (e, name, value) => {
+  window.ipcRenderer.on('set-system-preference', (e, name, value) => {
     store.dispatch(setSystemPreference(name, value));
   });
 
-  ipcRenderer.on('set-is-maximized', (e, isMaximized) => {
+  window.ipcRenderer.on('set-is-maximized', (e, isMaximized) => {
     store.dispatch(updateIsMaximized(isMaximized));
   });
 
-  ipcRenderer.on('set-is-full-screen', (e, isFullScreen) => {
+  window.ipcRenderer.on('set-is-full-screen', (e, isFullScreen) => {
     store.dispatch(updateIsFullScreen(isFullScreen));
   });
 };

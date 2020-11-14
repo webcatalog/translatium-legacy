@@ -47,8 +47,7 @@ import {
 
 const styles = (theme) => {
   // big sur increases title bar height
-  const { remote } = window.require('electron');
-  const titleBarHeight = remote.getGlobal('isMacOs11') ? 28 : 22;
+  const titleBarHeight = window.remote.getGlobal('isMacOs11') ? 28 : 22;
 
   return {
     container: {
@@ -164,7 +163,7 @@ class App extends React.Component {
             onDoubleClick={() => {
               // feature: double click on title bar to expand #656
               // https://github.com/atomery/webcatalog/issues/656
-              const win = window.require('electron').remote.getCurrentWindow();
+              const win = window.remote.getCurrentWindow();
               if (win.isMaximized()) {
                 win.unmaximize();
               } else {

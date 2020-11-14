@@ -2,14 +2,12 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 const takeScreenshotToBlob = () => {
-  const { desktopCapturer, remote } = window.require('electron');
-
   // use node-mac-permissions
   // as Electron API doesn't support askForScreenCaptureAccess()
   // shell.openExternal('x-apple.systempreferences...') is not sufficient as it doesn't ensure
   // the app is added to app list in system pref
   if (window.process.platform === 'darwin') {
-    const permissions = remote.require('node-mac-permissions');
+    const permissions = window.remote.require('node-mac-permissions');
     const authStatus = permissions.getAuthStatus('screen');
     if (authStatus === 'denied' || authStatus === 'restricted') {
       permissions.askForScreenCaptureAccess();
@@ -19,15 +17,15 @@ const takeScreenshotToBlob = () => {
 
   return new Promise((resolve, reject) => {
     try {
-      remote.getCurrentWindow().on('hide', () => {
+      window.remote.getCurrentWindow().on('hide', () => {
         resolve();
       });
-      remote.getCurrentWindow().hide();
+      window.remote.getCurrentWindow().hide();
     } catch (err) {
       reject(err);
     }
   })
-    .then(() => desktopCapturer.getSources({ types: ['screen'] }))
+    .then(() => window.desktopCapturer.getSources({ types: ['screen'] }))
     .then(async (sources) => {
       const source = sources[0];
       const stream = await window.navigator.mediaDevices.getUserMedia({
@@ -57,7 +55,7 @@ const takeScreenshotToBlob = () => {
       // so use grabFrame instead
       return imageCapture.grabFrame()
         .then((img) => {
-          remote.getCurrentWindow().show();
+          window.remote.getCurrentWindow().show();
           const canvas = window.document.createElement('canvas');
           canvas.width = img.width;
           canvas.height = img.height;
@@ -77,11 +75,11 @@ const takeScreenshotToBlob = () => {
         });
     })
     .then((result) => {
-      remote.getCurrentWindow().show();
+      window.remote.getCurrentWindow().show();
       return result;
     })
     .catch((err) => {
-      remote.getCurrentWindow().show();
+      window.remote.getCurrentWindow().show();
       // eslint-disable-next-line no-console
       console.log(err);
       return null;

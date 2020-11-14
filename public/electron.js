@@ -26,6 +26,12 @@ const { autoUpdater } = require('electron-updater');
 const { menubar } = require('menubar');
 const windowStateKeeper = require('electron-window-state');
 
+// Activate the Sentry Electron SDK as early as possible in every process.
+if (!isDev) {
+  // eslint-disable-next-line global-require
+  require('./libs/sentry');
+}
+
 const { createMenu, showMenu } = require('./libs/menu');
 const loadListeners = require('./listeners');
 const { getPreference } = require('./libs/preferences');
@@ -242,6 +248,7 @@ if (!gotTheLock) {
         webPreferences: {
           nodeIntegration: true,
           webSecurity: false,
+          preload: path.join(__dirname, 'preload', 'default.js'),
         },
       });
       mainWindowState.manage(mainWindow);

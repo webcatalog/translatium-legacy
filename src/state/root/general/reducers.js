@@ -13,8 +13,7 @@ import {
   getShouldUseDarkColors,
 } from '../../../senders';
 
-const { remote } = window.require('electron');
-const win = remote.getCurrentWindow();
+const win = window.remote.getCurrentWindow();
 
 const isMaximized = (state = win.isMaximized(), action) => {
   switch (action.type) {

@@ -193,13 +193,11 @@ class Home extends React.Component {
       this.inputRef.current.focus();
     }
 
-    const { ipcRenderer } = window.require('electron');
-    ipcRenderer.on('open-find', this.handleOpenFind);
+    window.ipcRenderer.on('open-find', this.handleOpenFind);
   }
 
   componentWillUnmount() {
-    const { ipcRenderer } = window.require('electron');
-    ipcRenderer.removeListener('open-find', this.handleOpenFind);
+    window.ipcRenderer.removeListener('open-find', this.handleOpenFind);
   }
 
   handleOpenFind() {
@@ -223,8 +221,6 @@ class Home extends React.Component {
       showTransliteration,
       textToSpeechPlaying,
     } = this.props;
-
-    const { remote } = window.require('electron');
 
     if (fullscreenInputBox === true) {
       return null;
@@ -261,7 +257,7 @@ class Home extends React.Component {
             Icon: FileCopy,
             tooltip: getLocale('copy'),
             onClick: () => {
-              remote.clipboard.writeText(output.outputText);
+              window.remote.clipboard.writeText(output.outputText);
               onOpenSnackbar(getLocale('copied'));
             },
           },
@@ -361,8 +357,6 @@ class Home extends React.Component {
       translateWhenPressingEnter,
     } = this.props;
 
-    const { remote } = window.require('electron');
-
     const controllers = [
       {
         Icon: ContentClear,
@@ -378,7 +372,7 @@ class Home extends React.Component {
         )),
         tooltip: getLocale('translateClipboard'),
         onClick: () => {
-          const text = remote.clipboard.readText();
+          const text = window.remote.clipboard.readText();
           onUpdateInputText(text);
           onTranslate(inputLang, outputLang, text);
         },
