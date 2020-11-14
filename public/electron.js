@@ -32,6 +32,7 @@ const { getPreference } = require('./libs/preferences');
 const { initLocales, getLocale } = require('./libs/locales');
 const sendToAllWindows = require('./libs/send-to-all-windows');
 const setContextMenu = require('./libs/set-context-menu');
+const isMacOs11 = require('./libs/is-mac-os-11');
 
 require('./libs/updater');
 
@@ -293,6 +294,8 @@ if (!gotTheLock) {
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
   app.on('ready', () => {
+    global.isMacOs11 = isMacOs11();
+
     initLocales();
 
     const themeSource = getPreference('themeSource');
