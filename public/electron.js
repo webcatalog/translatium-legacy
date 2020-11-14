@@ -323,7 +323,7 @@ if (!gotTheLock) {
           })
             .then(({ response }) => {
               if (response === 0) {
-                shell.openExternal('https://translatiumapp.com/download/mac?utm_source=mac-dmg');
+                shell.openExternal('https://translatium.app/download/mac?utm_source=mac-dmg');
               }
             })
             .catch(console.log); // eslint-disable-line no-console
@@ -337,7 +337,7 @@ if (!gotTheLock) {
           })
             .then(({ response }) => {
               if (response === 0) {
-                shell.openExternal('https://translatiumapp.com/download/windows?utm_source=windows-nsis');
+                shell.openExternal('https://translatium.app/download/windows?utm_source=windows-nsis');
               }
             })
             .catch(console.log); // eslint-disable-line no-console
