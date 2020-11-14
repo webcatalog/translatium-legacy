@@ -45,59 +45,65 @@ import {
   ROUTE_OCR,
 } from '../constants/routes';
 
-const styles = (theme) => ({
-  container: {
-    height: '100vh',
-    width: '100vw',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.default,
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  fullPageProgress: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    height: '100vh',
-    width: '100vw',
-    zIndex: 10000,
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  fakeTitleBar: {
-    background: theme.palette.type === 'dark' ? theme.palette.common.black : theme.palette.primary.dark,
-    color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.common.black) : theme.palette.primary.contrastText,
-    height: 22,
-    WebkitAppRegion: 'drag',
-    WebkitUserSelect: 'none',
-    textAlign: 'center',
-    lineHeight: '22px',
-    fontSize: '12px',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif',
-  },
-  contentContainer: {
-    flex: 1,
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
-    overflow: 'hidden',
-  },
-  bottomNavigationActionLabel: {
-    fontSize: '0.8rem !important',
-  },
-  hidden: {
-    display: 'none !important',
-  },
-  preloadedRouteContainer: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    overflow: 'hidden',
-  },
-});
+const styles = (theme) => {
+  // big sur increases title bar height
+  const { remote } = window.require('electron');
+  const titleBarHeight = remote.getGlobal('isMacOs11') ? 28 : 22;
+
+  return {
+    container: {
+      height: '100vh',
+      width: '100vw',
+      overflow: 'hidden',
+      backgroundColor: theme.palette.background.default,
+      position: 'relative',
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    fullPageProgress: {
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      height: '100vh',
+      width: '100vw',
+      zIndex: 10000,
+      backgroundColor: 'rgba(0, 0, 0, 0.8)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    fakeTitleBar: {
+      background: theme.palette.type === 'dark' ? theme.palette.common.black : theme.palette.primary.dark,
+      color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.common.black) : theme.palette.primary.contrastText,
+      height: titleBarHeight,
+      WebkitAppRegion: 'drag',
+      WebkitUserSelect: 'none',
+      textAlign: 'center',
+      lineHeight: `${titleBarHeight}px`,
+      fontSize: '12px',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif',
+    },
+    contentContainer: {
+      flex: 1,
+      position: 'relative',
+      display: 'flex',
+      flexDirection: 'column',
+      overflow: 'hidden',
+    },
+    bottomNavigationActionLabel: {
+      fontSize: '0.8rem !important',
+    },
+    hidden: {
+      display: 'none !important',
+    },
+    preloadedRouteContainer: {
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      overflow: 'hidden',
+    },
+  };
+};
 
 class App extends React.Component {
   componentWillUnmount() {
