@@ -13,8 +13,7 @@ const getFileType = (ext) => {
 };
 
 const openFileToBlobAsync = () => new Promise((resolve, reject) => {
-  const { remote } = window.require('electron');
-  remote.dialog.showOpenDialog({
+  window.remote.dialog.showOpenDialog({
     properties: ['openFile'],
     filters: [
       { name: 'Images', extensions: ['jpg', 'jpeg', 'png'] },

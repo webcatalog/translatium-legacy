@@ -86,11 +86,10 @@ const SearchBox = ({
     inputRef.current.select();
   }, [inputRef]);
   useEffect(() => {
-    const { ipcRenderer } = window.require('electron');
-    ipcRenderer.on('open-find', handleOpenFind);
+    window.ipcRenderer.on('open-find', handleOpenFind);
     // Remove event listener on cleanup
     return () => {
-      ipcRenderer.removeListener('open-find', handleOpenFind);
+      window.ipcRenderer.removeListener('open-find', handleOpenFind);
     };
   }, [handleOpenFind]);
 

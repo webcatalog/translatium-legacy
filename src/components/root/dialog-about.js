@@ -64,8 +64,6 @@ const About = (props) => {
     open,
   } = props;
 
-  const { remote } = window.require('electron');
-
   return (
     <Dialog
       className={classes.root}
@@ -82,7 +80,7 @@ const About = (props) => {
           variant="body2"
           className={classes.version}
         >
-          {`Version v${remote.app.getVersion()}`}
+          {`Version v${window.remote.app.getVersion()}`}
         </Typography>
 
         <Button

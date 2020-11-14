@@ -313,7 +313,7 @@ const Preferences = (props) => {
               <>
                 <ListItem
                   button
-                  onClick={() => window.require('electron').remote.shell.openExternal('https://translatium.app/popclip')}
+                  onClick={() => window.remote.shell.openExternal('https://translatium.app/popclip')}
                 >
                   <ListItemText primary={getLocale('popclipExtension')} />
                   <ChevronRightIcon color="action" />
@@ -432,7 +432,7 @@ const Preferences = (props) => {
             )}
             <Divider />
             <ListItem button>
-              <ListItemText primary={getLocale('quit')} onClick={() => window.require('electron').remote.app.quit()} />
+              <ListItemText primary={getLocale('quit')} onClick={() => window.remote.app.quit()} />
             </ListItem>
           </List>
         </Paper>
