@@ -313,7 +313,7 @@ const Preferences = (props) => {
               <>
                 <ListItem
                   button
-                  onClick={() => window.require('electron').remote.shell.openExternal('https://translatiumapp.com/popclip')}
+                  onClick={() => window.require('electron').remote.shell.openExternal('https://translatium.app/popclip')}
                 >
                   <ListItemText primary={getLocale('popclipExtension')} />
                   <ChevronRightIcon color="action" />
@@ -408,11 +408,11 @@ const Preferences = (props) => {
             </ListItem>
             <Divider />
             <ListItem button>
-              <ListItemText primary={getLocale('website')} onClick={() => requestOpenInBrowser('https://translatiumapp.com?utm_source=translatium_app')} />
+              <ListItemText primary={getLocale('website')} onClick={() => requestOpenInBrowser('https://translatium.app?utm_source=translatium_app')} />
             </ListItem>
             <Divider />
             <ListItem button>
-              <ListItemText primary={getLocale('support')} onClick={() => requestOpenInBrowser('https://translatiumapp.com/support?utm_source=translatium_app')} />
+              <ListItemText primary={getLocale('support')} onClick={() => requestOpenInBrowser('https://translatium.app/support?utm_source=translatium_app')} />
             </ListItem>
             {window.process.mas && (
               <>
