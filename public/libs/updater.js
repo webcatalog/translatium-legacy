@@ -1,7 +1,12 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-const { app, dialog, BrowserWindow } = require('electron');
+const {
+  BrowserWindow,
+  app,
+  dialog,
+  ipcMain,
+} = require('electron');
 const { autoUpdater } = require('electron-updater');
 
 const sendToAllWindows = require('./send-to-all-windows');
@@ -132,3 +137,16 @@ autoUpdater.on('update-downloaded', (info) => {
     })
     .catch(console.log); // eslint-disable-line no-console
 });
+
+app.whenReady()
+  .then(() => {
+    ipcMain.on('request-check-for-updates', () => {
+      if (autoUpdater.isUpdaterActive()) {
+        autoUpdater.checkForUpdates();
+      }
+    });
+
+    ipcMain.on('request-quit-and-install', (e, opts) => {
+      autoUpdater.quitAndInstall(opts);
+    });
+  });
