@@ -59,11 +59,11 @@ const appVersion = fs.readJSONSync(path.join(__dirname, 'package.json')).version
 let targets;
 switch (process.platform) {
   case 'darwin': {
-    targets = Platform.MAC.createTarget([process.env.CI ? 'mas' : 'mas-dev', 'zip', 'dmg']);
+    targets = Platform.MAC.createTarget([process.env.CI ? 'mas' : 'mas-dev']);
     break;
   }
   case 'win32': {
-    targets = Platform.WINDOWS.createTarget(['appx', 'nsis']);
+    targets = Platform.WINDOWS.createTarget(['appx']);
     break;
   }
   default:

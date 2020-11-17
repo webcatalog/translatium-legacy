@@ -5,9 +5,9 @@ const {
   BrowserWindow,
   Menu,
   app,
+  ipcMain,
   shell,
 } = require('electron');
-const { autoUpdater } = require('electron-updater');
 
 const config = require('../config');
 
@@ -17,7 +17,8 @@ const { getLocale } = require('./locales');
 let menu;
 
 const createMenu = () => {
-  const updaterEnabled = process.env.SNAP == null && !process.mas && !process.windowsStore;
+  // we only need updater for AppImage
+  const updaterEnabled = process.platform === 'linux' && process.env.SNAP == null;
   const handleCheckForUpdates = () => {
     // restart & apply updates
     if (global.updaterObj && global.updaterObj.status === 'update-downloaded') {
@@ -27,12 +28,12 @@ const createMenu = () => {
         if (win != null) {
           win.close();
         }
-        autoUpdater.quitAndInstall(false);
+        ipcMain.emit('request-quit-and-install', null, false);
       });
     }
 
     global.updateSilent = false;
-    autoUpdater.checkForUpdates();
+    ipcMain.emit('request-check-for-updates');
   };
 
   const updaterMenuItem = {

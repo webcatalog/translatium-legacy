@@ -22,7 +22,6 @@ const settings = require('electron-settings');
 const isDev = require('electron-is-dev');
 const path = require('path');
 const url = require('url');
-const { autoUpdater } = require('electron-updater');
 const { menubar } = require('menubar');
 const windowStateKeeper = require('electron-window-state');
 
@@ -40,7 +39,11 @@ const sendToAllWindows = require('./libs/send-to-all-windows');
 const setContextMenu = require('./libs/set-context-menu');
 const isMacOs11 = require('./libs/is-mac-os-11');
 
-require('./libs/updater');
+// we only need updater for AppImage
+if (process.platform === 'linux' && process.env.SNAP == null) {
+  // eslint-disable-next-line global-require
+  require('./libs/updater');
+}
 
 // see https://github.com/electron/electron/issues/18397
 app.allowRendererProcessReuse = true;
@@ -155,7 +158,7 @@ if (!gotTheLock) {
               label: getLocale('checkForUpdates'),
               click: () => {
                 global.updateSilent = false;
-                autoUpdater.checkForUpdates();
+                ipcMain.emit('request-check-for-updates');
               },
               visible: updaterEnabled,
             },
@@ -357,9 +360,7 @@ if (!gotTheLock) {
       sendToAllWindows('native-theme-updated');
     });
 
-    if (autoUpdater.isUpdaterActive()) {
-      autoUpdater.checkForUpdates();
-    }
+    ipcMain.emit('request-check-for-updates');
   });
 
   // Quit when all windows are closed.
