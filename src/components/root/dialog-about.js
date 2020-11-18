@@ -90,7 +90,7 @@ const About = (props) => {
         </Button>
 
         <Button
-          onClick={() => requestOpenInBrowser('https://translatium.app/support?utm_source=translatium_app')}
+          onClick={() => requestOpenInBrowser('https://translatium.app/help?utm_source=translatium_app')}
         >
           {getLocale('support')}
         </Button>
@@ -102,10 +102,10 @@ const About = (props) => {
           <MLink
             component="button"
             variant="body2"
-            onClick={() => requestOpenInBrowser('https://github.com/quanglam2807')}
+            onClick={() => requestOpenInBrowser('https://webcatalog.app/about?utm_source=translatium_app')}
             className={classes.link}
           >
-            Quang Lam
+            WebCatalog Ltd
           </MLink>
         </Typography>
       </DialogContent>

@@ -8,6 +8,7 @@ const {
   desktopCapturer,
 } = require('electron');
 const isDev = require('electron-is-dev');
+const machineId = require('node-machine-id');
 
 // Activate the Sentry Electron SDK as early as possible in every process.
 if (!isDev) {
@@ -15,8 +16,10 @@ if (!isDev) {
   require('../libs/sentry');
 }
 
+webFrame.setVisualZoomLevelLimits(1, 1);
+
 window.remote = remote;
 window.ipcRenderer = ipcRenderer;
 window.desktopCapturer = desktopCapturer;
 
-webFrame.setVisualZoomLevelLimits(1, 1);
+window.machineId = machineId.machineIdSync();

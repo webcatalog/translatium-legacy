@@ -4,7 +4,7 @@
 const path = require('path');
 
 const APP_NAME = 'Translatium';
-const APP_TEAM = 'Quang Lam';
+const APP_TEAM = 'WebCatalog Ltd';
 const APP_URL = 'https://translatium.app';
 
 const IMAGE_PATH = path.join(__dirname, '..', 'images');

@@ -2,7 +2,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import isUrl from './is-url';
-import isValidLicenseKey from './is-valid-license-key';
 import getLocale from './get-locale';
 
 const kits = {
@@ -15,12 +14,6 @@ const kits = {
   },
   url: (val, maxLength, fieldName) => {
     if (!isUrl(val)) {
-      return getLocale('isNotValid').replace('{fieldName}', fieldName);
-    }
-    return null;
-  },
-  licenseKey: (val, ruleVal, fieldName) => {
-    if (!isValidLicenseKey(val)) {
       return getLocale('isNotValid').replace('{fieldName}', fieldName);
     }
     return null;
