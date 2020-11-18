@@ -256,6 +256,8 @@ if (!gotTheLock) {
       });
       mainWindowState.manage(mainWindow);
 
+      mainWindow.webContents.openDevTools({ mode: 'detach' });
+
       mainWindow.on('enter-full-screen', () => {
         mainWindow.webContents.send('set-is-full-screen', true);
       });

@@ -4,6 +4,8 @@
 /* global fetch FormData document Image */
 import { UPDATE_OCR } from '../../../constants/actions';
 
+import amplitude from '../../../amplitude';
+
 import translateArray from '../../../helpers/translate-array';
 import openFileToBlobAsync from '../../../helpers/open-file-to-blob-async';
 import takeScreenshotToBlobAsync from '../../../helpers/take-screenshot-to-blob-async';
@@ -133,6 +135,13 @@ export const loadImage = (type = 'file') => (dispatch, getState) => {
               const zoomLevel = (maxWidth > visibleWidth)
                 ? Math.max(Math.round((visibleWidth / maxWidth) * 1e2) / 1e2, 0.1)
                 : 1;
+
+              // only log when the action is successful
+              if (type === 'screenshot') {
+                amplitude.getInstance().logEvent('translate screenshot');
+              } else {
+                amplitude.getInstance().logEvent('translate image file');
+              }
 
               dispatch({
                 type: UPDATE_OCR,

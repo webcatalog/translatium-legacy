@@ -28,6 +28,7 @@ import WindowsTitleBar from './shared/windows-title-bar';
 
 import Alert from './root/alert';
 import DialogAbout from './root/dialog-about';
+import TelemetryManager from './root/telemetry-manager';
 
 import Home from './pages/home';
 import History from './pages/history';
@@ -183,6 +184,7 @@ class App extends React.Component {
           )}
           <Alert />
           <DialogAbout />
+          <TelemetryManager />
           <Snackbar
             open={snackbarOpen}
             message={snackbarMessage || ''}

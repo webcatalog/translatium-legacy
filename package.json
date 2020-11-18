@@ -6,7 +6,7 @@
   "repository": "https://github.com/translatium/translatium",
   "author": {
     "name": "Quang Lam",
-    "email": "quang.lam2807@gmail.com"
+    "email": "quang.lam@webcatalog.app"
   },
   "license": "MPL-2.0",
   "engines": {
@@ -20,7 +20,7 @@
     "test-ui": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "dist": "yarn run build && babel-node dist.js",
-    "dist:no-sign": "cross-env CSC_IDENTITY_AUTO_DISCOVERY=false yarn dist",
+    "dist-dev": "cross-env CSC_IDENTITY_AUTO_DISCOVERY=false yarn dist",
     "lint": "eslint ./src ./public ./*.js ./test --ext js",
     "test": "mocha"
   },
@@ -34,11 +34,13 @@
     "fs-extra": "9.0.1",
     "menubar": "8.0.2",
     "node-fetch": "2.6.1",
-    "node-mac-permissions": "2.2.0"
+    "node-mac-permissions": "2.2.0",
+    "node-machine-id": "1.1.12"
   },
   "devDependencies": {
     "@material-ui/core": "4.11.0",
     "@material-ui/icons": "4.9.1",
+    "amplitude-js": "7.3.3",
     "babel-cli": "6.26.0",
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
@@ -49,7 +51,7 @@
     "cross-env": "7.0.2",
     "del": "5.1.0",
     "dotenv": "8.2.0",
-    "electron": "8.5.3",
+    "electron": "8.5.4",
     "electron-builder": "22.9.1",
     "electron-notarize": "1.0.0",
     "eslint": "6.8.0",
@@ -74,6 +76,7 @@
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
     "typeface-roboto": "0.0.75",
+    "uuid": "8.3.1",
     "wait-on": "5.2.0"
   },
   "homepage": "./",
