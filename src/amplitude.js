@@ -14,6 +14,8 @@ if (window.machineId) {
   const DEVICE_ID_NAMESPACE = '0a641322-b40e-4a51-aa9f-3c16e91f4db2';
   const deviceId = uuidv5(window.machineId, DEVICE_ID_NAMESPACE);
   amplitude.getInstance().setDeviceId(deviceId);
+
+  amplitude.getInstance().logEvent('EVENT_NAME_HERE');
 }
 
 export default amplitude;
