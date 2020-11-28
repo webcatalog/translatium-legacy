@@ -35,11 +35,11 @@ let cachedPreferences = null;
 
 const initCachedPreferences = () => {
   // upgrade from v12 from v13
-  if (settings.get('preferenceVersion', 0) < 13) {
-    settings.delete(`preferences.${v}.inputLang`);
-    settings.delete(`preferences.${v}.outputLang`);
-    settings.delete(`preferences.${v}.recentLanguages`);
-    settings.set('preferenceVersion', 13);
+  if (settings.getSync('preferenceVersion', 0) < 13) {
+    settings.unsetSync(`preferences.${v}.inputLang`);
+    settings.unsetSync(`preferences.${v}.outputLang`);
+    settings.unsetSync(`preferences.${v}.recentLanguages`);
+    settings.setSync('preferenceVersion', 13);
   }
 
   const defaultPreferences = {
@@ -59,7 +59,7 @@ const initCachedPreferences = () => {
     translateWhenPressingEnter: true,
     useHardwareAcceleration: true,
   };
-  cachedPreferences = { ...defaultPreferences, ...settings.get(`preferences.${v}`) };
+  cachedPreferences = { ...defaultPreferences, ...settings.getSync(`preferences.${v}`) };
   // backward compatibility
   // es-ES is renamed to es
   if (cachedPreferences.displayLanguage === 'es-ES') {
@@ -68,11 +68,18 @@ const initCachedPreferences = () => {
 };
 
 const getPreferences = () => {
-  // store in memory to boost performance
-  if (cachedPreferences == null) {
-    initCachedPreferences();
+  // trigger electron-settings before app ready might fails
+  // so catch with default pref as fallback
+  // https://github.com/nathanbuchar/electron-settings/issues/111
+  try {
+    // store in memory to boost performance
+    if (cachedPreferences == null) {
+      initCachedPreferences();
+    }
+    return cachedPreferences;
+  } catch {
+    return defaultPreferences;
   }
-  return cachedPreferences;
 };
 
 const getPreference = (name) => {
@@ -86,7 +93,7 @@ const getPreference = (name) => {
 const setPreference = (name, value) => {
   sendToAllWindows('set-preference', name, value);
   cachedPreferences[name] = value;
-  Promise.resolve().then(() => settings.set(`preferences.${v}.${name}`, value));
+  Promise.resolve().then(() => settings.setSync(`preferences.${v}.${name}`, value));
 
   if (name === 'openOnMenubarShortcut') {
     ipcMain.emit('unset-show-menubar-shortcut', null, getPreference(name));
@@ -100,7 +107,7 @@ const setPreference = (name, value) => {
 
 const resetPreferences = () => {
   cachedPreferences = null;
-  settings.deleteAll();
+  settings.unsetSync();
 
   const preferences = getPreferences();
   Object.keys(preferences).forEach((name) => {
