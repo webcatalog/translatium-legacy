@@ -17,7 +17,6 @@ const {
   nativeTheme,
   shell,
 } = require('electron');
-const fs = require('fs');
 const isDev = require('electron-is-dev');
 const path = require('path');
 const url = require('url');
@@ -76,14 +75,9 @@ if (!gotTheLock) {
   // as using electron-settings before app.on('ready') and "Settings" is created
   // would return error
   // https://github.com/nathanbuchar/electron-settings/issues/111
-  if (fs.existsSync(settings.file())) {
-    // access pref using electron-settings directly
-    // to avoid initiate preferences before 'ready'
-    const v = '2019';
-    const useHardwareAcceleration = settings.getSync(`preferences.${v}.useHardwareAcceleration`, true);
-    if (!useHardwareAcceleration) {
-      app.disableHardwareAcceleration();
-    }
+  const useHardwareAcceleration = getPreference('useHardwareAcceleration');
+  if (!useHardwareAcceleration) {
+    app.disableHardwareAcceleration();
   }
 
   // mock app.whenReady
