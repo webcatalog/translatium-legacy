@@ -33,6 +33,24 @@ const v = '2019';
 
 let cachedPreferences = null;
 
+const defaultPreferences = {
+  alwaysOnTop: false,
+  attachToMenubar: false,
+  clearInputShortcut: 'mod+shift+d',
+  displayLanguage: getDefaultDisplayLanguage(),
+  inputLang: 'en',
+  openOnMenubarShortcut: 'alt+shift+t',
+  outputLang: 'zh-CN',
+  ratingCardLastClicked: 0,
+  ratingCardDidRate: false,
+  recentLanguages: ['en', 'zh-CN'],
+  showTransliteration: true,
+  themeSource: 'system',
+  translateClipboardOnShortcut: false,
+  translateWhenPressingEnter: true,
+  useHardwareAcceleration: true,
+};
+
 const initCachedPreferences = () => {
   // upgrade from v12 from v13
   if (settings.getSync('preferenceVersion', 0) < 13) {
@@ -42,23 +60,6 @@ const initCachedPreferences = () => {
     settings.setSync('preferenceVersion', 13);
   }
 
-  const defaultPreferences = {
-    alwaysOnTop: false,
-    attachToMenubar: false,
-    clearInputShortcut: 'mod+shift+d',
-    displayLanguage: getDefaultDisplayLanguage(),
-    inputLang: 'en',
-    openOnMenubarShortcut: 'alt+shift+t',
-    outputLang: 'zh-CN',
-    ratingCardLastClicked: 0,
-    ratingCardDidRate: false,
-    recentLanguages: ['en', 'zh-CN'],
-    showTransliteration: true,
-    themeSource: 'system',
-    translateClipboardOnShortcut: false,
-    translateWhenPressingEnter: true,
-    useHardwareAcceleration: true,
-  };
   cachedPreferences = { ...defaultPreferences, ...settings.getSync(`preferences.${v}`) };
   // backward compatibility
   // es-ES is renamed to es
@@ -77,7 +78,7 @@ const getPreferences = () => {
       initCachedPreferences();
     }
     return cachedPreferences;
-  } catch {
+  } catch (_) {
     return defaultPreferences;
   }
 };
