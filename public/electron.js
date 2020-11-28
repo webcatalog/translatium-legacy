@@ -134,6 +134,8 @@ if (!gotTheLock) {
           minWidth: 400,
           minHeight: 500,
           webPreferences: {
+            enableRemoteModule: true,
+            contextIsolation: false,
             nodeIntegration: true,
             preload: path.join(__dirname, 'preload', 'menubar.js'),
           },
@@ -249,7 +251,9 @@ if (!gotTheLock) {
         // Snap icon is set correct already so no need to intervene
         icon: process.platform === 'linux' && process.env.SNAP == null ? path.resolve(__dirname, 'images', 'icon-linux.png') : undefined,
         webPreferences: {
+          enableRemoteModule: true,
           nodeIntegration: true,
+          contextIsolation: false,
           webSecurity: false,
           preload: path.join(__dirname, 'preload', 'default.js'),
         },
