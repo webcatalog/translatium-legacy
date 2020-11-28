@@ -18,15 +18,16 @@ const {
   shell,
 } = require('electron');
 const isDev = require('electron-is-dev');
-const path = require('path');
-const url = require('url');
-const { menubar } = require('menubar');
-const windowStateKeeper = require('electron-window-state');
 const settings = require('electron-settings');
 
 settings.configure({
   fileName: 'Settings', // backward compatible with electron-settings@3
 });
+
+const path = require('path');
+const url = require('url');
+const { menubar } = require('menubar');
+const windowStateKeeper = require('electron-window-state');
 
 // Activate the Sentry Electron SDK as early as possible in every process.
 if (!isDev) {
