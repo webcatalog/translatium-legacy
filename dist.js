@@ -50,7 +50,7 @@ const runCmd = (cmd, args, callBack) => {
   child.stdout.on('end', () => { callBack(resp); });
 };
 
-const { Platform } = builder;
+const { Arch, Platform } = builder;
 
 console.log(`Machine: ${process.platform}`);
 
@@ -59,7 +59,7 @@ const appVersion = fs.readJSONSync(path.join(__dirname, 'package.json')).version
 let targets;
 switch (process.platform) {
   case 'darwin': {
-    targets = Platform.MAC.createTarget([process.env.CI ? 'mas' : 'mas-dev']);
+    targets = Platform.MAC.createTarget([process.env.CI ? 'mas' : 'mas-dev'], Arch.x64, Arch.arm64);
     break;
   }
   case 'win32': {
