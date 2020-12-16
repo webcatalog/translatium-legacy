@@ -1,12 +1,12 @@
 {
   "name": "Translatium",
-  "description": "Translate Any Languages like a Pro",
-  "version": "15.1.0",
+  "description": "Translate 100+ Languages Instantly",
+  "version": "16.0.0",
   "main": "public/electron.js",
-  "repository": "https://github.com/translatium/translatium",
+  "repository": "https://github.com/webcatalog/translatium",
   "author": {
-    "name": "Quang Lam",
-    "email": "quang.lam@webcatalog.app"
+    "name": "WebCatalog Ltd",
+    "email": "contact@webcatalog.app"
   },
   "license": "MPL-2.0",
   "engines": {
