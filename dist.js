@@ -68,7 +68,7 @@ switch (process.platform) {
   }
   default:
   case 'linux': {
-    targets = Platform.LINUX.createTarget(['AppImage', 'snap']);
+    targets = Platform.LINUX.createTarget(['AppImage', 'snap'], Arch.x64, Arch.arm64);
     break;
   }
 }
