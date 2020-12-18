@@ -1,7 +1,7 @@
 {
   "name": "Translatium",
   "description": "Translate 100+ Languages Instantly",
-  "version": "16.0.1-rc",
+  "version": "16.0.1",
   "main": "public/electron.js",
   "repository": "https://github.com/webcatalog/translatium",
   "author": {
