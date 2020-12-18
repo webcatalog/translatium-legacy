@@ -1,0 +1,61 @@
+diff --git a/node_modules/app-builder-lib/out/macPackager.js b/node_modules/app-builder-lib/out/macPackager.js
+index 3c5180e..f81b7e2 100644
+--- a/node_modules/app-builder-lib/out/macPackager.js
++++ b/node_modules/app-builder-lib/out/macPackager.js
+@@ -276,13 +276,13 @@ class MacPackager extends _platformPackager().PlatformPackager {
+         });
+       }
+       
+-      const targetOutDir = path.join(outDir, targetName);
++      const targetOutDir = path.join(outDir, `${targetName}${_builderUtil().getArchSuffix(arch)}`);
+ 
+       if (prepackaged == null) {
+         await this.doPack(outDir, targetOutDir, "mas", arch, masBuildOptions, [target]);
+-        await this.sign(path.join(targetOutDir, `${this.appInfo.productFilename}.app`), targetOutDir, masBuildOptions);
++        await this.sign(path.join(targetOutDir, `${this.appInfo.productFilename}.app`), targetOutDir, masBuildOptions, arch);
+       } else {
+-        await this.sign(prepackaged, targetOutDir, masBuildOptions);
++        await this.sign(prepackaged, targetOutDir, masBuildOptions, arch);
+       }
+     }
+ 
+@@ -291,7 +291,7 @@ class MacPackager extends _platformPackager().PlatformPackager {
+     }
+   }
+ 
+-  async sign(appPath, outDir, masOptions) {
++  async sign(appPath, outDir, masOptions, arch) {
+     if (!(0, _macCodeSign().isSignAllowed)()) {
+       return;
+     }
+@@ -403,10 +403,10 @@ class MacPackager extends _platformPackager().PlatformPackager {
+       } // mas uploaded to AppStore, so, use "-" instead of space for name
+ 
+ 
+-      const artifactName = this.expandArtifactNamePattern(masOptions, "pkg");
++      const artifactName = this.expandArtifactNamePattern(masOptions, "pkg", arch);
+       const artifactPath = path.join(outDir, artifactName);
+       await this.doFlat(appPath, artifactPath, masInstallerIdentity, keychainFile);
+-      await this.dispatchArtifactCreated(artifactPath, null, _builderUtil().Arch.x64, this.computeSafeArtifactName(artifactName, "pkg"));
++      await this.dispatchArtifactCreated(artifactPath, null, arch, this.computeSafeArtifactName(artifactName, "pkg", arch));
+     }
+   }
+ 
+@@ -521,7 +521,7 @@ class MacPackager extends _platformPackager().PlatformPackager {
+     const appFileName = `${this.appInfo.productFilename}.app`;
+     await _bluebirdLst().default.map((0, _fsExtra().readdir)(packContext.appOutDir), file => {
+       if (file === appFileName) {
+-        return this.sign(path.join(packContext.appOutDir, file), null, null);
++        return this.sign(path.join(packContext.appOutDir, file), null, null, null);
+       }
+ 
+       return null;
+@@ -534,7 +534,7 @@ class MacPackager extends _platformPackager().PlatformPackager {
+     const outResourcesDir = path.join(packContext.appOutDir, "resources", "app.asar.unpacked");
+     await _bluebirdLst().default.map((0, _promise().orIfFileNotExist)((0, _fsExtra().readdir)(outResourcesDir), []), file => {
+       if (file.endsWith(".app")) {
+-        return this.sign(path.join(outResourcesDir, file), null, null);
++        return this.sign(path.join(outResourcesDir, file), null, null, null);
+       } else {
+         return null;
+       }
