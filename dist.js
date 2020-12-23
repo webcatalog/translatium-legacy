@@ -59,7 +59,8 @@ const appVersion = fs.readJSONSync(path.join(__dirname, 'package.json')).version
 let targets;
 switch (process.platform) {
   case 'darwin': {
-    targets = Platform.MAC.createTarget([process.env.CI ? 'mas' : 'mas-dev'], Arch.x64, Arch.arm64);
+    targets = Platform.MAC.createTarget(['mas'], Arch.universal);
+    // targets = Platform.MAC.createTarget(['mas-dev'], Arch.universal);
     break;
   }
   case 'win32': {
@@ -108,9 +109,8 @@ const opts = {
     },
     mas: {
       category: 'public.app-category.productivity',
-      provisioningProfile: targets.has(Platform.MAC) && targets.get(Platform.MAC).get(1).indexOf('mas-dev') > -1
-        ? 'build-resources/embedded-development.provisionprofile'
-        : 'build-resources/embedded.provisionprofile',
+      provisioningProfile: 'build-resources/embedded.provisionprofile',
+      // provisioningProfile: 'build-resources/embedded-development.provisionprofile', # mas-dev
       darkModeSupport: true,
     },
     linux: {
