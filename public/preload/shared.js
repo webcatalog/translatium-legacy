@@ -23,3 +23,4 @@ window.ipcRenderer = ipcRenderer;
 window.desktopCapturer = desktopCapturer;
 
 window.machineId = machineId.machineIdSync();
+window.macPermissions = process.platform === 'darwin' ? require('node-mac-permissions') : null;

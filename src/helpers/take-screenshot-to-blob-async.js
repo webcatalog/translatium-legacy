@@ -7,10 +7,9 @@ const takeScreenshotToBlob = () => {
   // shell.openExternal('x-apple.systempreferences...') is not sufficient as it doesn't ensure
   // the app is added to app list in system pref
   if (window.process.platform === 'darwin') {
-    const permissions = window.remote.require('node-mac-permissions');
-    const authStatus = permissions.getAuthStatus('screen');
+    const authStatus = window.macPermissions.getAuthStatus('screen');
     if (authStatus === 'denied' || authStatus === 'restricted') {
-      permissions.askForScreenCaptureAccess();
+      window.macPermissions.askForScreenCaptureAccess();
       return Promise.resolve();
     }
   }
