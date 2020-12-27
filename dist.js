@@ -8,38 +8,12 @@ const fs = require('fs-extra');
 const builder = require('electron-builder');
 const glob = require('glob');
 const del = require('del');
-const { notarize } = require('electron-notarize');
 const semver = require('semver');
-const { exec, spawn } = require('child_process');
+const { spawn } = require('child_process');
 const { getSignVendorPath } = require('app-builder-lib/out/codeSign/windowsCodeSign');
 
 const packageJson = require('./package.json');
 const displayLanguages = require('./public/libs/locales/languages');
-
-// sometimes, notarization works but *.app does not have a ticket stapled to it
-// this ensure the *.app has the notarization ticket
-const verifyNotarizationAsync = (filePath) => new Promise((resolve, reject) => {
-  // eslint-disable-next-line no-console
-  console.log(`xcrun stapler validate ${filePath.replace(/ /g, '\\ ')}`);
-
-  exec(`xcrun stapler validate ${filePath.replace(/ /g, '\\ ')}`, (e, stdout, stderr) => {
-    if (e instanceof Error) {
-      reject(e);
-      return;
-    }
-
-    if (stderr) {
-      reject(new Error(stderr));
-      return;
-    }
-
-    if (stdout.indexOf('The validate action worked!') > -1) {
-      resolve(stdout);
-    } else {
-      reject(new Error(stdout));
-    }
-  });
-});
 
 // https://stackoverflow.com/a/17466459
 const runCmd = (cmd, args, callBack) => {
@@ -174,29 +148,6 @@ const opts = {
         resolve();
       }
     }),
-    afterSign: (context) => {
-      // Only notarize app when forced in pull requests or when releasing using tag
-      const shouldNotarize = process.platform === 'darwin' && context.electronPlatformName === 'darwin' && process.env.CI_BUILD_TAG;
-      if (!shouldNotarize) return null;
-
-      console.log('Notarizing app...');
-      // https://kilianvalkhof.com/2019/electron/notarizing-your-electron-application/
-      const { appOutDir } = context;
-
-      const appName = context.packager.appInfo.productFilename;
-      const appPath = `${appOutDir}/${appName}.app`;
-      return notarize({
-        appBundleId: 'com.moderntranslator.app',
-        appPath,
-        appleId: process.env.APPLE_ID,
-        appleIdPassword: process.env.APPLE_ID_PASSWORD,
-      })
-        .then(() => verifyNotarizationAsync(appPath))
-        .then((notarizedInfo) => {
-          // eslint-disable-next-line no-console
-          console.log(notarizedInfo);
-        });
-    },
   },
 };
 
