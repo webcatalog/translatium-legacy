@@ -1,7 +1,7 @@
 {
   "name": "Translatium",
   "description": "Translate 100+ Languages Instantly",
-  "version": "16.1.0",
+  "version": "16.2.0",
   "main": "public/electron.js",
   "repository": "https://github.com/webcatalog/translatium",
   "author": {
@@ -75,7 +75,7 @@
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
     "uuid": "8.3.2",
-    "wait-on": "5.2.0"
+    "wait-on": "5.2.1"
   },
   "homepage": "./",
   "private": true,
