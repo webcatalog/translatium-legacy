@@ -33,8 +33,8 @@ const appVersion = fs.readJSONSync(path.join(__dirname, 'package.json')).version
 let targets;
 switch (process.platform) {
   case 'darwin': {
-    targets = Platform.MAC.createTarget(['mas'], Arch.universal);
-    // targets = Platform.MAC.createTarget(['mas-dev'], Arch.universal);
+    // targets = Platform.MAC.createTarget(['mas'], Arch.universal);
+    targets = Platform.MAC.createTarget([process.env.FORCE_DEV ? 'mas-dev' : 'mas'], Arch.universal);
     break;
   }
   case 'win32': {
@@ -51,6 +51,9 @@ switch (process.platform) {
 const opts = {
   targets,
   config: {
+    asarUnpack: [
+      'node_modules/node-mac-permissions/build',
+    ],
     appId: 'com.moderntranslator.app', // Backward compatibility
     // https://github.com/electron-userland/electron-builder/issues/3730
     buildVersion: process.platform === 'darwin' ? appVersion : undefined,
@@ -83,8 +86,9 @@ const opts = {
     },
     mas: {
       category: 'public.app-category.productivity',
-      provisioningProfile: 'build-resources/embedded.provisionprofile',
-      // provisioningProfile: 'build-resources/embedded-development.provisionprofile', # mas-dev
+      provisioningProfile: process.env.FORCE_DEV
+        ? 'build-resources/embedded-development.provisionprofile' // mas-dev
+        : 'build-resources/embedded.provisionprofile',
       darkModeSupport: true,
     },
     linux: {
