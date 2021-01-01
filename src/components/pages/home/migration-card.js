@@ -12,11 +12,9 @@ import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 
 import connectComponent from '../../../helpers/connect-component';
-import getLocale from '../../../helpers/get-locale';
 
 import {
   requestOpenInBrowser,
-  requestSetPreference,
 } from '../../../senders';
 
 const styles = (theme) => ({
@@ -50,7 +48,7 @@ const MigrationCard = ({
         disableElevation
         classes={{ label: classes.translateButtonLabel }}
         onClick={() => {
-          requestOpenInBrowser('macappstore://apps.apple.com/app/id1176624652');
+          requestOpenInBrowser('macappstore://apps.apple.com/app/id1547052291');
         }}
       >
         Mac App Store
