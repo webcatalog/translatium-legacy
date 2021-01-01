@@ -5,7 +5,7 @@
   "main": "public/electron.js",
   "repository": "https://github.com/webcatalog/translatium",
   "author": {
-    "name": "WebCatalog Ltd",
+    "name": "Quang Lam",
     "email": "contact@webcatalog.app"
   },
   "license": "MPL-2.0",

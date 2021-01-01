@@ -62,7 +62,7 @@ import { ROUTE_LANGUAGE_LIST } from '../../../constants/routes';
 
 import Dictionary from './dictionary';
 import History from './history';
-import RatingCard from './rating-card';
+import MigrationCard from './migration-card';
 
 const styles = (theme) => ({
   container: {
@@ -327,7 +327,7 @@ class Home extends React.Component {
               </CardActions>
             </Card>
 
-            <RatingCard />
+            <MigrationCard />
 
             {output.outputDict && output.source === 'translate.googleapis.com' && <Dictionary />}
           </div>
