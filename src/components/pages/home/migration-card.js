@@ -32,30 +32,33 @@ const styles = (theme) => ({
 
 const MigrationCard = ({
   classes,
-}) => (
-  <Card elevation={0} square className={classNames(classes.card, classes.migrationCard)}>
-    <CardContent>
-      <Typography variant="body2" component="p">
-        Because of a few reasons, we have to republish Translatium under a new app listing.
-        To continue receiving updates, please reinstall the app from our new listing.
-      </Typography>
-    </CardContent>
-    <CardActions className={classes.migrationCardActions}>
-      <Button
-        variant="contained"
-        size="medium"
-        color="primary"
-        disableElevation
-        classes={{ label: classes.translateButtonLabel }}
-        onClick={() => {
-          requestOpenInBrowser('macappstore://apps.apple.com/app/id1547052291');
-        }}
-      >
-        Mac App Store
-      </Button>
-    </CardActions>
-  </Card>
-);
+}) => {
+  if (!window.process.mas) return null;
+  return (
+    <Card elevation={0} square className={classNames(classes.card, classes.migrationCard)}>
+      <CardContent>
+        <Typography variant="body2" component="p">
+          Because of a few reasons, we have to republish Translatium under a new app listing.
+          To continue receiving updates, please reinstall the app from our new listing.
+        </Typography>
+      </CardContent>
+      <CardActions className={classes.migrationCardActions}>
+        <Button
+          variant="contained"
+          size="medium"
+          color="primary"
+          disableElevation
+          classes={{ label: classes.translateButtonLabel }}
+          onClick={() => {
+            requestOpenInBrowser('macappstore://apps.apple.com/app/id1547052291');
+          }}
+        >
+          Mac App Store
+        </Button>
+      </CardActions>
+    </Card>
+  );
+};
 
 MigrationCard.propTypes = {
   classes: PropTypes.object.isRequired,
