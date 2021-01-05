@@ -428,7 +428,7 @@ const Preferences = (props) => {
               <>
                 <Divider />
                 <ListItem button>
-                  <ListItemText primary={getLocale('rateMacAppStore')} onClick={() => requestOpenInBrowser('macappstore://apps.apple.com/app/id1176624652?action=write-review')} />
+                  <ListItemText primary={getLocale('rateMacAppStore')} onClick={() => requestOpenInBrowser('macappstore://apps.apple.com/app/id1547052291?action=write-review')} />
                 </ListItem>
               </>
             )}

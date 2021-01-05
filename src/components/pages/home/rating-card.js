@@ -57,7 +57,7 @@ const RatingCard = ({
               onClick={() => {
                 requestSetPreference('ratingCardLastClicked', Date.now());
                 requestSetPreference('ratingCardDidRate', true);
-                requestOpenInBrowser('macappstore://apps.apple.com/app/id1176624652?action=write-review');
+                requestOpenInBrowser('macappstore://apps.apple.com/app/id1547052291?action=write-review');
               }}
             >
               {getLocale('rateMacAppStore')}
