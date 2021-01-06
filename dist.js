@@ -54,7 +54,7 @@ const opts = {
     asarUnpack: [
       'node_modules/node-mac-permissions/build',
     ],
-    appId: 'com.moderntranslator.app', // Backward compatibility
+    appId: 'com.webcatalog.translatium',
     // https://github.com/electron-userland/electron-builder/issues/3730
     buildVersion: process.platform === 'darwin' ? appVersion : undefined,
     productName: 'Translatium',
