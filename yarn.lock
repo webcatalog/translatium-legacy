@@ -2210,10 +2210,10 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
-amplitude-js@7.3.3:
-  version "7.3.3"
-  resolved "https://registry.yarnpkg.com/amplitude-js/-/amplitude-js-7.3.3.tgz#ae4b35bd28231ccdc9713f8cc8675ae1ce64f19e"
-  integrity sha512-krSXUXeHqbQk15ozx0kC3h0K3i7wQ1ycSG08OfZBga2Vfbi3Y30CP6UXLdtJX4AiBB8EkjMePdMgU6kyuIpi/A==
+amplitude-js@7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/amplitude-js/-/amplitude-js-7.4.0.tgz#e66e31f3bed7857ea2a86a10209878c7ac2f4ccd"
+  integrity sha512-5n/a8VSTRAGURKBFiJww1dwQmhVCGjDlw0VRuxhPRaJ2L7jNpqnErZH0Cl9b9UgVp3mknhLynsrQ6Tl2YHm4Ug==
   dependencies:
     "@amplitude/ua-parser-js" "0.7.24"
     "@amplitude/utils" "^1.0.5"
