@@ -29,7 +29,7 @@
 				<string>com.webcatalog.translatium</string>
 				<string>com.moderntranslator.app</string>
 			</array>
-      <key>Check Installed</key>
+			<key>Check Installed</key>
 			<true/>
 			<key>Link</key>
 			<string>https://translatium.app/</string>
