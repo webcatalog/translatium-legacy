@@ -240,7 +240,8 @@ if (!gotTheLock) {
         defaultWidth: 400,
         defaultHeight: 500,
       });
-      mainWindow = new BrowserWindow({
+
+      const winOpts = {
         x: mainWindowState.x,
         y: mainWindowState.y,
         width: mainWindowState.width,
@@ -251,9 +252,6 @@ if (!gotTheLock) {
         autoHideMenuBar: false,
         show: false,
         frame: process.platform === 'darwin',
-        // manually set dock icon for AppImage
-        // Snap icon is set correct already so no need to intervene
-        icon: process.platform === 'linux' && process.env.SNAP == null ? path.resolve(__dirname, 'images', 'icon-linux.png') : undefined,
         webPreferences: {
           enableRemoteModule: true,
           nodeIntegration: true,
@@ -261,7 +259,19 @@ if (!gotTheLock) {
           webSecurity: false,
           preload: path.join(__dirname, 'preload', 'default.js'),
         },
-      });
+      };
+
+      // manually set dock icon for AppImage
+      // Snap icon is set correct already so no need to intervene
+      const icon = process.platform === 'linux' && process.env.SNAP == null ? path.resolve(__dirname, 'images', 'icon-linux.png') : undefined;
+      // winOpts.icon cannot be set to undefined
+      // as it'd crash Electron on macOS
+      // https://github.com/electron/electron/issues/27303#issuecomment-759501184
+      if (icon) {
+        winOpts.icon = icon;
+      }
+
+      mainWindow = new BrowserWindow(winOpts);
       mainWindowState.manage(mainWindow);
 
       mainWindow.on('enter-full-screen', () => {
