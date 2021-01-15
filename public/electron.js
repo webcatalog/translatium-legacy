@@ -95,7 +95,12 @@ if (!gotTheLock) {
   };
 
   // Register protocol
-  app.setAsDefaultProtocolClient('translatium');
+  // needed for PopClip support
+  // incompatible with snap
+  // see https://forum.snapcraft.io/t/dbus-error/4969/9
+  if (process.platform === 'darwin') {
+    app.setAsDefaultProtocolClient('translatium');
+  }
 
   // Load listeners
   loadListeners();
