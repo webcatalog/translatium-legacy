@@ -260,7 +260,7 @@ if (!gotTheLock) {
           preload: path.join(__dirname, 'preload', 'default.js'),
         },
       };
-      
+
       // manually set dock icon for AppImage
       // Snap icon is set correct already so no need to intervene
       const icon = process.platform === 'linux' && process.env.SNAP == null ? path.resolve(__dirname, 'images', 'icon-linux.png') : undefined;
