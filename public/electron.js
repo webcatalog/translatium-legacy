@@ -318,6 +318,26 @@ if (!gotTheLock) {
     ipcMain.emit('truly-ready');
   });
 
+  const showWindow = () => {
+    // On OS X it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    const attachToMenubar = getPreference('attachToMenubar');
+
+    if (attachToMenubar) {
+      if (mb == null) {
+        createWindowAsync();
+      } else {
+        mb.on('ready', () => {
+          mb.showWindow();
+        });
+      }
+    } else if (mainWindow == null) {
+      createWindowAsync();
+    } else {
+      mainWindow.show();
+    }
+  };
+
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
@@ -383,29 +403,15 @@ if (!gotTheLock) {
 
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {
-    app.quit();
+    if (process.platform !== 'darwin') {
+      app.quit();
+    }
   });
 
   app.on('activate', () => {
     app.whenReady()
       .then(() => {
-        // On OS X it's common to re-create a window in the app when the
-        // dock icon is clicked and there are no other windows open.
-        const attachToMenubar = getPreference('attachToMenubar');
-
-        if (attachToMenubar) {
-          if (mb == null) {
-            createWindowAsync();
-          } else {
-            mb.on('ready', () => {
-              mb.showWindow();
-            });
-          }
-        } else if (mainWindow == null) {
-          createWindowAsync();
-        } else {
-          mainWindow.show();
-        }
+        showWindow();
       });
   });
 
@@ -434,5 +440,9 @@ if (!gotTheLock) {
           }
         }
       });
+  });
+
+  ipcMain.on('show-window', () => {
+    showWindow();
   });
 }
