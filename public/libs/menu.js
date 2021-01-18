@@ -138,9 +138,9 @@ const createMenu = () => {
       role: 'window',
       label: getLocale('window'),
       submenu: [
+        { role: 'close', label: getLocale('close') },
         { role: 'minimize', label: getLocale('minimize') },
         { type: 'separator' },
-        { role: 'close', label: getLocale('close') },
       ],
     },
     {
@@ -192,12 +192,15 @@ const createMenu = () => {
 
     // Window menu
     template[3].submenu = [
+      { role: 'close', label: getLocale('close') },
       { role: 'minimize', label: getLocale('minimize') },
       { role: 'zoom', label: getLocale('zoom') },
       { type: 'separator' },
-      { role: 'close', label: getLocale('close') },
-      { type: 'separator' },
       { role: 'front', label: getLocale('bringAllToFront') },
+      {
+        label: 'Translatium',
+        click: () => ipcMain.emit('show-window'),
+      },
     ];
   } else {
     // File menu for Windows & Linux
