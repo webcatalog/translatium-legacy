@@ -129,5 +129,11 @@
 	"historyDesc": "Visualizzare qui parole e frasi tradotte in precedenza.",
 	"clearHistory": "Cancellare cronologia",
 	"reset": "Reimpostare",
-	"restorePreferencesToDefault": "Ripristinare le preferenze ai valori predefiniti originali"
+	"restorePreferencesToDefault": "Ripristinare le preferenze ai valori predefiniti originali",
+	"privacyConsentMessage": "Possiamo raccogliere statistiche anonime sull'utilizzo e rapporti sui crash?",
+	"privacyConsentDetail": "I dati ci aiutano a migliorare e ottimizzare il prodotto. Puoi modificare la tua decisione in qualsiasi momento nelle preferenze dell'app.",
+	"allow": "Consentire",
+	"dontAllow": "Non Consentire",
+	"allowCrashReports": "Consenti all'app di inviare rapporti anonimi sui crash",
+	"allowTelemetry": "Consenti all'app di inviare dati anonimi sull'utilizzo"
 }

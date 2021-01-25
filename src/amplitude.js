@@ -6,6 +6,7 @@ import { v5 as uuidv5 } from 'uuid';
 
 amplitude.getInstance().init(process.env.REACT_APP_AMPLITUDE_API_KEY);
 amplitude.getInstance().setVersionName(window.remote.app.getVersion());
+amplitude.getInstance().setOptOut(window.optOutTelemetry);
 
 // custom device id based on WebCatalog code
 // to have some control over device id

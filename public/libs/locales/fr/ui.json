@@ -129,5 +129,11 @@
 	"historyDesc": "Consultez les mots et phrases précédemment traduits ici.",
 	"clearHistory": "Effacer l'historique",
 	"reset": "Réinitialiser",
-	"restorePreferencesToDefault": "Restaurer les préférences à leurs valeurs par défaut"
+	"restorePreferencesToDefault": "Restaurer les préférences à leurs valeurs par défaut",
+	"privacyConsentMessage": "Pouvons-nous collecter des statistiques d'utilisation anonymes et des rapports de plantage ?",
+	"privacyConsentDetail": "Les données nous aident à améliorer et à optimiser le produit. Vous pouvez modifier votre décision à tout moment dans les préférences de l'application.",
+	"allow": "Permettre",
+	"dontAllow": "Ne Pas Autoriser",
+	"allowCrashReports": "Autoriser l'application à envoyer des rapports de plantage anonymes",
+	"allowTelemetry": "Autoriser l'application à envoyer des données d'utilisation anonymes"
 }

@@ -129,5 +129,11 @@
 	"historyDesc": "View previously translated words and phrases here.",
 	"clearHistory": "Clear history",
 	"reset": "Reset",
-	"restorePreferencesToDefault": "Restore preferences to their original defaults"
+	"restorePreferencesToDefault": "Restore preferences to their original defaults",
+	"privacyConsentMessage": "Can we collect anonymous usage statistics and crash reports?",
+	"privacyConsentDetail": "The data helps us improve and optimize the product. You can change your decision at any time in the app’s preferences.",
+	"allow": "Allow",
+	"dontAllow": "Don't Allow",
+	"allowCrashReports": "Allow the app to send anonymous crash reports",
+	"allowTelemetry": "Allow the app to send anonymous usage data"
 }

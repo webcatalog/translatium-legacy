@@ -129,5 +129,11 @@
 	"historyDesc": "이전에 번역된 단어와 구를 여기서 보세요..",
 	"clearHistory": "기록 지우기",
 	"reset": "재설정",
-	"restorePreferencesToDefault": "기본 설정을 원래 기본값으로 복원"
+	"restorePreferencesToDefault": "기본 설정을 원래 기본값으로 복원",
+	"privacyConsentMessage": "당사에서 익명의 사용 통계 및 충돌 보고서를 수집할 수 있습니까?",
+	"privacyConsentDetail": "데이터는 제품을 개선하고 최적화하는 데 도움이 됩니다. 앱의 기본 설정에서 언제든지 변경할 수 있습니다.",
+	"allow": "허용",
+	"dontAllow": "허용안함",
+	"allowCrashReports": "앱이 익명의 충돌 보고서를 보내도록 허용",
+	"allowTelemetry": "앱이 익명의 사용 데이터를 보내도록 허용"
 }

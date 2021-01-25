@@ -129,5 +129,11 @@
 	"historyDesc": "Hier zuvor übersetzte Wörter und Redewendungen anzeigen.",
 	"clearHistory": "Verlauf löschen",
 	"reset": "Zurücksetzen",
-	"restorePreferencesToDefault": "Einstellungen auf ihre ursprünglichen Standardwerte zurücksetzen"
+	"restorePreferencesToDefault": "Einstellungen auf ihre ursprünglichen Standardwerte zurücksetzen",
+	"privacyConsentMessage": "Können wir anonyme Nutzungsstatistiken und Absturzberichte erfassen?",
+	"privacyConsentDetail": "Die Daten helfen uns, das Produkt zu verbessern und zu optimieren. Sie können Ihre Entscheidung jederzeit in den Einstellungen der App ändern.",
+	"allow": "Erlauben",
+	"dontAllow": "Nicht Erlauben",
+	"allowCrashReports": "Erlaube der App anonyme Absturzberichte zu senden",
+	"allowTelemetry": "Erlaube der App anonyme Nutzungsdaten zu senden"
 }

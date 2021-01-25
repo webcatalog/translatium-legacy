@@ -129,5 +129,11 @@
 	"historyDesc": "Xem các từ và cụm từ đã dịch trong quá khứ tại đây.",
 	"clearHistory": "Xóa lịch sử",
 	"reset": "Thiết đặt lại",
-	"restorePreferencesToDefault": "Khôi phục tùy chọn về trạng thái ban đầu"
+	"restorePreferencesToDefault": "Khôi phục tùy chọn về trạng thái ban đầu",
+	"privacyConsentMessage": "Chúng tôi có thể thu thập dữ liệu sử dụng và báo cáo sự cố nặc danh không?",
+	"privacyConsentDetail": "Dữ liệu này giúp chúng tôi cải thiện và tối ưu hóa sản phẩm. Bạn có thể thay đổi quyết định của mình bất kỳ lúc nào trong tùy chọn của ứng dụng.",
+	"allow": "Cho phép",
+	"dontAllow": "Không cho phép",
+	"allowCrashReports": "Cho phép ứng dụng gửi báo cáo sự cố nặc danh",
+	"allowTelemetry": "Cho phép ứng dụng gửi dữ liệu sử dụng nặc danh"
 }
