@@ -148,7 +148,9 @@ const Preferences = (props) => {
     onToggleSetting,
     openAtLogin,
     openOnMenubarShortcut,
+    sentry,
     showTransliteration,
+    telemetry,
     themeSource,
     translateClipboardOnShortcut,
     translateWhenPressingEnter,
@@ -355,6 +357,40 @@ const Preferences = (props) => {
                 />
               </ListItemSecondaryAction>
             </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary={getLocale('allowCrashReports')}
+              />
+              <ListItemSecondaryAction>
+                <Switch
+                  edge="end"
+                  color="primary"
+                  checked={sentry}
+                  onChange={(e) => {
+                    requestSetPreference('sentry', e.target.checked);
+                    requestShowRequireRestartDialog();
+                  }}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary={getLocale('allowTelemetry')}
+              />
+              <ListItemSecondaryAction>
+                <Switch
+                  edge="end"
+                  color="primary"
+                  checked={telemetry}
+                  onChange={(e) => {
+                    requestSetPreference('telemetry', e.target.checked);
+                    requestShowRequireRestartDialog();
+                  }}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
           </List>
         </Paper>
 
@@ -472,7 +508,9 @@ Preferences.propTypes = {
   onToggleSetting: PropTypes.func.isRequired,
   openAtLogin: PropTypes.oneOf(['yes', 'yes-hidden', 'no']).isRequired,
   openOnMenubarShortcut: PropTypes.string,
+  sentry: PropTypes.bool.isRequired,
   showTransliteration: PropTypes.bool.isRequired,
+  telemetry: PropTypes.bool.isRequired,
   themeSource: PropTypes.string.isRequired,
   translateClipboardOnShortcut: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
@@ -485,7 +523,9 @@ const mapStateToProps = (state) => ({
   displayLanguage: state.preferences.displayLanguage,
   openAtLogin: state.systemPreferences.openAtLogin,
   openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
+  sentry: state.preferences.sentry,
   showTransliteration: state.preferences.showTransliteration,
+  telemetry: state.preferences.telemetry,
   themeSource: state.preferences.themeSource,
   translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,

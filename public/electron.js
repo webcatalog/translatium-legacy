@@ -15,7 +15,6 @@ const {
   ipcMain,
   nativeImage,
   nativeTheme,
-  shell,
 } = require('electron');
 const isDev = require('electron-is-dev');
 const settings = require('electron-settings');
@@ -29,15 +28,16 @@ const url = require('url');
 const { menubar } = require('menubar');
 const windowStateKeeper = require('electron-window-state');
 
+const { getPreference, setPreference } = require('./libs/preferences');
+
 // Activate the Sentry Electron SDK as early as possible in every process.
-if (!isDev) {
+if (!isDev && getPreference('sentry')) {
   // eslint-disable-next-line global-require
   require('./libs/sentry');
 }
 
 const { createMenu, showMenu } = require('./libs/menu');
 const loadListeners = require('./listeners');
-const { getPreference } = require('./libs/preferences');
 const { initLocales, getLocale } = require('./libs/locales');
 const sendToAllWindows = require('./libs/send-to-all-windows');
 const setContextMenu = require('./libs/set-context-menu');
@@ -360,35 +360,25 @@ if (!gotTheLock) {
 
     createWindowAsync()
       .then(() => {
-        if (isDev) return; // dev environment
-        // Mac
-        if (process.platform === 'darwin' && !process.mas) {
-          dialog.showMessageBox({
+        const privacyConsentAsked = getPreference('privacyConsentAsked');
+        if (!privacyConsentAsked) {
+          dialog.showMessageBox(mainWindow, {
             type: 'question',
-            buttons: ['Learn More...', 'OK'],
-            message: 'The direct download version of Translatium will no longer be updated. Please get the app from the Mac App Store instead.',
+            buttons: [getLocale('allow'), getLocale('dontAllow')],
+            message: getLocale('privacyConsentMessage'),
+            detail: getLocale('privacyConsentDetail'),
             cancelId: 1,
-          })
-            .then(({ response }) => {
-              if (response === 0) {
-                shell.openExternal('https://translatium.app/download/mac?utm_source=mac-dmg');
-              }
-            })
-            .catch(console.log); // eslint-disable-line no-console
-        // Windows
-        } else if (process.platform === 'win32' && !process.windowsStore) {
-          dialog.showMessageBox({
-            type: 'question',
-            buttons: ['Learn More...', 'OK'],
-            message: 'The direct download version of Translatium will no longer be updated. Please get the app from the Microsoft Store instead.',
-            cancelId: 1,
-          })
-            .then(({ response }) => {
-              if (response === 0) {
-                shell.openExternal('https://translatium.app/download/windows?utm_source=windows-nsis');
-              }
-            })
-            .catch(console.log); // eslint-disable-line no-console
+            defaultId: 0,
+          }).then(({ response }) => {
+            // setPreference('privacyConsentAsked', true);
+            if (response === 0) {
+              setPreference('sentry', true);
+              setPreference('telemetry', true);
+            } else {
+              setPreference('sentry', false);
+              setPreference('telemetry', false);
+            }
+          }).catch(console.log); // eslint-disable-line
         }
       });
     createMenu();
