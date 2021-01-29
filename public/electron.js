@@ -370,7 +370,7 @@ if (!gotTheLock) {
             cancelId: 1,
             defaultId: 0,
           }).then(({ response }) => {
-            // setPreference('privacyConsentAsked', true);
+            setPreference('privacyConsentAsked', true);
             if (response === 0) {
               setPreference('sentry', true);
               setPreference('telemetry', true);
