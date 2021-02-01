@@ -26,6 +26,12 @@ const displayLanguages = {
   vi: {
     displayName: 'Tiếng Việt',
   },
+  ja: {
+    displayName: '日本語',
+  },
+  'pt-PT': {
+    displayName: 'Português',
+  },
   'zh-CN': {
     displayName: '中文(简体)',
   },

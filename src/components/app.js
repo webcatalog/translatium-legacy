@@ -92,6 +92,8 @@ const styles = (theme) => {
     },
     bottomNavigationActionLabel: {
       fontSize: '0.8rem !important',
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
     },
     hidden: {
       display: 'none !important',
