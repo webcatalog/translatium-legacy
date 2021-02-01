@@ -9,6 +9,14 @@ const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+const packageJson = require('./package.json');
+
+const externals = {};
+Object.keys(packageJson.dependencies)
+  .forEach((name) => {
+    externals[name] = `commonjs ${name}`;
+  });
+
 const getPreloadScriptsConfig = () => {
   const plugins = [];
   return {
@@ -18,6 +26,7 @@ const getPreloadScriptsConfig = () => {
       __filename: false,
       __dirname: false,
     },
+    externals,
     entry: {
       'preload-default': path.join(__dirname, 'main-src', 'preload', 'default.js'),
       'preload-menubar': path.join(__dirname, 'main-src', 'preload', 'menubar.js'),
@@ -62,6 +71,7 @@ const getElectronMainConfig = () => {
       __filename: false,
       __dirname: false,
     },
+    externals,
     entry: {
       electron: path.join(__dirname, 'main-src', 'electron.js'),
     },
