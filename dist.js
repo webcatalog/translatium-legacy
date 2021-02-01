@@ -71,7 +71,6 @@ const opts = {
       schemes: ['translatium'],
     },
     appx: {
-      applicationId: 'translatium',
       identityName: 'com.webcatalog.translatium',
       publisher: 'CN=C2673AF2-2F8A-4FAF-AC59-112BBCFB3423',
       backgroundColor: '#43a047',
