@@ -24,4 +24,4 @@ window.desktopCapturer = desktopCapturer;
 
 window.machineId = machineId.machineIdSync();
 window.optOutTelemetry = !ipcRenderer.sendSync('get-preference', 'telemetry');
-window.macPermissions = process.platform === 'darwin' ? require('node-mac-permissions') : null;
+window.macPermissions = require('node-mac-permissions');
