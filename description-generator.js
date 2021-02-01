@@ -4,9 +4,9 @@
 const fs = require('fs-extra');
 const path = require('path');
 
-const displayLanguages = require('./public/libs/locales/languages');
+const displayLanguages = require('./main-src/libs/locales/languages');
 
-const localesDir = path.resolve(__dirname, 'public', 'libs', 'locales');
+const localesDir = path.resolve(__dirname, 'main-src', 'libs', 'locales');
 Object.keys(displayLanguages).forEach((langCode) => {
   // eslint-disable-next-line no-console
   console.log(`Generating description for ${langCode}...`);
