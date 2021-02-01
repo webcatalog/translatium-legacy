@@ -2,7 +2,7 @@
   "name": "Translatium",
   "description": "Translate 100+ Languages Instantly",
   "version": "17.1.1",
-  "main": "build/electron.js",
+  "main": "main-src/electron.js",
   "repository": "https://github.com/webcatalog/translatium",
   "author": {
     "name": "WebCatalog Ltd",
@@ -76,6 +76,7 @@
     "react-scripts": "3.4.4",
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
+    "source-map-support": "0.5.19",
     "uuid": "8.3.2",
     "wait-on": "5.2.1",
     "webpack": "4.42.0",

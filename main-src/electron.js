@@ -3,6 +3,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 /* eslint import/no-unresolved: [2, { ignore: ['electron'] }] */
 /* eslint-disable import/no-extraneous-dependencies */
+require('source-map-support').install();
 
 const {
   BrowserWindow,

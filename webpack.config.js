@@ -9,8 +9,6 @@ const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const externals = ['node-mac-permissions'];
-
 const getPreloadScriptsConfig = () => {
   const plugins = [];
   return {
@@ -20,7 +18,6 @@ const getPreloadScriptsConfig = () => {
       __filename: false,
       __dirname: false,
     },
-    externals,
     entry: {
       'preload-default': path.join(__dirname, 'main-src', 'preload', 'default.js'),
       'preload-menubar': path.join(__dirname, 'main-src', 'preload', 'menubar.js'),
@@ -32,10 +29,6 @@ const getPreloadScriptsConfig = () => {
     },
     devtool: 'source-map',
     plugins,
-    optimization: {
-      // We no not want to minimize our code.
-      minimize: false,
-    },
   };
 };
 
@@ -55,6 +48,10 @@ const getElectronMainConfig = () => {
       from: path.join(__dirname, 'main-src', 'images'),
       to: path.join(__dirname, 'build', 'images'),
     },
+    {
+      from: path.join(__dirname, 'node_modules', 'node-mac-permissions', 'build', 'Release', 'permissions.node'),
+      to: path.join(__dirname, 'build', 'permissions.node'),
+    },
   ];
   plugins.push(new CopyPlugin({ patterns }));
 
@@ -65,7 +62,6 @@ const getElectronMainConfig = () => {
       __filename: false,
       __dirname: false,
     },
-    externals,
     entry: {
       electron: path.join(__dirname, 'main-src', 'electron.js'),
     },
