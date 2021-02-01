@@ -75,6 +75,7 @@ const opts = {
       publisher: 'CN=C2673AF2-2F8A-4FAF-AC59-112BBCFB3423',
       backgroundColor: '#43a047',
       languages: Object.keys(displayLanguages),
+      showNameOnTiles: true,
     },
     mac: {
       darkModeSupport: true,
