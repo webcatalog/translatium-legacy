@@ -9,20 +9,9 @@ const builder = require('electron-builder');
 const glob = require('glob');
 const del = require('del');
 const semver = require('semver');
-const { spawn } = require('child_process');
-const { getSignVendorPath } = require('app-builder-lib/out/codeSign/windowsCodeSign');
 
 const packageJson = require('./package.json');
 const displayLanguages = require('./main-src/libs/locales/languages');
-
-// https://stackoverflow.com/a/17466459
-const runCmd = (cmd, args, callBack) => {
-  const child = spawn(cmd, args);
-  let resp = '';
-
-  child.stdout.on('data', (buffer) => { resp += buffer.toString(); });
-  child.stdout.on('end', () => { callBack(resp); });
-};
 
 const { Arch, Platform } = builder;
 
