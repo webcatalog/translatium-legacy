@@ -7,6 +7,6 @@ const { init } = require('@sentry/electron');
 const isRenderer = (process && process.type === 'renderer');
 
 init({
-  dsn: 'https://f7ea6d9ea90543a78848d2651be864ce@o476721.ingest.sentry.io/5516769',
+  dsn: process.env.ELECTRON_APP_SENTRY_DSN,
   release: isRenderer ? electron.remote.app.getVersion() : electron.app.getVersion(),
 });

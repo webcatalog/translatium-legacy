@@ -7,7 +7,7 @@ const fs = require('fs-extra');
 const path = require('path');
 
 describe('All localized languages have valid keys/values', () => {
-  const localesDir = path.resolve(__dirname, '..', 'public', 'libs', 'locales');
+  const localesDir = path.resolve(__dirname, '..', 'main-src', 'libs', 'locales');
   const defaultKeys = Object.keys(
     fs.readJSONSync(path.join(localesDir, 'en', 'languages.json')),
   ).concat(Object.keys(
@@ -15,7 +15,7 @@ describe('All localized languages have valid keys/values', () => {
   ));
 
   // eslint-disable-next-line global-require
-  const displayLanguages = require('../public/libs/locales/languages');
+  const displayLanguages = require('../main-src/libs/locales/languages');
   Object.keys(displayLanguages).forEach((langCode) => {
     it(langCode, () => {
       const keys = Object.keys(

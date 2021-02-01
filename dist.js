@@ -13,7 +13,7 @@ const { spawn } = require('child_process');
 const { getSignVendorPath } = require('app-builder-lib/out/codeSign/windowsCodeSign');
 
 const packageJson = require('./package.json');
-const displayLanguages = require('./public/libs/locales/languages');
+const displayLanguages = require('./main-src/libs/locales/languages');
 
 // https://stackoverflow.com/a/17466459
 const runCmd = (cmd, args, callBack) => {
