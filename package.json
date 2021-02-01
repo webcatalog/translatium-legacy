@@ -2,7 +2,7 @@
   "name": "Translatium",
   "description": "Translate 100+ Languages Instantly",
   "version": "17.1.1",
-  "main": "/electron.js",
+  "main": "main-src/electron.js",
   "repository": "https://github.com/webcatalog/translatium",
   "author": {
     "name": "WebCatalog Ltd",
