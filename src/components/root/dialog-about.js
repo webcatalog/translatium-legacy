@@ -14,7 +14,7 @@ import connectComponent from '../../helpers/connect-component';
 import getLocale from '../../helpers/get-locale';
 
 import { close } from '../../state/root/dialog-about/actions';
-import iconPng from '../../assets/translatium-icon.png';
+import translatiumIconPng from '../../images/products/translatium-mac-icon-128@2x.png';
 
 import { requestOpenInBrowser } from '../../senders';
 
@@ -74,7 +74,7 @@ const About = (props) => {
         {getLocale('about')}
       </EnhancedDialogTitle>
       <DialogContent className={classes.dialogContent}>
-        <img src={iconPng} alt="Translatium" className={classes.icon} />
+        <img src={translatiumIconPng} alt="Translatium" className={classes.icon} />
         <Typography variant="h6" className={classes.title}>Translatium</Typography>
         <Typography
           variant="body2"
