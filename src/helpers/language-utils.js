@@ -102,7 +102,7 @@ const data = {
     sv: 'swe',
     tr: 'tur',
     'zh-CN': 'chs',
-    'zh-TW': 'chs',
+    'zh-TW': 'cht',
   },
 };
 
