@@ -180,7 +180,6 @@ export const loadImage = (type = 'file') => (dispatch, getState) => {
         type: UPDATE_OCR,
         ocr: null,
       });
-      dispatch(openAlert('cannotOpenTheFile'));
     });
 };
 
