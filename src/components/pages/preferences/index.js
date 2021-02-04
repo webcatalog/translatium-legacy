@@ -427,7 +427,7 @@ const Preferences = (props) => {
               <>
                 <ListItem
                   button
-                  onClick={() => requestOpenInBrowser('https://webcatalog.app?utm_source=webcatalog_app')}
+                  onClick={() => requestOpenInBrowser(`https://webcatalog.app?utm_source=${utmSource}`)}
                   className={classes.listItemPromotion}
                 >
                   <div className={classes.promotionBlock}>

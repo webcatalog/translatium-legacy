@@ -154,6 +154,7 @@ export const startTextToSpeech = (textToSpeechLang, textToSpeechText) => ((dispa
       })
       .catch(() => {
         dispatch(openAlert('cannotConnectToServer'));
+        dispatch({ type: END_TEXT_TO_SPEECH });
       });
   }
 });
