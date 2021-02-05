@@ -60,7 +60,7 @@ const opts = {
       schemes: ['translatium'],
     },
     appx: {
-      identityName: 'WebCatalogLtd.TranslatiumTranslator',
+      identityName: 'WebCatalogLtd.Translatium',
       publisher: 'CN=C2673AF2-2F8A-4FAF-AC59-112BBCFB3423',
       backgroundColor: '#43a047',
       languages: Object.keys(displayLanguages),
