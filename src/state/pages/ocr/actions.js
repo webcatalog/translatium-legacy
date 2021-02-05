@@ -176,7 +176,10 @@ export const loadImage = (type = 'file') => (dispatch, getState) => {
     .catch((e) => {
       // eslint-disable-next-line
       console.log(e);
-      // dispatch(openAlert('cannotOpenTheFile'));
+      dispatch({
+        type: UPDATE_OCR,
+        ocr: null,
+      });
     });
 };
 

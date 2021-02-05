@@ -106,7 +106,9 @@ if (!gotTheLock) {
   // Load listeners
   loadListeners();
 
-  const REACT_PATH = isDev ? 'http://localhost:3000' : `file://${path.resolve(__dirname, 'index.html')}`;
+  const REACT_PATH = process.env.NODE_ENV === 'production'
+    ? `file://${path.resolve(__dirname, 'index.html')}`
+    : 'http://localhost:3000';
 
   const createWindowAsync = () => new Promise((resolve) => {
     const updaterEnabled = process.env.SNAP == null && !process.mas && !process.windowsStore;

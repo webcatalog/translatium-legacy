@@ -57,10 +57,6 @@ const getElectronMainConfig = () => {
       from: path.join(__dirname, 'main-src', 'images'),
       to: path.join(__dirname, 'build', 'images'),
     },
-    {
-      from: path.join(__dirname, 'node_modules', 'node-mac-permissions', 'build', 'Release', 'permissions.node'),
-      to: path.join(__dirname, 'build', 'permissions.node'),
-    },
   ];
   plugins.push(new CopyPlugin({ patterns }));
 

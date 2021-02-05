@@ -22,7 +22,7 @@
     "eject": "react-scripts eject",
     "dist": "yarn run build && babel-node dist.js",
     "dist-dev": "cross-env FORCE_DEV=1 yarn dist",
-    "lint": "eslint ./src ./public ./*.js ./test --ext js",
+    "lint": "eslint ./src ./main-src ./*.js ./test --ext js",
     "test": "mocha"
   },
   "dependencies": {

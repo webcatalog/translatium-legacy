@@ -60,7 +60,7 @@ const opts = {
       schemes: ['translatium'],
     },
     appx: {
-      identityName: 'com.webcatalog.translatium',
+      identityName: 'WebCatalogLtd.TranslatiumTranslator',
       publisher: 'CN=C2673AF2-2F8A-4FAF-AC59-112BBCFB3423',
       backgroundColor: '#43a047',
       languages: Object.keys(displayLanguages),
@@ -76,7 +76,7 @@ const opts = {
       entitlementsLoginHelper: 'build-resources/entitlements.mas.login-helper.plist',
     },
     mas: {
-      category: 'public.app-category.productivity',
+      category: 'public.app-category.travel',
       provisioningProfile: process.env.FORCE_DEV
         ? 'build-resources/embedded-development.provisionprofile' // mas-dev
         : 'build-resources/embedded.provisionprofile',
