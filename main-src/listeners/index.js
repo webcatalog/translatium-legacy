@@ -10,7 +10,7 @@ const {
   shell,
 } = require('electron');
 
-const fetch = require('node-fetch');
+const fetch = require('node-fetch').default;
 
 const {
   getPreference,

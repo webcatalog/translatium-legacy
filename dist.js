@@ -76,7 +76,7 @@ const opts = {
       entitlementsLoginHelper: 'build-resources/entitlements.mas.login-helper.plist',
     },
     mas: {
-      category: 'public.app-category.productivity',
+      category: 'public.app-category.travel',
       provisioningProfile: process.env.FORCE_DEV
         ? 'build-resources/embedded-development.provisionprofile' // mas-dev
         : 'build-resources/embedded.provisionprofile',
