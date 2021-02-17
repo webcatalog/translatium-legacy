@@ -392,7 +392,6 @@ const Preferences = (props) => {
                   checked={telemetry}
                   onChange={(e) => {
                     requestSetPreference('telemetry', e.target.checked);
-                    requestShowRequireRestartDialog();
                   }}
                 />
               </ListItemSecondaryAction>

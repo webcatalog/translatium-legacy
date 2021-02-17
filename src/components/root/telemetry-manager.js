@@ -8,7 +8,11 @@ import connectComponent from '../../helpers/connect-component';
 
 import amplitude from '../../amplitude';
 
-const TelemetryManager = ({ displayLanguage }) => {
+const TelemetryManager = ({ displayLanguage, telemetry }) => {
+  useEffect(() => {
+    amplitude.getInstance().setOptOut(!telemetry);
+  }, [telemetry]);
+
   useEffect(() => {
     amplitude.getInstance().setUserProperties({
       displayLanguage,
@@ -24,12 +28,18 @@ const TelemetryManager = ({ displayLanguage }) => {
   return null;
 };
 
+TelemetryManager.defaultProps = {
+  telemetry: false,
+};
+
 TelemetryManager.propTypes = {
   displayLanguage: PropTypes.string.isRequired,
+  telemetry: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   displayLanguage: state.preferences.displayLanguage,
+  telemetry: state.preferences.telemetry,
 });
 
 export default connectComponent(
