@@ -482,37 +482,39 @@ const Preferences = (props) => {
               </div>
               <ChevronRightIcon color="action" />
             </ListItem>
-            <Divider />
-            <ListItem
-              button
-              onClick={() => {
-                let url = `https://singlebox.app?utm_source=${utmSource}`;
-                if (window.process.mas) {
-                  url = 'macappstore://apps.apple.com/app/singlebox/id1548853763';
-                } else if (window.process.windowsStore) {
-                  url = 'ms-windows-store://pdp/?productid=9NQ0MV0GXJ2B';
-                }
-                requestOpenInBrowser(url);
-              }}
-              className={classes.listItemPromotion}
-            >
-              <div className={classes.promotionBlock}>
-                <div className={classes.promotionLeft}>
-                  <img src={singleboxIconPng} alt="Singlebox" className={classes.appIcon} />
-                </div>
-                <div className={classes.promotionRight}>
-                  <div>
-                    <Typography variant="body1" className={classes.appTitle}>
-                      Singlebox
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      Smart Browser for Busy People
-                    </Typography>
+            {!window.process.windowsStore && (
+              <>
+                <Divider />
+                <ListItem
+                  button
+                  onClick={() => {
+                    let url = `https://singlebox.app?utm_source=${utmSource}`;
+                    if (window.process.mas) {
+                      url = 'macappstore://apps.apple.com/app/singlebox/id1548853763';
+                    }
+                    requestOpenInBrowser(url);
+                  }}
+                  className={classes.listItemPromotion}
+                >
+                  <div className={classes.promotionBlock}>
+                    <div className={classes.promotionLeft}>
+                      <img src={singleboxIconPng} alt="Singlebox" className={classes.appIcon} />
+                    </div>
+                    <div className={classes.promotionRight}>
+                      <div>
+                        <Typography variant="body1" className={classes.appTitle}>
+                          Singlebox
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                          Smart Browser for Busy People
+                        </Typography>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <ChevronRightIcon color="action" />
-            </ListItem>
+                  <ChevronRightIcon color="action" />
+                </ListItem>
+              </>
+            )}
             <Divider />
             <ListItem
               button
@@ -637,37 +639,39 @@ const Preferences = (props) => {
               </div>
               <ChevronRightIcon color="action" />
             </ListItem>
-            <Divider />
-            <ListItem
-              button
-              onClick={() => {
-                let url = `https://dynacal.app?utm_source=${utmSource}`;
-                if (window.process.mas) {
-                  url = 'macappstore://apps.apple.com/us/app/dynacal-for-google-calendar/id1552616851';
-                } else if (window.process.windowsStore) {
-                  url = 'ms-windows-store://pdp/?productid=9PJZLC1W2SB5';
-                }
-                requestOpenInBrowser(url);
-              }}
-              className={classes.listItemPromotion}
-            >
-              <div className={classes.promotionBlock}>
-                <div className={classes.promotionLeft}>
-                  <img src={dynacalIconPng} alt="DynaCal" className={classes.appIcon} />
-                </div>
-                <div className={classes.promotionRight}>
-                  <div>
-                    <Typography variant="body1" className={classes.appTitle}>
-                      DynaCal
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      Best Way to Use Google Calendar on Mac & PC
-                    </Typography>
+            {!window.process.windowsStore && (
+              <>
+                <Divider />
+                <ListItem
+                  button
+                  onClick={() => {
+                    let url = `https://dynacal.app?utm_source=${utmSource}`;
+                    if (window.process.mas) {
+                      url = 'macappstore://apps.apple.com/us/app/dynacal-for-google-calendar/id1552616851';
+                    }
+                    requestOpenInBrowser(url);
+                  }}
+                  className={classes.listItemPromotion}
+                >
+                  <div className={classes.promotionBlock}>
+                    <div className={classes.promotionLeft}>
+                      <img src={dynacalIconPng} alt="DynaCal" className={classes.appIcon} />
+                    </div>
+                    <div className={classes.promotionRight}>
+                      <div>
+                        <Typography variant="body1" className={classes.appTitle}>
+                          DynaCal
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                          Best Way to Use Google Calendar on Mac & PC
+                        </Typography>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <ChevronRightIcon color="action" />
-            </ListItem>
+                  <ChevronRightIcon color="action" />
+                </ListItem>
+              </>
+            )}
           </List>
         </Paper>
 
