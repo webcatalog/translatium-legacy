@@ -13,7 +13,8 @@
     "node": "12"
   },
   "scripts": {
-    "postinstall": "npx patch-package",
+    "postinstall": "npx patch-package && yarn generate-open-source-notices",
+    "generate-open-source-notices": "yarn licenses generate-disclaimer > public/open-source-notices.txt",
     "start": "cross-env BROWSER=none react-scripts start",
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\" -k",
     "build": "react-scripts build && webpack",
@@ -46,7 +47,7 @@
     "cross-env": "7.0.3",
     "del": "6.0.0",
     "dotenv": "8.2.0",
-    "electron": "11.2.3",
+    "electron": "11.3.0",
     "electron-builder": "22.10.4",
     "electron-is-dev": "1.2.0",
     "electron-settings": "4.0.2",

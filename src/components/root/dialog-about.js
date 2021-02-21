@@ -14,6 +14,7 @@ import connectComponent from '../../helpers/connect-component';
 import getLocale from '../../helpers/get-locale';
 
 import { close } from '../../state/root/dialog-about/actions';
+import { open as openDialogOpenSourceNotices } from '../../state/root/dialog-open-source-notices/actions';
 import translatiumIconPng from '../../images/products/translatium-mac-icon-128@2x.png';
 
 import { requestOpenInBrowser } from '../../senders';
@@ -61,6 +62,7 @@ const About = (props) => {
   const {
     classes,
     onClose,
+    onOpenDialogOpenSourceNotices,
     open,
   } = props;
 
@@ -95,6 +97,14 @@ const About = (props) => {
           {getLocale('support')}
         </Button>
 
+        <br />
+
+        <Button
+          onClick={onOpenDialogOpenSourceNotices}
+        >
+          Open Source Notices
+        </Button>
+
         <Typography variant="body2" className={classes.madeBy}>
           <span>Made with </span>
           <span role="img" aria-label="love">❤</span>
@@ -116,6 +126,7 @@ const About = (props) => {
 About.propTypes = {
   classes: PropTypes.object.isRequired,
   onClose: PropTypes.func.isRequired,
+  onOpenDialogOpenSourceNotices: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
 };
 
@@ -125,6 +136,7 @@ const mapStateToProps = (state) => ({
 
 const actionCreators = {
   close,
+  openDialogOpenSourceNotices,
 };
 
 export default connectComponent(
