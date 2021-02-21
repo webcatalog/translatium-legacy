@@ -25,6 +25,7 @@ import EnhancedMenu from '../../shared/enhanced-menu';
 import { toggleSetting } from '../../../state/root/preferences/actions';
 import { open as openDialogAbout } from '../../../state/root/dialog-about/actions';
 import { open as openDialogShortcut } from '../../../state/pages/preferences/shortcut-dialog/actions';
+import { open as openDialogOpenSourceNotices } from '../../../state/root/dialog-open-source-notices/actions';
 
 import DialogShortcut from './dialog-shortcut';
 
@@ -152,6 +153,7 @@ const Preferences = (props) => {
     displayLanguage,
     onOpenDialogAbout,
     onOpenDialogShortcut,
+    onOpenDialogOpenSourceNotices,
     onToggleSetting,
     openAtLogin,
     openOnMenubarShortcut,
@@ -632,7 +634,7 @@ const Preferences = (props) => {
                       DynaMail
                     </Typography>
                     <Typography variant="body2" color="textSecondary">
-                      Best Way to Use Gmail on Mac & PC
+                      The Best Gmail Client
                     </Typography>
                   </div>
                 </div>
@@ -663,7 +665,7 @@ const Preferences = (props) => {
                           DynaCal
                         </Typography>
                         <Typography variant="body2" color="textSecondary">
-                          Best Way to Use Google Calendar on Mac & PC
+                          The Best Google Calendar Client
                         </Typography>
                       </div>
                     </div>
@@ -688,6 +690,10 @@ const Preferences = (props) => {
             <Divider />
             <ListItem button>
               <ListItemText primary={getLocale('support')} onClick={() => requestOpenInBrowser('https://translatium.app/support?utm_source=translatium_app')} />
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemText primary="Open Source Notices" onClick={onOpenDialogOpenSourceNotices} />
             </ListItem>
             {window.process.mas && (
               <>
@@ -734,6 +740,7 @@ Preferences.propTypes = {
   displayLanguage: PropTypes.string.isRequired,
   onOpenDialogAbout: PropTypes.func.isRequired,
   onOpenDialogShortcut: PropTypes.func.isRequired,
+  onOpenDialogOpenSourceNotices: PropTypes.func.isRequired,
   onToggleSetting: PropTypes.func.isRequired,
   openAtLogin: PropTypes.oneOf(['yes', 'yes-hidden', 'no']).isRequired,
   openOnMenubarShortcut: PropTypes.string,
@@ -764,6 +771,7 @@ const mapStateToProps = (state) => ({
 const actionCreators = {
   openDialogAbout,
   openDialogShortcut,
+  openDialogOpenSourceNotices,
   toggleSetting,
 };
 
