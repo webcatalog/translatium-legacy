@@ -41,6 +41,7 @@ import {
 import webcatalogIconPng from '../../../images/products/webcatalog-mac-icon-128@2x.png';
 import translatiumIconPng from '../../../images/products/translatium-mac-icon-128@2x.png';
 import singleboxIconPng from '../../../images/products/singlebox-mac-icon-128@2x.png';
+import squeezerIconPng from '../../../images/products/squeezer-mac-icon-128@2x.png';
 import cloveryIconPng from '../../../images/products/clovery-mac-icon-128@2x.png';
 import dynamailIconPng from '../../../images/products/dynamail-mac-icon-128@2x.png';
 import dynacalIconPng from '../../../images/products/dynacal-mac-icon-128@2x.png';
@@ -517,6 +518,39 @@ const Preferences = (props) => {
                 </ListItem>
               </>
             )}
+            {!window.process.windowsStore && (
+              <>
+                <Divider />
+                <ListItem
+                  button
+                  onClick={() => {
+                    let url = `https://squeezer.app?utm_source=${utmSource}`;
+                    if (window.process.mas) {
+                      url = 'macappstore://apps.apple.com/us/app/squeezer-image-compression/id1554751184';
+                    }
+                    requestOpenInBrowser(url);
+                  }}
+                  className={classes.listItemPromotion}
+                >
+                  <div className={classes.promotionBlock}>
+                    <div className={classes.promotionLeft}>
+                      <img src={squeezerIconPng} alt="Squeezer" className={classes.appIcon} />
+                    </div>
+                    <div className={classes.promotionRight}>
+                      <div>
+                        <Typography variant="body1" className={classes.appTitle}>
+                          Squeezer
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                          Compress, Resize, Convert Images
+                        </Typography>
+                      </div>
+                    </div>
+                  </div>
+                  <ChevronRightIcon color="action" />
+                </ListItem>
+              </>
+            )}
             <Divider />
             <ListItem
               button
@@ -682,24 +716,34 @@ const Preferences = (props) => {
           <List dense disablePadding>
             <ListItem button>
               <ListItemText primary={getLocale('about')} onClick={onOpenDialogAbout} />
+              <ChevronRightIcon color="action" />
             </ListItem>
             <Divider />
             <ListItem button>
               <ListItemText primary={getLocale('website')} onClick={() => requestOpenInBrowser('https://translatium.app?utm_source=translatium_app')} />
+              <ChevronRightIcon color="action" />
             </ListItem>
             <Divider />
             <ListItem button>
               <ListItemText primary={getLocale('support')} onClick={() => requestOpenInBrowser('https://translatium.app/support?utm_source=translatium_app')} />
+              <ChevronRightIcon color="action" />
+            </ListItem>
+            <Divider />
+            <ListItem button onClick={() => requestOpenInBrowser(`https://webcatalog.app/privacy?utm_source=${utmSource}`)}>
+              <ListItemText primary="Privacy Policy" />
+              <ChevronRightIcon color="action" />
             </ListItem>
             <Divider />
             <ListItem button>
               <ListItemText primary="Open Source Notices" onClick={onOpenDialogOpenSourceNotices} />
+              <ChevronRightIcon color="action" />
             </ListItem>
             {window.process.mas && (
               <>
                 <Divider />
                 <ListItem button>
                   <ListItemText primary={getLocale('rateMacAppStore')} onClick={() => requestOpenInBrowser('macappstore://apps.apple.com/app/id1547052291?action=write-review')} />
+                  <ChevronRightIcon color="action" />
                 </ListItem>
               </>
             )}
@@ -708,12 +752,14 @@ const Preferences = (props) => {
                 <Divider />
                 <ListItem button>
                   <ListItemText primary={getLocale('rateMicrosoftStore')} onClick={() => requestOpenInBrowser('ms-windows-store://review/?ProductId=9wzdncrcsg9k')} />
+                  <ChevronRightIcon color="action" />
                 </ListItem>
               </>
             )}
             <Divider />
             <ListItem button>
               <ListItemText primary={getLocale('quit')} onClick={() => window.remote.app.quit()} />
+              <ChevronRightIcon color="action" />
             </ListItem>
           </List>
         </Paper>
