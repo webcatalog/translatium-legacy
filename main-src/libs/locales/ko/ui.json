@@ -135,5 +135,6 @@
 	"allow": "허용",
 	"dontAllow": "허용안함",
 	"allowCrashReports": "앱이 익명의 충돌 보고서를 보내도록 허용",
-	"allowTelemetry": "앱이 익명의 사용 데이터를 보내도록 허용"
+	"allowTelemetry": "앱이 익명의 사용 데이터를 보내도록 허용",
+	"share": "공유"
 }

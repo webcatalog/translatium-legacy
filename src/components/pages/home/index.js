@@ -115,7 +115,7 @@ const styles = (theme) => ({
   },
   controllerContainerRight: {
     float: 'right',
-    paddingTop: 5,
+    paddingTop: 2,
   },
   controllerIconButton: {
     padding: theme.spacing(1),
@@ -151,6 +151,9 @@ const styles = (theme) => ({
   appBarColorDefault: {
     background: theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.primary.main,
     color: theme.palette.type === 'dark' ? theme.palette.getContrastText(theme.palette.grey[900]) : theme.palette.primary.contrastText,
+  },
+  translateButton: {
+    marginLeft: theme.spacing(0.5),
   },
   translateButtonLabel: {
     fontWeight: 500,
@@ -263,6 +266,23 @@ class Home extends React.Component {
           },
         ];
 
+        if (window.process.platform === 'darwin') {
+          controllers.push({
+            Icon: ({ fontSize }) => (
+              <SvgIcon fontSize={fontSize}>
+                <path fill="currentColor" d="M12,1L8,5H11V14H13V5H16M18,23H6C4.89,23 4,22.1 4,21V9A2,2 0 0,1 6,7H9V9H6V21H18V9H15V7H18A2,2 0 0,1 20,9V21A2,2 0 0,1 18,23Z" />
+              </SvgIcon>
+            ),
+            tooltip: getLocale('share'),
+            onClick: () => {
+              const shareMenu = new window.remote.ShareMenu({
+                texts: [output.outputText],
+              });
+              shareMenu.popup(window.remote.getCurrentWindow());
+            },
+          });
+        }
+
         if (isTTSSupported(output.outputLang)) {
           controllers.unshift({
             Icon: textToSpeechPlaying ? AVStop : AVVolumeUp,
@@ -345,6 +365,7 @@ class Home extends React.Component {
       onChangeRoute,
       onEndTextToSpeech,
       onLoadImage,
+      onOpenSnackbar,
       onStartTextToSpeech,
       onSwapLanguages,
       onToggleFullscreenInputBox,
@@ -430,6 +451,36 @@ class Home extends React.Component {
       tooltip: fullscreenInputBox ? getLocale('exitFullscreen') : getLocale('fullscreen'),
       onClick: onToggleFullscreenInputBox,
     });
+
+    const secondaryControllers = [
+      {
+        Icon: FileCopy,
+        tooltip: getLocale('copy'),
+        onClick: () => {
+          window.remote.clipboard.writeText(inputText);
+          onOpenSnackbar(getLocale('copied'));
+        },
+        disabled: inputText.length < 1,
+      },
+    ];
+
+    if (window.process.platform === 'darwin') {
+      secondaryControllers.push({
+        Icon: ({ fontSize }) => (
+          <SvgIcon fontSize={fontSize}>
+            <path fill="currentColor" d="M12,1L8,5H11V14H13V5H16M18,23H6C4.89,23 4,22.1 4,21V9A2,2 0 0,1 6,7H9V9H6V21H18V9H15V7H18A2,2 0 0,1 20,9V21A2,2 0 0,1 18,23Z" />
+          </SvgIcon>
+        ),
+        tooltip: getLocale('share'),
+        onClick: () => {
+          const shareMenu = new window.remote.ShareMenu({
+            texts: [inputText],
+          });
+          shareMenu.popup(window.remote.getCurrentWindow());
+        },
+        disabled: inputText.length < 1,
+      });
+    }
 
     return (
       <div className={classes.container}>
@@ -560,12 +611,38 @@ class Home extends React.Component {
                 )))}
               </div>
               <div className={classes.controllerContainerRight}>
+                {secondaryControllers.map(({
+                  Icon, tooltip, onClick, disabled,
+                }) => (disabled ? (
+                  <IconButton
+                    key={`inputTool_${tooltip}`}
+                    className={classes.controllerIconButton}
+                    aria-label={tooltip}
+                    onClick={onClick}
+                    disabled
+                  >
+                    <Icon fontSize="small" />
+                  </IconButton>
+                ) : (
+                  <Tooltip title={tooltip} placement={fullscreenInputBox ? 'top' : 'bottom'} key={`inputTool_${tooltip}`}>
+                    <IconButton
+                      className={classes.controllerIconButton}
+                      aria-label={tooltip}
+                      onClick={onClick}
+                    >
+                      <Icon fontSize="small" />
+                    </IconButton>
+                  </Tooltip>
+                )))}
                 {(inputText.length < 1 || (output && output.status === 'loading')) ? (
                   <Button
                     variant="outlined"
                     size="small"
                     color="default"
-                    classes={{ label: classes.translateButtonLabel }}
+                    classes={{
+                      root: classes.translateButton,
+                      label: classes.translateButtonLabel,
+                    }}
                     disabled
                   >
                     {getLocale('translate')}
@@ -577,7 +654,10 @@ class Home extends React.Component {
                       size="small"
                       color="default"
                       onClick={() => onTranslate()}
-                      classes={{ label: classes.translateButtonLabel }}
+                      classes={{
+                        root: classes.translateButton,
+                        label: classes.translateButtonLabel,
+                      }}
                     >
                       {getLocale('translate')}
                     </Button>
