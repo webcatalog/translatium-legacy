@@ -135,5 +135,6 @@
 	"allow": "Erlauben",
 	"dontAllow": "Nicht Erlauben",
 	"allowCrashReports": "Erlaube der App anonyme Absturzberichte zu senden",
-	"allowTelemetry": "Erlaube der App anonyme Nutzungsdaten zu senden"
+	"allowTelemetry": "Erlaube der App anonyme Nutzungsdaten zu senden",
+	"share": "Teilen"
 }

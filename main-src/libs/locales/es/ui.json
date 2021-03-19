@@ -135,5 +135,6 @@
 	"allow": "Permitir",
 	"dontAllow": "No Permitir",
 	"allowCrashReports": "Permitir que la aplicación envíe informes de fallos anónimos",
-	"allowTelemetry": "Permitir que la aplicación envíe datos de uso anónimos"
+	"allowTelemetry": "Permitir que la aplicación envíe datos de uso anónimos",
+	"share": "Compartir"
 }

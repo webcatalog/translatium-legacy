@@ -135,5 +135,6 @@
 	"allow": "許可する",
 	"dontAllow": "許可しない",
 	"allowCrashReports": "匿名のクラッシュレポートの送信をアプリに許可する",
-	"allowTelemetry": "匿名の利用状況データの送信をアプリに許可する"
+	"allowTelemetry": "匿名の利用状況データの送信をアプリに許可する",
+	"share": "シェアする"
 }

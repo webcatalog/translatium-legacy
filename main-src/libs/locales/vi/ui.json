@@ -135,5 +135,6 @@
 	"allow": "Cho phép",
 	"dontAllow": "Không cho phép",
 	"allowCrashReports": "Cho phép ứng dụng gửi báo cáo sự cố nặc danh",
-	"allowTelemetry": "Cho phép ứng dụng gửi dữ liệu sử dụng nặc danh"
+	"allowTelemetry": "Cho phép ứng dụng gửi dữ liệu sử dụng nặc danh",
+	"share": "Chia sẻ"
 }
