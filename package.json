@@ -10,7 +10,7 @@
   },
   "license": "MPL-2.0",
   "engines": {
-    "node": "12"
+    "node": "14"
   },
   "scripts": {
     "postinstall": "npx patch-package && yarn generate-open-source-notices",
