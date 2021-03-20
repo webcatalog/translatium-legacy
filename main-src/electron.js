@@ -112,9 +112,8 @@ if (!gotTheLock) {
 
   const createWindowAsync = () => new Promise((resolve) => {
     const updaterEnabled = process.env.SNAP == null && !process.mas && !process.windowsStore;
-    const attachToMenubar = getPreference('attachToMenubar');
-    global.attachToMenubar = attachToMenubar;
-    if (attachToMenubar) {
+    global.attachToMenubar = process.platform === 'darwin' && getPreference('attachToMenubar');
+    if (global.attachToMenubar) {
       // setImage after Tray instance is created to avoid
       // "Segmentation fault (core dumped)" bug on Linux
       // https://github.com/electron/electron/issues/22137#issuecomment-586105622
@@ -328,9 +327,8 @@ if (!gotTheLock) {
   const showWindow = () => {
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    const attachToMenubar = getPreference('attachToMenubar');
 
-    if (attachToMenubar) {
+    if (global.attachToMenubar) {
       if (mb == null) {
         createWindowAsync();
       } else {
@@ -421,8 +419,7 @@ if (!gotTheLock) {
           const urlObj = url.parse(urlStr, true);
           const text = decodeURIComponent(urlObj.query.text || '');
 
-          const attachToMenubar = getPreference('attachToMenubar');
-          if (attachToMenubar) {
+          if (global.attachToMenubar) {
             if (mb && mb.window) {
               mb.window.send('go-to-home');
               mb.window.send('set-input-lang', 'auto');

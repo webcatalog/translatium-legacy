@@ -247,75 +247,79 @@ const Preferences = (props) => {
           </List>
         </Paper>
 
-        <Typography variant="body2" className={classes.paperTitle}>
-          {getLocale(window.process.platform === 'win32' ? 'taskbar' : 'menubar')}
-        </Typography>
-        <Paper elevation={0} className={classes.paper}>
-          <List dense disablePadding>
-            <ListItem>
-              <ListItemText primary={window.process.platform === 'win32' ? getLocale('attachToTaskbar') : getLocale('attachToMenubar')} />
-              <ListItemSecondaryAction>
-                <Switch
-                  edge="end"
-                  checked={attachToMenubar}
-                  onChange={(e) => {
-                    requestSetPreference('attachToMenubar', e.target.checked);
-                    requestShowRequireRestartDialog();
-                  }}
-                  color="primary"
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
-            <Divider />
-            <ListItem
-              button
-              key="openOnMenubar"
-              onClick={() => onOpenDialogShortcut('openOnMenubar', openOnMenubarShortcut)}
-              disabled={!attachToMenubar}
-            >
-              <ListItemText
-                primary={getLocale('openKeyboardShortcut')}
-                secondary={openOnMenubarShortcut
-                  ? renderCombinator(openOnMenubarShortcut) : null}
-              />
-              <ChevronRightIcon color="action" />
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText
-                primary={getLocale('translateClipboardOnShortcut')}
-                secondary={getLocale('translateClipboardOnShortcutDesc')}
-              />
-              <ListItemSecondaryAction>
-                <Switch
-                  edge="end"
-                  checked={attachToMenubar ? translateClipboardOnShortcut : false}
-                  onChange={() => onToggleSetting('translateClipboardOnShortcut')}
-                  color="primary"
+        {window.process.platform === 'darwin' && (
+          <>
+            <Typography variant="body2" className={classes.paperTitle}>
+              {getLocale('menubar')}
+            </Typography>
+            <Paper elevation={0} className={classes.paper}>
+              <List dense disablePadding>
+                <ListItem>
+                  <ListItemText primary={getLocale('attachToMenubar')} />
+                  <ListItemSecondaryAction>
+                    <Switch
+                      edge="end"
+                      checked={attachToMenubar}
+                      onChange={(e) => {
+                        requestSetPreference('attachToMenubar', e.target.checked);
+                        requestShowRequireRestartDialog();
+                      }}
+                      color="primary"
+                    />
+                  </ListItemSecondaryAction>
+                </ListItem>
+                <Divider />
+                <ListItem
+                  button
+                  key="openOnMenubar"
+                  onClick={() => onOpenDialogShortcut('openOnMenubar', openOnMenubarShortcut)}
                   disabled={!attachToMenubar}
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText
-                primary={getLocale('alwaysOnTop')}
-              />
-              <ListItemSecondaryAction>
-                <Switch
-                  edge="end"
-                  checked={attachToMenubar ? alwaysOnTop : false}
-                  onChange={(e) => {
-                    requestSetPreference('alwaysOnTop', e.target.checked);
-                    requestShowRequireRestartDialog();
-                  }}
-                  color="primary"
-                  disabled={!attachToMenubar}
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
-          </List>
-        </Paper>
+                >
+                  <ListItemText
+                    primary={getLocale('openKeyboardShortcut')}
+                    secondary={openOnMenubarShortcut
+                      ? renderCombinator(openOnMenubarShortcut) : null}
+                  />
+                  <ChevronRightIcon color="action" />
+                </ListItem>
+                <Divider />
+                <ListItem>
+                  <ListItemText
+                    primary={getLocale('translateClipboardOnShortcut')}
+                    secondary={getLocale('translateClipboardOnShortcutDesc')}
+                  />
+                  <ListItemSecondaryAction>
+                    <Switch
+                      edge="end"
+                      checked={attachToMenubar ? translateClipboardOnShortcut : false}
+                      onChange={() => onToggleSetting('translateClipboardOnShortcut')}
+                      color="primary"
+                      disabled={!attachToMenubar}
+                    />
+                  </ListItemSecondaryAction>
+                </ListItem>
+                <Divider />
+                <ListItem>
+                  <ListItemText
+                    primary={getLocale('alwaysOnTop')}
+                  />
+                  <ListItemSecondaryAction>
+                    <Switch
+                      edge="end"
+                      checked={attachToMenubar ? alwaysOnTop : false}
+                      onChange={(e) => {
+                        requestSetPreference('alwaysOnTop', e.target.checked);
+                        requestShowRequireRestartDialog();
+                      }}
+                      color="primary"
+                      disabled={!attachToMenubar}
+                    />
+                  </ListItemSecondaryAction>
+                </ListItem>
+              </List>
+            </Paper>
+          </>
+        )}
 
         <Typography variant="body2" className={classes.paperTitle}>
           {getLocale('advanced')}
@@ -644,39 +648,39 @@ const Preferences = (props) => {
               </div>
               <ChevronRightIcon color="action" />
             </ListItem>
-            <Divider />
-            <ListItem
-              button
-              onClick={() => {
-                let url = `https://dynamail.app?utm_source=${utmSource}`;
-                if (window.process.mas) {
-                  url = 'macappstore://apps.apple.com/app/dynamail-for-gmail/id1550739756';
-                } else if (window.process.windowsStore) {
-                  url = 'ms-windows-store://pdp/?productid=9N57L5VQTB21';
-                }
-                requestOpenInBrowser(url);
-              }}
-              className={classes.listItemPromotion}
-            >
-              <div className={classes.promotionBlock}>
-                <div className={classes.promotionLeft}>
-                  <img src={dynamailIconPng} alt="DynaMail" className={classes.appIcon} />
-                </div>
-                <div className={classes.promotionRight}>
-                  <div>
-                    <Typography variant="body1" className={classes.appTitle}>
-                      DynaMail
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      The Best Gmail Client
-                    </Typography>
-                  </div>
-                </div>
-              </div>
-              <ChevronRightIcon color="action" />
-            </ListItem>
-            {!window.process.windowsStore && (
+            {window.process.platform === 'darwin' && (
               <>
+                <Divider />
+                <ListItem
+                  button
+                  onClick={() => {
+                    let url = `https://dynamail.app?utm_source=${utmSource}`;
+                    if (window.process.mas) {
+                      url = 'macappstore://apps.apple.com/app/dynamail-for-gmail/id1550739756';
+                    } else if (window.process.windowsStore) {
+                      url = 'ms-windows-store://pdp/?productid=9N57L5VQTB21';
+                    }
+                    requestOpenInBrowser(url);
+                  }}
+                  className={classes.listItemPromotion}
+                >
+                  <div className={classes.promotionBlock}>
+                    <div className={classes.promotionLeft}>
+                      <img src={dynamailIconPng} alt="DynaMail" className={classes.appIcon} />
+                    </div>
+                    <div className={classes.promotionRight}>
+                      <div>
+                        <Typography variant="body1" className={classes.appTitle}>
+                          DynaMail
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                          The Best Gmail Client
+                        </Typography>
+                      </div>
+                    </div>
+                  </div>
+                  <ChevronRightIcon color="action" />
+                </ListItem>
                 <Divider />
                 <ListItem
                   button
