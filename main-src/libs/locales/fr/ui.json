@@ -95,6 +95,7 @@
 	"dark": "Sombre",
 	"menubar": "Barre de menu",
 	"attachToMenubar": "Attacher à la barre de menu",
+	"pinToSystemTray": "Épingler dans la barre d'état système (zone de notification)",
 	"translateWhenPressingEnter": "Traduire lorsque vous appuyez sur Entrée",
 	"showTransliteration": "Afficher la translittération",
 	"rateMacAppStore": "Évaluez {appName} sur l'App Store Mac",

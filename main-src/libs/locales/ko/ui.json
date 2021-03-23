@@ -95,6 +95,7 @@
 	"dark": "어두움",
 	"menubar": "메뉴 모음",
 	"attachToMenubar": "메뉴 모음에 연결",
+	"pinToSystemTray": "시스템 트레이(알림 영역)에 고정",
 	"translateWhenPressingEnter": "Enter 키를 누르면 번역",
 	"showTransliteration": "음역 표시",
 	"rateMacAppStore": "Mac App Store에서 {appName} 평가하기",

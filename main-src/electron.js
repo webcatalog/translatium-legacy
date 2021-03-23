@@ -112,7 +112,7 @@ if (!gotTheLock) {
 
   const createWindowAsync = () => new Promise((resolve) => {
     const updaterEnabled = process.env.SNAP == null && !process.mas && !process.windowsStore;
-    global.attachToMenubar = process.platform === 'darwin' && getPreference('attachToMenubar');
+    global.attachToMenubar = getPreference('attachToMenubar');
     if (global.attachToMenubar) {
       // setImage after Tray instance is created to avoid
       // "Segmentation fault (core dumped)" bug on Linux
@@ -133,6 +133,8 @@ if (!gotTheLock) {
         index: REACT_PATH,
         tray,
         preloadWindow: true,
+        // https://github.com/webcatalog/translatium-desktop/issues/291
+        tooltip: 'Translatium',
         browserWindow: {
           alwaysOnTop: getPreference('alwaysOnTop'),
           width: menubarWindowState.width,

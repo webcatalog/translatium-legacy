@@ -247,79 +247,77 @@ const Preferences = (props) => {
           </List>
         </Paper>
 
-        {window.process.platform === 'darwin' && (
-          <>
-            <Typography variant="body2" className={classes.paperTitle}>
-              {getLocale('menubar')}
-            </Typography>
-            <Paper elevation={0} className={classes.paper}>
-              <List dense disablePadding>
-                <ListItem>
-                  <ListItemText primary={getLocale('attachToMenubar')} />
-                  <ListItemSecondaryAction>
-                    <Switch
-                      edge="end"
-                      checked={attachToMenubar}
-                      onChange={(e) => {
-                        requestSetPreference('attachToMenubar', e.target.checked);
-                        requestShowRequireRestartDialog();
-                      }}
-                      color="primary"
-                    />
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <Divider />
-                <ListItem
-                  button
-                  key="openOnMenubar"
-                  onClick={() => onOpenDialogShortcut('openOnMenubar', openOnMenubarShortcut)}
+        <Typography variant="body2" className={classes.paperTitle}>
+          {getLocale('menubar')}
+        </Typography>
+        <Paper elevation={0} className={classes.paper}>
+          <List dense disablePadding>
+            <ListItem>
+              <ListItemText
+                primary={getLocale(window.process.platform === 'darwin' ? 'attachToMenubar' : 'pinToSystemTray')}
+              />
+              <ListItemSecondaryAction>
+                <Switch
+                  edge="end"
+                  checked={attachToMenubar}
+                  onChange={(e) => {
+                    requestSetPreference('attachToMenubar', e.target.checked);
+                    requestShowRequireRestartDialog();
+                  }}
+                  color="primary"
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+            <Divider />
+            <ListItem
+              button
+              key="openOnMenubar"
+              onClick={() => onOpenDialogShortcut('openOnMenubar', openOnMenubarShortcut)}
+              disabled={!attachToMenubar}
+            >
+              <ListItemText
+                primary={getLocale('openKeyboardShortcut')}
+                secondary={openOnMenubarShortcut
+                  ? renderCombinator(openOnMenubarShortcut) : null}
+              />
+              <ChevronRightIcon color="action" />
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary={getLocale('translateClipboardOnShortcut')}
+                secondary={getLocale('translateClipboardOnShortcutDesc')}
+              />
+              <ListItemSecondaryAction>
+                <Switch
+                  edge="end"
+                  checked={attachToMenubar ? translateClipboardOnShortcut : false}
+                  onChange={() => onToggleSetting('translateClipboardOnShortcut')}
+                  color="primary"
                   disabled={!attachToMenubar}
-                >
-                  <ListItemText
-                    primary={getLocale('openKeyboardShortcut')}
-                    secondary={openOnMenubarShortcut
-                      ? renderCombinator(openOnMenubarShortcut) : null}
-                  />
-                  <ChevronRightIcon color="action" />
-                </ListItem>
-                <Divider />
-                <ListItem>
-                  <ListItemText
-                    primary={getLocale('translateClipboardOnShortcut')}
-                    secondary={getLocale('translateClipboardOnShortcutDesc')}
-                  />
-                  <ListItemSecondaryAction>
-                    <Switch
-                      edge="end"
-                      checked={attachToMenubar ? translateClipboardOnShortcut : false}
-                      onChange={() => onToggleSetting('translateClipboardOnShortcut')}
-                      color="primary"
-                      disabled={!attachToMenubar}
-                    />
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <Divider />
-                <ListItem>
-                  <ListItemText
-                    primary={getLocale('alwaysOnTop')}
-                  />
-                  <ListItemSecondaryAction>
-                    <Switch
-                      edge="end"
-                      checked={attachToMenubar ? alwaysOnTop : false}
-                      onChange={(e) => {
-                        requestSetPreference('alwaysOnTop', e.target.checked);
-                        requestShowRequireRestartDialog();
-                      }}
-                      color="primary"
-                      disabled={!attachToMenubar}
-                    />
-                  </ListItemSecondaryAction>
-                </ListItem>
-              </List>
-            </Paper>
-          </>
-        )}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary={getLocale('alwaysOnTop')}
+              />
+              <ListItemSecondaryAction>
+                <Switch
+                  edge="end"
+                  checked={attachToMenubar ? alwaysOnTop : false}
+                  onChange={(e) => {
+                    requestSetPreference('alwaysOnTop', e.target.checked);
+                    requestShowRequireRestartDialog();
+                  }}
+                  color="primary"
+                  disabled={!attachToMenubar}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+          </List>
+        </Paper>
 
         <Typography variant="body2" className={classes.paperTitle}>
           {getLocale('advanced')}

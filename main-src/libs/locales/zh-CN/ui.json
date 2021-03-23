@@ -95,6 +95,7 @@
 	"dark": "深色",
 	"menubar": "菜单栏",
 	"attachToMenubar": "附加到菜单栏",
+	"pinToSystemTray": "固定到系统托盘（通知区域）",
 	"translateWhenPressingEnter": "按 Enter 键时翻译",
 	"showTransliteration": "显示音译",
 	"rateMacAppStore": "在 Mac App Store 上评价 {appName}",
