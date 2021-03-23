@@ -95,6 +95,7 @@
 	"dark": "ダークテーマ",
 	"menubar": "メニューバー",
 	"attachToMenubar": "メニューバーに追加",
+	"pinToSystemTray": "システムトレイにピン留め（通知領域）",
 	"translateWhenPressingEnter": "Enterキーを押して翻訳する",
 	"showTransliteration": "音訳を表示する",
 	"rateMacAppStore": "{appName}をMac App Storeで評価",

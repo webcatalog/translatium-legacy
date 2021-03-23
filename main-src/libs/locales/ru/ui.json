@@ -95,6 +95,7 @@
 	"dark": "Темная",
 	"menubar": "Строка меню",
 	"attachToMenubar": "Привязать к строке меню",
+	"pinToSystemTray": "Закрепить на панели задач (область уведомлений)",
 	"translateWhenPressingEnter": "Переводить по нажатию Enter",
 	"showTransliteration": "Показывать транслитерацию",
 	"rateMacAppStore": "Оценить {appName} в Mac App Store",

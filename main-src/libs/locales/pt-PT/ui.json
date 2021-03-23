@@ -95,6 +95,7 @@
 	"dark": "Escuro",
 	"menubar": "Barra de menu",
 	"attachToMenubar": "Anexar à barra de menu",
+	"pinToSystemTray": "Fixar na bandeja do sistema (área de notificação)",
 	"translateWhenPressingEnter": "Traduzir ao pressionar Enter",
 	"showTransliteration": "Mostrar transliteração",
 	"rateMacAppStore": "Avalie {appName} na Mac App Store",

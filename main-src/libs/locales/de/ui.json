@@ -95,6 +95,7 @@
 	"dark": "Dunkel",
 	"menubar": "Menüleiste",
 	"attachToMenubar": "An Menüleiste anhängen",
+	"pinToSystemTray": "In die Systemleiste pinnen (Benachrichtigungsbereich)",
 	"translateWhenPressingEnter": "Bei Drücken der Eingabetaste übersetzen",
 	"showTransliteration": "Transliteration anzeigen",
 	"rateMacAppStore": "{appName} im Mac App Store bewerten",

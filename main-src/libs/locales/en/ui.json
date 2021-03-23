@@ -95,6 +95,7 @@
 	"dark": "Dark",
 	"menubar": "Menu bar",
 	"attachToMenubar": "Attach to menu bar",
+	"pinToSystemTray": "Pin to system tray (notification area)",
 	"translateWhenPressingEnter": "Translate when pressing Enter",
 	"showTransliteration": "Show transliteration",
 	"rateMacAppStore": "Rate {appName} on Mac App Store",

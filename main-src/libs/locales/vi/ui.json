@@ -95,6 +95,7 @@
 	"dark": "Tối",
 	"menubar": "Thanh menu",
 	"attachToMenubar": "Gắn vào thanh menu",
+	"pinToSystemTray": "Ghim vào khay hệ thống (khu vực thông báo)",
 	"translateWhenPressingEnter": "Dịch khi nhấn Enter",
 	"showTransliteration": "Hiển thị phiên âm",
 	"rateMacAppStore": "Đánh giá {appName} trên Mac App Store",
