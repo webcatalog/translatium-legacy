@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import MenuItem from '@material-ui/core/MenuItem';
@@ -110,6 +110,7 @@ const styles = (theme) => ({
   promotionBlock: {
     display: 'flex',
     flex: 1,
+    overflow: 'hidden',
   },
   promotionLeft: {
     height: 64,
@@ -121,6 +122,15 @@ const styles = (theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: theme.spacing(1.5),
+    overflow: 'hidden',
+  },
+  promotionRightInner: {
+    overflow: 'hidden',
+  },
+  promotionSecondaryText: {
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
   },
   appTitle: {},
   appIcon: {
@@ -164,7 +174,7 @@ const Preferences = (props) => {
   } = props;
 
   const utmSource = 'translatium_app';
-  const displayLanguages = getDisplayLanguages();
+  const displayLanguages = useMemo(() => getDisplayLanguages(), []);
 
   return (
     <div className={classes.container}>
@@ -440,12 +450,12 @@ const Preferences = (props) => {
                           <img src={webcatalogIconPng} alt="WebCatalog" className={classes.appIcon} />
                         </div>
                         <div className={classes.promotionRight}>
-                          <div>
+                          <div className={classes.promotionRightInner}>
                             <Typography variant="body1" className={classes.appTitle}>
                               WebCatalog
                             </Typography>
-                            <Typography variant="body2" color="textSecondary">
-                              Desktop App Bundle, powered by the Web
+                            <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
+                              Turn Any Websites Into Real Desktop Apps
                             </Typography>
                           </div>
                         </div>
@@ -473,11 +483,11 @@ const Preferences = (props) => {
                       <img src={translatiumIconPng} alt="Translatium" className={classes.appIcon} />
                     </div>
                     <div className={classes.promotionRight}>
-                      <div>
+                      <div className={classes.promotionRightInner}>
                         <Typography variant="body1" className={classes.appTitle}>
                           Translatium
                         </Typography>
-                        <Typography variant="body2" color="textSecondary">
+                        <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
                           Translate 100+ Languages Instantly
                         </Typography>
                       </div>
@@ -502,11 +512,11 @@ const Preferences = (props) => {
                       <img src={cloveryIconPng} alt="Clovery" className={classes.appIcon} />
                     </div>
                     <div className={classes.promotionRight}>
-                      <div>
+                      <div className={classes.promotionRightInner}>
                         <Typography variant="body1" className={classes.appTitle}>
                           Clovery
                         </Typography>
-                        <Typography variant="body2" color="textSecondary">
+                        <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
                           All Google Apps in One
                         </Typography>
                       </div>
@@ -531,12 +541,12 @@ const Preferences = (props) => {
                       <img src={pantextIconPng} alt="PanText" className={classes.appIcon} />
                     </div>
                     <div className={classes.promotionRight}>
-                      <div>
+                      <div className={classes.promotionRightInner}>
                         <Typography variant="body1" className={classes.appTitle}>
                           PanText
                         </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                          All Your Messaging Apps in One
+                        <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
+                          All-in-One Messenger
                         </Typography>
                       </div>
                     </div>
@@ -560,12 +570,12 @@ const Preferences = (props) => {
                       <img src={panmailIconPng} alt="PanMail" className={classes.appIcon} />
                     </div>
                     <div className={classes.promotionRight}>
-                      <div>
+                      <div className={classes.promotionRightInner}>
                         <Typography variant="body1" className={classes.appTitle}>
                           PanMail
                         </Typography>
                         <Typography variant="body2" color="textSecondary">
-                          All Your Email Apps in One
+                          Cloud-based Email Client
                         </Typography>
                       </div>
                     </div>
