@@ -2,6 +2,11 @@ Translate any languages instantly with {appName} - the most powerful translation
 
 {appName} lets you translate words, phrases and images between over 100 languages with dictionary, transliteration and voice output support.
 
+- Translate instantly between over 100 languages. 
+- Save your translation history and favorite phrases.
+- Translate text in images instantly with our powerful OCR tool.
+- Access quickly from menu bar or with keyboard shortcuts.
+
 Visit our website to learn more about {appName}: {appUrl}.
 
 Supported Languages: {supportedLanguages}
