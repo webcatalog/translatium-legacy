@@ -331,7 +331,7 @@ if (!gotTheLock) {
     // dock icon is clicked and there are no other windows open.
 
     if (global.attachToMenubar) {
-      if (mb == null) {
+      if (mb) {
         createWindowAsync();
       } else {
         mb.on('ready', () => {
@@ -360,7 +360,11 @@ if (!gotTheLock) {
     // When ipcRenderer sends mouse click co-ordinates, show menu at that position.
     // https://dev.to/saisandeepvaddi/creating-a-custom-menu-bar-in-electron-1pi3
     ipcMain.on('request-show-app-menu', (e, x, y) => {
-      if (mainWindow) {
+      if (global.attachToMenubar) {
+        if (mb && mb.window) {
+          showMenu(mb.window, x, y);
+        }
+      } else if (mainWindow) {
         showMenu(mainWindow, x, y);
       }
     });
