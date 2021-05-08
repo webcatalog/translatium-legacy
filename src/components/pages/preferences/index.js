@@ -41,7 +41,7 @@ import {
 import webcatalogIconPng from '../../../images/products/webcatalog-mac-icon-128@2x.png';
 import translatiumIconPng from '../../../images/products/translatium-mac-icon-128@2x.png';
 import cloveryIconPng from '../../../images/products/clovery-mac-icon-128@2x.png';
-import pantextIconPng from '../../../images/products/pantext-mac-icon-128@2x.png';
+import singleboxIconPng from '../../../images/products/singlebox-mac-icon-128@2x.png';
 import panmailIconPng from '../../../images/products/panmail-mac-icon-128@2x.png';
 
 const styles = (theme) => ({
@@ -499,6 +499,35 @@ const Preferences = (props) => {
                 <ListItem
                   button
                   onClick={() => {
+                    let url = `https://singlebox.app?utm_source=${utmSource}`;
+                    if (window.process.mas) {
+                      url = 'macappstore://apps.apple.com/us/app/singlebox-all-in-one-messenger/id1551183766';
+                    }
+                    requestOpenInBrowser(url);
+                  }}
+                  className={classes.listItemPromotion}
+                >
+                  <div className={classes.promotionBlock}>
+                    <div className={classes.promotionLeft}>
+                      <img src={singleboxIconPng} alt="Singlebox" className={classes.appIcon} />
+                    </div>
+                    <div className={classes.promotionRight}>
+                      <div className={classes.promotionRightInner}>
+                        <Typography variant="body1" className={classes.appTitle}>
+                          Singlebox
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
+                          All-in-One Messenger
+                        </Typography>
+                      </div>
+                    </div>
+                  </div>
+                  <ChevronRightIcon color="action" />
+                </ListItem>
+                <Divider />
+                <ListItem
+                  button
+                  onClick={() => {
                     let url = `https://clovery.app?utm_source=${utmSource}`;
                     if (window.process.mas) {
                       url = 'macappstore://apps.apple.com/us/app/clovery-for-google-apps/id1552618413';
@@ -518,35 +547,6 @@ const Preferences = (props) => {
                         </Typography>
                         <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
                           All Google Apps in One
-                        </Typography>
-                      </div>
-                    </div>
-                  </div>
-                  <ChevronRightIcon color="action" />
-                </ListItem>
-                <Divider />
-                <ListItem
-                  button
-                  onClick={() => {
-                    let url = `https://pantext.app?utm_source=${utmSource}`;
-                    if (window.process.mas) {
-                      url = 'macappstore://apps.apple.com/us/app/pantext-all-in-one-messenger/id1551183766';
-                    }
-                    requestOpenInBrowser(url);
-                  }}
-                  className={classes.listItemPromotion}
-                >
-                  <div className={classes.promotionBlock}>
-                    <div className={classes.promotionLeft}>
-                      <img src={pantextIconPng} alt="PanText" className={classes.appIcon} />
-                    </div>
-                    <div className={classes.promotionRight}>
-                      <div className={classes.promotionRightInner}>
-                        <Typography variant="body1" className={classes.appTitle}>
-                          PanText
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
-                          All-in-One Messenger
                         </Typography>
                       </div>
                     </div>
