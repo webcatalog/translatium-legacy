@@ -331,7 +331,7 @@ if (!gotTheLock) {
     // dock icon is clicked and there are no other windows open.
 
     if (global.attachToMenubar) {
-      if (mb) {
+      if (mb == null) {
         createWindowAsync();
       } else {
         mb.on('ready', () => {
