@@ -63,9 +63,14 @@ let mainWindow;
 const gotTheLock = process.mas || app.requestSingleInstanceLock();
 
 app.on('second-instance', () => {
-  if (mainWindow != null) {
+  if (global.attachToMenubar) {
+    if (mb && mb.window) {
+      if (mb.window.isMinimized()) mb.window.restore();
+      mb.window.show();
+    }
+  } else if (mainWindow != null) {
     if (mainWindow.isMinimized()) mainWindow.restore();
-    mainWindow.focus();
+    mainWindow.show();
   }
 });
 
