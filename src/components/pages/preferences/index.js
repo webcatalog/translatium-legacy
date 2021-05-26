@@ -43,6 +43,15 @@ import translatiumIconPng from '../../../images/products/translatium-mac-icon-12
 import cloveryIconPng from '../../../images/products/clovery-mac-icon-128@2x.png';
 import singleboxIconPng from '../../../images/products/singlebox-mac-icon-128@2x.png';
 
+import popclipIconPng from '../../../images/extension-icons/popclip.png';
+import chromeIconPng from '../../../images/extension-icons/chrome.png';
+import edgeIconPng from '../../../images/extension-icons/edge.png';
+import safariIconPng from '../../../images/extension-icons/safari.png';
+import firefoxIconPng from '../../../images/extension-icons/firefox.png';
+import operaIconPng from '../../../images/extension-icons/opera.png';
+import braveIconPng from '../../../images/extension-icons/brave.png';
+import vivaldiIconPng from '../../../images/extension-icons/vivaldi.png';
+
 const styles = (theme) => ({
   container: {
     flex: 1,
@@ -134,6 +143,21 @@ const styles = (theme) => ({
   appTitle: {},
   appIcon: {
     height: 64,
+  },
+  extensionBlock: {
+    display: 'flex',
+    flex: 1,
+    overflow: 'hidden',
+    flexDirection: 'column',
+  },
+  extensionIcons: {
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(0.5),
+  },
+  extensionIcon: {
+    height: 32,
+    width: 32,
+    marginRight: theme.spacing(0.5),
   },
 });
 
@@ -253,6 +277,36 @@ const Preferences = (props) => {
         </Paper>
 
         <Typography variant="body2" className={classes.paperTitle}>
+          {getLocale('extensions')}
+        </Typography>
+        <Paper elevation={0} className={classes.paper}>
+          <List dense disablePadding>
+            <ListItem
+              button
+              onClick={() => window.remote.shell.openExternal('https://translatium.app/extensions')}
+            >
+              <div className={classes.extensionBlock}>
+                <div className={classes.extensionIcons}>
+                  <img src={popclipIconPng} alt="PopClip" className={classes.extensionIcon} />
+                  <img src={chromeIconPng} alt="Google Chrome" className={classes.extensionIcon} />
+                  <img src={edgeIconPng} alt="Microsoft Edge" className={classes.extensionIcon} />
+                  <img src={safariIconPng} alt="Safari" className={classes.extensionIcon} />
+                  <img src={firefoxIconPng} alt="Firefox" className={classes.extensionIcon} />
+                  <img src={operaIconPng} alt="Opera" className={classes.extensionIcon} />
+                  <img src={braveIconPng} alt="Brave" className={classes.extensionIcon} />
+                  <img src={vivaldiIconPng} alt="Vivaldi" className={classes.extensionIcon} />
+                </div>
+                <ListItemText
+                  primary={getLocale('extensions')}
+                  secondary={getLocale('extensionDesc')}
+                />
+              </div>
+              <ChevronRightIcon color="action" />
+            </ListItem>
+          </List>
+        </Paper>
+
+        <Typography variant="body2" className={classes.paperTitle}>
           {getLocale('menubar')}
         </Typography>
         <Paper elevation={0} className={classes.paper}>
@@ -329,18 +383,6 @@ const Preferences = (props) => {
         </Typography>
         <Paper elevation={0} className={classes.paper}>
           <List dense disablePadding>
-            {window.process.platform === 'darwin' && (
-              <>
-                <ListItem
-                  button
-                  onClick={() => window.remote.shell.openExternal('https://translatium.app/popclip')}
-                >
-                  <ListItemText primary={getLocale('popclipExtension')} />
-                  <ChevronRightIcon color="action" />
-                </ListItem>
-                <Divider />
-              </>
-            )}
             {window.process.platform !== 'linux' && (
               <>
                 <EnhancedMenu
