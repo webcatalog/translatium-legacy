@@ -7,8 +7,6 @@
 
 echo "Building Safari Extension"
 
-source .env
-
 CURRENT_DIR=$(dirname "$0")
 
 # build appex

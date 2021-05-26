@@ -95,24 +95,34 @@ const opts = {
         'github',
       ],
     },
-    afterPack: ({ appOutDir }) => new Promise((resolve, reject) => {
-      const languages = Object.keys(displayLanguages);
+    afterPack: ({ appOutDir }) => Promise.resolve()
+      .then(() => new Promise((resolve, reject) => {
+        const languages = Object.keys(displayLanguages);
 
-      if (process.platform === 'darwin') {
-        glob(`${appOutDir}/Translatium.app/Contents/Resources/!(${languages.join('|').replace(/-/g, '_')}).lproj`, (err, files) => {
-          console.log('Deleting redundant *.lproj files...');
-          if (err) return reject(err);
-          return del(files).then(() => {
-            files.forEach((file) => {
-              console.log('Deleted', path.basename(file));
-            });
-            resolve();
-          }, reject);
-        });
-      } else {
-        resolve();
-      }
-    }),
+        if (process.platform === 'darwin') {
+          glob(`${appOutDir}/Translatium.app/Contents/Resources/!(${languages.join('|').replace(/-/g, '_')}).lproj`, (err, files) => {
+            console.log('Deleting redundant *.lproj files...');
+            if (err) return reject(err);
+            return del(files).then(() => {
+              files.forEach((file) => {
+                console.log('Deleted', path.basename(file));
+              });
+              resolve();
+            }, reject);
+          });
+        } else {
+          resolve();
+        }
+      }))
+      .then(() => {
+        // Safari extension
+        if (process.platform === 'darwin') {
+          const appexOriginPath = path.join(__dirname, 'extensions', 'safari', 'translatium', 'build', 'Release', 'safari.appex');
+          const appexDestPath = path.join(appOutDir, 'Translatium.app', 'Contents', 'PlugIns', 'safari.appex');
+          return fs.copyFile(appexOriginPath, appexDestPath);
+        }
+        return null;
+      }),
   },
 };
 
