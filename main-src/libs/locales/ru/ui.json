@@ -137,5 +137,6 @@
 	"allowTelemetry": "Разрешить приложению отправлять анонимные данные об использовании",
 	"share": "Поделиться",
 	"extensions": "Расширения",
-	"extensionDesc": "Select text with your mouse and translate with just one click."
+	"extensionDesc": "Select text with your mouse and translate with just one click.",
+	"privacyPolicy": "Privacy Policy"
 }

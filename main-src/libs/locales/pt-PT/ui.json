@@ -137,5 +137,6 @@
 	"allowTelemetry": "Permitir que a aplicação envie dados de utilização anónimos",
 	"share": "Compartilhar",
 	"extensions": "Extensões",
-	"extensionDesc": "Select text with your mouse and translate with just one click."
+	"extensionDesc": "Select text with your mouse and translate with just one click.",
+	"privacyPolicy": "Privacy Policy"
 }

@@ -137,5 +137,6 @@
 	"allowTelemetry": "Cho phép ứng dụng gửi dữ liệu sử dụng nặc danh",
 	"share": "Chia sẻ",
 	"extensions": "Tiện ích mở rộng",
-	"extensionDesc": "Chọn văn bản bằng chuột và dịch chỉ với một cú nhấp chuột."
+	"extensionDesc": "Chọn văn bản bằng chuột và dịch chỉ với một cú nhấp chuột.",
+	"privacyPolicy": "Privacy Policy"
 }

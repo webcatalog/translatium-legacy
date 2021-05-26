@@ -137,5 +137,6 @@
 	"allowTelemetry": "앱이 익명의 사용 데이터를 보내도록 허용",
 	"share": "공유",
 	"extensions": "확장 프로그램",
-	"extensionDesc": "Select text with your mouse and translate with just one click."
+	"extensionDesc": "Select text with your mouse and translate with just one click.",
+	"privacyPolicy": "Privacy Policy"
 }
