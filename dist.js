@@ -100,7 +100,7 @@ const opts = {
         const { appOutDir } = context;
         const languages = Object.keys(displayLanguages);
 
-        if (process.platform === 'darwin') {
+        if (process.platform === 'darwin' && context.arch !== Arch.universal) {
           glob(`${appOutDir}/Translatium.app/Contents/Resources/!(${languages.join('|').replace(/-/g, '_')}).lproj`, (err, files) => {
             console.log('Deleting redundant *.lproj files...');
             if (err) return reject(err);
