@@ -117,11 +117,12 @@ const opts = {
       .then(() => {
         // Safari extension
         if (process.platform === 'darwin') {
+          const plugInsPath = path.join(appOutDir, 'Translatium.app', 'Contents', 'PlugIns');
           const appexOriginPath = path.join(__dirname, 'extensions', 'safari', 'translatium', 'build', 'Release', 'safari.appex');
-          const appexDestPath = path.join(appOutDir, 'Translatium.app', 'Contents', 'PlugIns', 'safari.appex');
-          return fs.copyFile(appexOriginPath, appexDestPath);
+          const appexDestPath = path.join(plugInsPath, 'safari.appex');
+          fs.ensureDirSync(plugInsPath);
+          fs.copyFileSync(appexOriginPath, appexDestPath);
         }
-        return null;
       }),
   },
 };
