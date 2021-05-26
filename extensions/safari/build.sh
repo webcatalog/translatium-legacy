@@ -7,12 +7,15 @@
 
 echo "Building Safari Extension"
 
+source .env
+
 CURRENT_DIR=$(dirname "$0")
 
 # download certificates
 wget --content-disposition "$CSC_LINK" -O $CURRENT_DIR/certificates.p12
 
 # import certificates
+echo $CURRENT_DIR/build.keychain
 security create-keychain -p "$CSC_KEY_PASSWORD" $CURRENT_DIR/build.keychain
 security unlock-keychain -p "$CSC_KEY_PASSWORD" $CURRENT_DIR/build.keychain
 security set-keychain-settings -lut 1200 $CURRENT_DIR/build.keychain
