@@ -11,21 +11,21 @@ source .env
 
 CURRENT_DIR=$(dirname "$0")
 
+# build appex
+xcodebuild -project $CURRENT_DIR/translatium/translatium.xcodeproj -alltargets -configuration Release
+
 # download certificates
 wget --content-disposition "$CSC_LINK" -O $CURRENT_DIR/certificates.p12
 
 # import certificates
-echo $CURRENT_DIR/build.keychain
-security create-keychain -p "$CSC_KEY_PASSWORD" $CURRENT_DIR/build.keychain
-security unlock-keychain -p "$CSC_KEY_PASSWORD" $CURRENT_DIR/build.keychain
-security set-keychain-settings -lut 1200 $CURRENT_DIR/build.keychain
-security import $CURRENT_DIR/certificates.p12 -P "$CSC_KEY_PASSWORD" -k $CURRENT_DIR/build.keychain -T /usr/bin/codesign -T /usr/bin/security -T /usr/bin/productbuild
+security create-keychain -p "$CSC_KEY_PASSWORD" safari
+security unlock-keychain -p "$CSC_KEY_PASSWORD" safari
+security list-keychains -d user -s safari
+security set-keychain-settings -lut 1200 safari
 # https://stackoverflow.com/questions/39868578/security-codesign-in-sierra-keychain-ignores-access-control-settings-and-ui-p
 # https://github.com/electron-userland/electron-packager/issues/701#issuecomment-322315996
-security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$CSC_KEY_PASSWORD" $CURRENT_DIR/build.keychain
-
-# build appex
-xcodebuild -project $CURRENT_DIR/translatium/translatium.xcodeproj -alltargets -configuration Release
+security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$CSC_KEY_PASSWORD" safari
+security import $CURRENT_DIR/certificates.p12 -P "$CSC_KEY_PASSWORD" -k safari -T /usr/bin/codesign -T /usr/bin/security -T /usr/bin/productbuild
 
 # sign
-codesign --verbose --force -o runtime --sign "3rd Party Mac Developer Application: WebCatalog Ltd" --entitlements $CURRENT_DIR/translatium/safari/safari.entitlements $CURRENT_DIR/translatium/build/Release/safari.appex --keychain $CURRENT_DIR/build.keychain 
+codesign --verbose --force -o runtime --keychain safari --sign "3rd Party Mac Developer Application: WebCatalog Ltd" --entitlements $CURRENT_DIR/translatium/safari/safari.entitlements $CURRENT_DIR/translatium/build/Release/safari.appex
