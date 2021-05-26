@@ -95,8 +95,9 @@ const opts = {
         'github',
       ],
     },
-    afterPack: ({ appOutDir }) => Promise.resolve()
+    afterPack: (context) => Promise.resolve()
       .then(() => new Promise((resolve, reject) => {
+        const { appOutDir } = context;
         const languages = Object.keys(displayLanguages);
 
         if (process.platform === 'darwin') {
@@ -116,7 +117,8 @@ const opts = {
       }))
       .then(() => {
         // Safari extension
-        if (process.platform === 'darwin') {
+        if (process.platform === 'darwin' && context.arch === Arch.universal) {
+          const { appOutDir } = context;
           const plugInsPath = path.join(appOutDir, 'Translatium.app', 'Contents', 'PlugIns');
           const appexOriginPath = path.join(__dirname, 'extensions', 'safari', 'translatium', 'build', 'Release', 'safari.appex');
           const appexDestPath = path.join(plugInsPath, 'safari.appex');
