@@ -135,5 +135,7 @@
 	"dontAllow": "Nicht Erlauben",
 	"allowCrashReports": "Erlaube der App anonyme Absturzberichte zu senden",
 	"allowTelemetry": "Erlaube der App anonyme Nutzungsdaten zu senden",
-	"share": "Teilen"
+	"share": "Teilen",
+	"extensions": "Erweiterungen",
+	"extensionDesc": "Select text with your mouse and translate with just one click."
 }

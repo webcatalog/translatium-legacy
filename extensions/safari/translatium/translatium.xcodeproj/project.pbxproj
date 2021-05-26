@@ -1,0 +1,529 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DB00CED7265E48AC00972EAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00CED6265E48AC00972EAF /* AppDelegate.swift */; };
+		DB00CEDA265E48AC00972EAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB00CED8265E48AC00972EAF /* Main.storyboard */; };
+		DB00CEDC265E48AC00972EAF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00CEDB265E48AC00972EAF /* ViewController.swift */; };
+		DB00CEDE265E48AD00972EAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB00CEDD265E48AD00972EAF /* Assets.xcassets */; };
+		DB00CEE5265E48AD00972EAF /* safari.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DB00CEE4265E48AD00972EAF /* safari.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DB00CEEA265E48AD00972EAF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00CEE9265E48AD00972EAF /* Cocoa.framework */; };
+		DB00CEED265E48AD00972EAF /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00CEEC265E48AD00972EAF /* SafariWebExtensionHandler.swift */; };
+		DB00CEF0265E48AD00972EAF /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = DB00CEEF265E48AD00972EAF /* _locales */; };
+		DB00CEF2265E48AD00972EAF /* images in Resources */ = {isa = PBXBuildFile; fileRef = DB00CEF1265E48AD00972EAF /* images */; };
+		DB00CEF4265E48AD00972EAF /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = DB00CEF3265E48AD00972EAF /* manifest.json */; };
+		DB00CEF6265E48AD00972EAF /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = DB00CEF5265E48AD00972EAF /* background.js */; };
+		DB00CEF8265E48AD00972EAF /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = DB00CEF7265E48AD00972EAF /* content.js */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DB00CEE6265E48AD00972EAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB00CECA265E48AC00972EAF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB00CEE3265E48AD00972EAF;
+			remoteInfo = safari;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DB00CF06265E48AD00972EAF /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				DB00CEE5265E48AD00972EAF /* safari.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		DB00CED2265E48AC00972EAF /* translatium.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = translatium.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB00CED5265E48AC00972EAF /* translatium.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = translatium.entitlements; sourceTree = "<group>"; };
+		DB00CED6265E48AC00972EAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DB00CED9265E48AC00972EAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DB00CEDB265E48AC00972EAF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DB00CEDD265E48AD00972EAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DB00CEDF265E48AD00972EAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB00CEE4265E48AD00972EAF /* safari.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = safari.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB00CEE9265E48AD00972EAF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		DB00CEEC265E48AD00972EAF /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		DB00CEEF265E48AD00972EAF /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _locales; sourceTree = "<group>"; };
+		DB00CEF1265E48AD00972EAF /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		DB00CEF3265E48AD00972EAF /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		DB00CEF5265E48AD00972EAF /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
+		DB00CEF7265E48AD00972EAF /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = content.js; sourceTree = "<group>"; };
+		DB00CEFF265E48AD00972EAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB00CF00265E48AD00972EAF /* safari.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = safari.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DB00CECF265E48AC00972EAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB00CEE1265E48AD00972EAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB00CEEA265E48AD00972EAF /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DB00CEC9265E48AC00972EAF = {
+			isa = PBXGroup;
+			children = (
+				DB00CED4265E48AC00972EAF /* translatium */,
+				DB00CEEB265E48AD00972EAF /* safari */,
+				DB00CEE8265E48AD00972EAF /* Frameworks */,
+				DB00CED3265E48AC00972EAF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DB00CED3265E48AC00972EAF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DB00CED2265E48AC00972EAF /* translatium.app */,
+				DB00CEE4265E48AD00972EAF /* safari.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DB00CED4265E48AC00972EAF /* translatium */ = {
+			isa = PBXGroup;
+			children = (
+				DB00CED5265E48AC00972EAF /* translatium.entitlements */,
+				DB00CED6265E48AC00972EAF /* AppDelegate.swift */,
+				DB00CED8265E48AC00972EAF /* Main.storyboard */,
+				DB00CEDB265E48AC00972EAF /* ViewController.swift */,
+				DB00CEDD265E48AD00972EAF /* Assets.xcassets */,
+				DB00CEDF265E48AD00972EAF /* Info.plist */,
+			);
+			path = translatium;
+			sourceTree = "<group>";
+		};
+		DB00CEE8265E48AD00972EAF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DB00CEE9265E48AD00972EAF /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DB00CEEB265E48AD00972EAF /* safari */ = {
+			isa = PBXGroup;
+			children = (
+				DB00CEEC265E48AD00972EAF /* SafariWebExtensionHandler.swift */,
+				DB00CEFF265E48AD00972EAF /* Info.plist */,
+				DB00CF00265E48AD00972EAF /* safari.entitlements */,
+				DB00CEEE265E48AD00972EAF /* Resources */,
+			);
+			path = safari;
+			sourceTree = "<group>";
+		};
+		DB00CEEE265E48AD00972EAF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DB00CEEF265E48AD00972EAF /* _locales */,
+				DB00CEF1265E48AD00972EAF /* images */,
+				DB00CEF3265E48AD00972EAF /* manifest.json */,
+				DB00CEF5265E48AD00972EAF /* background.js */,
+				DB00CEF7265E48AD00972EAF /* content.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DB00CED1265E48AC00972EAF /* translatium */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB00CF07265E48AD00972EAF /* Build configuration list for PBXNativeTarget "translatium" */;
+			buildPhases = (
+				DB00CECE265E48AC00972EAF /* Sources */,
+				DB00CECF265E48AC00972EAF /* Frameworks */,
+				DB00CED0265E48AC00972EAF /* Resources */,
+				DB00CF06265E48AD00972EAF /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DB00CEE7265E48AD00972EAF /* PBXTargetDependency */,
+			);
+			name = translatium;
+			productName = translatium;
+			productReference = DB00CED2265E48AC00972EAF /* translatium.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DB00CEE3265E48AD00972EAF /* safari */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB00CF03265E48AD00972EAF /* Build configuration list for PBXNativeTarget "safari" */;
+			buildPhases = (
+				DB00CEE0265E48AD00972EAF /* Sources */,
+				DB00CEE1265E48AD00972EAF /* Frameworks */,
+				DB00CEE2265E48AD00972EAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = safari;
+			productName = safari;
+			productReference = DB00CEE4265E48AD00972EAF /* safari.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DB00CECA265E48AC00972EAF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					DB00CED1265E48AC00972EAF = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					DB00CEE3265E48AD00972EAF = {
+						CreatedOnToolsVersion = 12.5;
+					};
+				};
+			};
+			buildConfigurationList = DB00CECD265E48AC00972EAF /* Build configuration list for PBXProject "translatium" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DB00CEC9265E48AC00972EAF;
+			productRefGroup = DB00CED3265E48AC00972EAF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DB00CED1265E48AC00972EAF /* translatium */,
+				DB00CEE3265E48AD00972EAF /* safari */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DB00CED0265E48AC00972EAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB00CEDE265E48AD00972EAF /* Assets.xcassets in Resources */,
+				DB00CEDA265E48AC00972EAF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB00CEE2265E48AD00972EAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB00CEF6265E48AD00972EAF /* background.js in Resources */,
+				DB00CEF2265E48AD00972EAF /* images in Resources */,
+				DB00CEF4265E48AD00972EAF /* manifest.json in Resources */,
+				DB00CEF0265E48AD00972EAF /* _locales in Resources */,
+				DB00CEF8265E48AD00972EAF /* content.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DB00CECE265E48AC00972EAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB00CEDC265E48AC00972EAF /* ViewController.swift in Sources */,
+				DB00CED7265E48AC00972EAF /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB00CEE0265E48AD00972EAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB00CEED265E48AD00972EAF /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DB00CEE7265E48AD00972EAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB00CEE3265E48AD00972EAF /* safari */;
+			targetProxy = DB00CEE6265E48AD00972EAF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DB00CED8265E48AC00972EAF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB00CED9265E48AC00972EAF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DB00CF01265E48AD00972EAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DB00CF02265E48AD00972EAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		DB00CF04265E48AD00972EAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = safari/safari.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VKST52VQVP;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = safari/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.webcatalog.translatium.safari;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DB00CF05265E48AD00972EAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = safari/safari.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VKST52VQVP;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = safari/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.webcatalog.translatium.safari;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		DB00CF08265E48AD00972EAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = translatium/translatium.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = VKST52VQVP;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = translatium/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.webcatalog.translatium;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DB00CF09265E48AD00972EAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = translatium/translatium.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = VKST52VQVP;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = translatium/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.webcatalog.translatium;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DB00CECD265E48AC00972EAF /* Build configuration list for PBXProject "translatium" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB00CF01265E48AD00972EAF /* Debug */,
+				DB00CF02265E48AD00972EAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB00CF03265E48AD00972EAF /* Build configuration list for PBXNativeTarget "safari" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB00CF04265E48AD00972EAF /* Debug */,
+				DB00CF05265E48AD00972EAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB00CF07265E48AD00972EAF /* Build configuration list for PBXNativeTarget "translatium" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB00CF08265E48AD00972EAF /* Debug */,
+				DB00CF09265E48AD00972EAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DB00CECA265E48AC00972EAF /* Project object */;
+}

@@ -248,8 +248,8 @@ if (!gotTheLock) {
     } else {
       // Create the browser window.
       const mainWindowState = windowStateKeeper({
-        defaultWidth: 400,
-        defaultHeight: 500,
+        defaultWidth: 500,
+        defaultHeight: 600,
       });
 
       const winOpts = {

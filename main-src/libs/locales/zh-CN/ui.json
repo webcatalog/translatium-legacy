@@ -135,5 +135,7 @@
 	"dontAllow": "不允许",
 	"allowCrashReports": "允许该应用程序发送匿名崩溃报告",
 	"allowTelemetry": "允许该应用程序发送匿名使用情况数据",
-	"share": "分享"
+	"share": "分享",
+	"extensions": "扩展程序",
+	"extensionDesc": "Select text with your mouse and translate with just one click."
 }

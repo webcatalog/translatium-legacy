@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Translate with Translatium",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "Select text with your mouse and translate with just one click (Translatium desktop app required).",
+    "description":"The description of the application, displayed in the web store."
+  }
+}
