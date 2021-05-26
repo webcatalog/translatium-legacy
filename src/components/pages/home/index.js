@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import React from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -58,7 +58,7 @@ import {
 } from '../../../state/pages/home/text-to-speech/actions';
 import { updateLanguageListMode } from '../../../state/pages/language-list/actions';
 
-import { ROUTE_LANGUAGE_LIST } from '../../../constants/routes';
+import { ROUTE_LANGUAGE_LIST, ROUTE_HOME } from '../../../constants/routes';
 
 import Dictionary from './dictionary';
 import History from './history';
@@ -184,47 +184,34 @@ const styles = (theme) => ({
   },
 });
 
-class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.inputRef = React.createRef();
-    this.handleOpenFind = this.handleOpenFind.bind(this);
-  }
+const Home = ({
+  classes,
+  fullscreenInputBox,
+  inputLang,
+  inputText,
+  isHomeVisible,
+  onChangeRoute,
+  onEndTextToSpeech,
+  onLoadImage,
+  onOpenSnackbar,
+  onStartTextToSpeech,
+  onSwapLanguages,
+  onToggleFullscreenInputBox,
+  onTogglePhrasebook,
+  onTranslate,
+  onUpdateInputLang,
+  onUpdateInputText,
+  onUpdateLanguageListMode,
+  onUpdateOutputLang,
+  output,
+  outputLang,
+  showTransliteration,
+  textToSpeechPlaying,
+  translateWhenPressingEnter,
+}) => {
+  const inputRef = useRef(null);
 
-  componentDidMount() {
-    if (this.inputRef && this.inputRef.current) {
-      this.inputRef.current.focus();
-    }
-
-    window.ipcRenderer.on('open-find', this.handleOpenFind);
-  }
-
-  componentWillUnmount() {
-    window.ipcRenderer.removeListener('open-find', this.handleOpenFind);
-  }
-
-  handleOpenFind() {
-    this.inputRef.current.focus();
-    this.inputRef.current.select();
-  }
-
-  renderOutput() {
-    const {
-      classes,
-      fullscreenInputBox,
-      onEndTextToSpeech,
-      onOpenSnackbar,
-      onStartTextToSpeech,
-      onTogglePhrasebook,
-      onTranslate,
-      onUpdateInputLang,
-      onUpdateInputText,
-      onUpdateOutputLang,
-      output,
-      showTransliteration,
-      textToSpeechPlaying,
-    } = this.props;
-
+  const outputNode = useMemo(() => {
     if (fullscreenInputBox === true) {
       return null;
     }
@@ -268,6 +255,7 @@ class Home extends React.Component {
 
         if (window.process.platform === 'darwin') {
           controllers.push({
+            // eslint-disable-next-line react/prop-types
             Icon: ({ fontSize }) => (
               <SvgIcon fontSize={fontSize}>
                 <path fill="currentColor" d="M12,1L8,5H11V14H13V5H16M18,23H6C4.89,23 4,22.1 4,21V9A2,2 0 0,1 6,7H9V9H6V21H18V9H15V7H18A2,2 0 0,1 20,9V21A2,2 0 0,1 18,23Z" />
@@ -354,324 +342,339 @@ class Home extends React.Component {
         );
       }
     }
+  }, [
+    classes,
+    fullscreenInputBox,
+    onEndTextToSpeech,
+    onOpenSnackbar,
+    onStartTextToSpeech,
+    onTogglePhrasebook,
+    onTranslate,
+    onUpdateInputLang,
+    onUpdateInputText,
+    onUpdateOutputLang,
+    output,
+    showTransliteration,
+    textToSpeechPlaying,
+  ]);
+
+  useEffect(() => {
+    const handleOpenFind = () => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+        inputRef.current.select();
+      }
+    };
+
+    window.ipcRenderer.on('open-find', handleOpenFind);
+
+    return () => {
+      window.ipcRenderer.removeListener('open-find', handleOpenFind);
+    };
+  }, [
+    inputRef,
+  ]);
+
+  useEffect(() => {
+    if (isHomeVisible && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isHomeVisible, inputRef]);
+
+  const controllers = [
+    {
+      Icon: ContentClear,
+      tooltip: getLocale('clear'),
+      onClick: () => onUpdateInputText(''),
+      disabled: inputText.length < 1,
+    },
+    {
+      Icon: (() => (
+        <SvgIcon fontSize="small">
+          <path d="M19,20H5V4H7V7H17V4H19M12,2A1,1 0 0,1 13,3A1,1 0 0,1 12,4A1,1 0 0,1 11,3A1,1 0 0,1 12,2M19,2H14.82C14.4,0.84 13.3,0 12,0C10.7,0 9.6,0.84 9.18,2H5A2,2 0 0,0 3,4V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V4A2,2 0 0,0 19,2Z" />
+        </SvgIcon>
+      )),
+      tooltip: getLocale('translateClipboard'),
+      onClick: () => {
+        const text = window.remote.clipboard.readText();
+        onUpdateInputText(text);
+        onTranslate(inputLang, outputLang, text);
+      },
+    },
+  ];
+
+  if (isTTSSupported(inputLang)) {
+    controllers.push({
+      Icon: textToSpeechPlaying ? AVStop : AVVolumeUp,
+      tooltip: textToSpeechPlaying ? getLocale('stop') : getLocale('listen'),
+      onClick: () => {
+        if (textToSpeechPlaying) {
+          window.speechSynthesis.cancel();
+          return onEndTextToSpeech();
+        }
+
+        return onStartTextToSpeech(inputLang, inputText);
+      },
+    });
+  } else if (output && output.inputLang
+    && isTTSSupported(output.inputLang) && inputText === output.inputText) {
+    controllers.push({
+      Icon: textToSpeechPlaying ? AVStop : AVVolumeUp,
+      tooltip: textToSpeechPlaying ? getLocale('stop') : getLocale('listen'),
+      onClick: () => {
+        if (textToSpeechPlaying) {
+          window.speechSynthesis.cancel();
+          return onEndTextToSpeech();
+        }
+
+        return onStartTextToSpeech(output.inputLang, output.inputText);
+      },
+    });
   }
 
-  render() {
-    const {
-      classes,
-      fullscreenInputBox,
-      inputLang,
-      inputText,
-      onChangeRoute,
-      onEndTextToSpeech,
-      onLoadImage,
-      onOpenSnackbar,
-      onStartTextToSpeech,
-      onSwapLanguages,
-      onToggleFullscreenInputBox,
-      onTranslate,
-      onUpdateInputText,
-      onUpdateLanguageListMode,
-      output,
-      outputLang,
-      textToSpeechPlaying,
-      translateWhenPressingEnter,
-    } = this.props;
-
-    const controllers = [
-      {
-        Icon: ContentClear,
-        tooltip: getLocale('clear'),
-        onClick: () => onUpdateInputText(''),
-        disabled: inputText.length < 1,
-      },
-      {
-        Icon: (() => (
-          <SvgIcon fontSize="small">
-            <path d="M19,20H5V4H7V7H17V4H19M12,2A1,1 0 0,1 13,3A1,1 0 0,1 12,4A1,1 0 0,1 11,3A1,1 0 0,1 12,2M19,2H14.82C14.4,0.84 13.3,0 12,0C10.7,0 9.6,0.84 9.18,2H5A2,2 0 0,0 3,4V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V4A2,2 0 0,0 19,2Z" />
-          </SvgIcon>
-        )),
-        tooltip: getLocale('translateClipboard'),
-        onClick: () => {
-          const text = window.remote.clipboard.readText();
-          onUpdateInputText(text);
-          onTranslate(inputLang, outputLang, text);
-        },
-      },
-    ];
-
-    if (isTTSSupported(inputLang)) {
-      controllers.push({
-        Icon: textToSpeechPlaying ? AVStop : AVVolumeUp,
-        tooltip: textToSpeechPlaying ? getLocale('stop') : getLocale('listen'),
-        onClick: () => {
-          if (textToSpeechPlaying) {
-            window.speechSynthesis.cancel();
-            return onEndTextToSpeech();
-          }
-
-          return onStartTextToSpeech(inputLang, inputText);
-        },
-      });
-    } else if (output && output.inputLang
-      && isTTSSupported(output.inputLang) && inputText === output.inputText) {
-      controllers.push({
-        Icon: textToSpeechPlaying ? AVStop : AVVolumeUp,
-        tooltip: textToSpeechPlaying ? getLocale('stop') : getLocale('listen'),
-        onClick: () => {
-          if (textToSpeechPlaying) {
-            window.speechSynthesis.cancel();
-            return onEndTextToSpeech();
-          }
-
-          return onStartTextToSpeech(output.inputLang, output.inputText);
-        },
-      });
-    }
-
-    if (isOcrSupported(inputLang)) {
-      controllers.push({
-        Icon: ImageImage,
-        tooltip: getLocale('openImageFile'),
-        onClick: () => onLoadImage(),
-      });
-      controllers.push({
-        Icon: () => (
-          <SvgIcon fontSize="small">
-            <path d="M9,6H5V10H7V8H9M19,10H17V12H15V14H19M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2" />
-          </SvgIcon>
-        ),
-        tooltip: getLocale('takeScreenshot'),
-        onClick: () => onLoadImage('screenshot'),
-      });
-    }
-
+  if (isOcrSupported(inputLang)) {
     controllers.push({
-      Icon: fullscreenInputBox ? NavigationFullscreenExit : NavigationFullscreen,
-      tooltip: fullscreenInputBox ? getLocale('exitFullscreen') : getLocale('fullscreen'),
-      onClick: onToggleFullscreenInputBox,
+      Icon: ImageImage,
+      tooltip: getLocale('openImageFile'),
+      onClick: () => onLoadImage(),
     });
+    controllers.push({
+      Icon: () => (
+        <SvgIcon fontSize="small">
+          <path d="M9,6H5V10H7V8H9M19,10H17V12H15V14H19M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2" />
+        </SvgIcon>
+      ),
+      tooltip: getLocale('takeScreenshot'),
+      onClick: () => onLoadImage('screenshot'),
+    });
+  }
 
-    const secondaryControllers = [
-      {
-        Icon: FileCopy,
-        tooltip: getLocale('copy'),
-        onClick: () => {
-          window.remote.clipboard.writeText(inputText);
-          onOpenSnackbar(getLocale('copied'));
-        },
-        disabled: inputText.length < 1,
+  controllers.push({
+    Icon: fullscreenInputBox ? NavigationFullscreenExit : NavigationFullscreen,
+    tooltip: fullscreenInputBox ? getLocale('exitFullscreen') : getLocale('fullscreen'),
+    onClick: onToggleFullscreenInputBox,
+  });
+
+  const secondaryControllers = [
+    {
+      Icon: FileCopy,
+      tooltip: getLocale('copy'),
+      onClick: () => {
+        window.remote.clipboard.writeText(inputText);
+        onOpenSnackbar(getLocale('copied'));
       },
-    ];
+      disabled: inputText.length < 1,
+    },
+  ];
 
-    if (window.process.platform === 'darwin') {
-      secondaryControllers.push({
-        Icon: ({ fontSize }) => (
-          <SvgIcon fontSize={fontSize}>
-            <path fill="currentColor" d="M12,1L8,5H11V14H13V5H16M18,23H6C4.89,23 4,22.1 4,21V9A2,2 0 0,1 6,7H9V9H6V21H18V9H15V7H18A2,2 0 0,1 20,9V21A2,2 0 0,1 18,23Z" />
-          </SvgIcon>
-        ),
-        tooltip: getLocale('share'),
-        onClick: () => {
-          const shareMenu = new window.remote.ShareMenu({
-            texts: [inputText],
-          });
-          shareMenu.popup(window.remote.getCurrentWindow());
-        },
-        disabled: inputText.length < 1,
-      });
-    }
+  if (window.process.platform === 'darwin') {
+    secondaryControllers.push({
+      // eslint-disable-next-line react/prop-types
+      Icon: ({ fontSize }) => (
+        <SvgIcon fontSize={fontSize}>
+          <path fill="currentColor" d="M12,1L8,5H11V14H13V5H16M18,23H6C4.89,23 4,22.1 4,21V9A2,2 0 0,1 6,7H9V9H6V21H18V9H15V7H18A2,2 0 0,1 20,9V21A2,2 0 0,1 18,23Z" />
+        </SvgIcon>
+      ),
+      tooltip: getLocale('share'),
+      onClick: () => {
+        const shareMenu = new window.remote.ShareMenu({
+          texts: [inputText],
+        });
+        shareMenu.popup(window.remote.getCurrentWindow());
+      },
+      disabled: inputText.length < 1,
+    });
+  }
 
-    return (
-      <div className={classes.container}>
-        <div
-          className={classes.anotherContainer}
-          role="presentation"
-        >
-          <AppBar position="static" color="default" elevation={0} classes={{ colorDefault: classes.appBarColorDefault }}>
-            <Toolbar variant="dense" className={classes.toolbar}>
-              <Button
-                color="inherit"
-                classes={{ root: classes.languageTitle, label: classes.languageTitleLabel }}
-                onClick={() => {
-                  onUpdateLanguageListMode('inputLang');
-                  onChangeRoute(ROUTE_LANGUAGE_LIST);
-                }}
-              >
-                {inputLang === 'auto' && output && output.inputLang ? `${getLocale(output.inputLang)} (${getLocale('auto')})` : getLocale(inputLang)}
-              </Button>
-              <Tooltip title={getLocale('swap')} placement="bottom">
-                <div>
-                  <IconButton
-                    color="inherit"
-                    className={classes.toolbarIconButton}
-                    disabled={(() => {
-                      if (inputLang !== 'auto') {
-                        return false;
-                      }
-                      if (inputLang === 'auto' && output && output.inputLang) {
-                        return false;
-                      }
-                      return true;
-                    })()}
-                    onClick={onSwapLanguages}
-                  >
-                    <ActionSwapHoriz fontSize="small" />
-                  </IconButton>
-                </div>
-              </Tooltip>
-              <Button
-                color="inherit"
-                classes={{ root: classes.languageTitle, label: classes.languageTitleLabel }}
-                onClick={() => {
-                  onUpdateLanguageListMode('outputLang');
-                  onChangeRoute(ROUTE_LANGUAGE_LIST);
-                }}
-              >
-                {getLocale(outputLang)}
-              </Button>
-            </Toolbar>
-          </AppBar>
-          <Paper
-            elevation={1}
-            square
-            className={classNames(
-              classes.inputContainer,
-              { [classes.inputContainerFullScreen]: fullscreenInputBox },
-            )}
-          >
-            <textarea
-              ref={this.inputRef}
-              autoCapitalize="off"
-              autoComplete="off"
-              autoCorrect="off"
-              className={classNames('text-selectable', classes.textarea)}
-              lang={inputLang}
-              maxLength="10000" // api limit is 11000 chars
-              onChange={(e) => onUpdateInputText(
-                e.target.value,
-                e.target.selectionStart,
-                e.target.selectionEnd,
-              )}
-              onClick={(e) => onUpdateInputText(
-                e.target.value,
-                e.target.selectionStart,
-                e.target.selectionEnd,
-              )}
-              onInput={(e) => onUpdateInputText(
-                e.target.value,
-                e.target.selectionStart,
-                e.target.selectionEnd,
-              )}
-              onKeyDown={translateWhenPressingEnter ? (e) => {
-                if (e.key === 'Enter') {
-                  onTranslate();
-                  e.target.blur();
-                }
-
-                onUpdateInputText(
-                  e.target.value,
-                  e.target.selectionStart,
-                  e.target.selectionEnd,
-                );
-              } : null}
-              onKeyUp={(e) => onUpdateInputText(
-                e.target.value,
-                e.target.selectionStart,
-                e.target.selectionEnd,
-              )}
-              placeholder={getLocale('typeSomethingHere')}
-              spellCheck="false"
-              value={inputText}
-            />
-            <div className={classes.controllerContainer}>
-              <div className={classes.controllerContainerLeft}>
-                {controllers.map(({
-                  Icon, tooltip, onClick, disabled,
-                }) => (disabled ? (
-                  <IconButton
-                    key={`inputTool_${tooltip}`}
-                    className={classes.controllerIconButton}
-                    aria-label={tooltip}
-                    onClick={onClick}
-                    disabled
-                  >
-                    <Icon fontSize="small" />
-                  </IconButton>
-                ) : (
-                  <Tooltip title={tooltip} placement={fullscreenInputBox ? 'top' : 'bottom'} key={`inputTool_${tooltip}`}>
-                    <IconButton
-                      className={classes.controllerIconButton}
-                      aria-label={tooltip}
-                      onClick={onClick}
-                    >
-                      <Icon fontSize="small" />
-                    </IconButton>
-                  </Tooltip>
-                )))}
+  return (
+    <div className={classes.container}>
+      <div
+        className={classes.anotherContainer}
+        role="presentation"
+      >
+        <AppBar position="static" color="default" elevation={0} classes={{ colorDefault: classes.appBarColorDefault }}>
+          <Toolbar variant="dense" className={classes.toolbar}>
+            <Button
+              color="inherit"
+              classes={{ root: classes.languageTitle, label: classes.languageTitleLabel }}
+              onClick={() => {
+                onUpdateLanguageListMode('inputLang');
+                onChangeRoute(ROUTE_LANGUAGE_LIST);
+              }}
+            >
+              {inputLang === 'auto' && output && output.inputLang ? `${getLocale(output.inputLang)} (${getLocale('auto')})` : getLocale(inputLang)}
+            </Button>
+            <Tooltip title={getLocale('swap')} placement="bottom">
+              <div>
+                <IconButton
+                  color="inherit"
+                  className={classes.toolbarIconButton}
+                  disabled={(() => {
+                    if (inputLang !== 'auto') {
+                      return false;
+                    }
+                    if (inputLang === 'auto' && output && output.inputLang) {
+                      return false;
+                    }
+                    return true;
+                  })()}
+                  onClick={onSwapLanguages}
+                >
+                  <ActionSwapHoriz fontSize="small" />
+                </IconButton>
               </div>
-              <div className={classes.controllerContainerRight}>
-                {secondaryControllers.map(({
-                  Icon, tooltip, onClick, disabled,
-                }) => (disabled ? (
+            </Tooltip>
+            <Button
+              color="inherit"
+              classes={{ root: classes.languageTitle, label: classes.languageTitleLabel }}
+              onClick={() => {
+                onUpdateLanguageListMode('outputLang');
+                onChangeRoute(ROUTE_LANGUAGE_LIST);
+              }}
+            >
+              {getLocale(outputLang)}
+            </Button>
+          </Toolbar>
+        </AppBar>
+        <Paper
+          elevation={1}
+          square
+          className={classNames(
+            classes.inputContainer,
+            { [classes.inputContainerFullScreen]: fullscreenInputBox },
+          )}
+        >
+          <textarea
+            ref={inputRef}
+            autoCapitalize="off"
+            autoComplete="off"
+            autoCorrect="off"
+            className={classNames('text-selectable', classes.textarea)}
+            lang={inputLang}
+            maxLength="10000" // api limit is 11000 chars
+            onChange={(e) => onUpdateInputText(
+              e.target.value,
+              e.target.selectionStart,
+              e.target.selectionEnd,
+            )}
+            onClick={(e) => onUpdateInputText(
+              e.target.value,
+              e.target.selectionStart,
+              e.target.selectionEnd,
+            )}
+            onInput={(e) => onUpdateInputText(
+              e.target.value,
+              e.target.selectionStart,
+              e.target.selectionEnd,
+            )}
+            onKeyDown={translateWhenPressingEnter ? (e) => {
+              if (e.key === 'Enter') {
+                onTranslate();
+                e.target.blur();
+              }
+
+              onUpdateInputText(
+                e.target.value,
+                e.target.selectionStart,
+                e.target.selectionEnd,
+              );
+            } : null}
+            onKeyUp={(e) => onUpdateInputText(
+              e.target.value,
+              e.target.selectionStart,
+              e.target.selectionEnd,
+            )}
+            placeholder={getLocale('typeSomethingHere')}
+            spellCheck="false"
+            value={inputText}
+          />
+          <div className={classes.controllerContainer}>
+            <div className={classes.controllerContainerLeft}>
+              {controllers.map(({
+                Icon, tooltip, onClick, disabled,
+              }) => (disabled ? (
+                <IconButton
+                  key={`inputTool_${tooltip}`}
+                  className={classes.controllerIconButton}
+                  aria-label={tooltip}
+                  onClick={onClick}
+                  disabled
+                >
+                  <Icon fontSize="small" />
+                </IconButton>
+              ) : (
+                <Tooltip title={tooltip} placement={fullscreenInputBox ? 'top' : 'bottom'} key={`inputTool_${tooltip}`}>
                   <IconButton
-                    key={`inputTool_${tooltip}`}
                     className={classes.controllerIconButton}
                     aria-label={tooltip}
                     onClick={onClick}
-                    disabled
                   >
                     <Icon fontSize="small" />
                   </IconButton>
-                ) : (
-                  <Tooltip title={tooltip} placement={fullscreenInputBox ? 'top' : 'bottom'} key={`inputTool_${tooltip}`}>
-                    <IconButton
-                      className={classes.controllerIconButton}
-                      aria-label={tooltip}
-                      onClick={onClick}
-                    >
-                      <Icon fontSize="small" />
-                    </IconButton>
-                  </Tooltip>
-                )))}
-                {(inputText.length < 1 || (output && output.status === 'loading')) ? (
+                </Tooltip>
+              )))}
+            </div>
+            <div className={classes.controllerContainerRight}>
+              {secondaryControllers.map(({
+                Icon, tooltip, onClick, disabled,
+              }) => (disabled ? (
+                <IconButton
+                  key={`inputTool_${tooltip}`}
+                  className={classes.controllerIconButton}
+                  aria-label={tooltip}
+                  onClick={onClick}
+                  disabled
+                >
+                  <Icon fontSize="small" />
+                </IconButton>
+              ) : (
+                <Tooltip title={tooltip} placement={fullscreenInputBox ? 'top' : 'bottom'} key={`inputTool_${tooltip}`}>
+                  <IconButton
+                    className={classes.controllerIconButton}
+                    aria-label={tooltip}
+                    onClick={onClick}
+                  >
+                    <Icon fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+              )))}
+              {(inputText.length < 1 || (output && output.status === 'loading')) ? (
+                <Button
+                  variant="outlined"
+                  size="small"
+                  color="default"
+                  classes={{
+                    root: classes.translateButton,
+                    label: classes.translateButtonLabel,
+                  }}
+                  disabled
+                >
+                  {getLocale('translate')}
+                </Button>
+              ) : (
+                <Tooltip title={window.process.platform === 'darwin' ? '⌘ + T' : 'Ctrl + T'} placement={fullscreenInputBox ? 'top' : 'bottom'}>
                   <Button
                     variant="outlined"
                     size="small"
                     color="default"
+                    onClick={() => onTranslate()}
                     classes={{
                       root: classes.translateButton,
                       label: classes.translateButtonLabel,
                     }}
-                    disabled
                   >
                     {getLocale('translate')}
                   </Button>
-                ) : (
-                  <Tooltip title={window.process.platform === 'darwin' ? '⌘ + T' : 'Ctrl + T'} placement={fullscreenInputBox ? 'top' : 'bottom'}>
-                    <Button
-                      variant="outlined"
-                      size="small"
-                      color="default"
-                      onClick={() => onTranslate()}
-                      classes={{
-                        root: classes.translateButton,
-                        label: classes.translateButtonLabel,
-                      }}
-                    >
-                      {getLocale('translate')}
-                    </Button>
-                  </Tooltip>
-                )}
-              </div>
+                </Tooltip>
+              )}
             </div>
-          </Paper>
-          {this.renderOutput()}
-        </div>
+          </div>
+        </Paper>
+        {outputNode}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 Home.defaultProps = {
   output: null,
@@ -682,6 +685,7 @@ Home.propTypes = {
   fullscreenInputBox: PropTypes.bool.isRequired,
   inputLang: PropTypes.string.isRequired,
   inputText: PropTypes.string.isRequired,
+  isHomeVisible: PropTypes.bool.isRequired,
   onChangeRoute: PropTypes.func.isRequired,
   onEndTextToSpeech: PropTypes.func.isRequired,
   onLoadImage: PropTypes.func.isRequired,
@@ -706,6 +710,7 @@ const mapStateToProps = (state) => ({
   fullscreenInputBox: state.pages.home.fullscreenInputBox,
   inputLang: state.preferences.inputLang,
   inputText: state.pages.home.inputText,
+  isHomeVisible: state.router.route === ROUTE_HOME,
   output: state.pages.home.output,
   outputLang: state.preferences.outputLang,
   showTransliteration: state.preferences.showTransliteration,
