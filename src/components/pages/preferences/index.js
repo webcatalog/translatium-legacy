@@ -235,6 +235,13 @@ const Preferences = (props) => {
                 </MenuItem>
               ))}
             </EnhancedMenu>
+            <ListItem button>
+              <ListItemText
+                primary="Help us translate and bring Translatium to people around the world"
+                onClick={() => requestOpenInBrowser('https://www.notion.so/Translations-b1d65e8275514183b1b6d280fcbf99e9')}
+              />
+              <ChevronRightIcon color="action" />
+            </ListItem>
             <Divider />
             <EnhancedMenu
               id="theme"
@@ -617,8 +624,8 @@ const Preferences = (props) => {
               <ChevronRightIcon color="action" />
             </ListItem>
             <Divider />
-            <ListItem button onClick={() => requestOpenInBrowser(`https://webcatalog.app/privacy?utm_source=${utmSource}`)}>
-              <ListItemText primary="Privacy Policy" />
+            <ListItem button onClick={() => requestOpenInBrowser(`https://webcatalog.io/privacy?utm_source=${utmSource}`)}>
+              <ListItemText primary={getLocale('privacyPolicy')} />
               <ChevronRightIcon color="action" />
             </ListItem>
             <Divider />
