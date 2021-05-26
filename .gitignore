@@ -9,3 +9,4 @@ dist
 build
 .env
 _docs
+*.p12
