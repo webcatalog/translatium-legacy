@@ -121,7 +121,7 @@ const opts = {
           const appexOriginPath = path.join(__dirname, 'extensions', 'safari', 'translatium', 'build', 'Release', 'safari.appex');
           const appexDestPath = path.join(plugInsPath, 'safari.appex');
           fs.ensureDirSync(plugInsPath);
-          fs.copyFileSync(appexOriginPath, appexDestPath);
+          fs.copySync(appexOriginPath, appexDestPath);
         }
       }),
   },
