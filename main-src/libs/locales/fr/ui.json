@@ -135,5 +135,7 @@
 	"dontAllow": "Ne Pas Autoriser",
 	"allowCrashReports": "Autoriser l'application à envoyer des rapports de plantage anonymes",
 	"allowTelemetry": "Autoriser l'application à envoyer des données d'utilisation anonymes",
-	"share": "Partager"
+	"share": "Partager",
+	"extensions": "Extensions",
+	"extensionDesc": "Select text with your mouse and translate with just one click."
 }

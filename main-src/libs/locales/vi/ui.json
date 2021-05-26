@@ -135,5 +135,7 @@
 	"dontAllow": "Không cho phép",
 	"allowCrashReports": "Cho phép ứng dụng gửi báo cáo sự cố nặc danh",
 	"allowTelemetry": "Cho phép ứng dụng gửi dữ liệu sử dụng nặc danh",
-	"share": "Chia sẻ"
+	"share": "Chia sẻ",
+	"extensions": "Tiện ích mở rộng",
+	"extensionDesc": "Chọn văn bản bằng chuột và dịch chỉ với một cú nhấp chuột."
 }

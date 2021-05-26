@@ -135,5 +135,7 @@
 	"dontAllow": "許可しない",
 	"allowCrashReports": "匿名のクラッシュレポートの送信をアプリに許可する",
 	"allowTelemetry": "匿名の利用状況データの送信をアプリに許可する",
-	"share": "シェアする"
+	"share": "シェアする",
+	"extensions": "拡張機能",
+	"extensionDesc": "Select text with your mouse and translate with just one click."
 }
