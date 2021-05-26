@@ -118,6 +118,7 @@ const opts = {
       .then(() => {
         // Safari extension
         if (process.platform === 'darwin' && context.arch === Arch.universal) {
+          console.log('Copying', 'safari.appex');
           const { appOutDir } = context;
           const plugInsPath = path.join(appOutDir, 'Translatium.app', 'Contents', 'PlugIns');
           const appexOriginPath = path.join(__dirname, 'extensions', 'safari', 'translatium', 'build', 'Release', 'safari.appex');
