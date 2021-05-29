@@ -44,8 +44,8 @@ const sendToAllWindows = require('./libs/send-to-all-windows');
 const setContextMenu = require('./libs/set-context-menu');
 const isMacOs11 = require('./libs/is-mac-os-11');
 
-// we only need updater for AppImage
-if (process.platform === 'linux' && process.env.SNAP == null) {
+// we only need updater for standalone builds (AppImage, NSIS, DMG)
+if (process.env.SNAP == null && !process.mas && !process.windowsStore) {
   // eslint-disable-next-line global-require
   require('./libs/updater');
 }

@@ -1,4 +1,4 @@
-name: macOS
+name: macOS (Mac App Store)
 
 on:
   push:
@@ -9,12 +9,15 @@ on:
       - master
       - next
     paths:
-      - '.github/workflows/macos.yml'
+      - '.github/workflows/macos-mas.yml'
       - 'dist.js'
 
 jobs:
   build:
     runs-on: macos-latest
+
+    env:
+      BUILD_MAS: 1
 
     steps:
     - uses: actions/checkout@v2
