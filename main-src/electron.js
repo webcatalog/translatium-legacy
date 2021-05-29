@@ -339,9 +339,7 @@ if (!gotTheLock) {
       if (mb == null) {
         createWindowAsync();
       } else {
-        mb.on('ready', () => {
-          mb.showWindow();
-        });
+        mb.showWindow();
       }
     } else if (mainWindow == null) {
       createWindowAsync();
