@@ -284,7 +284,7 @@ const Preferences = (props) => {
         </Paper>
 
         {/* extensions are not supported on Linux because it doesn't support protocol translatium:// */}
-        {window.process.platform !== 'darwin' && (
+        {window.process.platform !== 'linux' && (
           <>
             <Typography variant="body2" className={classes.paperTitle}>
               {getLocale('extensions')}
