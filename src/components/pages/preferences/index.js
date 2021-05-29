@@ -283,35 +283,40 @@ const Preferences = (props) => {
           </List>
         </Paper>
 
-        <Typography variant="body2" className={classes.paperTitle}>
-          {getLocale('extensions')}
-        </Typography>
-        <Paper elevation={0} className={classes.paper}>
-          <List dense disablePadding>
-            <ListItem
-              button
-              onClick={() => window.remote.shell.openExternal('https://translatium.app/extensions')}
-            >
-              <div className={classes.extensionBlock}>
-                <div className={classes.extensionIcons}>
-                  <img src={popclipIconPng} alt="PopClip" className={classes.extensionIcon} />
-                  <img src={chromeIconPng} alt="Google Chrome" className={classes.extensionIcon} />
-                  <img src={edgeIconPng} alt="Microsoft Edge" className={classes.extensionIcon} />
-                  <img src={safariIconPng} alt="Safari" className={classes.extensionIcon} />
-                  <img src={firefoxIconPng} alt="Firefox" className={classes.extensionIcon} />
-                  <img src={operaIconPng} alt="Opera" className={classes.extensionIcon} />
-                  <img src={braveIconPng} alt="Brave" className={classes.extensionIcon} />
-                  <img src={vivaldiIconPng} alt="Vivaldi" className={classes.extensionIcon} />
-                </div>
-                <ListItemText
-                  primary={getLocale('extensions')}
-                  secondary={getLocale('extensionDesc')}
-                />
-              </div>
-              <ChevronRightIcon color="action" />
-            </ListItem>
-          </List>
-        </Paper>
+        {/* extensions are not supported on Linux because it doesn't support protocol translatium:// */}
+        {window.process.platform !== 'linux' && (
+          <>
+            <Typography variant="body2" className={classes.paperTitle}>
+              {getLocale('extensions')}
+            </Typography>
+            <Paper elevation={0} className={classes.paper}>
+              <List dense disablePadding>
+                <ListItem
+                  button
+                  onClick={() => window.remote.shell.openExternal('https://translatium.app/extensions')}
+                >
+                  <div className={classes.extensionBlock}>
+                    <div className={classes.extensionIcons}>
+                      <img src={popclipIconPng} alt="PopClip" className={classes.extensionIcon} />
+                      <img src={chromeIconPng} alt="Google Chrome" className={classes.extensionIcon} />
+                      <img src={edgeIconPng} alt="Microsoft Edge" className={classes.extensionIcon} />
+                      <img src={safariIconPng} alt="Safari" className={classes.extensionIcon} />
+                      <img src={firefoxIconPng} alt="Firefox" className={classes.extensionIcon} />
+                      <img src={operaIconPng} alt="Opera" className={classes.extensionIcon} />
+                      <img src={braveIconPng} alt="Brave" className={classes.extensionIcon} />
+                      <img src={vivaldiIconPng} alt="Vivaldi" className={classes.extensionIcon} />
+                    </div>
+                    <ListItemText
+                      primary={getLocale('extensions')}
+                      secondary={getLocale('extensionDesc')}
+                    />
+                  </div>
+                  <ChevronRightIcon color="action" />
+                </ListItem>
+              </List>
+            </Paper>
+          </>
+        )}
 
         <Typography variant="body2" className={classes.paperTitle}>
           {getLocale('menubar')}
