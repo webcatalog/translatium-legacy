@@ -2,13 +2,15 @@ name: Linux
 
 on:
   push:
-    branches:
-      - master
     tags:
       - "v*.*.*"
   pull_request:
     branches:
       - master
+      - next
+    paths:
+      - '.github/workflows/linux-arm64.yml'
+      - 'dist.js'
 
 jobs:
   build:
