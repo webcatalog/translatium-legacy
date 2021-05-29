@@ -15,7 +15,15 @@ const displayLanguages = require('./main-src/libs/locales/languages');
 
 const { Arch, Platform } = builder;
 
-console.log(`Machine: ${process.platform}`);
+const platform = process.env.TEMPLATE_PLATFORM || process.platform;
+const arch = process.env.TEMPLATE_ARCH || 'x64';
+
+if ((['x64', 'arm64'].indexOf(arch) < 0)) {
+  console.log(`${platform} ${arch} is not supported`);
+  process.exit(1);
+}
+
+console.log(`Machine: ${process.platform}. Building for ${platform} ${arch}`);
 
 const appVersion = fs.readJSONSync(path.join(__dirname, 'package.json')).version;
 
@@ -32,7 +40,8 @@ switch (process.platform) {
   }
   default:
   case 'linux': {
-    targets = Platform.LINUX.createTarget(['AppImage', 'snap']);
+    // currently, we're not able to build arm64 snap on x64 computers
+    targets = Platform.LINUX.createTarget(arch === 'x64' ? ['AppImage', 'snap'] : ['AppImage'], Arch[arch]);
     break;
   }
 }
