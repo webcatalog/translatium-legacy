@@ -15,8 +15,8 @@ const displayLanguages = require('./main-src/libs/locales/languages');
 
 const { Arch, Platform } = builder;
 
-const platform = process.env.TEMPLATE_PLATFORM || process.platform;
-const arch = process.env.TEMPLATE_ARCH || 'x64';
+const platform = process.env.BUILD_PLATFORM || process.platform;
+const arch = process.env.BUILD_ARCH || 'x64';
 
 if ((['x64', 'arm64'].indexOf(arch) < 0)) {
   console.log(`${platform} ${arch} is not supported`);
@@ -30,12 +30,15 @@ const appVersion = fs.readJSONSync(path.join(__dirname, 'package.json')).version
 let targets;
 switch (process.platform) {
   case 'darwin': {
-    // targets = Platform.MAC.createTarget(['mas'], Arch.universal);
-    targets = Platform.MAC.createTarget([process.env.FORCE_DEV ? 'mas-dev' : 'mas'], Arch.universal);
+    if (process.env.BUILD_MAS) {
+      targets = Platform.MAC.createTarget(process.env.FORCE_DEV ? ['mas-dev'] : ['mas'], Arch.universal);
+    } else {
+      targets = Platform.MAC.createTarget(process.env.FORCE_DEV ? ['dir'] : ['zip', 'dmg'], Arch.universal);
+    }
     break;
   }
   case 'win32': {
-    targets = Platform.WINDOWS.createTarget(['appx']);
+    targets = Platform.WINDOWS.createTarget(['appx', 'nsis']);
     break;
   }
   default:

@@ -18,7 +18,7 @@ let menu;
 
 const createMenu = () => {
   // we only need updater for AppImage
-  const updaterEnabled = process.platform === 'linux' && process.env.SNAP == null;
+  const updaterEnabled = process.env.SNAP == null && !process.mas && !process.windowsStore;
   const handleCheckForUpdates = () => {
     // restart & apply updates
     if (global.updaterObj && global.updaterObj.status === 'update-downloaded') {

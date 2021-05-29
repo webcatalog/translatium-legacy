@@ -1,31 +1,29 @@
-name: Linux (x64)
+name: macOS (Mac App Store)
 
 on:
   push:
-    branches:
-      - master
     tags:
       - "v*.*.*"
   pull_request:
     branches:
       - master
+      - next
+    paths:
+      - '.github/workflows/macos.yml'
+      - 'dist.js'
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     env:
-      BUILD_ARCH: x64
+      BUILD_MAS: 1
 
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 1
         submodules: false
-    - name: Install Snapcraft
-      uses: samuelmeuli/action-snapcraft@v1
-      with:
-        snapcraft_token: ${{ secrets.SNAP_TOKEN }}
     - name: Set up Node.js
       uses: actions/setup-node@v1
       with:
@@ -48,11 +46,19 @@ jobs:
     - name: Get tag name
       run: echo CI_BUILD_TAG=${GITHUB_REF/refs\/tags\//} >> $GITHUB_ENV
       if: startsWith(github.ref, 'refs/tags/')
+    - name: Build Safari extension
+      run: bash extensions/safari/build.sh
+      env:
+        CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+        CSC_LINK: ${{ secrets.CSC_LINK }}
     - run: yarn dist
       env:
         CI: true
         CI_PULL_REQUEST: ${{ github.event_name == 'pull_request' }}
+        CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+        CSC_LINK: ${{ secrets.CSC_LINK }}
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         REACT_APP_AMPLITUDE_API_KEY: ${{ secrets.REACT_APP_AMPLITUDE_API_KEY }}
         REACT_APP_OCR_SPACE_API_KEY: ${{ secrets.REACT_APP_OCR_SPACE_API_KEY }}
         ELECTRON_APP_SENTRY_DSN: ${{ secrets.ELECTRON_APP_SENTRY_DSN }}
+        SDKROOT: /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk 
