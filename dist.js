@@ -33,7 +33,7 @@ switch (process.platform) {
     if (process.env.BUILD_MAS) {
       targets = Platform.MAC.createTarget(process.env.FORCE_DEV ? ['mas-dev'] : ['mas'], Arch.universal);
     } else {
-      targets = Platform.MAC.createTarget(process.env.FORCE_DEV ? ['dir'] : ['zip', 'dmg'], Arch.universal);
+      targets = Platform.MAC.createTarget(process.env.FORCE_DEV ? ['dir'] : ['zip', 'dmg'], Arch.x64, Arch.arm64);
     }
     break;
   }
