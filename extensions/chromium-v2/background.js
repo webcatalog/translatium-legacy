@@ -4,7 +4,7 @@
 /* global chrome */
 chrome.contextMenus.create({
   id: 'translate-with-translatium',
-  title: 'Translate with Translatium',
+  title: chrome.i18n.getMessage('extName'),
   contexts: ['selection'],
 }, () => {
   if (chrome.runtime.lastError) {
