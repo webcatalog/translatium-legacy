@@ -4,7 +4,7 @@
 /* global browser */
 browser.menus.create({
   id: 'translate-with-translatium',
-  title: 'Translate with Translatium',
+  title: browser.i18n.getMessage('extName'),
   contexts: ['selection'],
 }, () => {
   if (browser.runtime.lastError) {
