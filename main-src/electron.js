@@ -104,7 +104,7 @@ if (!gotTheLock) {
   // needed for PopClip support
   // incompatible with snap
   // see https://forum.snapcraft.io/t/dbus-error/4969/9
-  if (process.platform === 'darwin') {
+  if (process.platform === 'darwin' && process.env.NODE_ENV === 'production') {
     app.setAsDefaultProtocolClient('translatium');
   }
 
@@ -235,6 +235,7 @@ if (!gotTheLock) {
               const text = clipboard.readText();
               if (text.length > 0) {
                 mb.window.send('set-input-text', text);
+                mb.window.send('go-to-home');
               }
             }
           } else {
@@ -425,8 +426,8 @@ if (!gotTheLock) {
     whenTrulyReady()
       .then(() => {
         if (urlStr.startsWith('translatium://')) {
-          const urlObj = url.parse(urlStr, true);
-          const text = decodeURIComponent(urlObj.query.text || '');
+          const urlObj = new url.URL(urlStr);
+          const text = urlObj.searchParams.get('text') || '';
 
           if (global.attachToMenubar) {
             if (mb && mb.window) {
@@ -442,7 +443,9 @@ if (!gotTheLock) {
             mainWindow.show();
           }
         }
-      });
+      })
+      // eslint-disable-next-line no-console
+      .catch((err) => console.log(err));
   });
 
   ipcMain.on('show-window', () => {
