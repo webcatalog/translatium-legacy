@@ -5,7 +5,7 @@
   "manifest_version": 2,
   "default_locale": "en",
   "background": {
-    "service_worker": "background.js"
+    "scripts": ["background.js"]
   },
   "permissions": [
     "contextMenus"
