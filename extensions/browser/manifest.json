@@ -8,7 +8,7 @@
     "scripts": ["background.js"]
   },
   "permissions": [
-    "menus"
+    "contextMenus"
   ],
   "icons": {
     "16": "icon-16.png",

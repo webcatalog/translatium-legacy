@@ -4,7 +4,7 @@
 
 const browser = window.browser || window.chrome;
 
-browser.menus.create({
+browser.contextMenus.create({
   id: 'translate-with-translatium',
   title: browser.i18n.getMessage('extName'),
   contexts: ['selection'],
@@ -15,7 +15,7 @@ browser.menus.create({
   }
 });
 
-browser.menus.onClicked.addListener((o) => {
+browser.contextMenus.onClicked.addListener((o) => {
   // handle context menu actions
   if (o && o.selectionText) {
     browser.tabs.query({ active: true, currentWindow: true }, (tabs) => {
