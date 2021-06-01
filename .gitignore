@@ -10,3 +10,4 @@ build
 .env
 _docs
 *.p12
+extensions/*.zip
