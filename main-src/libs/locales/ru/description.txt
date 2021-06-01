@@ -2,6 +2,11 @@
 
 {appName} переводит слова, фразы, а также текст на изображениях на более чем 100 языках, поддерживает функции словаря, транслитерации и голосового вывода.
 
+- Translate instantly between over 100 languages. 
+- Save your translation history and favorite phrases.
+- Translate text in images instantly with our powerful OCR tool.
+- Access quickly from menu bar or with keyboard shortcuts.
+
 Подробнее о {appName} — на нашем сайте: {appUrl}.
 
 Поддерживаемые языки: {supportedLanguages}

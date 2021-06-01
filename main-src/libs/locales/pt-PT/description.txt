@@ -2,6 +2,11 @@ Traduza quaisquer idiomas instantaneamente com {appName} - a aplicação de trad
 
 {appName} permite-lhe traduzir palavras, frases e imagens entre mais de 100 idiomas com suporte de dicionário, transliteração e saída de voz.
 
+- Translate instantly between over 100 languages. 
+- Save your translation history and favorite phrases.
+- Translate text in images instantly with our powerful OCR tool.
+- Access quickly from menu bar or with keyboard shortcuts.
+
 Visite o nosso website para saber mais sobre {appName}: {appUrl}.
 
 Idiomas Suportados: {supportedLanguages}

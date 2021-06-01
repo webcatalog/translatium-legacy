@@ -8,7 +8,7 @@
 	"delete": "Eliminare",
 	"selectAll": "Selezionare tutto",
 	"lookUp": "Cercare \"{selection}\"",
-	"copyLink": "Copia link",
+	"copyLink": "Copia Link",
 	"selectInputLang": "Selezionare lingua di input",
 	"selectOutputLang": "Selezionare lingua di output",
 	"swapLanguages": "Scambiare lingue",
@@ -137,6 +137,6 @@
 	"allowTelemetry": "Consenti all'app di inviare dati anonimi sull'utilizzo",
 	"share": "Condividi",
 	"extensions": "Estensioni",
-	"extensionDesc": "Select text with your mouse and translate with just one click.",
+	"extensionDesc": "Seleziona il testo con il mouse e traduci con un solo clic.",
 	"privacyPolicy": "Privacy Policy"
 }

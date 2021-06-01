@@ -2,6 +2,11 @@
 
 {appName}에서는 사전, 음역, 음성 출력 지원을 이용하여 100개 이상의 언어 간에 단어, 구, 이미지를 번역할 수 있습니다.
 
+- Translate instantly between over 100 languages. 
+- Save your translation history and favorite phrases.
+- Translate text in images instantly with our powerful OCR tool.
+- Access quickly from menu bar or with keyboard shortcuts.
+
 웹사이트를 방문하여 {appName}에 대해 자세히 알아보세요: {appUrl}.
 
 지원 언어: {supportedLanguages}
