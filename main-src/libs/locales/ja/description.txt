@@ -2,6 +2,11 @@
 
 {appName}は、辞書、音訳、音声出力機能を備え、100以上の言語間の単語、フレーズ、画像を翻訳することができます。
 
+- Translate instantly between over 100 languages. 
+- Save your translation history and favorite phrases.
+- Translate text in images instantly with our powerful OCR tool.
+- Access quickly from menu bar or with keyboard shortcuts.
+
 {appName}の詳細については、当アプリのウェブサイトをご覧ください。： {appUrl}
 
 対応言語：{supportedLanguages}

@@ -2,6 +2,11 @@ Traduisez instantanément n'importe quelle langue avec {appName} - l'application
 
 {appName} vous permet de traduire des mots, des phrases et des images dans plus de 100 langues avec la prise en charge des dictionnaires, de la translittération et de la sortie vocale.
 
+- Translate instantly between over 100 languages. 
+- Save your translation history and favorite phrases.
+- Translate text in images instantly with our powerful OCR tool.
+- Access quickly from menu bar or with keyboard shortcuts.
+
 Visitez notre site Web pour en savoir plus sur {appName} : {appUrl}.
 
 Langues prises en charge : {supportedLanguages}

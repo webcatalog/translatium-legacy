@@ -2,6 +2,11 @@
 
 {appName} 允许您在 100 多种语言之间翻译单词、短语和图像，并提供字典、音译和语音输出支持。
 
+- Translate instantly between over 100 languages. 
+- Save your translation history and favorite phrases.
+- Translate text in images instantly with our powerful OCR tool.
+- Access quickly from menu bar or with keyboard shortcuts.
+
 请访问我们的网站以了解关于 {appName} 的更多信息：{appUrl}。
 
 支持的语言：{supportedLanguages}

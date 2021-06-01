@@ -1,0 +1,12 @@
+Traduce cualquier idioma al instante con {appName}: la aplicación de traducción más potente para {operatingSystem}.
+
+{appName} permite traducir palabras, frases e imágenes a más de 100 idiomas con soporte para diccionario, transliteración y salida de voz.
+
+- Translate instantly between over 100 languages. 
+- Save your translation history and favorite phrases.
+- Translate text in images instantly with our powerful OCR tool.
+- Access quickly from menu bar or with keyboard shortcuts.
+
+Visite nuestro sitio web para obtener más información sobre {appName}: {appUrl}.
+
+Idiomas admitidos: {supportedLanguages}

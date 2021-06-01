@@ -2,6 +2,11 @@
 
 Mit {appName} können Sie Wörter, Redewendungen und Bilder aus und in mehr als 100 Sprachen übersetzen, mit Wörterbuch-, Transliterations- und Sprachausgabeunterstützung.
 
+- Translate instantly between over 100 languages. 
+- Save your translation history and favorite phrases.
+- Translate text in images instantly with our powerful OCR tool.
+- Access quickly from menu bar or with keyboard shortcuts.
+
 Besuchen Sie unsere Website, um mehr über {appName} zu erfahren: {appUrl}.
 
 Unterstützte Sprachen: {supportedLanguages}
