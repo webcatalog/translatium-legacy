@@ -38,7 +38,7 @@ switch (process.platform) {
     break;
   }
   case 'win32': {
-    targets = Platform.WINDOWS.createTarget(['appx', 'nsis']);
+    targets = Platform.WINDOWS.createTarget(['appx']);
     break;
   }
   default:
