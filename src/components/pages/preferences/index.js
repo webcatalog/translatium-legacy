@@ -566,7 +566,10 @@ const Preferences = (props) => {
                     <ListItem
                       button
                       onClick={() => {
-                        const url = `https://switchbar.app?utm_source=${utmSource}`;
+                        let url = `https://switchbar.app?utm_source=${utmSource}`;
+                        if (window.process.mas) {
+                          url = 'macappstore://apps.apple.com/app/switchbar/id1555467675';
+                        }
                         requestOpenInBrowser(url);
                       }}
                       className={classes.listItemPromotion}
