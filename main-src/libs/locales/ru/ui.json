@@ -105,6 +105,8 @@
 	"general": "Общие",
 	"advanced": "Расширенные",
 	"alwaysOnTop": "Держать поверх других окон",
+	"translateSelectedOnShortcut": "Переводить выделение по сочетанию клавиш",
+	"translateSelectedOnShortcutDesc": "При открытии приложения {appName} по сочетанию клавиш будет автоматически переводиться выделенный текст.",
 	"translateClipboardOnShortcut": "Переводить буфер обмена по сочетанию клавиш",
 	"translateClipboardOnShortcutDesc": "При открытии приложения {appName} по сочетанию клавиш будет автоматически переводиться содержимое буфера обмена.",
 	"openKeyboardShortcut": "Сочетание клавиш для быстрого открытия {appName}",

@@ -43,6 +43,7 @@ const { initLocales, getLocale } = require('./libs/locales');
 const sendToAllWindows = require('./libs/send-to-all-windows');
 const setContextMenu = require('./libs/set-context-menu');
 const isMacOs11 = require('./libs/is-mac-os-11');
+const { keyTap } = require('robotjs');
 
 // we only need updater for standalone builds (AppImage, NSIS, DMG)
 if (process.env.SNAP == null && !process.mas && !process.windowsStore) {
@@ -106,6 +107,16 @@ if (!gotTheLock) {
   // see https://forum.snapcraft.io/t/dbus-error/4969/9
   if (process.platform === 'darwin' && process.env.NODE_ENV === 'production') {
     app.setAsDefaultProtocolClient('translatium');
+  }
+
+  const getSelectedText = async () => {
+    const currentClipboardContent = clipboard.readText();
+    clipboard.clear();
+    keyTap("c", process.platform === "darwin" ? "command" : "control");
+    await new Promise(resolve => setTimeout(resolve, 200));
+    const selectedText = clipboard.readText();
+    clipboard.writeText(currentClipboardContent);
+    return selectedText;
   }
 
   // Load listeners
@@ -229,15 +240,20 @@ if (!gotTheLock) {
         if (!combinator) return;
         globalShortcut.register(combinator, () => {
           if (isHidden) {
-            mb.showWindow();
+            const translateSelectedOnShortcut = getPreference('translateSelectedOnShortcut');
             const translateClipboardOnShortcut = getPreference('translateClipboardOnShortcut');
-            if (translateClipboardOnShortcut) {
-              const text = clipboard.readText();
-              if (text.length > 0) {
-                mb.window.send('set-input-text', text);
-                mb.window.send('go-to-home');
-              }
-            }
+            if (translateSelectedOnShortcut || translateClipboardOnShortcut) {
+              getSelectedText().then((text) => {
+                if (text.length == 0 && translateClipboardOnShortcut) {
+                  text = clipboard.readText();
+                }
+                if (text.length > 0) {
+                  mb.window.send('set-input-text', text);
+                  mb.window.send('go-to-home');
+                }
+              });
+            } 
+            mb.showWindow();
           } else {
             mb.hideWindow();
           }
