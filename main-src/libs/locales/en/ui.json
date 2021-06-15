@@ -106,7 +106,7 @@
 	"advanced": "Advanced",
 	"alwaysOnTop": "Keep window always on top",
 	"translateSelectedOnShortcut": "Translate selection on shortcut",
-	"translateSelectedOnShortcutDesc": "When you open {appName} with a shortcut, it will automatically translate selected contents.",
+	"translateSelectedOnShortcutDesc": "When you open {appName} with a shortcut, it will automatically translate selected content.",
 	"translateClipboardOnShortcut": "Translate clipboard on shortcut",
 	"translateClipboardOnShortcutDesc": "When you open {appName} with a shortcut, it will automatically translate your clipboard contents.",
 	"openKeyboardShortcut": "Define a keyboard shortcut to open {appName} quickly",
