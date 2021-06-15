@@ -49,6 +49,7 @@ const defaultPreferences = {
   showTransliteration: true,
   telemetry: false,
   themeSource: 'system',
+  translateSelectedOnShortcut: true,
   translateClipboardOnShortcut: false,
   translateWhenPressingEnter: true,
   useHardwareAcceleration: true,
