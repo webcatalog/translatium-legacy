@@ -27,7 +27,9 @@
     "test": "mocha"
   },
   "dependencies": {
-    "node-mac-permissions": "2.2.0"
+    "node-loader": "^2.0.0",
+    "node-mac-permissions": "2.2.0",
+    "robotjs": "0.6.0"
   },
   "devDependencies": {
     "@fontsource/roboto": "4.4.5",
@@ -78,7 +80,6 @@
     "react-scripts": "3.4.4",
     "redux": "4.1.0",
     "redux-thunk": "2.3.0",
-    "robotjs": "0.6.0",
     "source-map-support": "0.5.19",
     "uuid": "8.3.2",
     "wait-on": "5.3.0",
