@@ -28,6 +28,8 @@ jobs:
       uses: samuelmeuli/action-snapcraft@v1
       with:
         snapcraft_token: ${{ secrets.SNAP_TOKEN }}
+    - name: Install libxtst-dev
+      run: sudo apt-get install libxtst-dev
     - name: Set up Node.js
       uses: actions/setup-node@v1
       with:
