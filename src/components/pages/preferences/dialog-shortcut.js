@@ -54,8 +54,8 @@ class DialogShortcut extends React.Component {
       if (e.shiftKey) pressed.push('shift');
 
       const modifier = keyboardMap[e.keyCode];
-      if (modifier) {
-        pressed.push(modifier);
+      if (modifier && ['SHIFT', 'OS_KEY', 'CONTROL', 'ALT'].indexOf(modifier) < 0) {
+        pressed.push(modifier.toLowerCase());
       }
 
       if (pressed.length < 2) return;
