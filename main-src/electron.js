@@ -110,13 +110,18 @@ if (!gotTheLock) {
   }
 
   const getSelectedText = async () => {
+    // get current text in clipboard
     const currentClipboardContent = clipboard.readText();
-    clipboard.clear();
+
+    // save selected text (by saving it to clipboard)
     keyTap('c', process.platform === 'darwin' ? 'command' : 'control');
     await new Promise((resolve) => setTimeout(resolve, 200));
     const selectedText = clipboard.readText();
+
+    // restore clipboard
     clipboard.writeText(currentClipboardContent);
-    return selectedText;
+
+    return selectedText || currentClipboardContent;
   };
 
   // Load listeners
@@ -240,13 +245,9 @@ if (!gotTheLock) {
         if (!combinator) return;
         globalShortcut.register(combinator, () => {
           if (isHidden) {
-            const translateSelectedOnShortcut = getPreference('translateSelectedOnShortcut');
             const translateClipboardOnShortcut = getPreference('translateClipboardOnShortcut');
-            if (translateSelectedOnShortcut || translateClipboardOnShortcut) {
+            if (translateClipboardOnShortcut) {
               getSelectedText().then((text) => {
-                if (text.length === 0 && translateClipboardOnShortcut) {
-                  text = clipboard.readText();
-                }
                 if (text.length > 0) {
                   mb.window.send('set-input-text', text);
                   mb.window.send('go-to-home');

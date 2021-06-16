@@ -193,7 +193,6 @@ const Preferences = (props) => {
     showTransliteration,
     telemetry,
     themeSource,
-    translateSelectedOnShortcut,
     translateClipboardOnShortcut,
     translateWhenPressingEnter,
     useHardwareAcceleration,
@@ -348,22 +347,6 @@ const Preferences = (props) => {
                   ? renderCombinator(openOnMenubarShortcut) : null}
               />
               <ChevronRightIcon color="action" />
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText
-                primary={getLocale('translateSelectedOnShortcut')}
-                secondary={getLocale('translateSelectedOnShortcutDesc')}
-              />
-              <ListItemSecondaryAction>
-                <Switch
-                  edge="end"
-                  checked={attachToMenubar ? translateSelectedOnShortcut : false}
-                  onChange={() => onToggleSetting('translateSelectedOnShortcut')}
-                  color="primary"
-                  disabled={!attachToMenubar}
-                />
-              </ListItemSecondaryAction>
             </ListItem>
             <Divider />
             <ListItem>
@@ -769,7 +752,6 @@ Preferences.propTypes = {
   showTransliteration: PropTypes.bool.isRequired,
   telemetry: PropTypes.bool.isRequired,
   themeSource: PropTypes.string.isRequired,
-  translateSelectedOnShortcut: PropTypes.bool.isRequired,
   translateClipboardOnShortcut: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
   useHardwareAcceleration: PropTypes.bool.isRequired,
@@ -785,7 +767,6 @@ const mapStateToProps = (state) => ({
   showTransliteration: state.preferences.showTransliteration,
   telemetry: state.preferences.telemetry,
   themeSource: state.preferences.themeSource,
-  translateSelectedOnShortcut: state.preferences.translateSelectedOnShortcut,
   translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
   useHardwareAcceleration: state.preferences.useHardwareAcceleration,
