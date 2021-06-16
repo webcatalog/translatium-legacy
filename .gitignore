@@ -11,3 +11,4 @@ build
 _docs
 *.p12
 extensions/*.zip
+*.zip
