@@ -543,7 +543,7 @@ const Preferences = (props) => {
                   </div>
                   <ChevronRightIcon color="action" />
                 </ListItem>
-                {!window.process.mas && !window.process.windowsStore && (
+                {!window.process.windowsStore && (
                   <>
                     <Divider />
                     <ListItem
