@@ -19,6 +19,7 @@ const {
 } = require('electron');
 const isDev = require('electron-is-dev');
 const settings = require('electron-settings');
+const { keyTap } = require('robotjs');
 
 settings.configure({
   fileName: 'Settings', // backward compatible with electron-settings@3
@@ -43,7 +44,6 @@ const { initLocales, getLocale } = require('./libs/locales');
 const sendToAllWindows = require('./libs/send-to-all-windows');
 const setContextMenu = require('./libs/set-context-menu');
 const isMacOs11 = require('./libs/is-mac-os-11');
-const { keyTap } = require('robotjs');
 
 // we only need updater for standalone builds (AppImage, NSIS, DMG)
 if (process.env.SNAP == null && !process.mas && !process.windowsStore) {
@@ -112,12 +112,12 @@ if (!gotTheLock) {
   const getSelectedText = async () => {
     const currentClipboardContent = clipboard.readText();
     clipboard.clear();
-    keyTap("c", process.platform === "darwin" ? "command" : "control");
-    await new Promise(resolve => setTimeout(resolve, 200));
+    keyTap('c', process.platform === 'darwin' ? 'command' : 'control');
+    await new Promise((resolve) => setTimeout(resolve, 200));
     const selectedText = clipboard.readText();
     clipboard.writeText(currentClipboardContent);
     return selectedText;
-  }
+  };
 
   // Load listeners
   loadListeners();
@@ -244,7 +244,7 @@ if (!gotTheLock) {
             const translateClipboardOnShortcut = getPreference('translateClipboardOnShortcut');
             if (translateSelectedOnShortcut || translateClipboardOnShortcut) {
               getSelectedText().then((text) => {
-                if (text.length == 0 && translateClipboardOnShortcut) {
+                if (text.length === 0 && translateClipboardOnShortcut) {
                   text = clipboard.readText();
                 }
                 if (text.length > 0) {
@@ -252,7 +252,7 @@ if (!gotTheLock) {
                   mb.window.send('go-to-home');
                 }
               });
-            } 
+            }
             mb.showWindow();
           } else {
             mb.hideWindow();
