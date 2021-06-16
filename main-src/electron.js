@@ -29,7 +29,7 @@ const url = require('url');
 const { menubar } = require('menubar');
 const windowStateKeeper = require('electron-window-state');
 
-const { getPreference, setPreference } = require('./libs/preferences');
+const { getPreference, setPreference, resetPreference } = require('./libs/preferences');
 
 // Activate the Sentry Electron SDK as early as possible in every process.
 if (!isDev && getPreference('sentry')) {
@@ -227,21 +227,30 @@ if (!gotTheLock) {
 
       ipcMain.on('set-show-menubar-shortcut', (e, combinator) => {
         if (!combinator) return;
-        globalShortcut.register(combinator, () => {
-          if (isHidden) {
-            mb.showWindow();
-            const translateClipboardOnShortcut = getPreference('translateClipboardOnShortcut');
-            if (translateClipboardOnShortcut) {
-              const text = clipboard.readText();
-              if (text.length > 0) {
-                mb.window.send('set-input-text', text);
-                mb.window.send('go-to-home');
+        try {
+          globalShortcut.register(combinator, () => {
+            if (isHidden) {
+              mb.showWindow();
+              const translateClipboardOnShortcut = getPreference('translateClipboardOnShortcut');
+              if (translateClipboardOnShortcut) {
+                const text = clipboard.readText();
+                if (text.length > 0) {
+                  mb.window.send('set-input-text', text);
+                  mb.window.send('go-to-home');
+                }
               }
+            } else {
+              mb.hideWindow();
             }
-          } else {
-            mb.hideWindow();
+          });
+        } catch (err) {
+          // Error processing argument at index 0, conversion failure from meta+shift+
+          // combinator was not set correctly by the frontend
+          // so we have to reset it to default
+          if (err && err.message && err.message.includes('processing argument')) {
+            resetPreference('openOnMenubarShortcut');
           }
-        });
+        }
       });
 
       const openOnMenubarShortcut = getPreference('openOnMenubarShortcut');

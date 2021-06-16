@@ -14,6 +14,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
+import keyboardMap from '../../../constants/keyboard-map';
+
 import {
   close as closeDialogShortcut,
   setCombinator,
@@ -46,14 +48,15 @@ class DialogShortcut extends React.Component {
     window.onkeydown = (e) => {
       const pressed = [];
 
-      if (e.keyCode === 16) return;
-
       if (e.ctrlKey) pressed.push('ctrl');
       if (e.metaKey) pressed.push('meta');
       if (e.altKey) pressed.push('alt');
       if (e.shiftKey) pressed.push('shift');
 
-      pressed.push(String.fromCharCode(e.keyCode).toLowerCase());
+      const modifier = keyboardMap[e.keyCode];
+      if (modifier) {
+        pressed.push(modifier);
+      }
 
       if (pressed.length < 2) return;
 
