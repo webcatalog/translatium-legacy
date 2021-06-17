@@ -71,7 +71,7 @@ const loadListeners = () => {
   });
 
   ipcMain.on('request-reset-preferences', () => {
-    dialog.showMessageBox(BrowserWindow.getAllWindows()[0], {
+    dialog.showMessageBox({
       type: 'question',
       buttons: [getLocale('resetNow'), getLocale('cancel')],
       message: getLocale('resetDesc'),

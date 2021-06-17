@@ -97,7 +97,6 @@ const getPreference = (name) => {
 const setPreference = (name, value) => {
   sendToAllWindows('set-preference', name, value);
   cachedPreferences[name] = value;
-  Promise.resolve().then(() => settings.setSync(`preferences.${v}.${name}`, value));
 
   if (name === 'openOnMenubarShortcut') {
     ipcMain.emit('unset-show-menubar-shortcut', null, getPreference(name));
@@ -107,6 +106,24 @@ const setPreference = (name, value) => {
   if (name === 'themeSource') {
     nativeTheme.themeSource = value;
   }
+
+  Promise.resolve().then(() => settings.setSync(`preferences.${v}.${name}`, value));
+};
+
+const resetPreference = (name) => {
+  const value = defaultPreferences[name];
+  sendToAllWindows('set-preference', name, defaultPreferences[name]);
+  cachedPreferences[name] = defaultPreferences[name];
+
+  if (name === 'openOnMenubarShortcut') {
+    ipcMain.emit('set-show-menubar-shortcut', null, value);
+  }
+
+  if (name === 'themeSource') {
+    nativeTheme.themeSource = value;
+  }
+
+  Promise.resolve().then(() => settings.unsetSync(`preferences.${v}.${name}`));
 };
 
 const resetPreferences = () => {
@@ -122,6 +139,7 @@ const resetPreferences = () => {
 module.exports = {
   getPreference,
   getPreferences,
+  resetPreference,
   resetPreferences,
   setPreference,
 };
