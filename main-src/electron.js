@@ -19,7 +19,6 @@ const {
 } = require('electron');
 const isDev = require('electron-is-dev');
 const settings = require('electron-settings');
-const { keyTap } = require('robotjs');
 
 settings.configure({
   fileName: 'Settings', // backward compatible with electron-settings@3
