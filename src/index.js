@@ -21,12 +21,14 @@ require('lunr-languages/lunr.stemmer.support')(global.lunr);
 require('lunr-languages/tinyseg')(global.lunr);
 global.lunr.wordcut = require('lunr-languages/wordcut');
 require('lunr-languages/lunr.multi')(global.lunr);
+require('lunr-languages/lunr.ar')(global.lunr);
 require('lunr-languages/lunr.da')(global.lunr);
 require('lunr-languages/lunr.de')(global.lunr);
 require('lunr-languages/lunr.du')(global.lunr);
 require('lunr-languages/lunr.es')(global.lunr);
 require('lunr-languages/lunr.fi')(global.lunr);
 require('lunr-languages/lunr.fr')(global.lunr);
+require('lunr-languages/lunr.hi')(global.lunr);
 require('lunr-languages/lunr.hu')(global.lunr);
 require('lunr-languages/lunr.it')(global.lunr);
 require('lunr-languages/lunr.ja')(global.lunr);
@@ -40,6 +42,7 @@ require('lunr-languages/lunr.sv')(global.lunr);
 require('lunr-languages/lunr.th')(global.lunr);
 require('lunr-languages/lunr.tr')(global.lunr);
 require('lunr-languages/lunr.vi')(global.lunr);
+require('lunr-languages/lunr.zh')(global.lunr);
 
 // https://github.com/quanglam2807/translatium/issues/28
 // remove text formatting when copying
