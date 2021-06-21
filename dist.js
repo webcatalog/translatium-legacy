@@ -38,7 +38,7 @@ switch (process.platform) {
     break;
   }
   case 'win32': {
-    targets = Platform.WINDOWS.createTarget(['appx']);
+    targets = Platform.WINDOWS.createTarget(['appx'], Arch.x64, Arch.arm64);
     break;
   }
   default:
