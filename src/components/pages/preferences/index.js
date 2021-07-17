@@ -287,7 +287,7 @@ const Preferences = (props) => {
               <List dense disablePadding>
                 <ListItem
                   button
-                  onClick={() => window.remote.shell.openExternal('https://translatium.app/extensions')}
+                  onClick={() => window.remote.shell.openExternal('https://webcatalog.io/translatium/extensions/')}
                 >
                   <div className={classes.extensionBlock}>
                     <div className={classes.extensionIcons}>
@@ -489,7 +489,7 @@ const Preferences = (props) => {
                   <>
                     <ListItem
                       button
-                      onClick={() => requestOpenInBrowser('https://webcatalog.app?utm_source=webcatalog_app')}
+                      onClick={() => requestOpenInBrowser('https://webcatalog.io/webcatalog/?utm_source=webcatalog_app')}
                       className={classes.listItemPromotion}
                     >
                       <div className={classes.promotionBlock}>
@@ -515,7 +515,7 @@ const Preferences = (props) => {
                 <ListItem
                   button
                   onClick={() => {
-                    let url = `https://translatium.app?utm_source=${utmSource}`;
+                    let url = `https://webcatalog.io/translatium/?utm_source=${utmSource}`;
                     if (window.process.mas) {
                       url = 'macappstore://apps.apple.com/app/translatium/id1547052291';
                     } else if (window.process.windowsStore) {
@@ -548,7 +548,7 @@ const Preferences = (props) => {
                     <ListItem
                       button
                       onClick={() => {
-                        let url = `https://switchbar.app?utm_source=${utmSource}`;
+                        let url = `https://webcatalog.io/switchbar/?utm_source=${utmSource}`;
                         if (window.process.mas) {
                           url = 'macappstore://apps.apple.com/app/switchbar/id1555467675';
                         }
@@ -579,7 +579,7 @@ const Preferences = (props) => {
                 <ListItem
                   button
                   onClick={() => {
-                    let url = `https://singlebox.app?utm_source=${utmSource}`;
+                    let url = `https://webcatalog.io/singlebox/?utm_source=${utmSource}`;
                     if (window.process.mas) {
                       url = 'macappstore://apps.apple.com/us/app/singlebox-all-in-one-messenger/id1551183766';
                     }
@@ -608,7 +608,7 @@ const Preferences = (props) => {
                 <ListItem
                   button
                   onClick={() => {
-                    let url = `https://clovery.app?utm_source=${utmSource}`;
+                    let url = `https://webcatalog.io/clovery/?utm_source=${utmSource}`;
                     if (window.process.mas) {
                       url = 'macappstore://apps.apple.com/us/app/clovery-for-google-apps/id1552618413';
                     }
@@ -647,12 +647,12 @@ const Preferences = (props) => {
             </ListItem>
             <Divider />
             <ListItem button>
-              <ListItemText primary={getLocale('website')} onClick={() => requestOpenInBrowser('https://translatium.app?utm_source=translatium_app')} />
+              <ListItemText primary={getLocale('website')} onClick={() => requestOpenInBrowser('https://webcatalog.io/translatium/?utm_source=translatium_app')} />
               <ChevronRightIcon color="action" />
             </ListItem>
             <Divider />
             <ListItem button>
-              <ListItemText primary={getLocale('support')} onClick={() => requestOpenInBrowser('https://translatium.app/support?utm_source=translatium_app')} />
+              <ListItemText primary={getLocale('support')} onClick={() => requestOpenInBrowser('https://webcatalog.io/translatium/help/?utm_source=translatium_app')} />
               <ChevronRightIcon color="action" />
             </ListItem>
             <Divider />

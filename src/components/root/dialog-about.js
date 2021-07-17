@@ -86,13 +86,13 @@ const About = (props) => {
         </Typography>
 
         <Button
-          onClick={() => requestOpenInBrowser('https://translatium.app?utm_source=translatium_app')}
+          onClick={() => requestOpenInBrowser('https://webcatalog.io/translatium/?utm_source=translatium_app')}
         >
           {getLocale('website')}
         </Button>
 
         <Button
-          onClick={() => requestOpenInBrowser('https://translatium.app/help?utm_source=translatium_app')}
+          onClick={() => requestOpenInBrowser('https://webcatalog.io/translatium/help/?utm_source=translatium_app')}
         >
           {getLocale('support')}
         </Button>
