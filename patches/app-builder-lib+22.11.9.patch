@@ -1,5 +1,5 @@
 diff --git a/node_modules/app-builder-lib/out/macPackager.js b/node_modules/app-builder-lib/out/macPackager.js
-index a35db1e..4dc07e9 100644
+index c97fe27..6bcf464 100644
 --- a/node_modules/app-builder-lib/out/macPackager.js
 +++ b/node_modules/app-builder-lib/out/macPackager.js
 @@ -104,6 +104,22 @@ class MacPackager extends platformPackager_1.PlatformPackager {

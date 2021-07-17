@@ -149,7 +149,7 @@ const createMenu = () => {
       submenu: [
         {
           label: getLocale('appNameSupport'),
-          click: () => shell.openExternal('https://translatium.app/support'),
+          click: () => shell.openExternal('https://webcatalog.io/translatium/help/'),
         },
         {
           label: getLocale('reportAnIssueViaGitHub'),
