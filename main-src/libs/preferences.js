@@ -42,8 +42,10 @@ const defaultPreferences = {
   openOnMenubarShortcut: 'alt+shift+t',
   outputLang: 'zh-CN',
   privacyConsentAsked: false,
-  ratingCardDidRate: false,
-  ratingCardLastClicked: 0,
+  // add suffix "2" to reset values and re-show rating card
+  // (we had a bug previously which prevented this to work properly)
+  ratingCardDidRate2: false,
+  ratingCardLastClicked2: 0,
   recentLanguages: ['en', 'zh-CN'],
   sentry: false,
   showTransliteration: true,

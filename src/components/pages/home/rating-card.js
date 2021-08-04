@@ -111,8 +111,8 @@ RatingCard.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  ratingCardLastClicked: state.preferences.ratingCardLastClicked,
-  ratingCardDidRate: state.preferences.ratingCardDidRate,
+  ratingCardLastClicked: state.preferences.ratingCardLastClicked2,
+  ratingCardDidRate: state.preferences.ratingCardDidRate2,
 });
 
 export default connectComponent(
