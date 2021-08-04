@@ -73,7 +73,7 @@ const RatingCard = ({
               onClick={() => {
                 requestSetPreference('ratingCardLastClicked', Date.now());
                 requestSetPreference('ratingCardDidRate', true);
-                requestOpenInBrowser('ms-windows-store://review/?ProductId=9wzdncrcsg9k');
+                requestOpenInBrowser('ms-windows-store://review/?ProductId=9MWPG56JKS38');
               }}
             >
               {getLocale('rateMicrosoftStore')}

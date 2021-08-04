@@ -678,7 +678,7 @@ const Preferences = (props) => {
               <>
                 <Divider />
                 <ListItem button>
-                  <ListItemText primary={getLocale('rateMicrosoftStore')} onClick={() => requestOpenInBrowser('ms-windows-store://review/?ProductId=9wzdncrcsg9k')} />
+                  <ListItemText primary={getLocale('rateMicrosoftStore')} onClick={() => requestOpenInBrowser('ms-windows-store://review/?ProductId=9MWPG56JKS38')} />
                   <ChevronRightIcon color="action" />
                 </ListItem>
               </>
