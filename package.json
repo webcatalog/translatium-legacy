@@ -13,7 +13,7 @@
     "node": "14"
   },
   "scripts": {
-    "postinstall": "npx patch-package && yarn generate-open-source-notices",
+    "postinstall": "npx patch-package && electron-builder install-app-deps && yarn generate-open-source-notices",
     "generate-open-source-notices": "yarn licenses generate-disclaimer > public/open-source-notices.txt",
     "start": "cross-env BROWSER=none react-scripts start",
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\" -k",
@@ -27,7 +27,9 @@
     "test": "mocha"
   },
   "dependencies": {
-    "node-mac-permissions": "2.2.0"
+    "node-loader": "^2.0.0",
+    "node-mac-permissions": "2.2.0",
+    "robotjs": "0.6.0"
   },
   "devDependencies": {
     "@fontsource/roboto": "4.5.0",

@@ -19,6 +19,7 @@ const {
 } = require('electron');
 const isDev = require('electron-is-dev');
 const settings = require('electron-settings');
+const { keyTap } = require('robotjs');
 
 settings.configure({
   fileName: 'Settings', // backward compatible with electron-settings@3
@@ -107,6 +108,21 @@ if (!gotTheLock) {
   if (process.platform === 'darwin' && process.env.NODE_ENV === 'production') {
     app.setAsDefaultProtocolClient('translatium');
   }
+
+  const getSelectedText = async () => {
+    // get current text in clipboard
+    const currentClipboardContent = clipboard.readText();
+
+    // save selected text (by saving it to clipboard)
+    keyTap('c', process.platform === 'darwin' ? 'command' : 'control');
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    const selectedText = clipboard.readText();
+
+    // restore clipboard
+    clipboard.writeText(currentClipboardContent);
+
+    return selectedText || currentClipboardContent;
+  };
 
   // Load listeners
   loadListeners();
@@ -230,15 +246,16 @@ if (!gotTheLock) {
         try {
           globalShortcut.register(combinator, () => {
             if (isHidden) {
-              mb.showWindow();
               const translateClipboardOnShortcut = getPreference('translateClipboardOnShortcut');
               if (translateClipboardOnShortcut) {
-                const text = clipboard.readText();
-                if (text.length > 0) {
-                  mb.window.send('set-input-text', text);
-                  mb.window.send('go-to-home');
-                }
+                getSelectedText().then((text) => {
+                  if (text.length > 0) {
+                    mb.window.send('set-input-text', text);
+                    mb.window.send('go-to-home');
+                  }
+                });
               }
+              mb.showWindow();
             } else {
               mb.hideWindow();
             }

@@ -78,6 +78,14 @@ const getElectronMainConfig = () => {
     },
     devtool: 'source-map',
     plugins,
+    module: {
+      rules: [
+        {
+          test: /\.node$/,
+          use: 'node-loader'
+        },
+      ]
+    }
   };
 };
 
