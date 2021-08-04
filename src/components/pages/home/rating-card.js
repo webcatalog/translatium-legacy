@@ -32,18 +32,18 @@ const styles = (theme) => ({
 
 const RatingCard = ({
   classes,
-  ratingCardLastClicked,
-  ratingCardDidRate,
+  ratingCardLastClicked2,
+  ratingCardDidRate2,
 }) => {
   if (!window.process.mas && !window.process.windowsStore) return null;
 
   // time gap between rating card request
   // 3 months if user has rated the app, 1 week if user has not
-  const gap = ratingCardDidRate ? 3 * 30 * 24 * 60 * 60 * 1000 : 7 * 24 * 60 * 60 * 1000;
+  const gap = ratingCardDidRate2 ? 3 * 30 * 24 * 60 * 60 * 1000 : 7 * 24 * 60 * 60 * 1000;
 
   const now = Date.now();
 
-  if (now > ratingCardLastClicked + gap) {
+  if (now > ratingCardLastClicked2 + gap) {
     return (
       <Card elevation={0} square className={classNames(classes.card, classes.ratingCard)}>
         <CardActions className={classes.ratingCardActions}>
@@ -55,8 +55,8 @@ const RatingCard = ({
               disableElevation
               classes={{ label: classes.translateButtonLabel }}
               onClick={() => {
-                requestSetPreference('ratingCardLastClicked', Date.now());
-                requestSetPreference('ratingCardDidRate', true);
+                requestSetPreference('ratingCardLastClicked2', Date.now());
+                requestSetPreference('ratingCardDidRate2', true);
                 requestOpenInBrowser('macappstore://apps.apple.com/app/id1547052291?action=write-review');
               }}
             >
@@ -71,8 +71,8 @@ const RatingCard = ({
               disableElevation
               classes={{ label: classes.translateButtonLabel }}
               onClick={() => {
-                requestSetPreference('ratingCardLastClicked', Date.now());
-                requestSetPreference('ratingCardDidRate', true);
+                requestSetPreference('ratingCardLastClicked2', Date.now());
+                requestSetPreference('ratingCardDidRate2', true);
                 requestOpenInBrowser('ms-windows-store://review/?ProductId=9MWPG56JKS38');
               }}
             >
@@ -86,7 +86,7 @@ const RatingCard = ({
             disableElevation
             classes={{ label: classes.translateButtonLabel }}
             onClick={() => {
-              requestSetPreference('ratingCardLastClicked', Date.now());
+              requestSetPreference('ratingCardLastClicked2', Date.now());
             }}
           >
             {getLocale('later')}
@@ -100,19 +100,19 @@ const RatingCard = ({
 };
 
 RatingCard.defaultProps = {
-  ratingCardLastClicked: 0,
-  ratingCardDidRate: false,
+  ratingCardLastClicked2: 0,
+  ratingCardDidRate2: false,
 };
 
 RatingCard.propTypes = {
   classes: PropTypes.object.isRequired,
-  ratingCardLastClicked: PropTypes.number,
-  ratingCardDidRate: PropTypes.bool,
+  ratingCardLastClicked2: PropTypes.number,
+  ratingCardDidRate2: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
-  ratingCardLastClicked: state.preferences.ratingCardLastClicked,
-  ratingCardDidRate: state.preferences.ratingCardDidRate,
+  ratingCardLastClicked2: state.preferences.ratingCardLastClicked2,
+  ratingCardDidRate2: state.preferences.ratingCardDidRate2,
 });
 
 export default connectComponent(
