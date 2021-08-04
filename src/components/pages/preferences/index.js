@@ -478,126 +478,29 @@ const Preferences = (props) => {
           or significantly change the app from what
           we see during the review process. */}
         {/* Microsoft also doesn't allow linking to apps outside the store */}
-        {!window.process.windowsStore && (
-          <>
-            <Typography variant="subtitle2" color="textPrimary" className={classes.paperTitle}>
-              More Apps
-            </Typography>
-            <Paper elevation={0} className={classes.paper}>
-              <List disablePadding dense>
-                {!window.process.mas && !window.process.windowsStore && (
-                  <>
-                    <ListItem
-                      button
-                      onClick={() => requestOpenInBrowser('https://webcatalog.io/webcatalog/?utm_source=webcatalog_app')}
-                      className={classes.listItemPromotion}
-                    >
-                      <div className={classes.promotionBlock}>
-                        <div className={classes.promotionLeft}>
-                          <img src={webcatalogIconPng} alt="WebCatalog" className={classes.appIcon} />
-                        </div>
-                        <div className={classes.promotionRight}>
-                          <div className={classes.promotionRightInner}>
-                            <Typography variant="body1" className={classes.appTitle}>
-                              WebCatalog
-                            </Typography>
-                            <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
-                              Turn Any Websites Into Real Desktop Apps
-                            </Typography>
-                          </div>
-                        </div>
-                      </div>
-                      <ChevronRightIcon color="action" />
-                    </ListItem>
-                    <Divider />
-                  </>
-                )}
+        <Typography variant="subtitle2" color="textPrimary" className={classes.paperTitle}>
+          More Apps
+        </Typography>
+        <Paper elevation={0} className={classes.paper}>
+          <List disablePadding dense>
+            {!window.process.mas && !window.process.windowsStore && (
+              <>
                 <ListItem
                   button
-                  onClick={() => {
-                    let url = `https://webcatalog.io/translatium/?utm_source=${utmSource}`;
-                    if (window.process.mas) {
-                      url = 'macappstore://apps.apple.com/app/translatium/id1547052291';
-                    } else if (window.process.windowsStore) {
-                      url = 'ms-windows-store://pdp/?productid=9MWPG56JKS38';
-                    }
-                    requestOpenInBrowser(url);
-                  }}
+                  onClick={() => requestOpenInBrowser('https://webcatalog.io/webcatalog/?utm_source=webcatalog_app')}
                   className={classes.listItemPromotion}
                 >
                   <div className={classes.promotionBlock}>
                     <div className={classes.promotionLeft}>
-                      <img src={translatiumIconPng} alt="Translatium" className={classes.appIcon} />
+                      <img src={webcatalogIconPng} alt="WebCatalog" className={classes.appIcon} />
                     </div>
                     <div className={classes.promotionRight}>
                       <div className={classes.promotionRightInner}>
                         <Typography variant="body1" className={classes.appTitle}>
-                          Translatium
+                          WebCatalog
                         </Typography>
                         <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
-                          Translate 100+ Languages Instantly
-                        </Typography>
-                      </div>
-                    </div>
-                  </div>
-                  <ChevronRightIcon color="action" />
-                </ListItem>
-                {!window.process.windowsStore && (
-                  <>
-                    <Divider />
-                    <ListItem
-                      button
-                      onClick={() => {
-                        let url = `https://webcatalog.io/switchbar/?utm_source=${utmSource}`;
-                        if (window.process.mas) {
-                          url = 'macappstore://apps.apple.com/app/switchbar/id1555467675';
-                        }
-                        requestOpenInBrowser(url);
-                      }}
-                      className={classes.listItemPromotion}
-                    >
-                      <div className={classes.promotionBlock}>
-                        <div className={classes.promotionLeft}>
-                          <img src={switchbarIconPng} alt="Switchbar" className={classes.appIcon} />
-                        </div>
-                        <div className={classes.promotionRight}>
-                          <div className={classes.promotionRightInner}>
-                            <Typography variant="body1" className={classes.appTitle}>
-                              Switchbar
-                            </Typography>
-                            <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
-                              Choose Where to Open Links
-                            </Typography>
-                          </div>
-                        </div>
-                      </div>
-                      <ChevronRightIcon color="action" />
-                    </ListItem>
-                  </>
-                )}
-                <Divider />
-                <ListItem
-                  button
-                  onClick={() => {
-                    let url = `https://webcatalog.io/singlebox/?utm_source=${utmSource}`;
-                    if (window.process.mas) {
-                      url = 'macappstore://apps.apple.com/us/app/singlebox-all-in-one-messenger/id1551183766';
-                    }
-                    requestOpenInBrowser(url);
-                  }}
-                  className={classes.listItemPromotion}
-                >
-                  <div className={classes.promotionBlock}>
-                    <div className={classes.promotionLeft}>
-                      <img src={singleboxIconPng} alt="Singlebox" className={classes.appIcon} />
-                    </div>
-                    <div className={classes.promotionRight}>
-                      <div className={classes.promotionRightInner}>
-                        <Typography variant="body1" className={classes.appTitle}>
-                          Singlebox
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
-                          All-in-One Messenger
+                          Turn Any Websites Into Real Desktop Apps
                         </Typography>
                       </div>
                     </div>
@@ -605,12 +508,47 @@ const Preferences = (props) => {
                   <ChevronRightIcon color="action" />
                 </ListItem>
                 <Divider />
+              </>
+            )}
+            <ListItem
+              button
+              onClick={() => {
+                let url = `https://webcatalog.io/translatium/?utm_source=${utmSource}`;
+                if (window.process.mas) {
+                  url = 'macappstore://apps.apple.com/app/translatium/id1547052291';
+                } else if (window.process.windowsStore) {
+                  url = 'ms-windows-store://pdp/?productid=9MWPG56JKS38';
+                }
+                requestOpenInBrowser(url);
+              }}
+              className={classes.listItemPromotion}
+            >
+              <div className={classes.promotionBlock}>
+                <div className={classes.promotionLeft}>
+                  <img src={translatiumIconPng} alt="Translatium" className={classes.appIcon} />
+                </div>
+                <div className={classes.promotionRight}>
+                  <div className={classes.promotionRightInner}>
+                    <Typography variant="body1" className={classes.appTitle}>
+                      Translatium
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
+                      Translate 100+ Languages Instantly
+                    </Typography>
+                  </div>
+                </div>
+              </div>
+              <ChevronRightIcon color="action" />
+            </ListItem>
+            {!window.process.windowsStore && (
+              <>
+                <Divider />
                 <ListItem
                   button
                   onClick={() => {
-                    let url = `https://webcatalog.io/clovery/?utm_source=${utmSource}`;
+                    let url = `https://webcatalog.io/switchbar/?utm_source=${utmSource}`;
                     if (window.process.mas) {
-                      url = 'macappstore://apps.apple.com/us/app/clovery-for-google-apps/id1552618413';
+                      url = 'macappstore://apps.apple.com/app/switchbar/id1555467675';
                     }
                     requestOpenInBrowser(url);
                   }}
@@ -618,25 +556,87 @@ const Preferences = (props) => {
                 >
                   <div className={classes.promotionBlock}>
                     <div className={classes.promotionLeft}>
-                      <img src={cloveryIconPng} alt="Clovery" className={classes.appIcon} />
+                      <img src={switchbarIconPng} alt="Switchbar" className={classes.appIcon} />
                     </div>
                     <div className={classes.promotionRight}>
                       <div className={classes.promotionRightInner}>
                         <Typography variant="body1" className={classes.appTitle}>
-                          Clovery
+                          Switchbar
                         </Typography>
                         <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
-                          All Google Apps in One
+                          Choose Where to Open Links
                         </Typography>
                       </div>
                     </div>
                   </div>
                   <ChevronRightIcon color="action" />
                 </ListItem>
-              </List>
-            </Paper>
-          </>
-        )}
+              </>
+            )}
+            <Divider />
+            <ListItem
+              button
+              onClick={() => {
+                let url = `https://webcatalog.io/singlebox/?utm_source=${utmSource}`;
+                if (window.process.mas) {
+                  url = 'macappstore://apps.apple.com/us/app/singlebox-all-in-one-messenger/id1551183766';
+                } else if (window.process.windowsStore) {
+                  url = 'ms-windows-store://pdp/?productid=9NH85V7VL3RN';
+                }
+                requestOpenInBrowser(url);
+              }}
+              className={classes.listItemPromotion}
+            >
+              <div className={classes.promotionBlock}>
+                <div className={classes.promotionLeft}>
+                  <img src={singleboxIconPng} alt="Singlebox" className={classes.appIcon} />
+                </div>
+                <div className={classes.promotionRight}>
+                  <div className={classes.promotionRightInner}>
+                    <Typography variant="body1" className={classes.appTitle}>
+                      Singlebox
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
+                      All-in-One Messenger
+                    </Typography>
+                  </div>
+                </div>
+              </div>
+              <ChevronRightIcon color="action" />
+            </ListItem>
+            <Divider />
+            <ListItem
+              button
+              onClick={() => {
+                let url = `https://webcatalog.io/clovery/?utm_source=${utmSource}`;
+                if (window.process.mas) {
+                  url = 'macappstore://apps.apple.com/us/app/clovery-for-google-apps/id1552618413';
+                } else if (window.process.windowsStore) {
+                  url = 'ms-windows-store://pdp/?productid=9NT71213J864';
+                }
+                requestOpenInBrowser(url);
+              }}
+              className={classes.listItemPromotion}
+            >
+              <div className={classes.promotionBlock}>
+                <div className={classes.promotionLeft}>
+                  <img src={cloveryIconPng} alt="Clovery" className={classes.appIcon} />
+                </div>
+                <div className={classes.promotionRight}>
+                  <div className={classes.promotionRightInner}>
+                    <Typography variant="body1" className={classes.appTitle}>
+                      Clovery
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
+                      All Google Apps in One
+                    </Typography>
+                  </div>
+                </div>
+              </div>
+              <ChevronRightIcon color="action" />
+            </ListItem>
+          </List>
+        </Paper>
 
         <Typography variant="body2" className={classes.paperTitle} />
         <Paper elevation={0} className={classes.paper}>
