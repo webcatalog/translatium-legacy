@@ -65,7 +65,16 @@ const initCachedPreferences = () => {
     settings.setSync('preferenceVersion', 13);
   }
 
-  cachedPreferences = { ...defaultPreferences, ...settings.getSync(`preferences.${v}`) };
+  // ratingCardDidRate2 is only reset on Windows & Linux
+  // so transfer old value to new value on macOS
+  const savedPreferences = settings.getSync(`preferences.${v}`);
+  if (process.platform === 'darwin') {
+    if (!savedPreferences.ratingCardDidRate2 && savedPreferences.ratingCardDidRate) {
+      savedPreferences.ratingCardDidRate2 = true;
+    }
+  }
+
+  cachedPreferences = { ...defaultPreferences, ...savedPreferences };
   // backward compatibility
   // es-ES is renamed to es
   if (cachedPreferences.displayLanguage === 'es-ES') {
