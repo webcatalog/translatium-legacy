@@ -27,4 +27,4 @@ security import $CURRENT_DIR/certificates.p12 -P "$CSC_KEY_PASSWORD" -k safari -
 security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$CSC_KEY_PASSWORD" safari
 
 # sign
-codesign --verbose --force -o runtime --keychain safari --sign "3rd Party Mac Developer Application: WebCatalog Ltd" --entitlements $CURRENT_DIR/translatium/safari/safari.entitlements $CURRENT_DIR/translatium/build/Release/safari.appex
+codesign --verbose --force -o runtime --keychain safari --sign "Apple Distribution: WebCatalog Ltd" --entitlements $CURRENT_DIR/translatium/safari/safari.entitlements $CURRENT_DIR/translatium/build/Release/safari.appex
