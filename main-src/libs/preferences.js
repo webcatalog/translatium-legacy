@@ -68,7 +68,7 @@ const initCachedPreferences = () => {
   // ratingCardDidRate2 is only reset on Windows & Linux
   // so transfer old value (ratingCardDidRate) to new value on macOS
   const savedPreferences = settings.getSync(`preferences.${v}`);
-  if (process.platform === 'darwin' && !savedPreferences.ratingCardDidRate2 && savedPreferences.ratingCardDidRate) {
+  if (process.platform === 'darwin' && savedPreferences && !savedPreferences.ratingCardDidRate2 && savedPreferences.ratingCardDidRate) {
     savedPreferences.ratingCardDidRate2 = true;
   }
 
