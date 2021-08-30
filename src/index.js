@@ -39,6 +39,7 @@ require('lunr-languages/lunr.pt')(global.lunr);
 require('lunr-languages/lunr.ro')(global.lunr);
 require('lunr-languages/lunr.ru')(global.lunr);
 require('lunr-languages/lunr.sv')(global.lunr);
+require('lunr-languages/lunr.ta')(global.lunr);
 require('lunr-languages/lunr.th')(global.lunr);
 require('lunr-languages/lunr.tr')(global.lunr);
 require('lunr-languages/lunr.vi')(global.lunr);
