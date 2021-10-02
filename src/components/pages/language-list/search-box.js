@@ -88,17 +88,21 @@ const SearchBox = ({
     inputRef.current.select();
   }, [inputRef, route]);
   useEffect(() => {
-    // focus on first load
-    // https://github.com/webcatalog/translatium-desktop/issues/347
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
     window.ipcRenderer.on('open-find', handleOpenFind);
     // Remove event listener on cleanup
     return () => {
       window.ipcRenderer.removeListener('open-find', handleOpenFind);
     };
   }, [inputRef, handleOpenFind]);
+
+  useEffect(() => {
+    if (route !== ROUTE_LANGUAGE_LIST) return;
+    // focus on first load
+    // https://github.com/webcatalog/translatium-desktop/issues/347
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [route]);
 
   const clearSearchAction = query.length > 0 && (
     <Tooltip title={getLocale('clear')} placement="left">
