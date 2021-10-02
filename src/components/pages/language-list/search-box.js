@@ -88,6 +88,11 @@ const SearchBox = ({
     inputRef.current.select();
   }, [inputRef, route]);
   useEffect(() => {
+    // focus on first load
+    // https://github.com/webcatalog/translatium-desktop/issues/347
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
     window.ipcRenderer.on('open-find', handleOpenFind);
     // Remove event listener on cleanup
     return () => {
