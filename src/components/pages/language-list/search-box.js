@@ -97,7 +97,6 @@ const SearchBox = ({
 
   useEffect(() => {
     if (route !== ROUTE_LANGUAGE_LIST) return;
-    console.log('focus');
     // focus on first load
     // https://github.com/webcatalog/translatium-desktop/issues/347
     if (inputRef.current) {
