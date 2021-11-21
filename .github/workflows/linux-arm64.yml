@@ -27,6 +27,7 @@ jobs:
     - name: Install Snapcraft
       uses: samuelmeuli/action-snapcraft@v1
       with:
+        # snapcraft export-login --snaps translatium --channels stable,edge -
         snapcraft_token: ${{ secrets.SNAP_TOKEN }}
     - name: Set up Node.js
       uses: actions/setup-node@v1

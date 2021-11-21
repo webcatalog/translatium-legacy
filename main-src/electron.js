@@ -19,6 +19,9 @@ const {
 } = require('electron');
 const isDev = require('electron-is-dev');
 const settings = require('electron-settings');
+const electronRemote = require('@electron/remote/main');
+
+electronRemote.initialize();
 
 settings.configure({
   fileName: 'Settings', // backward compatible with electron-settings@3
@@ -295,6 +298,7 @@ if (!gotTheLock) {
       }
 
       mainWindow = new BrowserWindow(winOpts);
+      electronRemote.enable(mainWindow.webContents);
       mainWindowState.manage(mainWindow);
 
       mainWindow.on('enter-full-screen', () => {

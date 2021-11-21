@@ -3,12 +3,12 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 require('source-map-support').install();
 const {
-  remote,
   ipcRenderer,
   webFrame,
   desktopCapturer,
 } = require('electron');
 const machineId = require('node-machine-id');
+const remote = require('@electron/remote');
 
 // Activate the Sentry Electron SDK as early as possible in every process.
 const isDev = process.env.NODE_ENV !== 'production';
