@@ -62,18 +62,6 @@ let mainWindow;
 // see https://github.com/electron/electron/issues/15958
 const gotTheLock = process.mas || app.requestSingleInstanceLock();
 
-app.on('second-instance', () => {
-  if (global.attachToMenubar) {
-    if (mb && mb.window) {
-      if (mb.window.isMinimized()) mb.window.restore();
-      mb.window.show();
-    }
-  } else if (mainWindow != null) {
-    if (mainWindow.isMinimized()) mainWindow.restore();
-    mainWindow.show();
-  }
-});
-
 if (!gotTheLock) {
   app.quit();
 } else {
@@ -107,6 +95,35 @@ if (!gotTheLock) {
   if (process.platform === 'darwin' && process.env.NODE_ENV === 'production') {
     app.setAsDefaultProtocolClient('translatium');
   }
+
+  const handleOpenUrl = (urlStr) => {
+    if (urlStr && urlStr.startsWith('translatium://')) {
+      const urlObj = new url.URL(urlStr);
+      const text = urlObj.searchParams.get('text') || '';
+
+      if (global.attachToMenubar) {
+        if (mb && mb.window) {
+          mb.window.send('go-to-home');
+          mb.window.send('set-input-lang', 'auto');
+          mb.window.send('set-input-text', text);
+          mb.showWindow();
+        }
+      } else if (mainWindow) {
+        mainWindow.send('go-to-home');
+        mainWindow.send('set-input-lang', 'auto');
+        mainWindow.send('set-input-text', text);
+        mainWindow.show();
+      }
+    }
+  };
+
+  const handleArgv = (argv) => {
+    if (argv.length <= 1) return;
+    const urlStr = argv.find((a) => a.startsWith('translatium://'));
+    if (urlStr) {
+      handleOpenUrl(urlStr);
+    }
+  };
 
   // Load listeners
   loadListeners();
@@ -384,6 +401,12 @@ if (!gotTheLock) {
 
     createWindowAsync()
       .then(() => {
+        // handle protocols on Windows & Linux
+        // on macOS, use 'open-url' event
+        if (process.platform !== 'darwin') {
+          handleArgv(process.argv);
+        }
+
         const privacyConsentAsked = getPreference('privacyConsentAsked');
         if (!privacyConsentAsked) {
           dialog.showMessageBox(mainWindow, {
@@ -429,29 +452,30 @@ if (!gotTheLock) {
       });
   });
 
-  app.on('open-url', (e, urlStr) => {
+  app.on('second-instance', (e, argv) => {
+    if (global.attachToMenubar) {
+      if (mb && mb.window) {
+        if (mb.window.isMinimized()) mb.window.restore();
+        mb.window.show();
+      }
+    } else if (mainWindow != null) {
+      if (mainWindow.isMinimized()) mainWindow.restore();
+      mainWindow.show();
+    }
+
+    // handle protocols on Windows & Linux
+    // on macOS, use 'open-url' event
+    if (process.platform !== 'darwin') {
+      handleArgv(argv);
+    }
+  });
+
+  app.on('open-url', (e) => {
     e.preventDefault();
 
     whenTrulyReady()
       .then(() => {
-        if (urlStr.startsWith('translatium://')) {
-          const urlObj = new url.URL(urlStr);
-          const text = urlObj.searchParams.get('text') || '';
-
-          if (global.attachToMenubar) {
-            if (mb && mb.window) {
-              mb.window.send('go-to-home');
-              mb.window.send('set-input-lang', 'auto');
-              mb.window.send('set-input-text', text);
-              mb.showWindow();
-            }
-          } else if (mainWindow) {
-            mainWindow.send('go-to-home');
-            mainWindow.send('set-input-lang', 'auto');
-            mainWindow.send('set-input-text', text);
-            mainWindow.show();
-          }
-        }
+        handleOpenUrl(url);
       })
       // eslint-disable-next-line no-console
       .catch((err) => console.log(err));
