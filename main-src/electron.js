@@ -28,7 +28,7 @@ settings.configure({
 });
 
 const path = require('path');
-const url = require('url');
+const { URL } = require('url');
 const { menubar } = require('menubar');
 const windowStateKeeper = require('electron-window-state');
 
@@ -101,7 +101,7 @@ if (!gotTheLock) {
 
   const handleOpenUrl = (urlStr) => {
     if (urlStr && urlStr.startsWith('translatium://')) {
-      const urlObj = new url.URL(urlStr);
+      const urlObj = new URL(urlStr);
       const text = urlObj.searchParams.get('text') || '';
 
       if (global.attachToMenubar) {
@@ -474,12 +474,12 @@ if (!gotTheLock) {
     }
   });
 
-  app.on('open-url', (e) => {
+  app.on('open-url', (e, urlStr) => {
     e.preventDefault();
 
     whenTrulyReady()
       .then(() => {
-        handleOpenUrl(url);
+        handleOpenUrl(urlStr);
       })
       // eslint-disable-next-line no-console
       .catch((err) => console.log(err));
