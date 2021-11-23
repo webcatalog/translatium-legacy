@@ -474,12 +474,12 @@ if (!gotTheLock) {
     }
   });
 
-  app.on('open-url', (e) => {
+  app.on('open-url', (e, urlStr) => {
     e.preventDefault();
 
     whenTrulyReady()
       .then(() => {
-        handleOpenUrl(url);
+        handleOpenUrl(urlStr);
       })
       // eslint-disable-next-line no-console
       .catch((err) => console.log(err));
