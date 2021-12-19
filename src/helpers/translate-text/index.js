@@ -70,6 +70,9 @@ const translateText = (inputLang, outputLang, inputText) => Promise.resolve()
 
     return {
       inputLang: inputLang === 'auto' ? result.src : inputLang,
+      detectedInputLang: result.ld_result
+        && result.ld_result.srclangs && result.ld_result.srclangs.length > 0
+        ? result.ld_result.srclangs[0] : inputLang,
       outputLang,
       inputText,
       outputText,

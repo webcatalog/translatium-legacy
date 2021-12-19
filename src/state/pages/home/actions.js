@@ -15,6 +15,7 @@ import { isInputLanguage, isOutputLanguage } from '../../../helpers/language-uti
 
 import { openAlert } from '../../root/alert/actions';
 import { addHistoryItem } from './history/actions';
+import { swapLanguages } from '../../root/preferences/actions';
 
 import { requestSetPreference } from '../../../senders';
 
@@ -51,6 +52,16 @@ export const translate = (
 
   translateText(inputLang, outputLang, inputText)
     .then((result) => {
+      // automatically swap language
+      // for example if user tries to translate from Japanese to English
+      // but the input text is in English
+      // then we assume the user actually wants to translate from English to Japanese.
+      if (result.detectedInputLang !== inputLang && result.detectedInputLang === outputLang) {
+        dispatch(swapLanguages());
+        dispatch(translate(outputLang, inputLang, inputText));
+        return;
+      }
+
       // only log when the action is successful
       amplitude.getInstance().logEvent('translate text');
 
