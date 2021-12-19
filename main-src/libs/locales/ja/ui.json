@@ -137,6 +137,10 @@
 	"allowTelemetry": "匿名の利用状況データの送信をアプリに許可する",
 	"share": "シェアする",
 	"extensions": "拡張機能",
-	"extensionDesc": "Select text with your mouse and translate with just one click.",
-	"privacyPolicy": "Privacy Policy"
+	"extensionDesc": "マウスでテキストを選択し、ワンクリックで翻訳します。",
+	"privacyPolicy": "プライバシーポリシー",
+	"voiceSpeed": "音声スピード",
+	"slowest": "最も低速",
+	"normal": "普通",
+	"fastest": "最速"
 }

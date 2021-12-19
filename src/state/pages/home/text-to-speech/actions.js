@@ -35,7 +35,7 @@ const preloadGoogleTTSAsync = (lang, text, idx, total) => () => {
 };
 
 // max length 100 characters
-const playGoogleTTSAsync = (lang, text, idx, total) => () => {
+const playGoogleTTSAsync = (lang, text, idx, total) => (_, getState) => {
   const uri = encodeURI(`https://translate.google.com/translate_tts?ie=UTF-8&q=${text}&tl=${lang}&total=${total}&idx=${idx}&textlen=8&client=dict-chrome-ex&prev=input`);
 
   const opts = {
@@ -56,6 +56,8 @@ const playGoogleTTSAsync = (lang, text, idx, total) => () => {
       const blob = new window.Blob([buffer], { type: 'audio/mp3' });
       const url = window.URL.createObjectURL(blob);
       player = new window.Audio(url);
+      const { voiceSpeed } = getState().preferences;
+      player.playbackRate = voiceSpeed / 10;
       return new Promise((resolve, reject) => {
         player.play();
         player.onended = () => resolve();
@@ -67,7 +69,7 @@ const playGoogleTTSAsync = (lang, text, idx, total) => () => {
     });
 };
 
-export const startTextToSpeech = (textToSpeechLang, textToSpeechText) => ((dispatch) => {
+export const startTextToSpeech = (textToSpeechLang, textToSpeechText) => ((dispatch, getState) => {
   if (textToSpeechText.length < 1) return;
 
   currentTaskId = Date.now();
@@ -89,6 +91,8 @@ export const startTextToSpeech = (textToSpeechLang, textToSpeechText) => ((dispa
 
     const utterThis = new window.SpeechSynthesisUtterance(textToSpeechText);
     utterThis.voice = voice;
+    const { voiceSpeed } = getState().preferences;
+    utterThis.rate = voiceSpeed / 10;
     utterThis.onend = () => {
       dispatch({ type: END_TEXT_TO_SPEECH });
     };
