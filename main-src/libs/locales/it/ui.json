@@ -138,5 +138,9 @@
 	"share": "Condividi",
 	"extensions": "Estensioni",
 	"extensionDesc": "Seleziona il testo con il mouse e traduci con un solo clic.",
-	"privacyPolicy": "Privacy Policy"
+	"privacyPolicy": "Politica sulla Privacy",
+	"voiceSpeed": "Velocità vocale",
+	"slowest": "Più lenta",
+	"normal": "Normali",
+	"fastest": "Più Veloce"
 }

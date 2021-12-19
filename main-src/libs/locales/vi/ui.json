@@ -138,5 +138,9 @@
 	"share": "Chia sẻ",
 	"extensions": "Tiện ích mở rộng",
 	"extensionDesc": "Chọn văn bản bằng chuột và dịch chỉ với một cú nhấp chuột.",
-	"privacyPolicy": "Chính sách bảo mật"
+	"privacyPolicy": "Chính sách bảo mật",
+	"voiceSpeed": "Tốc độ giọng nói",
+	"slowest": "Chậm nhất",
+	"normal": "Bình thường",
+	"fastest": "Nhanh nhất"
 }

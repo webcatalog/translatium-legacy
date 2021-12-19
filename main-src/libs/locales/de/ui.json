@@ -137,6 +137,10 @@
 	"allowTelemetry": "Erlaube der App anonyme Nutzungsdaten zu senden",
 	"share": "Teilen",
 	"extensions": "Erweiterungen",
-	"extensionDesc": "Select text with your mouse and translate with just one click.",
-	"privacyPolicy": "Privacy Policy"
+	"extensionDesc": "Wählen Sie den Text mit der Maus aus und übersetzen Sie ihn mit nur einem Klick.",
+	"privacyPolicy": "Datenschutzrichtlinien",
+	"voiceSpeed": "Sprachgeschwindigkeit",
+	"slowest": "Langsamste",
+	"normal": "Normal",
+	"fastest": "Schnellste"
 }
