@@ -142,5 +142,6 @@
 	"voiceSpeed": "음성 속도",
 	"slowest": "가장 느리게",
 	"normal": "보통",
-	"fastest": "가장 빠르게"
+	"fastest": "가장 빠르게",
+	"textSize": "글자 크기"
 }

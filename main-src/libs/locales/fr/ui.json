@@ -142,5 +142,6 @@
 	"voiceSpeed": "Vitesse de la voix",
 	"slowest": "Le plus lent",
 	"normal": "Normale",
-	"fastest": "Le plus rapide"
+	"fastest": "Le plus rapide",
+	"textSize": "Taille du texte"
 }
