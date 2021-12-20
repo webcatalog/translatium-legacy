@@ -23,6 +23,9 @@ const displayLanguages = {
   ru: {
     displayName: 'русский',
   },
+  tr: {
+    displayName: 'Türkçe',
+  },
   vi: {
     displayName: 'Tiếng Việt',
   },
