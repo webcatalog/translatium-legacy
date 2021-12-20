@@ -1,0 +1,12 @@
+{appName} ile istediğiniz dili anında çevirin - {operatingSystem} için en güçlü çeviri aracı.
+
+{appName}, kelime, ifade ve ses çıkışı desteği ile cümleleri ve görüntüleri 100'den fazla dil arasında çevirmenizi sağlar.
+
+- 100 dil arasında anında çeviri yapın. 
+- Çeviri geçmişini ve favori ifadelerinizi kaydedin.
+- Güçlü OCR aracımız ile görüntülerideki metinleri anında çevirin.
+- Menüden veya klavye kısayolları ile hızlıca erişim sağlayın.
+
+{appName} hakkında daha fazlasını öğrenmek için web sitemizi ziyaret edin: {appUrl}.
+
+Desteklenen Dilelr: {supportedLanguages}
