@@ -142,5 +142,6 @@
 	"voiceSpeed": "Voice speed",
 	"slowest": "Slowest",
 	"normal": "Normal",
-	"fastest": "Fastest"
+	"fastest": "Fastest",
+	"textSize": "Text size"
 }

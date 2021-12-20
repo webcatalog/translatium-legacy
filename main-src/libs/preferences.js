@@ -56,6 +56,7 @@ const defaultPreferences = {
   useHardwareAcceleration: true,
   // 10 => 1x (speed goes from 0.1x to 10x, we multiple by 10 to avoid using decimals)
   voiceSpeed: 10,
+  textSize: 1,
 };
 
 const initCachedPreferences = () => {

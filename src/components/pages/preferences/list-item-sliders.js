@@ -47,12 +47,13 @@ const convertPreferenceValToSliderVal = (val) => {
 const ListItemSliders = ({
   classes,
   voiceSpeed,
+  textSize,
 }) => (
   <ListItem>
     <ListItemText className={classes.sliderContainer}>
       <Grid container spacing={2}>
         <Grid classes={{ item: classes.sliderTitleContainer }} item>
-          <Typography id="brightness-slider" variant="body2" gutterBottom={false}>
+          <Typography id="voice-speed-slider" variant="body2" gutterBottom={false}>
             {getLocale('voiceSpeed')}
           </Typography>
         </Grid>
@@ -91,6 +92,33 @@ const ListItemSliders = ({
           />
         </Grid>
       </Grid>
+      <Grid container spacing={2}>
+        <Grid classes={{ item: classes.sliderTitleContainer }} item>
+          <Typography id="text-size-slider" variant="body2" gutterBottom={false}>
+            {getLocale('textSize')}
+          </Typography>
+        </Grid>
+        <Grid item xs>
+          <Slider
+            classes={{ markLabel: classes.sliderMarkLabel }}
+            value={textSize}
+            aria-labelledby="text-size-slider"
+            valueLabelDisplay="auto"
+            step={1}
+            min={1}
+            max={7}
+            marks={[
+              {
+                value: 1,
+                label: getLocale('normal'),
+              },
+            ]}
+            onChange={(e, value) => {
+              requestSetPreference('textSize', value);
+            }}
+          />
+        </Grid>
+      </Grid>
     </ListItemText>
   </ListItem>
 );
@@ -98,10 +126,12 @@ const ListItemSliders = ({
 ListItemSliders.propTypes = {
   classes: PropTypes.object.isRequired,
   voiceSpeed: PropTypes.number.isRequired,
+  textSize: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   voiceSpeed: state.preferences.voiceSpeed,
+  textSize: state.preferences.textSize,
 });
 
 export default connectComponent(

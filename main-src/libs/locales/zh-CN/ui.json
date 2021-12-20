@@ -142,5 +142,6 @@
 	"voiceSpeed": "语音速度",
 	"slowest": "最慢",
 	"normal": "正常",
-	"fastest": "最快"
+	"fastest": "最快",
+	"textSize": "文本尺寸"
 }

@@ -184,6 +184,18 @@ const styles = (theme) => ({
   },
 });
 
+const textSizeToVariant = (textSize) => {
+  switch (textSize) {
+    case 7: return 'h1';
+    case 6: return 'h2';
+    case 5: return 'h3';
+    case 4: return 'h4';
+    case 3: return 'h5';
+    case 2: return 'h6';
+    default: return 'body1';
+  }
+};
+
 const Home = ({
   classes,
   fullscreenInputBox,
@@ -206,6 +218,7 @@ const Home = ({
   output,
   outputLang,
   showTransliteration,
+  textSize,
   textToSpeechPlaying,
   translateWhenPressingEnter,
 }) => {
@@ -307,7 +320,7 @@ const Home = ({
             <Card elevation={0} square className={classes.card}>
               <CardContent className="text-selectable">
                 <Typography
-                  variant="body1"
+                  variant={textSizeToVariant(textSize)}
                   lang={output.outputLang}
                   className={classNames('text-selectable', classes.outputText)}
                 >
@@ -355,6 +368,7 @@ const Home = ({
     onUpdateOutputLang,
     output,
     showTransliteration,
+    textSize,
     textToSpeechPlaying,
   ]);
 
@@ -702,6 +716,7 @@ Home.propTypes = {
   output: PropTypes.object,
   outputLang: PropTypes.string.isRequired,
   showTransliteration: PropTypes.bool.isRequired,
+  textSize: PropTypes.number.isRequired,
   textToSpeechPlaying: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
 };
@@ -714,6 +729,7 @@ const mapStateToProps = (state) => ({
   output: state.pages.home.output,
   outputLang: state.preferences.outputLang,
   showTransliteration: state.preferences.showTransliteration,
+  textSize: state.preferences.textSize,
   textToSpeechPlaying: state.pages.home.textToSpeech.textToSpeechPlaying,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
 });
