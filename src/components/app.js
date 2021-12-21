@@ -166,12 +166,27 @@ class App extends React.Component {
             className={classes.fakeTitleBar}
             onDoubleClick={() => {
               // feature: double click on title bar to expand #656
-              // https://github.com/atomery/webcatalog/issues/656
-              const win = window.remote.getCurrentWindow();
-              if (win.isMaximized()) {
-                win.unmaximize();
-              } else {
-                win.maximize();
+              // https://github.com/webcatalog/webcatalog-app/issues/656
+
+              // User can choose title bar behavior from macOS System Preferences > Dock & Menu Bar
+              const systemPref = window.remote.systemPreferences.getUserDefault('AppleActionOnDoubleClick', 'string');
+
+              switch (systemPref) {
+                case 'Minimize': {
+                  const win = window.remote.getCurrentWindow();
+                  win.minimize();
+                  break;
+                }
+                case 'Maximize': {
+                  const win = window.remote.getCurrentWindow();
+                  if (win.isMaximized()) {
+                    win.unmaximize();
+                  } else {
+                    win.maximize();
+                  }
+                  break;
+                }
+                default: break;
               }
             }}
           />
