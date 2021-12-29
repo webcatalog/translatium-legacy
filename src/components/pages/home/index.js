@@ -567,11 +567,7 @@ const Home = ({
             className={classNames('text-selectable', classes.textarea)}
             lang={inputLang}
             maxLength="10000" // api limit is 11000 chars
-            onChange={(e) => onUpdateInputText(
-              e.target.value,
-              e.target.selectionStart,
-              e.target.selectionEnd,
-            )}
+            onChange={(e) => onUpdateInputText(e.target.value)}
             // handle Chinese, Japanese, Korean IME
             // https://github.com/facebook/react/issues/3926#issuecomment-929799564
             // https://stackoverflow.com/a/51221639
