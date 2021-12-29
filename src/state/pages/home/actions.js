@@ -97,7 +97,7 @@ export const translate = (
 });
 
 export const updateInputText = (
-  inputText, selectionStart, selectionEnd,
+  inputText,
 ) => ((dispatch, getState) => {
   const { pages } = getState();
   const { home } = pages;
@@ -106,8 +106,6 @@ export const updateInputText = (
   dispatch({
     type: UPDATE_INPUT_TEXT,
     inputText,
-    selectionStart,
-    selectionEnd,
   });
 
   // No change in inputText, no need to re-run task
@@ -118,15 +116,6 @@ export const updateInputText = (
     output: null,
   });
 });
-
-export const insertInputText = (text) => (dispatch, getState) => {
-  const { pages: { home } } = getState();
-  const { inputText, selectionStart } = home;
-
-  const newText = inputText.length < 1 ? text : `${inputText} ${text}`;
-
-  dispatch(updateInputText(newText, selectionStart, newText.length));
-};
 
 export const togglePhrasebook = () => ((dispatch, getState) => {
   const { output } = getState().pages.home;
@@ -179,7 +168,5 @@ export const loadOutput = (output) => ((dispatch) => {
   dispatch({
     type: UPDATE_INPUT_TEXT,
     inputText: output.inputText,
-    selectionStart: 0,
-    selectionEnd: 0,
   });
 });
