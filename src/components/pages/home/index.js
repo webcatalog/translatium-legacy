@@ -222,6 +222,7 @@ const Home = ({
   textToSpeechPlaying,
   translateWhenPressingEnter,
 }) => {
+  const onCompositionRef = useRef(false);
   const inputRef = useRef(null);
 
   const outputNode = useMemo(() => {
@@ -571,33 +572,21 @@ const Home = ({
               e.target.selectionStart,
               e.target.selectionEnd,
             )}
-            onClick={(e) => onUpdateInputText(
-              e.target.value,
-              e.target.selectionStart,
-              e.target.selectionEnd,
-            )}
-            onInput={(e) => onUpdateInputText(
-              e.target.value,
-              e.target.selectionStart,
-              e.target.selectionEnd,
-            )}
+            // handle Chinese, Japanese, Korean IME
+            // https://github.com/facebook/react/issues/3926#issuecomment-929799564
+            // https://stackoverflow.com/a/51221639
+            onCompositionStart={() => {
+              onCompositionRef.current = true;
+            }}
+            onCompositionEnd={() => {
+              onCompositionRef.current = false;
+            }}
             onKeyDown={translateWhenPressingEnter ? (e) => {
-              if (e.key === 'Enter') {
+              if (e.key === 'Enter' && !onCompositionRef.current) {
                 onTranslate();
                 e.target.blur();
               }
-
-              onUpdateInputText(
-                e.target.value,
-                e.target.selectionStart,
-                e.target.selectionEnd,
-              );
             } : null}
-            onKeyUp={(e) => onUpdateInputText(
-              e.target.value,
-              e.target.selectionStart,
-              e.target.selectionEnd,
-            )}
             placeholder={getLocale('typeSomethingHere')}
             spellCheck="false"
             value={inputText}
