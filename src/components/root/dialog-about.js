@@ -112,7 +112,7 @@ const About = (props) => {
           <MLink
             component="button"
             variant="body2"
-            onClick={() => requestOpenInBrowser('https://webcatalog.app/about?utm_source=translatium_app')}
+            onClick={() => requestOpenInBrowser('https://webcatalog.io/company/about/?utm_source=translatium_app')}
             className={classes.link}
           >
             WebCatalog Ltd

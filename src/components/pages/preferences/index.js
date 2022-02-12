@@ -567,7 +567,7 @@ const Preferences = (props) => {
                           Switchbar
                         </Typography>
                         <Typography variant="body2" color="textSecondary" className={classes.promotionSecondaryText}>
-                          Choose Where to Open Links
+                          Browser & Email Client Picker
                         </Typography>
                       </div>
                     </div>
