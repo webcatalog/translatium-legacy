@@ -2,7 +2,7 @@
   "name": "translatium",
   "productName": "Translatium",
   "description": "Translate 100+ Languages Instantly",
-  "version": "20.2.0",
+  "version": "20.3.0",
   "main": "main-src/electron.js",
   "repository": "https://github.com/webcatalog/translatium",
   "author": {
