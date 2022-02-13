@@ -87,21 +87,23 @@ const Dictionary = ({
                     {entry.word}
                   </MLink>
                 </Typography>
-                <Typography variant="body2" align="left" className={classes.translations}>
-                  {entry.reverse_translation.map((translation, i) => (
-                    <React.Fragment key={translation}>
-                      <MLink
-                        component="button"
-                        variant="body2"
-                        className={classes.link}
-                        onClick={() => translateForward(translation)}
-                      >
-                        {translation}
-                      </MLink>
-                      {i < entry.reverse_translation.length - 1 && (<span>, </span>)}
-                    </React.Fragment>
-                  ))}
-                </Typography>
+                {entry.reverse_translation && (
+                  <Typography variant="body2" align="left" className={classes.translations}>
+                    {entry.reverse_translation.map((translation, i) => (
+                      <React.Fragment key={translation}>
+                        <MLink
+                          component="button"
+                          variant="body2"
+                          className={classes.link}
+                          onClick={() => translateForward(translation)}
+                        >
+                          {translation}
+                        </MLink>
+                        {i < entry.reverse_translation.length - 1 && (<span>, </span>)}
+                      </React.Fragment>
+                    ))}
+                  </Typography>
+                )}
               </React.Fragment>
             ))}
           </div>
