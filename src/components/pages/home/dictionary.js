@@ -67,8 +67,6 @@ const Dictionary = ({
   const translateForward = (text) => onLinkClick(inputLang, outputLang, text);
   const translateBackward = (text) => onLinkClick(outputLang, inputLang, text);
 
-  console.log(outputDict);
-
   return (
     <div className={classes.container}>
       {outputDict.map((section) => (
