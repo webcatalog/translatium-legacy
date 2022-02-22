@@ -35,7 +35,7 @@ const DialogOpenSourceNotices = ({
       })
       // eslint-disable-next-line no-console
       .catch(console.log);
-  });
+  }, [setContent]);
 
   return (
     <Dialog

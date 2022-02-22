@@ -133,7 +133,6 @@
 	"privacyConsentDetail": "The data helps us improve and optimize the product. You can change your decision at any time in the app’s preferences.",
 	"allow": "Allow",
 	"dontAllow": "Don't Allow",
-	"allowCrashReports": "Allow the app to send anonymous crash reports",
 	"allowTelemetry": "Allow the app to send anonymous usage data",
 	"share": "Share",
 	"extensions": "Extensions",

@@ -133,7 +133,6 @@
 	"privacyConsentDetail": "データは製品の改善と最適化に役立ちます。アプリ設定からいつでも意思決定を変更できます。",
 	"allow": "許可する",
 	"dontAllow": "許可しない",
-	"allowCrashReports": "匿名のクラッシュレポートの送信をアプリに許可する",
 	"allowTelemetry": "匿名の利用状況データの送信をアプリに許可する",
 	"share": "シェアする",
 	"extensions": "拡張機能",

@@ -16,7 +16,6 @@ git clone https://github.com/quanglam2807/translatium.git
 cd translatium
 
 # set API keys
-export ELECTRON_APP_SENTRY_DSN=...
 export REACT_APP_OCR_SPACE_API_KEY=...
 
 # install the dependencies

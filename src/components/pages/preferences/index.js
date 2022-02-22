@@ -189,7 +189,6 @@ const Preferences = (props) => {
     onToggleSetting,
     openAtLogin,
     openOnMenubarShortcut,
-    sentry,
     showTransliteration,
     telemetry,
     themeSource,
@@ -421,23 +420,6 @@ const Preferences = (props) => {
                   checked={useHardwareAcceleration}
                   onChange={(e) => {
                     requestSetPreference('useHardwareAcceleration', e.target.checked);
-                    requestShowRequireRestartDialog();
-                  }}
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText
-                primary={getLocale('allowCrashReports')}
-              />
-              <ListItemSecondaryAction>
-                <Switch
-                  edge="end"
-                  color="primary"
-                  checked={sentry}
-                  onChange={(e) => {
-                    requestSetPreference('sentry', e.target.checked);
                     requestShowRequireRestartDialog();
                   }}
                 />
@@ -720,7 +702,6 @@ Preferences.propTypes = {
   onToggleSetting: PropTypes.func.isRequired,
   openAtLogin: PropTypes.oneOf(['yes', 'yes-hidden', 'no']).isRequired,
   openOnMenubarShortcut: PropTypes.string,
-  sentry: PropTypes.bool.isRequired,
   showTransliteration: PropTypes.bool.isRequired,
   telemetry: PropTypes.bool.isRequired,
   themeSource: PropTypes.string.isRequired,
@@ -735,7 +716,6 @@ const mapStateToProps = (state) => ({
   displayLanguage: state.preferences.displayLanguage,
   openAtLogin: state.systemPreferences.openAtLogin,
   openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
-  sentry: state.preferences.sentry,
   showTransliteration: state.preferences.showTransliteration,
   telemetry: state.preferences.telemetry,
   themeSource: state.preferences.themeSource,

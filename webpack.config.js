@@ -5,7 +5,6 @@
 // as in production, with asar, node_modules are not accessible in forked scripts
 
 const path = require('path');
-const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -46,9 +45,6 @@ const getElectronMainConfig = () => {
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: ['libs'],
       cleanAfterEveryBuildPatterns: [],
-    }),
-    new webpack.DefinePlugin({
-      'process.env.ELECTRON_APP_SENTRY_DSN': JSON.stringify(process.env.ELECTRON_APP_SENTRY_DSN),
     }),
   ];
 
