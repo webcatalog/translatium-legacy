@@ -54,6 +54,5 @@ jobs:
         CI: true
         CI_PULL_REQUEST: ${{ github.event_name == 'pull_request' }}
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        REACT_APP_AMPLITUDE_API_KEY: ${{ secrets.REACT_APP_AMPLITUDE_API_KEY }}
         REACT_APP_OCR_SPACE_API_KEY: ${{ secrets.REACT_APP_OCR_SPACE_API_KEY }}
       if: startsWith(github.ref, 'refs/tags/')

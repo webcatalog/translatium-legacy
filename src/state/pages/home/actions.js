@@ -7,8 +7,6 @@ import {
   UPDATE_OUTPUT,
 } from '../../../constants/actions';
 
-import amplitude from '../../../amplitude';
-
 import translateText from '../../../helpers/translate-text';
 import phrasebookDb from '../../../helpers/phrasebook-db';
 import { isInputLanguage, isOutputLanguage } from '../../../helpers/language-utils';
@@ -61,9 +59,6 @@ export const translate = (
         dispatch(translate(outputLang, inputLang, inputText));
         return;
       }
-
-      // only log when the action is successful
-      amplitude.getInstance().logEvent('translate text');
 
       // Prevent slow request to display outdated info
       const currentOutput = getState().pages.home.output;
