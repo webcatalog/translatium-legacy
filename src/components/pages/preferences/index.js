@@ -190,7 +190,6 @@ const Preferences = (props) => {
     openAtLogin,
     openOnMenubarShortcut,
     showTransliteration,
-    telemetry,
     themeSource,
     translateClipboardOnShortcut,
     translateWhenPressingEnter,
@@ -421,22 +420,6 @@ const Preferences = (props) => {
                   onChange={(e) => {
                     requestSetPreference('useHardwareAcceleration', e.target.checked);
                     requestShowRequireRestartDialog();
-                  }}
-                />
-              </ListItemSecondaryAction>
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText
-                primary={getLocale('allowTelemetry')}
-              />
-              <ListItemSecondaryAction>
-                <Switch
-                  edge="end"
-                  color="primary"
-                  checked={telemetry}
-                  onChange={(e) => {
-                    requestSetPreference('telemetry', e.target.checked);
                   }}
                 />
               </ListItemSecondaryAction>
@@ -703,7 +686,6 @@ Preferences.propTypes = {
   openAtLogin: PropTypes.oneOf(['yes', 'yes-hidden', 'no']).isRequired,
   openOnMenubarShortcut: PropTypes.string,
   showTransliteration: PropTypes.bool.isRequired,
-  telemetry: PropTypes.bool.isRequired,
   themeSource: PropTypes.string.isRequired,
   translateClipboardOnShortcut: PropTypes.bool.isRequired,
   translateWhenPressingEnter: PropTypes.bool.isRequired,
@@ -717,7 +699,6 @@ const mapStateToProps = (state) => ({
   openAtLogin: state.systemPreferences.openAtLogin,
   openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
   showTransliteration: state.preferences.showTransliteration,
-  telemetry: state.preferences.telemetry,
   themeSource: state.preferences.themeSource,
   translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
   translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
