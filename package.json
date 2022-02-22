@@ -31,7 +31,7 @@
     "node-mac-permissions": "2.2.0"
   },
   "devDependencies": {
-    "@electron/remote": "2.0.4",
+    "@electron/remote": "2.0.5",
     "@fontsource/roboto": "4.5.3",
     "@material-ui/core": "4.12.3",
     "@material-ui/icons": "4.11.2",
@@ -48,7 +48,7 @@
     "cross-env": "7.0.3",
     "del": "6.0.0",
     "dotenv": "10.0.0",
-    "electron": "16.0.8",
+    "electron": "16.0.9",
     "electron-builder": "22.14.13",
     "electron-is-dev": "2.0.0",
     "electron-settings": "4.0.2",
