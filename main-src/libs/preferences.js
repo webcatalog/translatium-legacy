@@ -47,7 +47,6 @@ const defaultPreferences = {
   ratingCardDidRate2: false,
   ratingCardLastClicked2: 0,
   recentLanguages: ['en', 'zh-CN'],
-  sentry: false,
   showTransliteration: true,
   telemetry: false,
   themeSource: 'system',

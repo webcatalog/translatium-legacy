@@ -133,7 +133,6 @@
 	"privacyConsentDetail": "Toplayacağımız veriler, uygulamayı daha stabil ve sağlam hale getirmemize yardımcı oluyor.",
 	"allow": "İzin Ver",
 	"dontAllow": "İzin Verme",
-	"allowCrashReports": "Çökme raporlarının anonim olarak gönderilmesine izin ver",
 	"allowTelemetry": "Kullanım verilerinin anonim olarak gönderilmesine izin ver",
 	"share": "Paylaş",
 	"extensions": "Uzantılar",

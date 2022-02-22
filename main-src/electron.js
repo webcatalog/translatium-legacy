@@ -17,7 +17,6 @@ const {
   nativeImage,
   nativeTheme,
 } = require('electron');
-const isDev = require('electron-is-dev');
 const settings = require('electron-settings');
 const electronRemote = require('@electron/remote/main');
 
@@ -33,12 +32,6 @@ const { menubar } = require('menubar');
 const windowStateKeeper = require('electron-window-state');
 
 const { getPreference, setPreference, resetPreference } = require('./libs/preferences');
-
-// Activate the Sentry Electron SDK as early as possible in every process.
-if (!isDev && getPreference('sentry')) {
-  // eslint-disable-next-line global-require
-  require('./libs/sentry');
-}
 
 const { createMenu, showMenu } = require('./libs/menu');
 const loadListeners = require('./listeners');
@@ -423,10 +416,8 @@ if (!gotTheLock) {
           }).then(({ response }) => {
             setPreference('privacyConsentAsked', true);
             if (response === 0) {
-              setPreference('sentry', true);
               setPreference('telemetry', true);
             } else {
-              setPreference('sentry', false);
               setPreference('telemetry', false);
             }
           }).catch(console.log); // eslint-disable-line

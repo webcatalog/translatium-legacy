@@ -133,7 +133,6 @@
 	"privacyConsentDetail": "데이터는 제품을 개선하고 최적화하는 데 도움이 됩니다. 앱의 기본 설정에서 언제든지 변경할 수 있습니다.",
 	"allow": "허용",
 	"dontAllow": "허용안함",
-	"allowCrashReports": "앱이 익명의 충돌 보고서를 보내도록 허용",
 	"allowTelemetry": "앱이 익명의 사용 데이터를 보내도록 허용",
 	"share": "공유",
 	"extensions": "확장 프로그램",
