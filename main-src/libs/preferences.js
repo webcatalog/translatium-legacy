@@ -41,14 +41,12 @@ const defaultPreferences = {
   inputLang: 'en',
   openOnMenubarShortcut: 'alt+shift+t',
   outputLang: 'zh-CN',
-  privacyConsentAsked: false,
   // add suffix "2" to reset values and re-show rating card
   // (we had a bug previously which prevented this to work properly)
   ratingCardDidRate2: false,
   ratingCardLastClicked2: 0,
   recentLanguages: ['en', 'zh-CN'],
   showTransliteration: true,
-  telemetry: false,
   themeSource: 'system',
   translateClipboardOnShortcut: false,
   translateWhenPressingEnter: true,

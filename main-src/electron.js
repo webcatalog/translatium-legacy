@@ -11,7 +11,6 @@ const {
   Tray,
   app,
   clipboard,
-  dialog,
   globalShortcut,
   ipcMain,
   nativeImage,
@@ -31,7 +30,7 @@ const { URL } = require('url');
 const { menubar } = require('menubar');
 const windowStateKeeper = require('electron-window-state');
 
-const { getPreference, setPreference, resetPreference } = require('./libs/preferences');
+const { getPreference, resetPreference } = require('./libs/preferences');
 
 const { createMenu, showMenu } = require('./libs/menu');
 const loadListeners = require('./listeners');
@@ -402,25 +401,6 @@ if (!gotTheLock) {
         // on macOS, use 'open-url' event
         if (process.platform !== 'darwin') {
           handleArgv(process.argv);
-        }
-
-        const privacyConsentAsked = getPreference('privacyConsentAsked');
-        if (!privacyConsentAsked) {
-          dialog.showMessageBox(mainWindow, {
-            type: 'question',
-            buttons: [getLocale('allow'), getLocale('dontAllow')],
-            message: getLocale('privacyConsentMessage'),
-            detail: getLocale('privacyConsentDetail'),
-            cancelId: 1,
-            defaultId: 0,
-          }).then(({ response }) => {
-            setPreference('privacyConsentAsked', true);
-            if (response === 0) {
-              setPreference('telemetry', true);
-            } else {
-              setPreference('telemetry', false);
-            }
-          }).catch(console.log); // eslint-disable-line
         }
       });
     createMenu();

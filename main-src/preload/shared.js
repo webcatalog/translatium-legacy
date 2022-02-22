@@ -7,7 +7,6 @@ const {
   webFrame,
   desktopCapturer,
 } = require('electron');
-const machineId = require('node-machine-id');
 const remote = require('@electron/remote');
 
 webFrame.setVisualZoomLevelLimits(1, 1);
@@ -16,5 +15,4 @@ window.remote = remote;
 window.ipcRenderer = ipcRenderer;
 window.desktopCapturer = desktopCapturer;
 
-window.machineId = machineId.machineIdSync();
 window.macPermissions = process.platform === 'darwin' ? require('node-mac-permissions') : null;
