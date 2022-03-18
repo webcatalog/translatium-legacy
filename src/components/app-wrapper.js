@@ -2,15 +2,13 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-import { ThemeProvider as MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
+import { ThemeProvider as MuiThemeProvider, createTheme, withStyles } from '@material-ui/core/styles';
 import pink from '@material-ui/core/colors/blue';
 import red from '@material-ui/core/colors/pink';
 import grey from '@material-ui/core/colors/grey';
 import green from '@material-ui/core/colors/green';
-
-import connectComponent from '../helpers/connect-component';
 
 import App from './app';
 
@@ -33,7 +31,9 @@ const GlobalCss = withStyles({
   },
 })(() => null);
 
-const AppWrapper = ({ shouldUseDarkColors }) => {
+const AppWrapper = () => {
+  const shouldUseDarkColors = useSelector((state) => state.general.shouldUseDarkColors);
+
   const themeObj = {
     typography: {
       fontSize: 13.5,
@@ -64,7 +64,7 @@ const AppWrapper = ({ shouldUseDarkColors }) => {
     };
   }
 
-  const theme = createMuiTheme(themeObj);
+  const theme = createTheme(themeObj);
 
   return (
     <MuiThemeProvider theme={theme}>
@@ -74,17 +74,4 @@ const AppWrapper = ({ shouldUseDarkColors }) => {
   );
 };
 
-AppWrapper.propTypes = {
-  shouldUseDarkColors: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  shouldUseDarkColors: state.general.shouldUseDarkColors,
-});
-
-export default connectComponent(
-  AppWrapper,
-  mapStateToProps,
-  null,
-  null,
-);
+export default AppWrapper;

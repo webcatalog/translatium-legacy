@@ -3,7 +3,8 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 /* global */
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
@@ -11,7 +12,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 
-import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
 import { translate } from '../../../state/pages/home/actions';
@@ -21,14 +21,14 @@ import { ROUTE_HOME } from '../../../constants/routes';
 
 import { getLanguages } from '../../../helpers/language-utils';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   listContainer: {
     flex: 1,
     overflowY: 'auto',
     WebkitOverflowScrolling: 'touch',
     color: theme.palette.text.primary,
   },
-});
+}));
 
 const langList = getLanguages()
   .map((id) => ({
@@ -41,26 +41,24 @@ const langList = getLanguages()
     return x.locale.localeCompare(y.locale);
   });
 
-const LanguageListList = ({
-  classes,
-  mode,
-  onChangeRoute,
-  onTranslate,
-  onUpdateInputLang,
-  onUpdateOutputLang,
-  recentLanguages,
-  search,
-}) => {
+const LanguageListList = () => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const mode = useSelector((state) => state.pages.languageList.mode);
+  const recentLanguages = useSelector((state) => state.preferences.recentLanguages);
+  const search = useSelector((state) => state.pages.languageList.search);
+
   const onLanguageClick = (value) => {
     if (mode === 'inputLang') {
-      onUpdateInputLang(value);
-      onTranslate(value);
+      dispatch(updateInputLang(value));
+      dispatch(translate(value));
     } else if (mode === 'outputLang') {
-      onUpdateOutputLang(value);
-      onTranslate(null, value);
+      dispatch(updateOutputLang(value));
+      dispatch(translate(null, value));
     }
 
-    onChangeRoute(ROUTE_HOME);
+    dispatch(changeRoute(ROUTE_HOME));
   };
 
   const isSearch = search && search.length > 0;
@@ -119,33 +117,4 @@ const LanguageListList = ({
   );
 };
 
-LanguageListList.propTypes = {
-  classes: PropTypes.object.isRequired,
-  mode: PropTypes.string.isRequired,
-  onChangeRoute: PropTypes.func.isRequired,
-  onTranslate: PropTypes.func.isRequired,
-  onUpdateInputLang: PropTypes.func.isRequired,
-  onUpdateOutputLang: PropTypes.func.isRequired,
-  recentLanguages: PropTypes.arrayOf(PropTypes.string).isRequired,
-  search: PropTypes.string.isRequired,
-};
-
-const actionCreators = {
-  changeRoute,
-  translate,
-  updateInputLang,
-  updateOutputLang,
-};
-
-const mapStateToProps = (state) => ({
-  mode: state.pages.languageList.mode,
-  recentLanguages: state.preferences.recentLanguages,
-  search: state.pages.languageList.search,
-});
-
-export default connectComponent(
-  LanguageListList,
-  mapStateToProps,
-  actionCreators,
-  styles,
-);
+export default LanguageListList;

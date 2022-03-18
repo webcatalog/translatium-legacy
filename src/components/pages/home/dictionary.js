@@ -2,17 +2,16 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Typography from '@material-ui/core/Typography';
 import MLink from '@material-ui/core/Link';
 
-import connectComponent from '../../../helpers/connect-component';
-
 import { updateInputLang, updateOutputLang } from '../../../state/root/preferences/actions';
 import { updateInputText, translate } from '../../../state/pages/home/actions';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     marginTop: 0,
     padding: 12,
@@ -45,23 +44,21 @@ const styles = (theme) => ({
     color: 'inherit',
     userSelect: 'text',
   },
-});
+}));
 
-const Dictionary = ({
-  classes,
-  onTranslate,
-  onUpdateInputLang,
-  onUpdateInputText,
-  onUpdateOutputLang,
-  output,
-}) => {
+const Dictionary = () => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const output = useSelector((state) => state.pages.home.output);
+
   const { inputLang, outputLang, outputDict } = output;
 
   const onLinkClick = (_inputLang, _outputLang, _inputText) => {
-    onUpdateInputLang(_inputLang);
-    onUpdateOutputLang(_outputLang);
-    onUpdateInputText(_inputText);
-    onTranslate(_inputLang, _outputLang, _inputText);
+    dispatch(updateInputLang(_inputLang));
+    dispatch(updateOutputLang(_outputLang));
+    dispatch(updateInputText(_inputText));
+    dispatch(translate(_inputLang, _outputLang, _inputText));
   };
 
   const translateForward = (text) => onLinkClick(inputLang, outputLang, text);
@@ -113,29 +110,4 @@ const Dictionary = ({
   );
 };
 
-Dictionary.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onTranslate: PropTypes.func.isRequired,
-  onUpdateInputLang: PropTypes.func.isRequired,
-  onUpdateInputText: PropTypes.func.isRequired,
-  onUpdateOutputLang: PropTypes.func.isRequired,
-  output: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  output: state.pages.home.output,
-});
-
-const actionCreators = {
-  updateInputLang,
-  updateOutputLang,
-  updateInputText,
-  translate,
-};
-
-export default connectComponent(
-  Dictionary,
-  mapStateToProps,
-  actionCreators,
-  styles,
-);
+export default Dictionary;

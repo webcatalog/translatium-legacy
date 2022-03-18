@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -13,48 +13,31 @@ import Button from '@material-ui/core/Button';
 
 import { closeAlert } from '../../state/root/alert/actions';
 
-import connectComponent from '../../helpers/connect-component';
 import getLocale from '../../helpers/get-locale';
 
-const Alert = ({ alertMessage, onCloseAlert }) => (
-  <Dialog
-    open={alertMessage != null}
-    onClose={onCloseAlert}
-  >
-    <DialogTitle>{getLocale('errorOccured')}</DialogTitle>
-    <DialogContent>
-      <DialogContentText>
-        {alertMessage != null ? getLocale(alertMessage) : null}
-      </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-      <Button color="primary" onClick={onCloseAlert}>
-        {getLocale('close')}
-      </Button>
-    </DialogActions>
-  </Dialog>
-);
+const Alert = () => {
+  const dispatch = useDispatch();
 
-Alert.defaultProps = {
-  alertMessage: null,
+  const alertMessage = useSelector((state) => state.alert.message);
+
+  return (
+    <Dialog
+      open={alertMessage != null}
+      onClose={() => dispatch(closeAlert())}
+    >
+      <DialogTitle>{getLocale('errorOccured')}</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          {alertMessage != null ? getLocale(alertMessage) : null}
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button color="primary" onClick={dispatch(closeAlert())}>
+          {getLocale('close')}
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
 };
 
-Alert.propTypes = {
-  alertMessage: PropTypes.string,
-  onCloseAlert: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  alertMessage: state.alert.message,
-});
-
-const actionCreators = {
-  closeAlert,
-};
-
-export default connectComponent(
-  Alert,
-  mapStateToProps,
-  actionCreators,
-  null,
-);
+export default Alert;

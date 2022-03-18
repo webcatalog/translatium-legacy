@@ -2,8 +2,9 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import React, { useEffect, useMemo, useRef } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { useSelector, useDispatch } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -30,7 +31,6 @@ import ToggleStarBorder from '@material-ui/icons/StarBorder';
 import Tooltip from '@material-ui/core/Tooltip';
 import FileCopy from '@material-ui/icons/FileCopy';
 
-import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
 import {
@@ -64,7 +64,7 @@ import Dictionary from './dictionary';
 import History from './history';
 import RatingCard from './rating-card';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     flex: 1,
     display: 'flex',
@@ -182,7 +182,7 @@ const styles = (theme) => ({
   outputText: {
     whiteSpace: 'pre-wrap',
   },
-});
+}));
 
 const textSizeToVariant = (textSize) => {
   switch (textSize) {
@@ -196,32 +196,25 @@ const textSizeToVariant = (textSize) => {
   }
 };
 
-const Home = ({
-  classes,
-  fullscreenInputBox,
-  inputLang,
-  inputText,
-  isHomeVisible,
-  onChangeRoute,
-  onEndTextToSpeech,
-  onLoadImage,
-  onOpenSnackbar,
-  onStartTextToSpeech,
-  onSwapLanguages,
-  onToggleFullscreenInputBox,
-  onTogglePhrasebook,
-  onTranslate,
-  onUpdateInputLang,
-  onUpdateInputText,
-  onUpdateLanguageListMode,
-  onUpdateOutputLang,
-  output,
-  outputLang,
-  showTransliteration,
-  textSize,
-  textToSpeechPlaying,
-  translateWhenPressingEnter,
-}) => {
+const Home = () => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const fullscreenInputBox = useSelector((state) => state.pages.home.fullscreenInputBox);
+  const inputLang = useSelector((state) => state.preferences.inputLang);
+  const inputText = useSelector((state) => state.pages.home.inputText);
+  const isHomeVisible = useSelector((state) => state.router.route === ROUTE_HOME);
+  const output = useSelector((state) => state.pages.home.output);
+  const outputLang = useSelector((state) => state.preferences.outputLang);
+  const showTransliteration = useSelector((state) => state.preferences.showTransliteration);
+  const textSize = useSelector((state) => state.preferences.textSize);
+  const textToSpeechPlaying = useSelector(
+    (state) => state.pages.home.textToSpeech.textToSpeechPlaying,
+  );
+  const translateWhenPressingEnter = useSelector(
+    (state) => state.preferences.translateWhenPressingEnter,
+  );
+
   const onCompositionRef = useRef(false);
   const inputRef = useRef(null);
 
@@ -245,16 +238,16 @@ const Home = ({
           {
             Icon: output.phrasebookId ? ToggleStar : ToggleStarBorder,
             tooltip: output.phrasebookId ? getLocale('removeFromPhrasebook') : getLocale('addToPhrasebook'),
-            onClick: onTogglePhrasebook,
+            onClick: () => dispatch(togglePhrasebook()),
           },
           {
             Icon: ActionSwapVert,
             tooltip: getLocale('swap'),
             onClick: () => {
-              onUpdateInputLang(output.outputLang);
-              onUpdateOutputLang(output.inputLang);
-              onUpdateInputText(output.outputText);
-              onTranslate(output.outputLang, output.inputLang, output.outputText);
+              dispatch(updateInputLang(output.outputLang));
+              dispatch(updateOutputLang(output.inputLang));
+              dispatch(updateInputText(output.outputText));
+              dispatch(translate(output.outputLang, output.inputLang, output.outputText));
             },
           },
           {
@@ -262,7 +255,7 @@ const Home = ({
             tooltip: getLocale('copy'),
             onClick: () => {
               window.remote.clipboard.writeText(output.outputText);
-              onOpenSnackbar(getLocale('copied'));
+              dispatch(openSnackbar(getLocale('copied')));
             },
           },
         ];
@@ -291,13 +284,13 @@ const Home = ({
             tooltip: textToSpeechPlaying ? getLocale('stop') : getLocale('listen'),
             onClick: () => {
               if (textToSpeechPlaying) {
-                return onEndTextToSpeech();
+                return dispatch(endTextToSpeech());
               }
 
-              return onStartTextToSpeech(
+              return dispatch(startTextToSpeech(
                 output.outputLang,
                 output.outputText,
-              );
+              ));
             },
           });
         }
@@ -359,18 +352,11 @@ const Home = ({
   }, [
     classes,
     fullscreenInputBox,
-    onEndTextToSpeech,
-    onOpenSnackbar,
-    onStartTextToSpeech,
-    onTogglePhrasebook,
-    onTranslate,
-    onUpdateInputLang,
-    onUpdateInputText,
-    onUpdateOutputLang,
     output,
     showTransliteration,
     textSize,
     textToSpeechPlaying,
+    dispatch,
   ]);
 
   useEffect(() => {
@@ -400,7 +386,7 @@ const Home = ({
     {
       Icon: ContentClear,
       tooltip: getLocale('clear'),
-      onClick: () => onUpdateInputText(''),
+      onClick: () => dispatch(updateInputText('')),
       disabled: inputText.length < 1,
     },
     {
@@ -412,8 +398,8 @@ const Home = ({
       tooltip: getLocale('translateClipboard'),
       onClick: () => {
         const text = window.remote.clipboard.readText();
-        onUpdateInputText(text);
-        onTranslate(inputLang, outputLang, text);
+        dispatch(updateInputText(text));
+        dispatch(translate(inputLang, outputLang, text));
       },
     },
   ];
@@ -425,10 +411,10 @@ const Home = ({
       onClick: () => {
         if (textToSpeechPlaying) {
           window.speechSynthesis.cancel();
-          return onEndTextToSpeech();
+          return dispatch(endTextToSpeech());
         }
 
-        return onStartTextToSpeech(inputLang, inputText);
+        return dispatch(startTextToSpeech(inputLang, inputText));
       },
     });
   } else if (output && output.inputLang
@@ -439,10 +425,10 @@ const Home = ({
       onClick: () => {
         if (textToSpeechPlaying) {
           window.speechSynthesis.cancel();
-          return onEndTextToSpeech();
+          return dispatch(endTextToSpeech());
         }
 
-        return onStartTextToSpeech(output.inputLang, output.inputText);
+        return dispatch(startTextToSpeech(output.inputLang, output.inputText));
       },
     });
   }
@@ -451,7 +437,7 @@ const Home = ({
     controllers.push({
       Icon: ImageImage,
       tooltip: getLocale('openImageFile'),
-      onClick: () => onLoadImage(),
+      onClick: () => dispatch(loadImage()),
     });
     controllers.push({
       Icon: () => (
@@ -460,14 +446,14 @@ const Home = ({
         </SvgIcon>
       ),
       tooltip: getLocale('takeScreenshot'),
-      onClick: () => onLoadImage('screenshot'),
+      onClick: () => dispatch(loadImage('screenshot')),
     });
   }
 
   controllers.push({
     Icon: fullscreenInputBox ? NavigationFullscreenExit : NavigationFullscreen,
     tooltip: fullscreenInputBox ? getLocale('exitFullscreen') : getLocale('fullscreen'),
-    onClick: onToggleFullscreenInputBox,
+    onClick: () => dispatch(toggleFullscreenInputBox()),
   });
 
   const secondaryControllers = [
@@ -476,7 +462,7 @@ const Home = ({
       tooltip: getLocale('copy'),
       onClick: () => {
         window.remote.clipboard.writeText(inputText);
-        onOpenSnackbar(getLocale('copied'));
+        dispatch(openSnackbar(getLocale('copied')));
       },
       disabled: inputText.length < 1,
     },
@@ -513,8 +499,8 @@ const Home = ({
               color="inherit"
               classes={{ root: classes.languageTitle, label: classes.languageTitleLabel }}
               onClick={() => {
-                onUpdateLanguageListMode('inputLang');
-                onChangeRoute(ROUTE_LANGUAGE_LIST);
+                dispatch(updateLanguageListMode('inputLang'));
+                dispatch(changeRoute(ROUTE_LANGUAGE_LIST));
               }}
             >
               {inputLang === 'auto' && output && output.inputLang ? `${getLocale(output.inputLang)} (${getLocale('auto')})` : getLocale(inputLang)}
@@ -533,7 +519,7 @@ const Home = ({
                     }
                     return true;
                   })()}
-                  onClick={onSwapLanguages}
+                  onClick={() => dispatch(swapLanguages())}
                 >
                   <ActionSwapHoriz fontSize="small" />
                 </IconButton>
@@ -543,8 +529,8 @@ const Home = ({
               color="inherit"
               classes={{ root: classes.languageTitle, label: classes.languageTitleLabel }}
               onClick={() => {
-                onUpdateLanguageListMode('outputLang');
-                onChangeRoute(ROUTE_LANGUAGE_LIST);
+                dispatch(updateLanguageListMode('outputLang'));
+                dispatch(changeRoute(ROUTE_LANGUAGE_LIST));
               }}
             >
               {getLocale(outputLang)}
@@ -567,7 +553,7 @@ const Home = ({
             className={classNames('text-selectable', classes.textarea)}
             lang={inputLang}
             maxLength="10000" // api limit is 11000 chars
-            onChange={(e) => onUpdateInputText(e.target.value)}
+            onChange={(e) => dispatch(updateInputText(e.target.value))}
             // handle Chinese, Japanese, Korean IME
             // https://github.com/facebook/react/issues/3926#issuecomment-929799564
             // https://stackoverflow.com/a/51221639
@@ -579,7 +565,7 @@ const Home = ({
             }}
             onKeyDown={translateWhenPressingEnter ? (e) => {
               if (e.key === 'Enter' && !onCompositionRef.current) {
-                onTranslate();
+                dispatch(translate());
                 e.target.blur();
               }
             } : null}
@@ -656,7 +642,7 @@ const Home = ({
                     variant="outlined"
                     size="small"
                     color="default"
-                    onClick={() => onTranslate()}
+                    onClick={() => dispatch(translate())}
                     classes={{
                       root: classes.translateButton,
                       label: classes.translateButtonLabel,
@@ -675,69 +661,4 @@ const Home = ({
   );
 };
 
-Home.defaultProps = {
-  output: null,
-};
-
-Home.propTypes = {
-  classes: PropTypes.object.isRequired,
-  fullscreenInputBox: PropTypes.bool.isRequired,
-  inputLang: PropTypes.string.isRequired,
-  inputText: PropTypes.string.isRequired,
-  isHomeVisible: PropTypes.bool.isRequired,
-  onChangeRoute: PropTypes.func.isRequired,
-  onEndTextToSpeech: PropTypes.func.isRequired,
-  onLoadImage: PropTypes.func.isRequired,
-  onOpenSnackbar: PropTypes.func.isRequired,
-  onStartTextToSpeech: PropTypes.func.isRequired,
-  onSwapLanguages: PropTypes.func.isRequired,
-  onToggleFullscreenInputBox: PropTypes.func.isRequired,
-  onTogglePhrasebook: PropTypes.func.isRequired,
-  onTranslate: PropTypes.func.isRequired,
-  onUpdateInputLang: PropTypes.func.isRequired,
-  onUpdateInputText: PropTypes.func.isRequired,
-  onUpdateLanguageListMode: PropTypes.func.isRequired,
-  onUpdateOutputLang: PropTypes.func.isRequired,
-  output: PropTypes.object,
-  outputLang: PropTypes.string.isRequired,
-  showTransliteration: PropTypes.bool.isRequired,
-  textSize: PropTypes.number.isRequired,
-  textToSpeechPlaying: PropTypes.bool.isRequired,
-  translateWhenPressingEnter: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  fullscreenInputBox: state.pages.home.fullscreenInputBox,
-  inputLang: state.preferences.inputLang,
-  inputText: state.pages.home.inputText,
-  isHomeVisible: state.router.route === ROUTE_HOME,
-  output: state.pages.home.output,
-  outputLang: state.preferences.outputLang,
-  showTransliteration: state.preferences.showTransliteration,
-  textSize: state.preferences.textSize,
-  textToSpeechPlaying: state.pages.home.textToSpeech.textToSpeechPlaying,
-  translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
-});
-
-const actionCreators = {
-  changeRoute,
-  endTextToSpeech,
-  loadImage,
-  openSnackbar,
-  startTextToSpeech,
-  swapLanguages,
-  toggleFullscreenInputBox,
-  togglePhrasebook,
-  translate,
-  updateInputLang,
-  updateInputText,
-  updateLanguageListMode,
-  updateOutputLang,
-};
-
-export default connectComponent(
-  Home,
-  mapStateToProps,
-  actionCreators,
-  styles,
-);
+export default Home;

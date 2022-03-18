@@ -2,7 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import React, { useCallback, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux';
 
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
@@ -10,14 +11,13 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
 import { updateLanguageListSearch as updateQuery } from '../../../state/pages/language-list/actions';
 
 import { ROUTE_LANGUAGE_LIST } from '../../../constants/routes';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   toolbarSearchContainer: {
     flex: 0,
     zIndex: 10,
@@ -70,14 +70,15 @@ const styles = (theme) => ({
   toolbarIconButton: {
     padding: theme.spacing(1),
   },
-});
+}));
 
-const SearchBox = ({
-  classes,
-  onUpdateQuery,
-  query,
-  route,
-}) => {
+const SearchBox = () => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const query = useSelector((state) => state.pages.languageList.search);
+  const route = useSelector((state) => state.router.route);
+
   const inputRef = useRef(null);
   // https://stackoverflow.com/a/57556594
   // Event handler utilizing useCallback ...
@@ -109,7 +110,7 @@ const SearchBox = ({
       <IconButton
         color="default"
         aria-label={getLocale('clear')}
-        onClick={() => onUpdateQuery('')}
+        onClick={() => dispatch(updateQuery(''))}
         className={classes.toolbarIconButton}
       >
         <CloseIcon fontSize="small" />
@@ -128,14 +129,14 @@ const SearchBox = ({
           <input
             ref={inputRef}
             className={classes.input}
-            onChange={(e) => onUpdateQuery(e.target.value)}
-            onInput={(e) => onUpdateQuery(e.target.value)}
+            onChange={(e) => dispatch(updateQuery(e.target.value))}
+            onInput={(e) => dispatch(updateQuery(e.target.value))}
             onKeyDown={(e) => {
               if ((e.keyCode || e.which) === 27) { // Escape
                 if (query === '') {
                   e.target.blur();
                 } else {
-                  onUpdateQuery('');
+                  dispatch(updateQuery(''));
                 }
               }
             }}
@@ -155,29 +156,4 @@ const SearchBox = ({
   );
 };
 
-SearchBox.defaultProps = {
-  query: '',
-};
-
-SearchBox.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onUpdateQuery: PropTypes.func.isRequired,
-  query: PropTypes.string,
-  route: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  query: state.pages.languageList.search,
-  route: state.router.route,
-});
-
-const actionCreators = {
-  updateQuery,
-};
-
-export default connectComponent(
-  SearchBox,
-  mapStateToProps,
-  actionCreators,
-  styles,
-);
+export default SearchBox;
