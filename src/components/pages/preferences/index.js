@@ -2,7 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import AppBar from '@material-ui/core/AppBar';
@@ -17,7 +18,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
-import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
 import EnhancedMenu from '../../shared/enhanced-menu';
@@ -54,7 +54,7 @@ import operaIconPng from '../../../images/extension-icons/opera.png';
 import braveIconPng from '../../../images/extension-icons/brave.png';
 import vivaldiIconPng from '../../../images/extension-icons/vivaldi.png';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     flex: 1,
     display: 'flex',
@@ -161,7 +161,7 @@ const styles = (theme) => ({
     width: 32,
     marginRight: theme.spacing(0.5),
   },
-});
+}));
 
 const renderCombinator = (combinator) => combinator
   .replace(/\+/g, ' + ')
@@ -177,24 +177,24 @@ const getOpenAtLoginString = (openAtLogin) => {
   return getLocale('no2');
 };
 
-const Preferences = (props) => {
-  const {
-    alwaysOnTop,
-    attachToMenubar,
-    classes,
-    displayLanguage,
-    onOpenDialogAbout,
-    onOpenDialogShortcut,
-    onOpenDialogOpenSourceNotices,
-    onToggleSetting,
-    openAtLogin,
-    openOnMenubarShortcut,
-    showTransliteration,
-    themeSource,
-    translateClipboardOnShortcut,
-    translateWhenPressingEnter,
-    useHardwareAcceleration,
-  } = props;
+const Preferences = () => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const alwaysOnTop = useSelector((state) => state.preferences.alwaysOnTop);
+  const attachToMenubar = useSelector((state) => state.preferences.attachToMenubar);
+  const displayLanguage = useSelector((state) => state.preferences.displayLanguage);
+  const openAtLogin = useSelector((state) => state.systemPreferences.openAtLogin);
+  const openOnMenubarShortcut = useSelector((state) => state.preferences.openOnMenubarShortcut);
+  const showTransliteration = useSelector((state) => state.preferences.showTransliteration);
+  const themeSource = useSelector((state) => state.preferences.themeSource);
+  const translateClipboardOnShortcut = useSelector(
+    (state) => state.preferences.translateClipboardOnShortcut,
+  );
+  const translateWhenPressingEnter = useSelector(
+    (state) => state.preferences.translateWhenPressingEnter,
+  );
+  const useHardwareAcceleration = useSelector((state) => state.preferences.useHardwareAcceleration);
 
   const utmSource = 'translatium_app';
   const displayLanguages = useMemo(() => getDisplayLanguages(), []);
@@ -256,7 +256,7 @@ const Preferences = (props) => {
                 <Switch
                   edge="end"
                   checked={showTransliteration}
-                  onChange={() => onToggleSetting('showTransliteration')}
+                  onChange={() => dispatch(toggleSetting('showTransliteration'))}
                   color="primary"
                 />
               </ListItemSecondaryAction>
@@ -268,7 +268,7 @@ const Preferences = (props) => {
                 <Switch
                   edge="end"
                   checked={translateWhenPressingEnter}
-                  onChange={() => onToggleSetting('translateWhenPressingEnter')}
+                  onChange={() => dispatch(toggleSetting('translateWhenPressingEnter'))}
                   color="primary"
                 />
               </ListItemSecondaryAction>
@@ -303,7 +303,7 @@ const Preferences = (props) => {
             <ListItem
               button
               key="openOnMenubar"
-              onClick={() => onOpenDialogShortcut('openOnMenubar', openOnMenubarShortcut)}
+              onClick={() => dispatch(openDialogShortcut('openOnMenubar', openOnMenubarShortcut))}
               disabled={!attachToMenubar}
             >
               <ListItemText
@@ -323,7 +323,7 @@ const Preferences = (props) => {
                 <Switch
                   edge="end"
                   checked={attachToMenubar ? translateClipboardOnShortcut : false}
-                  onChange={() => onToggleSetting('translateClipboardOnShortcut')}
+                  onChange={() => dispatch(toggleSetting('translateClipboardOnShortcut'))}
                   color="primary"
                   disabled={!attachToMenubar}
                 />
@@ -610,7 +610,7 @@ const Preferences = (props) => {
         <Paper elevation={0} className={classes.paper}>
           <List dense disablePadding>
             <ListItem button>
-              <ListItemText primary={getLocale('about')} onClick={onOpenDialogAbout} />
+              <ListItemText primary={getLocale('about')} onClick={() => dispatch(openDialogAbout())} />
               <ChevronRightIcon color="action" />
             </ListItem>
             <Divider />
@@ -630,7 +630,7 @@ const Preferences = (props) => {
             </ListItem>
             <Divider />
             <ListItem button>
-              <ListItemText primary="Open Source Notices" onClick={onOpenDialogOpenSourceNotices} />
+              <ListItemText primary="Open Source Notices" onClick={() => dispatch(openDialogOpenSourceNotices())} />
               <ChevronRightIcon color="action" />
             </ListItem>
             {window.process.mas && (
@@ -670,51 +670,4 @@ const Preferences = (props) => {
   );
 };
 
-Preferences.defaultProps = {
-  openOnMenubarShortcut: null,
-};
-
-Preferences.propTypes = {
-  alwaysOnTop: PropTypes.bool.isRequired,
-  attachToMenubar: PropTypes.bool.isRequired,
-  classes: PropTypes.object.isRequired,
-  displayLanguage: PropTypes.string.isRequired,
-  onOpenDialogAbout: PropTypes.func.isRequired,
-  onOpenDialogShortcut: PropTypes.func.isRequired,
-  onOpenDialogOpenSourceNotices: PropTypes.func.isRequired,
-  onToggleSetting: PropTypes.func.isRequired,
-  openAtLogin: PropTypes.oneOf(['yes', 'yes-hidden', 'no']).isRequired,
-  openOnMenubarShortcut: PropTypes.string,
-  showTransliteration: PropTypes.bool.isRequired,
-  themeSource: PropTypes.string.isRequired,
-  translateClipboardOnShortcut: PropTypes.bool.isRequired,
-  translateWhenPressingEnter: PropTypes.bool.isRequired,
-  useHardwareAcceleration: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  alwaysOnTop: state.preferences.alwaysOnTop,
-  attachToMenubar: state.preferences.attachToMenubar,
-  displayLanguage: state.preferences.displayLanguage,
-  openAtLogin: state.systemPreferences.openAtLogin,
-  openOnMenubarShortcut: state.preferences.openOnMenubarShortcut,
-  showTransliteration: state.preferences.showTransliteration,
-  themeSource: state.preferences.themeSource,
-  translateClipboardOnShortcut: state.preferences.translateClipboardOnShortcut,
-  translateWhenPressingEnter: state.preferences.translateWhenPressingEnter,
-  useHardwareAcceleration: state.preferences.useHardwareAcceleration,
-});
-
-const actionCreators = {
-  openDialogAbout,
-  openDialogShortcut,
-  openDialogOpenSourceNotices,
-  toggleSetting,
-};
-
-export default connectComponent(
-  Preferences,
-  mapStateToProps,
-  actionCreators,
-  styles,
-);
+export default Preferences;

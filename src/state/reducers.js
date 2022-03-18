@@ -14,7 +14,6 @@ import dialogOpenSourceNotices from './root/dialog-open-source-notices/reducers'
 import general from './root/general/reducers';
 import preferences from './root/preferences/reducers';
 import router from './root/router/reducers';
-import screen from './root/screen/reducers';
 import snackbar from './root/snackbar/reducers';
 import systemPreferences from './root/system-preferences/reducers';
 
@@ -30,7 +29,6 @@ const rootReducer = combineReducers({
   pages,
   preferences,
   router,
-  screen,
   snackbar,
   systemPreferences,
 });

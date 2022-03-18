@@ -1,8 +1,9 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,7 +12,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
 import keyboardMap from '../../../constants/keyboard-map';
@@ -23,7 +23,7 @@ import {
 
 import { requestSetPreference } from '../../../senders';
 
-const styles = {
+const useStyles = makeStyles({
   combinatorContainer: {
     marginTop: 12,
   },
@@ -31,7 +31,7 @@ const styles = {
     paddingLeft: 12,
     paddingRight: 12,
   },
-};
+});
 
 const renderCombinator = (combinator) => combinator
   .replace(/\+/g, ' + ')
@@ -41,11 +41,16 @@ const renderCombinator = (combinator) => combinator
   .replace('meta', '⌘')
   .toUpperCase();
 
-class DialogShortcut extends React.Component {
-  componentDidMount() {
-    const { onSetCombinator } = this.props;
+const DialogShortcut = () => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
 
-    window.onkeydown = (e) => {
+  const combinator = useSelector((state) => state.pages.preferences.shortcutDialog.combinator);
+  const identifier = useSelector((state) => state.pages.preferences.shortcutDialog.identifier);
+  const open = useSelector((state) => state.pages.preferences.shortcutDialog.open);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
       const pressed = [];
 
       if (e.ctrlKey) pressed.push('ctrl');
@@ -60,98 +65,59 @@ class DialogShortcut extends React.Component {
 
       if (pressed.length < 2) return;
 
-      onSetCombinator(pressed.join('+'));
+      dispatch(setCombinator(pressed.join('+')));
     };
-  }
 
-  componentWillUnmount() {
-    window.onkeydown = null;
-  }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [dispatch]);
 
-  render() {
-    const {
-      classes,
-      combinator,
-      identifier,
-      onCloseDialogShortcut,
-      open,
-    } = this.props;
-
-    return (
-      <Dialog open={open} onClose={onCloseDialogShortcut}>
-        <DialogTitle>
-          {getLocale('openKeyboardShortcut')}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            {getLocale('typeNewKeyboardCombinator')}
-          </DialogContentText>
-          <DialogContentText className={classes.combinatorContainer}>
-            {combinator && combinator !== '+' && combinator.split('+').map((key, i) => (
-              <span key={key}>
-                {i > 0 && <span className={classes.plusText}>+</span>}
-                <Button variant="contained">
-                  {renderCombinator(key)}
-                </Button>
-              </span>
-            ))}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={onCloseDialogShortcut}>
-            {getLocale('cancel')}
-          </Button>
-          <Button
-            onClick={() => {
-              requestSetPreference(`${identifier}Shortcut`, null);
-              onCloseDialogShortcut();
-            }}
-          >
-            {getLocale('removeShortcut')}
-          </Button>
-          <Button
-            color="primary"
-            onClick={() => {
-              requestSetPreference(`${identifier}Shortcut`, combinator);
-              onCloseDialogShortcut();
-            }}
-          >
-            {getLocale('save')}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
-  }
-}
-
-DialogShortcut.defaultProps = {
-  identifier: null,
-  combinator: null,
+  return (
+    <Dialog open={open} onClose={() => dispatch(closeDialogShortcut())}>
+      <DialogTitle>
+        {getLocale('openKeyboardShortcut')}
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          {getLocale('typeNewKeyboardCombinator')}
+        </DialogContentText>
+        <DialogContentText className={classes.combinatorContainer}>
+          {combinator && combinator !== '+' && combinator.split('+').map((key, i) => (
+            <span key={key}>
+              {i > 0 && <span className={classes.plusText}>+</span>}
+              <Button variant="contained">
+                {renderCombinator(key)}
+              </Button>
+            </span>
+          ))}
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={() => dispatch(closeDialogShortcut())}>
+          {getLocale('cancel')}
+        </Button>
+        <Button
+          onClick={() => {
+            requestSetPreference(`${identifier}Shortcut`, null);
+            dispatch(closeDialogShortcut());
+          }}
+        >
+          {getLocale('removeShortcut')}
+        </Button>
+        <Button
+          color="primary"
+          onClick={() => {
+            requestSetPreference(`${identifier}Shortcut`, combinator);
+            dispatch(closeDialogShortcut());
+          }}
+        >
+          {getLocale('save')}
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
 };
 
-DialogShortcut.propTypes = {
-  classes: PropTypes.object.isRequired,
-  combinator: PropTypes.string,
-  identifier: PropTypes.string,
-  onCloseDialogShortcut: PropTypes.func.isRequired,
-  onSetCombinator: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  combinator: state.pages.preferences.shortcutDialog.combinator,
-  identifier: state.pages.preferences.shortcutDialog.identifier,
-  open: state.pages.preferences.shortcutDialog.open,
-});
-
-const actionCreators = {
-  closeDialogShortcut,
-  setCombinator,
-};
-
-export default connectComponent(
-  DialogShortcut,
-  mapStateToProps,
-  actionCreators,
-  styles,
-);
+export default DialogShortcut;

@@ -2,8 +2,9 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 /* global document */
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Fab from '@material-ui/core/Fab';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -18,7 +19,6 @@ import NavigationMoreVertIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 
-import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
 import EnhancedMenu from '../../shared/enhanced-menu';
@@ -30,7 +30,7 @@ import { changeRoute } from '../../../state/root/router/actions';
 
 import { ROUTE_HOME } from '../../../constants/routes';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     flex: 1,
     display: 'flex',
@@ -82,275 +82,216 @@ const styles = (theme) => ({
     alignItems: 'center',
     paddingRight: theme.spacing(1),
   },
-});
+}));
 
-class Ocr extends React.Component {
-  constructor(props) {
-    super(props);
+const Ocr = () => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
 
-    this.handleEscKey = this.handleEscKey.bind(this);
-  }
+  const imageUrl = useSelector((state) => (state.pages.ocr ? state.pages.ocr.imageUrl : undefined));
+  const imageHeight = useSelector(
+    (state) => (state.pages.ocr ? state.pages.ocr.imageHeight : undefined) || 0,
+  );
+  const imageWidth = useSelector(
+    (state) => (state.pages.ocr ? state.pages.ocr.imageWidth : undefined) || 0,
+  );
+  const inputLang = useSelector((state) => state.preferences.inputLang);
+  const inputText = useSelector(
+    (state) => (state.pages.ocr ? state.pages.ocr.inputText : undefined) || '',
+  );
+  const lines = useSelector(
+    (state) => (state.pages.ocr ? state.pages.ocr[`${state.pages.ocr.mode || 'output'}Lines`] : undefined) || [],
+  );
+  const mode = useSelector((state) => (state.pages.ocr ? state.pages.ocr.mode : undefined) || 'input');
+  const outputLang = useSelector((state) => state.preferences.outputLang);
+  const outputText = useSelector(
+    (state) => (state.pages.ocr ? state.pages.ocr.outputText : undefined) || '',
+  );
+  const zoomLevel = useSelector(
+    (state) => (state.pages.ocr ? state.pages.ocr.zoomLevel : undefined) || 1,
+  );
 
-  componentDidMount() {
-    const { imageUrl, onChangeRoute } = this.props;
-
+  useEffect(() => {
     if (!imageUrl) {
-      onChangeRoute(ROUTE_HOME);
+      dispatch(changeRoute(ROUTE_HOME));
     }
+  }, [imageUrl, dispatch]);
 
-    document.addEventListener('keydown', this.handleEscKey);
-  }
+  useEffect(() => {
+    const handleEscKey = (evt) => {
+      if (evt.key === 'Escape' || evt.key === 'Esc') {
+        dispatch(changeRoute(ROUTE_HOME));
+      } else if ((evt.metaKey || evt.ctrlKey) && evt.key === '=') {
+        if (zoomLevel + 0.1 > 10) return;
+        dispatch(setZoomLevel(zoomLevel + 0.1));
+      } else if ((evt.metaKey || evt.ctrlKey) && evt.key === '-') {
+        if (zoomLevel - 0.1 < 0.1) return;
+        dispatch(setZoomLevel(zoomLevel - 0.1));
+      }
+    };
+    document.addEventListener('keydown', handleEscKey);
 
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleEscKey);
-  }
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }, [zoomLevel, dispatch]);
 
-  handleEscKey(evt) {
-    const { zoomLevel, onChangeRoute, onSetZoomLevel } = this.props;
-    if (evt.key === 'Escape' || evt.key === 'Esc') {
-      onChangeRoute(ROUTE_HOME);
-    } else if ((evt.metaKey || evt.ctrlKey) && evt.key === '=') {
-      if (zoomLevel + 0.1 > 10) return;
-      onSetZoomLevel(zoomLevel + 0.1);
-    } else if ((evt.metaKey || evt.ctrlKey) && evt.key === '-') {
-      if (zoomLevel - 0.1 < 0.1) return;
-      onSetZoomLevel(zoomLevel - 0.1);
-    }
-  }
+  if (!imageUrl) return null;
 
-  render() {
-    const {
-      classes,
-      imageUrl,
-      imageHeight,
-      imageWidth,
-      inputLang,
-      inputText,
-      lines,
-      mode,
-      onChangeRoute,
-      onLoadOutput,
-      onOpenSnackbar,
-      onSetMode,
-      onSetZoomLevel,
-      outputLang,
-      outputText,
-      zoomLevel,
-    } = this.props;
-
-    if (!imageUrl) return null;
-
-    return (
-      <div
-        className={classes.container}
-      >
-        <Tooltip title={getLocale('close')} placement="right">
-          <Fab
-            className={classes.closeButton}
-            size="small"
-            onClick={() => onChangeRoute(ROUTE_HOME)}
-          >
-            <CloseIcon />
-          </Fab>
-        </Tooltip>
-        <div className={classes.zoomContainer}>
-          <div
-            style={{ zoom: zoomLevel || 1, position: 'relative' }}
-          >
-            {lines.map((line) => (
-              <div
-                role="button"
-                tabIndex={0}
-                key={`ocrText_${line.text}_${line.top}_${line.left}`}
-                className={classes.line}
-                style={{
-                  top: line.top,
-                  left: line.left,
-                  fontSize: line.height,
-                  lineHeight: `${line.height}px`,
-                }}
-                onClick={() => {
-                  window.remote.clipboard.writeText(line.text);
-                  onOpenSnackbar(getLocale('copied'));
-                }}
-              >
-                {line.text}
-              </div>
-            ))}
-            <img
-              src={imageUrl}
-              alt=""
+  return (
+    <div
+      className={classes.container}
+    >
+      <Tooltip title={getLocale('close')} placement="right">
+        <Fab
+          className={classes.closeButton}
+          size="small"
+          onClick={() => dispatch(changeRoute(ROUTE_HOME))}
+        >
+          <CloseIcon />
+        </Fab>
+      </Tooltip>
+      <div className={classes.zoomContainer}>
+        <div
+          style={{ zoom: zoomLevel || 1, position: 'relative' }}
+        >
+          {lines.map((line) => (
+            <div
+              role="button"
+              tabIndex={0}
+              key={`ocrText_${line.text}_${line.top}_${line.left}`}
+              className={classes.line}
               style={{
-                height: imageHeight,
-                width: imageWidth,
+                top: line.top,
+                left: line.left,
+                fontSize: line.height,
+                lineHeight: `${line.height}px`,
               }}
-            />
-          </div>
+              onClick={() => {
+                window.remote.clipboard.writeText(line.text);
+                dispatch(openSnackbar(getLocale('copied')));
+              }}
+            >
+              {line.text}
+            </div>
+          ))}
+          <img
+            src={imageUrl}
+            alt=""
+            style={{
+              height: imageHeight,
+              width: imageWidth,
+            }}
+          />
         </div>
-        <Paper className={classes.controllers}>
-          <div className={classes.controllersLeft}>
-            <Typography variant="body2">
-              {`${Math.round(zoomLevel * 100)}%`}
-            </Typography>
-          </div>
-          <div className={classes.controllersRight}>
-            <Tooltip title={getLocale('zoomOut')} placement="top">
-              <IconButton
-                size="small"
-                aria-label={getLocale('zoomOut')}
-                onClick={() => {
-                  if (zoomLevel - 0.1 < 0.1) return;
-                  onSetZoomLevel(zoomLevel - 0.1);
-                }}
-              >
-                <RemoveIcon />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title={getLocale('zoomIn')} placement="top">
-              <IconButton
-                size="small"
-                aria-label={getLocale('zoomIn')}
-                onClick={() => {
-                  if (zoomLevel + 0.1 > 10) return;
-                  onSetZoomLevel(zoomLevel + 0.1);
-                }}
-              >
-                <AddIcon />
-              </IconButton>
-            </Tooltip>
-            <Button
-              size="small"
-              onClick={() => onSetZoomLevel(1)}
-            >
-              {getLocale('reset')}
-            </Button>
-            <EnhancedMenu
-              id="ocrMore"
-              buttonElement={(
-                <Tooltip title={getLocale('more')} placement="top">
-                  <IconButton
-                    className={classes.moreButton}
-                    size="small"
-                    aria-label={getLocale('more')}
-                  >
-                    <NavigationMoreVertIcon />
-                  </IconButton>
-                </Tooltip>
-              )}
-            >
-              <MenuItem
-                dense
-                onClick={() => {
-                  const newMode = mode === 'input' ? 'output' : 'input';
-                  onSetMode(newMode);
-                }}
-              >
-                {mode === 'input'
-                  ? `${getLocale('displayTranslatedText')} (${getLocale(outputLang)})`
-                  : `${getLocale('displayOriginalText')} (${getLocale(inputLang)})`}
-              </MenuItem>
-              <MenuItem
-                dense
-                onClick={() => {
-                  window.remote.clipboard.writeText(inputText);
-                  onOpenSnackbar(getLocale('copied'));
-                }}
-              >
-                {getLocale('copyOriginalText')}
-                {' '}
-                (
-                {getLocale(inputLang)}
-                )
-              </MenuItem>
-              <MenuItem
-                dense
-                onClick={() => {
-                  window.remote.clipboard.writeText(outputText);
-                  onOpenSnackbar(getLocale('copied'));
-                }}
-              >
-                {getLocale('copyTranslatedText')}
-                {' '}
-                (
-                {getLocale(outputLang)}
-                )
-              </MenuItem>
-              <MenuItem
-                dense
-                onClick={() => {
-                  onLoadOutput({
-                    inputLang,
-                    outputLang,
-                    inputText,
-                    outputText,
-                  });
-                  onChangeRoute(ROUTE_HOME);
-                }}
-              >
-                {getLocale('displayTextOnly')}
-              </MenuItem>
-            </EnhancedMenu>
-          </div>
-        </Paper>
       </div>
-    );
-  }
-}
-
-Ocr.defaultProps = {
-  imageUrl: null,
-  imageHeight: 0,
-  imageWidth: 0,
-  inputText: '',
-  lines: [],
-  mode: 'input',
-  outputText: '',
-  zoomLevel: 1,
+      <Paper className={classes.controllers}>
+        <div className={classes.controllersLeft}>
+          <Typography variant="body2">
+            {`${Math.round(zoomLevel * 100)}%`}
+          </Typography>
+        </div>
+        <div className={classes.controllersRight}>
+          <Tooltip title={getLocale('zoomOut')} placement="top">
+            <IconButton
+              size="small"
+              aria-label={getLocale('zoomOut')}
+              onClick={() => {
+                if (zoomLevel - 0.1 < 0.1) return;
+                dispatch(setZoomLevel(zoomLevel - 0.1));
+              }}
+            >
+              <RemoveIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={getLocale('zoomIn')} placement="top">
+            <IconButton
+              size="small"
+              aria-label={getLocale('zoomIn')}
+              onClick={() => {
+                if (zoomLevel + 0.1 > 10) return;
+                dispatch(setZoomLevel(zoomLevel + 0.1));
+              }}
+            >
+              <AddIcon />
+            </IconButton>
+          </Tooltip>
+          <Button
+            size="small"
+            onClick={() => dispatch(setZoomLevel(1))}
+          >
+            {getLocale('reset')}
+          </Button>
+          <EnhancedMenu
+            id="ocrMore"
+            buttonElement={(
+              <Tooltip title={getLocale('more')} placement="top">
+                <IconButton
+                  className={classes.moreButton}
+                  size="small"
+                  aria-label={getLocale('more')}
+                >
+                  <NavigationMoreVertIcon />
+                </IconButton>
+              </Tooltip>
+            )}
+          >
+            <MenuItem
+              dense
+              onClick={() => {
+                const newMode = mode === 'input' ? 'output' : 'input';
+                dispatch(setMode(newMode));
+              }}
+            >
+              {mode === 'input'
+                ? `${getLocale('displayTranslatedText')} (${getLocale(outputLang)})`
+                : `${getLocale('displayOriginalText')} (${getLocale(inputLang)})`}
+            </MenuItem>
+            <MenuItem
+              dense
+              onClick={() => {
+                window.remote.clipboard.writeText(inputText);
+                dispatch(openSnackbar(getLocale('copied')));
+              }}
+            >
+              {getLocale('copyOriginalText')}
+              {' '}
+              (
+              {getLocale(inputLang)}
+              )
+            </MenuItem>
+            <MenuItem
+              dense
+              onClick={() => {
+                window.remote.clipboard.writeText(outputText);
+                dispatch(openSnackbar(getLocale('copied')));
+              }}
+            >
+              {getLocale('copyTranslatedText')}
+              {' '}
+              (
+              {getLocale(outputLang)}
+              )
+            </MenuItem>
+            <MenuItem
+              dense
+              onClick={() => {
+                dispatch(loadOutput({
+                  inputLang,
+                  outputLang,
+                  inputText,
+                  outputText,
+                }));
+                dispatch(changeRoute(ROUTE_HOME));
+              }}
+            >
+              {getLocale('displayTextOnly')}
+            </MenuItem>
+          </EnhancedMenu>
+        </div>
+      </Paper>
+    </div>
+  );
 };
 
-Ocr.propTypes = {
-  classes: PropTypes.object.isRequired,
-  imageUrl: PropTypes.string,
-  imageHeight: PropTypes.number,
-  imageWidth: PropTypes.number,
-  inputLang: PropTypes.string.isRequired,
-  inputText: PropTypes.string,
-  lines: PropTypes.array,
-  mode: PropTypes.string,
-  onChangeRoute: PropTypes.func.isRequired,
-  onLoadOutput: PropTypes.func.isRequired,
-  onOpenSnackbar: PropTypes.func.isRequired,
-  onSetMode: PropTypes.func.isRequired,
-  onSetZoomLevel: PropTypes.func.isRequired,
-  outputLang: PropTypes.string.isRequired,
-  outputText: PropTypes.string,
-  zoomLevel: PropTypes.number,
-};
-
-const mapStateToProps = (state) => ({
-  imageUrl: state.pages.ocr ? state.pages.ocr.imageUrl : undefined,
-  imageHeight: state.pages.ocr ? state.pages.ocr.imageHeight : undefined,
-  imageWidth: state.pages.ocr ? state.pages.ocr.imageWidth : undefined,
-  inputLang: state.preferences.inputLang,
-  inputText: state.pages.ocr ? state.pages.ocr.inputText : undefined,
-  lines: state.pages.ocr ? state.pages.ocr[`${state.pages.ocr.mode || 'output'}Lines`] : undefined,
-  mode: state.pages.ocr ? state.pages.ocr.mode : undefined,
-  outputLang: state.preferences.outputLang,
-  outputText: state.pages.ocr ? state.pages.ocr.outputText : undefined,
-  zoomLevel: state.pages.ocr ? state.pages.ocr.zoomLevel : undefined,
-});
-
-const actionCreators = {
-  changeRoute,
-  loadOutput,
-  openSnackbar,
-  setMode,
-  setZoomLevel,
-};
-
-export default connectComponent(
-  Ocr,
-  mapStateToProps,
-  actionCreators,
-  styles,
-);
+export default Ocr;

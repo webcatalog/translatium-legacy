@@ -2,7 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -10,7 +11,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import MLink from '@material-ui/core/Link';
 
-import connectComponent from '../../helpers/connect-component';
 import getLocale from '../../helpers/get-locale';
 
 import { close } from '../../state/root/dialog-about/actions';
@@ -21,7 +21,7 @@ import { requestOpenInBrowser } from '../../senders';
 
 import EnhancedDialogTitle from '../shared/enhanced-dialog-title';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   icon: {
     height: 96,
     width: 96,
@@ -56,23 +56,21 @@ const styles = (theme) => ({
     fontWeight: 600,
     lineHeight: 1,
   },
-});
+}));
 
-const About = (props) => {
-  const {
-    classes,
-    onClose,
-    onOpenDialogOpenSourceNotices,
-    open,
-  } = props;
+const About = () => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const open = useSelector((state) => state.dialogAbout.open);
 
   return (
     <Dialog
       className={classes.root}
-      onClose={onClose}
+      onClose={() => dispatch(close())}
       open={open}
     >
-      <EnhancedDialogTitle onClose={onClose}>
+      <EnhancedDialogTitle onClose={() => dispatch(close())}>
         {getLocale('about')}
       </EnhancedDialogTitle>
       <DialogContent className={classes.dialogContent}>
@@ -100,7 +98,7 @@ const About = (props) => {
         <br />
 
         <Button
-          onClick={onOpenDialogOpenSourceNotices}
+          onClick={() => dispatch(openDialogOpenSourceNotices())}
         >
           Open Source Notices
         </Button>
@@ -123,25 +121,4 @@ const About = (props) => {
   );
 };
 
-About.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onClose: PropTypes.func.isRequired,
-  onOpenDialogOpenSourceNotices: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  open: state.dialogAbout.open,
-});
-
-const actionCreators = {
-  close,
-  openDialogOpenSourceNotices,
-};
-
-export default connectComponent(
-  About,
-  mapStateToProps,
-  actionCreators,
-  styles,
-);
+export default About;

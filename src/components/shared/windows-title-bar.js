@@ -7,6 +7,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { useSelector } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,12 +18,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import { requestShowAppMenu } from '../../senders';
 
-import connectComponent from '../../helpers/connect-component';
-
 const TOOLBAR_HEIGHT = 28;
 const BUTTON_WIDTH = 46;
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   appBar: {
     // leave space for resizing cursor
     // https://github.com/electron/electron/issues/3022
@@ -104,13 +104,14 @@ const styles = (theme) => ({
     borderRadius: 0,
     height: TOOLBAR_HEIGHT,
   },
-});
+}));
 
 const EnhancedAppBar = ({
-  classes,
-  isMaximized,
   title,
 }) => {
+  const classes = useStyles();
+  const isMaximized = useSelector((state) => state.general.isMaximized);
+
   const onDoubleClick = (e) => {
     // feature: double click on title bar to expand #656
     // https://github.com/webcatalog/webcatalog-app/issues/656
@@ -230,18 +231,7 @@ EnhancedAppBar.defaultProps = {
 };
 
 EnhancedAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-  isMaximized: PropTypes.bool.isRequired,
   title: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
-  isMaximized: state.general.isMaximized,
-});
-
-export default connectComponent(
-  EnhancedAppBar,
-  mapStateToProps,
-  null,
-  styles,
-);
+export default EnhancedAppBar;

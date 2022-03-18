@@ -2,7 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import React, { useCallback, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,12 +12,11 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import connectComponent from '../../../helpers/connect-component';
 import getLocale from '../../../helpers/get-locale';
 
 import { loadHistory, updateQuery } from '../../../state/pages/history/actions';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   toolbarSearchContainer: {
     flex: 0,
     zIndex: 10,
@@ -69,14 +69,14 @@ const styles = (theme) => ({
   toolbarIconButton: {
     padding: theme.spacing(1),
   },
-});
+}));
 
-const SearchBox = ({
-  classes,
-  onUpdateQuery,
-  query,
-  onLoadHistory,
-}) => {
+const SearchBox = () => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const query = useSelector((state) => state.pages.history.query);
+
   const inputRef = useRef(null);
   // https://stackoverflow.com/a/57556594
   // Event handler utilizing useCallback ...
@@ -99,7 +99,7 @@ const SearchBox = ({
         <IconButton
           color="default"
           aria-label={getLocale('clear')}
-          onClick={() => onUpdateQuery('')}
+          onClick={() => dispatch(updateQuery(''))}
           className={classes.toolbarIconButton}
         >
           <CloseIcon fontSize="small" />
@@ -109,7 +109,7 @@ const SearchBox = ({
         <IconButton
           color="default"
           aria-label={getLocale('search')}
-          onClick={() => onLoadHistory(true)}
+          onClick={() => dispatch(loadHistory(true))}
           className={classes.toolbarIconButton}
         >
           <KeyboardReturnIcon fontSize="small" />
@@ -129,14 +129,14 @@ const SearchBox = ({
           <input
             ref={inputRef}
             className={classes.input}
-            onChange={(e) => onUpdateQuery(e.target.value)}
-            onInput={(e) => onUpdateQuery(e.target.value)}
+            onChange={(e) => dispatch(updateQuery(e.target.value))}
+            onInput={(e) => dispatch(updateQuery(e.target.value))}
             onKeyDown={(e) => {
               if (e.key === 'Enter' && query.length > 0) {
-                onLoadHistory(true);
+                dispatch(loadHistory(true));
               } else if (e.key === 'Escape') {
                 e.target.blur();
-                onUpdateQuery('');
+                dispatch(updateQuery(''));
               }
             }}
             placeholder={getLocale('searchPreviousTranslations')}
@@ -149,29 +149,4 @@ const SearchBox = ({
   );
 };
 
-SearchBox.defaultProps = {
-  query: '',
-};
-
-SearchBox.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onUpdateQuery: PropTypes.func.isRequired,
-  onLoadHistory: PropTypes.func.isRequired,
-  query: PropTypes.string,
-};
-
-const mapStateToProps = (state) => ({
-  query: state.pages.history.query,
-});
-
-const actionCreators = {
-  updateQuery,
-  loadHistory,
-};
-
-export default connectComponent(
-  SearchBox,
-  mapStateToProps,
-  actionCreators,
-  styles,
-);
+export default SearchBox;
