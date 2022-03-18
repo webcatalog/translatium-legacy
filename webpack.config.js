@@ -27,7 +27,6 @@ const getPreloadScriptsConfig = () => {
     },
     externals,
     entry: {
-      'preload-default': path.join(__dirname, 'main-src', 'preload', 'default.js'),
       'preload-menubar': path.join(__dirname, 'main-src', 'preload', 'menubar.js'),
     },
     target: 'electron-renderer',
