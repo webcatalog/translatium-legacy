@@ -1,6 +1,8 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+import { getCurrentWindow } from '@electron/remote';
+
 const takeScreenshotToBlob = () => {
   // use node-mac-permissions
   // as Electron API doesn't support askForScreenCaptureAccess()
@@ -16,10 +18,10 @@ const takeScreenshotToBlob = () => {
 
   return new Promise((resolve, reject) => {
     try {
-      window.remote.getCurrentWindow().on('hide', () => {
+      getCurrentWindow().on('hide', () => {
         resolve();
       });
-      window.remote.getCurrentWindow().hide();
+      getCurrentWindow().hide();
     } catch (err) {
       reject(err);
     }
@@ -54,7 +56,7 @@ const takeScreenshotToBlob = () => {
       // so use grabFrame instead
       return imageCapture.grabFrame()
         .then((img) => {
-          window.remote.getCurrentWindow().show();
+          getCurrentWindow().show();
           const canvas = window.document.createElement('canvas');
           canvas.width = img.width;
           canvas.height = img.height;
@@ -74,11 +76,11 @@ const takeScreenshotToBlob = () => {
         });
     })
     .then((result) => {
-      window.remote.getCurrentWindow().show();
+      getCurrentWindow().show();
       return result;
     })
     .catch((err) => {
-      window.remote.getCurrentWindow().show();
+      getCurrentWindow().show();
       // eslint-disable-next-line no-console
       console.log(err);
       return null;

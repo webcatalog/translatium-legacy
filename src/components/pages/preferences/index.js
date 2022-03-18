@@ -4,6 +4,7 @@
 import React, { useMemo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
+import { shell, app } from '@electron/remote';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import AppBar from '@material-ui/core/AppBar';
@@ -360,7 +361,7 @@ const Preferences = () => {
               <List dense disablePadding>
                 <ListItem
                   button
-                  onClick={() => window.remote.shell.openExternal('https://webcatalog.io/translatium/extensions/')}
+                  onClick={() => shell.openExternal('https://webcatalog.io/translatium/extensions/')}
                 >
                   <div className={classes.extensionBlock}>
                     <div className={classes.extensionIcons}>
@@ -653,7 +654,7 @@ const Preferences = () => {
             )}
             <Divider />
             <ListItem button>
-              <ListItemText primary={getLocale('quit')} onClick={() => window.remote.app.quit()} />
+              <ListItemText primary={getLocale('quit')} onClick={() => app.quit()} />
               <ChevronRightIcon color="action" />
             </ListItem>
           </List>

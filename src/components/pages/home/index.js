@@ -5,6 +5,7 @@ import React, { useEffect, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { clipboard, ShareMenu, getCurrentWindow } from '@electron/remote';
 
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -254,7 +255,7 @@ const Home = () => {
             Icon: FileCopy,
             tooltip: getLocale('copy'),
             onClick: () => {
-              window.remote.clipboard.writeText(output.outputText);
+              clipboard.writeText(output.outputText);
               dispatch(openSnackbar(getLocale('copied')));
             },
           },
@@ -270,10 +271,10 @@ const Home = () => {
             ),
             tooltip: getLocale('share'),
             onClick: () => {
-              const shareMenu = new window.remote.ShareMenu({
+              const shareMenu = new ShareMenu({
                 texts: [output.outputText],
               });
-              shareMenu.popup(window.remote.getCurrentWindow());
+              shareMenu.popup(getCurrentWindow());
             },
           });
         }
@@ -397,7 +398,7 @@ const Home = () => {
       )),
       tooltip: getLocale('translateClipboard'),
       onClick: () => {
-        const text = window.remote.clipboard.readText();
+        const text = clipboard.readText();
         dispatch(updateInputText(text));
         dispatch(translate(inputLang, outputLang, text));
       },
@@ -461,7 +462,7 @@ const Home = () => {
       Icon: FileCopy,
       tooltip: getLocale('copy'),
       onClick: () => {
-        window.remote.clipboard.writeText(inputText);
+        clipboard.writeText(inputText);
         dispatch(openSnackbar(getLocale('copied')));
       },
       disabled: inputText.length < 1,
@@ -478,10 +479,10 @@ const Home = () => {
       ),
       tooltip: getLocale('share'),
       onClick: () => {
-        const shareMenu = new window.remote.ShareMenu({
+        const shareMenu = new ShareMenu({
           texts: [inputText],
         });
-        shareMenu.popup(window.remote.getCurrentWindow());
+        shareMenu.popup(getCurrentWindow());
       },
       disabled: inputText.length < 1,
     });

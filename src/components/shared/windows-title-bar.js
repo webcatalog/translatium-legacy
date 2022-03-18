@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { getCurrentWindow, getGlobal } from '@electron/remote';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -117,7 +118,7 @@ const EnhancedAppBar = ({
     // https://github.com/webcatalog/webcatalog-app/issues/656
     // https://stackoverflow.com/questions/10554446/no-onclick-when-child-is-clicked
     if (e.target === e.currentTarget) {
-      const win = window.remote.getCurrentWindow();
+      const win = getCurrentWindow();
       if (win.isMaximized()) {
         win.unmaximize();
       } else {
@@ -126,7 +127,7 @@ const EnhancedAppBar = ({
     }
   };
 
-  const menubarMode = window.remote.getGlobal('attachToMenubar');
+  const menubarMode = getGlobal('attachToMenubar');
 
   return (
     <AppBar
@@ -170,7 +171,7 @@ const EnhancedAppBar = ({
                 aria-label="Minimize"
                 onClick={(e) => {
                   e.stopPropagation();
-                  const browserWindow = window.remote.getCurrentWindow();
+                  const browserWindow = getCurrentWindow();
                   browserWindow.minimize();
                 }}
               >
@@ -184,7 +185,7 @@ const EnhancedAppBar = ({
                   aria-label={isMaximized ? 'Unmaximize' : 'Maximize'}
                   onClick={(e) => {
                     e.stopPropagation();
-                    const browserWindow = window.remote.getCurrentWindow();
+                    const browserWindow = getCurrentWindow();
                     if (browserWindow.isMaximized()) {
                       browserWindow.unmaximize();
                     } else {
@@ -209,7 +210,7 @@ const EnhancedAppBar = ({
                   aria-label={isMaximized ? 'Unmaximize' : 'Maximize'}
                   onClick={(e) => {
                     e.stopPropagation();
-                    const browserWindow = window.remote.getCurrentWindow();
+                    const browserWindow = getCurrentWindow();
                     browserWindow.close();
                   }}
                 >

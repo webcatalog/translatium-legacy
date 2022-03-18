@@ -2,6 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 import { combineReducers } from 'redux';
+import { getCurrentWindow } from '@electron/remote';
 
 import {
   UPDATE_SHOULD_USE_DARK_COLORS,
@@ -13,7 +14,7 @@ import {
   getShouldUseDarkColors,
 } from '../../../senders';
 
-const win = window.remote.getCurrentWindow();
+const win = getCurrentWindow();
 
 const isMaximized = (state = win.isMaximized(), action) => {
   switch (action.type) {

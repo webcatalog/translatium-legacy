@@ -77,7 +77,7 @@ const loadListeners = (store) => {
 
   window.ipcRenderer.on('translate-clipboard', () => {
     const { inputLang, outputLang } = store.getState().preferences;
-    const inputText = window.remote.clipboard.readText();
+    const inputText = clipboard.readText();
     store.dispatch(updateInputText(inputText));
     store.dispatch(translate(inputLang, outputLang, inputText));
   });

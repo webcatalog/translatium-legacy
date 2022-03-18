@@ -7,11 +7,9 @@ const {
   webFrame,
   desktopCapturer,
 } = require('electron');
-const remote = require('@electron/remote');
 
 webFrame.setVisualZoomLevelLimits(1, 1);
 
-window.remote = remote;
 window.ipcRenderer = ipcRenderer;
 window.desktopCapturer = desktopCapturer;
 

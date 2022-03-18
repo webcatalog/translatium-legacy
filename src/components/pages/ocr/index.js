@@ -5,6 +5,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { clipboard } from '@electron/remote';
 
 import Fab from '@material-ui/core/Fab';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -168,7 +169,7 @@ const Ocr = () => {
                 lineHeight: `${line.height}px`,
               }}
               onClick={() => {
-                window.remote.clipboard.writeText(line.text);
+                clipboard.writeText(line.text);
                 dispatch(openSnackbar(getLocale('copied')));
               }}
             >
@@ -250,7 +251,7 @@ const Ocr = () => {
             <MenuItem
               dense
               onClick={() => {
-                window.remote.clipboard.writeText(inputText);
+                clipboard.writeText(inputText);
                 dispatch(openSnackbar(getLocale('copied')));
               }}
             >
@@ -263,7 +264,7 @@ const Ocr = () => {
             <MenuItem
               dense
               onClick={() => {
-                window.remote.clipboard.writeText(outputText);
+                clipboard.writeText(outputText);
                 dispatch(openSnackbar(getLocale('copied')));
               }}
             >
