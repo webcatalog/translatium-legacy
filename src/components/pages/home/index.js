@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { clipboard, ShareMenu, getCurrentWindow } from '@electron/remote';
+import { ipcRenderer } from 'electron';
 
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -368,10 +369,10 @@ const Home = () => {
       }
     };
 
-    window.ipcRenderer.on('open-find', handleOpenFind);
+    ipcRenderer.on('open-find', handleOpenFind);
 
     return () => {
-      window.ipcRenderer.removeListener('open-find', handleOpenFind);
+      ipcRenderer.removeListener('open-find', handleOpenFind);
     };
   }, [
     inputRef,

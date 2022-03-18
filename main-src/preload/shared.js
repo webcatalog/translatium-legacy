@@ -3,14 +3,12 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 require('source-map-support').install();
 const {
-  ipcRenderer,
   webFrame,
   desktopCapturer,
 } = require('electron');
 
 webFrame.setVisualZoomLevelLimits(1, 1);
 
-window.ipcRenderer = ipcRenderer;
 window.desktopCapturer = desktopCapturer;
 
 window.macPermissions = process.platform === 'darwin' ? require('node-mac-permissions') : null;

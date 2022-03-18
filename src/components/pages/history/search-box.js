@@ -4,6 +4,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { ipcRenderer } from 'electron';
 
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
@@ -86,10 +87,10 @@ const SearchBox = () => {
     inputRef.current.select();
   }, [inputRef]);
   useEffect(() => {
-    window.ipcRenderer.on('open-find', handleOpenFind);
+    ipcRenderer.on('open-find', handleOpenFind);
     // Remove event listener on cleanup
     return () => {
-      window.ipcRenderer.removeListener('open-find', handleOpenFind);
+      ipcRenderer.removeListener('open-find', handleOpenFind);
     };
   }, [handleOpenFind]);
 
