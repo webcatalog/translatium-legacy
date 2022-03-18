@@ -4,6 +4,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { app } from '@electron/remote';
 
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -80,7 +81,7 @@ const About = () => {
           variant="body2"
           className={classes.version}
         >
-          {`Version v${window.remote.app.getVersion()}`}
+          {`Version v${app.getVersion()}`}
         </Typography>
 
         <Button

@@ -2,6 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 /* global Blob */
+import { dialog } from '@electron/remote';
 
 const getFileType = (ext) => {
   switch (ext) {
@@ -13,7 +14,7 @@ const getFileType = (ext) => {
 };
 
 const openFileToBlobAsync = () => new Promise((resolve, reject) => {
-  window.remote.dialog.showOpenDialog({
+  dialog.showOpenDialog({
     properties: ['openFile'],
     filters: [
       { name: 'Images', extensions: ['jpg', 'jpeg', 'png'] },

@@ -1,30 +1,37 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+import {
+  getCurrentWindow,
+  desktopCapturer,
+  require as remoteRequire,
+} from '@electron/remote';
+
 const takeScreenshotToBlob = () => {
   // use node-mac-permissions
   // as Electron API doesn't support askForScreenCaptureAccess()
   // shell.openExternal('x-apple.systempreferences...') is not sufficient as it doesn't ensure
   // the app is added to app list in system pref
   if (window.process.platform === 'darwin') {
-    const authStatus = window.macPermissions.getAuthStatus('screen');
+    const permissions = remoteRequire('node-mac-permissions');
+    const authStatus = permissions.getAuthStatus('screen');
     if (authStatus === 'denied' || authStatus === 'restricted') {
-      window.macPermissions.askForScreenCaptureAccess();
+      permissions.askForScreenCaptureAccess();
       return Promise.resolve();
     }
   }
 
   return new Promise((resolve, reject) => {
     try {
-      window.remote.getCurrentWindow().on('hide', () => {
+      getCurrentWindow().on('hide', () => {
         resolve();
       });
-      window.remote.getCurrentWindow().hide();
+      getCurrentWindow().hide();
     } catch (err) {
       reject(err);
     }
   })
-    .then(() => window.desktopCapturer.getSources({ types: ['screen'] }))
+    .then(() => desktopCapturer.getSources({ types: ['screen'] }))
     .then(async (sources) => {
       const source = sources[0];
       const stream = await window.navigator.mediaDevices.getUserMedia({
@@ -54,7 +61,7 @@ const takeScreenshotToBlob = () => {
       // so use grabFrame instead
       return imageCapture.grabFrame()
         .then((img) => {
-          window.remote.getCurrentWindow().show();
+          getCurrentWindow().show();
           const canvas = window.document.createElement('canvas');
           canvas.width = img.width;
           canvas.height = img.height;
@@ -74,11 +81,11 @@ const takeScreenshotToBlob = () => {
         });
     })
     .then((result) => {
-      window.remote.getCurrentWindow().show();
+      getCurrentWindow().show();
       return result;
     })
     .catch((err) => {
-      window.remote.getCurrentWindow().show();
+      getCurrentWindow().show();
       // eslint-disable-next-line no-console
       console.log(err);
       return null;

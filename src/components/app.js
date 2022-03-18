@@ -5,6 +5,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { getCurrentWindow, systemPreferences, getGlobal } from '@electron/remote';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -47,7 +48,7 @@ import {
 
 const useStyles = makeStyles((theme) => {
   // big sur increases title bar height
-  const titleBarHeight = window.remote.getGlobal('isMacOs11') ? 28 : 22;
+  const titleBarHeight = getGlobal('isMacOs11') ? 28 : 22;
 
   return {
     container: {
@@ -160,16 +161,16 @@ const App = () => {
             // https://github.com/webcatalog/webcatalog-app/issues/656
 
             // User can choose title bar behavior from macOS System Preferences > Dock & Menu Bar
-            const systemPref = window.remote.systemPreferences.getUserDefault('AppleActionOnDoubleClick', 'string');
+            const systemPref = systemPreferences.getUserDefault('AppleActionOnDoubleClick', 'string');
 
             switch (systemPref) {
               case 'Minimize': {
-                const win = window.remote.getCurrentWindow();
+                const win = getCurrentWindow();
                 win.minimize();
                 break;
               }
               case 'Maximize': {
-                const win = window.remote.getCurrentWindow();
+                const win = getCurrentWindow();
                 if (win.isMaximized()) {
                   win.unmaximize();
                 } else {

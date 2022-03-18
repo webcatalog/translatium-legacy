@@ -290,9 +290,6 @@ if (!gotTheLock) {
           nodeIntegration: true,
           contextIsolation: false,
           webSecurity: false,
-          preload: process.env.NODE_ENV === 'production'
-            ? path.join(__dirname, 'preload-default.js')
-            : path.join(__dirname, 'preload', 'default.js'),
         },
       };
 
