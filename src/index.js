@@ -5,6 +5,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import { webFrame } from 'electron';
 
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -54,6 +55,8 @@ document.addEventListener('copy', (e) => {
   clipdata.setData('text/html', textOnly);
   e.preventDefault();
 });
+
+webFrame.setVisualZoomLevelLimits(1, 1);
 
 render(
   <Provider store={store}>

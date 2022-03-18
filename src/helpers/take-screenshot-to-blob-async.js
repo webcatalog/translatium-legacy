@@ -1,7 +1,11 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-import { getCurrentWindow } from '@electron/remote';
+import {
+  getCurrentWindow,
+  desktopCapturer,
+  require as remoteRequire,
+} from '@electron/remote';
 
 const takeScreenshotToBlob = () => {
   // use node-mac-permissions
@@ -9,9 +13,10 @@ const takeScreenshotToBlob = () => {
   // shell.openExternal('x-apple.systempreferences...') is not sufficient as it doesn't ensure
   // the app is added to app list in system pref
   if (window.process.platform === 'darwin') {
-    const authStatus = window.macPermissions.getAuthStatus('screen');
+    const permissions = remoteRequire('node-mac-permissions');
+    const authStatus = permissions.getAuthStatus('screen');
     if (authStatus === 'denied' || authStatus === 'restricted') {
-      window.macPermissions.askForScreenCaptureAccess();
+      permissions.askForScreenCaptureAccess();
       return Promise.resolve();
     }
   }
@@ -26,7 +31,7 @@ const takeScreenshotToBlob = () => {
       reject(err);
     }
   })
-    .then(() => window.desktopCapturer.getSources({ types: ['screen'] }))
+    .then(() => desktopCapturer.getSources({ types: ['screen'] }))
     .then(async (sources) => {
       const source = sources[0];
       const stream = await window.navigator.mediaDevices.getUserMedia({
