@@ -77,6 +77,16 @@ const opts = {
       backgroundColor: '#43a047',
       languages: Object.keys(displayLanguages),
       showNameOnTiles: true,
+      publish: [
+        {
+          provider: 's3',
+          channel: 'latest',
+          bucket: 'cdn-2.webcatalog.io',
+          region: 'us-east-2',
+          path: '/translatium',
+        },
+        'github',
+      ],
     },
     mac: {
       darkModeSupport: true,
