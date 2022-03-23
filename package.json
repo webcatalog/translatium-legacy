@@ -2,9 +2,9 @@
   "name": "translatium",
   "productName": "Translatium",
   "description": "Translate 100+ Languages Instantly",
-  "version": "20.4.0",
+  "version": "20.5.0",
   "main": "main-src/electron.js",
-  "repository": "https://github.com/webcatalog/translatium",
+  "repository": "https://github.com/webcatalog/translatium-desktop",
   "author": {
     "name": "WebCatalog Ltd",
     "email": "contact@webcatalog.io"
